@@ -93,29 +93,22 @@
 
         <ul class="nav navbar-nav ct-navbar--fadeIn">
             <!--=========================================================================-->
-            <li><a href="index.html"><div class="ct-textEffect"><span data-content="Home">主页</span></div></a></li>
+            <li><a href="index.html"><div class="ct-textEffect"><span data-content="主页">主页</span></div></a></li>
             <!--=========================================================================-->
-            <li class="dropdown"><a href="about.html"><div class="ct-textEffect"><span data-content="About Us">关于我们</span></div></a>
+            <li class="dropdown"><a href="about.html"><div class="ct-textEffect"><span data-content="关于我们">关于我们</span></div></a>
                 
             </li>
             <!--=========================================================================-->
             
-            <li class="active dropdown"><a href="rent-now.html"><div class="ct-textEffect"><span data-content="Rent Now">学校</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="rent-now.html"><span>Rent Now</span></a></li>
-                    <li><a href="rent-item.html"><span>Rent Item</span></a></li>
-                    <li class="ct-subDropdown"><a href="rent-page-variation-1.html">学校</a>
-                        <ul class="ct-submenu dropdown-menu">
-                            <li><a href="rent-page-variation-1.html"><span>电子科技大学</span></a></li>
-                            <li><a href="rent-page-variation-2.html"><span>清华大学</span></a></li>
-                            <li><a href="rent-paypal.html"><span>北京大学</span></a></li>
-                        </ul>
-                    </li>
-                </ul>
+            <li onclick="findSchool()" class="active dropdown"><a><div class="ct-textEffect"><span data-content="学校">学校</span></div></a>
             </li>
+
+            <li onclick="findTopic()" class="active dropdown"><a><div class="ct-textEffect"><span data-content="话题">话题</span></div></a>
+            </li>
+
             <!--=========================================================================-->
             
-            <li class="dropdown"><a href="events.html"><div class="ct-textEffect"><span data-content="Events">活动</span></div></a>
+            <li class="dropdown"><a onclick="school()"><div class="ct-textEffect"><span data-content="活动">活动</span></div></a>
                 <ul class="dropdown-menu">
                     <li><a href="events.html"><span>活动概览</span></a></li>
                     <li class="ct-subDropdown"><a href="event-single.html">查看活动</a>
@@ -127,13 +120,13 @@
                 </ul>
             </li>
             <!--=========================================================================-->
-            <li class="dropdown"><a href="account.html"><div class="ct-textEffect"><span data-content="Pages">个人信息</span></div></a>
+            <li class="dropdown"><a href="account.html"><div class="ct-textEffect"><span data-content="个人信息">个人信息</span></div></a>
                 <ul class="dropdown-menu">
                     <li><a href="account.html"><span>我的账户</span></a></li>
                 </ul>
             </li>
             <!--=========================================================================-->
-            <li><a href="contact.html"><div class="ct-textEffect"><span data-content="Contact">Contact</span></div></a></li>
+            <li><a href="contact.html"><div class="ct-textEffect"><span data-content="联系我们">联系我们</span></div></a></li>
         </ul>
 
     </div>

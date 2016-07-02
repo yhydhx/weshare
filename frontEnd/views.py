@@ -15,7 +15,7 @@ import hashlib
 
 
 def index(request):
-	__checkin__(request)
+	
 	return render(request,"frontEnd/index.html")
 
 def __checkin__(request):

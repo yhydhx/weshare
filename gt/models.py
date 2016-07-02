@@ -5,6 +5,12 @@ from django.utils import timezone
 from djangotoolbox.fields import  ListField
 from django import forms
 
+
+class Host(models.Model):
+    name = models.CharField(max_length = 100)
+    gender = models.IntegerField()
+    motto = 
+
 class Process(models.Model):
     Uid = models.CharField(max_length=100)
     times = models.IntegerField()
