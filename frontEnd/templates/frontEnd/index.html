@@ -1,0 +1,657 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]>
+<html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="description" content="Rentica - The Best One Yet">
+    <meta name="author" content="CreateIT">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
+    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
+
+    <title>Rentica - HTML Template</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}">
+
+    <!--[if lt IE 9]>
+    <script src="./assets/bootstrap/js/html5shiv.min.js"></script>
+	<script src="./assets/bootstrap/js/respond.min.js"></script>
+ 	<script src="./assets/plugins/REM-unit-polyfill/js/rem.min.js"></script>
+    <![endif]-->
+    <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script>
+
+
+    <script src="{% static 'frontEnd/js/map/lib/jquery-1.11.1.min.js'%}"></script> 
+    <script type="text/javascript" src="{% static 'frontEnd/js/map/lib/raphael-min.js'%}" ></script>
+    <script type="text/javascript" src="{% static 'frontEnd/js/map/res/chinaMapConfig.js'%}" ></script>
+    <script type="text/javascript" src="{% static 'frontEnd/js/map/map-min.js'%}" ></script>
+<style>
+    *{margin:0;padding:0;border: none;}
+    body { color: #333; text-align: center; font: 12px "微软雅黑";background-color: #dcf5ed; }
+    .mapTipText{width: 280px;height: 110px;background-color: #ffffff;}
+    .mapTipText .mapTipImg{height: 66px; width: 66px; float: left;border: 2px solid #ffffff; border-radius: 50%;overflow: hidden;margin: -12px 5px 0 -12px;}
+    .mapTipText .mapTipImg img{width: 100%;height: 100%;}
+    .mapTipText .mapTipList{float: left;margin-left: 4px;}
+    .mapTipText .mapTipList h2{text-align: left;}
+    .mapTipText .mapTipList h2 a{font-size: 24px; color: #262626;text-decoration:none;}
+    .mapTipText .mapTipList h2 a:hover{ color: #0085d2;}
+    .mapTipText .mapTipList h2 a span{font-size: 16px;margin-left: 3px;}
+    .mapTipText .mapTipList ul{ width: 203px;padding-right: 10px;}
+    .mapTipText .mapTipList ul li{list-style: none;float: left;padding: 7px 3px 0 3px;}
+    .mapTipText .mapTipList ul li a{color: #262626;text-decoration:none;}
+    .mapTipText .mapTipList ul li a:hover{background-color:#2ebcfe;color:#ffffff;}
+</style>
+
+</head>
+<body class="cssAnimate">
+
+
+{% include "frontEnd/nav.html" %}
+
+<div class="ct-slick ct-js-slick" data-adaptiveHeight="true" data-animations="true" data-autoplay="true" data-infinite="true" data-autoplaySpeed="6000" data-draggable="false" data-touchMove="false" data-arrows="true" data-items="1">
+    <div class="item" data-bg="./assets/images/content/cars/bg-02.jpg">
+        <div class="item-inner">
+            <div class="ct-slick-image">
+                <img class="animated" src="./assets/images/content/cars/slideImage-01.png" data-fx="bounceInLeft" data-time="50">
+            </div>
+            <div class="ct-slick-content">
+                <h2 class="ct-fw-lighter animated" data-fx="bounceInDown" data-time="600"><small>您是否正在寻找</small></h2>
+                <h2 class="ct-fw-900 text-uppercase ct-u-marginBoth10 animated" data-fx="bounceInDown" data-time="850">科研大牛？</h2>
+                <p class="ct-u-marginBottom20 animated" data-fx="bounceInDown" data-time="600">Whatever your budget and whatever the size of car you are looking for, we are sure we can help you find what’s right for you. And we make sure our offer will give you a lot of fun too.</p>
+                    <a href="rent-item.html" class="btn btn-motive animated" data-fx="bounceInDown" data-time="1350"><span>Rent a sedan</span></a>
+                    <a href="contact.html" class="btn btn-graydarker animated" data-fx="bounceInDown" data-time="1100"><span>Contact Us</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="item" data-bg="./assets/images/content/cars/bg-02.jpg">
+        <div class="item-inner text-right pull-right">
+            <div class="ct-slick-content">
+                <h2 class="ct-fw-lighter animated" data-fx="bounceInDown" data-time="500"><small>您是否正在寻找</small></h2>
+                <h2 class="ct-fw-900 text-uppercase ct-u-marginBoth10 animated" data-fx="bounceInDown" data-time="750">出国达人？</h2>
+                <p class="ct-u-marginBottom20 animated" data-fx="bounceInDown" data-time="500">Whatever your budget and whatever the size of car you are looking for, we are sure we can help you find what’s right for you. And we make sure our offer will give you a lot of fun too.</p>
+                <a href="rent-item.html" class="btn btn-motive animated" data-fx="bounceInDown" data-time="1250"><span>Rent a sedan</span></a>
+                <a href="contact.html" class="btn btn-graydarker animated" data-fx="bounceInDown" data-time="1000"><span>Contact Us</span></a>
+            </div>
+            <div class="ct-slick-image">
+                <img class="animated" src="./assets/images/content/cars/slideImage-02.png" data-fx="bounceInRight" data-time="50">
+            </div>
+        </div>
+    </div>
+    <div class="item" data-bg="./assets/images/content/cars/bg-02.jpg">
+        <div class="item-inner">
+            <div class="ct-slick-image">
+                <img class="animated" src="./assets/images/content/cars/slideImage-03.png" data-fx="bounceInLeft" data-time="50">
+            </div>
+            <div class="ct-slick-content">
+                <h2 class="ct-fw-lighter animated" data-fx="bounceInDown" data-time="600"><small>您是否正在寻找</small></h2>
+                <h2 class="ct-fw-900 text-uppercase ct-u-marginBoth10 animated" data-fx="bounceInDown" data-time="850">课程学霸？</h2>
+                <p class="ct-u-marginBottom20 animated" data-fx="bounceInDown" data-time="600">Whatever your budget and whatever the size of car you are looking for, we are sure we can help you find what’s right for you. And we make sure our offer will give you a lot of fun too.</p>
+                <a href="rent-item.html" class="btn btn-motive animated" data-fx="bounceInDown" data-time="1350"><span>Rent a sedan</span></a>
+                <a href="contact.html" class="btn btn-graydarker animated" data-fx="bounceInDown" data-time="1100"><span>Contact Us</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="item" data-bg="./assets/images/content/cars/bg-02.jpg">
+        <div class="item-inner text-right pull-right">
+            <div class="ct-slick-content">
+                <h2 class="ct-fw-lighter animated" data-fx="bounceInDown" data-time="500"><small>您是否正在寻找</small></h2>
+                <h2 class="ct-fw-900 text-uppercase ct-u-marginBoth10 animated" data-fx="bounceInDown" data-time="750">牛人带我飞?</h2>
+                <p class="ct-u-marginBottom20 animated" data-fx="bounceInDown" data-time="500">Whatever your budget and whatever the size of car you are looking for, we are sure we can help you find what’s right for you. And we make sure our offer will give you a lot of fun too.</p>
+                <a href="rent-item.html" class="btn btn-motive animated" data-fx="bounceInDown" data-time="1250"><span>Rent a sedan</span></a>
+                <a href="contact.html" class="btn btn-graydarker animated" data-fx="bounceInDown" data-time="1000"><span>Contact Us</span></a>
+            </div>
+            <div class="ct-slick-image">
+                <img class="animated" src="./assets/images/content/cars/slideImage-04.png" data-fx="bounceInRight" data-time="50">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="ct-u-sectionGrayLighter ct-shadow ct-shadow--type1 ct-u-sectionBorder">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="ct-numberBox ct-numberBox--right ct-u-paddingBoth50">
+                    <h2 class="ct-numberBox-number"><b>21</b></h2>
+                    <h6 class="ct-numberBox-header ct-u-hr ct-u-hr--right">分享者</h6>
+                    <p class="ct-numberBox-content">We have a large base of satisfied customers, no one can give as much as we.</p>
+                </div>
+            </div>
+            <div class="col-sm-4 ct-u-sectionGray">
+                <div class="ct-numberBox ct-numberBox--center ct-u-paddingBoth50">
+                    <h2 class="ct-numberBox-number"><b>37</b></h2>
+                    <h6 class="ct-numberBox-header ct-u-hr ct-u-hr--center">点击数</h6>
+                    <p class="ct-numberBox-content">We have a large base of satisfied customers, no one can give as much as we.</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ct-numberBox ct-u-paddingBoth50">
+                    <h2 class="ct-numberBox-number"><b>15</b></h2>
+                    <h6 class="ct-numberBox-header ct-u-hr ct-u-hr--left">高校数</h6>
+                    <p class="ct-numberBox-content">We have a large base of satisfied customers, no one can give as much as we.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ct-u-marginTop90 ct-u-paddingBottom10">
+    <div class="container">
+
+        <div id='school' class="ct-sectionHeader ct-u-marginBottom70">
+            <h2 class="ct-sectionHeader-title"><small>探索 <span>学校</span></small></h2>
+            <div class="ct-sectionHeader-separator">
+                <span class="minus"></span>
+                <span class="slash">/</span>
+                <span class="slash">/</span>
+                <span class="minus"></span>
+            </div>
+            <p>发现校园达人</p>
+        </div>
+
+        <div class="row">
+<div class="itemCon" style="float: left">
+    <div id="ChinaMap" style="margin-left: 20%;"></div>
+    <div id="stateTip" style="position: absolute;left: 100%;text-align: left;display: inline;"></div>
+</div>
+            <div id="mapTipContent" style="width: 900px;margin: 0 auto;display: none">
+                <div class="mapTipText mapTipText0">
+                    <div class="mapTipImg"><img src="{% static 'frontEnd/images/heilongjiang.jpg'%}" alt=""/></div>
+                    <div class="mapTipList">
+                        <h2><a href="">黑龙江<span>Heilongjiang</span></a></h2>
+                        <ul>
+                            <li><a href="">哈尔滨</a></li>
+                            <li><a href="">漠河</a></li>
+                            <li><a href="">五大连池</a></li>
+                            <li><a href="">兴凯湖</a></li>
+                            <li><a href="">雪乡</a></li>
+                            <li><a href="">大兴安岭</a></li>
+                            <li><a href="">齐齐哈尔</a></li>
+                            <li><a href="">牡丹江</a></li>
+                            <li><a href="">伊春</a></li>
+                            <li><a href="">大庆</a></li>
+                            <li><a href="">镜泊湖</a></li>
+                            <li><a href="">帽儿山</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mapTipText mapTipText1">
+                    <div class="mapTipImg"><img src="{% static 'frontEnd/images/jilin.jpg'%}" alt=""/></div>
+                    <div class="mapTipList">
+                        <h2><a href="">吉林<span>Jilin</span></a></h2>
+                        <ul>
+                            <li><a href="">长白山</a></li>
+                            <li><a href="">长春</a></li>
+                            <li><a href="">延吉</a></li>
+                            <li><a href="">雾凇岛</a></li>
+                            <li><a href="">集安</a></li>
+                            <li><a href="">吉林市</a></li>
+                            <li><a href="">查干湖</a></li>
+                            <li><a href="">三角龙湾</a></li>
+                            <li><a href="">通化</a></li>
+                            <li><a href="">四平</a></li>
+                            <li><a href="">松原</a></li>
+                            <li><a href="">白城</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mapTipText mapTipText2">
+                    <div class="mapTipImg"><img src="{% static 'frontEnd/images/liaoling.jpg'%}"  alt=""/></div>
+                    <div class="mapTipList">
+                        <h2><a href="">辽宁<span>Liaoning</span></a></h2>
+                        <ul>
+                            <li><a href="">大连</a></li>
+                            <li><a href="">丹东</a></li>
+                            <li><a href="">沈阳</a></li>
+                            <li><a href="">兴城</a></li>
+                            <li><a href="">葫芦岛</a></li>
+                            <li><a href="">绥中</a></li>
+                            <li><a href="">旅顺</a></li>
+                            <li><a href="">锦州</a></li>
+                            <li><a href="">抚顺</a></li>
+                            <li><a href="">鞍山</a></li>
+                            <li><a href="">本溪</a></li>
+                            <li><a href="">营口</a></li>
+                            <li><a href="">盘锦</a></li>
+                            <li><a href="">长兴岛</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mapTipText mapTipText3">
+                    <div class="mapTipImg"><img src="{% static 'frontEnd/images/heilongjiang.jpg'%}"  alt=""/></div>
+                    <div class="mapTipList">
+                        <h2><a href="">四川<span>Liaoning</span></a></h2>
+                        <ul>
+                            <li><a href="">大连</a></li>
+                            <li><a href="">丹东</a></li>
+                            <li><a href="">沈阳</a></li>
+                            <li><a href="">兴城</a></li>
+                            <li><a href="">葫芦岛</a></li>
+                            <li><a href="">绥中</a></li>
+                            <li><a href="">旅顺</a></li>
+                            <li><a href="">锦州</a></li>
+                            <li><a href="">抚顺</a></li>
+                            <li><a href="">鞍山</a></li>
+                            <li><a href="">本溪</a></li>
+                            <li><a href="">营口</a></li>
+                            <li><a href="">盘锦</a></li>
+                            <li><a href="">长兴岛</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mapTipText mapTipText17">
+                    <div class="mapTipImg"><img src="{% static 'frontEnd/images/heilongjiang.jpg'%}" alt=""/></div>
+                    <div class="mapTipList">
+                        <h2><a href="">四川<span>Sichuan</span></a></h2>
+                        <ul>
+                            <li><a href="">电子科技大学</a></li>
+                            <li><a href="">四川大学</a></li>
+                            <li><a href="">西南交大</a></li>
+                            <li><a href="">西南财经大学</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!-- 热门话题 -->
+<div id="ct-js-wrapper" class="ct-pageWrapper">
+
+
+<section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="120" data-type="parallax" data-stellar-background-ratio="0.3" data-bg-image="./assets/images/content/cars/mediaHeader-03.jpg" data-bg-image-mobile="./assets/images/content/cars/mediaHeader-03.jpg">
+    
+    <div class="ct-sectionHeader ct-u-marginBottom0">
+            <h2 class="ct-sectionHeader-title"><small>探索 <span>话题</span></small></h2>
+            <div class="ct-sectionHeader-separator">
+                <span class="minus"></span>
+                <span class="slash">/</span>
+                <span class="slash">/</span>
+                <span class="minus"></span>
+            </div>
+            <p>发现热门话题</p>
+        </div>
+</section>
+
+<div class="ct-u-sectionMotive text-center">
+    <ul class="ct-gallery-filters ct-js-gallery-filters">
+        <li><a data-filter="*" class="btn btn-motive active"><span>全部</span></a></li>
+        <li><a data-filter=".sport" class="btn btn-motive"><span>课程点睛</span></a></li>
+        <li><a data-filter=".sedan" class="btn btn-motive"><span>留学咨询</span></a></li>
+        <li><a data-filter=".luxury" class="btn btn-motive"><span>科研探讨</span></a></li>
+        <li><a data-filter=".event" class="btn btn-motive"><span>学科竞赛</span></a></li>
+        <li><a data-filter=".baoyan" class="btn btn-motive"><span>保研咨询</span></a></li>
+        <li><a data-filter=".else" class="btn btn-motive"><span>其他</span></a></li>
+    </ul>
+</div>
+
+<div id="ct-gallery" class="ct-gallery ct-gallery--col5 ct-js-magnificPortfolioPopupGroup">
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-02-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item sedan">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-02.jpg'%}"  alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-14-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item luxury">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-06-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item event">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-06.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-04-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item event">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-04.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-11-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item sport">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-11.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-12-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item sedan">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-12.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-01-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item luxury">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-01.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-15-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item sport">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-15.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-05-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item luxury">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-05.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-03-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item sedan">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-03.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-14-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item sedan">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-10-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item else">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-16-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item luxury">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-17-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item events">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-18-big.jpg" title="Ahoy There Matey">
+        <figure class="ct-gallery-item sport">
+            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
+            <figcaption>
+                <div class="ct-u-displayTableVertical">
+                    <div class="ct-u-displayTableCell">
+                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
+                        <p>sports car</p>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
+    </a>
+
+</div>
+
+<a href="#" class="btn btn-motive ct-loadMoreButton"><span class="h2"><small>Load <b>More</b><i class="fa fa-arrow-down"></i></small></span></a>
+
+</div>
+
+<!-- 热门话题 -->
+
+
+
+
+<footer class="ct-footer ct-u-sectionDark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ct-footer-logo ct-u-paddingTop50 ct-u-paddingBottom30"><img src="{% static 'frontEnd/images/content/logo2.png'%}"  alt="logo"></div>
+                <p>Rentica operate in the booking market since 2000. We created a platform that would not only allow our clients to book a car, but to make this process as easy as possible. Rentica deals with all the major car hire companies around the world checking which local supplier is offering the best prices for the car you want on the date you need it.</p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-paddingTop50">
+                    <h3 class="ct-sectionHeader-title">Next events</h3>
+                    <div class="ct-sectionHeader-separator">
+                        <span class="slash">/</span>
+                        <span class="slash">/</span>
+                        <span class="minus"></span>
+                    </div>
+                </div>
+
+                <a href="events.html">
+                     <div class="media ct-mediaObject">
+                         <div class="media-left"><img src="{% static 'frontEnd/images/content/cars/footerObject-01.jpg'%}" alt=""></div>
+                         <div class="media-body">
+                             <h6 class="ct-mediaObject-header">Rentica sports car racing finals</h6>
+                             <h2 class="ct-mediaObject-date"><small>Aug 25 <span>2015</span></small></h2>
+                         </div>
+                     </div>
+                 </a>
+                 <a href="events.html">
+                     <div class="media ct-mediaObject">
+                         <div class="media-left"><img src="{% static 'frontEnd/images/content/cars/footerObject-02.jpg'%}" alt=""></div>
+                         <div class="media-body">
+                             <h6 class="ct-mediaObject-header">Rentica Sedan Showdown</h6>
+                             <h2 class="ct-mediaObject-date"><small>Sep 03 <span>2015</span></small></h2>
+                         </div>
+                     </div>
+                 </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-paddingTop50 ct-u-marginBottom15">
+                    <h3 class="ct-sectionHeader-title">Flickr gallery</h3>
+                    <div class="ct-sectionHeader-separator">
+                        <span class="slash">/</span>
+                        <span class="slash">/</span>
+                        <span class="minus"></span>
+                    </div>
+                </div>
+
+                <div class="ct-flickrGallery">
+                    <!--<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=8&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user_set&amp;set=72157612872346179"></script>-->
+                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-01-big.jpg"><img src="./assets/images/content/cars/flickr-01.jpg" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-02-big.jpg"><img src="./assets/images/content/cars/flickr-02.jpg" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-03-big.jpg"><img src="./assets/images/content/cars/flickr-03.jpg" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-04-big.jpg"><img src="./assets/images/content/cars/flickr-04.jpg" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-05-big.jpg"><img src="./assets/images/content/cars/flickr-05.jpg" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-06-big.jpg"><img src="./assets/images/content/cars/flickr-06.jpg" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-07-big.jpg"><img src="./assets/images/content/cars/flickr-07.jpg" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-08-big.jpg"><img src="./assets/images/content/cars/flickr-08.jpg" alt=""/></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
+        <div class="container">
+            <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/">createIT</a> 2014</div>
+            <ul class="ct-socials">
+                <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i class="fa fa-flickr"></i></a></li>
+                <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
+                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i class="fa fa-facebook-square"></i></a></li>
+                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</div>
+
+<!-- JavaScripts -->
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js'%}" ></script>
+<script src="{% static 'frontEnd/js/dependencies.js'%}" ></script>
+
+<script src="{% static 'frontEnd/js/main.js'%}"  ></script>
+
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js'%}" ></script>
+
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js'%}" ></script>
+
+<script src="{% static 'frontEnd/plugins/slick/slick.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js'%}" ></script>
+
+
+<script src="{% static 'frontEnd/plugins/isotope/jquery.isotope.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/isotope/imagesloaded.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/isotope/infinitescroll.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/isotope/init.js'%}" ></script>
+
+<script type="text/javascript">
+    $(function(){
+        $('#ChinaMap').SVGMap({
+            mapWidth: 806,
+            mapHeight: 396
+        });
+    });
+    function findSchool() {  
+        window.scrollTo(100,800);   
+    } 
+</script>
+
+</body>
+</html>

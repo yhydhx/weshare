@@ -1,0 +1,598 @@
+// Numbered Boxes // ---------------------------------------------------------------
+
+.ct-numberBox{
+  padding: 1rem;
+
+  &-number{
+    color: @motive;
+    line-height:1;
+  }
+  .ct-numberBox-header{
+    margin-top: 1.486em;
+    text-transform: uppercase;
+    font-weight: 700;
+    &.ct-u-hr{
+      margin-bottom:1em;
+    }
+  }
+
+  // Variations // --------------------
+  &--right{
+    *{text-align:right;}
+  }
+  &--center{
+    *{text-align:center;}
+  }
+
+  // Responsive // --------------------
+  @media (max-width:767px){
+    text-align:center;
+    *{text-align:center;}
+    .ct-u-hr:after {left:0;right:0;margin:auto;} // centering HR
+  }
+}
+
+// Icon Boxes // -------------------------------------------------------------------
+
+.ct-iconBox {
+  position:relative;
+  margin-top:0;
+
+  .ct-iconBox-icon{
+    i{
+      color: @motive;
+      * {display:none;}
+    }
+  }
+  .ct-iconBox-header{
+    font-weight: bold;
+    text-transform: uppercase;
+    &.ct-u-hr{
+      padding-bottom: 1.286em;
+      margin-bottom: 1.143em;
+    }
+  }
+
+  // Box Variations // ------------------------
+
+  &.ct-iconBox--type1{
+    .ct-iconBox-header{
+      margin-top: 0.7em;
+      &.ct-u-hr{margin-bottom: 0.75em;}
+    }
+    .ct-iconBox-icon i {padding-left:1px;} // prevent icon clipping
+    .media-left{padding-right:1.714rem;}
+    .media-right{padding-left:1.714rem;}
+  }
+
+  &.ct-iconBox--type2{
+    text-align:center;
+
+    .ct-iconBox-icon{
+      position:relative;
+      top:0.75em;
+      i{
+        color:#fff;
+        background:@motive;
+        width:2.250em;
+        height:2.250em;
+        line-height:2.250em;
+        border-radius:50%;
+
+      }
+    }
+    .ct-iconBox-content{
+      background: #f8f8f8;
+      border:1px solid #ddd;
+      padding: 5em 1.435em 2.143em 1.435em;
+      .btn{
+        margin-top:1em;
+      }
+    }
+  }
+
+  &.ct-iconBox--type3{
+    .media-left{padding-right:18px;}
+    .media-right{padding-left:18px;}
+
+    .ct-iconBox-icon{
+      i{
+        width:2em;
+        height:2em;
+        border:3px solid @motive;
+        border-radius:50%;
+
+        line-height:1.95em;
+        text-align:center;
+      }
+
+      &.ct-iconBox-icon--gray i {
+        border-width:1px;
+      }
+    }
+  }
+
+  &.ct-iconBox--type4{
+    z-index:1;
+    overflow:hidden;
+
+    .ct-iconBox-icon{
+      position:relative;
+      padding:10px 0;
+      i{
+        width:2.333em;
+        height: 2.333em;
+        line-height: 2.25em;
+        border-radius:50%;
+
+        text-align:center;
+        border:2px solid @motive;
+        background:rgba(255,255,255,0.99);
+      }
+    }
+    .media-body{padding-right:2rem;}
+    .media-left+.media-body{padding-right:0;padding-left:2rem;}
+
+    .ct-iconBox-icon:after{
+      content:"";
+      position:absolute;
+      z-index:-1;
+      height:100%;
+      width:2000px;
+      top:0;
+      left:50%;
+      background:@motive;
+      .ct-m-opacity(0);
+      .ct-m-transition(all,0.2s,ease);
+    }
+
+    &:hover{
+      .ct-iconBox-icon:after{
+        .ct-m-opacity(1);
+      }
+      a{color: #fff;}
+    }
+    a:hover{text-decoration: underline !important;}
+  }
+
+
+  // Icon Variations // ----
+  .ct-iconBox-icon{
+    &.ct-iconBox-icon--gray i{
+      background:#f8f8f8;
+      border-color:#ddd;
+      color: #aaa;
+    }
+    &.ct-iconBox-icon--inverse i{
+      background: @motive;
+      border-color: @motive;
+      color: #fff;
+    }
+  }
+
+
+  @media(max-width:767px){
+    &.ct-iconBox--type1, &.ct-iconBox--type2{
+      .media-left{
+        display:block;
+        padding:0 0 0.5em 0;
+      }
+      text-align:center;
+      .media-body{
+        display:block
+      }
+      .ct-u-hr:after{
+        left:0;right:0;
+        margin-left:auto;margin-right:auto;
+      }
+    }
+  }
+}
+
+.ct-u-sectionMotive .ct-iconBox{ // motive Section color fix
+  .ct-iconBox-icon i{
+    color: #fff;
+    border-color: #fff;
+  }
+  &.ct-iconBox--type4{
+    .ct-iconBox-icon {
+      i{background: @motive;}
+      &:after{background:#fff;}
+    }
+    &:hover{
+      *, small{color: @motive;}
+      i{color: #fff;}
+      a{color: #222;}
+    }
+  }
+}
+
+// Person Box // --------------------------------------------------------------------
+
+.ct-personBox{
+  .ct-personBox-image img{
+    .ct-m-grayscale(100%);
+    .ct-m-transition(all, 0.2s, ease);
+    width:100%;
+  }
+  .ct-personBox-content{
+    background: @motive;
+
+    .ct-personBox-header{
+      text-align:center;
+      color: #fff;
+      padding:2.143em 0 1.214em 0;
+      text-transform:uppercase;
+      small{
+        display:block;
+        margin-top:7px;
+        font-style: italic;
+        color: #fff;
+        text-transform: lowercase;
+      }
+    }
+  }
+  .ct-socials{
+    padding-bottom: 1.571em;
+  }
+  &:hover{
+    .ct-personBox-image img{
+      .ct-m-grayscale(0);
+    }
+    *{ text-decoration:none;}
+  }
+
+  // Responsive // -----------------------
+
+  @media (max-width: 767px){
+    margin-left:-15px;margin-right:-15px;
+    .ct-personBox-image img{.ct-m-grayscale(0);}
+//    margin-bottom: 4em;
+  }
+}
+
+// Pricing Box // --------------------------------------
+
+.ct-pricingBox{
+  text-align:center;
+  background: #f8f8f8;
+  padding-bottom:2em;
+  border-radius: 10px 10px 0 0;
+
+  border:1px solid #ddd;
+
+  .ct-pricingBox-header{
+    position:relative;
+    border-radius: 10px 10px 0 0;
+
+    padding-bottom:1em;
+    margin:-1px -1px 0 -1px;
+
+    .ct-pricingBox-title{
+      padding-top: 0.3em;
+      margin-bottom:10px;
+      padding-bottom:20px;
+      &, *{font-weight: lighter;}
+    }
+
+    .ct-pricingBox-price{
+      margin-bottom: 0.15em;
+    }
+    .ct-pricingBox-subtitle{
+      text-transform: uppercase;
+    }
+  }
+
+  .ct-pricingBox-content{
+    padding-top:0.25em;
+
+    .ct-pricingBox-list{
+      list-style:none;
+      padding:0 2em;
+      margin-bottom:2em;
+      li{
+        line-height:1;
+        padding:0.85em;
+        border:1px solid #ddd;
+        margin-top:-1px;
+        &:nth-child(even){  background: #eee;  }
+        &:nth-child(odd){background:#fff;}
+      }
+    }
+    svg{
+      display:block;
+      stroke-width: 10px;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      width:100%;
+      height: 60px;
+    }
+  }
+
+  // variations // --------------------------------------
+  &.ct-pricingBox--motive{
+    .ct-pricingBox-header{
+      background: @motive;
+      *{  color: #fff; &:after{  background-color: #fff;  } } // text colors
+    }
+    svg{
+      display:block;
+      stroke-width: 10px;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      width:100%;
+      height: 60px;
+      fill: @motive;
+      position:relative;
+      top:-1px;
+    }
+  }
+  &.ct-pricingBox--gray{
+    .ct-pricingBox-header{
+      background: #888;
+      *{  color: #fff; &:after{  background-color: #fff;  } } // text colors
+    }
+    svg{
+      display:block;
+      stroke-width: 10px;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      width:100%;
+      height: 60px;
+      fill: #888;
+      position:relative;
+      top:-1px;
+    }
+  }
+  &.ct-pricingBox--graydarker{
+    .ct-pricingBox-header{
+      background: #555;
+      *{  color: #fff; &:after{  background-color: #fff;  } } // text colors
+    }
+    svg{
+      display:block;
+      stroke-width: 10px;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      width:100%;
+      height: 60px;
+      fill: #555;
+      position:relative;
+      top:-1px;
+    }
+  }
+  &.ct-pricingBox--graylighter{
+    .ct-pricingBox-header{
+      background: #aaa;
+      *{  color: #fff; &:after{  background-color: #fff;  } } // text colors
+    }
+    svg{
+      display:block;
+      stroke-width: 10px;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      width:100%;
+      height: 60px;
+      fill: #aaa;
+      position:relative;
+      top:-1px;
+    }
+  }
+}
+
+
+// Figure Box // ----------------------------------------------------------------
+
+.ct-figureBox{
+  position:relative;
+  box-shadow: 0 -3px 10px 0 rgba(0, 0, 0, 0.2);
+  &, img{
+    border-radius: 20px;
+
+  }
+  *{color: #222;}
+
+  figcaption{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    background: #fff;
+    background: rgba(255,255,255,0.7);
+    border-radius: 20px 20px 0 0;
+
+    .ct-m-transition(all, 0.2s, ease);
+    .ct-figureBox-header{
+      padding: 0.15em 70px 0.35em 0.25em;
+      &, small{font-weight: lighter;}
+      span{
+        font-weight:bold;
+      }
+      .ct-figureBox-icon{
+        content:"\f054";
+        font-family: fontawesome;
+        position:absolute;
+        font-weight: lighter;
+        top:0;
+        right:0;
+        height:100%;
+        width:62px;
+        border-radius: 0 20px 0 0;
+
+        background: #fff;
+        font-size:0.75em;
+        text-align: center;
+        padding-top: 0.9em;
+        color: #222;
+        .ct-m-opacity(0);
+      }
+    }
+  }
+  &:hover figcaption{
+    background:@motive;
+    &, *{color: #fff;}
+    .ct-figureBox-icon{.ct-m-opacity(1);}
+  }
+
+  // Responsive // --------------------------------------------------------
+
+  @media (max-width:479px){
+    figcaption .ct-figureBox-header{
+      padding: 0.3em 40px 0.45em 0.5em;
+      &, *{  font-size: 2rem;  }
+      .ct-figureBox-icon{
+        font-size:1.5rem;
+        padding-top:0.75em;
+        width:40px;
+      }
+    }
+  }
+}
+.ie8{
+  .ct-figureBox figcaption{
+    .ct-figureBox-header{
+      padding-top:10px;
+      padding-left: 15px;
+    }
+  }
+}
+
+
+// Archive Box // -------------------------------------------------------
+
+.ct-archiveBox{
+  width:100%;
+  height: 12.143rem;
+  display:table;
+  border:1px solid;
+  padding: 1em;
+
+  background: #f8f8f8;
+  border-color: #ddd;
+
+  .ct-archiveBox-inner{
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    .ct-archiveBox-header{
+      background:transparent;
+      font-weight:300;
+      padding-bottom:0.5em;
+      margin-bottom:0.5em;
+      color: #222;
+    }
+    p{
+      font-style:italic;
+      font-weight:600;
+      font-size: 0.929em;
+      margin:0;
+    }
+  }
+
+  &.ct-archiveBox--motive{
+    background: @motive;
+    border-color: @motive;
+    *{color: #fff;}
+    .ct-u-hr:after{background:#fff;}
+  }
+  &.ct-archiveBox--dark{
+    background: #333;
+    border-color: #222;
+    *{color: #fff;}
+    .ct-u-hr:after{background:#fff;}
+  }
+}
+
+// Graph Boxes // ----------------------------------------------------------
+
+.ct-graphBox {
+  text-align: center;
+  &.ct-graphBox--default{
+    padding: 1.714em;
+    border: 1px solid #ddd;
+    .ct-graphBox-graph {
+      position:relative;
+      canvas {
+        width: 150px !important;
+        height: 150px !Important;
+      }
+      .ct-graphBox-number {
+        &, span {
+          position: absolute;
+          line-height: 150px;
+          top: 0;left:0;
+          display:block;
+          font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          width: 100%;
+          text-align: center;
+        }
+      }
+      .ct-graphBox-icon i{
+        position: absolute;
+        line-height: 150px;
+        top: 0;left:0;
+        display:block;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+  &.ct-graphBox--type2{
+    .ct-graphBox-graph{
+      position:relative;
+
+      .ct-graphBox-graph-content{
+        position:absolute;
+        width:100%;height:100%;
+        top:0;left:0;
+      }
+
+      .ct-graphBox-number{
+        width:100%;
+        vertical-align: middle;
+        text-align:center;
+        height: 0.75em;
+        line-height: 0.7;
+        font-size: 6.75rem;
+        font-weight:700;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        padding-left: 15px;
+        margin: 5px 0 10px 0;
+        span{
+          font-size: 2.143rem;
+          vertical-align: top;
+        }
+      }
+      .ct-graphBox-title{
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+// Counter Box // -------------------------------------------------------------------------------------------------------------
+
+.ct-counterBox{
+  background: #f8f8f8;
+  border:1px solid #ddd;
+  position:relative;
+  text-align:center;
+  .ct-counterBox-number{
+    font-size: 5.714rem;
+    font-weight:700;
+    display:block;
+    padding: 0.5em 0.5em 0.1em 0.5em;
+    line-height:1;
+  }
+  .ct-counterBox-title{
+    font-weight:bold;
+    text-transform: uppercase;
+    padding-bottom: 50px;
+  }
+  .ct-counterBox-icon{
+    position:absolute;
+    top:0.8rem;right:1rem;
+    font-size: 1.84rem;
+  }
+}

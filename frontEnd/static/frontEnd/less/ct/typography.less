@@ -1,0 +1,56 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:600,600italic,800,400,400italic,300italic);
+
+html{
+  font-size: 14px;
+  @media (max-width:767px){  font-size: 12px;  }
+}
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:0;} // bootstrap reset
+a{text-decoration: none !important;} // bootstrap reset
+a:hover, a:focus{color: #222;} // bootstrap reset
+
+a{  color: @motive;  }
+
+h1,h1 small, h2, h2 small, h3, h3 small, h4, h4 small, h5, h5 small, h6, h6 small,
+.h1,.h1 small, .h2, .h2 small, .h3, .h3 small, .h4, .h4 small, .h5, .h5 small, .h6, .h6 small, body {color: inherit;} // default color
+h1,h2,.h1,.h2{line-height: 0.75em;} // smaller line height for big headers
+
+.ct-t-fontDefault {font-family: 'Open Sans', sans-serif} // utility Default Font
+.ct-t-fontAlt  {font-family: "Lato", sans-serif} // utility Alternative Font
+
+body, h2 b{  font-family: 'Open Sans', sans-serif;  } // font family for body and h2 bold
+h1,h2,h3,h4,h5,h6,small,.h1,.h2,.h3,.h4,.h5,.h6{  font-family: "Lato", sans-serif; } // font family for headers
+
+p {font-size: 1.000rem;} // 14px;
+
+h1, .h1{
+  font-size: 6.429rem; // 90px;
+  small{  font-size: 5.357rem  } // 75px;
+}
+h2, .h2{
+  font-size: 4.286rem; // 60px;
+  b{font-size: 3.571rem;} // 50px;
+  small{  font-size: 2.857rem  } // 40px;
+}
+h3, .h3{
+  font-size: 2.143rem; // 30px;
+  small{  font-size: 1.786rem; } // 25px;
+}
+h4, .h4{
+  font-size: 1.714rem; // 24px;
+  small{  font-size: 1.429rem; } // 20px;
+}
+h5, .h5{
+  font-size: 1.214rem; // 17px;
+  small{  font-size: 1.071rem; } // 15px;
+}
+h6, .h6{
+  font-size: 1.000rem; // 14px;
+  small{  font-size: 0.929rem; } // 13px;
+}
+p{
+  color: #777;
+  line-height:1.86em;
+}
+
+.ct-t-hover:hover{background:@motive;color:#fff;}
+.ct-u-sectionMotive .ct-t-hover:hover{background: #fff; color: @motive;}
