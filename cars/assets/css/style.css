@@ -7980,7 +7980,7 @@ p {
   background: #666666 !important;
 }
 .ct-u-colorMotive {
-  color: #e74c46 !important;
+  color: #4e4e4e !important;               /* here  */
 }
 .ct-u-colorPrimary {
   color: #337ab7 !important;
@@ -10742,9 +10742,9 @@ body.boxed .ct-topBar + .ct-menuMobile + .ct-pageWrapper nav.navbar,
   border-style: solid;
   border-width: 0 10px 10px 10px;
 }
-.ct-footer.ct-u-sectionDark:after {
+/*.ct-footer.ct-u-sectionDark:after {
   border-color: transparent transparent #333 transparent;
-}
+}*/
 .ct-footer.ct-u-sectionMotive:after {
   border-color: transparent transparent #e74c46 transparent;
 }
