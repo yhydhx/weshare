@@ -1,0 +1,54 @@
+.progress{
+  box-shadow:none !important;
+  height:10px;
+  position:relative;
+  overflow:visible;
+  border-radius:0;
+
+  .progress-bar{
+    border-radius:0;
+    background-color: @motive;
+    position:relative;
+  }
+  .ct-progressBar-tr{color:#222;}
+}
+
+.ct-progressBar{
+  margin-bottom:30px;
+}
+.ct-progressBar-tr{
+  position: absolute;
+  top: -1.95em;
+  right: 0;
+  font-weight: bold;
+  font-family: 'lato';
+  font-size: 1rem;
+}
+
+.ct-progressBar-name{
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  padding-bottom: 0.5em;
+  text-transform: uppercase;
+  font-family: 'lato';
+  font-weight: 700;
+}
+
+.ct-progressBar--inverse{
+
+  .progress-bar{
+    background-color: #fff;
+  }
+  .ct-progressBar-tr{color:#fff;}
+
+  .ct-progressBar-name {
+    color: #fff;
+  }
+
+  .progress{
+    background: #555555;
+  }
+
+}
