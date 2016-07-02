@@ -1,0 +1,188 @@
+.btn{
+  box-shadow:none !important; // bootstrap reset
+  .ct-m-transition(all, 0.2s, ease);
+  padding:0.85em 0.95em;
+  line-height: 1;
+  font-size:1em;
+  border-radius:5px;
+  span{
+    text-transform: uppercase;
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+  }
+  i{.ct-m-transition(all, 0.2s, ease);}
+  i+span{padding-left:0.75em;}
+  span+i{padding-left:0.75em;}
+
+  // variations // --------------------
+
+  &.btn-xs{
+    padding:2px 5px;
+    border-radius: 4px;
+  }
+  &.btn-lg{
+    padding: 1.588em 1.768em;
+    i{margin: 0 -0.65em;}
+    i+span{padding-left:1.35em;}
+    span+i{padding-left: 1.35em;}
+  }
+  &.btn-wide{
+    width:100%;
+    padding-left:0;padding-right:0;
+  }
+  .ct-iconButton, .ct-iconButton:hover{border-color: #fff;margin-left:5px;}
+}
+
+// Colors // ------------------------------------
+
+// Motive // ---------
+.btn-motive{
+  background: @motive;
+  span{color: #fff;}
+  i{color: #fff;}
+  &:hover{background: #333;}
+}
+.btn-motive-o{
+  background: transparent;
+  i, span{color: @motive;}
+  border: 2px solid @motive;
+  &:hover{
+    border-color: #333;
+    span, i{color: #333;}
+  }
+}
+
+// Gray // ------------
+.btn-gray{
+  background: #888;
+  span, i{color: #fff;}
+  &:hover{background: #444;}
+}
+.btn-gray-o{
+  background: transparent;
+  color: #888;
+  i,span{color: #888;}
+  border: 2px solid #888;
+  &:hover{
+    border-color: #444;
+    span, i{color: #444;}
+  }
+}
+
+// Gray Lighter // ------------
+.btn-graylighter{
+  background: #aaa;
+  span, i{color: #fff;}
+  &:hover{background: #555;}
+}
+.btn-graylighter-o{
+  background: transparent;
+  color: #aaa;
+  span,i{color: #aaa;}
+  border: 2px solid #aaa;
+  &:hover{
+    border-color: #555;
+    span, i{color: #555;}
+  }
+}
+
+// Gray Darker // ------------
+.btn-graydarker{
+  background: #555;
+  span, i{color: #fff;}
+  &:hover{background: #222;}
+}
+.btn-graydarker-o{
+  background: transparent;
+  color: #555;
+  span,i{color: #555;}
+  border: 2px solid #555;
+  &:hover{
+    border-color: #222;
+    &, i, span{color: #222;}
+  }
+}
+
+// Default // --------------
+.btn-default{
+  border-color: transparent;
+  span,i{color:#333;}
+  &:hover{
+    span,i{color:#333;}
+  }
+}
+.btn-default-o{
+  background-color: transparent;
+  span{color: #fff;}
+  border: 2px solid #fff;
+  &:hover{
+    background: #fff;
+    span{color:#222;}
+  }
+}
+
+// Inverse // --------------
+.btn-inverse{
+  border-color: transparent;
+  background:#333;
+  span,i{color:#fff}
+  &:hover{
+    background: #555;
+  }
+}
+.btn-inverse-o{
+  background-color: transparent;
+  i,span{color: #333;}
+  border: 2px solid #333;
+  &:hover{
+    background: #333;
+    span,i{color:#fff;}
+  }
+}
+
+// Bootstrap buttons // ---------------
+.btn-primary, .btn-success, .btn-danger, .btn-warning, .btn-info {
+  border-color: transparent;
+  &:hover{
+    background:#333;
+    border-color: transparent;
+  }
+}
+
+.btn-primary-o, .btn-success-o, .btn-danger-o, .btn-warning-o, .btn-info-o{
+  background:transparent;
+  border:2px solid;
+  &:hover{
+    border-color: #333;
+    span,i{color:#333;}
+  }
+}
+.btn-primary-o{color:@brand-primary}
+.btn-success-o{color:@brand-success}
+.btn-danger-o{color:@brand-danger}
+.btn-warning-o{color:@brand-warning}
+.btn-info-o{color:@brand-info}
+
+
+
+// Scroll Buttons // ------------------------------
+
+.ct-iconButton {
+  color: #888;
+  border: 2px solid #888;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  display: inline-block;
+  line-height: 1.8em;
+  text-align:center;
+  .ct-m-transition(all, 0.2s, ease);
+
+  &:hover{  color: #333;  border-color: #333;  }
+
+  &.ct-iconButton--larger{
+    width:2.857em;
+    height: 2.857em;
+    line-height: 2.55;
+  }
+}
