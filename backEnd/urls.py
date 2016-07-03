@@ -16,12 +16,9 @@ urlpatterns = patterns('',
     url(r'^school/(?P<method>\w+)/?(?P<Oid>\w*)$', views.school,name ='school'),
     url(r'^topic/(?P<method>\w+)/?(?P<Oid>\w*)$', views.topic,name ='topic'),
     url(r'^feature/(?P<method>\w+)/?(?P<Oid>\w*)$', views.feature,name ='feature'),    
+    url(r'^test\.html$', views.test, name='test'),
+    url(r'^s\.html$', views.s, name='s'),
     '''
-    url(r'^product/(?P<method>\w+)/(?P<Oid>\w*)$', views.product,name ='product'),
-    url(r'^plan/(?P<method>\w+)/(?P<Oid>\w*)$', views.plan,name ='plan'),
-    url(r'^recruit/(?P<method>\w+)/(?P<Oid>\w*)$', views.recruit,name ='recruit'),
-    url(r'^contact/(?P<method>\w+)/(?P<Oid>\w*)$', views.contact,name ='contact'),
-    url(r'^us/(?P<method>\w+)/(?P<Oid>\w*)$', views.us,name ='us'),
 
     
 

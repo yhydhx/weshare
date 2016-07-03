@@ -187,11 +187,12 @@ def school(request,method,Oid):
     if method == 'addSchool' :
         s_name = request.POST.get("s_name")
         p_name = request.POST.get("p_name")
-        
+        s_display_index = request.POST.get("s_display_index")
         school = School(
             s_name = s_name,
             s_province = p_name,
             s_student_number = 0,
+            s_display_index = s_display_index,
             )
         school.save()
 
@@ -206,10 +207,12 @@ def school(request,method,Oid):
             school = {'s_name' : request.POST.get('s_name'),
                     's_province' : request.POST.get("p_name"),
                     'id' : request.POST.get("id"),
+                    's_display_index' : request.POST.get("s_display_index")
                     }
 
         School.objects.filter(id=school['id']).update(  s_name = school['s_name'],
-                                                    s_province = school['s_province']
+                                                    s_province = school['s_province'],
+                                                    s_display_index = school['s_display_index']
                                                     )
 
         
@@ -321,208 +324,40 @@ def feature(request,method,Oid):
     else:
         return HttpResponse('没有该方法')
 
-########################################################
-# this view is about the Plan 
-# contains show news list , add news , change news, 
-# delete news,and add new news
-# News contain three parts , title content date                 
-########################################################
+def test(request):
 
+	'''
+	find all provinces 
+	then get all university of each province.
 
-def plan(request,method,Oid):
-    try:
-        request.session['username']
-    except KeyError,e:
-        return HttpResponseRedirect('login.html')
-    if method == 'addPlan':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        plan = Plan(
-            title=title,
-            content = content,
-            uploadUser = request.session['username'],
-            )
-        plan.save()
-        #Oid = news.id
-        return HttpResponseRedirect('/backEnd/plan/show')
-    elif method == 'change':
-        return render(request,'backEnd/changePlan.html',{'plan':Plan.objects.get(id=Oid)})
+	'''
+	provinces = Province.objects.all()
+	d = {}
+	for s_province in provinces:
+		d[s_province.p_name] = {}
+		d[s_province.p_name]['name'] = s_province.p_name
+		d[s_province.p_name]['id'] = s_province.p_id
+		d[s_province.p_name]['schools'] = []
 
-    elif method == 'save':
-        if request.method == 'POST':
-            plan = {'id' : request.POST.get('id'),
-                    'title' : request.POST.get('title'),
-                    'content' : request.POST.get('content'),
-                    }
+	schools = School.objects.all()
+	for s_school in schools:
+		if s_school.s_display_index == 0:
+			continue
+		s_school_name = s_school.s_name
+		d_school = {}
+		d_school['name'] = s_school_name
+		d_school['id'] = s_school.id
+		d[s_school.s_province]['schools'].append(d_school)
 
-            Plan.objects.filter(id=plan['id']).update(content=plan['content'])
-            Plan.objects.filter(id=plan['id']).update(title=plan['title'])
-            Oid = plan['id']
-        return HttpResponseRedirect('/backEnd/plan/show')
+	obj = []
+	for t in d.values():
+		obj.append(t)
+	print obj
 
-    elif method == 'delete':
-        Plan.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
-    elif method == 'add':
-        return render(request,'backEnd/addPlanView.html')
-    elif method == 'show':
-        return render(request,'backEnd/showPlanList.html',{'plan':Plan.objects.all()})
-    else:
-        return HttpResponse('没有该方法')
+	return render(request,"frontEnd/index.html",{"object":obj})
 
-########################################################
-# this view is about the us
-# contains show news list , add  Us , change Us, 
-# delete one,and add new one
-# News contain three parts , title content date                 
-########################################################
-
-def us(request,method,Oid):
-    try:
-        request.session['username']
-    except KeyError,e:
-        return HttpResponseRedirect('login.html')
-    if method == 'addUs':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        order = request.POST.get('order')
-        us = Us(
-            title=title,
-            order = order,
-            content = content,
-            uploadUser = request.session['username'],
-            )
-        us.save()
-        #Oid = news.id
-        return HttpResponseRedirect('/backEnd/us/show')
-    elif method == 'change':
-        return render(request,'backEnd/changeUs.html',{'us':Us.objects.get(id=Oid)})
-    elif method == 'save':
-        if request.method == 'POST':
-            us = {'id' : request.POST.get('id'),
-                    'title' : request.POST.get('title'),
-                    'content' : request.POST.get('content'),
-                    'order': request.POST.get('order'),
-                    }
-
-            Us.objects.filter(id=us['id']).update(content=us['content'])
-            Us.objects.filter(id=us['id']).update(title=us['title'])
-            Us.objects.filter(id=us['id']).update(order=us['order'])
-            Oid = us['id']
-
-        return HttpResponseRedirect('/backEnd/us/show')
-
-    elif method == 'delete':
-        Us.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
-    elif method == 'add':
-        return render(request,'backEnd/addUsView.html')
-    elif method == 'show':
-        return render(request,'backEnd/showUsList.html',{'us':Us.objects.all()})
-    else:
-        return HttpResponse('没有该方法')
-
-
-
-########################################################
-# this view is about the recruit
-# contains show news list , add  Us , change Us, 
-# delete one,and add new one
-# News contain three parts , title content date                 
-########################################################
-
-
-def recruit(request,method,Oid):
-    try:
-        request.session['username']
-    except KeyError,e:
-        return HttpResponseRedirect('login.html')
-    if method == 'addRecruit':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        recruit = Recruit(
-            title=title,
-            content = content,
-            uploadUser = request.session['username'],
-            )
-        recruit.save()
-        #Oid = news.id
-        return HttpResponseRedirect('/backEnd/recruit/show')
-    elif method == 'change':
-        return render(request,'backEnd/changeRecruit.html',{'recruit':Recruit.objects.get(id=Oid)})
-    elif method == 'save':
-        if request.method == 'POST':
-            recruit = {'id' : request.POST.get('id'),
-                    'title' : request.POST.get('title'),
-                    'content' : request.POST.get('content'),
-                    }
-
-            Recruit.objects.filter(id=recruit['id']).update(content=recruit['content'])
-            Recruit.objects.filter(id=recruit['id']).update(title=recruit['title'])
-            Oid = recruit['id']
-
-        return HttpResponseRedirect('/backEnd/recruit/show')
-
-    elif method == 'delete':
-        Recruit.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
-    elif method == 'add':
-        return render(request,'backEnd/addRecruitView.html')
-    elif method == 'show':
-       return render(request,'backEnd/showRecruitList.html',{'recruit':Recruit.objects.all()})
-
-    else:
-        return HttpResponse('没有该方法')
-
-
-########################################################
-# this view is about the contact
-# contains show news list , add  Us , change Us, 
-# delete one,and add new one
-# News contain three parts , title content date                 
-########################################################
-
-
-def contact(request,method,Oid):
-    try:
-        request.session['username']
-    except KeyError,e:
-        return HttpResponseRedirect('login.html')
-    if method == 'addContact':
-        tel = request.POST.get('tel')
-        email = request.POST.get('email')
-        address = request.POST.get('address')
-        contact = Contact(
-            tel=tel,
-            email = email,
-            address = address,
-            uploadUser = request.session['username'],
-            )
-        contact.save()
-        return HttpResponseRedirect('/backEnd/contact/show')
-    elif method == 'change':
-        return render(request,'backEnd/changeContact.html',{'contact':Contact.objects.get(id=Oid)})
-    elif method == 'save':
-        if request.method == 'POST':
-            contact = {'id' : request.POST.get('id'),
-                    'title' : request.POST.get('title'),
-                    'content' : request.POST.get('content'),
-                    }
-
-            Contact.objects.filter(id=contact['id']).update(content=contact['content'])
-            Contact.objects.filter(id=contact['id']).update(title=contact['title'])
-        return HttpResponseRedirect('/backEnd/contact/show')
-
-    elif method == 'delete':
-        Contact.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
-    elif method == 'add':
-        return render(request,'backEnd/addContactView.html')
-    elif method == 'show':
-       return render(request,'backEnd/showContactList.html',{'contact':Contact.objects.all()})
-
-    else:
-        return HttpResponse('没有该方法')
+def s(request):
+	return render(request,"frontEnd/school.html")
 
 
 ##################################################################################################
@@ -566,6 +401,5 @@ def showImgList(request):
 def deleteImg(request,Oid):
     Image.objects.filter(id=Oid).delete()
     return HttpResponseRedirect('../showImgList')
-def test(request):
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    return   HttpResponse(BASE_DIR)
+
+
