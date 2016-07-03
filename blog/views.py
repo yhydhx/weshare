@@ -1,7 +1,7 @@
 # coding: utf-8  
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext, loader
-from django.shortcuts import render,get_object_or_404,RequestContext
+from django.shortcuts import render, get_object_or_404, RequestContext
 from django.core.urlresolvers import reverse
 from django.views import generic
 #from blog.models import Poll,Choice,Blog
@@ -19,14 +19,17 @@ import hashlib
     return render(request, 'blog/index.html', context)
 '''
 
+
 def __checkin__(request):
     try:
         request.session['username']
     except KeyError,e:
         return HttpResponseRedirect('login.html')
 
+
 def login(request):
     return render(request, 'blog/login.html' )
+
 
 def logout(request):
     del request.session['username']

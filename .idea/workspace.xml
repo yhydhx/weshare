@@ -1,0 +1,1469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0739ecb5-f8ce-40a7-a704-d49c1a062d3b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-cool.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-cry.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-embarassed.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-foot-in-mouth.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-frown.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-innocent.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-kiss.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-laughing.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-money-mouth.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-sealed.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-smile.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-surprised.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-tongue-out.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-undecided.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-wink.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/img/smiley-yell.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/media/moxieplayer.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce-small.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce-small.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce-small.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/img/anchor.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/img/loader.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/img/object.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/img/trans.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/10.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/11.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/8.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/KwPYo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/alpha.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/amazon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/avatar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/avatar1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/avatar1_small.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/avatar2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/avatar3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/behance.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/bg-input-focus.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/bg-input.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/bg-opacity.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/bg-white-lock.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/bg/1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/bg/2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/bg/3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/bg/4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/blank.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/blogger.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/bstree-halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/chosen-sprite.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/datatable-row-openclose.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/deviantart.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/dribbble.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/dropbox.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/earth.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/evernote.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/facebook.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/fancybox_loading.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/fancybox_overlay.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/fancybox_sprite.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/favicon.ico" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/fontawesome-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/fontawesome-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/fontawesome-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/forrst.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/github.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons-halflings-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons-halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons_halflings-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons_halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphiconshalflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphiconshalflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphiconshalflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/googleplus.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/gritter-light.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/gritter.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/hor-menu-search-close-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/hor-menu-search-close.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/hor-menu-search.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/hue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/icon-color-close.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/icon-color.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/icon-img-down.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/icon-img-up.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ie-spacer.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/image1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/image2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/image3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/image4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/image5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/img1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/img1_2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/img2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/img3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/img4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/inbox-nav-arrow-blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/instagram.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/iphone.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/item_img.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/item_img1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/jolicloud.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/last-fm.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/linkedin.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/loading.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/logo-big.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/logo_azteca.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/logo_conquer.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/logo_metronic.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/menu-toggler.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/overlay-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/photo1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/photo2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/photo3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/photo4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/photo5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/photo6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/picasa.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/pintrest.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-collapse-icon-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-collapse-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-config-icon-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-config-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-expand-icon-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-expand-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-reload-icon-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-reload-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-remove-icon-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/portlet-remove-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_02.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_03.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_04.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_05.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_06.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_07.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_08.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_09.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_10.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_11.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_12.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_13.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_14.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_15.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_16.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/preview_17.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/profile-img.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/profile.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/progressbar.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/remove-icon-small.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/rss.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/saturation.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/search-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/select2-spinner.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/select2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/select2x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/sidebar-menu-arrow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/sidebar-search-close.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/sidebar-toggler.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/skype.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/social_facebook.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/social_googleplus.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/social_linkedin.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/social_rss.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/social_twitter.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/sort_asc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/sort_asc_disabled.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/sort_both.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/sort_desc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/sort_desc_disabled.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/spotify.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/sprite.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/spritemap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/spritemap@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/stumbleupon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/switch.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/syncfusion-icons-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/syncfusion-icons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/tumblr.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/twitter.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-bg_diagonals-thick_18_b81900_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-bg_diagonals-thick_20_666666_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-bg_flat_10_000000_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-bg_glass_100_f6f6f6_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-bg_glass_100_fdf5ce_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-bg_glass_65_ffffff_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-bg_gloss-wave_35_f6a828_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-icons_222222_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-icons_228ef1_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-icons_888888_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-icons_ef8c08_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-icons_ffd27a_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/vimeo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/vk.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/walmart.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/wordpress.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/xing.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/yahoo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/youtube.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/a.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/index/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/index/load-scripts(1).php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/index/load-scripts.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/index/load-styles.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/index/zh_CN-administration-screens.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/langs/readme.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/langs/zh_CN.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/license.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/advlist/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/anchor/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/autolink/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/autoresize/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/autosave/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/bbcode/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/charmap/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/code/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/colorpicker/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/contextmenu/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/directionality/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/emoticons/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/example/dialog.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/example/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/example_dependency/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/fullpage/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/fullscreen/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/hr/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/image/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/importcss/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/insertdatetime/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/layer/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/legacyoutput/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/link/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/lists/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/media/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/nonbreaking/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/noneditable/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/pagebreak/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/paste/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/preview/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/print/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/save/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/searchreplace/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/spellchecker/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/tabfocus/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/table/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/template/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/textcolor/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/textpattern/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/visualblocks/css/visualblocks.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/visualblocks/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/visualchars/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/plugins/wordcount/plugin.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/content.inline.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/content.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/readme.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce-small.dev.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce-small.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce.dev.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/fonts/tinymce.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/skin.ie7.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/skins/lightgray/skin.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/themes/modern/theme.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/js/tinymce/tinymce.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/DT_bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/about-us.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/animate.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/blog.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/blue.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/bootstrap-fileupload.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/bootstrap-modal.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/bootstrap-responsive.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/bootstrap-responsive1.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/bootstrap-tag.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/bootstrap-toggle-buttons.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/bootstrap-tree.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/bootstrap-wysihtml5.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/brown.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/chosen.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/clockface.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/colorpicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/coming-soon.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/datepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/daterangepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/datetimepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/default.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/dropzone.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/email.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/error.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/font-awesome.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/font-awesome.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/fullcalendar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/glyphicons.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/grey.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/halflings.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/inbox.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/invoice.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/jquery-ui-1.10.1.custom.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/jquery.easy-pie-chart.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/jquery.fancybox.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/jquery.fileupload-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/jquery.gritter.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/jquery.nestable.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/jquery.tagsinput.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/jquery.ui.slider.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/jqvmap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/light.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/lock.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/login-soft.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/login.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/multi-select-metro.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/news.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/pricing-tables.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/print.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/profile.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/promo.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/purple.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/search.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/select2_metro.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/style-metro.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/style-non-responsive.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/style-responsive.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/timeline.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/timepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/css/uniform.default.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/fontawesome-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons-white.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons_halflings-white.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphicons_halflings.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/glyphiconshalflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/image/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/DT_bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/additional-methods.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-colorpicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-datepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-datetimepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-fileupload.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-modal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-modalmanager.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-rtl.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-tag.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-timepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-tree.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap-wysihtml5.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/breakpoints.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/breakpoints.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/calendar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/canvas-to-blob.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/charts.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/chosen.jquery.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/ckeditor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/clockface.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/coming-soon.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/contact-us.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/date.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/daterangepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/dropzone.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/excanvas.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/excanvas.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/form-components.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/form-fileupload.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/form-samples.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/form-validation.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/form-wizard.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/fullcalendar.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/gallery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/gmaps.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/inbox.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery-1.10.1.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery-1.8.3.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery-migrate-1.2.1.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery-ui-1.10.1.custom.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.backstretch.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.blockui.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.bootpag.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.bootstrap.wizard.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.cookie.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.countdown.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.dataTables.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.dataTables.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.easy-pie-chart.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.fancybox.pack.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.fileupload-fp.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.fileupload-ui.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.fileupload.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.flot.crosshair.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.flot.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.flot.pie.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.flot.resize.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.flot.stack.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.gritter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.iframe-transport.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.input-ip-address-control-1.0.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.inputmask.bundle.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.knob.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.multi-select.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.nestable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.pulsate.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.slimscroll.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.sparkline.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.tagsinput.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.toggle.buttons.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.ui.widget.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.uniform.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.validate.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.vmap.europe.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.vmap.germany.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.vmap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.vmap.russia.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.vmap.sampledata.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.vmap.usa.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.vmap.world.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/jquery.xdr-transport.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/load-image.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/lock.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/login-soft.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/login.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/maps-google.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/maps-vector.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/portlet-draggable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/respond.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/respond.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/search.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/select2.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/table-advanced.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/table-editable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/table-managed.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/tmpl.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/ui-general.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/ui-jqueryui.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/ui-modals.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/ui-nestable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/ui-sliders.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/ui-tree.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/static/backEnd/media/js/wysihtml5-0.3.0.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addContactView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addImage.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addNewsView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addPayoffView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addPlanView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addProductView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addProvinceView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addQuestionView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addRecruitView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addRoomView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addRuleView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addUsView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/addUserView.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changeContact.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changeMember.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changeNews.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changePasswd" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changePayoff.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changePlan.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changeProduct.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changeQuestion.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changeRecruit.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changeRoom.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changeRule.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/changeUs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/demo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/left.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/login.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/results.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/sanye.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showContactList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showContactUs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showImgList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showNewsList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showPayoffList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showPlanList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showProductList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showProvinceList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showQuestionList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showRecruitList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showRoomList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showRuleList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showUsList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/showUserList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/test_file.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/ust.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/vote.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backEnd/views.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/rent-page-variation-1.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/school.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/404.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/404.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/about.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/about.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/contact.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/contact.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/footer.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/urls.py" afterPath="$PROJECT_DIR$/frontEnd/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/views.py" afterPath="$PROJECT_DIR$/frontEnd/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gt/models.py" afterPath="$PROJECT_DIR$/gt/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gt/settings.py" afterPath="$PROJECT_DIR$/gt/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gt/urls.py" afterPath="$PROJECT_DIR$/gt/urls.py" />
+    </list>
+    <ignored path="weshare.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="weshare" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.5569249">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.48316252">
+                  <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+                  <folding>
+                    <element signature="e#44#102#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="75.625">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="account.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="156.25">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gt/settings.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="41" column="14" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/frontEnd/urls.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
+                  <folding>
+                    <element signature="e#0#42#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/frontEnd/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gt/urls.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#51#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="wsgi.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gt/wsgi.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gt/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+                  <folding>
+                    <element signature="e#0#15#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/gt/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.24158126">
+                  <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
+                  <folding>
+                    <element signature="e#0#15#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/cars/complete-info.html" />
+        <option value="$PROJECT_DIR$/cars/index.html" />
+        <option value="$PROJECT_DIR$/blog/views.py" />
+        <option value="$PROJECT_DIR$/frontEnd/urls.py" />
+        <option value="$PROJECT_DIR$/gt/models.py" />
+        <option value="$PROJECT_DIR$/gt/settings.py" />
+        <option value="$PROJECT_DIR$/frontEnd/views.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1280" />
+    <option name="y" value="-143" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontEnd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontEnd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cars/js/tinymce" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="weshare" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="weshare" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="weshare" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="weshare" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="weshare" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="weshare" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="weshare" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="weshare" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="weshare" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0739ecb5-f8ce-40a7-a704-d49c1a062d3b" name="Default" comment="" />
+      <created>1467443252361</created>
+      <option name="number" value="Default" />
+      <updated>1467443252361</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1280" y="-143" width="1920" height="1080" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.092651755" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23715416" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29743084" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#44#102#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/django/contrib/auth/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="446" column="6" selection-start-line="446" selection-start-column="6" selection-end-line="446" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/complete-info.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="546" column="46" selection-start-line="546" selection-start-column="46" selection-end-line="546" selection-end-column="46" />
+          <folding>
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/contact.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/js/tinymce/jquery.tinymce.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/rent-item.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/rent-now.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/account.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.625">
+          <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/js/tinymce/tinymce.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="208.88889">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/404.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/js/tinymce/jquery.tinymce.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/rent-item.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/contact.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/complete-info.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="546" column="46" selection-start-line="546" selection-start-column="46" selection-end-line="546" selection-end-column="46" />
+          <folding>
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/django/contrib/auth/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="446" column="6" selection-start-line="446" selection-start-column="6" selection-end-line="446" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="75.625">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="156.25">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="14" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48316252">
+          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+          <folding>
+            <element signature="e#44#102#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
