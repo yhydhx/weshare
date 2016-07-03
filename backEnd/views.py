@@ -268,6 +268,59 @@ def topic(request,method,Oid):
     else:
         return HttpResponse('没有该方法')
 
+
+
+def feature(request,method,Oid):
+    try:
+        request.session['username']
+    except KeyError,e:
+        return HttpResponseRedirect('login.html')
+
+
+    if method == 'addFeature' :
+        f_name = request.POST.get("f_name")
+        f_topic = request.POST.get("f_topic")
+        
+        feature = Feature(
+            f_name = f_name,
+            f_topic = f_topic,
+            )
+        feature.save()
+
+        return HttpResponseRedirect('/dc/feature/show')
+    elif method == 'change':
+        feature = Feature.objects.get(id=Oid)
+        topics = Topic.objects.all()
+        return render(request,'backEnd/changeFeature.html',{'feature':feature,'topics':topics})
+
+    elif method == 'save':
+        if request.method == 'POST':
+            feature = {'f_name' : request.POST.get('f_name'),
+                    'f_topic' : request.POST.get("f_topic"),
+                    'id' : request.POST.get("id"),
+                    }
+
+        Feature.objects.filter(id=feature['id']).update(  f_name = feature['f_name'],
+                                                    f_topic = feature['f_topic']
+                                                    )
+
+        
+        return HttpResponseRedirect('/dc/feature/show/')
+
+    elif method == 'delete':
+        Feature.objects.filter(id=Oid).delete()
+
+        return HttpResponseRedirect('../show')
+    elif method == 'add':
+        topics = Topic.objects.all()
+        return render(request,'backEnd/addFeatureView.html',{'topics':topics})
+    elif method == 'show' or method == '':
+        allFeature = Feature.objects.all()
+        return render(request,'backEnd/showFeatureList.html',{'object':allFeature})
+    
+    else:
+        return HttpResponse('没有该方法')
+
 ########################################################
 # this view is about the Plan 
 # contains show news list , add news , change news, 

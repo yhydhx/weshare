@@ -38,7 +38,7 @@ class Topic(models.Model):
 
 class Feature(models.Model):
     f_name = models.CharField(max_length=200)
-    f_topic_id = models.CharField(max_length=100)
+    f_topic = models.CharField(max_length=100)
 
 class Host_Topic(models.Model):
     host_id = models.CharField(max_length=100)
