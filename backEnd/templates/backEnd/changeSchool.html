@@ -21,28 +21,22 @@
     </style>
 </head>
 <!-- Place this in the body of the page content -->
-<form id='room' method="post" action='../save/'>
+<form id='school' method="post" action='../save/'>
 		 {% csrf_token %}
-        <input type='hidden' name="id" value={{room.id}}> 
+        <input type='hidden' name="id" value={{school.id}}> 
 
-    <h2>roomId<input name='roomId' value ='{{room.roomId}}' ></h2>
-    <h2>roomName<input name='roomName' value ='{{room.roomName}}' ></h2>
-    <h2>roomSize<input name='roomSize' value ='{{room.roomSize}}' ></h2>
-    <h2> rule 
-    <select id="rules" name = 'ruleId' form="room">
+    <h2>school name<input name='s_name' value ='{{school.s_name}}' ></h2>
+    
+    <h2> province 
+    <select id="provinces" name = 'p_name' form="school">
         {% block content %}
-            {% for publisher in rules %}
-            <option value={{publisher.id}}>{{publisher.ruleName}}</option>
+            {% for publisher in provinces %}
+            <option value={{publisher.p_name}}>{{publisher.p_name}}</option>
             {% endfor %}
         {% endblock %}
     </select>
     </h2>    
-    <h2>maxRound<input name='maxRound' value ='{{room.maxRound}}' ></h2>
-    <h2>userOneId<input name='userOneId' value ='{{room.userOneId}}' ></h2>
-    <h2>userTwoId<input name='userTwoId' value ='{{room.userTwoId}}' ></h2>
-    <h2>userOneTimestamp<input name='userOneTimestamp' value ='{{room.userOneTimestamp}}' ></h2>
-     <h2>userTwoTimestamp<input name='userTwoTimestamp' value ='{{room.userTwoTimestamp}}' ></h2>
-    <h2>roomExistMember<input name='roomExistMember' value ='{{room.roomExistMember}}' ></h2>
+    
 
 
     <input type='submit' value="确认">
@@ -53,10 +47,10 @@
 
 <script type="text/javascript" src="{% static 'blog/js/jstable.js' %}"></script>
 <script type="text/javascript">
-var rules = document.getElementById("rules").children;
-for(var i = 0; i < rules.length; i++){
-    if (rules[i].value == '{{room.ruleId}}'){
-        rules[i].selected = true;
+var provinces = document.getElementById("provinces").children;
+for(var i = 0; i < provinces.length; i++){
+    if (provinces[i].value == '{{school.s_province}}'){
+        provinces[i].selected = true;
     }
 }
 

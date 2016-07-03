@@ -29,8 +29,8 @@ class Province(models.Model):
 class School(models.Model):
     s_name  = models.CharField(max_length=200)
     s_province = models.CharField(max_length=200)
-    s_link = models.CharField(max_length=100)
-    s_student_number = models.CharField(max_length=100)
+    #s_link = models.CharField(max_length=100)
+    s_student_number = models.IntegerField()
 
 class Topic(models.Model):
     t_name = models.CharField(max_length=200)

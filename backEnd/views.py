@@ -155,70 +155,118 @@ def province(request,method,Oid):
         #Oid = news.id
         return HttpResponseRedirect('/dc/province/show/')
     elif method == 'change':
-        return render(request,'backEnd/changeProvince.html',{'member':Member.objects.get(id=Oid)})
+        return render(request,'backEnd/changeProvince.html',{'object':Province.objects.get(id=Oid)})
     elif method == 'save':
         if request.method == 'POST':
-            member = {'id' : request.POST.get('id'),
-                    'name' : request.POST.get('name'),
-                    'description' : request.POST.get('description'),
-                    'showOrder': request.POST.get('showOrder'),
+            province = {'p_name' : request.POST.get('province_name'),
+                    'p_id' : request.POST.get('province_id'),
+                    'id' : request.POST.get("id")
                     }
-            Member.objects.filter(id=member['id']).update(description=member['description'],name=member['name'],showOrder=member['showOrder'])
+            Province.objects.filter(id=province['id']).update(p_name=province['p_name'],p_id=province['p_id'])
 
         return HttpResponseRedirect('/dc/province/show')
 
     elif method == 'delete':
-        Member.objects.filter(id=Oid).delete()
+        Province.objects.filter(id=Oid).delete()
         return HttpResponseRedirect('../show')
     elif method == 'add':
         return render(request,'backEnd/addProvinceView.html')
     elif method == 'show':
         #return HttpResponse("hello")
-        return render(request,'backEnd/showProvinceList.html',{'province':1})
+        return render(request,'backEnd/showProvinceList.html',{'object':Province.objects.all()})
     else:
         return HttpResponse('没有该方法')
 
-def product(request,method,Oid):
+def school(request,method,Oid):
     try:
         request.session['username']
     except KeyError,e:
         return HttpResponseRedirect('login.html')
-    if method == 'addProduct':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        product = Product(
-            title=title,
-            content = content,
-            uploadUser = request.session['username'],
+
+
+    if method == 'addSchool' :
+        s_name = request.POST.get("s_name")
+        p_name = request.POST.get("p_name")
+        
+        school = School(
+            s_name = s_name,
+            s_province = p_name,
+            s_student_number = 0,
             )
-        product.save()
-        #return HttpResponse(product.id)
-        return HttpResponseRedirect('/backEnd/product/show')
+        school.save()
+
+        return HttpResponseRedirect('/dc/school/show')
     elif method == 'change':
-        return render(request,'backEnd/changeProduct.html',{'product':Product.objects.get(id=Oid)})
+        school = School.objects.get(id=Oid)
+        provinces = Province.objects.all()
+        return render(request,'backEnd/changeSchool.html',{'school':school,'provinces':provinces})
 
     elif method == 'save':
         if request.method == 'POST':
-            product = {'id' : request.POST.get('id'),
-                'title' : request.POST.get('title'),
-                'content' : request.POST.get('content'),
-                }
+            school = {'s_name' : request.POST.get('s_name'),
+                    's_province' : request.POST.get("p_name"),
+                    'id' : request.POST.get("id"),
+                    }
 
-        Product.objects.filter(id=product['id']).update(content=product['content'])
-        Product.objects.filter(id=product['id']).update(title=product['title'])
-        Oid = product['id']
-        return HttpResponseRedirect('/backEnd/product/show')
+        School.objects.filter(id=school['id']).update(  s_name = school['s_name'],
+                                                    s_province = school['s_province']
+                                                    )
+
+        
+        return HttpResponseRedirect('/dc/school/show')
 
     elif method == 'delete':
-        Product.objects.filter(id=Oid).delete()
+        School.objects.filter(id=Oid).delete()
+
         return HttpResponseRedirect('../show')
     elif method == 'add':
-        return render(request,'backEnd/addProductView.html')
-    elif method == 'show':
-        return render(request,'backEnd/showProductList.html',{'product':Product.objects.all()})
+        provinces = Province.objects.all()
+        return render(request,'backEnd/addSchoolView.html',{'provinces':provinces})
+    elif method == 'show' or method == '':
+        allSchool = School.objects.all()
+        return render(request,'backEnd/showSchoolList.html',{'object':allSchool})
+    
     else:
         return HttpResponse('没有该方法')
 
+
+def topic(request,method,Oid):
+    try:
+        request.session['username']
+    except KeyError,e:
+        return HttpResponseRedirect('login.html')
+    if method == 'addProvince':
+        name = request.POST.get('topic_name')
+
+        
+        topic = Topic(
+            t_name = name,
+            t_click = 0,
+            )
+        topic.save()
+        #Oid = news.id
+        return HttpResponseRedirect('/dc/topic/show/')
+    elif method == 'change':
+        return render(request,'backEnd/changeTopic.html',{'object':Topic.objects.get(id=Oid)})
+    elif method == 'save':
+        if request.method == 'POST':
+            topic = {'t_name' : request.POST.get('topic_name'),
+                    'id' : request.POST.get("id")
+                    }
+            Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'])
+
+        return HttpResponseRedirect('/dc/topic/show')
+
+    elif method == 'delete':
+        Topic.objects.filter(id=Oid).delete()
+        return HttpResponseRedirect('../show')
+    elif method == 'add':
+        return render(request,'backEnd/addTopicView.html')
+    elif method == 'show':
+        #return HttpResponse("hello")
+        return render(request,'backEnd/showTopicList.html',{'object':Topic.objects.all()})
+    else:
+        return HttpResponse('没有该方法')
 
 ########################################################
 # this view is about the Plan 

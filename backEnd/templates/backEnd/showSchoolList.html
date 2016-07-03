@@ -3,7 +3,7 @@
 
 	<meta charset="utf-8">
 
-	<title>Rule</title>
+	<title>Room</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -13,35 +13,35 @@
 
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 
-	<link href="{% static 'blog/media/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
 
-	<link href="{% static 'blog/media/css/bootstrap-responsive.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/bootstrap-responsive.min.css' %}" rel="stylesheet" type="text/css">
 
-	<link href="{% static 'blog/media/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 
-	<link href="{% static 'blog/media/css/style-metro.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/style-metro.css' %}" rel="stylesheet" type="text/css">
 
-	<link href="{% static 'blog/media/css/style.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/style.css' %}" rel="stylesheet" type="text/css">
 
-	<link href="{% static 'blog/media/css/style-responsive.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/style-responsive.css' %}" rel="stylesheet" type="text/css">
 
-	<link href="{% static 'blog/media/css/default.css' %}" rel="stylesheet" type="text/css" id="style_color">
+	<link href="{% static 'backEnd/media/css/default.css' %}" rel="stylesheet" type="text/css" id="style_color">
 
-	<link href="{% static 'blog/media/css/uniform.default.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/uniform.default.css' %}" rel="stylesheet" type="text/css">
 
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES --> 
 
-	<link href="{% static 'blog/media/css/jquery.gritter.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/jquery.gritter.css' %}" rel="stylesheet" type="text/css">
 
-	<link href="{% static 'blog/media/css/daterangepicker.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/daterangepicker.css' %}" rel="stylesheet" type="text/css">
 
-	<link href="{% static 'blog/media/css/fullcalendar.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'backEnd/media/css/fullcalendar.css' %}" rel="stylesheet" type="text/css">
 
-	<link href="{% static 'blog/media/css/jqvmap.css' %}" rel="stylesheet" type="text/css" media="screen">
+	<link href="{% static 'backEnd/media/css/jqvmap.css' %}" rel="stylesheet" type="text/css" media="screen">
 
-	<link href="{% static 'blog/media/css/jquery.easy-pie-chart.css' %}" rel="stylesheet" type="text/css" media="screen">
+	<link href="{% static 'backEnd/media/css/jquery.easy-pie-chart.css' %}" rel="stylesheet" type="text/css" media="screen">
 
 	<!-- END PAGE LEVEL STYLES -->
 
@@ -57,9 +57,9 @@ var ajaxurl = '/wordpress/wp-admin/admin-ajax.php',
 	isRtl = 0;
 </script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<link rel="stylesheet" href="{% static 'blog/index/load-styles.php' %}" type="text/css" media="all">
-<link rel="stylesheet" id="open-sans-css" href="{% static 'blog/index/css' %}" type="text/css" media="all">
-<link rel="stylesheet" id="zh-cn-l10n-administration-screens-css" href="{% static 'blog/index/zh_CN-administration-screens.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'backEnd/index/load-styles.php' %}" type="text/css" media="all">
+<link rel="stylesheet" id="open-sans-css" href="{% static 'backEnd/index/css' %}" type="text/css" media="all">
+<link rel="stylesheet" id="zh-cn-l10n-administration-screens-css" href="{% static 'backEnd/index/zh_CN-administration-screens.css' %}" type="text/css" media="all">
 <!--[if lte IE 7]>
 <link rel='stylesheet' id='ie-css'  href='http://localhost/wordpress/wp-admin/css/ie.min.css?ver=3.9.2' type='text/css' media='all' />
 <![endif]-->
@@ -68,7 +68,7 @@ var ajaxurl = '/wordpress/wp-admin/admin-ajax.php',
 /* <![CDATA[ */
 var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> */
 </script><style type="text/css"></style>
-<script type="text/javascript" src="{% static 'blog/index/load-scripts.php' %}"></script>
+<script type="text/javascript" src="{% static 'backEnd/index/load-scripts.php' %}"></script>
 <script type="text/javascript">var _wpColorScheme = {"icons":{"base":"#999","focus":"#2ea2cc","current":"#fff"}};</script>
 <style type="text/css" media="print">#wpadminbar { display:none; }</style>
 </head>
@@ -124,7 +124,7 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 
 			<!-- BEGIN SIDEBAR MENU -->        
 
-			{% include 'blog/left.html'  %}
+			{% include 'backEnd/left.html'  %}
 
 			<!-- END SIDEBAR MENU -->
 
@@ -167,7 +167,7 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 			</div>
 				</div>
 		<div class="wrap">
-<h2>Rule <a href="../add" class="add-new-h2">Add Rule</a></h2>
+<h2>School <a href="../add" class="add-new-h2">Add School</a></h2>
 
 
 <form id="posts-filter" action="" method="get">
@@ -188,16 +188,16 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 
 	{% block content %}
     <ul>
-        {% for publisher in rule %}
+        {% for publisher in object %}
            
             	<tbody id="the-list">
 				<tr id="post-1" class="post-1 type-post status-publish format-standard hentry category-uncategorized alternate iedit author-self level-0">
 				
-			<td class="post-title page-title column-title"><strong><a class="row-title" href="/dc/rule/change/{{publisher.id}}" title="编辑{{ publisher.ruleName }}">{{ publisher.ruleName }}</a></strong>
+			<td class="post-title page-title column-title"><strong><a class="row-title" href="/dc/school/change/{{publisher.id}}" title="编辑{{ publisher.s_name }}">{{ publisher.s_name }}</a></strong>
 <div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>
-<div class="row-actions"><span class="edit"><a href="/dc/rule/change/{{publisher.id}}" title="编辑此项目">编辑</a>  </span><span class="trash"><a class="submitdelete" title="移动此项目到回收站" href="/dc/rule/delete/{{publisher.id}}">回收站</a> | </span><span class="view"><a href="/rule/{{publisher.id}}" title="查看“世界，你好！”" rel="permalink">查看</a></span></div>
+<div class="row-actions"><span class="edit"><a href="/dc/school/change/{{publisher.id}}" title="编辑此项目">编辑</a>  </span><span class="trash"><a class="submitdelete" title="移动此项目到回收站" href="/dc/school/delete/{{publisher.id}}">回收站</a> | </span><span class="view"></span></div>
 </td>		
-			<td class="categories column-categories">aritlce1</td>
+			<td class="categories column-categories">{{publisher.s_province}}</td>
 			<td class="date column-date"><abbr >{{publisher.uploadTime}}</abbr></td>		</tr>
 		</tbody>
         {% endfor %}
@@ -234,31 +234,31 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 
 	<!-- BEGIN CORE PLUGINS -->
 
-	<script type="text/javascript" async="" src="http://stats.g.doubleclick.net/dc.js"></script><script src="{% static 'blog/media/js/jquery-1.10.1.min.js' %}" type="text/javascript"></script>
+	<script type="text/javascript" async="" src="http://stats.g.doubleclick.net/dc.js"></script><script src="{% static 'backEnd/media/js/jquery-1.10.1.min.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
 
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 
-	<script src="{% static 'blog/media/js/jquery-ui-1.10.1.custom.min.js' %}" type="text/javascript"></script>      
+	<script src="{% static 'backEnd/media/js/jquery-ui-1.10.1.custom.min.js' %}" type="text/javascript"></script>      
 
-	<script src="{% static 'blog/media/js/bootstrap.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/bootstrap.min.js' %}" type="text/javascript"></script>
 
 	<!--[if lt IE 9]>
 
-	<script src="{% static 'blog/media/js/excanvas.min.js"></script>
+	<script src="{% static 'backEnd/media/js/excanvas.min.js"></script>
 
-	<script src="{% static 'blog/media/js/respond.min.js"></script>  
+	<script src="{% static 'backEnd/media/js/respond.min.js"></script>  
 
 	<![endif]-->   
 
-	<script src="{% static 'blog/media/js/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/jquery.blockui.min.js' %}" type="text/javascript"></script>  
+	<script src="{% static 'backEnd/media/js/jquery.blockui.min.js' %}" type="text/javascript"></script>  
 
-	<script src="{% static 'blog/media/js/jquery.cookie.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/jquery.cookie.min.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/jquery.uniform.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/jquery.uniform.min.js' %}" type="text/javascript"></script>
 
 	<!-- END CORE PLUGINS -->
 
@@ -266,31 +266,31 @@ var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> 
 
 	
 
-	<script src="{% static 'blog/media/js/jquery.flot.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/jquery.flot.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/jquery.flot.resize.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/jquery.flot.resize.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/jquery.pulsate.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/jquery.pulsate.min.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/date.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/date.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/daterangepicker.js' %}" type="text/javascript"></script>     
+	<script src="{% static 'backEnd/media/js/daterangepicker.js' %}" type="text/javascript"></script>     
 
-	<script src="{% static 'blog/media/js/jquery.gritter.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/jquery.gritter.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/fullcalendar.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/fullcalendar.min.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/jquery.easy-pie-chart.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/jquery.easy-pie-chart.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/jquery.sparkline.min.js' %}" type="text/javascript"></script>  
+	<script src="{% static 'backEnd/media/js/jquery.sparkline.min.js' %}" type="text/javascript"></script>  
 
 	<!-- END PAGE LEVEL PLUGINS -->
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 
-	<script src="{% static 'blog/media/js/app.js' %}" type="text/javascript"></script>
+	<script src="{% static 'backEnd/media/js/app.js' %}" type="text/javascript"></script>
 
-	<script src="{% static 'blog/media/js/index.js' %}" type="text/javascript"></script>        
+	<script src="{% static 'backEnd/media/js/index.js' %}" type="text/javascript"></script>        
 
 	<!-- END PAGE LEVEL SCRIPTS -->  
 
