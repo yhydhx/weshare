@@ -4,12 +4,13 @@ from django.db import models
 from django.utils import timezone
 from djangotoolbox.fields import  ListField
 from django import forms
+from django.contrib.auth.models import User
 
 
 class Host(models.Model):
     name = models.CharField(max_length = 100)
     gender = models.IntegerField()
-    motto = 
+    motto =
 
 class Process(models.Model):
     Uid = models.CharField(max_length=100)
@@ -23,8 +24,9 @@ class Process(models.Model):
     robotChoose = models.IntegerField()
     processDate = models.DateTimeField()
     clientIP = models.CharField(max_length=30)
+
     def date_format(self):
-    	self.date = self.date.strftime("%Y-%m-%d")
+        self.date = self.date.strftime("%Y-%m-%d")
 
 
 class Player(models.Model):
