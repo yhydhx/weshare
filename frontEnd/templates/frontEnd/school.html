@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <!--[if IE 8 ]>
@@ -13,20 +14,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="./assets/images/content/cars/icon.ico">
+    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
     <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
 
     <title>Rentica - HTML Template</title>
 
-    <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
 
     <!--[if lt IE 9]>
-    <script src="./assets/bootstrap/js/html5shiv.min.js"></script>
-	<script src="./assets/bootstrap/js/respond.min.js"></script>
- 	<script src="./assets/plugins/REM-unit-polyfill/js/rem.min.js"></script>
+    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
+	<script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
+ 	<script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
-    <script src="./assets/js/modernizr.custom.js"></script>
+    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
 </head>
 
 <body class="cssAnimate">
@@ -223,7 +224,7 @@
                 <div class="ct-product-gallery" >
                     <!-- ======================= -->
                     <div class="ct-product hidden sedan withoutDriver" data-price="400" data-passengers="2">
-                        <div class="ct-product-image"><img src="./assets/images/content/cars/product-01.jpg" alt=""></div>
+                        <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/product-01.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">何通</h4>
                             <p>UCLA PHD 托福111，GPA 4.0</p>
@@ -233,7 +234,7 @@
                     </div>
                     <!-- ======================= -->
                     <div class="ct-product hidden sport withDriver" data-price="560" data-passengers="8">
-                        <div class="ct-product-image"><img src="./assets/images/content/cars/gallery-14.jpg" alt=""></div>
+                        <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">Tomota Landcruiser</h4>
                             <p>Perfect for the whole family car, the journey home will be pure pleasure.</p>
@@ -243,7 +244,7 @@
                     </div>
                     <!-- ======================= -->
                     <div class="ct-product hidden toy withoutDriver" data-price="350" data-passengers="1">
-                        <div class="ct-product-image"><img src="./assets/images/content/cars/gallery-06.jpg" alt=""></div>
+                        <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/gallery-06.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">Aumi A6</h4>
                             <p>Exclusive car for those who want to show their class and status. Everyone will envy.</p>
@@ -253,7 +254,7 @@
                     </div>
                     <!-- ======================= -->
                     <div class="ct-product hidden luxury withDriver" data-price="740" data-passengers="7">
-                        <div class="ct-product-image"><img src="./assets/images/content/cars/gallery-04.jpg" alt=""></div>
+                        <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/gallery-04.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">Mermedess Kompressor</h4>
                             <p>Beautiful weather and the long journey? This super fast car is for you.</p>
@@ -263,7 +264,7 @@
                     </div>
                     <!-- ======================= -->
                     <div class="ct-product hidden toy withoutDriver" data-price="75" data-passengers="5">
-                        <div class="ct-product-image"><img src="./assets/images/content/cars/gallery-11.jpg" alt=""></div>
+                        <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/gallery-11.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">BMG Z Series</h4>
                             <p>Do you want to spend a weekend out of town? This car is waiting for you.</p>
@@ -273,7 +274,7 @@
                     </div>
                     <!-- ======================= -->
                     <div class="ct-product hidden sport withDriver" data-price="180" data-passengers="4">
-                        <div class="ct-product-image"><img src="./assets/images/content/cars/gallery-04.jpg" alt=""></div>
+                        <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/gallery-04.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">Bord Mustanp</h4>
                             <p>This beautiful car is what you see every day on vacation.</p>
@@ -283,7 +284,7 @@
                     </div>
                     <!-- ======================= -->
                     <div class="ct-product hidden toy withDriver" data-price="990" data-passengers="0">
-                        <div class="ct-product-image"><img src="./assets/images/content/cars/gallery-17.jpg" alt=""></div>
+                        <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/gallery-17.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">Burakki Veylon</h4>
                             <p>Nice weather, great friends nothing but rent our super-comfortable car.</p>
@@ -293,7 +294,7 @@
                     </div>
                     <!-- ======================= -->
                     <div class="ct-product hidden luxury withDriver" data-price="100" data-passengers="9">
-                        <div class="ct-product-image"><img src="./assets/images/content/cars/gallery-07.jpg" alt=""></div>
+                        <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/gallery-07.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">BMG CPG 7</h4>
                             <p>When you get to that car nothing will be for you as luxurious as it is.</p>
@@ -313,7 +314,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="ct-footer-logo ct-u-paddingTop50 ct-u-paddingBottom30"><img src="./assets/images/content/logo2.png" alt="logo"></div>
+                <div class="ct-footer-logo ct-u-paddingTop50 ct-u-paddingBottom30"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt="logo"></div>
                 <p>Rentica operate in the booking market since 2000. We created a platform that would not only allow our clients to book a car, but to make this process as easy as possible. Rentica deals with all the major car hire companies around the world checking which local supplier is offering the best prices for the car you want on the date you need it.</p>
             </div>
             <div class="col-md-4 col-sm-6">
@@ -328,7 +329,7 @@
 
                 <a href="events.html">
                      <div class="media ct-mediaObject">
-                         <div class="media-left"><img src="./assets/images/content/cars/footerObject-01.jpg" alt=""></div>
+                         <div class="media-left"><img src="{% static 'frontEnd/images/content/cars/footerObject-01.jpg' %}" alt=""></div>
                          <div class="media-body">
                              <h6 class="ct-mediaObject-header">Rentica sports car racing finals</h6>
                              <h2 class="ct-mediaObject-date"><small>Aug 25 <span>2015</span></small></h2>
@@ -337,7 +338,7 @@
                  </a>
                  <a href="events.html">
                      <div class="media ct-mediaObject">
-                         <div class="media-left"><img src="./assets/images/content/cars/footerObject-02.jpg" alt=""></div>
+                         <div class="media-left"><img src="{% static 'frontEnd/images/content/cars/footerObject-02.jpg' %}" alt=""></div>
                          <div class="media-body">
                              <h6 class="ct-mediaObject-header">Rentica Sedan Showdown</h6>
                              <h2 class="ct-mediaObject-date"><small>Sep 03 <span>2015</span></small></h2>
@@ -356,14 +357,14 @@
                 </div>
 
                 <div class="ct-flickrGallery">
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-01-big.jpg"><img src="./assets/images/content/cars/flickr-01.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-02-big.jpg"><img src="./assets/images/content/cars/flickr-02.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-03-big.jpg"><img src="./assets/images/content/cars/flickr-03.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-04-big.jpg"><img src="./assets/images/content/cars/flickr-04.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-05-big.jpg"><img src="./assets/images/content/cars/flickr-05.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-06-big.jpg"><img src="./assets/images/content/cars/flickr-06.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-07-big.jpg"><img src="./assets/images/content/cars/flickr-07.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-08-big.jpg"><img src="./assets/images/content/cars/flickr-08.jpg" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-01-big.jpg' %}"><img src="{% static '/images/content/cars/flickr-01.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-02-big.jpg' %}"><img src="{% static '/images/content/cars/flickr-02.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-03-big.jpg' %}"><img src="{% static '/images/content/cars/flickr-03.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-04-big.jpg' %}"><img src="{% static '/images/content/cars/flickr-04.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-05-big.jpg' %}"><img src="{% static '/images/content/cars/flickr-05.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-06-big.jpg' %}"><img src="{% static '/images/content/cars/flickr-06.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-07-big.jpg' %}"><img src="{% static '/images/content/cars/flickr-07.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-08-big.jpg' %}"><img src="{% static '/images/content/cars/flickr-08.jpg' %}" alt=""/></a>
                 </div>
 
             </div>
@@ -386,29 +387,29 @@
 </div>
 
 <!-- JavaScripts -->
-<script src="./assets/js/jquery.min.js"></script>
-<script src="./assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="./assets/js/dependencies.js"></script>
+<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
 
-<script src="./assets/js/main.js"></script>
+<script src="{% static 'frontEnd/js/main.js' %}"></script>
 
-<script src="./assets/plugins/ct-mediaSection/js/jquery.stellar.min.js"></script>
-<script src="./assets/plugins/ct-mediaSection/js/init.js"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
 
-<script src="./assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="./assets/plugins/magnific-popup/init.js"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
 
-<script src="./assets/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
 <script>jQuery('.input-daterange').datepicker({});</script>
 
-<script src="./assets/plugins/bootstrap-slider/js/bootstrap-slider.js"></script>
+<script src="{% static 'frontEnd/plugins/bootstrap-slider/js/bootstrap-slider.js' %}"></script>
 <script>jQuery('.sliderAmount').slider();</script>
 
-<script src="./assets/plugins/selectize.js-master/dist/js/standalone/selectize.min.js"></script>
+<script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
 
-<script src="./assets/plugins/isotope/jquery.isotope.min.js"></script>
-<script src="./assets/plugins/isotope/imagesloaded.js"></script>
-<script src="./assets/plugins/isotope/products.js"></script>
+<script src="{% static 'frontEnd/plugins/isotope/jquery.isotope.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/isotope/imagesloaded.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/isotope/products.js' %}"></script>
 
 
 

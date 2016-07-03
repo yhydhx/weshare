@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     #'game',
     'frontEnd',
 
+    'backEnd',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -61,9 +63,9 @@ WSGI_APPLICATION = 'gt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_mongodb_engine',
-        'NAME': "game",
-        'USER': 'jupiter',
-        'PASSWORD' : '5080',
+        'NAME': "weshare",
+        #'USER': 'jupiter',
+        #'PASSWORD' : '5080',
         'HOST' : '127.0.0.1',
         'PORT' : '27017',
     }

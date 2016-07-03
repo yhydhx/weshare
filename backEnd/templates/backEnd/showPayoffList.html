@@ -1,0 +1,327 @@
+{% load staticfiles %}
+<html lang="en" class="no-js"><!--<![endif]--><!-- BEGIN HEAD --><head>
+
+	<meta charset="utf-8">
+
+	<title>Payoff Matrix</title>
+
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+	<meta content="" name="description">
+
+	<meta content="" name="author">
+
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<link href="{% static 'blog/media/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+
+	<link href="{% static 'blog/media/css/bootstrap-responsive.min.css' %}" rel="stylesheet" type="text/css">
+
+	<link href="{% static 'blog/media/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+	<link href="{% static 'blog/media/css/style-metro.css' %}" rel="stylesheet" type="text/css">
+
+	<link href="{% static 'blog/media/css/style.css' %}" rel="stylesheet" type="text/css">
+
+	<link href="{% static 'blog/media/css/style-responsive.css' %}" rel="stylesheet" type="text/css">
+
+	<link href="{% static 'blog/media/css/default.css' %}" rel="stylesheet" type="text/css" id="style_color">
+
+	<link href="{% static 'blog/media/css/uniform.default.css' %}" rel="stylesheet" type="text/css">
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES --> 
+
+	<link href="{% static 'blog/media/css/jquery.gritter.css' %}" rel="stylesheet" type="text/css">
+
+	<link href="{% static 'blog/media/css/daterangepicker.css' %}" rel="stylesheet" type="text/css">
+
+	<link href="{% static 'blog/media/css/fullcalendar.css' %}" rel="stylesheet" type="text/css">
+
+	<link href="{% static 'blog/media/css/jqvmap.css' %}" rel="stylesheet" type="text/css" media="screen">
+
+	<link href="{% static 'blog/media/css/jquery.easy-pie-chart.css' %}" rel="stylesheet" type="text/css" media="screen">
+
+	<!-- END PAGE LEVEL STYLES -->
+
+	<link rel="shortcut icon" href="media/image/favicon.ico">
+<script type="text/javascript">
+addLoadEvent = function(func){if(typeof jQuery!="undefined")jQuery(document).ready(func);else if(typeof wpOnload!='function'){wpOnload=func;}else{var oldonload=wpOnload;wpOnload=function(){oldonload();func();}}};
+var ajaxurl = '/wordpress/wp-admin/admin-ajax.php',
+	pagenow = 'edit-post',
+	typenow = 'post',
+	adminpage = 'edit-php',
+	thousandsSeparator = ',',
+	decimalPoint = '.',
+	isRtl = 0;
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'blog/index/load-styles.php' %}" type="text/css" media="all">
+<link rel="stylesheet" id="open-sans-css" href="{% static 'blog/index/css' %}" type="text/css" media="all">
+<link rel="stylesheet" id="zh-cn-l10n-administration-screens-css" href="{% static 'blog/index/zh_CN-administration-screens.css' %}" type="text/css" media="all">
+<!--[if lte IE 7]>
+<link rel='stylesheet' id='ie-css'  href='http://localhost/wordpress/wp-admin/css/ie.min.css?ver=3.9.2' type='text/css' media='all' />
+<![endif]-->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var userSettings = {"url":"\/wordpress\/","uid":"1","time":"1407891755"};/* ]]> */
+</script><style type="text/css"></style>
+<script type="text/javascript" src="{% static 'blog/index/load-scripts.php' %}"></script>
+<script type="text/javascript">var _wpColorScheme = {"icons":{"base":"#999","focus":"#2ea2cc","current":"#fff"}};</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+</head>
+<body class="wp-admin wp-core-ui js  edit-php auto-fold admin-bar post-type-post branch-3-9 version-3-9-2 admin-color-fresh locale-zh-cn customize-support sticky-menu svg">
+<script type="text/javascript">
+	document.body.className = document.body.className.replace('no-js','js');
+</script>
+
+	<script type="text/javascript">
+		(function() {
+			var request, b = document.body, c = 'className', cs = 'customize-support', rcs = new RegExp('(^|\\s+)(no-)?'+cs+'(\\s+|$)');
+
+			request = true;
+
+			b[c] = b[c].replace( rcs, ' ' );
+			b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
+		}());
+	</script>
+</head>
+<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style>
+
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed" style="">
+
+	<!-- BEGIN HEADER -->
+
+	<div class="header navbar navbar-inverse navbar-fixed-top">
+
+		<!-- BEGIN TOP NAVIGATION BAR -->
+
+		<div class="navbar-inner">
+			<div style="margin-left:90%">
+			<button href = "logout" class="dropdown user" onclick = "window.location.href='logout'" style = "posi">退出登录</button>
+		</div>
+		</div>
+
+		<!-- END TOP NAVIGATION BAR -->
+
+	</div>
+
+	<!-- END HEADER -->
+
+	<!-- BEGIN CONTAINER -->
+
+	<div class="page-container">
+
+		<!-- BEGIN SIDEBAR -->
+
+		<div class="page-sidebar nav-collapse collapse">
+
+			<!-- BEGIN SIDEBAR MENU -->        
+
+			{% include 'blog/left.html'  %}
+
+			<!-- END SIDEBAR MENU -->
+
+		</div>
+
+		<!-- END SIDEBAR -->
+
+		<!-- BEGIN PAGE -->
+
+		<div class="page-content">
+			<div id="wpbody-content" aria-label="主内容" tabindex="0" style="margin-top:40px">
+		<div id="screen-meta" class="metabox-prefs">
+				<div id="screen-options-wrap" class="hidden" tabindex="-1" aria-label="“显示选项”选项卡">
+		<form id="adv-settings" action="" method="post">
+					<h5>显示下列项目</h5>
+					<div class="metabox-prefs">
+				<label for="author-hide"><input class="hide-column-tog" name="author-hide" type="checkbox" id="author-hide" value="author" checked="checked">作者</label>
+<label for="categories-hide"><input class="hide-column-tog" name="categories-hide" type="checkbox" id="categories-hide" value="categories" checked="checked">分类目录</label>
+<label for="tags-hide"><input class="hide-column-tog" name="tags-hide" type="checkbox" id="tags-hide" value="tags" checked="checked">标签</label>
+<label for="comments-hide"><input class="hide-column-tog" name="comments-hide" type="checkbox" id="comments-hide" value="comments" checked="checked">评论</label>
+<label for="date-hide"><input class="hide-column-tog" name="date-hide" type="checkbox" id="date-hide" value="date" checked="checked">日期</label>
+				<br class="clear">
+			</div>
+				<div class="screen-options">
+							<input type="number" step="1" min="1" max="999" class="screen-per-page" name="wp_screen_options[value]" id="edit_post_per_page" maxlength="3" value="20">
+				<label for="edit_post_per_page">
+					airitlce				</label>
+			<input type="submit" name="screen-options-apply" id="screen-options-apply" class="button" value="应用">			<input type="hidden" name="wp_screen_options[option]" value="edit_post_per_page">
+		</div>
+				<div><input type="hidden" id="screenoptionnonce" name="screenoptionnonce" value="5cdd7608a8"></div>
+		</form>
+		</div>
+				</div>
+				<div id="screen-meta-links">
+					<div id="contextual-help-link-wrap" class="hide-if-no-js screen-meta-toggle">
+			<a href="#contextual-help-wrap" id="contextual-help-link" class="show-settings" aria-controls="contextual-help-wrap" aria-expanded="false">帮助</a>
+			</div>
+					<div id="screen-options-link-wrap" class="hide-if-no-js screen-meta-toggle">
+			<a href="#screen-options-wrap" id="show-settings-link" class="show-settings" aria-controls="screen-options-wrap" aria-expanded="false">显示选项</a>
+			</div>
+				</div>
+		<div class="wrap">
+<h2>Payoff Matrix <a href="../add" class="add-new-h2">Add Payoff Matrix</a></h2>
+
+
+<form id="posts-filter" action="" method="get">
+
+<input type="hidden" name="orderby" value="title"><input type="hidden" name="order" value="asc">
+
+<input type="hidden" name="post_status" class="post_status_page" value="all">
+<input type="hidden" name="post_type" class="post_type_page" value="post">
+
+<input type="hidden" id="_wpnonce" name="_wpnonce" value="e924fa65ff"><input type="hidden" name="_wp_http_referer" value="/wordpress/wp-admin/edit.php?orderby=title&amp;order=asc">	
+<table class="wp-list-table widefat fixed posts">
+	<thead>
+	<tr>
+		<th scope="col" id="title" class="manage-column column-title sorted asc" style=""><span>标题</span></th><th scope="col" id="categories" class="manage-column column-categories" style="">分类目录</th>
+		<th scope="col" id="date" class="manage-column column-date sortable asc" style=""><span>日期</span></th>	</tr>
+	</thead>
+
+
+	{% block content %}
+    <ul>
+        {% for publisher in payoff %}
+           
+            	<tbody id="the-list">
+				<tr id="post-1" class="post-1 type-post status-publish format-standard hentry category-uncategorized alternate iedit author-self level-0">
+				
+			<td class="post-title page-title column-title"><strong><a class="row-title" href="/dc/payoff/change/{{publisher.id}}" title="编辑{{ publisher.name }}">{{ publisher.name }}</a></strong>
+<div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>
+<div class="row-actions"><span class="edit"><a href="/dc/payoff/change/{{publisher.id}}" title="编辑此项目">编辑</a>  </span><span class="trash"><a class="submitdelete" title="移动此项目到回收站" href="/dc/payoff/delete/{{publisher.id}}">回收站</a> | </span><span class="view"><a href="/dc/payoff/select/{{publisher.id}}" title="select" rel="permalink">选定</a></span></div>
+</td>		
+			<td class="categories column-categories">payoff</td>
+			<td class="date column-date"><abbr >{{publisher.uploadTime}}</abbr></td>		</tr>
+		</tbody>
+        {% endfor %}
+    </ul>
+	{% endblock %}
+
+</table>
+	
+
+		<br class="clear">
+	</div>
+
+</form>
+
+
+
+
+</div>
+
+
+</div>
+
+		</div>
+
+		<!-- END PAGE -->
+
+	</div>
+
+	<!-- END CONTAINER -->
+
+	ER -->
+
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+
+	<!-- BEGIN CORE PLUGINS -->
+
+	<script type="text/javascript" async="" src="http://stats.g.doubleclick.net/dc.js"></script><script src="{% static 'blog/media/js/jquery-1.10.1.min.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
+
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+
+	<script src="{% static 'blog/media/js/jquery-ui-1.10.1.custom.min.js' %}" type="text/javascript"></script>      
+
+	<script src="{% static 'blog/media/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+	<!--[if lt IE 9]>
+
+	<script src="{% static 'blog/media/js/excanvas.min.js"></script>
+
+	<script src="{% static 'blog/media/js/respond.min.js"></script>  
+
+	<![endif]-->   
+
+	<script src="{% static 'blog/media/js/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/jquery.blockui.min.js' %}" type="text/javascript"></script>  
+
+	<script src="{% static 'blog/media/js/jquery.cookie.min.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/jquery.uniform.min.js' %}" type="text/javascript"></script>
+
+	<!-- END CORE PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+	
+
+	<script src="{% static 'blog/media/js/jquery.flot.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/jquery.flot.resize.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/jquery.pulsate.min.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/date.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/daterangepicker.js' %}" type="text/javascript"></script>     
+
+	<script src="{% static 'blog/media/js/jquery.gritter.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/fullcalendar.min.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/jquery.easy-pie-chart.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/jquery.sparkline.min.js' %}" type="text/javascript"></script>  
+
+	<!-- END PAGE LEVEL PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+	<script src="{% static 'blog/media/js/app.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'blog/media/js/index.js' %}" type="text/javascript"></script>        
+
+	<!-- END PAGE LEVEL SCRIPTS -->  
+
+	<script>
+
+		jQuery(document).ready(function() {    
+
+		   App.init(); // initlayout and core plugins
+
+		   Index.init();
+
+		   Index.initJQVMAP(); // init index page's custom scripts
+
+		   Index.initCalendar(); // init index page's custom scripts
+
+		   Index.initCharts(); // init index page's custom scripts
+
+		   Index.initChat();
+
+		   Index.initMiniCharts();
+
+		   Index.initDashboardDaterange();
+
+		   Index.initIntro();
+
+		});
+
+	</script>
+
+	<!-- END JAVASCRIPTS -->
+
+<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script>
+
+<!-- END BODY -->
