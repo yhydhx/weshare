@@ -1,0 +1,1570 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://vis.cse.ust.hk/demos/ust/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<style>
+
+</style>
+<style type="text/css"></style></head><body>
+<script src="{% static 'blog/js/d3.min.js' %}"></script>
+<script src="{% static 'blog/js/dept.js' %}"></script>
+<script>
+//http://jeromecukier.net/projects/agot/events.html
+// From http://mkweb.bcgsc.ca/circos/guide/tables/
+var width = 960,
+        height = 960,
+        innerRadius = Math.min(width, height) * .41,
+        centerRadius = innerRadius * 1.02;
+outerRadius = centerRadius * 1.02;
+var color = d3.scale.category10();
+var colorRange = [];
+for(var i = 0; i < 4; ++i) {
+    colorRange.push(color(i+1));
+}
+var fill = d3.scale.ordinal()
+        .domain(d3.range(4))
+        .range(colorRange);
+
+var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+var labelBoxes = svg.selectAll(".label")
+        .data(schoolList)
+        .enter()
+        .append("g")
+        .attr("class","label");
+var labelRect = labelBoxes.append("rect")
+        .attr("x",40)
+        .attr("y",function(d,index){
+            return 20+index*30;
+        })
+        .attr("width",20)
+        .attr("height",20)
+        .attr("fill",function(d){
+            if(d == "Unknow") return "#999";
+            return fill(school[d]);
+        })
+        .attr("opacity",0.4);
+var labelText = labelBoxes.append("text")
+        .text(function(d){
+            return d;
+        })
+        .attr("x",function(d,index){
+            return 80;
+        })
+        .attr("y",function(d,index){
+            return 35+index*30;
+        });
+
+svg = svg
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+var defs = svg.append("defs");
+var radialGradient =
+        defs
+        .append("radialGradient")
+        .attr("id", "prof_photo_frame")
+        .attr("cx", "50%")
+        .attr("cy", "50%")
+        .attr("r", "50%")
+        .attr("fx", "50%")
+        .attr("fx", "50%");
+radialGradient.append("stop")
+        .attr("offset", "70%")
+        .style("stop-color", "rgb(255,255,255)")
+        .style("stop-opacity", "0");
+radialGradient.append("stop")
+        .attr("offset", "80%")
+        .style("stop-color", "rgb(255,255,255)")
+        .style("stop-opacity", "1");
+
+
+//object deep copy
+Object.clone = function(sObj){
+
+    if(typeof sObj !== "object"){
+
+        return sObj;
+
+    }
+
+    var s = {};
+
+    if(sObj.constructor == Array){
+
+        s = [];
+
+    }
+
+    for(var i in sObj){
+
+        s[i] = Object.clone(sObj[i]);
+
+    }
+
+    return s;
+
+}
+
+d3.json("{% static 'blog/js/schl.json' %}",function(school) {
+    d3.json("{% static 'blog/js/dept.json' %}", function (department) {
+        d3.json("{% static 'blog/js/lib.json' %}", function (professor) {
+
+            var back = svg
+                    .append("image")
+                    .attr("xlink:href", "img/icons/up_unavailable.png")
+                    .attr("x", 300)
+                    .attr("y", -height / 2)
+                    .attr("width", "35")
+                    .attr("height", "35")
+                    .style("cursor", "default")
+                    .on("mouseover", function() {
+                        if(state != 0) {
+                            back.attr("xlink:href", "img/icons/up_hover.png");
+                        }
+                    })
+                    .on("mouseout",function() {
+                        if(state != 0) {
+                            back.attr("xlink:href", "img/icons/up.png");
+                        }
+                    })
+                    .on("mousedown", function () {
+                        if(state != 0) {
+                            back.attr("xlink:href", "img/icons/up_press.png");
+                        }
+                    })
+                    .on("mouseup", function () {
+                        if(state != 0) {
+                            back.attr("xlink:href", "img/icons/up_hover.png");
+                        }
+                    })
+                    .on("click", function() {
+                        if(state == 2 && selectedProf != -1) {
+                            egoView(false);
+                        } else {
+                            if (state != 0) {
+                                state_transition(state, former_state);
+                            }
+                        }
+                    });
+
+            var deptIndicatePanel = svg.append('g')
+                    .attr("class", "deptIndicatePanel");
+            var deptIndicateText = new Array(deptNames.length-2);
+            for(var i = 0; i < deptNames.length-2; ++i) {
+                deptIndicateText[i] = deptIndicatePanel.append("text")
+                        .text(deptNames[i])
+                        .attr("fill", "#00000")
+                        .attr("display", "none");
+            }
+
+            function changeDeptIndicate()
+            {
+                if (state == 1) {
+                    for (var i = 0; i < deptNames.length-2; ++i) {
+                        var d = prof_groups[i];
+                        var angle = (d.endAngle + d.startAngle) / 2;
+                        if (i == 12)
+                            angle = angle - 0.03;
+                        if (i == 13)
+                            angle = angle - 0.02;
+
+                        var radian = angle * 360 / 2 / Math.PI;
+                        var ratio = 1;
+                        if (radian <= 180) {
+                            radian = radian - 90;
+                            ratio = 1.06;
+                        } else {
+                            radian = radian + 90;
+                            ratio = 1.18;
+                        }
+                        var x = innerRadius * ratio * Math.sin(angle);
+                        var y = -innerRadius * ratio * Math.cos(angle);
+
+                        deptIndicateText[i].attr("transform", "translate(" + String(x) + "," + String(y) + "), rotate(" + String(radian) + ", 0, 0)");
+                        deptIndicateText[i].attr("display", "");
+                    }
+                    return ;
+                }
+
+                for(var i = 0 ; i < deptNames.length-2; ++i) {
+                    deptIndicateText[i].attr("display", "none");
+                }
+
+                if(state == 2) {
+                    for (var i = schoolOffset[selectedSchool]; i < schoolOffset[selectedSchool+1]; ++i) {
+                        var _i = i - schoolOffset[selectedSchool];
+                        var inner_prof_groups = inner_departmentChord[selectedSchool].groups();
+                        var d = inner_prof_groups[_i];
+                        var angle = (d.endAngle + d.startAngle) / 2;
+                        var radian = angle * 360 / 2 / Math.PI;
+                        var ratio = 1;
+                        if (radian <= 180) {
+                            radian = radian - 90;
+                            ratio = 1.06;
+                        } else {
+                            radian = radian + 90;
+                            ratio = 1.18;
+                        }
+                        var x = innerRadius * ratio * Math.sin(angle);
+                        var y = -innerRadius * ratio * Math.cos(angle);
+
+                        deptIndicateText[i].attr("transform", "translate(" + String(x) + "," + String(y) + "), rotate(" + String(radian) + ", 0, 0)");
+                        deptIndicateText[i].attr("display", "");
+                    }
+                }
+            }
+
+            var former_state = -1;
+            var state = 0; // 0 - school view, 1 - dept view, 2 - inner-dept view
+            var selectedSchool = -1;
+            var selectedProf = -1;
+
+            var schlLen = school.nodes.length;
+            var schoolMatrix = new Array(schlLen);
+            for (var i = 0; i < schlLen; i++) {
+                schoolMatrix[i] = new Array(schlLen);
+                for (var j = 0; j < schlLen; j++) {
+                    schoolMatrix[i][j] = 0;
+                }
+            }
+            for (var i = 0; i < school.links.length; i++) {
+                var source = school.links[i].source;
+                var target = school.links[i].target;
+                schoolMatrix[source][target] = school.links[i].weight;
+                schoolMatrix[target][source] = school.links[i].weight;
+            }
+
+            deptLen = department.nodes.length;
+            var departmentMatrix = new Array(deptLen);
+            for (var i = 0; i < deptLen; i++) {
+                departmentMatrix[i] = new Array(deptLen);
+                for (var j = 0; j < deptLen; j++) {
+                    departmentMatrix[i][j] = 0;
+                }
+            }
+
+            // init dept matrix of each school
+            var inner_departmentMatrix = new Array(schlLen);
+            var lenOfEachSchool = new Array(schlLen);
+            for (var i = 0; i < schlLen; ++i) {
+                lenOfEachSchool[i] = 0;
+            }
+            for (var i = 0; i < deptNames.length; ++i) {
+                var deptName = deptNames[i];
+                var schoolIndex = dept[deptName];
+                if (schoolIndex != null)
+                    lenOfEachSchool[schoolIndex] = lenOfEachSchool[schoolIndex] + 1;
+            }
+
+            for (var i = 0; i < schlLen; ++i) {
+                inner_departmentMatrix[i] = new Array(lenOfEachSchool[i]);
+                for (var j = 0; j < lenOfEachSchool[i]; ++j) {
+                    inner_departmentMatrix[i][j] = new Array(lenOfEachSchool[i]);
+                    for (var k = 0; k < lenOfEachSchool[i]; ++k) {
+                        inner_departmentMatrix[i][j][k] = 0;
+                    }
+                }
+            }
+
+            var deptIdIndexMap = [];
+            var deptIndexIdMap = [];
+            var deptOpacity = [];
+
+
+            // id is the id of dept defined in json, index is the index of dept defined in js
+            for (var i = 0; i < deptLen; ++i) {
+                var deptName = department.nodes[i].label;
+                var index = deptIndex[deptName];
+                deptIdIndexMap[department.nodes[i].id] = index;
+                deptIndexIdMap[index] = department.nodes[i].id;
+
+                var deptIndexInSchool = deptIndexS[deptName];
+                deptOpacity[deptName] = (1.0 - 1.0 / 7.0 * (deptIndexInSchool + 1));
+            }
+
+
+            for (var i = 0; i < department.links.length; i++) {
+                var source = deptIdIndexMap[department.links[i].source];
+                var target = deptIdIndexMap[department.links[i].target];
+
+                departmentMatrix[source][target] = department.links[i].weight;
+                departmentMatrix[target][source] = department.links[i].weight;
+
+                var sourceName = deptNames[source];
+                var targetName = deptNames[target];
+                if (getSchoolIndex(sourceName) != null && getSchoolIndex(sourceName) == getSchoolIndex(targetName)) {
+                    var inner_source = deptIndexS[sourceName];
+                    var inner_target = deptIndexS[targetName];
+
+                    inner_departmentMatrix[getSchoolIndex(sourceName)][inner_source][inner_target] = department.links[i].weight;
+                    inner_departmentMatrix[getSchoolIndex(targetName)][inner_target][inner_source] = department.links[i].weight;
+                }
+            }
+
+            // draw chord
+
+            var schoolChord = d3.layout.chord()
+                //                .padding(0.2)
+                //                .sortGroups(d3.descending)
+                    .sortSubgroups(d3.descending)
+                    .matrix(schoolMatrix);
+
+            var school_chord = svg.append("g")
+                    .selectAll("path")
+                    .data(schoolChord.groups)
+                    .enter().append("path")
+                    .attr("class", "schoolChord")
+                    .style("cursor", "pointer")
+                    .style("fill", function (d) {
+                        return fill(d.index);
+                    })
+                    .style("stroke", function (d) {
+                        return fill(d.index);
+                    })
+                    .attr("d", d3.svg.arc().innerRadius(centerRadius).outerRadius(outerRadius * 1.05))
+                    .on("mouseover", function (data, index) {
+
+                        if (state != 0) {
+                            svg.selectAll(".schoolChord")
+                                    .transition()
+                                    .attr("d", d3.svg.arc().innerRadius(centerRadius).outerRadius(outerRadius * 1.05));
+                        }
+
+                        svg.selectAll(".schoolChord")
+                                .filter(function (d, i) {
+                                    return i == index;
+                                })
+                                .transition()
+                                .attr("d", d3.svg.arc().innerRadius(centerRadius).outerRadius(outerRadius * 1.1));
+
+                        dept_circle[0].forEach(function (d, i) {
+                            d.style.opacity = 0.1;
+                            var deptName = deptNames[deptIdIndexMap[i]];
+                            var schoolIndex = getSchoolIndex(deptName);
+
+                            if (schoolIndex == index) {
+                                d.style.opacity = 1;
+                            }
+                        });
+
+
+                        prof_circle[0].forEach(function (d, i) {
+                            d.style.opacity = 0.1;
+                            var deptName = professor.nodes[i].dept;
+                            var schoolIndex = getSchoolIndex(deptName);
+
+                            if (schoolIndex == index) {
+                                d.style.opacity = 1;
+                            }
+                        });
+                    })
+                    .on("mouseout", function () {
+
+                        if (state != 0) {
+                            svg.selectAll(".schoolChord")
+                                    .transition()
+                                    .attr("d", d3.svg.arc().innerRadius(centerRadius).outerRadius(outerRadius));
+                        } else {
+                            svg.selectAll(".schoolChord")
+                                    .transition()
+                                    .attr("d", d3.svg.arc().innerRadius(centerRadius).outerRadius(outerRadius * 1.05));
+                        }
+
+                        if(state == 0) {
+                            dept_circle[0].forEach(function (d, i) {
+                                var deptName = deptNames[deptIdIndexMap[i]];
+                                d.style.opacity = deptOpacity[deptName];
+                            });
+                        }
+
+                        if(state == 1) {
+                            prof_circle[0].forEach(function (d, i) {
+                                d.style.opacity = 0.1;
+                                var deptName = professor.nodes[i].dept;
+                                d.style.opacity = deptOpacity[deptName];
+                            });
+                        }
+                    })
+                    .on("click", function (data, index) {
+                        state_transition(state, 2, index);
+                    });
+
+            school_chord.append("title")
+                    .text(function (data, index){
+                        var text = "School: " + schoolList[index];
+                        return text;
+                    });
+
+
+            var departmentChord = d3.layout.chord()
+                    .sortSubgroups(d3.descending)
+                    .matrix(departmentMatrix);
+
+            var dept_chord = svg.append("g").selectAll("path")
+                    .data(departmentChord.groups)
+                    .enter().append("path")
+                    .attr("class", "deptChord")
+                    .style("cursor", "pointer")
+                    .style("fill", function (d) {
+                        var deptName = deptNames[d.index];
+                        var schoolIndex = getSchoolIndex(deptName);
+                        return fill(schoolIndex);
+                    })
+                    .style("stroke", function (d) {
+                        var deptName = deptNames[d.index];
+                        var schoolIndex = getSchoolIndex(deptName);
+                        return fill(schoolIndex);
+                    })
+                    .style("opacity", function (d) {
+                        var deptName = deptNames[d.index];
+                        return deptOpacity[deptName];
+                    })
+                    .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(centerRadius * 0.99))
+                    .on("mouseover", function (data, index) {
+
+                        deptIndicateText[index].style("font-weight", "bolder");
+
+                        if (state == 0) {
+                            dept_chord
+                                    .transition()
+                                    .attr("d", d3.svg.arc().innerRadius(innerRadius * 0.95).outerRadius(centerRadius * 0.99));
+
+                            dept_circle[0].forEach(function (d, i) {
+                                d.style.opacity = 0.1;
+                                if (deptIdIndexMap[i] == index) {
+                                    d.style.opacity = 1;
+                                }
+                            });
+                        }
+
+                        if(state == 1) {
+                            dept_chord
+                                    .filter(function (d, i) {
+                                        return i == index;
+                                    })
+                                    .transition()
+                                    .attr("d", d3.svg.arc().innerRadius(innerRadius * 0.90).outerRadius(centerRadius * 0.99));
+                        }
+
+                        if(state == 1) {
+                            prof_circle[0].forEach(function (d, i) {
+                                d.style.opacity = 0.1;
+                                var deptName = professor.nodes[i].dept;
+                                var _deptIndex = deptIndex[deptName];
+
+                                if (_deptIndex == index) {
+                                    d.style.opacity = 1;
+                                }
+                            });
+                        }
+                    })
+                    .on("mouseout", function (data, index) {
+                        deptIndicateText[index].style("font-weight", "normal");
+
+                        if (state != 2) {
+
+                            if (state == 0) {
+                                dept_chord
+                                        .transition()
+                                        .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(centerRadius * 0.99));
+                            } else {
+                                dept_chord
+                                        .transition()
+                                        .attr("d", d3.svg.arc().innerRadius(innerRadius * 0.95).outerRadius(centerRadius * 0.99));
+                            }
+
+                            if(state == 0) {
+                                dept_circle[0].forEach(function (d, i) {
+                                    var deptName = deptNames[deptIdIndexMap[i]];
+                                    d.style.opacity = deptOpacity[deptName];
+                                });
+                            }
+
+                            if(state == 1) {
+                                prof_circle[0].forEach(function (d, i) {
+                                    d.style.opacity = 0.1;
+                                    var deptName = professor.nodes[i].dept;
+                                    d.style.opacity = deptOpacity[deptName];
+                                });
+                            }
+                        }
+                    })
+                    .on("click", function (data, index) {
+                        switch(state) {
+                            case 0:
+                                state_transition(state, 1);
+                                break;
+                            case 1:
+                                if (index == 8) {
+                                    window.open("./cse/index.html");
+                                }
+                                break;
+                            default:
+                                break;
+
+                        }
+                    });
+
+            dept_chord.append("title")
+                    .text(function (data, index){
+                        var text = "Dept: " + deptNames[index];
+                        return text;
+                    });
+
+            var inner_departmentChord = new Array(schlLen);
+            var inner_dept_chord = new Array(schlLen);
+            for (var i = 0; i < schlLen; ++i) {
+                inner_departmentChord[i] = d3.layout.chord()
+                    //                .padding(0.2)
+                    //                .sortGroups(d3.descending)
+                        .sortSubgroups(d3.descending)
+                        .matrix(inner_departmentMatrix[i]);
+
+                inner_dept_chord[i] = svg.append("g").selectAll("path")
+                        .data(inner_departmentChord[i].groups)
+                        .enter().append("path")
+                        .attr("class", "innerDeptChord")
+                        .style("fill", function (d) {
+                            var index = schoolOffset[i] + d.index;
+                            var deptName = deptNames[index];
+                            var schoolIndex = getSchoolIndex(deptName);
+                            return fill(schoolIndex);
+                        })
+                        .style("stroke", function (d) {
+                            var index = schoolOffset[i] + d.index;
+                            var deptName = deptNames[index];
+                            var schoolIndex = getSchoolIndex(deptName);
+                            return fill(schoolIndex);
+                        })
+                        .style("opacity", function (d) {
+                            var index = schoolOffset[i] + d.index;
+                            var deptName = deptNames[index];
+                            return deptOpacity[deptName];
+                        })
+                        .attr("d", d3.svg.arc().innerRadius(centerRadius * 0.95).outerRadius(centerRadius * 0.99))
+                        .attr("display", "none")
+                        .on("mouseover", function (data, index) {
+                            var newIndex = schoolOffset[selectedSchool] + index;
+
+
+                            deptIndicateText[newIndex].style("font-weight", "bolder");
+
+                            if(state == 2) {
+                                inner_dept_chord[selectedSchool]
+                                        .filter(function (d, _index) {
+                                            return _index == index;
+                                        })
+                                        .transition()
+                                        .attr("d", d3.svg.arc().innerRadius(innerRadius * 0.90).outerRadius(centerRadius * 0.99));
+                                inner_prof_circle[selectedSchool][0].forEach(function (d, _index) {
+                                    d.style.opacity = 0.1;
+                                    var deptName = inner_nodesList[selectedSchool][_index].dept;
+                                    var _deptIndex = deptIndex[deptName];
+
+                                    if (_deptIndex == schoolOffset[selectedSchool] + index) {
+                                        d.style.opacity = 1;
+                                    }
+                                });
+                            }
+                        })
+                        .on("mouseout", function (data, index) {
+
+
+                            var newIndex = schoolOffset[selectedSchool] + index;
+                            if(deptIndicateText[newIndex] == undefined)
+                                return ;
+                            deptIndicateText[newIndex].style("font-weight", "normal");
+
+                            if(state == 2) {
+                                inner_dept_chord[selectedSchool]
+                                        .transition()
+                                        .attr("d", d3.svg.arc().innerRadius(innerRadius * 0.95).outerRadius(centerRadius * 0.99));
+
+                                inner_prof_circle[selectedSchool][0].forEach(function (d, _index) {
+                                    d.style.opacity = 0.1;
+                                    var deptName = inner_nodesList[selectedSchool][_index].dept;
+                                    d.style.opacity = deptOpacity[deptName];
+                                });
+                            }
+                        })
+                        .on("click", function(data, index) {
+                            if(selectedSchool == 2 && index == 2) {
+                                window.open("./cse/index.html");
+                            }
+                        });
+
+                inner_dept_chord[i].append("title")
+                        .text(function (data, index){
+                            var newIndex = parseInt(schoolOffset[i]) + index;
+                            var deptName = deptNames[newIndex];
+
+                            var text = "Dept: " + deptName;
+                            return text;
+                        });
+            }
+            inner_dept_chord[0][0][1].style.cursor = "pointer";
+
+            // force control
+
+            var dept_centerNodes = [];
+            var dept_groups = schoolChord.groups();
+            for (var i = 0; i < dept_groups.length; i++) {
+                var d = dept_groups[i];
+                var x = innerRadius * 0.6 * Math.sin((d.endAngle + d.startAngle) / 2);
+                var y = -innerRadius * 0.6 * Math.cos((d.endAngle + d.startAngle) / 2);
+                var schoolName = school.nodes[i].label;
+                dept_centerNodes.push({x: x, y: y, s: schoolName});
+            }
+            dept_centerNodes.siMap = {};
+            for (var i = 0; i < dept_centerNodes.length; i++) {
+                dept_centerNodes.siMap[dept_centerNodes[i].s] = i;
+            }
+            dept_centerNodes.getDeptCenterNodes = function (departmentName) {
+                var schoolName = getSchoolName(departmentName);
+                var index = this.siMap[schoolName];
+                return dept_centerNodes[index];
+            };
+
+            // set an initial layout to speed up convergence of force-directed layout
+            department.nodes.forEach(function (o) {
+                var cx = dept_centerNodes.getDeptCenterNodes(o.label).x;
+                var cy = dept_centerNodes.getDeptCenterNodes(o.label).y;
+                o.x = cx + Math.random()*50;
+                o.y = cy + Math.random()*50;
+            });
+
+            var dept_force = d3.layout.force()
+                    .nodes(department.nodes)
+                    .links(department.links)
+                    .linkDistance(20)
+                    .charge(-1000)
+                    .linkStrength(0.05)
+                    .gravity(0)
+                    .size([width/8, height/8])
+                    .on("tick", dept_tick)
+                    .start();
+
+            var dept_link = svg.append("g")
+                    .attr("class", "dept_links")
+                    .selectAll(".dept_link")
+                    .data(department.links)
+                    .enter().append("line")
+                    .attr("class", "dept_link")
+                    .style("stroke", "#999")
+                    .style("stroke-opacity", ".6")
+                    .style("stroke-width", function (d) {
+                        return Math.sqrt(d.weight / 2);
+                    });
+
+            var dept_circleg = svg.append("g")
+                    .attr("class", "dept_circleg")
+                    .selectAll(".dept_node")
+                    .data(department.nodes)
+                    .enter()
+                    .append("g");
+            var dept_circle = dept_circleg.append("circle")
+                    .attr("r", 25)
+                    .attr("class", "dept_node")
+                    .style("fill", function (d) {
+                        var value = d.label;
+                        var name = getSchoolName(value);
+                        var colorId = dept_centerNodes.siMap[name];
+                        return color(colorId + 1);
+                    })
+                    .style("opacity", function (data, index) {
+                        var deptName = deptNames[deptIdIndexMap[index]];
+                        return deptOpacity[deptName];
+                    })
+                    .call(dept_force.drag);
+
+            var pic = dept_circleg.append("image")
+                    .attr("xlink:href", function (d) {
+                        return "img/dept/" + d.url;
+                    })
+                    .attr("x", function (data) {
+                        return -35 / 2;
+                    })
+                    .attr("y", function (data) {
+                        return -35 / 2;
+                    })
+                    .attr("width", function (data) {
+                        return 35;
+                    })
+                    .attr("height", function (data) {
+                        return 35;
+                    })
+                    .on("mouseover", function (data, index) {
+
+                        dept_circle[0][index].style.opacity = 1;
+
+                        dept_circle[0].forEach(function (data, i) {
+                            if (data.__data__.CollaMap[index]) {
+                                dept_circle[0][i].style.opacity = 1;
+                            }
+                            else if (i != index) {
+                                dept_circle[0][i].style.opacity = 0.1;
+                                pic[0][i].style.opacity = 0.3;
+                            }
+                        });
+
+                        dept_link.style("opacity", function (d) {
+                            if (d.source.label == data.label || d.target.label == data.label) {
+                                return 1;
+                            } else {
+                                return  0.1;
+                            }
+                        })
+                    })
+                    .on("mouseout", function (data) {
+
+                        dept_circle[0].forEach(function (d) {
+                            d.style.opacity = 0.4;
+                        });
+                        pic[0].forEach(function (d) {
+                            d.style.opacity = 1;
+                        });
+                        dept_link.style("opacity", 1);
+                    })
+                    .call(dept_force.drag);
+
+            pic.append("title")
+                    .text(function (data, index){
+                       var text = "Dept: " + deptNames[deptIdIndexMap[index]];
+                       return text;
+                    });
+
+            function dept_tick(e) {
+                var k = e.alpha * 0.8;
+                // Push nodes toward their designated focus.
+                department.nodes.forEach(function (o, i) {
+                    var cx = dept_centerNodes.getDeptCenterNodes(o.label).x;
+                    var cy = dept_centerNodes.getDeptCenterNodes(o.label).y;
+                    o.x += (cx - o.x) * k;
+                    o.y += (cy - o.y) * k;
+                });
+                pic.attr("transform", function (d) {
+                            return "translate(" + d.x + "," + d.y + ")";
+                        }
+                );
+                dept_link.attr("x1", function (d) {
+                    return d.source.x;
+                })
+                        .attr("y1", function (d) {
+                            return d.source.y;
+                        })
+                        .attr("x2", function (d) {
+                            return d.target.x;
+                        })
+                        .attr("y2", function (d) {
+                            return d.target.y;
+                        });
+                dept_circle
+                        .attr("cx", function (d) {
+                            return d.x;
+                        })
+                        .attr("cy", function (d) {
+                            return d.y;
+                        });
+            }
+
+
+            var prof_centerNodes = [];
+            var prof_groups = departmentChord.groups();
+            for (var i = 0; i < prof_groups.length; i++) {
+                var d = prof_groups[i];
+                var x = innerRadius * 0.6 * Math.sin((d.endAngle + d.startAngle) / 2);
+                var y = -innerRadius * 0.6 * Math.cos((d.endAngle + d.startAngle) / 2);
+                var departmentName = deptNames[i];
+                prof_centerNodes.push({x: x, y: y, d: departmentName});
+            }
+            prof_centerNodes.diMap = {};
+            for (var i = 0; i < prof_centerNodes.length; i++) {
+                prof_centerNodes.diMap[prof_centerNodes[i].d] = i;
+            }
+            prof_centerNodes.getProfCenterNodes = function (professorID) {
+                var departmentName = professor.nodes[professorID].dept;
+                var index = this.diMap[departmentName];
+                return this[index];
+            };
+
+            // set an initial layout to speed up convergence of force-directed layout
+            professor.nodes.forEach(function (o) {
+                var cx = prof_centerNodes.getProfCenterNodes(o.id).x;
+                var cy = prof_centerNodes.getProfCenterNodes(o.id).y;
+                o.x = cx + Math.random()*50;
+                o.y = cy + Math.random()*50;
+            });
+
+            var prof_force = d3.layout.force()
+                    .nodes(professor.nodes)
+                    .links(professor.links)
+                    .linkDistance(20)
+                    .charge(-50)
+                    .linkStrength(0.05)
+                    .gravity(0)
+                    .size([width/8 , height/8 ])
+                    .on("tick", prof_tick)
+                    .stop();
+
+            var prof_link = svg.append("g")
+                    .attr("class", "prof_links")
+                    .selectAll(".prof_link")
+                    .data(professor.links)
+                    .enter().append("line")
+                    .attr("class", "prof_link")
+                    .style("stroke", "#999")
+                    .style("stroke-opacity", ".6")
+                    .style("stroke-width", function (d) {
+                        return Math.sqrt(d.weight);
+                    })
+                    .attr("display", "none");
+
+            var prof_circleg = svg.append("g")
+                    .attr("class", "prof_circleg")
+                    .selectAll(".prof_node")
+                    .data(professor.nodes)
+                    .enter()
+                    .append("g")
+                    .attr("display", "none");
+            var prof_circle = prof_circleg.append("circle")
+                    .attr("r", 5)
+                    .attr("class", "prof_node")
+                    .style("fill", function (d) {
+                        var deptName = d.dept;
+                        var schoolIndex = getSchoolIndex(deptName);
+                        return fill(schoolIndex);
+                    })
+                    .style("opacity", function (d) {
+                        var deptName = d.dept;
+                        var deptIndexInSchool = deptIndexS[deptName];
+                        return (1.0 - 1.0 / 7.0 * (deptIndexInSchool + 1));
+                    })
+                    .on("mouseover", function (data, index) {
+
+                        prof_circle[0][index].style.opacity = 1;
+
+                        prof_circle[0].forEach(function (data, i) {
+                            if (i != index) {
+                                prof_circle[0][i].style.opacity = 0.1;
+                            }
+                        });
+
+                        prof_link.style("opacity", function (d) {
+                            if (d.source.label == data.label || d.target.label == data.label) {
+                                prof_circle[0][d.source.id].style.opacity = 1;
+                                prof_circle[0][d.target.id].style.opacity = 1;
+
+                                return 1;
+                            } else {
+                                return  0.1;
+                            }
+                        })
+                    })
+                    .on("mouseout", function (data) {
+
+
+                        prof_circle[0].forEach(function (d, index) {
+                            var deptName = professor.nodes[index].dept;
+                            d.style.opacity = deptOpacity[deptName];
+                        });
+                        prof_link.style("opacity", 1)
+                    })
+                    .call(prof_force.drag);
+
+            prof_circle.append("title")
+                    .text(function (data, index){
+                        var display_name =  professor.nodes[index].fullname;
+                        if(display_name.length == 0)
+                            display_name = professor.nodes[index].name;
+                        var text = "Prof: " + display_name + "\r\n" + "Dept: " + professor.nodes[index].dept;
+                        return text;
+                    });
+
+            function prof_tick(e) {
+                var k = e.alpha * 0.8;
+                // Push nodes toward their designated focus.
+                professor.nodes.forEach(function (o, i) {
+                    var cx = prof_centerNodes.getProfCenterNodes(o.id).x;
+                    var cy = prof_centerNodes.getProfCenterNodes(o.id).y;
+                    o.x += (cx - o.x) * k;
+                    o.y += (cy - o.y) * k;
+                });
+                prof_link.attr("x1", function (d) {
+                    return d.source.x;
+                })
+                        .attr("y1", function (d) {
+                            return d.source.y;
+                        })
+                        .attr("x2", function (d) {
+                            return d.target.x;
+                        })
+                        .attr("y2", function (d) {
+                            return d.target.y;
+                        });
+                prof_circle
+                        .attr("cx", function (d) {
+                            return d.x;
+                        })
+                        .attr("cy", function (d) {
+                            return d.y;
+                        });
+            }
+
+
+
+            var prof_ego_activate_circle = svg.append("circle")
+                    .attr("cx", 0)
+                    .attr("cy", 0)
+                    .attr("r", 60)
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 2)
+                    .attr("fill", "none")
+                    .attr("display", "none")
+                    .on("mousemove", function() {
+
+                    });
+
+            var inner_prof_centerNodes = new Array(schlLen);
+            var inner_prof_force = new Array(schlLen);
+            var inner_nodesList = new Array(schlLen);
+            var inner_linksList = new Array(schlLen);
+            var inner_idIndexMap = new Array(schlLen);
+            var inner_prof_link = new Array(schlLen);
+            var inner_prof_circleg = new Array(schlLen);
+            var inner_prof_circle = new Array(schlLen);
+            var inner_prof_pic = new Array(schlLen);
+            var inner_prof_pic_cover = new Array(schlLen);
+
+            for (var i = 0; i < schlLen; ++i) {
+                inner_prof_centerNodes[i] = [];
+                var inner_prof_groups = inner_departmentChord[i].groups();
+                for (var j = 0; j < inner_prof_groups.length; j++) {
+                    var d = inner_prof_groups[j];
+                    var x = innerRadius * 0.6 * Math.sin((d.endAngle + d.startAngle) / 2);
+                    var y = -innerRadius * 0.6 * Math.cos((d.endAngle + d.startAngle) / 2);
+                    var departmentName = deptNames[schoolOffset[i] + j];
+                    inner_prof_centerNodes[i].push({x: x, y: y, d: departmentName});
+                }
+                inner_prof_centerNodes[i].diMap = {};
+                for (var j = 0; j < inner_prof_centerNodes[i].length; j++) {
+                    inner_prof_centerNodes[i].diMap[inner_prof_centerNodes[i][j].d] = j;
+                }
+                inner_prof_centerNodes[i].getProfCenterNodes = function (professorID) {
+                    var departmentName = professor.nodes[professorID].dept;
+                    var index = this.diMap[departmentName];
+                    return this[index];
+                };
+
+                inner_nodesList[i] = [];
+                inner_linksList[i] = [];
+                inner_idIndexMap[i] = {};
+
+                var newIndex = 0;
+                for(var j = 0; j < professor.nodes.length; ++j) {
+                    if(getSchoolIndex(professor.nodes[j].dept) == i) {
+                        inner_nodesList[i].push(Object.clone(professor.nodes[j]));
+                        inner_idIndexMap[i][professor.nodes[j].id] = newIndex;
+
+                        newIndex = newIndex + 1;
+                    }
+                }
+
+                for(var j = 0; j < professor.links.length; ++j) {
+                    var source = professor.links[j].source;
+                    var target = professor.links[j].target;
+                    if(getSchoolIndex(professor.nodes[source].dept) == i && getSchoolIndex(professor.nodes[target].dept) == i) {
+                        var newLink = Object.clone(professor.links[j]);
+                        newLink.source = inner_idIndexMap[i][source];
+                        newLink.target = inner_idIndexMap[i][target];
+                        inner_linksList[i].push(newLink);
+                    }
+                }
+
+
+                inner_prof_force[i] = d3.layout.force()
+                        .nodes(inner_nodesList[i])
+                        .links(inner_linksList[i])
+                        .linkDistance(function(link, index) { // 50
+                            var source = inner_idIndexMap[selectedSchool][link.source.id];
+                            var target = inner_idIndexMap[selectedSchool][link.target.id];
+
+                            var source_value = parseInt(inner_prof_circle[selectedSchool][0][source].attributes.r.value);
+                            var target_value = parseInt(inner_prof_circle[selectedSchool][0][target].attributes.r.value);
+
+                            var value = (source_value + target_value) / 30;
+                            value = value * value;
+                            value = value * 50;
+
+                            return value
+                        })
+                        .linkStrength(0.3)
+                        .charge(function(node, index) { // -300
+                            var nid = inner_idIndexMap[selectedSchool][node.id];
+                            var value = parseInt(inner_prof_circle[selectedSchool][0][nid].attributes.r.value);
+                            value = value / 15;
+                            value = value * value;
+                            value = value * -300;
+                            return value;
+                        })
+                        .chargeDistance(300)
+                        .gravity(0)
+                        .size([width/8 , height/8 ])
+                        .on("tick", inner_prof_tick)
+                        .stop();
+
+                inner_prof_link[i] = svg.append("g")
+                        .attr("class", "inner_prof_links_"+String(i))
+                        .selectAll(".inner_prof_link_"+String(i))
+                        .data(inner_linksList[i])
+                        .enter().append("line")
+                        .attr("class", "inner_prof_link_"+String(i))
+                        .style("stroke", "#999")
+                        .style("stroke-opacity", ".6")
+                        .style("stroke-width", function (d) {
+                            return Math.sqrt(d.weight);
+                        })
+                        .attr("display", "none");
+
+                inner_prof_link[i].append("title")
+                        .text(function (data, index){
+                            return data.weight;
+                        });
+
+                inner_prof_circleg[i] = svg.append("g")
+                        .attr("class", "inner_prof_circleg_"+String(i))
+                        .selectAll(".inner_prof_node_"+String(i))
+                        .data(inner_nodesList[i])
+                        .enter()
+                        .append("g")
+                        .attr("display", "none");
+                inner_prof_circle[i] = inner_prof_circleg[i].append("circle")
+                        .attr("r", 15)
+                        .attr("class", "inner_prof_node_"+String(i))
+                        .style("fill", function (d) {
+                            var deptName = d.dept;
+                            var schoolIndex = getSchoolIndex(deptName);
+                            return fill(schoolIndex);
+                        })
+                        .style("opacity", function (d) {
+                            var deptName = d.dept;
+                            var deptIndexInSchool = deptIndexS[deptName];
+                            return (1.0 - 1.0 / 7.0 * (deptIndexInSchool + 1));
+                        })
+                        .call(inner_prof_force[i].drag);
+
+                inner_prof_pic[i] = inner_prof_circleg[i].append("image")
+                        .attr("xlink:href", function(d){
+                            if(d.fullname.length == 0)
+                                return "img/prof/default.jpg"
+                            return "img/prof/" + d.name + ".jpg";
+                        })
+                        .attr("x", "-10")
+                        .attr("y", "-10")
+                        .attr("width", "20")
+                        .attr("height", "20")
+                        .attr("style", "border:5px;");
+
+                // set an initial layout to speed up convergence of force-directed layout
+                inner_nodesList[i].forEach(function (o) {
+                    var cx = inner_prof_centerNodes[i].getProfCenterNodes(o.id).x;
+                    var cy = inner_prof_centerNodes[i].getProfCenterNodes(o.id).y;
+                    o.x = cx + Math.random()*50;
+                    o.y = cy + Math.random()*50;
+                });
+
+                var selecte_pic_cover = -1;
+                var is_pic_cover_selected = false;
+
+                inner_prof_pic_cover[i] = inner_prof_circleg[i].append("circle")
+                        .attr("r", "13")
+                        .style("fill", "url(#prof_photo_frame)")
+                        .on("mouseover", function (data, index) {
+
+                            if(selecte_pic_cover == -1) {
+                                if (selectedProf == -1) {
+                                    inner_prof_circle[selectedSchool][0][index].attributes.r.value = 60;
+                                    inner_prof_pic[selectedSchool][0][index].attributes.x.value = -40;
+                                    inner_prof_pic[selectedSchool][0][index].attributes.y.value = -40;
+                                    inner_prof_pic[selectedSchool][0][index].attributes.width.value = 80;
+                                    inner_prof_pic[selectedSchool][0][index].attributes.height.value = 80;
+                                    inner_prof_pic_cover[selectedSchool][0][index].attributes.r.value = 52;
+
+                                    inner_prof_link[selectedSchool].style("opacity", function (d) {
+                                        var _index = -1;
+                                        if (d.source.label == data.label) {
+                                            _index = inner_idIndexMap[selectedSchool][d.target.id];
+
+
+                                        } else if (d.target.label == data.label) {
+                                            _index = inner_idIndexMap[selectedSchool][d.source.id];
+
+                                        } else {
+                                            return  0.1;
+                                        }
+
+                                        inner_prof_circle[selectedSchool][0][_index].attributes.r.value = 30;
+                                        inner_prof_pic[selectedSchool][0][_index].attributes.x.value = -20;
+                                        inner_prof_pic[selectedSchool][0][_index].attributes.y.value = -20;
+                                        inner_prof_pic[selectedSchool][0][_index].attributes.width.value = 40;
+                                        inner_prof_pic[selectedSchool][0][_index].attributes.height.value = 40;
+                                        inner_prof_pic_cover[selectedSchool][0][_index].attributes.r.value = 26;
+
+                                        return 1;
+                                    });
+
+                                    inner_prof_force[selectedSchool].stop();
+                                    inner_prof_force[selectedSchool].start();
+                                } else {
+                                    if (selectedProf != index) {
+                                        inner_prof_circle[selectedSchool][0][index].attributes.r.value = 2 * inner_prof_circle[selectedSchool][0][index].attributes.r.value;
+                                        inner_prof_pic[selectedSchool][0][index].attributes.width.value = 2 * inner_prof_pic[selectedSchool][0][index].attributes.width.value;
+                                        inner_prof_pic[selectedSchool][0][index].attributes.height.value = 2 * inner_prof_pic[selectedSchool][0][index].attributes.height.value;
+                                        inner_prof_pic[selectedSchool][0][index].attributes.x.value = -0.5 * inner_prof_pic[selectedSchool][0][index].attributes.width.value;
+                                        inner_prof_pic[selectedSchool][0][index].attributes.y.value = -0.5 * inner_prof_pic[selectedSchool][0][index].attributes.height.value;
+                                        inner_prof_pic_cover[selectedSchool][0][index].attributes.r.value = 2 * inner_prof_pic_cover[selectedSchool][0][index].attributes.r.value;
+                                    }
+                                }
+                            }
+                        })
+                        .on("mouseout", function (data, index) {
+
+
+                            if(selecte_pic_cover == -1) {
+                                if (selectedProf == -1) {
+                                    picRecovery();
+                                } else {
+                                    if (selectedProf != index) {
+                                        inner_prof_circle[selectedSchool][0][index].attributes.r.value = 0.5 * inner_prof_circle[selectedSchool][0][index].attributes.r.value;
+                                        inner_prof_pic[selectedSchool][0][index].attributes.width.value = 0.5 * inner_prof_pic[selectedSchool][0][index].attributes.width.value;
+                                        inner_prof_pic[selectedSchool][0][index].attributes.height.value = 0.5 * inner_prof_pic[selectedSchool][0][index].attributes.height.value;
+                                        inner_prof_pic[selectedSchool][0][index].attributes.x.value = -0.5 * inner_prof_pic[selectedSchool][0][index].attributes.width.value;
+                                        inner_prof_pic[selectedSchool][0][index].attributes.y.value = -0.5 * inner_prof_pic[selectedSchool][0][index].attributes.height.value;
+                                        inner_prof_pic_cover[selectedSchool][0][index].attributes.r.value = 0.5 * inner_prof_pic_cover[selectedSchool][0][index].attributes.r.value;
+                                    }
+                                }
+                            }
+                        })
+                        .on("mousedown", function (data, index) {
+                            if(selectedProf == -1) {
+                                selecte_pic_cover = index;
+                                prof_ego_activate_circle.attr("display", "");
+                                svg.on("mousemove", function () {
+                                    var point = d3.mouse(svg[0][0]);
+                                    var x = point[0];
+                                    var y = point[1];
+                                    if (Math.sqrt(x * x + y * y) < 60) {
+                                        is_pic_cover_selected = true;
+                                        prof_ego_activate_circle.attr("stroke", fill(selectedSchool));
+                                    } else {
+                                        is_pic_cover_selected = false;
+                                        prof_ego_activate_circle.attr("stroke", "grey");
+                                    }
+                                });
+                            }
+                        })
+                        .on("mouseup", function (data, index) {
+                            if(selectedProf == -1) {
+                                svg.on("mousemove", null);
+
+                                if(is_pic_cover_selected && selecte_pic_cover != -1) {
+                                    selecte_pic_cover = -1;
+                                    is_pic_cover_selected = false;
+
+                                    egoView(true, index);
+
+                                } else {
+                                    selecte_pic_cover = -1;
+                                    is_pic_cover_selected = false;
+                                    prof_ego_activate_circle.attr("stroke", "grey");
+                                    prof_ego_activate_circle.attr("display", "none");
+                                    picRecovery();
+                                }
+                            } else {
+                                if(selectedProf == index) {
+                                    prof_ego_activate_circle.attr("stroke", "grey");
+                                    prof_ego_activate_circle.attr("display", "none");
+                                    egoView(false);
+                                } else {
+                                    egoView(true, index);
+                                }
+                            }
+                        })
+                        .call(inner_prof_force[i].drag);
+                inner_prof_pic_cover[i].append("title")
+                        .text(function (data, index){
+                            var display_name =  inner_nodesList[i][index].fullname;
+                            if(display_name.length == 0)
+                                display_name = inner_nodesList[i][index].name;
+                            var text = "Prof: " + display_name + "\r\n" + "Dept: " + inner_nodesList[i][index].dept;
+                            return text;
+                        });
+
+                function picRecovery() {
+                    if(selectedSchool == -1)
+                        return;
+
+                    picSizeRecovery();
+                    inner_prof_force[selectedSchool].stop();
+                    inner_prof_force[selectedSchool].start();
+                }
+
+                function picSizeRecovery() {
+                    if(selectedSchool == -1)
+                        return;
+
+                    inner_prof_circle[selectedSchool].attr("r", 15);
+                    inner_prof_pic[selectedSchool].attr("x", -10);
+                    inner_prof_pic[selectedSchool].attr("y", -10);
+                    inner_prof_pic[selectedSchool].attr("width", 20);
+                    inner_prof_pic[selectedSchool].attr("height", 20);
+                    inner_prof_pic_cover[selectedSchool].attr("r", 13);
+
+                    inner_prof_link[selectedSchool].style("opacity", 1);
+                }
+
+
+                function egoView(isActivated, _selectedProf) {
+
+                    inner_prof_force[selectedSchool].stop();
+
+                    if(selectedProf != -1) {
+                        picSizeRecovery();
+                    }
+
+                    if(!isActivated) {
+                        prof_ego_activate_circle.attr("stroke", "grey");
+                        prof_ego_activate_circle.attr("display", "none");
+
+                         // set an initial layout to speed up convergence of force-directed layout
+                        inner_nodesList[selectedSchool].forEach(function (o) {
+                            var cx = inner_prof_centerNodes[selectedSchool].getProfCenterNodes(o.id).x;
+                            var cy = inner_prof_centerNodes[selectedSchool].getProfCenterNodes(o.id).y;
+                            o.x = cx + Math.random()*50;
+                            o.y = cy + Math.random()*50;
+                        });
+
+                        selectedProf = -1;
+                        inner_prof_force[selectedSchool].start();
+
+                        return ;
+                    }
+
+                    selectedProf = _selectedProf;
+
+                    inner_prof_circle[selectedSchool][0][selectedProf].attributes.r.value = 60;
+                    inner_prof_pic[selectedSchool][0][selectedProf].attributes.x.value = -40;
+                    inner_prof_pic[selectedSchool][0][selectedProf].attributes.y.value = -40;
+                    inner_prof_pic[selectedSchool][0][selectedProf].attributes.width.value = 80;
+                    inner_prof_pic[selectedSchool][0][selectedProf].attributes.height.value = 80;
+                    inner_prof_pic_cover[selectedSchool][0][selectedProf].attributes.r.value = 52;
+
+                    inner_prof_link[selectedSchool].style("opacity", 0.1);
+
+                    inner_nodesList[selectedSchool][selectedProf].x = 0;
+                    inner_nodesList[selectedSchool][selectedProf].y = 0;
+
+                    var transiDuration = 500;
+
+                    var selectedProf_g = d3.select(inner_prof_circleg[selectedSchool][0][selectedProf]);
+                    selectedProf_g.selectAll("circle")
+                            .transition()
+                            .duration(transiDuration)
+                            .attr("cx", "0")
+                            .attr("cy", "0");
+                    selectedProf_g.select("image")
+                            .transition()
+                            .duration(transiDuration)
+                            .attr("transform", "translate(0, 0)");
+
+                    var childrenSet = {};
+                    childrenSet[selectedProf] = true;
+
+                    for (var k = 0; k <2; ++k) {
+                        var children = new Array();
+                        var _childrenSet = {};
+
+                        for (var j = 0; j < inner_linksList[selectedSchool].length; ++j) {
+                            var _index = -1;
+                            var d = inner_linksList[selectedSchool][j];
+                            var sourceID = inner_idIndexMap[selectedSchool][d.source.id];
+                            var targetID = inner_idIndexMap[selectedSchool][d.target.id];
+
+                            if (childrenSet.hasOwnProperty(sourceID) && !childrenSet.hasOwnProperty(targetID) && !_childrenSet.hasOwnProperty(targetID)) {
+                                _index = targetID;
+
+                            } else if (childrenSet.hasOwnProperty(targetID) && !childrenSet.hasOwnProperty(sourceID) && !_childrenSet.hasOwnProperty(sourceID)) {
+                                _index = sourceID;
+                            } else {
+                                continue;
+                            }
+
+                            children.push(_index);
+                            _childrenSet[_index] = true;
+                        }
+
+                        var step = 2 * Math.PI / children.length;
+                        for (var j = 0; j < children.length; ++j) {
+                            childrenSet[children[j]] = true;
+
+                            var _x = Math.cos(step * j) * 100 * (k+1);
+                            var _y = Math.sin(step * j) * 100 * (k+1);
+
+                            inner_nodesList[selectedSchool][children[j]].x = _x;
+                            inner_nodesList[selectedSchool][children[j]].y = _y;
+
+                            var _selectedProf_g = d3.select(inner_prof_circleg[selectedSchool][0][children[j]]);
+                            _selectedProf_g.selectAll("circle")
+                                    .transition()
+                                    .duration(transiDuration)
+                                    .attr("cx", String(_x))
+                                    .attr("cy", String(_y));
+                            _selectedProf_g.select("image")
+                                    .transition()
+                                    .duration(transiDuration)
+                                    .attr("transform", "translate(" + String(_x) + ", " + String(_y) + ")");
+
+
+                            inner_prof_circle[selectedSchool][0][children[j]].attributes.r.value = 30;
+                            inner_prof_pic[selectedSchool][0][children[j]].attributes.x.value = -20;
+                            inner_prof_pic[selectedSchool][0][children[j]].attributes.y.value = -20;
+                            inner_prof_pic[selectedSchool][0][children[j]].attributes.width.value = 40;
+                            inner_prof_pic[selectedSchool][0][children[j]].attributes.height.value = 40;
+                            inner_prof_pic_cover[selectedSchool][0][children[j]].attributes.r.value = 26;
+                        }
+                    }
+
+                    var notChildren = new Array();
+
+                    for(var j = 0; j < inner_nodesList[selectedSchool].length; ++j) {
+                        if(!childrenSet.hasOwnProperty(j)) {
+                            notChildren.push(j);
+                        }
+                    }
+
+                    step = 2 * Math.PI / notChildren.length;
+                    for(var j =  0; j < notChildren.length; ++j) {
+                        var _x = Math.cos(step * j) * 300;
+                        var _y = Math.sin(step * j) * 300;
+
+                        inner_nodesList[selectedSchool][notChildren[j]].x = _x;
+                        inner_nodesList[selectedSchool][notChildren[j]].y = _y;
+
+                        var _selectedProf_g = d3.select(inner_prof_circleg[selectedSchool][0][notChildren[j]]);
+                        _selectedProf_g.selectAll("circle").transition().attr("cx", String(_x)).attr("cy", String(_y));
+                        _selectedProf_g.select("image").transition().attr("transform", "translate(" + String(_x) + ", " + String(_y)+ ")");
+                    }
+
+                    inner_prof_link[selectedSchool]
+                            .filter(function(d) {
+                                var sourceID = inner_idIndexMap[selectedSchool][d.source.id];
+                                var targetID = inner_idIndexMap[selectedSchool][d.target.id];
+
+                                if(childrenSet.hasOwnProperty(sourceID) && childrenSet.hasOwnProperty(targetID)) {
+                                    return true;
+                                }
+                                return false;
+                            })
+                            .style("opacity", 1);
+
+                    inner_prof_link[selectedSchool]
+                            .transition()
+                            .duration(transiDuration)
+                            .attr("x1", function(d) { return d.source.x; })
+                            .attr("y1", function(d) { return d.source.y; })
+                            .attr("x2", function(d) { return d.target.x; })
+                            .attr("y2", function(d) { return d.target.y; });
+                }
+
+            }
+
+            function inner_prof_tick(e) {
+                if(selectedSchool == -1)
+                    return ;
+
+                if(selectedProf != -1)
+                    return;
+
+                var k = e.alpha*0.8 ;
+                // Push nodes toward their designated focus.
+                inner_nodesList[selectedSchool].forEach(function (o, i) {
+                    var cx = inner_prof_centerNodes[selectedSchool].getProfCenterNodes(o.id).x;
+                    var cy = inner_prof_centerNodes[selectedSchool].getProfCenterNodes(o.id).y;
+                    o.x += (cx - o.x) * k;
+                    o.y += (cy - o.y) * k;
+                });
+                inner_prof_link[selectedSchool].attr("x1", function(d) { return d.source.x; })
+                        .attr("y1", function(d) { return d.source.y; })
+                        .attr("x2", function(d) { return d.target.x; })
+                        .attr("y2", function(d) { return d.target.y; });
+                inner_prof_circle[selectedSchool]
+                        .attr("cx", function (d) {
+                            return d.x;
+                        })
+                        .attr("cy", function (d) {
+                            return d.y;
+                        });
+                inner_prof_pic[selectedSchool]
+                        .attr("transform",function(d) {
+                            return "translate(" + d.x + "," + d.y + ")";
+                        });
+                inner_prof_pic_cover[selectedSchool]
+                        .attr("cx", function (d) {
+                            return d.x;
+                        })
+                        .attr("cy", function (d) {
+                            return d.y;
+                        });
+            }
+
+            function state_transition(s_state, t_state, _selectedSchool) {
+                selectedProf = -1;
+
+                if(s_state < t_state){
+                    former_state = s_state;
+                } else if(s_state > t_state){
+                    former_state = t_state - 1;
+                }
+                state = t_state;
+
+                switch(s_state) {
+                    case 0:
+                        school_chord
+                                .transition()
+                                .attr("d", d3.svg.arc().innerRadius(centerRadius).outerRadius(outerRadius));
+                        if(t_state == 2) {
+                            dept_chord.attr("display", "none");
+                        }
+
+                        dept_force.stop();
+                        dept_circleg.attr("display", "none");
+                        dept_link.attr("display", "none");
+                        break;
+                    case 1:
+                        if(t_state == 0) {
+                            dept_chord
+                                    .transition()
+                                    .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(centerRadius * 0.99));
+                        }
+                        if(t_state == 2) {
+                            dept_chord.attr("display", "none");
+                        }
+
+                        prof_force.stop();
+                        prof_circleg.attr("display", "none");
+                        prof_link.attr("display", "none");
+                        break;
+                    case 2:
+                        picSizeRecovery();
+                        prof_ego_activate_circle.attr("stroke", "grey");
+                        prof_ego_activate_circle.attr("display", "none");
+
+                        inner_dept_chord[selectedSchool]
+                                .attr("display", "none");
+
+                        inner_prof_force[selectedSchool].stop();
+                        inner_prof_circleg[selectedSchool].attr("display", "none");
+                        inner_prof_link[selectedSchool].attr("display", "none");
+
+                        selectedSchool = -1;
+                        break;
+                    default:
+                }
+
+                if(_selectedSchool != undefined) {
+                    selectedSchool = _selectedSchool;
+                }
+
+                switch(t_state) {
+                    case 0:
+                        back.attr("xlink:href", "img/icons/up_unavailable.png")
+                                .style("cursor", "default");
+
+                        dept_chord
+                                .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(centerRadius * 0.99))
+                                .style("cursor", "pointer")
+                                .attr("display", "");
+                        school_chord
+                                .transition()
+                                .attr("d", d3.svg.arc().innerRadius(centerRadius).outerRadius(outerRadius * 1.05));
+
+                        dept_circleg.attr("display", "");
+                        dept_link.attr("display", "");
+                        dept_force.start();
+                        break;
+                    case 1:
+                        back.attr("xlink:href", "img/icons/up.png")
+                            .style("cursor", "pointer");
+
+                        dept_chord.attr("display", "")
+                                .style("cursor", "default");
+                        dept_chord[0][8].style.cursor = "pointer";
+                        if(s_state == 0) {
+                            dept_chord
+                                    .transition()
+                                    .attr("d", d3.svg.arc().innerRadius(innerRadius * 0.95).outerRadius(centerRadius * 0.99));
+                        }
+                        if(s_state == 2) {
+                            dept_chord
+                                    .attr("d", d3.svg.arc().innerRadius(centerRadius * 0.99).outerRadius(centerRadius * 0.99));
+                            dept_chord
+                                    .transition()
+                                    .attr("d", d3.svg.arc().innerRadius(innerRadius * 0.95).outerRadius(centerRadius * 0.99));
+                        }
+
+                        prof_circleg.attr("display", "");
+                        prof_link.attr("display", "");
+                        prof_force.start();
+                        break;
+                    case 2:
+                        back.attr("xlink:href", "img/icons/up.png")
+                                .style("cursor", "pointer");
+
+                        inner_dept_chord[selectedSchool]
+                                .attr("display", "");
+                        if(s_state == 1) {
+                            inner_dept_chord[selectedSchool]
+                                    .attr("d", d3.svg.arc().innerRadius(centerRadius * 0.99).outerRadius(centerRadius * 0.99));
+                            inner_dept_chord[selectedSchool]
+                                    .transition()
+                                    .attr("d", d3.svg.arc().innerRadius(innerRadius * 0.95).outerRadius(centerRadius * 0.99));
+                        }
+
+                        inner_prof_circleg[selectedSchool].attr("display", "");
+                        inner_prof_link[selectedSchool].attr("display", "");
+                        inner_prof_force[selectedSchool].start();
+                        break;
+                    default:
+                }
+                changeDeptIndicate();
+            }
+
+
+
+            var infoPanel = svg.append("g")
+                    .attr("class","infoPanel");
+            var infoRect = infoPanel.append("rect")
+                    .attr("x",-width / 2) // width - 200
+                    .attr("y",-height / 2) //20
+                    .attr("width",200)
+                    .attr("height",40)
+                    .attr("fill","#FFFFE0")
+                    .attr("opacity", 0.8);
+
+            var infoText = infoPanel.append("text")
+                    .text("")
+                    .attr("x", -width / 2) // width - 200
+                    .attr("y",-height / 2 + 20) // 60
+                    .attr("fill","#999");
+            infoPanel.attr("display", "none");
+
+
+
+        });
+    });
+});
+
+
+</script><svg width="960" height="960"></svg><embed id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" height="0" width="0"></body></html>

@@ -1,0 +1,32 @@
+
+{% load staticfiles %}
+
+<form method = 'post' action = '/dc/question/addQuestion/'>
+	 {% csrf_token %}
+	<h2>Question</h2>	
+    <textarea name= 'content'></textarea>
+    choice A<input name='choiceA' value ='' >
+    choice B<input name='choiceB' value ='' >
+    choice C<input name='choiceC' value ='' >
+    choice D<input name='choiceD' value ='' >
+	</br>
+    type correct answer(1,2,3,4) <input name='correctAnswer' value=''>
+	order<input name='order' value ='{{order}}' >
+	</br>
+    Show <input type="radio" id="isShow" name="radiobutton" value="1">
+    Not Show <input type="radio" id="notShow" name="radiobutton" value="0">
+
+	</br>
+    <input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+
+<script type="text/javascript" src="{% static 'blog/js/tinymce/tinymce.min.js' %}"  ></script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+   language:"zh_CN",		
+
+ });
+</script>
+

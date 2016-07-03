@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0091) -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<!-- Place this in the body of the page content -->
+<form method="post" action='../save/'>
+		 {% csrf_token %}
+        <input type='hidden' name="id" value={{member.id}}> 
+
+
+    <h2>name<input name='name' value ='{{member.name}}' ></h2>
+    <h2>description<input name='description' value ='{{member.description}}' ></h2>
+    <h2>blog_href<input name='blog_href' value ='{{member.blog_href}}' ></h2>
+    <h2>image<input name='image' value ='{{member.image}}' ></h2>
+
+
+    <input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+
+
+
+<script type="text/javascript" src="{% static 'blog/js/jstable.js' %}"></script>
+
+
+
+

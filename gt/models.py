@@ -9,41 +9,52 @@ from django import forms
 class Host(models.Model):
     name = models.CharField(max_length = 100)
     gender = models.IntegerField()
-    motto = 
+    motto = models.CharField(max_length= 100)
+    phone_number = models.CharField(max_length=30)
+    password = models.CharField(max_length=200)
+    email = models.CharField(max_length=100)
+    introduction = models.CharField(max_length = 1000)
+    icon = models.CharField(max_length=100)
+    orders = models.IntegerField()
+    service_time = models.CharField(max_length=100)
+    max_payment = models.FloatField()
+    min_payment = models.FloatField()
+    state  = models.IntegerField()  #normal user  => 0  examing => 1  sharer => 2
 
-class Process(models.Model):
-    Uid = models.CharField(max_length=100)
-    times = models.IntegerField()
-    coMethod = models.IntegerField()
-    addMoney = models.IntegerField()
-    money = models.IntegerField()
-    addRobotMoney = models.IntegerField()
-    robotMoney = models.IntegerField()
-    humanChoose = models.IntegerField()
-    robotChoose = models.IntegerField()
-    processDate = models.DateTimeField()
-    clientIP = models.CharField(max_length=30)
-    def date_format(self):
-    	self.date = self.date.strftime("%Y-%m-%d")
+class Province(models.Model):
+    p_name = models.CharField(max_length=100)
+    p_id = models.IntegerField()
+
+    
+class School(models.Model):
+    s_name  = models.CharField(max_length=200)
+    s_province = models.CharField(max_length=200)
+    s_link = models.CharField(max_length=100)
+    s_student_number = models.CharField(max_length=100)
+
+class Topic(models.Model):
+    t_name = models.CharField(max_length=200)
+    t_click = models.IntegerField()
+
+class Feature(models.Model):
+    f_name = models.CharField(max_length=200)
+    f_topic_id = models.CharField(max_length=100)
+
+class Host_Topic(models.Model):
+    host_id = models.CharField(max_length=100)
+    t_id = models.CharField(max_length=100)
+    f_id = models.CharField(max_length=100)
 
 
-class Player(models.Model):
-    Uid = models.CharField(max_length=100)
-    trueName = models.CharField(max_length = 100)
-    isTrueName = models.IntegerField()
-    uploadTime = models.DateTimeField()
-    finalScore = models.IntegerField(null=True )
-    finalRobotScore = models.IntegerField(null=True )
-    rounds = models.IntegerField(null=True)
-    def date_format(self):
-        self.uploadTime = self.uploadTime.strftime("%Y-%m-%d")
+class Certificate(models.Model):
+    host_id = models.CharField(max_length=100)
+    c_name = models.CharField(max_length=200)
+    c_state = models.IntegerField()
 
-class Rule(models.Model):
-    ruleName = models.CharField(max_length = 100)
-    p1 = models.FloatField()
-    p2 = models.FloatField()
-    p3 = models.FloatField()
-    p4 = models.FloatField()
-    maxRound = models.IntegerField()
-    minRound = models.IntegerField()
-    w = models.FloatField()
+
+class User(models.Model):
+    username = models.CharField(max_length = 100)
+    #email = models.CharField(max_length = 100)
+    password = models.CharField(max_length = 100)
+    #inviting_code = models.CharField(max_length =50)
+    #user_flag = models.SmallIntegerField()

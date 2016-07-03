@@ -1,0 +1,41 @@
+
+{% load staticfiles %}
+
+<form method = 'post' action = '../save/'>
+     {% csrf_token %}
+    <h2>Question</h2>   
+    <textarea name= 'content'>{{question.description}}</textarea>
+    <input type='hidden' value='{{question.id}}' name = 'id'>
+    choice A<input name='choiceA' value ='{{question.selectA}}' >
+    choice B<input name='choiceB' value ='{{question.selectB}}' >
+    choice C<input name='choiceC' value ='{{question.selectC}}' >
+    choice D<input name='choiceD' value ='{{question.selectD}}' >
+    </br>
+    type correct answer(1,2,3,4) <input name='correctAnswer' value='{{question.correctAnswer}}'>
+    order<input name='order' value ='{{question.order}}' >
+    </br>
+    Show <input type="radio" id="isShow" name="radiobutton" value="1">
+    Not Show <input type="radio" id="notShow" name="radiobutton" value="0">
+
+    </br>
+    <input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+
+<script type="text/javascript" src="{% static 'blog/js/tinymce/tinymce.min.js' %}"  ></script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+   language:"zh_CN",        
+
+ });
+var showRadios= document.getElementsByName('radiobutton');
+var isShow = {{question.isShow}}
+
+if (isShow == 0){
+    showRadios[1].checked = true;
+}else{
+    showRadios[0].checked = true;
+}
+</script>
+

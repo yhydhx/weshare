@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'game',
-    'frontEnd'
+    'frontEnd',
+    'backEnd'
 
 )
 
@@ -61,11 +62,11 @@ WSGI_APPLICATION = 'gt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_mongodb_engine',
-        'NAME': "game",
+        'NAME': "weshare",
         'USER': 'jupiter',
         'PASSWORD' : '5080',
         'HOST' : '127.0.0.1',
-        'PORT' : '27000',
+        'PORT' : '27017',
     }
 }
 

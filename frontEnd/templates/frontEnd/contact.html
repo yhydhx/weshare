@@ -13,20 +13,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="./assets/images/content/cars/icon.ico">
-    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
+    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
+    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png' %}">-->
 
     <title>Rentica - HTML Template</title>
 
-    <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
 
     <!--[if lt IE 9]>
-    <script src="./assets/bootstrap/js/html5shiv.min.js"></script>
-	<script src="./assets/bootstrap/js/respond.min.js"></script>
- 	<script src="./assets/plugins/REM-unit-polyfill/js/rem.min.js"></script>
+    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
+	<script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
+ 	<script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
-    <script src="./assets/js/modernizr.custom.js"></script>
+    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
 </head>
 
 <body class="cssAnimate">
@@ -35,7 +35,7 @@
 </div>
 
 <div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="./assets/images/content/logo2.png" alt=""/></a></div>
+    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a></div>
     <ul class="ct-menuMobile-navbar">
         <li class="active"><a href="index.html"><span>Home</span></a></li>
         <li><a href="about.html"><span>About us</span></a></li>
@@ -81,8 +81,8 @@
 <nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
 
     <div class="navbar-header">
-        <a class="ct-logoDark" href="index.html"><img src="./assets/images/content/logo.png" alt=""/></a>
-        <a class="ct-logoWhite" href="index.html"><img src="./assets/images/content/logo2.png" alt=""/></a>
+        <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
+        <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a>
     </div>
 
     <div class="container">
@@ -105,11 +105,11 @@
                 </div>
                 <div class="ct-langPicker">
                     <div class="ct-langPicker-content">
-                        <a href="#"><img src="./assets/images/content/flag-01.jpg" alt=""/></a>
+                        <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
                         <ul class="ct-langPicker-list">
-                            <li><a href="#">English <img src="./assets/images/content/flag-01.jpg" alt=""/></a></li>
-                            <li><a href="#">Español <img src="./assets/images/content/flag-03.jpg" alt=""/></a></li>
-                            <li><a href="#">Italiano <img src="./assets/images/content/flag-02.jpg" alt=""/></a></li>
+                            <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a></li>
+                            <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}" alt=""/></a></li>
+                            <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}" alt=""/></a></li>
                         </ul>
                     </div>
                 </div> <!-- Flags -->
@@ -184,7 +184,7 @@
     </div>
 </nav>
 
-<section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340" data-type="parallax" data-stellar-background-ratio="0.2" data-bg-image="./assets/images/content/cars/mediaHeader-01.jpg" data-bg-image-mobile="./assets/images/content/cars/mediaHeader-01.jpg">
+<section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340" data-type="parallax" data-stellar-background-ratio="0.2" data-bg-image="{% static 'frontEnd/images/content/cars/mediaHeader-01.jpg' %}" data-bg-image-mobile="{% static 'frontEnd/images/content/cars/mediaHeader-01.jpg' %}">
     <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">contact us</h2></div>
 </section>
 
@@ -222,7 +222,7 @@
     </div>
 </div>
 
-<div class="ct-mediaSection ct-mediaSection--desktop" data-type="pattern" data-bg-image="./assets/images/content/cars/bg-01.jpg" data-bg-image-mobile="./assets/images/content/cars/bg-01-mobile.jpg">
+<div class="ct-mediaSection ct-mediaSection--desktop" data-type="pattern" data-bg-image="{% static 'frontEnd/images/content/cars/bg-01.jpg' %}" data-bg-image-mobile="{% static 'frontEnd/images/content/cars/bg-01-mobile.jpg' %}">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 ct-u-paddingBottom80">
@@ -283,7 +283,7 @@
                 </div>
 
 
-                <form role="form" action="./assets/form/send.php" method="POST" class="validateIt">
+                <form role="form" action="{% static 'frontEnd/form/send.php" method="POST" class="validateIt">
 
                     <div class="row">
                         <div class="col-sm-9">
@@ -335,7 +335,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="ct-footer-logo ct-u-paddingTop50 ct-u-paddingBottom30"><img src="./assets/images/content/logo2.png" alt="logo"></div>
+                <div class="ct-footer-logo ct-u-paddingTop50 ct-u-paddingBottom30"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt="logo"></div>
                 <p>Rentica operate in the booking market since 2000. We created a platform that would not only allow our clients to book a car, but to make this process as easy as possible.
                     Rentica deals with all the major car hire companies around the world checking which local supplier is offering the best prices for the car you want on the date you need it.
                 </p>
@@ -352,7 +352,7 @@
 
                 <a href="events.html">
                      <div class="media ct-mediaObject">
-                         <div class="media-left"><img src="./assets/images/content/cars/footerObject-01.jpg" alt=""></div>
+                         <div class="media-left"><img src="{% static 'frontEnd/images/content/cars/footerObject-01.jpg' %}" alt=""></div>
                          <div class="media-body">
                              <h6 class="ct-mediaObject-header">Rentica sports car racing finals</h6>
                              <h2 class="ct-mediaObject-date"><small>Aug 25 <span>2015</span></small></h2>
@@ -361,7 +361,7 @@
                  </a>
                  <a href="events.html">
                      <div class="media ct-mediaObject">
-                         <div class="media-left"><img src="./assets/images/content/cars/footerObject-02.jpg" alt=""></div>
+                         <div class="media-left"><img src="{% static 'frontEnd/images/content/cars/footerObject-02.jpg' %}" alt=""></div>
                          <div class="media-body">
                              <h6 class="ct-mediaObject-header">Rentica Sedan Showdown</h6>
                              <h2 class="ct-mediaObject-date"><small>Sep 03 <span>2015</span></small></h2>
@@ -380,14 +380,14 @@
                 </div>
 
                 <div class="ct-flickrGallery">
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-01-big.jpg"><img src="./assets/images/content/cars/flickr-01.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-02-big.jpg"><img src="./assets/images/content/cars/flickr-02.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-03-big.jpg"><img src="./assets/images/content/cars/flickr-03.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-04-big.jpg"><img src="./assets/images/content/cars/flickr-04.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-05-big.jpg"><img src="./assets/images/content/cars/flickr-05.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-06-big.jpg"><img src="./assets/images/content/cars/flickr-06.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-07-big.jpg"><img src="./assets/images/content/cars/flickr-07.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-08-big.jpg"><img src="./assets/images/content/cars/flickr-08.jpg" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-01-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-01.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-02-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-02.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-03-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-03.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-04-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-04.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-05-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-05.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-06-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-06.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-07-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-07.jpg' %}" alt=""/></a>
+                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-08-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-08.jpg' %}" alt=""/></a>
                 </div>
 
             </div>
@@ -410,24 +410,24 @@
 </div>
 
 <!-- JavaScripts -->
-<script src="./assets/js/jquery.min.js"></script>
-<script src="./assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="./assets/js/dependencies.js"></script>
+<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
 
-<script src="./assets/js/main.js"></script>
+<script src="{% static 'frontEnd/js/main.js' %}"></script>
 
-<script src="./assets/plugins/ct-mediaSection/js/jquery.stellar.min.js"></script>
-<script src="./assets/plugins/ct-mediaSection/js/init.js"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
 
-<script src="./assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="./assets/plugins/magnific-popup/init.js"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
 
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="./assets/js/gmaps/gmap3.min.js"></script>
-<script src="./assets/js/gmaps/init.js"></script>
+<script src="{% static 'frontEnd/js/gmaps/gmap3.min.js' %}"></script>
+<script src="{% static 'frontEnd/js/gmaps/init.js' %}"></script>
 
-<script src="./assets/js/jquery.h5validate.js"></script>
-<script src="./assets/form/js/contact-form.js"></script>
+<script src="{% static 'frontEnd/js/jquery.h5validate.js' %}"></script>
+<script src="{% static 'frontEnd/form/js/contact-form.js' %}"></script>
 
 </body>
 </html>

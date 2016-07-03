@@ -1,9 +1,10 @@
+{% load staticfiles %}
 <div class="ct-preloader-container">                                            <!-- Preloader -->
     <div class='ct-preloader'><div><div><div><div><div><div><div><div><div><div></div></div></div></div></div></div></div></div></div></div></div>
 </div>
 
 <div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="./assets/images/content/logo2.png" alt=""/></a></div>
+    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a></div>
     <ul class="ct-menuMobile-navbar">
         <li class="active"><a href="index.html"><span>主页</span></a></li>
         <li><a href="about.html"><span>关于我们</span></a></li>
@@ -49,8 +50,8 @@
 <nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
 
     <div class="navbar-header">
-        <a class="ct-logoDark" href="index.html"><img src="./assets/images/content/logo.png" alt=""/></a>
-        <a class="ct-logoWhite" href="index.html"><img src="./assets/images/content/logo2.png" alt=""/></a>
+        <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
+        <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a>
     </div>
 
     <div class="container">
@@ -73,11 +74,11 @@
                 </div>
                 <div class="ct-langPicker">
                     <div class="ct-langPicker-content">
-                        <a href="#"><img src="./assets/images/content/flag-01.jpg" alt=""/></a>
+                        <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
                         <ul class="ct-langPicker-list">
-                            <li><a href="#">English <img src="./assets/images/content/flag-01.jpg" alt=""/></a></li>
-                            <li><a href="#">Español <img src="./assets/images/content/flag-03.jpg" alt=""/></a></li>
-                            <li><a href="#">Italiano <img src="./assets/images/content/flag-02.jpg" alt=""/></a></li>
+                            <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a></li>
+                            <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}" alt=""/></a></li>
+                            <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}" alt=""/></a></li>
                         </ul>
                     </div>
                 </div> <!-- Flags -->

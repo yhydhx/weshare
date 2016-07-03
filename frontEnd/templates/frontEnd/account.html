@@ -14,20 +14,20 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="./assets/images/content/cars/icon.ico">
-    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
+    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
+    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png' %}">-->
 
     <title>Rentica - HTML Template</title>
 
-    <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
 
     <!--[if lt IE 9]>
-    <script src="./assets/bootstrap/js/html5shiv.min.js"></script>
-	<script src="./assets/bootstrap/js/respond.min.js"></script>
- 	<script src="./assets/plugins/REM-unit-polyfill/js/rem.min.js"></script>
+    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
+	<script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
+ 	<script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
-    <script src="./assets/js/modernizr.custom.js"></script>
+    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
 </head>
 
 <body class="cssAnimate">
@@ -56,7 +56,7 @@
 </div>
 
 <div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="./assets/images/content/logo2.png" alt=""/></a></div>
+    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a></div>
     <ul class="ct-menuMobile-navbar">
         <li class="active"><a href="index.html"><span>Home</span></a></li>
         <li><a href="about.html"><span>About us</span></a></li>
@@ -102,8 +102,8 @@
     <nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
 
         <div class="navbar-header">
-            <a class="ct-logoDark" href="index.html"><img src="./assets/images/content/logo.png" alt=""/></a>
-            <a class="ct-logoWhite" href="index.html"><img src="./assets/images/content/logo2.png" alt=""/></a>
+            <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
+            <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a>
         </div>
 
         <div class="container">
@@ -128,11 +128,11 @@
                     </div>
                     <div class="ct-langPicker">
                         <div class="ct-langPicker-content">
-                            <a href="#"><img src="./assets/images/content/flag-01.jpg" alt=""/></a>
+                            <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
                             <ul class="ct-langPicker-list">
-                                <li><a href="#">English <img src="./assets/images/content/flag-01.jpg" alt=""/></a></li>
-                                <li><a href="#">Español <img src="./assets/images/content/flag-03.jpg" alt=""/></a></li>
-                                <li><a href="#">Italiano <img src="./assets/images/content/flag-02.jpg" alt=""/></a>
+                                <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a></li>
+                                <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}" alt=""/></a></li>
+                                <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}" alt=""/></a>
                                 </li>
                             </ul>
                         </div>
@@ -227,8 +227,8 @@
 
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340"
              data-type="parallax" data-stellar-background-ratio="0.3"
-             data-bg-image="./assets/images/content/cars/bg-02.jpg"
-             data-bg-image-mobile="./assets/images/content/cars/bg-01-mobile.jpg">
+             data-bg-image="{% static 'frontEnd/images/content/cars/bg-02.jpg' %}"
+             data-bg-image-mobile="{% static 'frontEnd/images/content/cars/bg-01-mobile.jpg' %}">
         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2
                 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">来创建个账户</h2></div>
     </section>
@@ -311,22 +311,22 @@
 </div>
 
 <!-- JavaScripts -->
-<script src="./assets/js/jquery.min.js"></script>
-<script src="./assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="./assets/js/dependencies.js"></script>
+<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
 
-<script src="./assets/js/main.js"></script>
+<script src="{% static 'frontEnd/js/main.js' %}"></script>
 
-<script src="./assets/plugins/ct-mediaSection/js/jquery.stellar.min.js"></script>
-<script src="./assets/plugins/ct-mediaSection/js/init.js"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
 
-<script src="./assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="./assets/plugins/magnific-popup/init.js"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
 
-<script src="./assets/plugins/selectize.js-master/dist/js/standalone/selectize.min.js"></script>
+<script src="{% static 'frontEnd/plugins/selectize.js' %}-master/dist/js/standalone/selectize.min.js' %}"></script>
 
-<script src="./assets/plugins/slick/slick.min.js"></script>
-<script src="./assets/plugins/slick/init.js"></script>
+<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
 
 
 </body>

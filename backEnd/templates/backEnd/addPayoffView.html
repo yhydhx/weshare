@@ -1,0 +1,14 @@
+
+{% load staticfiles %}
+
+<form method = 'post' action = '/dc/payoff/addPayoff/'>
+	 {% csrf_token %}
+	<h2>name<input name='name' value ='' ></h2>
+	<h2>R<input name='R' value ='' ></h2>
+	<h2>T<input name='T' value ='' ></h2>
+	<h2>S<input name='S' value ='' ></h2>
+	<h2>P<input name='P' value ='' ></h2>
+	<input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+
