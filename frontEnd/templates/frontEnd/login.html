@@ -25,8 +25,8 @@
 
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-	<script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
- 	<script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
+    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
+    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
 </head>
@@ -57,7 +57,8 @@
 </div>
 
 <div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a></div>
+    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
+                                                              alt=""/></a></div>
     <ul class="ct-menuMobile-navbar">
         <li class="active"><a href="index.html"><span>Home</span></a></li>
         <li><a href="about.html"><span>About us</span></a></li>
@@ -104,7 +105,8 @@
 
         <div class="navbar-header">
             <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
-            <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a>
+            <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
+                                                           alt=""/></a>
         </div>
 
         <div class="container">
@@ -131,9 +133,12 @@
                         <div class="ct-langPicker-content">
                             <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
                             <ul class="ct-langPicker-list">
-                                <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a></li>
-                                <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}" alt=""/></a></li>
-                                <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}" alt=""/></a>
+                                <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}"
+                                                             alt=""/></a></li>
+                                <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}"
+                                                             alt=""/></a></li>
+                                <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}"
+                                                              alt=""/></a>
                                 </li>
                             </ul>
                         </div>
@@ -237,15 +242,16 @@
                     <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
 
 
-                        <form class="ct-panel">
+                        <form class="ct-panel" action="/login/" method="post">
+                            {% csrf_token %}
                             <div class="ct-panel-inner">
                                 <div class="form-group">
                                     <label for="user" class="required">用户名或邮箱</label>
-                                    <input id="user" required class="form-control form-control--type2">
+                                    <input id="user" name="username" required class="form-control form-control--type2">
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="required">密码</label>
-                                    <input id="password" type="password" required
+                                    <input id="password" name="password" type="password" required
                                            class="form-control form-control--type2">
                                 </div>
                                 <div class="ct-panel-meta">
@@ -271,7 +277,7 @@
                                 <h2 class="ct-u-marginBottom30">
                                     <small class="ct-fw-300"><span class="ct-fw-bold">新用户?</span></small>
                                 </h2>
-                                <a href="account.html" class="btn btn-motive"><span>注册</span></a>
+                                <a href="/account/" class="btn btn-motive"><span>注册</span></a>
                             </div>
                         </div>
                     </div>
