@@ -10,6 +10,8 @@ from django.views import generic
 from django import forms
 from gt.models import *
 from django.contrib import auth
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 import datetime
 from django.utils import timezone
 from django.conf import settings
@@ -23,28 +25,31 @@ def index(request):
         return render_to_response('frontEnd/index.html')
 
 
+@csrf_exempt
 def init_register(request):  # 暂时统一用用户名注册,以后的一些坑以后再填
     if request.method == 'POST':
         if request.POST['username'] and request.POST['password'] and request.POST['password-confirm']:
             if request.POST['password'] == request.POST['password-confirm']:  # 初级的用户注册完成了
                 username = request.POST['username']
                 password = request.POST['password']
-                if Host.objects.filter(username=username):
+                if 0:  # 这里的查重等会再弄
                     return HttpResponse('用户名已经存在请换一个')
                 else:
-                    init_user = Host(username=username,
+                    base_user = User(username=username,
                                      password=password,
                                      email='',
                                      first_name='',
                                      last_name='', )
+                    base_user.save()
+                    init_user = Host(base_user=base_user)
                     init_user.save()
-                return render_to_response('login.html')
+                    return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
             else:
                 return HttpResponse('请输入两次相同的密码')
         else:
             return HttpResponse('清完成这个表单')
     else:
-        return HttpResponse('fuck the robot!')
+        return render_to_response('frontEnd/account.html')
 
 
 def __checkin__(request):
@@ -69,7 +74,7 @@ def login(request):
         else:
             return HttpResponse('请填入用户名和密码')
     else:
-        return HttpResponse('fuck the robot!')
+        return render_to_response('frontEnd/index.html', context_instance=RequestContext(request))
 
 
 def logout(request):

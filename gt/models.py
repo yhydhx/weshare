@@ -7,8 +7,9 @@ from django import forms
 from django.contrib.auth.models import User
 
 
-class Host(User):
-    gender = models.IntegerField(blank=True)
+class Host(models.Model):
+    base_user = models.OneToOneField(User)
+    gender = models.IntegerField(default=1, blank=True)
     motto = models.CharField(max_length=100, blank=True)
     phone_number = models.CharField(max_length=30, blank=True)
     introduction = models.CharField(max_length=2000, blank=True)

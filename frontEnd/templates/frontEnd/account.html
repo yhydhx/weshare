@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <!--[if IE 8 ]>
@@ -24,8 +25,8 @@
 
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-	<script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
- 	<script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
+    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
+    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
 </head>
@@ -56,7 +57,8 @@
 </div>
 
 <div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a></div>
+    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
+                                                              alt=""/></a></div>
     <ul class="ct-menuMobile-navbar">
         <li class="active"><a href="index.html"><span>Home</span></a></li>
         <li><a href="about.html"><span>About us</span></a></li>
@@ -103,7 +105,8 @@
 
         <div class="navbar-header">
             <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
-            <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a>
+            <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
+                                                           alt=""/></a>
         </div>
 
         <div class="container">
@@ -130,9 +133,12 @@
                         <div class="ct-langPicker-content">
                             <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
                             <ul class="ct-langPicker-list">
-                                <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a></li>
-                                <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}" alt=""/></a></li>
-                                <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}" alt=""/></a>
+                                <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}"
+                                                             alt=""/></a></li>
+                                <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}"
+                                                             alt=""/></a></li>
+                                <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}"
+                                                              alt=""/></a>
                                 </li>
                             </ul>
                         </div>
@@ -233,7 +239,8 @@
                 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">来创建个账户</h2></div>
     </section>
 
-    <form class="ct-u-sectionBorder">
+    <form class="ct-u-sectionBorder" action="/account/" method="post">
+        {% csrf_token %}
         <div class="container">
             <div class="row" style="padding-left: 30%">
                 <div class="col-md-6 ct-u-paddingTop80">
@@ -250,35 +257,35 @@
                     </div>
 
                     <div class="form-group" style="padding-top: 1 px">
-                        <label for="realname">姓名</label>
-                        <input id="realname" class="form-control form-control--type2">
+                        <label for="username">姓名</label>
+                        <input id="username" name="username" class="form-control form-control--type2">
                     </div>
 
                     <div class="form-group ">
                         <label for="phone">手机号码</label>
-                        <input id="phone" type="tel" class="form-control form-control--type2">
+                        <input id="phone" name="phone" type="tel" class="form-control form-control--type2">
                     </div>
 
                     <div class="form-group">
                         <label for="email" class="required">邮箱</label>
-                        <input id="email" required class="form-control form-control--type2">
+                        <input id="email" name="email" required class="form-control form-control--type2">
                     </div>
 
                     <div class="form-group">
                         <label for="password" class="required">密码</label>
-                        <input id="password" type="password" required class="form-control form-control--type2">
+                        <input id="password" name="password" type="password" required class="form-control form-control--type2">
                     </div>
 
                     <div class="form-group">
                         <label for="password-confirm" class="required">请重复输入密码</label>
-                        <input id="password-confirm" type="password" required class="form-control form-control--type2">
+                        <input id="password-confirm" name="password-confirm" type="password" required class="form-control form-control--type2">
                     </div>
                 </div>
 
             </div>
 
             <div class="row" style="margin-left: 29%">
-                <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150" >
+                <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
                     <button type="submit" class="btn btn-lg btn-wide btn-motive"><span>创建我的账户</span></button>
                 </div>
             </div>
