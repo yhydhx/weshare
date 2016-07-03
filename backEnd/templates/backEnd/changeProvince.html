@@ -8,13 +8,12 @@
 <!-- Place this in the body of the page content -->
 <form method="post" action='../save/'>
 		 {% csrf_token %}
-        <input type='hidden' name="id" value={{member.id}}> 
+        <input type='hidden' name="id" value={{object.id}}> 
 
 
-    <h2>name<input name='name' value ='{{member.name}}' ></h2>
-    <h2>description<input name='description' value ='{{member.description}}' ></h2>
-    <h2>blog_href<input name='blog_href' value ='{{member.blog_href}}' ></h2>
-    <h2>image<input name='image' value ='{{member.image}}' ></h2>
+    <h2>province name<input name='province_name' value ='{{object.p_name}}' ></h2>
+    <h2>propvince id<input name='province_id' value ='{{object.p_id}}' ></h2>
+
 
 
     <input type='submit' value="确认">

@@ -13,6 +13,9 @@ urlpatterns = patterns('',
     url(r'^logout$', views.logout,name ='logout'),
  
     url(r'^province/(?P<method>\w+)/?(?P<Oid>\w*)$', views.province,name ='province'),
+    url(r'^school/(?P<method>\w+)/?(?P<Oid>\w*)$', views.school,name ='school'),
+    url(r'^topic/(?P<method>\w+)/?(?P<Oid>\w*)$', views.topic,name ='topic'),
+    
     '''
     url(r'^product/(?P<method>\w+)/(?P<Oid>\w*)$', views.product,name ='product'),
     url(r'^plan/(?P<method>\w+)/(?P<Oid>\w*)$', views.plan,name ='plan'),

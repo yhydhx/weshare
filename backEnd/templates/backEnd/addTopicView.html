@@ -1,0 +1,13 @@
+
+{% load staticfiles %}
+
+<form method = 'post' action = '/dc/topic/addProvince/'>
+	 {% csrf_token %}
+	<h2>Topic<input name='topic_name' value ='' ></h2>
+	
+	
+
+	<input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+
