@@ -60,26 +60,33 @@ def __checkin__(request):
         return HttpResponseRedirect('login.html')
 
 
+@csrf_exempt
 def login(request):
     if request.method == 'POST':
         if request.POST['username'] and request.POST['password']:
             username = request.POST['username']
             password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
-            if user is not None and user.is_active:
-                auth.login(request, user)
+            user = User.objects.get(username=username)
+            if user.password != password:
+                user = None
+            print user, username, password
+            if user and user.is_active:
+                request.session['username'] = username
                 return HttpResponseRedirect('/index/')
             else:
                 return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
         else:
             return HttpResponse('请填入用户名和密码')
     else:
-        return render_to_response('frontEnd/index.html', context_instance=RequestContext(request))
+        return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
 
 
 def logout(request):
     del request.session['username']
     return HttpResponseRedirect("login.html")
+
+
+
 
 
 def database(request):
