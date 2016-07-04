@@ -86,7 +86,12 @@ def logout(request):
     return HttpResponseRedirect("login.html")
 
 
+def complete_account(request):
+    return render_to_response('frontEnd/complete-account.html')
 
+
+def complete_account_icon(requset):
+    return render_to_response('frontEnd/complete-account-icon.html')
 
 
 def database(request):

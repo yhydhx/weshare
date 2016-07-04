@@ -8,4 +8,6 @@ urlpatterns = patterns('',
                        url(r'^account/$', views.init_register, name='index'),
                        url(r'^database$', views.database, name='index'),
                        url(r'^login/$', views.login, name='index'),
+                       url(r'^complish-account/', views.complete_account, name='index'),
+                       url(r'^complish-account-icon/',views.complete_account_icon, name='index'),
                        )
