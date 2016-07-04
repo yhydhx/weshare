@@ -21,17 +21,16 @@
     </style>
 </head>
 <!-- Place this in the body of the page content -->
-<form id='school' method="post" action='../save/'>
+<form id='feature' method="post" action='../save/'>
 		 {% csrf_token %}
-        <input type='hidden' name="id" value={{school.id}}> 
+        <input type='hidden' name="id" value={{feature.id}}> 
 
-    <h2>school name<input name='s_name' value ='{{school.s_name}}' ></h2>
-    <h2>display on index <input name = "s_display_index" value= "{{school.s_display_index}}"></h2>
-    <h2> province 
-    <select id="provinces" name = 'p_name' form="school">
+    <h2>feature name<input name='f_name' value ='{{feature.f_name}}' ></h2>
+    <h2> Topic 
+    <select id="topics" name = 'f_topic' form="feature">
         {% block content %}
-            {% for publisher in provinces %}
-            <option value={{publisher.p_name}}>{{publisher.p_name}}</option>
+            {% for publisher in topics %}
+            <option value={{publisher.t_name}}>{{publisher.t_name}}</option>
             {% endfor %}
         {% endblock %}
     </select>
@@ -47,10 +46,10 @@
 
 <script type="text/javascript" src="{% static 'blog/js/jstable.js' %}"></script>
 <script type="text/javascript">
-var provinces = document.getElementById("provinces").children;
-for(var i = 0; i < provinces.length; i++){
-    if (provinces[i].value == '{{school.s_province}}'){
-        provinces[i].selected = true;
+var topics = document.getElementById("topics").children;
+for(var i = 0; i < topics.length; i++){
+    if (topics[i].value == '{{feature.f_topic}}'){
+        topics[i].selected = true;
     }
 }
 

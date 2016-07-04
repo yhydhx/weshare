@@ -1,0 +1,20 @@
+
+{% load staticfiles %}
+
+<form id= "feature" method = 'post' action = '/dc/feature/addFeature/'>
+	 {% csrf_token %}
+	<h2>feature name<input name='f_name' value ='' ></h2>
+	
+	<h2> Topic 
+	<select name = 'f_topic' form="feature">
+		{% block content %}
+			{% for publisher in topics %}
+			<option value={{publisher.t_name}}>{{publisher.t_name}}</option>
+			{% endfor %}
+		{% endblock %}
+	</select>
+	</h2>
+	</br>
+	<input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>

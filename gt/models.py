@@ -29,7 +29,7 @@ class Province(models.Model):
 class School(models.Model):
     s_name = models.CharField(max_length=200)
     s_province = models.CharField(max_length=200)
-    #s_link = models.CharField(max_length=100)
+    s_display_index = models.IntegerField()
     s_student_number = models.IntegerField()
 
 
@@ -40,7 +40,7 @@ class Topic(models.Model):
 
 class Feature(models.Model):
     f_name = models.CharField(max_length=200)
-    f_topic_id = models.CharField(max_length=100)
+    f_topic = models.CharField(max_length=100)
 
 
 class Host_Topic(models.Model):

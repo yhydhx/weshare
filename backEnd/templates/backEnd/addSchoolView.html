@@ -4,7 +4,7 @@
 <form id= "room" method = 'post' action = '/dc/school/addSchool/'>
 	 {% csrf_token %}
 	<h2>school name<input name='s_name' value ='' ></h2>
-	
+	<h2>display on index <input name='s_display_index' value= ""></h2>
 	<h2> province 
 	<select name = 'p_name' form="room">
 		{% block content %}
