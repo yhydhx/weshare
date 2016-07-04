@@ -19,7 +19,7 @@ class Host(models.Model):
     max_payment = models.FloatField(default=0)
     min_payment = models.FloatField(default=0)
     state = models.IntegerField(default=0)  # normal user  => 0  examing => 1  sharer => 2
-
+    h_school = models.CharField(max_length=200)
 
 class Province(models.Model):
     p_name = models.CharField(max_length=100)
