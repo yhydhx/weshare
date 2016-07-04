@@ -143,58 +143,32 @@
                     </form>
                 </div>
 
-                <div class="ct-widget ct-widget-captcha ct-u-marginBottom30">
+                <div class="ct-widget ct-u-marginBottom30">
                     <h3 class="ct-widget-header">选择性别</h3>
                     <form class="ct-widget-content">
-                        <div class="ct-u-displayTableVertical">
-                            <div class="ct-u-displayTableCell">
-                                <div class="ct-checkbox ct-checkbox--rounded">
-                                    <input id="checkbox7" name="radio2" type="radio" checked>
-                                    <label for="checkbox7" class="checkbox-inline">男</label>
-                                </div>
-                            </div>
-                            <div class="ct-u-displayTableCell">
-                                <div class="ct-checkbox ct-checkbox--rounded">
-                                    <input id="checkbox8" name="radio2" type="radio">
-                                    <label for="checkbox8" class="checkbox-inline">女</label>
-                                </div>
-                            </div>
-                        </div>
+                        <select class="ct-select ct-js-selectize ct-js-selectDriver" title="gender">
+                            <option value="*">请选择性别</option>
+                            <option value=".male">男</option>
+                            <option value=".female">女</option>
+                        </select>
                     </form>
                 </div>
 
-                <div class="ct-widget ct-widget-filter-byPrice ct-u-marginBottom30">
+
+                <div class="ct-widget ct-u-marginBottom30">
                     <h3 class="ct-widget-header">选择学历</h3>
-                    <form class="ct-widget-content">    
-                        <div class="ct-u-displayTableVertical">
-                        
-                            <div class="ct-u-displayTableCell">
-                                <div class="ct-checkbox ct-checkbox--rounded">
-                                    <input id="checkbox9" name="radio2" type="radio" checked>
-                                    <label for="checkbox9" class="checkbox-inline">本科</label>
-                                </div>
-                            </div>
-                            <div class="ct-u-displayTableCell">
-                                <div class="ct-checkbox ct-checkbox--rounded">
-                                    <input id="checkbox10" name="radio2" type="radio">
-                                    <label for="checkbox10" class="checkbox-inline">硕士</label>
-                                </div>
-                            </div>
-                            <div class="ct-u-displayTableCell">
-                                <div class="ct-checkbox ct-checkbox--rounded">
-                                    <input id="checkbox11" name="radio2" type="radio">
-                                    <label for="checkbox11" class="checkbox-inline">博士</label>
-                                </div>
-                            </div>
-                            <div class="ct-u-displayTableCell">
-                                <div class="ct-checkbox ct-checkbox--rounded">
-                                    <input id="checkbox12" name="radio2" type="radio">
-                                    <label for="checkbox12" class="checkbox-inline">其他</label>
-                                </div>
-                            </div>
-                        </div>
+                    <form class="ct-widget-content">
+                        <select class="ct-select ct-js-selectize ct-js-selectDriver" title="Driver">
+                            <option value="*">全部学历</option>
+                            <option value=".withDriver">本科</option>
+                            <option value=".withoutDriver">硕士</option>
+                            <option value=".phd">博士</option>
+                            <option value=".else">其他</option>
+                        </select>
                     </form>
                 </div>
+
+                
 
                 
 
@@ -222,8 +196,8 @@
                 </form>
 
                 <div class="ct-product-gallery" >
-                    <!-- ======================= -->
-                    <div class="ct-product hidden sedan withoutDriver" data-price="400" data-passengers="2">
+                    <!-- ======================= --> 
+                    <div class="ct-product hidden sedan withoutDriver male" data-price="400" data-passengers="2">
                         <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/product-01.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">何通</h4>
@@ -233,7 +207,7 @@
                         </div>
                     </div>
                     <!-- ======================= -->
-                    <div class="ct-product hidden sport withDriver" data-price="560" data-passengers="8">
+                    <div class="ct-product hidden sport withDriver female" data-price="560" data-passengers="8">
                         <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">Tomota Landcruiser</h4>
@@ -263,7 +237,7 @@
                         </div>
                     </div>
                     <!-- ======================= -->
-                    <div class="ct-product hidden toy withoutDriver" data-price="75" data-passengers="5">
+                    <div class="ct-product hidden toy else" data-price="75" data-passengers="5">
                         <div class="ct-product-image"><img src="{% static 'frontEnd/images/content/cars/gallery-11.jpg' %}" alt=""></div>
                         <div class="ct-product-content">
                             <h4 class="ct-product-header ct-u-hr ct-u-hr--center">BMG Z Series</h4>

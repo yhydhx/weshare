@@ -352,7 +352,7 @@ def test(request):
 	obj = []
 	for t in d.values():
 		obj.append(t)
-	print obj
+        
 
 	return render(request,"frontEnd/index.html",{"object":obj})
 
