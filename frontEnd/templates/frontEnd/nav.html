@@ -23,6 +23,10 @@
     </div>
 </div>
 
+{% if session_timeout %}
+<p style="color: #ffffff; background-color: #ec8c8c"> 您的session 已经失效,请重新登录 </p>
+{% endif %}
+
 <div class="ct-menuMobile">
     <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
                                                               alt=""/></a></div>
@@ -81,14 +85,15 @@
         <div class="container">
             <div class="ct-navbarBox">
                 {% if login_flag %}
-                    <a href="######主页######">您好: {{ current_user.username }}(这里之后要变成头像)</a>
-                    {% if current_user.state == 0 %}
-                      <p>您还没有成为host, 点击这里成为host
-                          <a href="/complete-account-icon/" class="ct-login"><span>注册成为host</span><i class="fa fa-lock"></i></a></p>
-                    {% endif %}
-                    <a href="/logout/" class="ct-login"><span>退出登录</span><i class="fa fa-lock"></i></a>
+                <a href="######主页######">您好: {{ current_user.username }}(这里之后要变成头像)</a>
+                {% if current_user.state == 0 %}
+                <p>您还没有成为host, 点击这里成为host
+                    <a href="/complete-account-icon/" class="ct-login"><span>注册成为host</span><i
+                            class="fa fa-lock"></i></a></p>
+                {% endif %}
+                <a href="/logout/" class="ct-login"><span>退出登录</span><i class="fa fa-lock"></i></a>
                 {% else %}
-                    <a href="/login/" class="ct-login"><span>注册/登录</span><i class="fa fa-lock"></i></a>
+                <a href="/login/" class="ct-login"><span>注册/登录</span><i class="fa fa-lock"></i></a>
                 {% endif %}
                 <div class="ct-navbarBox-meta">
                     <div class="ct-navSearch-box">
@@ -173,7 +178,7 @@
                     <div class="ct-textEffect"><span data-content="个人信息">个人信息</span></div>
                 </a>
                     <ul class="dropdown-menu">
-                        <li><a href="account.html"><span>我的账户</span></a></li>
+                        <li><a href="/host-center/"><span>我的账户</span></a></li>
                     </ul>
                 </li>
                 <!--=========================================================================-->
