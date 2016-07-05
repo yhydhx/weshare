@@ -90,10 +90,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT  = BASE_DIR + "/gt/static/"
-UPLOAD_PATH = STATIC_ROOT+ "upload/"
+STATIC_ROOT = BASE_DIR + "/gt/static/"
+UPLOAD_PATH = STATIC_ROOT + "upload/"
 
 STATICfILES_DIRS = (
-    os.path.join(BASE_DIR,"static"),
+    os.path.join(BASE_DIR, "static"),
     '/var/www/html/gt/gt/static'
 )

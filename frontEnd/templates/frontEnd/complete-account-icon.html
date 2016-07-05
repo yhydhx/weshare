@@ -238,26 +238,23 @@
              data-bg-image="{% static 'frontEnd/images/content/cars/bg-02.jpg' %}"
              data-bg-image-mobile="{% static 'frontEnd/images/content/cars/bg-01-mobile.jpg' %}">
         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2
-                class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">来创建个账户</h2></div>
+                class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">成为HOST</h2></div>
     </section>
 
-    <form class="ct-u-sectionBorder" action="/account/" method="post">
+    <form name="icon" class="ct-u-sectionBorder" action="/complete-account-icon/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="container">
-            <div class="row" style="padding-left: 30%; padding-right:  30%;">
+            <div class="row">
                 <div class="col-md-12 ct-u-paddingTop80">
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
                         <h2 class="ct-sectionHeader-title">
                             <small><span>上传头像</span></small>
                         </h2>
-                        <div class="ct-sectionHeader-separator">
-                            <span class="slash">/</span>
-                            <span class="slash">/</span>
-                            <span class="minus"></span>
-                            <p>步骤一</p>
-                        </div>
                     </div>
+
+                    <!--这里的头像上传暂时没有自适应-->
                     <div>
+
                         <style>
                             body {
                                 margin: 0;
@@ -280,22 +277,18 @@
                                 height: 200px;
                             }
                         </style>
-                        
+
                         <div id="clipArea"></div>
-                        <input type="file" id="file">
-                        <button id="clipBtn">截取</button>
-                        <div id="view"></div>
-                        
+                        <input type="file" id="file" name="icon">
+                        <!--<button id="clipBtn">截取</button>-->
+                       <!-- <div id="view"></div>  -->
                     </div>
-
-
                 </div>
-
             </div>
 
             <div class="row" style="margin-left: 29%">
                 <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
-                    <button type="submit" class="btn btn-lg btn-wide btn-motive"><span>创建我的账户</span></button>
+                    <button id="clipBtn" type="submit" class="btn btn-lg btn-wide btn-motive"><span>进入下一步</span></button>
                 </div>
             </div>
 
@@ -339,6 +332,8 @@
 
 <script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
+
+
 
 <script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
 

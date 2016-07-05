@@ -1,17 +1,21 @@
+# coding:utf-8
+
 import datetime
 from django_mongodb_engine.contrib import MongoDBManager
 from django.db import models
 from django.utils import timezone
 from djangotoolbox.fields import ListField
 from django import forms
-from django.contrib.auth.models import User
 
 
 class Host(models.Model):
-    base_user = models.OneToOneField(User)
-    gender = models.IntegerField(default=1, blank=True)
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=30)
+    email = models.CharField(max_length=50)
+    # 以上为必选信息
+    gender = models.IntegerField(default=1, blank=True)  # 1是男生0是女生
     motto = models.CharField(max_length=100, blank=True)
-    phone_number = models.CharField(max_length=30, blank=True)
     introduction = models.CharField(max_length=2000, blank=True)
     icon = models.CharField(max_length=100, blank=True)
     orders = models.IntegerField(default=0)
