@@ -57,3 +57,8 @@ class Certificate(models.Model):
     host_id = models.CharField(max_length=100)
     c_name = models.CharField(max_length=200)
     c_state = models.IntegerField()
+
+class Admin(models.Model):
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    
