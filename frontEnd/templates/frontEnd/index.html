@@ -54,7 +54,9 @@
 
 </head>
 <body class="cssAnimate">
-
+{% if session_timeout %}
+<p style="color: #ffffff; background-color: #ec8c8c"> 您的session 已经失效,请重新登录 </p>
+{% endif %}
 
 {% include "frontEnd/nav.html" %}
 
