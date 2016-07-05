@@ -44,7 +44,7 @@ def loginCertifacate(request):
         md5Encode.update(tmpPassword)
         password = md5Encode.hexdigest()
 
-        user = get_object_or_404(User, username=username)
+        user = get_object_or_404(Admin, username=username)
         if user.password == password:
             request.session['username'] = username
             return HttpResponseRedirect('/dc/province/show/')
@@ -92,7 +92,7 @@ def addUser(request):
     md5Encode.update(tmpPassword)
     password = md5Encode.hexdigest()
 
-    veryfyUser = User.objects.filter(username=username).all()
+    veryfyUser = Admin.objects.filter(username=username).all()
 
     try:
         HttpResponse(veryfyUser[0])
@@ -101,7 +101,7 @@ def addUser(request):
     if veryfyUser is not None:
         return HttpResponse("This user is already exits")
 
-    user = User(
+    user = Admin(
         username=username,
         password=password
     )
@@ -118,7 +118,7 @@ def changePasswd(request):
         md5Encode.update(tmpPassword)
         password = md5Encode.hexdigest()
 
-        user = get_object_or_404(User, username=username)
+        user = get_object_or_404(Admin, username=username)
         if user.password == password:
             newEncode = hashlib.new("ripemd160")
             newEncode.update(newPassword)
