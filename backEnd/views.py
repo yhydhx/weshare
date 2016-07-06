@@ -21,7 +21,7 @@ import hashlib
 
 def __checkin__(request):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
 
@@ -31,7 +31,7 @@ def login(request):
 
 
 def logout(request):
-    del request.session['username']
+    del request.session['adminname']
     return HttpResponseRedirect("login.html")
 
 
@@ -46,7 +46,7 @@ def loginCertifacate(request):
 
         user = get_object_or_404(Admin, username=username)
         if user.password == password:
-            request.session['username'] = username
+            request.session['adminname'] = username
             return HttpResponseRedirect('/dc/province/show/')
         else:
             return HttpResponse("密码错误")
@@ -71,7 +71,7 @@ def contact(request):
 '''
     if request.method == 'POST':
         username = request.POST.get("username")
-        request.session['username'] = data
+        request.session['adminname'] = data
         return HttpResponse(data)
         return render(request, 'backEnd/index.html', {'data': data, 'bigcity': 2})
     else:
@@ -124,7 +124,7 @@ def changePasswd(request):
             newEncode.update(newPassword)
             user.password = newEncode.hexdigest()
             user.save()
-            del request.session['username']
+            del request.session['adminname']
             return HttpResponseRedirect("login.html")
         else:
             return HttpResponse("密码错误")
@@ -146,7 +146,7 @@ def index(request):
 ########################################################
 def province(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     if method == 'addProvince':
@@ -186,7 +186,7 @@ def province(request, method, Oid):
 
 def school(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
 
@@ -240,7 +240,7 @@ def school(request, method, Oid):
 
 def topic(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     if method == 'addProvince':
@@ -278,7 +278,7 @@ def topic(request, method, Oid):
 
 def feature(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
 
@@ -327,7 +327,7 @@ def feature(request, method, Oid):
 
 def user(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     if method == 'addProvince':
@@ -341,13 +341,13 @@ def user(request, method, Oid):
         # Oid = news.id
         return HttpResponseRedirect('/dc/topic/show/')
     elif method == 'change':
-        return render(request, 'backEnd/changeTopic.html', {'object': Topic.objects.get(id=Oid)})
+        return render(request, 'backEnd/host-index.html', {'user': Host.objects.get(id=Oid)})
     elif method == 'pass':
         
 
         Host.objects.filter(id=Oid).update(state=2)
 
-        return HttpResponseRedirect('/dc/user/show/')
+        return HttpResponseRedirect('/dc/user/host/')
 
     elif method == 'delete':
         Topic.objects.filter(id=Oid).delete()
@@ -417,7 +417,7 @@ def s(request):
 
 def addImage(request):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     if request.method == "POST":
@@ -445,7 +445,7 @@ def addImageInfo(request):
 
 def showImgList(request):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     return render(request, 'backEnd/showImgList.html', {'image': Image.objects.all()})
