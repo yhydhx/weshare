@@ -44,7 +44,7 @@ def loginCertifacate(request):
         md5Encode.update(tmpPassword)
         password = md5Encode.hexdigest()
 
-        user = get_object_or_404(User, username=username)
+        user = get_object_or_404(Admin, username=username)
         if user.password == password:
             request.session['username'] = username
             return HttpResponseRedirect('/dc/province/show/')
@@ -92,7 +92,7 @@ def addUser(request):
     md5Encode.update(tmpPassword)
     password = md5Encode.hexdigest()
 
-    veryfyUser = User.objects.filter(username=username).all()
+    veryfyUser = Admin.objects.filter(username=username).all()
 
     try:
         HttpResponse(veryfyUser[0])
@@ -101,7 +101,7 @@ def addUser(request):
     if veryfyUser is not None:
         return HttpResponse("This user is already exits")
 
-    user = User(
+    user = Admin(
         username=username,
         password=password
     )
@@ -118,7 +118,7 @@ def changePasswd(request):
         md5Encode.update(tmpPassword)
         password = md5Encode.hexdigest()
 
-        user = get_object_or_404(User, username=username)
+        user = get_object_or_404(Admin, username=username)
         if user.password == password:
             newEncode = hashlib.new("ripemd160")
             newEncode.update(newPassword)
@@ -322,6 +322,55 @@ def feature(request, method, Oid):
         allFeature = Feature.objects.all()
         return render(request, 'backEnd/showFeatureList.html', {'object': allFeature})
 
+    else:
+        return HttpResponse('没有该方法')
+
+def user(request, method, Oid):
+    try:
+        request.session['username']
+    except KeyError, e:
+        return HttpResponseRedirect('login.html')
+    if method == 'addProvince':
+        name = request.POST.get('topic_name')
+
+        topic = Topic(
+            t_name=name,
+            t_click=0,
+        )
+        topic.save()
+        # Oid = news.id
+        return HttpResponseRedirect('/dc/topic/show/')
+    elif method == 'change':
+        return render(request, 'backEnd/changeTopic.html', {'object': Topic.objects.get(id=Oid)})
+    elif method == 'pass':
+        
+
+        Host.objects.filter(id=Oid).update(state=2)
+
+        return HttpResponseRedirect('/dc/user/show/')
+
+    elif method == 'delete':
+        Topic.objects.filter(id=Oid).delete()
+        return HttpResponseRedirect('../show')
+    elif method == 'applying':
+        users = Host.objects.filter(state=1)
+        for each_host in users:
+            each_host.userState = "<a href = '../pass/"+str(each_host.id)+"'>申请中(点击通过)</a>"
+        
+        return render(request, 'backEnd/showUserList.html', {'object':users})
+
+    elif method == 'show':
+        # return HttpResponse("hello")
+        users = Host.objects.filter(state=0)
+        for each_host in users:
+            each_host.userState = "正常用户"
+        return render(request, 'backEnd/showUserList.html', {'object':users})
+    elif method == 'host':
+        # return HttpResponse("hello")
+        users = Host.objects.filter(state=2)
+        for each_host in users:
+            each_host.userState = "分享者"
+        return render(request, 'backEnd/showUserList.html', {'object':users})
     else:
         return HttpResponse('没有该方法')
 

@@ -56,7 +56,11 @@
     </div>
 </div>
 
+
 <div class="ct-menuMobile">
+    {% if session_timeout %}
+    <p style="color: #ffffff; background-color: #ec8c8c"> 您的session 已经失效,请重新登录 </p>
+    {% endif %}
     <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
                                                               alt=""/></a></div>
     <ul class="ct-menuMobile-navbar">

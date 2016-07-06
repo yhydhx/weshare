@@ -87,7 +87,8 @@ def login(request):
             except:
                 return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
     else:
-        return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
+        return render_to_response('frontEnd/login.html', {'session_timeout': False},
+                                  context_instance=RequestContext(request))
 
 
 def logout(request):
@@ -100,7 +101,8 @@ def complete_account(request):
     try:
         username = request.session['username']
     except:
-        return render_to_response('frontEnd/index.html', context_instance=RequestContext(request))
+        return render_to_response('frontEnd/login.html', {'session_timeout': True},
+                                  context_instance=RequestContext(request))
     try:
         host = Host.objects.get(username=username)
     except:
@@ -128,11 +130,11 @@ def complete_account(request):
             host.max_payment = max_payment
             host.state = 1
             host.save()
-            return HttpResponseRedirect('/index/')
+            return HttpResponseRedirect('/index/', context_instance=RequestContext(request))
         else:
-            return HttpResponse('没有好好搞')
+            return HttpResponse('请把表单填写完整')
     else:
-        return render_to_response('frontEnd/complete-account.html')
+        return render_to_response('frontEnd/complete-account.html', context_instance=RequestContext(request))
 
 
 ''' class UploadFileForm(forms.Form):
@@ -144,7 +146,8 @@ def complete_account_icon(request):  # 注册成为HOST
     try:
         username = request.session['username']
     except:  # 会话失效或者你随意找到了这个url
-        return render_to_response('frontEnd/index.html', context_instance=RequestContext(request))
+        return render_to_response('frontEnd/index.html', {'session_timeout': 1},
+                                  context_instance=RequestContext(request))
     try:
         host = Host.objects.get(username=username)
     except:
@@ -167,6 +170,23 @@ def complete_account_icon(request):  # 注册成为HOST
         return render_to_response('frontEnd/complete-account.html', context_instance=RequestContext(request))
     else:
         return render_to_response('frontEnd/complete-account-icon.html', context_instance=RequestContext(request))
+
+
+def host_center(request):
+    try:
+        username = request.session['username']
+    except:
+        return render_to_response('frontEnd/login.html', {'session_timeout': True})
+
+    try:
+        host = Host.objects.get(username=username)
+    except:
+        return HttpResponse('您所持有的用户名不能匹配任何一个host')
+    if not request.method == 'POST':   # 当使用get请求来请求网页的时候(不带任何的数据请求网页)
+
+        return render_to_response('frontEnd/rent-item.html', {'user': host})
+
+    return render_to_response('frontEnd/rent-item.html')
 
 
 '''def database(request):
