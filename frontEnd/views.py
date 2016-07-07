@@ -168,7 +168,7 @@ def complete_account_icon(request):  # 注册成为HOST
         for chunk in icon.chunks():
             des_origin_file.write(chunk)
         des_origin_file.close()
-        host.icon = des_origin_path
+        host.icon = 'files/icons/' + mark_list + '.jpeg'  # mark_list是唯一的标
         host.save()
         return render_to_response('frontEnd/complete-account.html', context_instance=RequestContext(request))
     else:

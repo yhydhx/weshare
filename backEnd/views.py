@@ -407,6 +407,8 @@ def test(request):
 
 
 def s(request):
+    hosts = Host.objects.all()
+
     return render(request, "frontEnd/school.html")
 
 
