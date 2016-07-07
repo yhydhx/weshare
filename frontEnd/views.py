@@ -34,7 +34,6 @@ def index(request):
     else:
         return render_to_response('frontEnd/index.html')
 
-
 @csrf_exempt
 def init_register(request):  # 暂时统一用用户名注册,以后的一些坑以后再填
     if request.method == 'POST':
@@ -60,7 +59,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
         else:
             return HttpResponse('清完成这个表单')
     else:
-        return render_to_response('frontEnd/account.html')
+        return render_to_response('frontEnd/account.html', context_instance=RequestContext(request))
 
 
 def __checkin__(request):

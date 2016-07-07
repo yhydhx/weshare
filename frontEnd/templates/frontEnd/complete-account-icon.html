@@ -113,22 +113,18 @@
         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2
                 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">成为HOST</h2></div>
     </section>
-
     <form name="icon" class="ct-u-sectionBorder" action="/complete-account-icon/" method="post"
           enctype="multipart/form-data">
         {% csrf_token %}
+    <div class="tabpanel ct-u-paddingTop10 ct-u-paddingBottom" style="padding-left: 10%">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a role="tab" data-toggle="tab">第一步:上传头像</a></li>
+            <li role="presentation"><a role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
+            <li role="presentation"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
+        </ul>
+    </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-12 ct-u-paddingTop80">
-                    <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <h2 class="ct-sectionHeader-title">
-                            <small><span>上传头像</span></small>
-                        </h2>
-                    </div>
-
-                    <!--这里的头像上传暂时没有自适应-->
-                    <div>
-
                         <style>
                             body {
                                 margin: 0;
@@ -169,8 +165,6 @@
 
         </div>
     </form>
-
-
     <footer class="ct-footer ct-u-sectionDark">
         <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
             <div class="container">
