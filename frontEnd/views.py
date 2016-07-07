@@ -204,18 +204,24 @@ def complete_account_feature(request):
                     competition = request.POST['competition']
                 except:
                     return HttpResponse('请填写表单')
+        
         if foreign:
             feature = Feature()
             topic = Topic()
             host_topic = Host_Topic()  # 先把相关联的对象相关联起来
 
-            topic.t_name = u'留学咨询'
-            topic.t_click = 0
+            try:
+                topic = Topic.objects.get(t_name=u'留学咨询')
 
+            except:
+                print "could not find the topic"
+                topic.t_name = u'留学咨询'
+                topic.t_click = 0
+                topic.save()
+ 
             feature.f_name = foreign
             feature.f_topic = topic.t_name
 
-            topic.save()
             feature.save()
 
             host_topic.host_id = host.id
@@ -223,13 +229,18 @@ def complete_account_feature(request):
             host_topic.f_id = feature.id  # 然后把id相互关联起来
             host_topic.save()
 
+
         if course:
             feature = Feature()
             topic = Topic()
             host_topic = Host_Topic()  # 先把相关联的对象相关联起来
 
-            topic.t_name = u'课程咨询'
-            topic.t_click = 0
+            try:
+                topic = Topic.objects.get(t_name=u'课程咨询')
+            except:
+                topic.t_name = u'课程咨询'
+                topic.t_click = 0
+                topic.save()
 
             feature.f_name = course
             feature.f_topic = topic.t_name
@@ -247,8 +258,13 @@ def complete_account_feature(request):
             topic = Topic()
             host_topic = Host_Topic()  # 先把相关联的对象相关联起来
 
-            topic.t_name = u'竞赛经历'
-            topic.t_click = 0
+            try:
+                topic = Topic.objects.get( t_name=u'竞赛经历')
+            except:
+                topic.t_name = u'竞赛经历'
+                topic.t_click = 0
+                topic.save()
+            
 
             feature.f_name = competition
             feature.f_topic = topic.t_name
@@ -264,14 +280,41 @@ def complete_account_feature(request):
         feature_list_1 = []
         feature_list_2 = []
         feature_list_3 = []
-        for feature_atom in Feature.objects.filter(f_topic=u'留学咨询'):
-            feature_list_1.append(feature_atom.f_name)
-        for feature_atom in Feature.objects.filter(f_topic=u'课程咨询'):
-            feature_list_2.append(feature_atom.f_name)
-        for feature_atom in Feature.objects.filter(f_topic=u'竞赛经历'):
-            feature_list_3.append(feature_atom.f_name)
 
-        print feature_list_2
+        h_topics = Host_Topic.objects.filter(host_id=host.id)
+
+        #classification
+        d_topic_feature = {}
+        for h_topic_atom in h_topics:
+            t_id = h_topic_atom.t_id
+            f_id = h_topic_atom.f_id
+            if not d_topic_feature.has_key(t_id):
+                d_topic_feature[t_id] = [f_id]
+            else:
+                d_topic_feature[t_id].append(f_id)
+        
+        print d_topic_feature
+
+        #transform the id into chinese
+        d_topic_feature_translate = {}
+        for k,v in d_topic_feature.items():
+            topic_name = Topic.objects.get(id = k).t_name
+            d_topic_feature_translate[topic_name] = []
+            for feature_atom_id in v:
+                feature_name =  get_object_or_404(Feature, id=feature_atom_id).f_name
+                d_topic_feature_translate[topic_name].append(feature_name)
+
+        print d_topic_feature_translate
+
+
+        for topic,feature_list in d_topic_feature_translate.items():
+            if topic == u'留学咨询':
+                feature_list_1 = feature_list
+            elif topic == u'课程咨询':
+                feature_list_2 = feature_list
+            elif topic == u'竞赛经历':
+                feature_list_3 = feature_list
+
         return render_to_response('frontEnd/complete-account-feature.html', {'feature_list_1': feature_list_1,
                                                                              'feature_list_2': feature_list_2,
                                                                              'feature_list_3': feature_list_3,
