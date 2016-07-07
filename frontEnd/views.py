@@ -188,9 +188,7 @@ def complete_account_feature(request):
         host = Host.objects.get(username=username)
     except:
         return HttpResponse('您所持有的session和不能匹配任何一个用户')
-    if not request.method == 'POST':
-        return render_to_response('frontEnd/complete-account-feature.html')
-    else:
+    if request.method == 'POST':
         foreign = ''
         course = ''
         competition = ''
@@ -277,49 +275,49 @@ def complete_account_feature(request):
             host_topic.f_id = feature.id  # 然后把id相互关联起来
             host_topic.save()
 
-        feature_list_1 = []
-        feature_list_2 = []
-        feature_list_3 = []
+    feature_list_1 = []
+    feature_list_2 = []
+    feature_list_3 = []
 
-        h_topics = Host_Topic.objects.filter(host_id=host.id)
+    h_topics = Host_Topic.objects.filter(host_id=host.id)
+    print len(h_topics)
+    #classification
+    d_topic_feature = {}
+    for h_topic_atom in h_topics:
+        t_id = h_topic_atom.t_id
+        f_id = h_topic_atom.f_id
+        if not d_topic_feature.has_key(t_id):
+            d_topic_feature[t_id] = [f_id]
+        else:
+            d_topic_feature[t_id].append(f_id)
+    
+    print d_topic_feature
 
-        #classification
-        d_topic_feature = {}
-        for h_topic_atom in h_topics:
-            t_id = h_topic_atom.t_id
-            f_id = h_topic_atom.f_id
-            if not d_topic_feature.has_key(t_id):
-                d_topic_feature[t_id] = [f_id]
-            else:
-                d_topic_feature[t_id].append(f_id)
-        
-        print d_topic_feature
+    #transform the id into chinese
+    d_topic_feature_translate = {}
+    for k,v in d_topic_feature.items():
+        topic_name = Topic.objects.get(id = k).t_name
+        d_topic_feature_translate[topic_name] = []
+        for feature_atom_id in v:
+            feature_name =  get_object_or_404(Feature, id=feature_atom_id).f_name
+            d_topic_feature_translate[topic_name].append(feature_name)
 
-        #transform the id into chinese
-        d_topic_feature_translate = {}
-        for k,v in d_topic_feature.items():
-            topic_name = Topic.objects.get(id = k).t_name
-            d_topic_feature_translate[topic_name] = []
-            for feature_atom_id in v:
-                feature_name =  get_object_or_404(Feature, id=feature_atom_id).f_name
-                d_topic_feature_translate[topic_name].append(feature_name)
-
-        print d_topic_feature_translate
+    print d_topic_feature_translate
 
 
-        for topic,feature_list in d_topic_feature_translate.items():
-            if topic == u'留学咨询':
-                feature_list_1 = feature_list
-            elif topic == u'课程咨询':
-                feature_list_2 = feature_list
-            elif topic == u'竞赛经历':
-                feature_list_3 = feature_list
+    for topic,feature_list in d_topic_feature_translate.items():
+        if topic == u'留学咨询':
+            feature_list_1 = feature_list
+        elif topic == u'课程咨询':
+            feature_list_2 = feature_list
+        elif topic == u'竞赛经历':
+            feature_list_3 = feature_list
 
-        return render_to_response('frontEnd/complete-account-feature.html', {'feature_list_1': feature_list_1,
-                                                                             'feature_list_2': feature_list_2,
-                                                                             'feature_list_3': feature_list_3,
-                                                                             'host': host},
-                                  context_instance=RequestContext(request))
+    return render_to_response('frontEnd/complete-account-feature.html', {'feature_list_1': feature_list_1,
+                                                                         'feature_list_2': feature_list_2,
+                                                                         'feature_list_3': feature_list_3,
+                                                                         'host': host},
+                              context_instance=RequestContext(request))
 
 
 def host_center(request):
