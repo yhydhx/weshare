@@ -25,6 +25,7 @@ class Host(models.Model):
     state = models.IntegerField(default=0)  # normal user  => 0  examing => 1  sharer => 2
     h_school = models.CharField(max_length=200)
 
+
 class Province(models.Model):
     p_name = models.CharField(max_length=100)
     p_id = models.IntegerField()
@@ -39,7 +40,7 @@ class School(models.Model):
 
 class Topic(models.Model):
     t_name = models.CharField(max_length=200)
-    t_click = models.IntegerField()
+    t_click = models.IntegerField(default=0)
 
 
 class Feature(models.Model):
@@ -50,15 +51,15 @@ class Feature(models.Model):
 class Host_Topic(models.Model):
     host_id = models.CharField(max_length=100)
     t_id = models.CharField(max_length=100)
-    f_id = models.CharField(max_length=100)
+    f_id = models.CharField(max_length=100)  # 关系库
 
 
-class Certificate(models.Model):
+class Certificate(models.Model):   # igno
     host_id = models.CharField(max_length=100)
     c_name = models.CharField(max_length=200)
     c_state = models.IntegerField()
 
+
 class Admin(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
-    

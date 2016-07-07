@@ -109,13 +109,15 @@ def complete_account(request):
         return HttpResponse('你所持有的session并不在数据库中找到对应内容')
     if request.method == 'POST':
         if request.POST['self-introduction'] and request.POST['gender'] and request.POST['motto'] and \
-                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment']:
+                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
+                request.POST['school']:
             self_introduction = request.POST['self-introduction']
             gender = request.POST['gender']
             motto = request.POST['motto']
             min_payment = request.POST['min-payment']
             service_time = request.POST['service-time']
             max_payment = request.POST['max-payment']
+            school = request.POST['school']
             print gender
             if not (gender == u'男' or gender == u'女'):
                 return HttpResponse('请填写男或者女')
@@ -128,9 +130,10 @@ def complete_account(request):
             host.min_payment = min_payment
             host.service_time = service_time
             host.max_payment = max_payment
+            host.h_school = school
             host.state = 1
             host.save()
-            return HttpResponseRedirect('/index/', context_instance=RequestContext(request))
+            return render_to_response('frontEnd/complete-account-feature.html')
         else:
             return HttpResponse('请把表单填写完整')
     else:
@@ -172,6 +175,110 @@ def complete_account_icon(request):  # 注册成为HOST
         return render_to_response('frontEnd/complete-account-icon.html', context_instance=RequestContext(request))
 
 
+# def asyn_upload(request):
+
+@csrf_exempt
+def complete_account_feature(request):
+    try:
+        username = request.session['username']
+    except:
+        return render_to_response('frontEnd/login.html', {'session_timeout': True})
+
+    try:
+        host = Host.objects.get(username=username)
+    except:
+        return HttpResponse('您所持有的session和不能匹配任何一个用户')
+    if not request.method == 'POST':
+        return render_to_response('frontEnd/complete-account-feature.html')
+    else:
+        foreign = ''
+        course = ''
+        competition = ''
+        try:
+            foreign = request.POST['foreign']
+        except:
+            try:
+                course = request.POST['course']
+            except:
+                try:
+                    competition = request.POST['competition']
+                except:
+                    return HttpResponse('请填写表单')
+        if foreign:
+            feature = Feature()
+            topic = Topic()
+            host_topic = Host_Topic()  # 先把相关联的对象相关联起来
+
+            topic.t_name = u'留学咨询'
+            topic.t_click = 0
+
+            feature.f_name = foreign
+            feature.f_topic = topic.t_name
+
+            topic.save()
+            feature.save()
+
+            host_topic.host_id = host.id
+            host_topic.t_id = topic.id
+            host_topic.f_id = feature.id  # 然后把id相互关联起来
+            host_topic.save()
+
+        if course:
+            feature = Feature()
+            topic = Topic()
+            host_topic = Host_Topic()  # 先把相关联的对象相关联起来
+
+            topic.t_name = u'课程咨询'
+            topic.t_click = 0
+
+            feature.f_name = course
+            feature.f_topic = topic.t_name
+
+            topic.save()
+            feature.save()
+
+            host_topic.host_id = host.id
+            host_topic.t_id = topic.id
+            host_topic.f_id = feature.id  # 然后把id相互关联起来
+            host_topic.save()
+
+        if competition:
+            feature = Feature()
+            topic = Topic()
+            host_topic = Host_Topic()  # 先把相关联的对象相关联起来
+
+            topic.t_name = u'竞赛经历'
+            topic.t_click = 0
+
+            feature.f_name = competition
+            feature.f_topic = topic.t_name
+
+            topic.save()
+            feature.save()
+
+            host_topic.host_id = host.id
+            host_topic.t_id = topic.id
+            host_topic.f_id = feature.id  # 然后把id相互关联起来
+            host_topic.save()
+
+        feature_list_1 = []
+        feature_list_2 = []
+        feature_list_3 = []
+        for feature_atom in Feature.objects.filter(f_topic=u'留学咨询'):
+            feature_list_1.append(feature_atom.f_name)
+        for feature_atom in Feature.objects.filter(f_topic=u'课程咨询'):
+            feature_list_2.append(feature_atom.f_name)
+        for feature_atom in Feature.objects.filter(f_topic=u'竞赛经历'):
+            feature_list_3.append(feature_atom.f_name)
+
+        print feature_list_2
+        return render_to_response('frontEnd/complete-account-feature.html', {'feature_list_1': feature_list_1,
+                                                                             'feature_list_2': feature_list_2,
+                                                                             'feature_list_3': feature_list_3,
+                                                                             'host': host},
+                                  context_instance=RequestContext(request))
+
+
 def host_center(request):
     try:
         username = request.session['username']
@@ -182,7 +289,7 @@ def host_center(request):
         host = Host.objects.get(username=username)
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
-    if not request.method == 'POST':   # 当使用get请求来请求网页的时候(不带任何的数据请求网页)
+    if not request.method == 'POST':  # 当使用get请求来请求网页的时候(不带任何的数据请求网页)
 
         return render_to_response('frontEnd/rent-item.html', {'user': host})
 

@@ -183,7 +183,7 @@
                         <div class="tab-content">
                             <!-- Tab #1 -->
                             <div role="tabpanel" class="tab-pane fade in active" id="description">
-                                {{ user.introduction }}
+                                {{ user.introduction | safe }}
                             </div>
 
                             <div role="tabpanel" class="tab-pane fade" id="amenities">

@@ -29,8 +29,8 @@
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
-    <script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
-    <script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
+
+
 </head>
 
 <body class="cssAnimate">
@@ -111,94 +111,98 @@
              data-bg-image="{% static 'frontEnd/images/content/cars/bg-02.jpg' %}"
              data-bg-image-mobile="{% static 'frontEnd/images/content/cars/bg-01-mobile.jpg' %}">
         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2
-                class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">完善账户信息</h2></div>
+                class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">成为HOST</h2></div>
     </section>
 
-    <form class="ct-u-sectionBorder" action="/complete-account/" method="post">
+    <div class="ct-u-sectionBorder">
         {% csrf_token %}
         <div class="container">
             <div class="row">
-                <div class="col-md-7 ct-u-paddingTop80">
+                <div class="col-md-12 ct-u-paddingTop80">
+
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <h2 class="ct-sectionHeader-title">
-                            <small><span>自我介绍</span></small>
-                        </h2>
-                        <div class="ct-sectionHeader-separator">
-                            <span class="slash">/</span>
-                            <span class="slash">/</span>
-                            <span class="minus"></span>
-                        </div>
+                        <form class="ct-u-sectionBorder" name="foreign" action="/complete-account-feature/"
+                              method="post">
+                            <h2 class="ct-sectionHeader-title">
+                                <small><span>留学咨询</span></small>
+                            </h2>
+                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                {% for feature in feature_list_1 %}
+                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
+                                {% endfor %}
+                            </ul>
+                            <div class="form-group" style="padding-top: 1px">
+                                <label for="foreign">例如 CV修改, phd内推等</label>
+                                <input class="form-control form-control--type2" id="foreign" name="foreign">
+                                <button type="submit" class="btn btn-lg btn-wide btn-motive">
+                                    <span>提交</span></button>
+
+                            </div>
+                        </form>
                     </div>
-                    <textarea name="self-introduction" id="self-introduction">
-                        <p>请在这里展示你最棒的自己</p>
-                    </textarea>
-                </div>
-                <div class="col-md-5 ct-u-paddingTop80">
+
+                    ////////////////////////////////////
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <h2 class="ct-sectionHeader-title">
-                            <small><span>扩展信息</span></small>
-                        </h2>
-                        <div class="ct-sectionHeader-separator">
-                            <span class="slash">/</span>
-                            <span class="slash">/</span>
-                            <span class="minus"></span>
-                        </div>
+                        <form class="ct-u-sectionBorder" name="course" action="/complete-account-feature/"
+                              method="post">
+                            <h2 class="ct-sectionHeader-title">
+                                <small><span>课程咨询</span></small>
+                            </h2>
+                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                {% for feature in feature_list_2 %}
+                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
+                                {% endfor %}
+                            </ul>
+                            <div class="form-group" style="padding-top: 1px">
+                                <label for="course">例如 复习方法, 考试技巧, 学霸笔记</label>
+                                <input class="form-control form-control--type2" id="course" name="course">
+                                <button type="submit" class="btn btn-lg btn-wide btn-motive">
+                                    <span>提交</span></button>
+
+                            </div>
+                        </form>
                     </div>
 
-                    <div class="form-group" style="padding-top: 1px">
-                        <label for="gender">性别</label>
-                        <input id="gender" name="gender" class="form-control form-control--type2">
+                    ///////////////////////////////
+                    <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
+                        <form class="ct-u-sectionBorder" name="competition" action="/complete-account-feature/"
+                              method="post">
+                            <h2 class="ct-sectionHeader-title">
+                                <small><span>竞赛经历</span></small>
+                            </h2>
+                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                {% for feature in feature_list_3 %}
+                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
+                                {% endfor %}
+                            </ul>
+                            <div class="form-group" style="padding-top: 1px">
+                                <label for="competition">例如 数学建模辅导, 英语竞赛技巧</label>
+                                <input class="form-control form-control--type2" id="competition" name="competition">
+                                <button type="submit" class="btn btn-lg btn-wide btn-motive">
+                                    <span>提交</span></button>
+
+                            </div>
+                        </form>
                     </div>
 
-                    <div class="form-group ">
-                        <label for="motto">个性签名</label>
-                        <input id="motto" name="motto" type="text" class="form-control form-control--type2">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="service-time" class="required">您方便服务的时间</label>
-                        <input id="service-time" name="service-time" required class="form-control form-control--type2">
-                    </div>
-
-                    <!--这里的填写最低薪酬的方法加上一个前端的验证 是否为数字-->
-                    <div class="form-group">
-                        <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
-                        <input id="min-payment" name="min-payment" type="number" required value="请填写数字"
-                               class="form-control form-control--type2">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
-                        <input id="max-payment" name="max-payment" type="number" required value="请填写数字"
-                               class="form-control form-control--type2">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="school" class="required">学校</label>
-                        <input id="school" name="school" required class="form-control form-control--type2">
-                    </div>
-
-                    <!--<div class="form-group">
-                            <label for="topic" class="required">您所能提供的服务</label>
-                            <input id="topic" name="topic" required class="form-control form-control--type2">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="feature" class="required">提供服务的具体内容</label>
-                            <input id="feature" name="feature" required class="form-control form-control--type2">
-                        </div> -->
                 </div>
-
             </div>
+
 
             <div class="row" style="margin-left: 29%">
                 <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
-                    <button type="submit" class="btn btn-lg btn-wide btn-motive"><span>进入下一步:我的能提供的服务</span></button>
+                    <script>
+                        function openpage(){
+                            window.location.replace("/index/")
+                        }
+                    </script>
+                    <button id="clipBtn" onclick="openpage()" class="btn btn-lg btn-wide btn-motive"><span>完成全部的内容</span>
+                    </button>
                 </div>
             </div>
 
         </div>
-    </form>
+    </div>
 
 
     <footer class="ct-footer ct-u-sectionDark">
@@ -224,9 +228,9 @@
 
 </div>
 
-
 <!-- JavaScripts -->
-<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+
+<script src="{% static 'frontEnd/js/jquery-2.1.1.min.js' %}"></script>
 <script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
 
@@ -238,11 +242,40 @@
 <script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
 
+
 <script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
 
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
 
+<!-- clip image -->
+
+<script src="{% static 'frontEnd/js/photo-cut/iscroll-zoom.js' %}"></script>
+<script src="{% static 'frontEnd/js/photo-cut/hammer.js' %}"></script>
+<script src="{% static 'frontEnd/js/photo-cut/lrz.all.bundle.js' %}"></script>
+<script src="{% static 'frontEnd/js/photo-cut/jquery.photoClip.js' %}"></script>
+
+
+<script>
+    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    var clipArea = new bjj.PhotoClip("#clipArea", {
+        size: [260, 260],
+        outputSize: [640, 640],
+        file: "#file",
+        view: "#view",
+        ok: "#clipBtn",
+        loadStart: function () {
+            console.log("照片读取中");
+        },
+        loadComplete: function () {
+            console.log("照片读取完成");
+        },
+        clipFinish: function (dataURL) {
+            console.log(dataURL);
+        }
+    });
+    //clipArea.destroy();
+</script>
 
 </body>
 </html>
