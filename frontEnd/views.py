@@ -16,6 +16,7 @@ import datetime
 from django.utils import timezone
 from django.conf import settings
 import hashlib
+from tools import *
 import chunk
 import os
 
@@ -23,16 +24,17 @@ import os
 def index(request):
     login_flag = False
     try:
-        req_username = request.session['username']
-    except KeyError:
-        req_username = None
-    if req_username:
-        user = Host.objects.get(username=req_username)
+        req_username = request.session['email']
+    except:
+        return render_to_response('frontEnd/index.html')
+    try:
+        user = Host.objects.get(email=req_username)
         login_flag = True
         return render_to_response('frontEnd/index.html', {'current_user': user,
                                                           'login_flag': login_flag})
-    else:
+    except:
         return render_to_response('frontEnd/index.html')
+
 
 @csrf_exempt
 def init_register(request):  # 暂时统一用用户名注册,以后的一些坑以后再填
@@ -44,8 +46,19 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                 password = request.POST['password']
                 phone = request.POST['phone']
                 email = request.POST['email']
+                if not process_mail(email):
+                    error = '请使用正确格式的邮箱'
+                    return render_to_response('frontEnd/account.html', {'error': error},
+                                              context_instance=RequestContext(request))
+                if not process_passwd(password):
+                    error = '请使用正确要求的密码'
+                    return render_to_response('frontEnd/account.html', {'error': error},
+                                              context_instance=RequestContext(request))
                 try:
-                    Host.objects.get(username=username)
+                    Host.objects.get(email=email)
+                    error = '您的邮箱已经被注册了'
+                    return render_to_response('frontEnd/account.html', {'error': error},
+                                              context_instance=RequestContext(request))
                 except:
                     host = Host(username=username,
                                 password=password,
@@ -55,11 +68,15 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                     host.save()
                     return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
             else:
-                return HttpResponse('请输入两次相同的密码')
+                error = '两次密码输入要相同'
+                return render_to_response('frontEnd/account.html', {'error': error},
+                                          context_instance=RequestContext(request))
         else:
-            return HttpResponse('清完成这个表单')
+            error = '请填满表单中的每一项'
+            return render_to_response('frontEnd/account.html', {'error': error},
+                                      context_instance=RequestContext(request))
     else:
-        return render_to_response('frontEnd/account.html', context_instance=RequestContext(request))
+        return render_to_response('frontEnd/account.html', {'error': False}, context_instance=RequestContext(request))
 
 
 def __checkin__(request):
@@ -67,21 +84,21 @@ def __checkin__(request):
         request.session['username']
     except KeyError, e:
         print "KeyError"
-        return HttpResponseRedirect('login.html')
+        return HttpResponseRedirect('/login/')
 
 
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
-        if request.POST['username'] and request.POST['password']:
-            username = request.POST['username']
+        if request.POST['email'] and request.POST['password']:
+            email = request.POST['email']
             password = request.POST['password']
             try:
-                user = Host.objects.get(username=username)
+                user = Host.objects.get(email=email)
                 if user.password != password:
                     return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
                 else:
-                    request.session['username'] = username
+                    request.session['email'] = email
                     return HttpResponseRedirect('/index/')
             except:
                 return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
@@ -91,39 +108,44 @@ def login(request):
 
 
 def logout(request):
-    del request.session['username']
-    return HttpResponseRedirect("login.html")
+    del request.session['email']
+    return HttpResponseRedirect('/index/')
 
 
 @csrf_exempt  # 所有有这个东西的全部要删掉到时候重新部署csrf防跨站
 def complete_account(request):
     try:
-        username = request.session['username']
+        username = request.session['email']
     except:
         return render_to_response('frontEnd/login.html', {'session_timeout': True},
                                   context_instance=RequestContext(request))
     try:
-        host = Host.objects.get(username=username)
+        host = Host.objects.get(email=username)
     except:
         return HttpResponse('你所持有的session并不在数据库中找到对应内容')
     if request.method == 'POST':
-        if request.POST['self-introduction'] and request.POST['gender'] and request.POST['motto'] and \
+        if request.POST['self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
+            'motto'] and \
                 request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
-                request.POST['school']:
+                request.POST['school'] and request.POST['qq']:
             self_introduction = request.POST['self-introduction']
-            gender = request.POST['gender']
+            gender = request.POST['selectbox']
             motto = request.POST['motto']
             min_payment = request.POST['min-payment']
             service_time = request.POST['service-time']
             max_payment = request.POST['max-payment']
             school = request.POST['school']
+            qq = request.POST['qq']
+
             print gender
-            if not (gender == u'男' or gender == u'女'):
-                return HttpResponse('请填写男或者女')
-            if gender == u'男':
-                host.gender = 1
-            else:
+            if not judge_limit(min_payment, max_payment):
+                return HttpResponse('最低报酬要小于最高报酬')
+
+            if gender == u'1':
                 host.gender = 0
+            elif gender == u'2':
+                host.gender = 1
+
             host.introduction = self_introduction
             host.motto = motto
             host.min_payment = min_payment
@@ -131,12 +153,17 @@ def complete_account(request):
             host.max_payment = max_payment
             host.h_school = school
             host.state = 1
+            host.qq_number = qq
             host.save()
-            return render_to_response('frontEnd/complete-account-feature.html')
+            return render_to_response('frontEnd/complete-account-feature.html', {'login_flag': True,
+                                                                                 'currrent_user': host})
         else:
             return HttpResponse('请把表单填写完整')
     else:
-        return render_to_response('frontEnd/complete-account.html', context_instance=RequestContext(request))
+        return render_to_response('frontEnd/complete-account.html',
+                                  {'login_flag': True,
+                                   'current_user': host},
+                                  context_instance=RequestContext(request))
 
 
 ''' class UploadFileForm(forms.Form):
@@ -146,12 +173,12 @@ def complete_account(request):
 
 def complete_account_icon(request):  # 注册成为HOST
     try:
-        username = request.session['username']
+        username = request.session['email']
     except:  # 会话失效或者你随意找到了这个url
         return render_to_response('frontEnd/index.html', {'session_timeout': 1},
                                   context_instance=RequestContext(request))
     try:
-        host = Host.objects.get(username=username)
+        host = Host.objects.get(email=username)
     except:
         return HttpResponse('你所持有的session并不能在数据库中找到什么相对应的东西')
     # host已经验证完全。
@@ -169,9 +196,11 @@ def complete_account_icon(request):  # 注册成为HOST
         des_origin_file.close()
         host.icon = 'files/icons/' + mark_list + '.jpeg'  # mark_list是唯一的标
         host.save()
-        return render_to_response('frontEnd/complete-account.html', context_instance=RequestContext(request))
+        return HttpResponseRedirect('/complete-account/')
     else:
-        return render_to_response('frontEnd/complete-account-icon.html', context_instance=RequestContext(request))
+        return render_to_response('frontEnd/complete-account-icon.html', {'login_flag': True,
+                                                                          'current_user': host},
+                                  context_instance=RequestContext(request))
 
 
 # def asyn_upload(request):
@@ -179,14 +208,14 @@ def complete_account_icon(request):  # 注册成为HOST
 @csrf_exempt
 def complete_account_feature(request):
     try:
-        username = request.session['username']
+        username = request.session['email']
     except:
         return render_to_response('frontEnd/login.html', {'session_timeout': True})
-
     try:
-        host = Host.objects.get(username=username)
+        host = Host.objects.get(email=username)
     except:
         return HttpResponse('您所持有的session和不能匹配任何一个用户')
+
     if request.method == 'POST':
         foreign = ''
         course = ''
@@ -312,25 +341,29 @@ def complete_account_feature(request):
     return render_to_response('frontEnd/complete-account-feature.html', {'feature_list_1': feature_list_1,
                                                                          'feature_list_2': feature_list_2,
                                                                          'feature_list_3': feature_list_3,
-                                                                         'host': host},
+                                                                         'host': host,
+                                                                         'current_user': host,
+                                                                         'login_flag': True},
                               context_instance=RequestContext(request))
 
 
 def host_center(request):
     try:
-        username = request.session['username']
+        username = request.session['email']
     except:
         return render_to_response('frontEnd/login.html', {'session_timeout': True})
 
     try:
-        host = Host.objects.get(username=username)
+        host = Host.objects.get(email=username)
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
     if not request.method == 'POST':  # 当使用get请求来请求网页的时候(不带任何的数据请求网页)
 
-        return render_to_response('frontEnd/rent-item.html', {'user': host})
+        return render_to_response('frontEnd/rent-item.html', {'user': host,
+                                                              'login_flag': True,
+                                                              'current_user': host})
 
-    return render_to_response('frontEnd/rent-item.html')
+    return render_to_response('frontEnd/rent-item.html', {'login_flag': True})
 
 
 '''def database(request):
