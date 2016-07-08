@@ -22,8 +22,13 @@ class Host(models.Model):
     service_time = models.CharField(max_length=100, default=True)
     max_payment = models.FloatField(default=0)
     min_payment = models.FloatField(default=0)
-    state = models.IntegerField(default=0)  # normal user  => 0  examing => 1  sharer => 2
     h_school = models.CharField(max_length=200)
+    state = models.IntegerField(default=0)  # normal user  => 0  examing => 1  sharer => 2
+
+    birth = models.CharField(blank=True, max_length=100)
+    qq_number = models.CharField(blank=True, max_length=20)
+    wechat = models.CharField(blank=True, max_length=20)
+
     def get_all_features(self):
         host_topics =  Host_Topic.objects.filter(host_id=self.id)
         d_topic_feature = {}
@@ -57,6 +62,9 @@ class Host(models.Model):
                 
         return d_topic_feature
 
+    
+
+
 
 class Province(models.Model):
     p_name = models.CharField(max_length=100)
@@ -73,7 +81,8 @@ class School(models.Model):
 class Topic(models.Model):
     t_name = models.CharField(max_length=200)
     t_click = models.IntegerField(default=0)
-    t_tag = models.CharField(max_length=200)
+    t_tag = models.IntegerField(null=True)
+
 
 
 class Feature(models.Model):
@@ -87,7 +96,7 @@ class Host_Topic(models.Model):
     f_id = models.CharField(max_length=100)  # 关系库
 
 
-class Certificate(models.Model):   # igno
+class Certificate(models.Model):  # igno
     host_id = models.CharField(max_length=100)
     c_name = models.CharField(max_length=200)
     c_state = models.IntegerField()

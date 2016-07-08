@@ -116,6 +116,13 @@
 
     <div class="ct-u-sectionBorder">
         {% csrf_token %}
+        <div class="tabpanel ct-u-paddingTop10 ct-u-paddingBottom" style="padding-left: 10%">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation"><a role="tab" data-toggle="tab">第一步:上传头像</a></li>
+                <li role="presentation" ><a role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
+                <li role="presentation" class="active"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
+            </ul>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ct-u-paddingTop80">
@@ -141,7 +148,6 @@
                         </form>
                     </div>
 
-                    ////////////////////////////////////
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
                         <form class="ct-u-sectionBorder" name="course" action="/complete-account-feature/"
                               method="post">
@@ -163,7 +169,6 @@
                         </form>
                     </div>
 
-                    ///////////////////////////////
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
                         <form class="ct-u-sectionBorder" name="competition" action="/complete-account-feature/"
                               method="post">
@@ -192,11 +197,12 @@
             <div class="row" style="margin-left: 29%">
                 <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
                     <script>
-                        function openpage(){
+                        function openpage() {
                             window.location.replace("/index/")
                         }
                     </script>
-                    <button id="clipBtn" onclick="openpage()" class="btn btn-lg btn-wide btn-motive"><span>完成全部的内容</span>
+                    <button id="clipBtn" onclick="openpage()" class="btn btn-lg btn-wide btn-motive">
+                        <span>完成全部的内容</span>
                     </button>
                 </div>
             </div>

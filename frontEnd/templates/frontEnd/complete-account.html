@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
 
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/plugins/date_input/date_input.css' %}">
+
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
     <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
@@ -31,6 +33,15 @@
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
     <script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
     <script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
+
+    <script src="{% static 'frontEnd/plugins/date_input/jquery.date_input.js' %}"></script>
+
+    <script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/plugins/datepicker/css/bootstrap-datepicker.css' %} ">
+
+    <script src="{% static 'frontEnd/plugins/datedropper/datedropper.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/plugins/datedropper/datedropper.css' %} ">
+
 </head>
 
 <body class="cssAnimate">
@@ -117,6 +128,13 @@
     <form class="ct-u-sectionBorder" action="/complete-account/" method="post">
         {% csrf_token %}
         <div class="container">
+            <div class="tabpanel ct-u-paddingTop10 ct-u-paddingBottom" style="padding-left: 25%">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation"><a role="tab" data-toggle="tab">第一步:上传头像</a></li>
+                    <li role="presentation" class="active"><a role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
+                    <li role="presentation"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
+                </ul>
+            </div>
             <div class="row">
                 <div class="col-md-7 ct-u-paddingTop80">
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
@@ -130,7 +148,35 @@
                         </div>
                     </div>
                     <textarea name="self-introduction" id="self-introduction">
-                        <p>请在这里展示你最棒的自己</p>
+                        <p style="text-align: left">请按照一下模板更改哦(注:若没有请删除完成后请把这段话删掉)</p>
+                        <h1 style="text-align: left">性格特点</h1>
+                          <p>
+                              (示例)我是一个萌萌的逗比,幽默风趣,会讲笑话,很牛逼.<br>
+                              Note that any <strong>性格和善,和人们自来熟</strong> file and image management functionality in
+                              this example is part of our commercial offering – the demo is to show the integration.
+                          </p>
+                        <h1 style="text-align: left">留学情况</h1>
+                        <p>
+                            (实例)<br>
+                            2014 - 2015 <strong>香港理工大学</strong> 网络工程研究生
+                            <br>
+                            2015 - 现在 <strong>香港科技大学</strong> 通信网络博士
+                        </p>
+                        <h1 style="text-align: left">学业情况</h1>
+                        <p>
+                            大学平均G点3.9哇,被同学尊称为何满绩,何大神。托福裸考105,二战111, 雅思8.5, GRE 2398分, 被CMU, UCLA, Stanford, 等名校录取
+                        </p>
+                        <h1 style="text-align: left">竞赛经历</h1>
+                        <p>
+                            2015年全国大学生英语竞赛特等奖<br>
+                            2014年全国大学生数学建模比赛特等奖<br>
+                            2015年世界大学生数学建模二等奖<br>
+                            2014年全国ACM上海站第三名<br>
+                        </p>
+                        <h1 style="text-align: left">科研背景</h1>
+                        <p>
+
+                        </p>
                     </textarea>
                 </div>
                 <div class="col-md-5 ct-u-paddingTop80">
@@ -145,9 +191,11 @@
                         </div>
                     </div>
 
+
+
                     <div class="form-group" style="padding-top: 1px">
                         <label for="gender">性别</label>
-                        <input id="gender" name="gender" class="form-control form-control--type2">
+                        <input id="gender" name="gender" required class="form-control form-control--type2">
                     </div>
 
                     <div class="form-group ">
@@ -177,6 +225,12 @@
                         <label for="school" class="required">学校</label>
                         <input id="school" name="school" required class="form-control form-control--type2">
                     </div>
+
+                    <div class="form-group">
+                        <label for="qq" class="required">QQ号</label>
+                        <input id="qq" name="qq" required class="form-control form-control--type2">
+                    </div>
+
 
                     <!--<div class="form-group">
                             <label for="topic" class="required">您所能提供的服务</label>
@@ -226,6 +280,7 @@
 
 
 <!-- JavaScripts -->
+
 <script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
 <script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
@@ -242,6 +297,8 @@
 
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+
+<script>$("#departure").dateDropper();</script>
 
 
 </body>

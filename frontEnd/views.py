@@ -34,7 +34,6 @@ def index(request):
     else:
         return render_to_response('frontEnd/index.html')
 
-
 @csrf_exempt
 def init_register(request):  # 暂时统一用用户名注册,以后的一些坑以后再填
     if request.method == 'POST':
@@ -60,7 +59,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
         else:
             return HttpResponse('清完成这个表单')
     else:
-        return render_to_response('frontEnd/account.html')
+        return render_to_response('frontEnd/account.html', context_instance=RequestContext(request))
 
 
 def __checkin__(request):
@@ -202,7 +201,7 @@ def complete_account_feature(request):
                     competition = request.POST['competition']
                 except:
                     return HttpResponse('请填写表单')
-        
+
         if foreign:
             feature = Feature()
             topic = Topic()
@@ -216,7 +215,7 @@ def complete_account_feature(request):
                 topic.t_name = u'留学咨询'
                 topic.t_click = 0
                 topic.save()
- 
+
             feature.f_name = foreign
             feature.f_topic = topic.t_name
 
@@ -226,7 +225,6 @@ def complete_account_feature(request):
             host_topic.t_id = topic.id
             host_topic.f_id = feature.id  # 然后把id相互关联起来
             host_topic.save()
-
 
         if course:
             feature = Feature()
@@ -257,12 +255,11 @@ def complete_account_feature(request):
             host_topic = Host_Topic()  # 先把相关联的对象相关联起来
 
             try:
-                topic = Topic.objects.get( t_name=u'竞赛经历')
+                topic = Topic.objects.get(t_name=u'竞赛经历')
             except:
                 topic.t_name = u'竞赛经历'
                 topic.t_click = 0
                 topic.save()
-            
 
             feature.f_name = competition
             feature.f_topic = topic.t_name
@@ -281,7 +278,7 @@ def complete_account_feature(request):
 
     h_topics = Host_Topic.objects.filter(host_id=host.id)
     print len(h_topics)
-    #classification
+    # classification
     d_topic_feature = {}
     for h_topic_atom in h_topics:
         t_id = h_topic_atom.t_id
@@ -290,22 +287,21 @@ def complete_account_feature(request):
             d_topic_feature[t_id] = [f_id]
         else:
             d_topic_feature[t_id].append(f_id)
-    
+
     print d_topic_feature
 
-    #transform the id into chinese
+    # transform the id into chinese
     d_topic_feature_translate = {}
-    for k,v in d_topic_feature.items():
-        topic_name = Topic.objects.get(id = k).t_name
+    for k, v in d_topic_feature.items():
+        topic_name = Topic.objects.get(id=k).t_name
         d_topic_feature_translate[topic_name] = []
         for feature_atom_id in v:
-            feature_name =  get_object_or_404(Feature, id=feature_atom_id).f_name
+            feature_name = get_object_or_404(Feature, id=feature_atom_id).f_name
             d_topic_feature_translate[topic_name].append(feature_name)
 
     print d_topic_feature_translate
 
-
-    for topic,feature_list in d_topic_feature_translate.items():
+    for topic, feature_list in d_topic_feature_translate.items():
         if topic == u'留学咨询':
             feature_list_1 = feature_list
         elif topic == u'课程咨询':
