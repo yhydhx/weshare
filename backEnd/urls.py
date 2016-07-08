@@ -19,6 +19,8 @@ urlpatterns = patterns('',
     url(r'^feature/(?P<method>\w+)/?(?P<Oid>\w*)$', views.feature,name ='feature'),    
     url(r'^test\.html$', views.test, name='test'),
     url(r'^s\.html$', views.s, name='s'),
+    url(r'^email\.html$', views.setEmail, name='setEmail'),
+    
     '''
 
     

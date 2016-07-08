@@ -97,3 +97,10 @@ STATICfILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     '/var/www/html/gt/gt/static'
 )
+
+#email setting 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST= 'smtp.126.com'
+EMAIL_HOST_USER='yhydhxson@126.com'
+EMAIL_HOST_PASSWORD='Yhy1105080'
+EMAIL_USE_TLS = False
