@@ -18,6 +18,8 @@ from django.utils import timezone
 from django.conf import settings
 from gt.settings import *
 
+from django.utils.http import urlquote
+
 
 
 import hashlib
@@ -544,23 +546,34 @@ def deleteImg(request, Oid):
 
 def setEmail(request):
 
-    #em = EmailMessage('subject','body','yhydhxson@126.com',['yhydhx@126.com'],['yhydhx@126.com'])
-    subject,from_email,to = 'hello','yhydhxson@126.com','271086337@qq.com'
-    text_content = 'This is an important message'
-    html_content = u'<b>激活链接：</b><a href="http://www.baidu.com">http:www.baidu.com</a>'
-    msg = EmailMultiAlternatives(subject,text_content,from_email,[to])
-    msg.attach_alternative(html_content, 'text/html')
+    # em = EmailMessage('subject','body','service@wshere  .com',['yhydhx@126.com'],['yhydhx@126.com'])
+    # em.send()
     
-    # mail_list = ['yhydhx@126.com']
-    # title = "this is a test"
-    # context = "<a href='http://www.baidu.com'>helloworld</a>"
-    # subject, from_email, to = title, EMAIL_HOST_USER, mail_list
-    
-    # html_content = context     
-    # msg = EmailMultiAlternatives(subject, html_content, from_email, to)
-    # msg.attach_alternative(html_content, "text/html")
+    # subject,from_email,to = 'hello','service@wshere.com','271086337@qq.com'
+    # text_content = 'This is an important message'
+    # html_content = u'<b>激活链接：</b><a href="http://www.baidu.com">http:www.baidu.com</a>'
+    # msg = EmailMultiAlternatives(subject,text_content,from_email,[to])
+    # msg.attach_alternative(html_content, 'text/html')
+    # msg.send()
+
+    mail_list = ['yhydhx@126.com']
+    title = "this is a test"
+    context = {"context":"<a href='http://wshere.com/kaixuan'>helloworld</a>",
+                "link": "http://wshere.com/identify/kaixun/jdklafwioejfioqw",
+               }
+    email_template_name = 'frontEnd/template.html'
+    t = loader.get_template(email_template_name) 
+
+    subject, from_email, to = title, EMAIL_HOST_USER, mail_list
+
+    html_content = t.render(Context(context))
+    print html_content
+    msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+    msg.attach_alternative(html_content, "text/html")
     
     msg.send()
+
+
     
     return HttpResponse("succuss")
 
