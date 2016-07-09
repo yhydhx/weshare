@@ -3,6 +3,7 @@
 # 验证邮箱的函数
 
 import re
+import base64
 
 
 def process_mail(input_mail):
@@ -70,3 +71,5 @@ def judge_gender(gender):
         return True
     else:
         return False
+
+

@@ -19,6 +19,7 @@ import hashlib
 from tools import *
 import chunk
 import os
+import base64
 
 
 def index(request):
@@ -169,38 +170,6 @@ def complete_account(request):
 ''' class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)
     file = forms.FileField() '''
-
-
-def complete_account_icon(request):  # 注册成为HOST
-    try:
-        username = request.session['email']
-    except:  # 会话失效或者你随意找到了这个url
-        return render_to_response('frontEnd/index.html', {'session_timeout': 1},
-                                  context_instance=RequestContext(request))
-    try:
-        host = Host.objects.get(email=username)
-    except:
-        return HttpResponse('你所持有的session并不能在数据库中找到什么相对应的东西')
-    # host已经验证完全。
-    if request.method == 'POST':
-        # form = UploadFileForm(request.POST, request.FILES)
-        mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
-        des_origin_path = settings.UPLOAD_PATH + 'icons/' + mark_list + '.jpeg'  # mark_list是唯一的标志
-        try:
-            icon = request.FILES['icon']
-        except:
-            return HttpResponse('你没有携带图片来post我')
-        des_origin_file = open(des_origin_path, "wb")
-        for chunk in icon.chunks():
-            des_origin_file.write(chunk)
-        des_origin_file.close()
-        host.icon = 'files/icons/' + mark_list + '.jpeg'  # mark_list是唯一的标
-        host.save()
-        return HttpResponseRedirect('/complete-account/')
-    else:
-        return render_to_response('frontEnd/complete-account-icon.html', {'login_flag': True,
-                                                                          'current_user': host},
-                                  context_instance=RequestContext(request))
 
 
 # def asyn_upload(request):
@@ -364,6 +333,43 @@ def host_center(request):
                                                               'current_user': host})
 
     return render_to_response('frontEnd/rent-item.html', {'login_flag': True})
+
+
+def modify_account(request):
+    return render_to_response('frontEnd/modify-account.html')
+
+
+@csrf_exempt
+def image_receive(request):
+    try:
+        username = request.session['email']
+    except:
+        render_to_response('frontEnd/login.html', {'session_timeout': True})
+
+    try:
+        host = Host.objects.get(email=username)
+    except:
+        return HttpResponse('您所持有的用户名不能匹配任何一个host')
+
+    if request.method == 'POST':
+        try:
+            data = request.POST.get("data", None)
+        except:
+            return HttpResponse('data为空')
+        processed_data = str(data).split('/jpeg;base64,')[1].split('); background-position: 50% 50')[0]
+        processed_pic = base64.b64decode(processed_data)
+        mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
+        des_origin_path = settings.UPLOAD_PATH + 'icons/' + mark_list + '.jpeg'  # mark_list是唯一的标志
+        des_origin_file = open(des_origin_path, 'w')
+        des_origin_file.write(processed_pic)
+        des_origin_file.close()
+        host.icon = 'files/icons/' + mark_list + '.jpeg'
+        host.save()
+        return HttpResponse('ACKACK')
+    else:
+        return render_to_response('frontEnd/complete-account-icon.html', {'login_flag': True,
+                                                                          'current_user': host},
+                                  context_instance=RequestContext(request))
 
 
 '''def database(request):

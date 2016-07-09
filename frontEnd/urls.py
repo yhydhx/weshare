@@ -10,9 +10,8 @@ urlpatterns = patterns('',
                        url('^logout/$', views.logout, name='index'),
                        url(r'^login/$', views.login, name='index'),
                        url(r'^complete-account/$', views.complete_account, name='index'),
-                       url(r'^complete-account-icon/$', views.complete_account_icon, name='index'),
                        url(r'^host-center/$', views.host_center, name='host'),
-
-
+                       url(r'^modify-account/$', views.modify_account, name='modify'),
+                       url(r'^image-receive/$', views.image_receive),
                        url(r'^complete-account-feature/', views.complete_account_feature, name='cp'),
                        )
