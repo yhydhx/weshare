@@ -249,7 +249,7 @@
             var fuck = $.ajax({
                 type: "POST",
                 url: "/image-receive/",
-                data: {data: image, c: document.cookie},
+                data: { data: image, c: document.cookie},
                 dataType: "jsonp",
                 async:false,
                 success: window.location.replace("/complete-account/")

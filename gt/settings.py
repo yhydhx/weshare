@@ -97,3 +97,13 @@ STATICfILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     '/var/www/html/gt/gt/static'
 )
+
+#email setting 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST= 'smtp.mxhichina.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER='service@wshere.com'
+EMAIL_HOST_PASSWORD='WeShareHere001'
+#EMAIL_USE_TLS = True
+EMAIL_SSL_PORT = 465
+

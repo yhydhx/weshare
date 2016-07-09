@@ -29,6 +29,42 @@ class Host(models.Model):
     qq_number = models.CharField(blank=True, max_length=20)
     wechat = models.CharField(blank=True, max_length=20)
 
+    def get_all_features(self):
+        host_topics =  Host_Topic.objects.filter(host_id=self.id)
+        d_topic_feature = {}
+        for single_feature in host_topics:
+            t_id = single_feature.t_id
+            f_id = single_feature.f_id
+
+            if not d_topic_feature.has_key(t_id):
+                d_topic_feature[t_id] = {}
+                d_topic_feature[t_id]['name'] = Topic.objects.get(id=t_id).t_name
+                d_topic_feature[t_id]['features'] = []
+                d_topic_feature[t_id]['row1'] = []
+                d_topic_feature[t_id]['row2'] = []
+                d_topic_feature[t_id]['row3'] = []
+                d_topic_feature[t_id]['row4'] = []
+
+            d_topic_feature[t_id]['features'].append(Feature.objects.get(id=f_id).f_name)
+        
+        for t_id,value in d_topic_feature.items():
+            count = 0
+            for f in d_topic_feature[t_id]['features']:
+                count += 1
+                if count % 4 == 1:
+                    d_topic_feature[t_id]['row1'].append(f)
+                elif count % 4 == 2:
+                    d_topic_feature[t_id]['row2'].append(f)
+                elif count % 4 == 3:
+                    d_topic_feature[t_id]['row3'].append(f)
+                elif count % 4 == 0:
+                    d_topic_feature[t_id]['row4'].append(f)
+                
+        return d_topic_feature
+
+    
+
+
 
 class Province(models.Model):
     p_name = models.CharField(max_length=100)
@@ -46,6 +82,7 @@ class Topic(models.Model):
     t_name = models.CharField(max_length=200)
     t_click = models.IntegerField(default=0)
     t_tag = models.IntegerField(null=True)
+
 
 
 class Feature(models.Model):

@@ -54,48 +54,6 @@
     </div>
 </div>
 
-<div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
-                                                              alt=""/></a></div>
-    <ul class="ct-menuMobile-navbar">
-        <li class="active"><a href="index.html"><span>Home</span></a></li>
-        <li><a href="about.html"><span>About us</span></a></li>
-        <li><a href="gallery.html"><span>Our gallery</span></a></li>
-        <li class="dropdown"><a href="rent-now.html"><span>Rent Now</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="rent-now.html"><span>Rent Now</span></a></li>
-                <li><a href="rent-item.html"><span>Rent Item</span></a></li>
-                <li><a href="rent-page-variation-1.html"><span>Rent Page v1</span></a></li>
-                <li><a href="rent-page-variation-2.html"><span>Rent Page v2</span></a></li>
-                <li><a href="rent-paypal.html"><span>Rent with Paypal integration</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="blog.html"><span>Blog</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="blog.html"><span>Blog</span></a></li>
-                <li><a href="blog-single.html"><span>Blog Single</span></a></li>
-                <li><a href="blog-archive.html"><span>Blog Archive</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="events.html"><span>Events</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="events.html"><span>Events</span></a></li>
-                <li><a href="event-single.html"><span>Event Single 1</span></a></li>
-                <li><a href="event-single2.html"><span>Event Single 2</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="account.html"><span>Pages</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="account.html"><span>My Account</span></a></li>
-                <li><a href="login.html"><span>Login</span></a></li>
-
-                <li><a href="404.html"><span>404</span></a></li>
-            </ul>
-        </li>
-        <li><a href="services.html"><span>Services</span></a></li>
-        <li><a href="contact.html"><span>Contact</span></a></li>
-    </ul>
-</div>
 
 <div id="ct-js-wrapper" class="ct-pageWrapper">
 
@@ -110,7 +68,7 @@
             {% if not user.state %}
             <img src="{% static 'frontEnd/images/question' %}" style="text-align: center;  width: 150px; height: 150px">
             {% else %}
-            <img src="{{user.icon}}" style="text-align: center; width: 150px; height: 150px">
+            <img src="{{user.image}}" style="text-align: center; width: 150px; height: 150px">
             {%  endif %}
             <h3 class="ct-fw-lighter ct-u-hr ct-u-hr--wide ct-u-marginBottom10">{{ user.username }}</h3>
             <h3 class="ct-u-marginBottom20" style="color: transparent">
@@ -188,103 +146,46 @@
 
                             <div role="tabpanel" class="tab-pane fade" id="amenities">
 
-                                <h3 class="ct-fw-lighter ct-u-marginTop50 ct-u-marginBottom20 ct-u-paddingBottom15 ct-u-borderBottom">
-                                    Main features</h3>
-                                <div class="row">
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Air conditioner</span></li>
-                                            <li><i class="fa fa-check"></i><span>Heating</span></li>
-                                            <li class="disabled"><i class="fa fa-close"></i><span>Hot water</span></li>
-                                        </ul>
+                                
+                                {% block content %}
+                                    {% for topic in user.features %}
+                                    <h3 class="ct-fw-lighter ct-u-marginTop50 ct-u-marginBottom20 ct-u-paddingBottom15 ct-u-borderBottom">
+                                    {{topic.name}}</h3>
+                                    <div class="row">
+                                        <div class="col-md-3 col-xs-6">
+                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                                {% for feature in topic.row1 %}
+                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                                {% for feature in topic.row2 %}
+                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                                {% for feature in topic.row3 %}
+                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                                {% for feature in topic.row4 %}
+                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
                                     </div>
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Refrigirator</span></li>
-                                            <li><i class="fa fa-check"></i><span>Jacuzzi</span></li>
-                                            <li class="disabled"><i class="fa fa-close"></i><span>Heating</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clearfix visible-xs"></div>
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Electric grill</span></li>
-                                            <li><i class="fa fa-check"></i><span>Showers</span></li>
-                                            <li><i class="fa fa-check"></i><span>Generator</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Microwave oven</span></li>
-                                            <li class="disabled"><i
-                                                    class="fa fa-close"></i><span>External showers</span></li>
-                                            <li class="disabled"><i class="fa fa-close"></i><span>Dinghy</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clearfix visible-xs"></div>
-                                </div>
-
-                                <h3 class="ct-fw-lighter ct-u-marginTop50 ct-u-marginBottom20 ct-u-paddingBottom15 ct-u-borderBottom">
-                                    Entertainment</h3>
-                                <div class="row">
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Game console</span></li>
-                                            <li><i class="fa fa-check"></i><span>Scuba diving</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Cinema</span></li>
-                                            <li><i class="fa fa-check"></i><span>Shark feeding</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clearfix visible-xs"></div>
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Belly dancers</span></li>
-                                            <li><i class="fa fa-check"></i><span>Mermaids</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Board games</span></li>
-                                            <li class="disabled"><i class="fa fa-close"></i><span>CD and DVD</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clearfix visible-xs"></div>
-                                </div>
-
-                                <h3 class="ct-fw-lighter ct-u-marginTop50 ct-u-marginBottom20 ct-u-paddingBottom15 ct-u-borderBottom">
-                                    Other features</h3>
-                                <div class="row">
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Life raft</span></li>
-                                            <li class="disabled"><i class="fa fa-close"></i><span>Sonar</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Auto pilot</span></li>
-                                            <li class="disabled"><i class="fa fa-close"></i><span>Whale harpoon</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="clearfix visible-xs"></div>
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>GPS navigation</span></li>
-                                            <li><i class="fa fa-check"></i><span>Safety kit</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-3 col-xs-6">
-                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                            <li><i class="fa fa-check"></i><span>Motor navigation</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clearfix visible-xs"></div>
-                                </div>
+                                    {% endfor %}
+                                {% endblock %}
+                                
 
                             </div>
 

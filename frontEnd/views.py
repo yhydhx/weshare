@@ -172,8 +172,6 @@ def complete_account(request):
     file = forms.FileField() '''
 
 
-# def asyn_upload(request):
-
 @csrf_exempt
 def complete_account_feature(request):
     try:
@@ -336,7 +334,61 @@ def host_center(request):
 
 
 def modify_account(request):
-    return render_to_response('frontEnd/modify-account.html')
+    try:
+        username = request.session['email']
+        print 1
+    except:
+        return render_to_response('frontEnd/login.html', {'seesion_out': True})
+    try:
+        host = Host.objects.get(email=username)
+    except:
+        return HttpResponse('您所持有的用户名不能匹配任何一个host')
+    if request.method == 'POST':
+        if request.POST['username'] and request.POST['phone'] and request.POST[
+            'self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
+            'motto'] and \
+                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
+                request.POST['school'] and request.POST['qq']:
+            username = request.POST['username']
+            phone = request.POST['phone']
+            self_introduction = request.POST['self-introduction']
+            gender = request.POST['selectbox']
+            motto = request.POST['motto']
+            min_payment = request.POST['min-payment']
+            service_time = request.POST['service-time']
+            max_payment = request.POST['max-payment']
+            school = request.POST['school']
+            qq = request.POST['qq']
+
+            print gender
+            if not judge_limit(min_payment, max_payment):
+                return HttpResponse('最低报酬要小于最高报酬')
+
+            if gender == u'1':
+                host.gender = 0
+            elif gender == u'2':
+                host.gender = 1
+
+            host.username = username
+            host.phone_number = phone
+            host.introduction = self_introduction
+            host.motto = motto
+            host.min_payment = min_payment
+            host.service_time = service_time
+            host.max_payment = max_payment
+            host.h_school = school
+            host.qq_number = qq
+            host.save()
+            return render_to_response('frontEnd/modify-account.html', {'login_flag': True,
+                                                                       'current_user': host},
+                                      context_instance=RequestContext(request))
+        else:
+            return HttpResponse('请把表单填写完整')
+
+    else:
+        return render_to_response('frontEnd/modify-account.html', {'current_user': host,
+                                                                   'login_flag': True},
+                                  context_instance=RequestContext(request))
 
 
 @csrf_exempt

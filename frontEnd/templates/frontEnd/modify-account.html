@@ -112,195 +112,189 @@
              data-bg-image="{% static 'frontEnd/images/content/cars/bg-02.jpg' %}"
              data-bg-image-mobile="{% static 'frontEnd/images/content/cars/bg-01-mobile.jpg' %}">
         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2
-                class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">完善账户信息</h2></div>
+                class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">修改账户信息</h2></div>
     </section>
 
 
-    {% csrf_token %}
     <div class="container">
         <div class="row">
 
-            <form class="ct-u-sectionBorder ct-u-sectionBorder ct-u-marginBottom input-daterange input-group"
-                  action="/complete-account/" method="post" id="form1">
-                <div class="tabpanel ct-u-paddingTop50 ct-u-paddingBottom60">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab">Description</a>
-                        </li>
-                        <li role="presentation"><a href="#amenities" role="tab" data-toggle="tab">Amenities</a></li>
-                        <li role="presentation"><a href="#details" role="tab" data-toggle="tab">Technical Details</a>
-                        </li>
-                    </ul>
 
-                    <!-- Tab panes -->
-                    <div class="tab-content">
+            <div class="tabpanel ct-u-paddingTop50 ct-u-paddingBottom60">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#description" role="tab"
+                                                              data-toggle="tab">修改我的头像</a>
+                    </li>
+                    <li role="presentation"><a href="#amenities" role="tab" data-toggle="tab">修改个人资料 &nbsp;</a></li>
+                    <li role="presentation"><a href="#details" role="tab" data-toggle="tab">修改身份特质</a>
+                    </li>
+                </ul>
 
-                        <!-- Tab #1 -->
-                        <div role="tabpanel" class="tab-pane fade in active" id="description">
-                            <style>
-                                body {
-                                    margin: 0;
-                                    text-align: center;
-                                }
+                <!-- Tab panes -->
+                <div class="tab-content">
 
-                                #clipArea {
-                                    margin: 20px;
-                                    height: 300px;
-                                }
+                    <!-- Tab #1 -->
+                    <div role="tabpanel" class="tab-pane fade in active" id="description">
+                        <style>
+                            body {
+                                margin: 0;
+                                text-align: center;
+                            }
 
-                                #file,
-                                #clipBtn {
-                                    margin: 20px;
-                                }
+                            #clipArea {
+                                margin: 20px;
+                                height: 300px;
+                            }
 
-                                #view {
-                                    margin: 0 auto;
-                                    width: 200px;
-                                    height: 200px;
-                                }
-                            </style>
+                            #file,
+                            #clipBtn {
+                                margin: 20px;
+                            }
+
+                            #view {
+                                margin: 0 auto;
+                                width: 200px;
+                                height: 200px;
+                            }
+                        </style>
+                        <div class="col-lg-8 col-md-8 col-sm-12" style="padding-bottom: 80%">
                             <div id="clipArea"></div>
                             <input type="file" id="file" name="icon">
                             <button id="clipBtn" class="btn btn-lg btn-motive" type="button">截取</button>
-                            <div id="view"></div>
                         </div>
+                        <div id="view" class="col-lg-4 col-md-4 col-sm-12"></div>
+                        <div class="row" style="margin-left: 29%">
+                            <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
+                                <button id="foo" type="button" class="btn btn-lg btn-wide btn-motive">
+                                    <span>上传新头像</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                        <!-- Tab #2 -->
-                        <div role="tabpanel" class="tab-pane fade" id="amenities">
+                    <!-- Tab #2 -->
+                    <div role="tabpanel" class="tab-pane fade" id="amenities">
+                        <form class=" ct-u-marginBottom input-daterange input-group"
+                              action="/modify-account/" method="post" id="form1">
+                            {% csrf_token %}
                             <div class="col-md-7 ct-u-paddingTop80">
                                 <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
                                     <h2 class="ct-sectionHeader-title">
-                                        <small><span>自我介绍</span></small>
+                                        <small><span>自我介绍修改</span></small>
                                     </h2>
                                 </div>
-                    <textarea name="self-introduction" id="self-introduction">
-                        <p style="text-align: left">请按照一下模板更改哦(注:若没有请删除完成后请把这段话删掉)</p>
-                        <h3 style="text-align: left">性格特点</h3>
-                          <p>
-                              (示例)我是一个萌萌的逗比,幽默风趣,会讲笑话,很牛逼.<br>
-                              Note that any <strong>性格和善,和人们自来熟</strong> file and image management functionality in
-                              this example is part of our commercial offering – the demo is to show the integration.
-                          </p>
-                        <h3 style="text-align: left">留学情况</h3>
-                        <p>
-                            (实例)<br>
-                            2014 - 2015 <strong>香港理工大学</strong> 网络工程研究生
-                            <br>
-                            2015 - 现在 <strong>香港科技大学</strong> 通信网络博士
-                        </p>
-                        <h3 style="text-align: left">学业情况</h3>
-                        <p>
-                            大学平均G点3.9哇,被同学尊称为何满绩,何大神。托福裸考105,二战111, 雅思8.5, GRE 2398分, 被CMU, UCLA, Stanford, 等名校录取
-                        </p>
-                        <h3 style="text-align: left">竞赛经历</h3>
-                        <p>
-                            2015年全国大学生英语竞赛特等奖<br>
-                            2014年全国大学生数学建模比赛特等奖<br>
-                            2015年世界大学生数学建模二等奖<br>
-                            2014年全国ACM上海站第三名<br>
-                        </p>
-                        <h3 style="text-align: left">科研背景</h3>
-                        <p>
-
-                        </p>
-                    </textarea>
+                                <textarea name="self-introduction" id="self-introduction">{{ current_user.introduction | safe }}</textarea>
                             </div>
                             <div class="col-md-5 ct-u-paddingTop80">
                                 <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
                                     <h2 class="ct-sectionHeader-title">
-                                        <small><span>扩展信息</span></small>
+                                        <small><span>扩展信息修改</span></small>
                                     </h2>
                                 </div>
 
-                                <label for="birth">生日</label>
-                                <input type="text" id="birth" class="form-control form-control--type2"
-                                       placeholder="点击以添加生辰"
-                                       name="birth" title="from">
+                                <div class="ct-panel-inner">
+                                    <div class="form-group ">
+                                        <label for="username" style="text-align: left">真实姓名</label>
+                                        <input id="username" name="username" type="text"
+                                               value="{{ current_user.username }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label for="phone">电话号码</label>
+                                        <input id="phone" name="phone" type="text"
+                                               value="{{ current_user.phone_number }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <label for="birth">生日</label>
+                                    <input type="text" id="birth" class="form-control form-control--type2"
+                                           value="{{ current_user.birth }}"
+                                           name="birth" title="from">
 
 
-                                <div class="ct-checkbox ct-u-paddingTop10 ct-u-paddingMD-bot10">
-                                    <label for="gender">性别</label>
-                                    <input class="form-control form-control--type2" id="gender" name="gender"
-                                           type="checkbox"
-                                           checked>
-                                </div>
+                                    <div class="ct-checkbox ct-u-paddingTop10 ct-u-paddingMD-bot10">
+                                        <label for="gender">性别</label>
+                                        <input class="form-control form-control--type2" id="gender" name="gender"
+                                               type="checkbox" value="2"
+                                               checked>
+                                    </div>
 
-                                <select class="ct-select ct-js-selectize" title="Sorting" name="selectbox">
-                                    <option value="女">女</option>
-                                    <option value="男">男</option>
-                                </select>
-
-
-                                <div class="form-group ">
-                                    <label for="motto">个性签名</label>
-                                    <input id="motto" name="motto" type="text"
-                                           class="form-control form-control--type2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="service-time" class="required">您方便服务的时间</label>
-                                    <input id="service-time" name="service-time" required
-                                           class="form-control form-control--type2">
-                                </div>
-
-                                <!--这里的填写最低薪酬的方法加上一个前端的验证 是否为数字-->
-                                <div class="form-group">
-                                    <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
-                                    <input id="min-payment" name="min-payment" type="number" required value="请填写数字"
-                                           class="form-control form-control--type2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
-                                    <input id="max-payment" name="max-payment" type="number" required value="请填写数字"
-                                           class="form-control form-control--type2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="school" class="required">学校</label>
-                                    <input id="school" name="school" required
-                                           class="form-control form-control--type2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="qq" class="required">QQ号</label>
-                                    <input id="qq" name="qq" required class="form-control form-control--type2">
-                                </div>
+                                    <select class="ct-select ct-js-selectize" title="Sorting" name="selectbox">
+                                        <option value="女">女</option>
+                                        <option value="男">男</option>
+                                    </select>
 
 
-                                <!--<div class="form-group">
-                                        <label for="topic" class="required">您所能提供的服务</label>
-                                        <input id="topic" name="topic" required class="form-control form-control--type2">
+                                    <div class="form-group ">
+                                        <label for="motto">个性签名</label>
+                                        <input id="motto" name="motto" type="text"
+                                               value="{{ current_user.motto }}"
+                                               class="form-control form-control--type2">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="feature" class="required">提供服务的具体内容</label>
-                                        <input id="feature" name="feature" required class="form-control form-control--type2">
-                                    </div> -->
-                            </div>
-                        </div>
+                                        <label for="service-time" class="required">您方便服务的时间</label>
+                                        <input id="service-time" name="service-time" required
+                                               value="{{ current_user.service_time }}"
+                                               class="form-control form-control--type2">
+                                    </div>
 
-                        <!-- Tab #3 -->
-                        <div role="tabpanel" class="tab-pane fade" id="details">
-                            <h3 class="ct-fw-lighter ct-u-marginBoth50">Technical Details</h3>
-                            <h6 class="ct-u-hr ct-u-hr--left ct-fw-bold text-uppercase">Lorem ipsum dolor sit amet</h6>
-                            <p class="ct-u-marginBottom50">Quisque at nulla a tortor finibus tempor eget nec lacus.
-                                Donec gravida molestie mauris.
-                                TENDERS & TOYS 2 x 30ft inflatable tenders type 90 EFB with 350hp YaCHa inboard engine.
-                                1 x Classic Runnerboat with 360hp SRYreN inboard engine. 5 x YaCHa Waverunners 1 x YaCHa
-                                Jetskis 570ft/25m floating trampoline 6 x kayak AMENITIES A glass bottomed Jacuzzi for 5
-                                A sauna and fully equipped spa room</p>
-                        </div>
+                                    <!--这里的填写最低薪酬的方法加上一个前端的验证 是否为数字-->
+                                    <div class="form-group">
+                                        <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
+                                        <input id="min-payment" name="min-payment" type="number" required
+                                               value="{{ current_user.min_payment }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
+                                        <input id="max-payment" name="max-payment" type="number" required
+                                               value="{{ current_user.max_payment }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="school" class="required">学校</label>
+                                        <input id="school" name="school" required
+                                               value="{{ current_user.h_school }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="qq" class="required">QQ号</label>
+                                        <input id="qq" name="qq" required
+                                               value="{{ current_user.qq_number }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-left: 29%">
+                                <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
+                                    <input id="submit" type="submit"
+                                           class="btn btn-lg btn-wide btn-motive"
+                                           value="确认修改自己的资料" onclick="alert('修改资料成功。')">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Tab #3 -->
+                    <div role="tabpanel" class="tab-pane fade" id="details">
+                        <h3 class="ct-fw-lighter ct-u-marginBoth50">Technical Details</h3>
+                        <h6 class="ct-u-hr ct-u-hr--left ct-fw-bold text-uppercase">Lorem ipsum dolor sit amet</h6>
+                        <p class="ct-u-marginBottom50">Quisque at nulla a tortor finibus tempor eget nec lacus.
+                            Donec gravida molestie mauris.
+                            TENDERS & TOYS 2 x 30ft inflatable tenders type 90 EFB with 350hp YaCHa inboard engine.
+                            1 x Classic Runnerboat with 360hp SRYreN inboard engine. 5 x YaCHa Waverunners 1 x YaCHa
+                            Jetskis 570ft/25m floating trampoline 6 x kayak AMENITIES A glass bottomed Jacuzzi for 5
+                            A sauna and fully equipped spa room</p>
                     </div>
                 </div>
-                <div class="row" style="margin-left: 29%">
-                    <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
-                        <input id="submit" type="submit"
-                               class="btn btn-lg btn-wide btn-motive"
-                               value="进入下一步,录入自己的服务">
-                    </div>
-                </div>
-            </form>
+            </div>
+
         </div>
 
     </div>
@@ -391,12 +385,12 @@
 <script>
     $(document).ready(function () {
         /* $.ajaxSetup({
-            dataType: "json",
-            beforeSend: function (xhr, settings) {
-                var csrftoken = $.cookie('csrftoken');
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }); */
+         dataType: "json",
+         beforeSend: function (xhr, settings) {
+         var csrftoken = $.cookie('csrftoken');
+         xhr.setRequestHeader("X-CSRFToken", csrftoken);
+         }
+         }); */
         $("#foo").click(function () {
             var image = $("#view").attr("style");
             var fuck = $.ajax({
@@ -404,8 +398,8 @@
                 url: "/image-receive/",
                 data: {data: image, c: document.cookie},
                 dataType: "jsonp",
-                async:false,
-                success: window.location.replace("/complete-account/")
+                async: false,
+                success: window.location.replace("/index/")
             }).always(function (data) {
                 //console.log(data)
             });

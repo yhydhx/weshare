@@ -6,10 +6,22 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 
 from django import forms
+
+#mail section 
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives,EmailMessage
+from django.template import Context, loader
+
 from gt.models import *
 import datetime
 from django.utils import timezone
 from django.conf import settings
+from gt.settings import *
+
+from django.utils.http import urlquote
+
+
+
 import hashlib
 
 '''def index(request):
@@ -245,10 +257,12 @@ def topic(request, method, Oid):
         return HttpResponseRedirect('login.html')
     if method == 'addProvince':
         name = request.POST.get('topic_name')
+        tag = request.POST.get('topic_tag')
 
         topic = Topic(
-            t_name=name,
-            t_click=0,
+            t_name = name,
+            t_click = 0,
+            t_tag = tag,
         )
         topic.save()
         # Oid = news.id
@@ -258,9 +272,10 @@ def topic(request, method, Oid):
     elif method == 'save':
         if request.method == 'POST':
             topic = {'t_name': request.POST.get('topic_name'),
+                     't_tag': request.POST.get('topic_tag'),
                      'id': request.POST.get("id")
                      }
-            Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'])
+            Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'],t_tag=topic['t_tag'])
 
         return HttpResponseRedirect('/dc/topic/show')
 
@@ -341,7 +356,12 @@ def user(request, method, Oid):
         # Oid = news.id
         return HttpResponseRedirect('/dc/topic/show/')
     elif method == 'change':
-        return render(request, 'backEnd/host-index.html', {'user': Host.objects.get(id=Oid)})
+        host = Host.objects.get(id=Oid)
+        features = host.get_all_features()
+        host.features =  features.values()
+        host.image = "/files/icons/"+host.icon.split("/")[-1]
+        return render(request, 'backEnd/host-index.html', {'user': host})
+    
     elif method == 'pass':
         
 
@@ -408,8 +428,69 @@ def test(request):
 
 def s(request):
     hosts = Host.objects.all()
+    d_topic_detail = {}
+    for each_host in hosts:
+        '''
+        format the payment 
+        fix the path of the image 
+        find all tags:
+        tags
+        find the topics of this users.
+        then construct a dict for topic id -> topic tag and topic name 
+        make a list of topic
+        finally add each tag to users.
 
-    return render(request, "frontEnd/school.html")
+        '''
+
+
+        tag = ""
+        if each_host.gender == 1:
+            tag += "male "
+        else:
+            tag += "female "
+        
+
+        h_topics = Host_Topic.objects.filter(host_id=each_host.id)
+
+        #classification
+        d_host_topic = {}
+        for h_topic_atom in h_topics:
+            t_id = h_topic_atom.t_id
+            f_id = h_topic_atom.f_id
+            if not d_topic_detail.has_key(t_id):    
+                single_topic = Topic.objects.get(id = t_id)
+                d_topic_detail[t_id] = {}
+                d_topic_detail[t_id]['name'] = single_topic.t_name
+                d_topic_detail[t_id]['tag'] = single_topic.t_tag
+                d_topic_detail[t_id]['number'] = 0
+                d_topic_detail[t_id]['index'] = len(d_topic_detail)
+                d_topic_detail[t_id]['topics'] = {}
+
+            d_topic_detail[t_id]['topics'][each_host.id] = 1
+            d_topic_detail[t_id]['number'] = len(d_topic_detail[t_id]['topics'])
+            d_host_topic[t_id] = d_topic_detail[t_id]['tag']
+            
+            #print d_topic_detail[t_id]['topics']
+            #print d_topic_detail[t_id]
+            print each_host.username, d_topic_detail[t_id]['name']
+        #complete tags
+        for k,v in d_host_topic.items():
+            tag = tag + " " +v
+
+        
+
+        each_host.image = "/files/icons/"+each_host.icon.split("/")[-1]
+        each_host.min_payment = int(each_host.min_payment)
+        each_host.tag = tag
+    
+
+    Info = {}
+    Info['object'] = hosts
+    Info['topics'] = d_topic_detail.values()
+
+    Info['allPeople'] = len(hosts)
+
+    return render(request, "frontEnd/school.html",Info)
 
 
 ##################################################################################################
@@ -456,3 +537,45 @@ def showImgList(request):
 def deleteImg(request, Oid):
     Image.objects.filter(id=Oid).delete()
     return HttpResponseRedirect('../showImgList')
+
+
+##################################################################################################
+#  email operation 
+#   about check and inform 
+##################################################################################################
+
+def setEmail(request):
+
+    # em = EmailMessage('subject','body','service@wshere  .com',['yhydhx@126.com'],['yhydhx@126.com'])
+    # em.send()
+    
+    # subject,from_email,to = 'hello','service@wshere.com','271086337@qq.com'
+    # text_content = 'This is an important message'
+    # html_content = u'<b>激活链接：</b><a href="http://www.baidu.com">http:www.baidu.com</a>'
+    # msg = EmailMultiAlternatives(subject,text_content,from_email,[to])
+    # msg.attach_alternative(html_content, 'text/html')
+    # msg.send()
+
+    mail_list = ['yhydhx@126.com']
+    title = "this is a test"
+    context = {"context":"<a href='http://wshere.com/kaixuan'>helloworld</a>",
+                "link": "http://wshere.com/identify/kaixun/jdklafwioejfioqw",
+               }
+    email_template_name = 'frontEnd/template.html'
+    t = loader.get_template(email_template_name) 
+
+    subject, from_email, to = title, EMAIL_HOST_USER, mail_list
+
+    html_content = t.render(Context(context))
+    print html_content
+    msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+    msg.attach_alternative(html_content, "text/html")
+    
+    msg.send()
+
+
+    
+    return HttpResponse("succuss")
+
+
+
