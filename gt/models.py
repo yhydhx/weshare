@@ -30,7 +30,7 @@ class Host(models.Model):
     wechat = models.CharField(blank=True, max_length=20)
 
     def get_all_features(self):
-        host_topics =  Host_Topic.objects.filter(host_id=self.id)
+        host_topics = Host_Topic.objects.filter(host_id=self.id)
         d_topic_feature = {}
         for single_feature in host_topics:
             t_id = single_feature.t_id
@@ -46,8 +46,8 @@ class Host(models.Model):
                 d_topic_feature[t_id]['row4'] = []
 
             d_topic_feature[t_id]['features'].append(Feature.objects.get(id=f_id).f_name)
-        
-        for t_id,value in d_topic_feature.items():
+
+        for t_id, value in d_topic_feature.items():
             count = 0
             for f in d_topic_feature[t_id]['features']:
                 count += 1
@@ -59,11 +59,8 @@ class Host(models.Model):
                     d_topic_feature[t_id]['row3'].append(f)
                 elif count % 4 == 0:
                     d_topic_feature[t_id]['row4'].append(f)
-                
+
         return d_topic_feature
-
-    
-
 
 
 class Province(models.Model):
@@ -84,7 +81,6 @@ class Topic(models.Model):
     t_tag = models.IntegerField(null=True)
 
 
-
 class Feature(models.Model):
     f_name = models.CharField(max_length=200)
     f_topic = models.CharField(max_length=100)
@@ -94,6 +90,12 @@ class Host_Topic(models.Model):
     host_id = models.CharField(max_length=100)
     t_id = models.CharField(max_length=100)
     f_id = models.CharField(max_length=100)  # 关系库
+
+
+class User_data(models.Model):
+    host_id = models.CharField(max_length=50)
+    description = models.CharField(max_length=100, blank=True)
+    url = models.CharField(max_length=100)
 
 
 class Certificate(models.Model):  # igno

@@ -22,13 +22,49 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/test.css' %}">
 
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
     <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
+    <script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+    <script src="{% static 'frontEnd/js/allunivlist.js' %}"></script>
+    <script>var school = "";
+    var sf = "";
+    $(function () {
+        $.each(allUnivList, function (j, m) {
+            $("#gj").append("<a href='javascript:void(0);' onclick='getSheng(" + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
+        });
+    });
 
+    function getSheng(aid, name) {
+        school = name;
+        $("#sheng").show();
+        $("#list").html('');
+        $("#sheng").html('');
+        if (allUnivList[aid].provs.length == 0) {
+            $("#sheng").append("ºÜ±§Ç¸£¡ÔÝÊ±Ã»ÓÐÊý¾Ý£¨Ö»Ìá¹©ÁËÖÐ¹úºÍÃÀ¹úµÄÑ§Ð£ÐÅÏ¢£©");
+        }
+        else {
+            $.each(allUnivList[aid].provs, function (j, m) {
+                $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool(" + aid + "," + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
+            });
+        }
+    }
+
+    function getSchool(gid, pid, name) {
+        school = school.substring(0, 2);
+        school += " - " + name;
+        $("#list").show();
+        $("#list").html('');
+        $.each(allUnivList[gid].provs[pid].univs, function (k, l) {
+            $("#list").append("<a style='width:270px;display:block;float:left;'>" + l.name + "</a>");
+        });
+        $("#list").append("<br style='clear:both;' />");
+
+    }</script>
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
     <script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
     <script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
@@ -210,15 +246,22 @@
                                class="form-control form-control--type2">
                     </div>
 
-                    <div class="form-group">
-                        <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
-                        <input id="max-payment" name="max-payment" type="number" required value="请填写数字"
-                               class="form-control form-control--type2">
-                    </div>
 
                     <div class="form-group">
                         <label for="school" class="required">学校</label>
                         <input id="school" name="school" required class="form-control form-control--type2">
+                        <div style="width:100%; margin:0 auto; overflow:hidden;">
+                            <label for="txtSc" class="required">你的学校</label>
+                            <input type="text" id="txtSc" name="school"
+                                   class="form-control form-control--type2"/>
+
+                            <div id="gj"
+                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px; display:none;background-color: #FFFFFF;z-index:999;"></div>
+                            <div id="sheng"
+                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none;background-color: #FFFFFF;z-index:999;"></div>
+                            <div id="list"
+                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none; background-color: #FFFFFF;z-index:999;height:300px; overflow-y:auto;"></div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -273,6 +316,46 @@
     </div>
 </footer>
 
+<a class="btn btn-primary" data-toggle="modal" href='#modal-id' id="fuckJS">fuckJS</a>
+<div class="modal fade" id="modal-id">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Choose a picture or upload one</h4>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#choose" aria-controls="choose" role="tab" data-toggle="tab">choose</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">upload</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="choose">
+                            <div class="squr"><input type="checkbox" name="c1"></div>
+                            <div class="squr"><input type="checkbox" name="c2"></div>
+                            <div class="squr"><input type="checkbox" name="c3"></div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="upload">
+                            <iframe src="uploadFile.html"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -303,6 +386,85 @@
 <script>jQuery('.sliderAmount').slider();</script>
 
 <script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
+
+<script type="text/javascript">
+    var mypics = [];
+    $(document).ready(function ($) {
+        $("#fuckJS").click(function (event) {
+            $('.mce-i-image').parent().click()
+            $('.mce-textbox').first().attr('value', mypics[i]);
+            $(".mce-reset div.mce-primary button").click();
+        })
+    });
+    $(document).ready(function ($) {
+        $("#fuckJS").click(function () {
+            $.ajax({
+                url: '/path/to/file',
+                type: 'GET',
+                dataType: 'json',
+                data: {param1: 'value1'},
+                async: false
+            }).done(function () {
+                        console.log("success");
+                    })
+                    .always(function () {
+                        console.log("complete");
+                    });
+        });
+    });
+    $(document).ready(function () {
+        $("#submitFileX").click(function (event) {
+            $("input[name = 'uploadFile']").click()
+        });
+
+        var closeDiv = '<button type="button" class="btn closeCheckBox">×</button>'
+        $("[name = c1]").parent().dblclick(function () {
+            $("[name = c1]").prop('checked', 'checked')
+            $("[name = c1]").parent().css('border', '2px solid #ccc');
+            $("[name = c1]").parent().append(closeDiv)
+        });
+        $("[name = c1]").parent().delegate('button.closeCheckBox', 'click', function () {
+            $(this).remove()
+            $("[name = c1]").parent().css('border', '1px solid #000');
+            console.log("fuckJS")
+
+        });
+        $.ajax({
+                    url: '/path/to/file',
+                    type: 'GET',
+                    dataType: 'json',
+                })
+                .done(function (data) {
+                    console.log("success");
+                })
+                .fail(function () {
+                    console.log("error");
+                })
+                .always(function () {
+                    console.log("complete");
+                })
+    })
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtSc").on("click", function () {
+            $("#gj").show();
+            $("#list").hide();
+            $("#sheng").hide();
+        });
+
+        $("#list").delegate("a", "click", function () {
+            console.log("fuck js")
+            $("#gj").hide();
+            $("#list").hide();
+            $("#sheng").hide();
+            school += " - " + $(this).text();
+            $("#txtSc").val(school);
+        });
+
+    });</script>
 
 
 </body>

@@ -131,10 +131,25 @@
                         <input id="username" name="username" class="form-control form-control--type2">
                     </div>
 
-                    <div class="form-group ">
-                        <label for="phone">手机号码</label>
-                        <input id="phone" name="phone" type="tel" class="form-control form-control--type2">
-                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group-btn" style="display: inline-block;top:30px;left: 5px;z-index:9;">
+                            <button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">区号 <span
+                                    class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a class="hrefClass" >美国 +1</a></li>
+                                <li><a class="hrefClass" >加拿大 +1</a></li>
+                                <li><a class="hrefClass" >英国 +44</a></li>
+                                <li><a class="hrefClass" >中国 +86</a></li>
+                                <li><a class="hrefClass" >香港 +852</a></li>
+                                <li><a class="hrefClass" >日本 +81</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                        <label for="foreign-phone">手机号码</label>
+                        <input type="text" class="form-control form-control--type2" aria-label="..." name="phone"
+                               id="foreign-phone">
+                    </div><!-- /input-group -->
 
                     <div class="form-group">
                         <label for="email" class="required">邮箱</label>
@@ -206,6 +221,16 @@
 
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+<script>
+    $(document).ready(
+            $(".hrefClass").click(function(){
+                var a = $(this).text().split(" ")[1]
+                $("#foreign-phone").val(a)
+            })
+
+            // $(".hrefClass").text().split(" ")[1]
+    )
+</script>
 
 
 </body>

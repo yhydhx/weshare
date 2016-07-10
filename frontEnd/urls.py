@@ -14,4 +14,7 @@ urlpatterns = patterns('',
                        url(r'^modify-account/$', views.modify_account, name='modify'),
                        url(r'^image-receive/$', views.image_receive),
                        url(r'^complete-account-feature/', views.complete_account_feature, name='cp'),
+
+                       url('^image-library/', views.image_library, name='image-library'),
+                       # url('^feature_ajax/', views.feature_ajax, name='feature_ajax'),
                        )

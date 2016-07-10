@@ -17,6 +17,7 @@ from django.utils import timezone
 from django.conf import settings
 import hashlib
 from tools import *
+import json
 import chunk
 import os
 import base64
@@ -415,7 +416,7 @@ def image_receive(request):
         des_origin_file = open(des_origin_path, 'w')
         des_origin_file.write(processed_pic)
         des_origin_file.close()
-        host.icon = 'files/icons/' + mark_list + '.jpeg'
+        host.icon = '/files/icons/' + mark_list + '.jpeg'
         host.save()
         return HttpResponse('ACKACK')
     else:
@@ -424,7 +425,70 @@ def image_receive(request):
                                   context_instance=RequestContext(request))
 
 
-'''def database(request):
+@csrf_exempt
+def image_library(request):
+    try:
+        username = request.session['email']
+    except:
+        render_to_response('frontEnd/login.html', {'session_timeout': True})
+
+    try:
+        host = Host.objects.get(email=username)
+    except:
+        return HttpResponse('您所持有的用户名不能匹配任何一个host')
+
+    if request.method == 'POST':
+        try:
+            file = request.FILES['pic-library']
+        except:
+            return HttpResponse('fail')
+
+        mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
+        des_origin_path = settings.UPLOAD_PATH + 'image-library/' + mark_list + '.jpeg'  # mark_list是唯一的标志
+        des_origin_file = open(des_origin_path, 'wb')
+        des_origin_file.write(file)
+        des_origin_file.close()
+
+        user_data = User_data()
+        user_data.host_id = host.id
+        User_data.url = des_origin_path
+        user_data.save()
+        return HttpResponse('ACKACK')
+    else:  # 来获取图片
+        user_data_list = User_data.objects.filter(host_id=host.id)
+        index = 1
+        url_list = {}
+        for user_data in user_data_list:
+            user_data[str(index)] = user_data.url
+        url_list_json = json.loads(url_list)
+        return HttpResponse(url_list_json)
+
+
+
+'''
+@csrf_exempt
+def feature_ajax(request):
+    try:
+        username = request.session['email']
+    except:
+        return HttpResponse('None')
+
+    try:
+        host = Host.objects.get(email=username)
+    except:
+        return HttpResponse('您所持有的用户名不能匹配任何一个host')
+
+    if request.method == 'POST':
+        if request.POST.get['type'] == 'add':
+
+        elif request.POST.get['type'] == 'del':
+            pass
+        else:
+            return HttpResponse('no type received')
+
+
+
+def database(request):
     user = User(username='xxx', password='xxx')
     user.save()
     return HttpResponse('ddfdfd')'''
