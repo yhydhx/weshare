@@ -396,6 +396,10 @@ def recruit(request,method,Oid):
     else:
         return HttpResponse('没有该方法')
 
+    def about(request):
+        return render(request,"frontEnd/about.html")
+
+
 
 ########################################################
 # this view is about the contact

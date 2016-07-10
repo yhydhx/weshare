@@ -492,6 +492,11 @@ def s(request):
 
     return render(request, "frontEnd/school.html",Info)
 
+def about(request):
+    return render(request,"frontEnd/about.html")
+
+def service(request):
+    return render(request,"frontEnd/services.html")
 
 ##################################################################################################
 #  file operation 

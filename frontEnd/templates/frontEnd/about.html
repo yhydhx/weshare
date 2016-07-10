@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <!--[if IE 8 ]>
@@ -30,162 +31,11 @@
 </head>
 
 <body class="cssAnimate">
-<div class="ct-preloader-container">                                            <!-- Preloader -->
-    <div class='ct-preloader'><div><div><div><div><div><div><div><div><div><div></div></div></div></div></div></div></div></div></div></div></div>
-</div>
 
-<div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a></div>
-    <ul class="ct-menuMobile-navbar">
-        <li class="active"><a href="index.html"><span>Home</span></a></li>
-        <li><a href="about.html"><span>About us</span></a></li>
-        <li><a href="gallery.html"><span>Our gallery</span></a></li>
-        <li class="dropdown"><a href="rent-now.html"><span>Rent Now</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="rent-now.html"><span>Rent Now</span></a></li>
-                <li><a href="rent-item.html"><span>Rent Item</span></a></li>
-                <li><a href="rent-page-variation-1.html"><span>Rent Page v1</span></a></li>
-                <li><a href="rent-page-variation-2.html"><span>Rent Page v2</span></a></li>
-                <li><a href="rent-paypal.html"><span>Rent with Paypal integration</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="blog.html"><span>Blog</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="blog.html"><span>Blog</span></a></li>
-                <li><a href="blog-single.html"><span>Blog Single</span></a></li>
-                <li><a href="blog-archive.html"><span>Blog Archive</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="events.html"><span>Events</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="events.html"><span>Events</span></a></li>
-                <li><a href="event-single.html"><span>Event Single 1</span></a></li>
-                <li><a href="event-single2.html"><span>Event Single 2</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="account.html"><span>Pages</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="account.html"><span>My Account</span></a></li>
-                <li><a href="login.html"><span>Login</span></a></li>
-
-                <li><a href="404.html"><span>404</span></a></li>
-            </ul>
-        </li>
-        <li><a href="services.html"><span>Services</span></a></li>
-        <li><a href="contact.html"><span>Contact</span></a></li>
-    </ul>
-</div>
-
-<div id="ct-js-wrapper" class="ct-pageWrapper">
-
-<nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
-
-    <div class="navbar-header">
-        <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
-        <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""/></a>
-    </div>
-
-    <div class="container">
-        <div class="ct-navbarBox">
-            <a href="login.html" class="ct-login"><span>Login</span><i class="fa fa-lock"></i></a>
-            <div class="ct-navbarBox-meta">
-                <div class="ct-navSearch-box">
-                    <a class="ct-js-navSearch ct-navSearch" href="#"><i class="fa fa-search"></i></a> <!-- Navbar Search  -->
-                    <div class="ct-navbar-search">
-                        <form role="form">
-                            <div class="form-group  ct-input--type2">
-                                <input id="searchM" required="" type="text" name="field[]" placeholder="Search website..." class="form-control">
-                                <label for="searchM"><span>Search</span></label>
-                                <button class="ct-navbar-search-button" type="submit">
-                                    <i class="fa fa-search fa-fw"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="ct-langPicker">
-                    <div class="ct-langPicker-content">
-                        <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
-                        <ul class="ct-langPicker-list">
-                            <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a></li>
-                            <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}" alt=""/></a></li>
-                            <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}" alt=""/></a></li>
-                        </ul>
-                    </div>
-                </div> <!-- Flags -->
-            </div>
-
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-
-        <ul class="nav navbar-nav ct-navbar--fadeIn">
-            <!--=========================================================================-->
-            <li><a href="index.html"><div class="ct-textEffect"><span data-content="Home">Home</span></div></a></li>
-            <!--=========================================================================-->
-            <li class="active dropdown"><a href="about.html"><div class="ct-textEffect"><span data-content="About Us">About Us</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="about.html"><span>About us</span></a></li>
-                    <li><a href="gallery.html"><span>Our gallery</span></a></li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li><a href="services.html"><div class="ct-textEffect"><span data-content="Services">Services</span></div></a></li>
-            <li class="dropdown"><a href="rent-now.html"><div class="ct-textEffect"><span data-content="Rent Now">Rent Now</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="rent-now.html"><span>Rent Now</span></a></li>
-                    <li><a href="rent-item.html"><span>Rent Item</span></a></li>
-                    <li class="ct-subDropdown"><a href="rent-page-variation-1.html">Rent Page</a>
-                        <ul class="ct-submenu dropdown-menu">
-                            <li><a href="rent-page-variation-1.html"><span>Rent Page v1</span></a></li>
-                            <li><a href="rent-page-variation-2.html"><span>Rent Page v2</span></a></li>
-                            <li><a href="rent-paypal.html"><span>Rent with Paypal integration</span></a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li class="dropdown"><a href="blog.html"><div class="ct-textEffect"><span data-content="Blog">Blog</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="blog.html"><span>Blog</span></a></li>
-                    <li><a href="blog-single.html"><span>Blog Single</span></a></li>
-                    <li><a href="blog-archive.html"><span>Blog Archive</span></a></li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li class="dropdown"><a href="events.html"><div class="ct-textEffect"><span data-content="Events">Events</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="events.html"><span>Events</span></a></li>
-                    <li class="ct-subDropdown"><a href="event-single.html">Event Single</a>
-                        <ul class="ct-submenu dropdown-menu">
-                            <li><a href="event-single.html"><span>Event Single 1</span></a></li>
-                            <li><a href="event-single2.html"><span>Event Single 2</span></a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li class="dropdown"><a href="account.html"><div class="ct-textEffect"><span data-content="Pages">Pages</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="account.html"><span>My Account</span></a></li>
-                    <li><a href="login.html"><span>Login</span></a></li>
-
-                    <li><a href="404.html"><span>404</span></a></li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li><a href="contact.html"><div class="ct-textEffect"><span data-content="Contact">Contact</span></div></a></li>
-        </ul>
-
-    </div>
-</nav>
+{% include "frontEnd/nav.html" %}
 
 <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340" data-type="parallax" data-stellar-background-ratio="0.3" data-bg-image="{% static 'frontEnd/images/content/cars/mediaHeader-01.jpg' %}" data-bg-image-mobile="{% static 'frontEnd/images/content/cars/mediaHeader-01.jpg' %}">
-    <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">about us</h2></div>
+    <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">团队介绍</h2></div>
 </section>
 
 <section class="ct-u-sectionBorder">
@@ -201,22 +51,68 @@
     </div>
 </section>
 
+
 <div class="container-fluid ct-u-sectionGrayLighter">
     <div class="row">
-        <div class="col-lg-4 col-lg-offset-2 col-md-6 ct-u-paddingBoth100">
-            <h6 class="text-uppercase ct-fw-bold ct-u-hr ct-u-hr--right ct-u-textRightMD">EVERYTHING FROM FAST SPORTS CARS TO LUXURY LIMOS</h6>
-            <div class="ct-u-textRightMD">
-                <p>In our collection we have a different types of cars. You can find anything you want. We cooperate with various companies to give our customers the greatest choice. We guarantee that ours services are the highest quality. Actualy we have over 20,000 different car models.
-                    We can deliver a car anywhere you want: house, beach, country, state.
-                </p>
-                <a href="rent-page-variation-1.html" class="btn btn-motive"><i class="fa fa-arrow-circle-right"></i><span>View our offer</span></a>
+        
+        <div class="col-md-6">
+            <div class="ct-sectionOverflow-image">
+                <img src="./assets/images/content/cars/sectionImage-03.jpg" alt=""/>
             </div>
         </div>
-        <div class="col-md-6 ct-embed-outer">
-            <div class="embed-responsive embed-responsive-16by9 ct-embed">
-                <i class="fa fa-play"></i>
-                <img src="{% static 'frontEnd/images/content/cars/video-placeholder.jpg' %}" alt=""/>
-                <video class="embed-responsive-item" src="{% static 'frontEnd/videos/maserati.mp4" data-autoplay="false" controls></video>
+        <div class="col-md-6">
+            <div class="ct-sectionOverflow-content ct-u-textLeft">
+                <h2 class="ct-u-marginTop20"><small class="ct-u-colorDarkGray ct-fw-lighter">Aug 25 2015</small></h2>
+                <h6 class="ct-u-marginTop60 text-uppercase ct-fw-bold ct-u-hr ct-u-hr--left">Rentica Sports Car Racing Finals</h6>
+                <p>On this very special day you will have the pleasure to witness the best racing cars in the world.
+                    We can guarantee you as our client to have the best seats and a complimentary snacks to accompany
+                    you while viewing this amazing show. Take your friends with you! The next race is set to be
+                    in Monaco so a great chance to soak up the sun too.</p>
+                <a href="event-single.html" class="ct-iconButton ct-iconButton--larger ct-u-marginTop50 animated" data-fx="fadeIn"><i class="fa fa-arrow-right animated" data-fx="bounceInLeft" data-time="100"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid ct-u-sectionGrayLighter">
+    <div class="row">
+        
+        <div class="col-md-6">
+            <div class="ct-sectionOverflow-image">
+                <img src="./assets/images/content/cars/sectionImage-03.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ct-sectionOverflow-content ct-u-textLeft">
+                <h2 class="ct-u-marginTop20"><small class="ct-u-colorDarkGray ct-fw-lighter">Aug 25 2015</small></h2>
+                <h6 class="ct-u-marginTop60 text-uppercase ct-fw-bold ct-u-hr ct-u-hr--left">Rentica Sports Car Racing Finals</h6>
+                <p>On this very special day you will have the pleasure to witness the best racing cars in the world.
+                    We can guarantee you as our client to have the best seats and a complimentary snacks to accompany
+                    you while viewing this amazing show. Take your friends with you! The next race is set to be
+                    in Monaco so a great chance to soak up the sun too.</p>
+                <a href="event-single.html" class="ct-iconButton ct-iconButton--larger ct-u-marginTop50 animated" data-fx="fadeIn"><i class="fa fa-arrow-right animated" data-fx="bounceInLeft" data-time="100"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid ct-u-sectionGrayLighter">
+    <div class="row">
+        
+        <div class="col-md-6">
+            <div class="ct-sectionOverflow-image">
+                <img src="./assets/images/content/cars/sectionImage-03.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ct-sectionOverflow-content ct-u-textLeft">
+                <h2 class="ct-u-marginTop20"><small class="ct-u-colorDarkGray ct-fw-lighter">Aug 25 2015</small></h2>
+                <h6 class="ct-u-marginTop60 text-uppercase ct-fw-bold ct-u-hr ct-u-hr--left">Rentica Sports Car Racing Finals</h6>
+                <p>On this very special day you will have the pleasure to witness the best racing cars in the world.
+                    We can guarantee you as our client to have the best seats and a complimentary snacks to accompany
+                    you while viewing this amazing show. Take your friends with you! The next race is set to be
+                    in Monaco so a great chance to soak up the sun too.</p>
+                <a href="event-single.html" class="ct-iconButton ct-iconButton--larger ct-u-marginTop50 animated" data-fx="fadeIn"><i class="fa fa-arrow-right animated" data-fx="bounceInLeft" data-time="100"></i></a>
             </div>
         </div>
     </div>
@@ -451,85 +347,7 @@
     </div>
 </div>
 
-
-
-
-<footer class="ct-footer ct-u-sectionDark">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="ct-footer-logo ct-u-paddingTop50 ct-u-paddingBottom30"><img src="{% static 'frontEnd/images/content/logo2.png' %}" alt=""></div>
-                <p>Rentica operate in the booking market since 2000. We created a platform that would not only allow our clients to book a car, but to make this process as easy as possible.
-                    Rentica deals with all the major car hire companies around the world checking which local supplier is offering the best prices for the car you want on the date you need it.
-                </p>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-paddingTop50">
-                    <h3 class="ct-sectionHeader-title">Next events</h3>
-                    <div class="ct-sectionHeader-separator">
-                        <span class="slash">/</span>
-                        <span class="slash">/</span>
-                        <span class="minus"></span>
-                    </div>
-                </div>
-
-                <a href="events.html">
-                     <div class="media ct-mediaObject">
-                         <div class="media-left"><img src="{% static 'frontEnd/images/content/cars/footerObject-01.jpg' %}" alt=""></div>
-                         <div class="media-body">
-                             <h6 class="ct-mediaObject-header">Rentica sports car racing finals</h6>
-                             <h2 class="ct-mediaObject-date"><small>Aug 25 <span>2015</span></small></h2>
-                         </div>
-                     </div>
-                 </a>
-                 <a href="events.html">
-                     <div class="media ct-mediaObject">
-                         <div class="media-left"><img src="{% static 'frontEnd/images/content/cars/footerObject-02.jpg' %}" alt=""></div>
-                         <div class="media-body">
-                             <h6 class="ct-mediaObject-header">Rentica Sedan Showdown</h6>
-                             <h2 class="ct-mediaObject-date"><small>Sep 03 <span>2015</span></small></h2>
-                         </div>
-                     </div>
-                 </a>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-paddingTop50 ct-u-marginBottom15">
-                    <h3 class="ct-sectionHeader-title">Flickr gallery</h3>
-                    <div class="ct-sectionHeader-separator">
-                        <span class="slash">/</span>
-                        <span class="slash">/</span>
-                        <span class="minus"></span>
-                    </div>
-                </div>
-
-                <div class="ct-flickrGallery">
-                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-01-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-01.jpg' %}" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-02-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-02.jpg' %}" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-03-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-03.jpg' %}" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-04-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-04.jpg' %}" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-05-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-05.jpg' %}" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-06-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-06.jpg' %}" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-07-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-07.jpg' %}" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="{% static 'frontEnd/images/content/cars/gallery-08-big.jpg' %}"><img src="{% static 'frontEnd/images/content/cars/flickr-08.jpg' %}" alt=""/></a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
-        <div class="container">
-            <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/">createIT</a> 2014</div>
-            <ul class="ct-socials">
-                <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i class="fa fa-flickr"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i class="fa fa-facebook-square"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
-
+{% include "frontEnd/footer.html" %}
 </div>
 
 <!-- JavaScripts -->
