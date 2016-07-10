@@ -23,6 +23,30 @@ import base64
 
 
 def index(request):
+
+    provinces = Province.objects.all()
+    d = {}
+    for s_province in provinces:
+        d[s_province.p_name] = {}
+        d[s_province.p_name]['name'] = s_province.p_name
+        d[s_province.p_name]['id'] = s_province.p_id
+        d[s_province.p_name]['schools'] = []
+
+    schools = School.objects.all()
+    for s_school in schools:
+        if s_school.s_display_index == 0:
+            continue
+        s_school_name = s_school.s_name
+        d_school = {}
+        d_school['name'] = s_school_name
+        d_school['id'] = s_school.id
+        d[s_school.s_province]['schools'].append(d_school)
+
+    obj = []
+    for t in d.values():
+        obj.append(t)
+
+
     login_flag = False
     try:
         req_username = request.session['email']
@@ -96,6 +120,7 @@ def login(request):
             password = request.POST['password']
             try:
                 user = Host.objects.get(email=email)
+
                 if user.password != password:
                     return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
                 else:
@@ -324,13 +349,16 @@ def host_center(request):
         host = Host.objects.get(email=username)
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
-    if not request.method == 'POST':  # 当使用get请求来请求网页的时候(不带任何的数据请求网页)
 
-        return render_to_response('frontEnd/rent-item.html', {'user': host,
-                                                              'login_flag': True,
-                                                              'current_user': host})
+    
+    features = host.get_all_features()
+    host.features =  features.values()
+    host.image = "/files/icons/"+host.icon.split("/")[-1]
 
-    return render_to_response('frontEnd/rent-item.html', {'login_flag': True})
+    return render_to_response('frontEnd/host-index.html', {'user': host,
+                                                          'login_flag': True,
+                                                          'current_user': host,
+                                                          'user': host})
 
 
 def modify_account(request):
@@ -423,6 +451,77 @@ def image_receive(request):
                                                                           'current_user': host},
                                   context_instance=RequestContext(request))
 
+def about(request):
+    return render(request,"frontEnd/about.html")
+
+def service(request):
+    return render(request,"frontEnd/services.html")
+
+def school(request):
+    hosts = Host.objects.all()
+    d_topic_detail = {}
+    for each_host in hosts:
+        '''
+        format the payment 
+        fix the path of the image 
+        find all tags:
+        tags
+        find the topics of this users.
+        then construct a dict for topic id -> topic tag and topic name 
+        make a list of topic
+        finally add each tag to users.
+
+        '''
+
+
+        tag = ""
+        if each_host.gender == 1:
+            tag += "male "
+        else:
+            tag += "female "
+        
+
+        h_topics = Host_Topic.objects.filter(host_id=each_host.id)
+
+        #classification
+        d_host_topic = {}
+        for h_topic_atom in h_topics:
+            t_id = h_topic_atom.t_id
+            f_id = h_topic_atom.f_id
+            if not d_topic_detail.has_key(t_id):    
+                single_topic = Topic.objects.get(id = t_id)
+                d_topic_detail[t_id] = {}
+                d_topic_detail[t_id]['name'] = single_topic.t_name
+                d_topic_detail[t_id]['tag'] = single_topic.t_tag
+                d_topic_detail[t_id]['number'] = 0
+                d_topic_detail[t_id]['index'] = len(d_topic_detail)
+                d_topic_detail[t_id]['topics'] = {}
+
+            d_topic_detail[t_id]['topics'][each_host.id] = 1
+            d_topic_detail[t_id]['number'] = len(d_topic_detail[t_id]['topics'])
+            d_host_topic[t_id] = d_topic_detail[t_id]['tag']
+            
+            #print d_topic_detail[t_id]['topics']
+            #print d_topic_detail[t_id]
+            print each_host.username, d_topic_detail[t_id]['name']
+        #complete tags
+        for k,v in d_host_topic.items():
+            tag = tag + " " +v
+
+        
+
+        each_host.image = "/files/icons/"+each_host.icon.split("/")[-1]
+        each_host.min_payment = int(each_host.min_payment)
+        each_host.tag = tag
+    
+
+    Info = {}
+    Info['object'] = hosts
+    Info['topics'] = d_topic_detail.values()
+
+    Info['allPeople'] = len(hosts)
+
+    return render(request, "frontEnd/school.html",Info)
 
 '''def database(request):
     user = User(username='xxx', password='xxx')

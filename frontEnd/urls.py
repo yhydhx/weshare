@@ -14,4 +14,7 @@ urlpatterns = patterns('',
                        url(r'^modify-account/$', views.modify_account, name='modify'),
                        url(r'^image-receive/$', views.image_receive),
                        url(r'^complete-account-feature/', views.complete_account_feature, name='cp'),
+                       url(r'^about$', views.about,name ='about'),
+                       url(r'^service$', views.service,name ='service'),
+                       url(r'^school$', views.school,name ='school'),
                        )
