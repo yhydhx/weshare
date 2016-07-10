@@ -27,9 +27,10 @@
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
     <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
+    <script src="{% static 'frontEnd/js/jquery-2.1.1.min.js' %}"></script>
+    <script src="{% static 'frontEnd/js/jquery-2.1.1.min.js' %}"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
-
 
 </head>
 
@@ -116,49 +117,47 @@
     <form name="icon" class="ct-u-sectionBorder" action="/complete-account-icon/" method="post"
           enctype="multipart/form-data">
         {% csrf_token %}
-    <div class="tabpanel ct-u-paddingTop10 ct-u-paddingBottom" style="padding-left: 10%">
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a role="tab" data-toggle="tab">第一步:上传头像</a></li>
-            <li role="presentation"><a role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
-            <li role="presentation"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
-        </ul>
-    </div>
+        <div class="tabpanel ct-u-paddingTop10 ct-u-paddingBottom" style="padding-left: 10%">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a role="tab" data-toggle="tab">第一步:上传头像</a></li>
+                <li role="presentation"><a role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
+                <li role="presentation"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
+            </ul>
+        </div>
         <div class="container">
             <div class="row">
-                        <style>
-                            body {
-                                margin: 0;
-                                text-align: center;
-                            }
+                <style>
+                    body {
+                        margin: 0;
+                        text-align: center;
+                    }
 
-                            #clipArea {
-                                margin: 20px;
-                                height: 300px;
-                            }
+                    #clipArea {
+                        margin: 20px;
+                        height: 300px;
+                    }
 
-                            #file,
-                            #clipBtn {
-                                margin: 20px;
-                            }
+                    #file,
+                    #clipBtn {
+                        margin: 20px;
+                    }
 
-                            #view {
-                                margin: 0 auto;
-                                width: 200px;
-                                height: 200px;
-                            }
-                        </style>
+                    #view {
+                        margin: 0 auto;
+                        width: 200px;
+                        height: 200px;
+                    }
+                </style>
 
-                        <div id="clipArea"></div>
-                        <input type="file" id="file" name="icon">
-                        <!--<button id="clipBtn">截取</button>-->
-                        <!-- <div id="view"></div>  -->
-                    </div>
-                </div>
+                <div id="clipArea"></div>
+                <input type="file" id="file" name="icon" class="" >
+                <button id="clipBtn" class="btn btn-lg btn-motive" type="button">截取</button>
+                <div id="view"></div>
             </div>
 
             <div class="row" style="margin-left: 29%">
                 <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
-                    <button id="clipBtn" type="submit" class="btn btn-lg btn-wide btn-motive"><span>进入下一步</span>
+                    <button id="foo" type="button" class="btn btn-lg btn-wide btn-motive"><span>进入下一步</span>
                     </button>
                 </div>
             </div>
@@ -235,6 +234,31 @@
         }
     });
     //clipArea.destroy();
+</script>
+<script>
+    $(document).ready(function () {
+        /* $.ajaxSetup({
+            dataType: "json",
+            beforeSend: function (xhr, settings) {
+                var csrftoken = $.cookie('csrftoken');
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }); */
+        $("#foo").click(function () {
+            var image = $("#view").attr("style");
+            var fuck = $.ajax({
+                type: "POST",
+                url: "/image-receive/",
+                data: { data: image, c: document.cookie},
+                dataType: "jsonp",
+                async:false,
+                success: window.location.replace("/complete-account/")
+            }).always(function (data) {
+                //console.log(data)
+            });
+            console.log(fuck.responseText)
+        })
+    })
 </script>
 
 </body>

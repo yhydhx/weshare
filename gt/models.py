@@ -17,7 +17,7 @@ class Host(models.Model):
     gender = models.IntegerField(default=1, blank=True)  # 1是男生0是女生
     motto = models.CharField(max_length=100, blank=True)
     introduction = models.CharField(max_length=2000, blank=True)
-    icon = models.CharField(max_length=100, blank=True)
+    icon = models.CharField(max_length=200)
     orders = models.IntegerField(default=0)
     service_time = models.CharField(max_length=100, default=True)
     max_payment = models.FloatField(default=0)

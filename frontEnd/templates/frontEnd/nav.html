@@ -85,11 +85,14 @@
         <div class="container">
             <div class="ct-navbarBox">
                 {% if login_flag %}
-                <a href="######主页######">您好: {{ current_user.username }}(这里之后要变成头像)</a>
+                <a href="/host-center/" class="ct-login"><span>{{ current_user.username }}</span><i
+                        class="fa fa-lock"></i></a>
                 {% if current_user.state == 0 %}
                 <p>您还没有成为host, 点击这里成为host
-                    <a href="/complete-account-icon/" class="ct-login"><span>注册成为host</span><i
+                    <a href="/image-receive/" class="ct-login"><span>注册成为host</span><i
                             class="fa fa-lock"></i></a></p>
+                {% elif current_user.state == 1 %}
+                <a href="" class="ct-login"><span>资料审核中</span><i class="fa fa-lock"></i></a>
                 {% endif %}
                 <a href="/logout/" class="ct-login"><span>退出登录</span><i class="fa fa-lock"></i></a>
                 {% else %}
@@ -173,7 +176,8 @@
                     <div class="ct-textEffect"><span data-content="个人信息">个人信息</span></div>
                 </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/host-center/"><span>我的账户</span></a></li>
+                        <li><a href="/host-center/"><span>我的主页</span></a></li>
+                        <li><a href="/modify-account/"><span>修改账户资料</span></a></li>
                     </ul>
                 </li>
                 <!--=========================================================================-->
