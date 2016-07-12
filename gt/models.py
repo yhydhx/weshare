@@ -105,3 +105,18 @@ class Certificate(models.Model):  # igno
 class Admin(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
+
+
+class Menu(models.Model):
+    m_name = models.CharField(max_length=100)
+    m_index = models.IntegerField()
+
+class Document(models.Model):
+    d_menu = models.CharField(max_length=100)
+    d_name = models.CharField(max_length=100)
+    d_text = models.TextField()
+    d_index = models.IntegerField()   # 将不同的话题区分开来
+    
+    
+
+

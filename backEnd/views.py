@@ -395,6 +395,108 @@ def user(request, method, Oid):
         return HttpResponse('没有该方法')
 
 
+def menu(request, method, Oid):
+    try:
+        request.session['adminname']
+    except KeyError, e:
+        return HttpResponseRedirect('login.html')
+    if method == 'addMenu':
+        name = request.POST.get('menu_name')
+        index = request.POST.get('menu_index')
+
+        menu = Menu(
+            m_name = name,
+            m_index = index,
+        )
+        menu.save()
+        # Oid = news.id
+        return HttpResponseRedirect('/dc/menu/show/')
+    elif method == 'change':
+        return render(request, 'backEnd/changeMenu.html', {'object': Menu.objects.get(id=Oid)})
+    elif method == 'save':
+        if request.method == 'POST':
+            menu = {'m_name': request.POST.get('menu_name'),
+                     'm_index': request.POST.get('menu_index'),
+                     'id': request.POST.get("id")
+                     }
+
+            print menu         
+            Menu.objects.filter(id=menu['id']).update(m_name=menu['m_name'],m_index=menu['m_index'])
+
+        return HttpResponseRedirect('/dc/menu/show/')
+
+    elif method == 'delete':
+        Menu.objects.filter(id=Oid).delete()
+        return HttpResponseRedirect('../show/')
+    elif method == 'add':
+        return render(request, 'backEnd/addMenuView.html')
+    elif method == 'show':
+        # return HttpResponse("hello")
+        return render(request, 'backEnd/showMenuList.html', {'object': Menu.objects.all()})
+    else:
+        return HttpResponse('没有该方法')
+
+
+
+
+def doc(request, method, Oid):
+    try:
+        request.session['adminname']
+    except KeyError, e:
+        return HttpResponseRedirect('login.html')
+
+    if method == 'addDoc':
+        d_name = request.POST.get("d_name")
+        d_menu = request.POST.get("d_menu")
+        d_text = request.POST.get("d_text")
+        d_index = request.POST.get("d_index")
+
+
+        doc = Document(
+            d_name = d_name,
+            d_menu = d_menu,
+            d_text = d_text,
+            d_index = d_index
+        )
+        doc.save()
+
+        return HttpResponseRedirect('/dc/doc/show/')
+    elif method == 'change':
+        doc = Document.objects.get(id=Oid)
+        menu = Menu.objects.all()
+        return render(request, 'backEnd/changeDoc.html', {'doc': doc, 'menu': menu})
+
+    elif method == 'save':
+        if request.method == 'POST':
+            doc = {'d_name': request.POST.get('d_name'),
+                    'd_text': request.POST.get("d_text"),
+                    'd_menu': request.POST.get("d_menu"),
+                    'd_index': request.POST.get("d_index"),
+                       'id': request.POST.get("id"),
+                       }
+
+        Document.objects.filter(id=doc['id']).update(d_name=doc['d_name'],
+                                                        d_text=doc['d_text'],
+                                                        d_index=doc['d_index'],
+                                                        d_menu=doc['d_menu']
+                                                        )
+
+        return HttpResponseRedirect('/dc/doc/show/')
+
+    elif method == 'delete':
+        Document.objects.filter(id=Oid).delete()
+
+        return HttpResponseRedirect('../show')
+    elif method == 'add':
+        menu = Menu.objects.all()
+        return render(request, 'backEnd/addDocView.html', {'menu': menu})
+    elif method == 'show' or method == '':
+        allFeature = Document.objects.all()
+        return render(request, 'backEnd/showDocList.html', {'object': allFeature})
+
+    else:
+        return HttpResponse('没有该方法')
+
 def test(request):
     '''
     find all provinces
@@ -491,6 +593,9 @@ def s(request):
     Info['allPeople'] = len(hosts)
 
     return render(request, "frontEnd/school.html",Info)
+
+
+
 
 
 
