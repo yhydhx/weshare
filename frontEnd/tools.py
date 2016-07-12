@@ -16,6 +16,13 @@ def process_mail(input_mail):
         return False
 
 
+def process_phone_num(phone_num):
+    if '+' in phone_num:
+        return True
+    else:
+        return False
+
+
 def checklen(pwd):
     return len(pwd) >= 8
 

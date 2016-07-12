@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^test\.html$', views.test, name='test'),
     url(r'^s\.html$', views.s, name='s'),
     url(r'^email\.html$', views.setEmail, name='setEmail'),
+
     
     '''
 

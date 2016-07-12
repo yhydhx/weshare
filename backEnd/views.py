@@ -7,9 +7,9 @@ from django.views import generic
 
 from django import forms
 
-#mail section 
+# mail section
 from django.core.mail import send_mail
-from django.core.mail import EmailMultiAlternatives,EmailMessage
+from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template import Context, loader
 
 from gt.models import *
@@ -19,8 +19,6 @@ from django.conf import settings
 from gt.settings import *
 
 from django.utils.http import urlquote
-
-
 
 import hashlib
 
@@ -260,9 +258,9 @@ def topic(request, method, Oid):
         tag = request.POST.get('topic_tag')
 
         topic = Topic(
-            t_name = name,
-            t_click = 0,
-            t_tag = tag,
+            t_name=name,
+            t_click=0,
+            t_tag=tag,
         )
         topic.save()
         # Oid = news.id
@@ -275,7 +273,7 @@ def topic(request, method, Oid):
                      't_tag': request.POST.get('topic_tag'),
                      'id': request.POST.get("id")
                      }
-            Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'],t_tag=topic['t_tag'])
+            Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'], t_tag=topic['t_tag'])
 
         return HttpResponseRedirect('/dc/topic/show')
 
@@ -340,6 +338,7 @@ def feature(request, method, Oid):
     else:
         return HttpResponse('没有该方法')
 
+
 def user(request, method, Oid):
     try:
         request.session['adminname']
@@ -358,12 +357,11 @@ def user(request, method, Oid):
     elif method == 'change':
         host = Host.objects.get(id=Oid)
         features = host.get_all_features()
-        host.features =  features.values()
-        host.image = "/files/icons/"+host.icon.split("/")[-1]
+        host.features = features.values()
+        host.image = "/files/icons/" + host.icon.split("/")[-1]
         return render(request, 'backEnd/host-index.html', {'user': host})
-    
+
     elif method == 'pass':
-        
 
         Host.objects.filter(id=Oid).update(state=2)
 
@@ -375,22 +373,22 @@ def user(request, method, Oid):
     elif method == 'applying':
         users = Host.objects.filter(state=1)
         for each_host in users:
-            each_host.userState = "<a href = '../pass/"+str(each_host.id)+"'>申请中(点击通过)</a>"
-        
-        return render(request, 'backEnd/showUserList.html', {'object':users})
+            each_host.userState = "<a href = '../pass/" + str(each_host.id) + "'>申请中(点击通过)</a>"
+
+        return render(request, 'backEnd/showUserList.html', {'object': users})
 
     elif method == 'show':
         # return HttpResponse("hello")
         users = Host.objects.filter(state=0)
         for each_host in users:
             each_host.userState = "正常用户"
-        return render(request, 'backEnd/showUserList.html', {'object':users})
+        return render(request, 'backEnd/showUserList.html', {'object': users})
     elif method == 'host':
         # return HttpResponse("hello")
         users = Host.objects.filter(state=2)
         for each_host in users:
             each_host.userState = "分享者"
-        return render(request, 'backEnd/showUserList.html', {'object':users})
+        return render(request, 'backEnd/showUserList.html', {'object': users})
     else:
         return HttpResponse('没有该方法')
 
@@ -442,23 +440,21 @@ def s(request):
 
         '''
 
-
         tag = ""
         if each_host.gender == 1:
             tag += "male "
         else:
             tag += "female "
-        
 
         h_topics = Host_Topic.objects.filter(host_id=each_host.id)
 
-        #classification
+        # classification
         d_host_topic = {}
         for h_topic_atom in h_topics:
             t_id = h_topic_atom.t_id
             f_id = h_topic_atom.f_id
-            if not d_topic_detail.has_key(t_id):    
-                single_topic = Topic.objects.get(id = t_id)
+            if not d_topic_detail.has_key(t_id):
+                single_topic = Topic.objects.get(id=t_id)
                 d_topic_detail[t_id] = {}
                 d_topic_detail[t_id]['name'] = single_topic.t_name
                 d_topic_detail[t_id]['tag'] = single_topic.t_tag
@@ -469,20 +465,17 @@ def s(request):
             d_topic_detail[t_id]['topics'][each_host.id] = 1
             d_topic_detail[t_id]['number'] = len(d_topic_detail[t_id]['topics'])
             d_host_topic[t_id] = d_topic_detail[t_id]['tag']
-            
-            #print d_topic_detail[t_id]['topics']
-            #print d_topic_detail[t_id]
+
+            # print d_topic_detail[t_id]['topics']
+            # print d_topic_detail[t_id]
             print each_host.username, d_topic_detail[t_id]['name']
-        #complete tags
-        for k,v in d_host_topic.items():
-            tag = tag + " " +v
+        # complete tags
+        for k, v in d_host_topic.items():
+            tag = tag + " " + v
 
-        
-
-        each_host.image = "/files/icons/"+each_host.icon.split("/")[-1]
+        each_host.image = "/files/icons/" + each_host.icon.split("/")[-1]
         each_host.min_payment = int(each_host.min_payment)
         each_host.tag = tag
-    
 
     Info = {}
     Info['object'] = hosts
@@ -490,7 +483,7 @@ def s(request):
 
     Info['allPeople'] = len(hosts)
 
-    return render(request, "frontEnd/school.html",Info)
+    return render(request, "frontEnd/school.html", Info)
 
 
 ##################################################################################################
@@ -545,10 +538,9 @@ def deleteImg(request, Oid):
 ##################################################################################################
 
 def setEmail(request):
-
     # em = EmailMessage('subject','body','service@wshere  .com',['yhydhx@126.com'],['yhydhx@126.com'])
     # em.send()
-    
+
     # subject,from_email,to = 'hello','service@wshere.com','271086337@qq.com'
     # text_content = 'This is an important message'
     # html_content = u'<b>激活链接：</b><a href="http://www.baidu.com">http:www.baidu.com</a>'
@@ -558,11 +550,11 @@ def setEmail(request):
 
     mail_list = ['yhydhx@126.com']
     title = "this is a test"
-    context = {"context":"<a href='http://wshere.com/kaixuan'>helloworld</a>",
-                "link": "http://wshere.com/identify/kaixun/jdklafwioejfioqw",
+    context = {"context": "<a href='http://wshere.com/kaixuan'>helloworld</a>",
+               "link": "http://wshere.com/identify/kaixun/jdklafwioejfioqw",
                }
     email_template_name = 'frontEnd/template.html'
-    t = loader.get_template(email_template_name) 
+    t = loader.get_template(email_template_name)
 
     subject, from_email, to = title, EMAIL_HOST_USER, mail_list
 
@@ -570,12 +562,7 @@ def setEmail(request):
     print html_content
     msg = EmailMultiAlternatives(subject, html_content, from_email, to)
     msg.attach_alternative(html_content, "text/html")
-    
+
     msg.send()
 
-
-    
     return HttpResponse("succuss")
-
-
-

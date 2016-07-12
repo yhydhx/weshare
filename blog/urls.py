@@ -20,10 +20,11 @@ urlpatterns = patterns('',
     url(r'^us/(?P<method>\w+)/(?P<Oid>\w*)$', views.us,name ='us'),
 
     
-
+    url(r'^about$', views.about,name ='about'),
     #file operation 
     url(r'^addImage$', views.addImage,name ='addImage'),
     url(r'^addImageInfo$', views.addImageInfo,name ='addImageInfo'),
+
     url(r'^showImgList$', views.showImgList,name ='showImgList'),
     url(r'^deleteImg/(?P<Oid>\w+)$', views.deleteImg,name ='deleteImg'),
     url(r'^test$', views.test,name ='test'),

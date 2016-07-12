@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
     <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png' %}">-->
 
-    <title>Rentica - HTML Template</title>
+    <title>完善账户信息</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
@@ -45,7 +45,7 @@
         $("#list").html('');
         $("#sheng").html('');
         if (allUnivList[aid].provs.length == 0) {
-            $("#sheng").append("ºÜ±§Ç¸£¡ÔÝÊ±Ã»ÓÐÊý¾Ý£¨Ö»Ìá¹©ÁËÖÐ¹úºÍÃÀ¹úµÄÑ§Ð£ÐÅÏ¢£©");
+            $("#sheng").append("不好意思暂时还没有开放这些国家与地区的注册");
         }
         else {
             $.each(allUnivList[aid].provs, function (j, m) {
@@ -246,10 +246,13 @@
                                class="form-control form-control--type2">
                     </div>
 
+                    <div class="form-group">
+                        <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
+                        <input id="max-payment" name="max-payment" type="number" required value="请填写数字"
+                               class="form-control form-control--type2">
+                    </div>
 
                     <div class="form-group">
-                        <label for="school" class="required">学校</label>
-                        <input id="school" name="school" required class="form-control form-control--type2">
                         <div style="width:100%; margin:0 auto; overflow:hidden;">
                             <label for="txtSc" class="required">你的学校</label>
                             <input type="text" id="txtSc" name="school"

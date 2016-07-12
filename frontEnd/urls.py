@@ -17,4 +17,7 @@ urlpatterns = patterns('',
 
                        url('^image-library/', views.image_library, name='image-library'),
                        # url('^feature_ajax/', views.feature_ajax, name='feature_ajax'),
+                       url(r'^about$', views.about, name='about'),
+                       url(r'^service$', views.service, name='service'),
+                       url(r'^school$', views.school, name='school'),
                        )
