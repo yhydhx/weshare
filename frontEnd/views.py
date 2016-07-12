@@ -455,7 +455,26 @@ def about(request):
     return render(request,"frontEnd/about.html")
 
 def service(request):
-    return render(request,"frontEnd/services.html")
+    menu = Menu.objects.filter(m_index=2)
+    services = Document.objects.all()
+    menu_list = []
+
+    d_topic_question = {}
+    for menu_atom in menu:
+        menu_list.append(menu_atom.m_name)
+        d_topic_question[menu_atom.m_name] = {}
+        d_topic_question[menu_atom.m_name]['doc'] = []
+        d_topic_question[menu_atom.m_name]['name'] = menu_atom.m_name
+
+    count = 0    
+    for service_atom in services:
+        if service_atom.d_menu in menu_list:
+            count += 1
+            service_atom.num = "collapes"+str(count)
+            d_topic_question[service_atom.d_menu]['doc'].append(service_atom)
+
+
+    return render(request,"frontEnd/services.html",{"object":d_topic_question.values()})
 
 def school(request):
     hosts = Host.objects.all()
