@@ -18,17 +18,54 @@
     <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
     <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png' %}">-->
 
-    <title>Rentica - HTML Template</title>
+    <title>注册</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/test.css' %}">
 
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
     <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
+    <script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
+    <script src="{% static 'frontEnd/js/allunivlist.js' %}"></script>
+    <script>var school = "";
+    var sf = "";
+    $(function () {
+        $.each(allUnivList, function (j, m) {
+            $("#gj").append("<a href='javascript:void(0);' onclick='getSheng(" + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
+        });
+    });
+
+    function getSheng(aid, name) {
+        school = name;
+        $("#sheng").show();
+        $("#list").html('');
+        $("#sheng").html('');
+        if (allUnivList[aid].provs.length == 0) {
+            $("#sheng").append("不好意思,還未添加此學校");
+        }
+        else {
+            $.each(allUnivList[aid].provs, function (j, m) {
+                $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool(" + aid + "," + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
+            });
+        }
+    }
+
+    function getSchool(gid, pid, name) {
+        school = school.substring(0, 2);
+        school += " - " + name;
+        $("#list").show();
+        $("#list").html('');
+        $.each(allUnivList[gid].provs[pid].univs, function (k, l) {
+            $("#list").append("<a style='width:270px;display:block;float:left;'>" + l.name + "</a>");
+        });
+        $("#list").append("<br style='clear:both;' />");
+
+    }</script>
 </head>
 
 <body class="cssAnimate">
@@ -131,14 +168,44 @@
                         <input id="username" name="username" class="form-control form-control--type2">
                     </div>
 
-                    <div class="form-group ">
-                        <label for="phone">手机号码</label>
-                        <input id="phone" name="phone" type="tel" class="form-control form-control--type2">
-                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group-btn" style="display: inline-block;top:30px;left: 5px;z-index:9;">
+                            <button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">区号 <span
+                                    class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a class="hrefClass">美国 +1</a></li>
+                                <li><a class="hrefClass">加拿大 +1</a></li>
+                                <li><a class="hrefClass">英国 +44</a></li>
+                                <li><a class="hrefClass">中国 +86</a></li>
+                                <li><a class="hrefClass">香港 +852</a></li>
+                                <li><a class="hrefClass">日本 +81</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                        <label for="foreign-phone">手机号码</label>
+                        <input type="text" class="form-control form-control--type2" aria-label="..." name="phone"
+                               id="foreign-phone" placeholder="请点击右侧三角添加区号">
+                    </div><!-- /input-group -->
 
                     <div class="form-group">
                         <label for="email" class="required">邮箱</label>
                         <input id="email" name="email" required class="form-control form-control--type2">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="width:100%; margin:0 auto; overflow:hidden;">
+                            <label for="txtSc" class="required">你的学校</label>
+                            <input type="text" id="txtSc" name="school"
+                                   class="form-control form-control--type2"/>
+
+                            <div id="gj"
+                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px; display:none;background-color: #FFFFFF;z-index:999;"></div>
+                            <div id="sheng"
+                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none;background-color: #FFFFFF;z-index:999;"></div>
+                            <div id="list"
+                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none; background-color: #FFFFFF;z-index:999;height:300px; overflow-y:auto;"></div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -206,6 +273,34 @@
 
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtSc").on("click", function () {
+            $("#gj").show();
+            $("#list").hide();
+            $("#sheng").hide();
+        });
+
+        $("#list").delegate("a", "click", function () {
+            console.log("fuck js")
+            $("#gj").hide();
+            $("#list").hide();
+            $("#sheng").hide();
+            school += " - " + $(this).text();
+            $("#txtSc").val(school);
+        });
+
+    });</script>
+<script>
+    $(document).ready(
+            $(".hrefClass").click(function () {
+                var a = $(this).text().split(" ")[1]
+                $("#foreign-phone").val(a)
+            })
+
+            // $(".hrefClass").text().split(" ")[1]
+    )
+</script>
 
 
 </body>

@@ -58,17 +58,20 @@
 <div id="ct-js-wrapper" class="ct-pageWrapper">
 
     {% include "frontEnd/nav.html" %}
-
+    {% if current_user.state == 0 %}
+    <h3 style="padding-top: 35%; padding-bottom: 25%; text-align: center">只有<a href="/image-receive/">注册成为HOST</a>才可以成为获得个人主页
+    </h3>
+    {% else %}
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="553"
              data-type="parallax" data-stellar-background-ratio="0.2"
              data-bg-image="{% static 'frontEnd/images/content/cars/mediaHeader-02.jpg' %}"
              data-bg-image-mobile="{% static 'frontEnd/images/content/cars/mediaHeader-02.jpg' %}">
-         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom text-center ct-u-paddingBottom20"
+        <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom text-center ct-u-paddingBottom20"
              data-stellar-ratio="0.7">
             {% if not user.state %}
             <img src="{% static 'frontEnd/images/question' %}" style="text-align: center;  width: 150px; height: 150px">
             {% else %}
-            <img src="{% static 'frontEnd/images/pd.png' %}" style="text-align: center; width: 150px; height: 150px">
+            <img src="{{ current_user.icon }}" style="height: 120px; width: 120px; border: 3px solid #cccccc; border-radius: 50%">
             {% endif %}
             <h3 class="ct-fw-lighter ct-u-hr ct-u-hr--wide ct-u-marginBottom10">{{ user.username }}</h3>
             <h3 class="ct-u-marginBottom20" style="color: transparent">
@@ -117,8 +120,8 @@
 
 
                     <div id="ct-js-checkoutBox" class="ct-widget ct-widget-pricing ct-u-marginBottom30">
-                        <h3 class="ct-widget-header ct-widget-header--dark">面谈价格 <span id="datepickerOutput"
-                                                                                       class="pull-right">￥/ h</span>
+                        <h3 class="ct-widget-header ct-widget-header--dark">面谈价格<span id="datepickerOutput"
+                                                                                      class="pull-right">￥/h</span>
                         </h3>
                         <div class="ct-widget-content">
                             <h4 class="ct-checkout-error">
@@ -150,46 +153,46 @@
 
                             <div role="tabpanel" class="tab-pane fade" id="amenities">
 
-                                
+
                                 {% block content %}
-                                    {% for topic in user.features %}
-                                    <h3 class="ct-fw-lighter ct-u-marginTop50 ct-u-marginBottom20 ct-u-paddingBottom15 ct-u-borderBottom">
+                                {% for topic in user.features %}
+                                <h3 class="ct-fw-lighter ct-u-marginTop50 ct-u-marginBottom20 ct-u-paddingBottom15 ct-u-borderBottom">
                                     {{topic.name}}</h3>
-                                    <div class="row">
-                                        <div class="col-md-3 col-xs-6">
-                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                                {% for feature in topic.row1 %}
-                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-3 col-xs-6">
-                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                                {% for feature in topic.row2 %}
-                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix visible-xs"></div>
-                                        <div class="col-md-3 col-xs-6">
-                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                                {% for feature in topic.row3 %}
-                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-3 col-xs-6">
-                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                                {% for feature in topic.row4 %}
-                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix visible-xs"></div>
+                                <div class="row">
+                                    <div class="col-md-3 col-xs-6">
+                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                            {% for feature in topic.row1 %}
+                                            <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                            {% endfor %}
+                                        </ul>
                                     </div>
-                                    {% endfor %}
+                                    <div class="col-md-3 col-xs-6">
+                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                            {% for feature in topic.row2 %}
+                                            <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix visible-xs"></div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                            {% for feature in topic.row3 %}
+                                            <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                            {% for feature in topic.row4 %}
+                                            <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix visible-xs"></div>
+                                </div>
+                                {% endfor %}
                                 {% endblock %}
-                                
+
 
                             </div>
 
@@ -246,7 +249,7 @@
             </div>
         </div>
     </div>
-
+    {% endif %}
 
     <footer class="ct-footer ct-u-sectionDark">
         <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">

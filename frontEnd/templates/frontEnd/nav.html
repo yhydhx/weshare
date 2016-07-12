@@ -93,6 +93,7 @@
                             class="fa fa-lock"></i></a></p>
                 {% elif current_user.state == 1 %}
                 <a href="" class="ct-login"><span>资料审核中</span><i class="fa fa-lock"></i></a>
+                <img src="{{ current_user.icon }}" style="height: 28px; width: 28px; border: 1px solid #cccccc; border-radius: 50%">
                 {% endif %}
                 <a href="/logout/" class="ct-login"><span>退出登录</span><i class="fa fa-lock"></i></a>
                 {% else %}
@@ -140,7 +141,7 @@
 
             <ul class="nav navbar-nav ct-navbar--fadeIn">
                 <!--=========================================================================-->
-                <li><a href="index.html">
+                <li><a href="/index/">
                     <div class="ct-textEffect"><span data-content="主页">主页</span></div>
                 </a></li>
                 

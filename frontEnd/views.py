@@ -17,13 +17,13 @@ from django.utils import timezone
 from django.conf import settings
 import hashlib
 from tools import *
+import json
 import chunk
 import os
 import base64
 
 
 def index(request):
-
     provinces = Province.objects.all()
     d = {}
     for s_province in provinces:
@@ -46,7 +46,6 @@ def index(request):
     for t in d.values():
         obj.append(t)
 
-
     login_flag = False
     try:
         req_username = request.session['email']
@@ -65,10 +64,11 @@ def index(request):
 def init_register(request):  # 暂时统一用用户名注册,以后的一些坑以后再填
     if request.method == 'POST':
         if request.POST['username'] and request.POST['password'] and request.POST['password-confirm'] \
-                and request.POST['phone'] and request.POST['email']:
+                and request.POST['phone'] and request.POST['email'] and request.POST['school']:
             if request.POST['password'] == request.POST['password-confirm']:  # 初级的用户注册完成了
                 username = request.POST['username']
                 password = request.POST['password']
+                h_school = request.POST['school']
                 phone = request.POST['phone']
                 email = request.POST['email']
                 if not process_mail(email):
@@ -77,6 +77,11 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                                               context_instance=RequestContext(request))
                 if not process_passwd(password):
                     error = '请使用正确要求的密码'
+                    return render_to_response('frontEnd/account.html', {'error': error},
+                                              context_instance=RequestContext(request))
+
+                if not process_phone_num(phone):
+                    error = '请选择国家区号'
                     return render_to_response('frontEnd/account.html', {'error': error},
                                               context_instance=RequestContext(request))
                 try:
@@ -89,6 +94,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                                 password=password,
                                 email=email,
                                 phone_number=phone,
+                                h_school=h_school,
                                 )
                     host.save()
                     return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
@@ -350,15 +356,14 @@ def host_center(request):
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
-    
     features = host.get_all_features()
-    host.features =  features.values()
-    host.image = "/files/icons/"+host.icon.split("/")[-1]
+    host.features = features.values()
+    host.image = "/files/icons/" + host.icon.split("/")[-1]
 
     return render_to_response('frontEnd/host-index.html', {'user': host,
-                                                          'login_flag': True,
-                                                          'current_user': host,
-                                                          'user': host})
+                                                           'login_flag': True,
+                                                           'current_user': host,
+                                                           'user': host})
 
 
 def modify_account(request):
@@ -443,7 +448,7 @@ def image_receive(request):
         des_origin_file = open(des_origin_path, 'w')
         des_origin_file.write(processed_pic)
         des_origin_file.close()
-        host.icon = 'files/icons/' + mark_list + '.jpeg'
+        host.icon = '/files/icons/' + mark_list + '.jpeg'
         host.save()
         return HttpResponse('ACKACK')
     else:
@@ -451,10 +456,13 @@ def image_receive(request):
                                                                           'current_user': host},
                                   context_instance=RequestContext(request))
 
+
 def about(request):
-    return render(request,"frontEnd/about.html")
+    return render(request, "frontEnd/about.html")
+
 
 def service(request):
+
     menu = Menu.objects.filter(m_index=2)
     services = Document.objects.all()
     menu_list = []
@@ -476,6 +484,7 @@ def service(request):
 
     return render(request,"frontEnd/services.html",{"object":d_topic_question.values()})
 
+
 def school(request):
     hosts = Host.objects.all()
     d_topic_detail = {}
@@ -492,23 +501,21 @@ def school(request):
 
         '''
 
-
         tag = ""
         if each_host.gender == 1:
             tag += "male "
         else:
             tag += "female "
-        
 
         h_topics = Host_Topic.objects.filter(host_id=each_host.id)
 
-        #classification
+        # classification
         d_host_topic = {}
         for h_topic_atom in h_topics:
             t_id = h_topic_atom.t_id
             f_id = h_topic_atom.f_id
-            if not d_topic_detail.has_key(t_id):    
-                single_topic = Topic.objects.get(id = t_id)
+            if not d_topic_detail.has_key(t_id):
+                single_topic = Topic.objects.get(id=t_id)
                 d_topic_detail[t_id] = {}
                 d_topic_detail[t_id]['name'] = single_topic.t_name
                 d_topic_detail[t_id]['tag'] = single_topic.t_tag
@@ -519,20 +526,17 @@ def school(request):
             d_topic_detail[t_id]['topics'][each_host.id] = 1
             d_topic_detail[t_id]['number'] = len(d_topic_detail[t_id]['topics'])
             d_host_topic[t_id] = d_topic_detail[t_id]['tag']
-            
-            #print d_topic_detail[t_id]['topics']
-            #print d_topic_detail[t_id]
+
+            # print d_topic_detail[t_id]['topics']
+            # print d_topic_detail[t_id]
             print each_host.username, d_topic_detail[t_id]['name']
-        #complete tags
-        for k,v in d_host_topic.items():
-            tag = tag + " " +v
+        # complete tags
+        for k, v in d_host_topic.items():
+            tag = tag + " " + v
 
-        
-
-        each_host.image = "/files/icons/"+each_host.icon.split("/")[-1]
+        each_host.image = "/files/icons/" + each_host.icon.split("/")[-1]
         each_host.min_payment = int(each_host.min_payment)
         each_host.tag = tag
-    
 
     Info = {}
     Info['object'] = hosts
@@ -540,9 +544,72 @@ def school(request):
 
     Info['allPeople'] = len(hosts)
 
-    return render(request, "frontEnd/school.html",Info)
+    return render(request, "frontEnd/school.html", Info)
 
-'''def database(request):
+
+@csrf_exempt
+def image_library(request):
+    try:
+        username = request.session['email']
+    except:
+        render_to_response('frontEnd/login.html', {'session_timeout': True})
+
+    try:
+        host = Host.objects.get(email=username)
+    except:
+        return HttpResponse('您所持有的用户名不能匹配任何一个host')
+
+    if request.method == 'POST':
+        try:
+            file = request.FILES['pic-library']
+        except:
+            return HttpResponse('fail')
+
+        mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
+        des_origin_path = settings.UPLOAD_PATH + 'image-library/' + mark_list + '.jpeg'  # mark_list是唯一的标志
+        des_origin_file = open(des_origin_path, 'wb')
+        des_origin_file.write(file)
+        des_origin_file.close()
+
+        user_data = User_data()
+        user_data.host_id = host.id
+        User_data.url = des_origin_path
+        user_data.save()
+        return HttpResponse('ACKACK')
+    else:  # 来获取图片
+        user_data_list = User_data.objects.filter(host_id=host.id)
+        index = 1
+        url_list = {}
+        for user_data in user_data_list:
+            user_data[str(index)] = user_data.url
+        url_list_json = json.loads(url_list)
+        return HttpResponse(url_list_json)
+
+
+'''
+@csrf_exempt
+def feature_ajax(request):
+    try:
+        username = request.session['email']
+    except:
+        return HttpResponse('None')
+
+    try:
+        host = Host.objects.get(email=username)
+    except:
+        return HttpResponse('您所持有的用户名不能匹配任何一个host')
+
+    if request.method == 'POST':
+        if request.POST.get['type'] == 'add':
+
+        elif request.POST.get['type'] == 'del':
+            pass
+        else:
+            return HttpResponse('no type received')
+
+
+
+def database(request):
     user = User(username='xxx', password='xxx')
     user.save()
     return HttpResponse('ddfdfd')'''
