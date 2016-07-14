@@ -464,7 +464,7 @@ def about(request):
 def service(request):
 
     menu = Menu.objects.filter(m_index=2)
-    services = Document.objects.all()
+    services = Document.objects.all().order_by('d_index')
     menu_list = []
 
     d_topic_question = {}
