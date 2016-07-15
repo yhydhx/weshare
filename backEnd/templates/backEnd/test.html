@@ -1,0 +1,139 @@
+  
+{% load staticfiles %}
+
+    <style type="text/css">
+        #searchresult
+        {
+            width: 130px;
+            position: absolute;
+            z-index: 1;
+            overflow: hidden;
+            left: 130px;
+            top: 71px;
+            background: #E0E0E0;
+            border-top: none;
+        }
+        .line
+        {
+            font-size: 12px;
+            background: #E0E0E0;
+            width: 130px;
+            padding: 2px;
+        }
+        .hover
+        {
+            background: #007ab8;
+            width: 130px;
+            color: #fff;
+        }
+        .std
+        {
+            width: 150px;
+        }
+    </style>
+
+
+    <body>
+        <form id="form1" runat="server">
+        <div>
+            智能模糊查询提示
+
+            <input id="txt_search" type="text" style="width: 150px;" />
+            <div id="searchresult" style="display: none;">
+            </div>
+        </div>
+       
+        </form>
+    </body>
+
+<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+        $(function () {
+            $("#txt_search").keyup(function (evt) {
+                ChangeCoords(); //控制查询结果div坐标
+                var k = window.event ? evt.keyCode : evt.which;
+                //输入框的id为txt_search，这里监听输入框的keyup事件
+                //不为空 && 不为上箭头或下箭头或回车
+                if ($("#txt_search").val() != "" && k != 38 && k != 40 && k != 13) {
+                    $.ajax({
+                        type: 'Get',
+                        //async: false, //同步执行，不然会有问题
+                        dataType: "json",
+                        url: "getUserNameList",   //提交的页面/方法名
+                        data: "{'userName':'" + $("#txt_search").val() + "'}",              //参数（如果没有参数：null）
+                        contentType: "application/json; charset=utf-8",
+                        error: function (msg) {//请求失败处理函数
+                            alert("数据加载失败");
+                        },
+                        success: function (data) { //请求成功后处理函数。
+                            var objData = data;
+                            if (objData.length > 0) {
+                                var layer = "";
+                                layer = "<table id='aa'>";
+                                $.each(objData, function (idx, item) {
+                                    layer += "<tr class='line'><td class='std'>" + item.userName + "</td></tr>";
+                                });
+                                layer += "</table>";
+
+                                //将结果添加到div中    
+                                $("#searchresult").empty();
+                                $("#searchresult").append(layer);
+                                $(".line:first").addClass("hover");
+                                $("#searchresult").css("display", "");
+                                //鼠标移动事件
+
+                                $(".line").hover(function () {
+                                    $(".line").removeClass("hover");
+                                    $(this).addClass("hover");
+                                }, function () {
+                                    $(this).removeClass("hover");
+                                    //$("#searchresult").css("display", "none");
+                                });
+                                //鼠标点击事件
+                                $(".line").click(function () {
+                                    $("#txt_search").val($(this).text());
+                                    $("#searchresult").css("display", "none");
+                                });
+                            } else {
+                                $("#searchresult").empty();
+                                $("#searchresult").css("display", "none");
+                            }
+                        }
+                    });
+                }
+                else if (k == 38) {//上箭头
+                    $('#aa tr.hover').prev().addClass("hover");
+                    $('#aa tr.hover').next().removeClass("hover");
+                    $('#txt_search').val($('#aa tr.hover').text());
+                } else if (k == 40) {//下箭头
+                    $('#aa tr.hover').next().addClass("hover");
+                    $('#aa tr.hover').prev().removeClass("hover");
+                    $('#txt_search').val($('#aa tr.hover').tsext());
+                }
+                else if (k == 13) {//回车
+                    $('#txt_search').val($('#aa tr.hover').text());
+                    $("#searchresult").empty();
+                    $("#searchresult").css("display", "none");
+                }
+                else {
+                    $("#searchresult").empty();
+                    $("#searchresult").css("display", "none");
+                }
+            });
+            $("#searchresult").bind("mouseleave", function () {
+                $("#searchresult").empty();
+                $("#searchresult").css("display", "none");
+            });
+        });
+        //设置查询结果div坐标
+
+        function ChangeCoords() {
+            //    var left = $("#txt_search")[0].offsetLeft; //获取距离最左端的距离，像素，整型
+            //    var top = $("#txt_search")[0].offsetTop + 26; //获取距离最顶端的距离，像素，整型（20为搜索输入框的高度）
+            var left = $("#txt_search").position().left; //获取距离最左端的距离，像素，整型
+            var top = $("#txt_search").position().top + 20; ; //获取距离最顶端的距离，像素，整型（20为搜索输入框的高度）
+            $("#searchresult").css("left", left + "px"); //重新定义CSS属性
+            $("#searchresult").css("top", top + "px"); //同上
+        }
+
+    </script>

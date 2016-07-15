@@ -18,17 +18,54 @@
     <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
     <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png' %}">-->
 
-    <title>Rentica - HTML Template</title>
+    <title>注册</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/test.css' %}">
 
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
     <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
+    <script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
+    <script src="{% static 'frontEnd/js/allunivlist.js' %}"></script>
+    <script>var school = "";
+    var sf = "";
+    $(function () {
+        $.each(allUnivList, function (j, m) {
+            $("#gj").append("<a href='javascript:void(0);' onclick='getSheng(" + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
+        });
+    });
+
+    function getSheng(aid, name) {
+        school = name;
+        $("#sheng").show();
+        $("#list").html('');
+        $("#sheng").html('');
+        if (allUnivList[aid].provs.length == 0) {
+            $("#sheng").append("不好意思,還未添加此學校");
+        }
+        else {
+            $.each(allUnivList[aid].provs, function (j, m) {
+                $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool(" + aid + "," + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
+            });
+        }
+    }
+
+    function getSchool(gid, pid, name) {
+        school = school.substring(0, 2);
+        school += " - " + name;
+        $("#list").show();
+        $("#list").html('');
+        $.each(allUnivList[gid].provs[pid].univs, function (k, l) {
+            $("#list").append("<a style='width:270px;display:block;float:left;'>" + l.name + "</a>");
+        });
+        $("#list").append("<br style='clear:both;' />");
+
+    }</script>
 </head>
 
 <body class="cssAnimate">
@@ -101,134 +138,7 @@
 
 <div id="ct-js-wrapper" class="ct-pageWrapper">
 
-    <nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
-
-        <div class="navbar-header">
-            <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
-            <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
-                                                           alt=""/></a>
-        </div>
-
-        <div class="container">
-            <div class="ct-navbarBox">
-                <a href="login.html" class="ct-login"><span>Login</span><i class="fa fa-lock"></i></a>
-                <div class="ct-navbarBox-meta">
-                    <div class="ct-navSearch-box">
-                        <a class="ct-js-navSearch ct-navSearch" href="#"><i class="fa fa-search"></i></a>
-                        <!-- Navbar Search  -->
-                        <div class="ct-navbar-search">
-                            <form role="form">
-                                <div class="form-group  ct-input--type2">
-                                    <input id="searchM" required="" type="text" name="field[]"
-                                           placeholder="Search website..." class="form-control">
-                                    <label for="searchM"><span>Search</span></label>
-                                    <button class="ct-navbar-search-button" type="submit">
-                                        <i class="fa fa-search fa-fw"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="ct-langPicker">
-                        <div class="ct-langPicker-content">
-                            <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
-                            <ul class="ct-langPicker-list">
-                                <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}"
-                                                             alt=""/></a></li>
-                                <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}"
-                                                             alt=""/></a></li>
-                                <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}"
-                                                              alt=""/></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> <!-- Flags -->
-                </div>
-
-                <button type="button" class="navbar-toggle">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <ul class="nav navbar-nav ct-navbar--fadeIn">
-                <!--=========================================================================-->
-                <li><a href="index.html">
-                    <div class="ct-textEffect"><span data-content="Home">Home</span></div>
-                </a></li>
-                <!--=========================================================================-->
-                <li class="dropdown"><a href="about.html">
-                    <div class="ct-textEffect"><span data-content="About Us">About Us</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="about.html"><span>About us</span></a></li>
-                        <li><a href="gallery.html"><span>Our gallery</span></a></li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li><a href="services.html">
-                    <div class="ct-textEffect"><span data-content="Services">Services</span></div>
-                </a></li>
-                <li class="dropdown"><a href="rent-now.html">
-                    <div class="ct-textEffect"><span data-content="Rent Now">Rent Now</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="rent-now.html"><span>Rent Now</span></a></li>
-                        <li><a href="rent-item.html"><span>Rent Item</span></a></li>
-                        <li class="ct-subDropdown"><a href="rent-page-variation-1.html">Rent Page</a>
-                            <ul class="ct-submenu dropdown-menu">
-                                <li><a href="rent-page-variation-1.html"><span>Rent Page v1</span></a></li>
-                                <li><a href="rent-page-variation-2.html"><span>Rent Page v2</span></a></li>
-                                <li><a href="rent-paypal.html"><span>Rent with Paypal integration</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li class="dropdown"><a href="blog.html">
-                    <div class="ct-textEffect"><span data-content="Blog">Blog</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="blog.html"><span>Blog</span></a></li>
-                        <li><a href="blog-single.html"><span>Blog Single</span></a></li>
-                        <li><a href="blog-archive.html"><span>Blog Archive</span></a></li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li class="dropdown"><a href="events.html">
-                    <div class="ct-textEffect"><span data-content="Events">Events</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="events.html"><span>Events</span></a></li>
-                        <li class="ct-subDropdown"><a href="event-single.html">Event Single</a>
-                            <ul class="ct-submenu dropdown-menu">
-                                <li><a href="event-single.html"><span>Event Single 1</span></a></li>
-                                <li><a href="event-single2.html"><span>Event Single 2</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li class="active dropdown"><a href="account.html">
-                    <div class="ct-textEffect"><span data-content="Pages">Pages</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="account.html"><span>My Account</span></a></li>
-                        <li><a href="login.html"><span>Login</span></a></li>
-
-                        <li><a href="404.html"><span>404</span></a></li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li><a href="contact.html">
-                    <div class="ct-textEffect"><span data-content="Contact">Contact</span></div>
-                </a></li>
-            </ul>
-
-        </div>
-    </nav>
+    {% include "frontEnd/nav.html" %}
 
 
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340"
@@ -248,12 +158,9 @@
                         <h2 class="ct-sectionHeader-title">
                             <small><span>账户信息</span></small>
                         </h2>
-                        <div class="ct-sectionHeader-separator">
-                            <span class="slash">/</span>
-                            <span class="slash">/</span>
-                            <span class="minus"></span>
-                        </div>
-                        <p>The information in your account does more than just identify you</p>
+                        {% if error %}
+                        <p style="color: #da4f49">{{ error }}</p>
+                        {% endif %}
                     </div>
 
                     <div class="form-group" style="padding-top: 1 px">
@@ -261,10 +168,25 @@
                         <input id="username" name="username" class="form-control form-control--type2">
                     </div>
 
-                    <div class="form-group ">
-                        <label for="phone">手机号码</label>
-                        <input id="phone" name="phone" type="tel" class="form-control form-control--type2">
-                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group-btn" style="display: inline-block;top:30px;left: 5px;z-index:9;">
+                            <button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">区号 <span
+                                    class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a class="hrefClass">美国 +1</a></li>
+                                <li><a class="hrefClass">加拿大 +1</a></li>
+                                <li><a class="hrefClass">英国 +44</a></li>
+                                <li><a class="hrefClass">中国 +86</a></li>
+                                <li><a class="hrefClass">香港 +852</a></li>
+                                <li><a class="hrefClass">日本 +81</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                        <label for="foreign-phone">手机号码</label>
+                        <input type="text" class="form-control form-control--type2" aria-label="..." name="phone"
+                               id="foreign-phone" placeholder="请点击右侧三角添加区号">
+                    </div><!-- /input-group -->
 
                     <div class="form-group">
                         <label for="email" class="required">邮箱</label>
@@ -272,13 +194,30 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="required">密码</label>
-                        <input id="password" name="password" type="password" required class="form-control form-control--type2">
+                        <div style="width:100%; margin:0 auto; overflow:hidden;">
+                            <label for="txtSc" class="required">你的学校</label>
+                            <input type="text" id="txtSc" name="school"
+                                   class="form-control form-control--type2"/>
+
+                            <div id="gj"
+                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px; display:none;background-color: #FFFFFF;z-index:999;"></div>
+                            <div id="sheng"
+                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none;background-color: #FFFFFF;z-index:999;"></div>
+                            <div id="list"
+                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none; background-color: #FFFFFF;z-index:999;height:300px; overflow-y:auto;"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="required">密码(要求八位以上,包含数字和大小写字母混合)</label>
+                        <input id="password" name="password" type="password" required
+                               class="form-control form-control--type2">
                     </div>
 
                     <div class="form-group">
                         <label for="password-confirm" class="required">请重复输入密码</label>
-                        <input id="password-confirm" name="password-confirm" type="password" required class="form-control form-control--type2">
+                        <input id="password-confirm" name="password-confirm" type="password" required
+                               class="form-control form-control--type2">
                     </div>
                 </div>
 
@@ -334,6 +273,34 @@
 
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtSc").on("click", function () {
+            $("#gj").show();
+            $("#list").hide();
+            $("#sheng").hide();
+        });
+
+        $("#list").delegate("a", "click", function () {
+            console.log("fuck js")
+            $("#gj").hide();
+            $("#list").hide();
+            $("#sheng").hide();
+            school += " - " + $(this).text();
+            $("#txtSc").val(school);
+        });
+
+    });</script>
+<script>
+    $(document).ready(
+            $(".hrefClass").click(function () {
+                var a = $(this).text().split(" ")[1]
+                $("#foreign-phone").val(a)
+            })
+
+            // $(".hrefClass").text().split(" ")[1]
+    )
+</script>
 
 
 </body>

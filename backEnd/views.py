@@ -6,11 +6,21 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 
 from django import forms
+
+# mail section
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives, EmailMessage
+from django.template import Context, loader
+
 from gt.models import *
 import datetime
 from django.utils import timezone
 from django.conf import settings
-import hashlib
+from gt.settings import *
+
+from django.utils.http import urlquote
+
+import hashlib,json
 
 '''def index(request):
     latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]
@@ -21,7 +31,7 @@ import hashlib
 
 def __checkin__(request):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
 
@@ -31,7 +41,7 @@ def login(request):
 
 
 def logout(request):
-    del request.session['username']
+    del request.session['adminname']
     return HttpResponseRedirect("login.html")
 
 
@@ -46,7 +56,7 @@ def loginCertifacate(request):
 
         user = get_object_or_404(Admin, username=username)
         if user.password == password:
-            request.session['username'] = username
+            request.session['adminname'] = username
             return HttpResponseRedirect('/dc/province/show/')
         else:
             return HttpResponse("密码错误")
@@ -71,7 +81,7 @@ def contact(request):
 '''
     if request.method == 'POST':
         username = request.POST.get("username")
-        request.session['username'] = data
+        request.session['adminname'] = data
         return HttpResponse(data)
         return render(request, 'backEnd/index.html', {'data': data, 'bigcity': 2})
     else:
@@ -124,7 +134,7 @@ def changePasswd(request):
             newEncode.update(newPassword)
             user.password = newEncode.hexdigest()
             user.save()
-            del request.session['username']
+            del request.session['adminname']
             return HttpResponseRedirect("login.html")
         else:
             return HttpResponse("密码错误")
@@ -146,7 +156,7 @@ def index(request):
 ########################################################
 def province(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     if method == 'addProvince':
@@ -186,7 +196,7 @@ def province(request, method, Oid):
 
 def school(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
 
@@ -240,15 +250,17 @@ def school(request, method, Oid):
 
 def topic(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     if method == 'addProvince':
         name = request.POST.get('topic_name')
+        tag = request.POST.get('topic_tag')
 
         topic = Topic(
             t_name=name,
             t_click=0,
+            t_tag=tag,
         )
         topic.save()
         # Oid = news.id
@@ -258,9 +270,10 @@ def topic(request, method, Oid):
     elif method == 'save':
         if request.method == 'POST':
             topic = {'t_name': request.POST.get('topic_name'),
+                     't_tag': request.POST.get('topic_tag'),
                      'id': request.POST.get("id")
                      }
-            Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'])
+            Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'], t_tag=topic['t_tag'])
 
         return HttpResponseRedirect('/dc/topic/show')
 
@@ -278,7 +291,7 @@ def topic(request, method, Oid):
 
 def feature(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
 
@@ -325,9 +338,10 @@ def feature(request, method, Oid):
     else:
         return HttpResponse('没有该方法')
 
+
 def user(request, method, Oid):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     if method == 'addProvince':
@@ -341,13 +355,17 @@ def user(request, method, Oid):
         # Oid = news.id
         return HttpResponseRedirect('/dc/topic/show/')
     elif method == 'change':
-        return render(request, 'backEnd/changeTopic.html', {'object': Topic.objects.get(id=Oid)})
+        host = Host.objects.get(id=Oid)
+        features = host.get_all_features()
+        host.features = features.values()
+        host.image = "/files/icons/" + host.icon.split("/")[-1]
+        return render(request, 'backEnd/host-index.html', {'user': host})
+
     elif method == 'pass':
-        
 
         Host.objects.filter(id=Oid).update(state=2)
 
-        return HttpResponseRedirect('/dc/user/show/')
+        return HttpResponseRedirect('/dc/user/host/')
 
     elif method == 'delete':
         Topic.objects.filter(id=Oid).delete()
@@ -355,59 +373,209 @@ def user(request, method, Oid):
     elif method == 'applying':
         users = Host.objects.filter(state=1)
         for each_host in users:
-            each_host.userState = "<a href = '../pass/"+str(each_host.id)+"'>申请中(点击通过)</a>"
-        
-        return render(request, 'backEnd/showUserList.html', {'object':users})
+            each_host.userState = "<a href = '../pass/" + str(each_host.id) + "'>申请中(点击通过)</a>"
+
+        return render(request, 'backEnd/showUserList.html', {'object': users})
 
     elif method == 'show':
         # return HttpResponse("hello")
         users = Host.objects.filter(state=0)
         for each_host in users:
             each_host.userState = "正常用户"
-        return render(request, 'backEnd/showUserList.html', {'object':users})
+        return render(request, 'backEnd/showUserList.html', {'object': users})
     elif method == 'host':
         # return HttpResponse("hello")
         users = Host.objects.filter(state=2)
         for each_host in users:
             each_host.userState = "分享者"
-        return render(request, 'backEnd/showUserList.html', {'object':users})
+        return render(request, 'backEnd/showUserList.html', {'object': users})
     else:
         return HttpResponse('没有该方法')
 
 
+def menu(request, method, Oid):
+    try:
+        request.session['adminname']
+    except KeyError, e:
+        return HttpResponseRedirect('login.html')
+    if method == 'addMenu':
+        name = request.POST.get('menu_name')
+        index = request.POST.get('menu_index')
+
+        menu = Menu(
+            m_name = name,
+            m_index = index,
+        )
+        menu.save()
+        # Oid = news.id
+        return HttpResponseRedirect('/dc/menu/show/')
+    elif method == 'change':
+        return render(request, 'backEnd/changeMenu.html', {'object': Menu.objects.get(id=Oid)})
+    elif method == 'save':
+        if request.method == 'POST':
+            menu = {'m_name': request.POST.get('menu_name'),
+                     'm_index': request.POST.get('menu_index'),
+                     'id': request.POST.get("id")
+                     }
+
+            print menu         
+            Menu.objects.filter(id=menu['id']).update(m_name=menu['m_name'],m_index=menu['m_index'])
+
+        return HttpResponseRedirect('/dc/menu/show/')
+
+    elif method == 'delete':
+        Menu.objects.filter(id=Oid).delete()
+        return HttpResponseRedirect('../show/')
+    elif method == 'add':
+        return render(request, 'backEnd/addMenuView.html')
+    elif method == 'show':
+        # return HttpResponse("hello")
+        return render(request, 'backEnd/showMenuList.html', {'object': Menu.objects.all()})
+    else:
+        return HttpResponse('没有该方法')
+
+
+
+
+def doc(request, method, Oid):
+    try:
+        request.session['adminname']
+    except KeyError, e:
+        return HttpResponseRedirect('login.html')
+
+    if method == 'addDoc':
+        d_name = request.POST.get("d_name")
+        d_menu = request.POST.get("d_menu")
+        d_text = request.POST.get("d_text")
+        d_index = request.POST.get("d_index")
+
+
+        doc = Document(
+            d_name = d_name,
+            d_menu = d_menu,
+            d_text = d_text,
+            d_index = d_index
+        )
+        doc.save()
+
+        return HttpResponseRedirect('/dc/doc/show/')
+    elif method == 'change':
+        doc = Document.objects.get(id=Oid)
+        menu = Menu.objects.all()
+        return render(request, 'backEnd/changeDoc.html', {'doc': doc, 'menu': menu})
+
+    elif method == 'save':
+        if request.method == 'POST':
+            doc = {'d_name': request.POST.get('d_name'),
+                    'd_text': request.POST.get("d_text"),
+                    'd_menu': request.POST.get("d_menu"),
+                    'd_index': request.POST.get("d_index"),
+                       'id': request.POST.get("id"),
+                       }
+
+        Document.objects.filter(id=doc['id']).update(d_name=doc['d_name'],
+                                                        d_text=doc['d_text'],
+                                                        d_index=doc['d_index'],
+                                                        d_menu=doc['d_menu']
+                                                        )
+
+        return HttpResponseRedirect('/dc/doc/show/')
+
+    elif method == 'delete':
+        Document.objects.filter(id=Oid).delete()
+
+        return HttpResponseRedirect('../show')
+    elif method == 'add':
+        menu = Menu.objects.all()
+        return render(request, 'backEnd/addDocView.html', {'menu': menu})
+    elif method == 'show' or method == '':
+        allFeature = Document.objects.all()
+        return render(request, 'backEnd/showDocList.html', {'object': allFeature})
+
+    else:
+        return HttpResponse('没有该方法')
+
 def test(request):
-    '''
-    find all provinces
-    then get all university of each province.
 
-    '''
-    provinces = Province.objects.all()
-    d = {}
-    for s_province in provinces:
-        d[s_province.p_name] = {}
-        d[s_province.p_name]['name'] = s_province.p_name
-        d[s_province.p_name]['id'] = s_province.p_id
-        d[s_province.p_name]['schools'] = []
+    return render(request, "backEnd/test.html")
 
-    schools = School.objects.all()
-    for s_school in schools:
-        if s_school.s_display_index == 0:
-            continue
-        s_school_name = s_school.s_name
-        d_school = {}
-        d_school['name'] = s_school_name
-        d_school['id'] = s_school.id
-        d[s_school.s_province]['schools'].append(d_school)
+def getUserNameList(request):
+    username = request.GET.get("userName")
 
-    obj = []
-    for t in d.values():
-        obj.append(t)
+    hosts = Host.objects.all()
 
-    return render(request, "frontEnd/index.html", {"object": obj})
-
+    response_data = []
+    for host_atom in hosts:
+        if host_atom.username.startswith(username):
+            tmpD = {}
+            tmpD['userName'] = host_atom.username
+            response_data.append(tmpD)
+    
+    return HttpResponse(json.dumps(response_data))
 
 def s(request):
-    return render(request, "frontEnd/school.html")
+    hosts = Host.objects.all()
+    d_topic_detail = {}
+    for each_host in hosts:
+        '''
+        format the payment 
+        fix the path of the image 
+        find all tags:
+        tags
+        find the topics of this users.
+        then construct a dict for topic id -> topic tag and topic name 
+        make a list of topic
+        finally add each tag to users.
+
+        '''
+
+        tag = ""
+        if each_host.gender == 1:
+            tag += "male "
+        else:
+            tag += "female "
+
+        h_topics = Host_Topic.objects.filter(host_id=each_host.id)
+
+        # classification
+        d_host_topic = {}
+        for h_topic_atom in h_topics:
+            t_id = h_topic_atom.t_id
+            f_id = h_topic_atom.f_id
+            if not d_topic_detail.has_key(t_id):
+                single_topic = Topic.objects.get(id=t_id)
+                d_topic_detail[t_id] = {}
+                d_topic_detail[t_id]['name'] = single_topic.t_name
+                d_topic_detail[t_id]['tag'] = single_topic.t_tag
+                d_topic_detail[t_id]['number'] = 0
+                d_topic_detail[t_id]['index'] = len(d_topic_detail)
+                d_topic_detail[t_id]['topics'] = {}
+
+            d_topic_detail[t_id]['topics'][each_host.id] = 1
+            d_topic_detail[t_id]['number'] = len(d_topic_detail[t_id]['topics'])
+            d_host_topic[t_id] = d_topic_detail[t_id]['tag']
+
+            # print d_topic_detail[t_id]['topics']
+            # print d_topic_detail[t_id]
+            print each_host.username, d_topic_detail[t_id]['name']
+        # complete tags
+        for k, v in d_host_topic.items():
+            tag = tag + " " + v
+
+        each_host.image = "/files/icons/" + each_host.icon.split("/")[-1]
+        each_host.min_payment = int(each_host.min_payment)
+        each_host.tag = tag
+
+    Info = {}
+    Info['object'] = hosts
+    Info['topics'] = d_topic_detail.values()
+
+    Info['allPeople'] = len(hosts)
+
+    return render(request, "frontEnd/school.html", Info)
+
+
+
 
 
 ##################################################################################################
@@ -417,7 +585,7 @@ def s(request):
 
 def addImage(request):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     if request.method == "POST":
@@ -445,7 +613,7 @@ def addImageInfo(request):
 
 def showImgList(request):
     try:
-        request.session['username']
+        request.session['adminname']
     except KeyError, e:
         return HttpResponseRedirect('login.html')
     return render(request, 'backEnd/showImgList.html', {'image': Image.objects.all()})
@@ -454,3 +622,39 @@ def showImgList(request):
 def deleteImg(request, Oid):
     Image.objects.filter(id=Oid).delete()
     return HttpResponseRedirect('../showImgList')
+
+
+##################################################################################################
+#  email operation 
+#   about check and inform 
+##################################################################################################
+
+def setEmail(request):
+    # em = EmailMessage('subject','body','service@wshere  .com',['yhydhx@126.com'],['yhydhx@126.com'])
+    # em.send()
+
+    # subject,from_email,to = 'hello','service@wshere.com','271086337@qq.com'
+    # text_content = 'This is an important message'
+    # html_content = u'<b>激活链接：</b><a href="http://www.baidu.com">http:www.baidu.com</a>'
+    # msg = EmailMultiAlternatives(subject,text_content,from_email,[to])
+    # msg.attach_alternative(html_content, 'text/html')
+    # msg.send()
+
+    mail_list = ['yhydhx@126.com']
+    title = "this is a test"
+    context = {"context": "<a href='http://wshere.com/kaixuan'>helloworld</a>",
+               "link": "http://wshere.com/identify/kaixun/jdklafwioejfioqw",
+               }
+    email_template_name = 'frontEnd/template.html'
+    t = loader.get_template(email_template_name)
+
+    subject, from_email, to = title, EMAIL_HOST_USER, mail_list
+
+    html_content = t.render(Context(context))
+    print html_content
+    msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+    msg.attach_alternative(html_content, "text/html")
+
+    msg.send()
+
+    return HttpResponse("succuss")

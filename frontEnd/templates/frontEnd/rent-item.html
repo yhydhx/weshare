@@ -96,10 +96,12 @@
         <li><a href="contact.html"><span>Contact</span></a></li>
     </ul>
 </div>
-
 <div id="ct-js-wrapper" class="ct-pageWrapper">
 
     {% include "frontEnd/nav.html" %}
+    {% if current_user.state == 0 %}
+    <h1>只有<a href="/image-receive/">注册</a>用户才可以有个人主页</h1>
+    {% else %}
 
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="553"
              data-type="parallax" data-stellar-background-ratio="0.2"
@@ -111,12 +113,16 @@
             <img src="{% static 'frontEnd/images/question' %}" style="text-align: center;  width: 150px; height: 150px">
             {% else %}
             <img src="{% static 'frontEnd/images/pd.png' %}" style="text-align: center; width: 150px; height: 150px">
-            {%  endif %}
+            {% endif %}
             <h3 class="ct-fw-lighter ct-u-hr ct-u-hr--wide ct-u-marginBottom10">{{ user.username }}</h3>
             <h3 class="ct-u-marginBottom20" style="color: transparent">
                 <small class="ct-fw-lighter ct-u-colorMotive">- {{ user.motto }} -</small>
             </h3>
-
+            {% if current_user.state == 1 %}
+            <a href="/host-center/" class="ct-login"><span>审核中</span><i class="fa fa-lock"></i></a>
+            {% else%}
+            <a href="/host-center/" class="ct-login"><span>审核通过</span><i class="fa fa-unlock"></i></a>
+            {% endif %}
         </div>
     </section>
 
@@ -183,7 +189,7 @@
                         <div class="tab-content">
                             <!-- Tab #1 -->
                             <div role="tabpanel" class="tab-pane fade in active" id="description">
-                                {{ user.introduction }}
+                                {{ user.introduction | safe }}
                             </div>
 
                             <div role="tabpanel" class="tab-pane fade" id="amenities">
@@ -341,7 +347,7 @@
             </div>
         </div>
     </div>
-
+    {% endif %}
 
     <footer class="ct-footer ct-u-sectionDark">
         <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">

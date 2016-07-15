@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <!--[if IE 8 ]>
@@ -18,180 +19,34 @@
 
     <title>Rentica - HTML Template</title>
 
-    <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
+
 
     <!--[if lt IE 9]>
-    <script src="./assets/bootstrap/js/html5shiv.min.js"></script>
-	<script src="./assets/bootstrap/js/respond.min.js"></script>
- 	<script src="./assets/plugins/REM-unit-polyfill/js/rem.min.js"></script>
+    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
+    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
+    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
-    <script src="./assets/js/modernizr.custom.js"></script>
+    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
 </head>
 
 <body class="cssAnimate">
-<div class="ct-preloader-container">                                            <!-- Preloader -->
-    <div class='ct-preloader'><div><div><div><div><div><div><div><div><div><div></div></div></div></div></div></div></div></div></div></div></div>
-</div>
 
-<div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="./assets/images/content/logo2.png" alt=""/></a></div>
-    <ul class="ct-menuMobile-navbar">
-        <li class="active"><a href="index.html"><span>Home</span></a></li>
-        <li><a href="about.html"><span>About us</span></a></li>
-        <li><a href="gallery.html"><span>Our gallery</span></a></li>
-        <li class="dropdown"><a href="rent-now.html"><span>Rent Now</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="rent-now.html"><span>Rent Now</span></a></li>
-                <li><a href="rent-item.html"><span>Rent Item</span></a></li>
-                <li><a href="rent-page-variation-1.html"><span>Rent Page v1</span></a></li>
-                <li><a href="rent-page-variation-2.html"><span>Rent Page v2</span></a></li>
-                <li><a href="rent-paypal.html"><span>Rent with Paypal integration</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="blog.html"><span>Blog</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="blog.html"><span>Blog</span></a></li>
-                <li><a href="blog-single.html"><span>Blog Single</span></a></li>
-                <li><a href="blog-archive.html"><span>Blog Archive</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="events.html"><span>Events</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="events.html"><span>Events</span></a></li>
-                <li><a href="event-single.html"><span>Event Single 1</span></a></li>
-                <li><a href="event-single2.html"><span>Event Single 2</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="account.html"><span>Pages</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="account.html"><span>My Account</span></a></li>
-                <li><a href="login.html"><span>Login</span></a></li>
-
-                <li><a href="404.html"><span>404</span></a></li>
-            </ul>
-        </li>
-        <li><a href="services.html"><span>Services</span></a></li>
-        <li><a href="contact.html"><span>Contact</span></a></li>
-    </ul>
-</div>
-
-<div id="ct-js-wrapper" class="ct-pageWrapper">
-
-<nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
-
-    <div class="navbar-header">
-        <a class="ct-logoDark" href="index.html"><img src="./assets/images/content/logo.png" alt=""/></a>
-        <a class="ct-logoWhite" href="index.html"><img src="./assets/images/content/logo2.png" alt=""/></a>
-    </div>
-
-    <div class="container">
-        <div class="ct-navbarBox">
-            <a href="login.html" class="ct-login"><span>Login</span><i class="fa fa-lock"></i></a>
-            <div class="ct-navbarBox-meta">
-                <div class="ct-navSearch-box">
-                    <a class="ct-js-navSearch ct-navSearch" href="#"><i class="fa fa-search"></i></a> <!-- Navbar Search  -->
-                    <div class="ct-navbar-search">
-                        <form role="form">
-                            <div class="form-group  ct-input--type2">
-                                <input id="searchM" required="" type="text" name="field[]" placeholder="Search website..." class="form-control">
-                                <label for="searchM"><span>Search</span></label>
-                                <button class="ct-navbar-search-button" type="submit">
-                                    <i class="fa fa-search fa-fw"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="ct-langPicker">
-                    <div class="ct-langPicker-content">
-                        <a href="#"><img src="./assets/images/content/flag-01.jpg" alt=""/></a>
-                        <ul class="ct-langPicker-list">
-                            <li><a href="#">English <img src="./assets/images/content/flag-01.jpg" alt=""/></a></li>
-                            <li><a href="#">Español <img src="./assets/images/content/flag-03.jpg" alt=""/></a></li>
-                            <li><a href="#">Italiano <img src="./assets/images/content/flag-02.jpg" alt=""/></a></li>
-                        </ul>
-                    </div>
-                </div> <!-- Flags -->
-            </div>
-
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-
-        <ul class="nav navbar-nav ct-navbar--fadeIn">
-            <!--=========================================================================-->
-            <li><a href="index.html"><div class="ct-textEffect"><span data-content="Home">Home</span></div></a></li>
-            <!--=========================================================================-->
-            <li class="dropdown"><a href="about.html"><div class="ct-textEffect"><span data-content="About Us">About Us</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="about.html"><span>About us</span></a></li>
-                    <li><a href="gallery.html"><span>Our gallery</span></a></li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li class="active"><a href="services.html"><div class="ct-textEffect"><span data-content="Services">Services</span></div></a></li>
-            <li class="dropdown"><a href="rent-now.html"><div class="ct-textEffect"><span data-content="Rent Now">Rent Now</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="rent-now.html"><span>Rent Now</span></a></li>
-                    <li><a href="rent-item.html"><span>Rent Item</span></a></li>
-                    <li class="ct-subDropdown"><a href="rent-page-variation-1.html">Rent Page</a>
-                        <ul class="ct-submenu dropdown-menu">
-                            <li><a href="rent-page-variation-1.html"><span>Rent Page v1</span></a></li>
-                            <li><a href="rent-page-variation-2.html"><span>Rent Page v2</span></a></li>
-                            <li><a href="rent-paypal.html"><span>Rent with Paypal integration</span></a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li class="dropdown"><a href="blog.html"><div class="ct-textEffect"><span data-content="Blog">Blog</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="blog.html"><span>Blog</span></a></li>
-                    <li><a href="blog-single.html"><span>Blog Single</span></a></li>
-                    <li><a href="blog-archive.html"><span>Blog Archive</span></a></li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li class="dropdown"><a href="events.html"><div class="ct-textEffect"><span data-content="Events">Events</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="events.html"><span>Events</span></a></li>
-                    <li class="ct-subDropdown"><a href="event-single.html">Event Single</a>
-                        <ul class="ct-submenu dropdown-menu">
-                            <li><a href="event-single.html"><span>Event Single 1</span></a></li>
-                            <li><a href="event-single2.html"><span>Event Single 2</span></a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li class="dropdown"><a href="account.html"><div class="ct-textEffect"><span data-content="Pages">Pages</span></div></a>
-                <ul class="dropdown-menu">
-                    <li><a href="account.html"><span>My Account</span></a></li>
-                    <li><a href="login.html"><span>Login</span></a></li>
-
-                    <li><a href="404.html"><span>404</span></a></li>
-                </ul>
-            </li>
-            <!--=========================================================================-->
-            <li><a href="contact.html"><div class="ct-textEffect"><span data-content="Contact">Contact</span></div></a></li>
-        </ul>
-
-    </div>
-</nav>
+{% include "frontEnd/nav.html" %}
 
 <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340" data-type="parallax" data-stellar-background-ratio="0.3" data-bg-image="./assets/images/content/cars/mediaHeader-01.jpg" data-bg-image-mobile="./assets/images/content/cars/mediaHeader-01.jpg">
     <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">services</h2></div>
 </section>
 
+
+{% block topic %}
+{% for menu in object %}
+
 <section class="ct-u-sectionBorder">
     <div class="container">
-        <div class="ct-sectionHeader ct-u-paddingTop60 ct-u-paddingBottom70">
-            <h2 class="ct-sectionHeader-title"><small>We belive in <span>quality</span></small></h2>
+        <div class="ct-sectionHeader ct-u-paddingTop60 ct-u-paddingBottom10">
+            <h2 class="ct-sectionHeader-title"><small> {{menu.name}}</small></h2>
             <div class="ct-sectionHeader-separator">
                 <span class="minus"></span>
                 <span class="slash">/</span>
@@ -201,62 +56,7 @@
             <p>100% satisfaction or the money back policy is what we believe in and we do mean business.</p>
         </div>
 
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="ct-iconBox ct-iconBox--type1 media ct-u-marginBottom50">
-                    <div class="h3 ct-iconBox-icon media-left"><small><i class="fa fa-wrench"></i></small></div>
-                    <div class="ct-iconBox-content media-body">
-                        <h6 class="ct-iconBox-header ct-u-hr ct-u-hr--left">Our cars work great</h6>
-                        <p>With 30 years car hire experience in Europe and 60 years worldwide we allways remember that our top priority is to provide the best quality car rental service at an affordable price.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="ct-iconBox ct-iconBox--type1 media ct-u-marginBottom50">
-                    <div class="h3 ct-iconBox-icon media-left"><small><i class="fa fa-thumbs-o-up"></i></small></div>
-                    <div class="ct-iconBox-content media-body">
-                        <h6 class="ct-iconBox-header ct-u-hr ct-u-hr--left">Outstanding reviews</h6>
-                        <p>Just look at out testimonials section. It is full of happy and fully satisfied customers that cannot wait to use our services again. It is just a pleasure and stress-free experience.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="ct-iconBox ct-iconBox--type1 media ct-u-marginBottom50">
-                    <div class="h3 ct-iconBox-icon media-left"><small><i class="fa fa-car"></i></small></div>
-                    <div class="ct-iconBox-content media-body">
-                        <h6 class="ct-iconBox-header ct-u-hr ct-u-hr--left">Take it for a spin</h6>
-                        <p>Come to our car rental point and ask for a free ride to check if the car you were thinking about suits your needs. In no time you will be given a chance to drive and try if the trunk accomodates your luggage.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="ct-iconBox ct-iconBox--type1 media ct-u-marginBottom50">
-                    <div class="h3 ct-iconBox-icon media-left"><small><i class="fa fa-star"></i></small></div>
-                    <div class="ct-iconBox-content media-body">
-                        <h6 class="ct-iconBox-header ct-u-hr ct-u-hr--left">Five star service</h6>
-                        <p>Our company is rated with 5 stars which guarantees that you will receive the best quality possible, and the satisfaction is guaranteed or the money back policy works perfect.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="ct-iconBox ct-iconBox--type1 media ct-u-marginBottom50">
-                    <div class="h3 ct-iconBox-icon media-left"><small><i class="fa fa-money"></i></small></div>
-                    <div class="ct-iconBox-content media-body">
-                        <h6 class="ct-iconBox-header ct-u-hr ct-u-hr--left">Discounts for groups</h6>
-                        <p>If you are planning to rent more than one car, you are sure to receive a substancial discount for every next car. So far there hac never been a client that would leave us without "thank you so much".</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="ct-iconBox ct-iconBox--type1 media ct-u-marginBottom50">
-                    <div class="h3 ct-iconBox-icon media-left"><small><i class="fa fa-flag"></i></small></div>
-                    <div class="ct-iconBox-content media-body">
-                        <h6 class="ct-iconBox-header ct-u-hr ct-u-hr--left">Let's go have some fun</h6>
-                        <p>Book one of our car rental deals, and you’ll be able to say bye-bye to the of public transportation. With unlimited mileage and special offers you can easily find cheap rental cars last minute.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
     </div>
 </section>
@@ -265,318 +65,62 @@
 <section class="ct-mediaSection ct-mediaSection--desktop" data-type="pattern" data-bg-image="./assets/images/content/cars/bg-08.jpg" data-bg-image-mobile="./assets/images/content/cars/bg-08.jpg">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 text-center ct-u-paddingTop70 ct-u-paddingBottom70">
-                <img src="./assets/images/content/cars/services-01.png" alt="">
-            </div>
-            <div class="col-sm-6 ct-u-paddingTop90 ct-u-paddingBottom50">
-                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom30">
-                    <h2 class="ct-sectionHeader-title"><small>Standards <span>are important</span></small></h2>
-                    <div class="ct-sectionHeader-separator">
-                        <span class="slash">/</span>
-                        <span class="slash">/</span>
-                        <span class="minus"></span>
-                    </div>
-                    <p>Only the best offers and the best selection just for you!</p>
-                </div>
+            
+            <div class=" ct-u-paddingTop10 ct-u-paddingBottom50" style = " width: 60%; margin-left: 20%;">
 
                 <div class="panel-group" id="accordion">
+                    {% for doc in menu.doc%}
                     <div class="panel panel-motive">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <a class="h5 collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                    <small>How easy is it to launch this rocket ?</small>
+                                <a class="h5 collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{doc.num}}">
+                                    <small>{{doc.d_name}}</small>
                                 </a>
                             </div>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse">
+                        <div id="{{doc.num}}" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <p>You'll find a great rate on a great car rental at more than 200 conveniently
-                                    located Rentica car rental sites throughout the country, including many at
-                                    or near major airports. It is very convenient and you will never find yourself
-                                    in a situation when you have no access to emergency service or replacement car.
+                                <p>{{doc.d_text |  safe }}
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-motive">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                    <small>Is it cool enough for me ?</small>
-                                </a>
-                            </div>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <p>When it comes to rental car selection, Rentica’s got everything from sub compacts
-                                    to SUVs. Find a rental car for every occasion - minivans for vacations, ragtops
-                                    for weekend getaways and economy models for saving a little extra spending money.
-                                    So only the sky is now the limit for you. The only problem you will have is
-                                    "what shall I choose".
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-motive">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                    <small>What if I crash ?</small>
-                                </a>
-                            </div>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <p>Occasionally something may occur and your Rentica rental car may need service
-                                    while you're travelling. If you need help, you can rest assured that in the U.S.,
-                                    Canada, and some other countries, Rentica can provide Emergency Roadside
-                                    Assistance within 30 minutes from the call. And you will never be left alone.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    {%  endfor %}
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="ct-mediaSection ct-mediaSection--desktop" data-type="pattern" data-bg-image="./assets/images/content/cars/bg-09.jpg" data-bg-image-mobile="./assets/images/content/cars/bg-09.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-sm-push-6 text-center ct-u-paddingTop70">
-                <img src="./assets/images/content/cars/services-02.png" alt="">
-            </div>
-            <div class="col-sm-6 col-sm-pull-6 ct-u-paddingTop90 ct-u-paddingBottom150">
-                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom30">
-                    <h2 class="ct-sectionHeader-title"><small>Our clients <span>are important</span></small></h2>
-                    <div class="ct-sectionHeader-separator">
-                        <span class="slash">/</span>
-                        <span class="slash">/</span>
-                        <span class="minus"></span>
-                    </div>
-                    <p>Best company for best customers</p>
-                </div>
-                <p>We are open for our customers and each one is treated individually, so everyone must get out of our office in 100% satisfied. Our customers are our most important and highly appreciate everyone contented smile on the faces of our customers. That is why we make every effort to ensure that our cars were in the highest quality and ensure the safety of all their passengers. Additionally, each of our customers will receive the following services:
-                </p>
-                <div class="row">
-                    <div class="col-sm-6 ct-u-paddingTop20">
-                        <ul class="ct-simpleList">
-                            <li><i class="fa fa-check-circle"></i><span>Only the best services</span></li>
-                            <li><i class="fa fa-check-circle"></i><span>Highly trained staff</span></li>
-                            <li><i class="fa fa-check-circle"></i><span>Money back guaranteed</span></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 ct-u-paddingTop20">
-                        <ul class="ct-simpleList">
-                            <li><i class="fa fa-check-circle"></i><span>Top notch automobiles</span></li>
-                            <li><i class="fa fa-check-circle"></i><span>Extra options for low costs</span></li>
-                            <li><i class="fa fa-check-circle"></i><span>Discounts for members</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="ct-u-sectionMotive">
-    <div class="ct-sectionHeader ct-u-paddingBoth60">
-        <h2 class="ct-sectionHeader-title"><small>Ultra affordable <span>pricing</span></small></h2>
-        <div class="ct-sectionHeader-separator">
-            <span class="minus"></span>
-            <span class="slash">/</span>
-            <span class="slash">/</span>
-            <span class="minus"></span>
-        </div>
-        <p>Our prices are dedicated, enthusiastic and always best for customers</p>
-    </div>
-</section>
-
-<section class="ct-mediaSection ct-mediaSection--desktop" data-type="parallax" data-stellar-background-ratio="0.3" data-bg-image="./assets/images/content/cars/bg-10.jpg" data-bg-image-mobile="./assets/images/content/cars/bg-10.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="ct-pricingBox ct-pricingBox--graydarker ct-u-marginBoth30">
-                    <div class="ct-pricingBox-header">
-                        <h2 class="ct-pricingBox-title ct-u-hr ct-u-hr--wide"><small>Funky Package</small></h2>
-                        <h2 class="ct-pricingBox-price"><b>$750</b></h2>
-                        <h6 class="ct-pricingBox-subtitle">Monthly</h6>
-                    </div>
-                    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path d="M0,0 L 50,50 100,0 Z"/>
-                    </svg>
-                    <div class="ct-pricingBox-content">
-                        <ul class="ct-pricingBox-list">
-                            <li>T-shirt and toaster</li>
-                            <li>Rihanna's phone number</li>
-                            <li>Telepathic support</li>
-                            <li>Foldable time machine</li>
-                            <li>Real life undo button</li>
-                        </ul>
-                    </div>
-                    <a href="login.html" class="btn btn-lg btn-graydarker"><span>Sign Up Now</span></a>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="ct-pricingBox ct-pricingBox--motive ct-u-marginBoth30">
-                    <div class="ct-pricingBox-header">
-                        <h2 class="ct-pricingBox-title ct-u-hr ct-u-hr--wide"><small>VIP Package</small></h2>
-                        <h2 class="ct-pricingBox-price"><b>$1250</b></h2>
-                        <h6 class="ct-pricingBox-subtitle">Monthly</h6>
-                    </div>
-                    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path d="M0,0 L 50,50 100,0 Z"/>
-                    </svg>
-                    <div class="ct-pricingBox-content">
-                        <ul class="ct-pricingBox-list">
-                            <li>T-shirt and toaster</li>
-                            <li>Rihanna's phone number</li>
-                            <li>Telepathic support</li>
-                            <li>Foldable time machine</li>
-                            <li>Real life undo button</li>
-                        </ul>
-                    </div>
-                    <a href="login.html" class="btn btn-lg btn-motive"><span>Sign Up Now</span></a>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="ct-pricingBox ct-pricingBox--graylighter ct-u-marginBoth30">
-                    <div class="ct-pricingBox-header">
-                        <h2 class="ct-pricingBox-title ct-u-hr ct-u-hr--wide"><small>Standard Package</small></h2>
-                        <h2 class="ct-pricingBox-price"><b>$350</b></h2>
-                        <h6 class="ct-pricingBox-subtitle">Monthly</h6>
-                    </div>
-                    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path d="M0,0 L 50,50 100,0 Z" />
-                    </svg>
-                    <div class="ct-pricingBox-content">
-                        <ul class="ct-pricingBox-list">
-                            <li>T-shirt and toaster</li>
-                            <li>Rihanna's phone number</li>
-                            <li>Telepathic support</li>
-                            <li>Foldable time machine</li>
-                            <li>Real life undo button</li>
-                        </ul>
-                    </div>
-                    <a href="login.html" class="btn btn-lg btn-graylighter"><span>Sign Up Now</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="ct-sectionGrayLighter">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <h2 class="ct-u-textRight ct-u-marginTop30 ct-fw-lighter"><small>Ultra <span class="ct-fw-800">comfortable vehicles</span> for ultra small prices</small></h2>
-            </div>
-            <div class="col-sm-8">
-                <p class="ct-u-marginTop40 ct-u-marginBottom130">
-                    Thanks to our cars Your vacation will become much calmer. You will not have to worry about transportation, no formalities, tickets. All send to us immediately and you will not have to worry about any formalities. I'll take care of all our highly qualified staff who will take care so that you have a peaceful holiday where you will not have any worries. Order today our boat and take care of your calm on their amazing expeditions full of only positive memories. Remember we are always and everywhere for you.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+{% endfor %}
+{% endblock %}
 
 
-<footer class="ct-footer ct-u-sectionDark">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="ct-footer-logo ct-u-paddingTop50 ct-u-paddingBottom30"><img src="./assets/images/content/logo2.png" alt=""></div>
-                <p>Rentica operate in the booking market since 2000. We created a platform that would not only allow our clients to book a car, but to make this process as easy as possible.
-                    Rentica deals with all the major car hire companies around the world checking which local supplier is offering the best prices for the car you want on the date you need it.
-                </p>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-paddingTop50">
-                    <h3 class="ct-sectionHeader-title">Next events</h3>
-                    <div class="ct-sectionHeader-separator">
-                        <span class="slash">/</span>
-                        <span class="slash">/</span>
-                        <span class="minus"></span>
-                    </div>
-                </div>
 
-                <a href="events.html">
-                     <div class="media ct-mediaObject">
-                         <div class="media-left"><img src="./assets/images/content/cars/footerObject-01.jpg" alt=""></div>
-                         <div class="media-body">
-                             <h6 class="ct-mediaObject-header">Rentica sports car racing finals</h6>
-                             <h2 class="ct-mediaObject-date"><small>Aug 25 <span>2015</span></small></h2>
-                         </div>
-                     </div>
-                 </a>
-                 <a href="events.html">
-                     <div class="media ct-mediaObject">
-                         <div class="media-left"><img src="./assets/images/content/cars/footerObject-02.jpg" alt=""></div>
-                         <div class="media-body">
-                             <h6 class="ct-mediaObject-header">Rentica Sedan Showdown</h6>
-                             <h2 class="ct-mediaObject-date"><small>Sep 03 <span>2015</span></small></h2>
-                         </div>
-                     </div>
-                 </a>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-paddingTop50 ct-u-marginBottom15">
-                    <h3 class="ct-sectionHeader-title">Flickr gallery</h3>
-                    <div class="ct-sectionHeader-separator">
-                        <span class="slash">/</span>
-                        <span class="slash">/</span>
-                        <span class="minus"></span>
-                    </div>
-                </div>
 
-                <div class="ct-flickrGallery">
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-01-big.jpg"><img src="./assets/images/content/cars/flickr-01.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-02-big.jpg"><img src="./assets/images/content/cars/flickr-02.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-03-big.jpg"><img src="./assets/images/content/cars/flickr-03.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-04-big.jpg"><img src="./assets/images/content/cars/flickr-04.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-05-big.jpg"><img src="./assets/images/content/cars/flickr-05.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-06-big.jpg"><img src="./assets/images/content/cars/flickr-06.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-07-big.jpg"><img src="./assets/images/content/cars/flickr-07.jpg" alt=""/></a>
-                    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-08-big.jpg"><img src="./assets/images/content/cars/flickr-08.jpg" alt=""/></a>
-                </div>
 
-            </div>
-        </div>
-    </div>
-    <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
-        <div class="container">
-            <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/">createIT</a> 2014</div>
-            <ul class="ct-socials">
-                <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i class="fa fa-flickr"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i class="fa fa-facebook-square"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
 
+{% include "frontEnd/footer.html" %}
 </div>
 
+
+
 <!-- JavaScripts -->
-<script src="./assets/js/jquery.min.js"></script>
-<script src="./assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="./assets/js/dependencies.js"></script>
+<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
 
-<script src="./assets/js/main.js"></script>
+<script src="{% static 'frontEnd/js/main.js' %}"></script>
 
-<script src="./assets/plugins/ct-mediaSection/js/jquery.stellar.min.js"></script>
-<script src="./assets/plugins/ct-mediaSection/js/init.js"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
 
-<script src="./assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="./assets/plugins/magnific-popup/init.js"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
 
+<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
 
-
-<script src="./assets/plugins/slick/slick.min.js"></script>
-<script src="./assets/plugins/slick/init.js"></script>
 
 
 

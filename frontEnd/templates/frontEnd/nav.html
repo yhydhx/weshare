@@ -85,11 +85,15 @@
         <div class="container">
             <div class="ct-navbarBox">
                 {% if login_flag %}
-                <a href="######主页######">您好: {{ current_user.username }}(这里之后要变成头像)</a>
+                <a href="/host-center/" class="ct-login"><span>{{ current_user.username }}</span><i
+                        class="fa fa-lock"></i></a>
                 {% if current_user.state == 0 %}
                 <p>您还没有成为host, 点击这里成为host
-                    <a href="/complete-account-icon/" class="ct-login"><span>注册成为host</span><i
+                    <a href="/image-receive/" class="ct-login"><span>注册成为host</span><i
                             class="fa fa-lock"></i></a></p>
+                {% elif current_user.state == 1 %}
+                <a href="" class="ct-login"><span>资料审核中</span><i class="fa fa-lock"></i></a>
+                <img src="{{ current_user.icon }}" style="height: 28px; width: 28px; border: 1px solid #cccccc; border-radius: 50%">
                 {% endif %}
                 <a href="/logout/" class="ct-login"><span>退出登录</span><i class="fa fa-lock"></i></a>
                 {% else %}
@@ -137,26 +141,20 @@
 
             <ul class="nav navbar-nav ct-navbar--fadeIn">
                 <!--=========================================================================-->
-                <li><a href="index.html">
+                <li><a href="/index/">
                     <div class="ct-textEffect"><span data-content="主页">主页</span></div>
                 </a></li>
-                <!--=========================================================================-->
-                <li class="dropdown"><a href="about.html">
-                    <div class="ct-textEffect"><span data-content="关于我们">关于我们</span></div>
-                </a>
-
-                </li>
+                
                 <!--=========================================================================-->
 
-                <li onclick="findSchool()" class="active dropdown"><a>
+                <li  ><a href="javascript:findSchool()">
                     <div class="ct-textEffect"><span data-content="学校">学校</span></div>
-                </a>
-                </li>
+                </a></li>
 
-                <li onclick="findTopic()" class="active dropdown"><a>
+
+                 <li  ><a href="javascript:findTopic()">
                     <div class="ct-textEffect"><span data-content="话题">话题</span></div>
-                </a>
-                </li>
+                </a></li>
 
                 <!--=========================================================================-->
 
@@ -178,13 +176,21 @@
                     <div class="ct-textEffect"><span data-content="个人信息">个人信息</span></div>
                 </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/host-center/"><span>我的账户</span></a></li>
+                        <li><a href="/host-center/"><span>我的主页</span></a></li>
+                        <li><a href="/modify-account/"><span>修改账户资料</span></a></li>
                     </ul>
                 </li>
                 <!--=========================================================================-->
-                <li><a href="contact.html">
-                    <div class="ct-textEffect"><span data-content="联系我们">联系我们</span></div>
-                </a></li>
+                <li class="dropdown"><a href="/about">
+                    <div class="ct-textEffect"><span data-content="团队信息">关于我们</span></div>
+                </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/service"><span>使用帮助</span></a></li>
+                        <li><a href="/host-center/"><span>招贤纳士</span></a></li>
+                        
+                    </ul>
+                </li>
+
             </ul>
 
         </div>

@@ -1,0 +1,476 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]>
+<html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="description" content="Rentica - The Best One Yet">
+    <meta name="author" content="CreateIT">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
+    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png' %}">-->
+
+    <title>Rentica - HTML Template</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/test.css' %}">
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
+    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
+    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
+    <![endif]-->
+    <script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+    <script src="{% static 'frontEnd/js/allunivlist.js' %}"></script>
+    <script>var school = "";
+    var sf = "";
+    $(function () {
+        $.each(allUnivList, function (j, m) {
+            $("#gj").append("<a href='javascript:void(0);' onclick='getSheng(" + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
+        });
+    });
+
+    function getSheng(aid, name) {
+        school = name;
+        $("#sheng").show();
+        $("#list").html('');
+        $("#sheng").html('');
+        if (allUnivList[aid].provs.length == 0) {
+            $("#sheng").append("不好意思,暂时还没有开放这些国家和地区的学校注册");
+        }
+        else {
+            $.each(allUnivList[aid].provs, function (j, m) {
+                $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool(" + aid + "," + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
+            });
+        }
+    }
+
+    function getSchool(gid, pid, name) {
+        school = school.substring(0, 2);
+        school += " - " + name;
+        $("#list").show();
+        $("#list").html('');
+        $.each(allUnivList[gid].provs[pid].univs, function (k, l) {
+            $("#list").append("<a style='width:270px;display:block;float:left;'>" + l.name + "</a>");
+        });
+        $("#list").append("<br style='clear:both;' />");
+
+    }</script>
+
+    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
+    <script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
+    <script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
+</head>
+
+<body class="cssAnimate">
+<div class="ct-preloader-container">                                            <!-- Preloader -->
+    <div class='ct-preloader'>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div>
+                                        <div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ct-menuMobile">
+    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
+                                                              alt=""/></a></div>
+    <ul class="ct-menuMobile-navbar">
+        <li class="active"><a href="index.html"><span>Home</span></a></li>
+        <li><a href="about.html"><span>About us</span></a></li>
+        <li><a href="gallery.html"><span>Our gallery</span></a></li>
+        <li class="dropdown"><a href="rent-now.html"><span>Rent Now</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="rent-now.html"><span>Rent Now</span></a></li>
+                <li><a href="rent-item.html"><span>Rent Item</span></a></li>
+                <li><a href="rent-page-variation-1.html"><span>Rent Page v1</span></a></li>
+                <li><a href="rent-page-variation-2.html"><span>Rent Page v2</span></a></li>
+                <li><a href="rent-paypal.html"><span>Rent with Paypal integration</span></a></li>
+            </ul>
+        </li>
+        <li class="dropdown"><a href="blog.html"><span>Blog</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="blog.html"><span>Blog</span></a></li>
+                <li><a href="blog-single.html"><span>Blog Single</span></a></li>
+                <li><a href="blog-archive.html"><span>Blog Archive</span></a></li>
+            </ul>
+        </li>
+        <li class="dropdown"><a href="events.html"><span>Events</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="events.html"><span>Events</span></a></li>
+                <li><a href="event-single.html"><span>Event Single 1</span></a></li>
+                <li><a href="event-single2.html"><span>Event Single 2</span></a></li>
+            </ul>
+        </li>
+        <li class="dropdown"><a href="account.html"><span>Pages</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="account.html"><span>My Account</span></a></li>
+                <li><a href="login.html"><span>Login</span></a></li>
+
+                <li><a href="404.html"><span>404</span></a></li>
+            </ul>
+        </li>
+        <li><a href="services.html"><span>Services</span></a></li>
+        <li><a href="contact.html"><span>Contact</span></a></li>
+    </ul>
+</div>
+
+<div id="ct-js-wrapper" class="ct-pageWrapper">
+
+    {% include "frontEnd/nav.html" %}
+
+
+    <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340"
+             data-type="parallax" data-stellar-background-ratio="0.3"
+             data-bg-image="{% static 'frontEnd/images/content/cars/bg-02.jpg' %}"
+             data-bg-image-mobile="{% static 'frontEnd/images/content/cars/bg-01-mobile.jpg' %}">
+        <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2
+                class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">修改账户信息</h2></div>
+    </section>
+
+
+    <div class="container">
+        <div class="row">
+
+
+            <div class="tabpanel ct-u-paddingTop50 ct-u-paddingBottom60">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#description" role="tab"
+                                                              data-toggle="tab">修改我的头像</a>
+                    </li>
+                    <li role="presentation"><a href="#amenities" role="tab" data-toggle="tab">修改个人资料 &nbsp;</a></li>
+                    <li role="presentation"><a href="#details" role="tab" data-toggle="tab">修改身份特质</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+
+                    <!-- Tab #1 -->
+                    <div role="tabpanel" class="tab-pane fade in active" id="description">
+                        <style>
+                            body {
+                                margin: 0;
+                                text-align: center;
+                            }
+
+                            #clipArea {
+                                margin: 20px;
+                                height: 300px;
+                            }
+
+                            #file,
+                            #clipBtn {
+                                margin: 20px;
+                            }
+
+                            #view {
+                                margin: 0 auto;
+                                width: 200px;
+                                height: 200px;
+                            }
+                        </style>
+                        <div class="col-lg-8 col-md-8 col-sm-12">
+                            <div id="clipArea"></div>
+                            <input type="file" id="file" name="icon">
+                            <button id="clipBtn" class="btn btn-lg btn-motive" type="button">截取</button>
+                        </div>
+                        <div id="view" class="col-lg-4 col-md-4 col-sm-12" style="margin-top: 0"></div>
+
+                        <div style="margin-left: 29%">
+                            <button id="foo" type="button" class="btn btn-sm btn-wide btn-motive">
+                                <span>上传新头像</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tab #2 -->
+                    <div role="tabpanel" class="tab-pane fade" id="amenities">
+                        <form class=" ct-u-marginBottom input-daterange input-group"
+                              action="/modify-account/" method="post" id="form1">
+                            {% csrf_token %}
+                            <div class="col-md-7 ct-u-paddingTop80">
+                                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
+                                    <h2 class="ct-sectionHeader-title">
+                                        <small><span>自我介绍修改</span></small>
+                                    </h2>
+                                </div>
+                                <textarea name="self-introduction" id="self-introduction">{{ current_user.introduction | safe }}</textarea>
+                            </div>
+                            <div class="col-md-5 ct-u-paddingTop80">
+                                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
+                                    <h2 class="ct-sectionHeader-title">
+                                        <small><span>扩展信息修改</span></small>
+                                    </h2>
+                                </div>
+
+                                <div class="ct-panel-inner">
+                                    <div class="form-group ">
+                                        <label for="username" style="text-align: left">真实姓名</label>
+                                        <input id="username" name="username" type="text"
+                                               value="{{ current_user.username }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label for="phone">电话号码</label>
+                                        <input id="phone" name="phone" type="text"
+                                               value="{{ current_user.phone_number }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <label for="birth">生日</label>
+                                    <input type="text" id="birth" class="form-control form-control--type2"
+                                           value="{{ current_user.birth }}"
+                                           name="birth" title="from">
+
+
+                                    <div class="ct-checkbox ct-u-paddingTop10 ct-u-paddingMD-bot10">
+                                        <label for="gender">性别</label>
+                                        <input class="form-control form-control--type2" id="gender" name="gender"
+                                               type="checkbox" value="2"
+                                               checked>
+                                    </div>
+
+                                    <select class="ct-select ct-js-selectize" title="Sorting" name="selectbox">
+                                        <option value="女">女</option>
+                                        <option value="男">男</option>
+                                    </select>
+
+
+                                    <div class="form-group ">
+                                        <label for="motto">个性签名</label>
+                                        <input id="motto" name="motto" type="text"
+                                               value="{{ current_user.motto }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="service-time" class="required">您方便服务的时间</label>
+                                        <input id="service-time" name="service-time" required
+                                               value="{{ current_user.service_time }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <!--这里的填写最低薪酬的方法加上一个前端的验证 是否为数字-->
+                                    <div class="form-group">
+                                        <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
+                                        <input id="min-payment" name="min-payment" type="number" required
+                                               value="{{ current_user.min_payment }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
+                                        <input id="max-payment" name="max-payment" type="number" required
+                                               value="{{ current_user.max_payment }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div style="width:100%; margin:0 auto; overflow:hidden;">
+                                            <label for="txtSc" class="required">你的学校</label>
+                                            <input type="text" id="txtSc" name="school"
+                                                   value="{{ current_user.h_school }}"
+                                                   class="form-control form-control--type2"/>
+
+                                            <div id="gj"
+                                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px; display:none;background-color: #FFFFFF;z-index:999;"></div>
+                                            <div id="sheng"
+                                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none;background-color: #FFFFFF;z-index:999;"></div>
+                                            <div id="list"
+                                                 style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none; background-color: #FFFFFF;z-index:999;height:300px; overflow-y:auto;"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="qq" class="required">QQ号</label>
+                                        <input id="qq" name="qq" required
+                                               value="{{ current_user.qq_number }}"
+                                               class="form-control form-control--type2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-left: 29%">
+                                <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
+                                    <input id="submit" type="submit"
+                                           class="btn btn-lg btn-wide btn-motive"
+                                           value="确认修改自己的资料" onclick="alert('修改资料成功。')">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Tab #3 -->
+                    <div role="tabpanel" class="tab-pane fade" id="details">
+                        <h3 class="ct-fw-lighter ct-u-marginBoth50">Technical Details</h3>
+                        <h6 class="ct-u-hr ct-u-hr--left ct-fw-bold text-uppercase">Lorem ipsum dolor sit amet</h6>
+                        <p class="ct-u-marginBottom50">Quisque at nulla a tortor finibus tempor eget nec lacus.
+                            Donec gravida molestie mauris.
+                            TENDERS & TOYS 2 x 30ft inflatable tenders type 90 EFB with 350hp YaCHa inboard engine.
+                            1 x Classic Runnerboat with 360hp SRYreN inboard engine. 5 x YaCHa Waverunners 1 x YaCHa
+                            Jetskis 570ft/25m floating trampoline 6 x kayak AMENITIES A glass bottomed Jacuzzi for 5
+                            A sauna and fully equipped spa room</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer class="ct-footer ct-u-sectionDark">
+    <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
+        <div class="container">
+            <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/">createIT</a> 2014
+            </div>
+            <ul class="ct-socials">
+                <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i
+                        class="fa fa-flickr"></i></a></li>
+                <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i
+                        class="fa fa-instagram"></i></a></li>
+                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i
+                        class="fa fa-pinterest"></i></a></li>
+                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i
+                        class="fa fa-facebook-square"></i></a></li>
+                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i
+                        class="fa fa-twitter"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</div>
+
+
+<!-- JavaScripts -->
+
+<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
+
+<script src="{% static 'frontEnd/js/main.js' %}"></script>
+<script src="{% static 'frontEnd/js/shop.js' %}"></script>
+
+
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
+
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
+
+
+<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+
+<script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+<script>jQuery('.input-daterange #birth').datepicker({});</script>
+
+<script src="{% static 'frontEnd/plugins/bootstrap-slider/js/bootstrap-slider.js' %}"></script>
+<script>jQuery('.sliderAmount').slider();</script>
+
+<script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
+
+<!-- clip image -->
+
+<script src="{% static 'frontEnd/js/photo-cut/iscroll-zoom.js' %}"></script>
+<script src="{% static 'frontEnd/js/photo-cut/hammer.js' %}"></script>
+<script src="{% static 'frontEnd/js/photo-cut/lrz.all.bundle.js' %}"></script>
+<script src="{% static 'frontEnd/js/photo-cut/jquery.photoClip.js' %}"></script>
+
+
+<script>
+    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    var clipArea = new bjj.PhotoClip("#clipArea", {
+        size: [260, 260],
+        outputSize: [640, 640],
+        file: "#file",
+        view: "#view",
+        ok: "#clipBtn",
+        loadStart: function () {
+            console.log("照片读取中");
+        },
+        loadComplete: function () {
+            console.log("照片读取完成");
+        },
+        clipFinish: function (dataURL) {
+            console.log(dataURL);
+        }
+    });
+    //clipArea.destroy();
+</script>
+<script>
+    $(document).ready(function () {
+        /* $.ajaxSetup({
+         dataType: "json",
+         beforeSend: function (xhr, settings) {
+         var csrftoken = $.cookie('csrftoken');
+         xhr.setRequestHeader("X-CSRFToken", csrftoken);
+         }
+         }); */
+        $("#foo").click(function () {
+            var image = $("#view").attr("style");
+            var fuck = $.ajax({
+                type: "POST",
+                url: "/image-receive/",
+                data: {data: image, c: document.cookie},
+                dataType: "jsonp",
+                async: false,
+                success: window.location.replace("/index/")
+            }).always(function (data) {
+                //console.log(data)
+            });
+            console.log(fuck.responseText)
+        })
+    })
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtSc").on("click", function () {
+            $("#gj").show();
+            $("#list").hide();
+            $("#sheng").hide();
+        });
+
+        $("#list").delegate("a", "click", function () {
+            console.log("fuck js")
+            $("#gj").hide();
+            $("#list").hide();
+            $("#sheng").hide();
+            school += " - " + $(this).text();
+            $("#txtSc").val(school);
+        });
+
+    });</script>
+
+
+</body>
+</html>

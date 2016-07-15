@@ -17,12 +17,50 @@ class Host(models.Model):
     gender = models.IntegerField(default=1, blank=True)  # 1是男生0是女生
     motto = models.CharField(max_length=100, blank=True)
     introduction = models.CharField(max_length=2000, blank=True)
-    icon = models.CharField(max_length=100, blank=True)
+    icon = models.CharField(max_length=200)
     orders = models.IntegerField(default=0)
     service_time = models.CharField(max_length=100, default=True)
     max_payment = models.FloatField(default=0)
     min_payment = models.FloatField(default=0)
+    h_school = models.CharField(max_length=200)
     state = models.IntegerField(default=0)  # normal user  => 0  examing => 1  sharer => 2
+
+    birth = models.CharField(blank=True, max_length=100)
+    qq_number = models.CharField(blank=True, max_length=20)
+    wechat = models.CharField(blank=True, max_length=20)
+
+    def get_all_features(self):
+        host_topics = Host_Topic.objects.filter(host_id=self.id)
+        d_topic_feature = {}
+        for single_feature in host_topics:
+            t_id = single_feature.t_id
+            f_id = single_feature.f_id
+
+            if not d_topic_feature.has_key(t_id):
+                d_topic_feature[t_id] = {}
+                d_topic_feature[t_id]['name'] = Topic.objects.get(id=t_id).t_name
+                d_topic_feature[t_id]['features'] = []
+                d_topic_feature[t_id]['row1'] = []
+                d_topic_feature[t_id]['row2'] = []
+                d_topic_feature[t_id]['row3'] = []
+                d_topic_feature[t_id]['row4'] = []
+
+            d_topic_feature[t_id]['features'].append(Feature.objects.get(id=f_id).f_name)
+
+        for t_id, value in d_topic_feature.items():
+            count = 0
+            for f in d_topic_feature[t_id]['features']:
+                count += 1
+                if count % 4 == 1:
+                    d_topic_feature[t_id]['row1'].append(f)
+                elif count % 4 == 2:
+                    d_topic_feature[t_id]['row2'].append(f)
+                elif count % 4 == 3:
+                    d_topic_feature[t_id]['row3'].append(f)
+                elif count % 4 == 0:
+                    d_topic_feature[t_id]['row4'].append(f)
+
+        return d_topic_feature
 
 
 class Province(models.Model):
@@ -39,7 +77,8 @@ class School(models.Model):
 
 class Topic(models.Model):
     t_name = models.CharField(max_length=200)
-    t_click = models.IntegerField()
+    t_click = models.IntegerField(default=0)
+    t_tag = models.CharField(max_length= 100, null=True)
 
 
 class Feature(models.Model):
@@ -50,15 +89,36 @@ class Feature(models.Model):
 class Host_Topic(models.Model):
     host_id = models.CharField(max_length=100)
     t_id = models.CharField(max_length=100)
-    f_id = models.CharField(max_length=100)
+    f_id = models.CharField(max_length=100)  # 关系库
 
 
-class Certificate(models.Model):
+class User_data(models.Model):
+    host_id = models.CharField(max_length=50)
+    description = models.CharField(max_length=100, blank=True)
+    url = models.CharField(max_length=100)
+
+
+class Certificate(models.Model):  # igno
     host_id = models.CharField(max_length=100)
     c_name = models.CharField(max_length=200)
     c_state = models.IntegerField()
 
+
 class Admin(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
+
+
+class Menu(models.Model):
+    m_name = models.CharField(max_length=100)
+    m_index = models.IntegerField()
+
+class Document(models.Model):
+    d_menu = models.CharField(max_length=100)
+    d_name = models.CharField(max_length=100)
+    d_text = models.TextField()
+    d_index = models.IntegerField()   # 将不同的话题区分开来
     
+    
+
+

@@ -27,9 +27,10 @@
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
     <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
+    <script src="{% static 'frontEnd/js/jquery-2.1.1.min.js' %}"></script>
+    <script src="{% static 'frontEnd/js/jquery-2.1.1.min.js' %}"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
-
 
 </head>
 
@@ -103,134 +104,7 @@
 
 <div id="ct-js-wrapper" class="ct-pageWrapper">
 
-    <nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
-
-        <div class="navbar-header">
-            <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
-            <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
-                                                           alt=""/></a>
-        </div>
-
-        <div class="container">
-            <div class="ct-navbarBox">
-                <a href="login.html" class="ct-login"><span>Login</span><i class="fa fa-lock"></i></a>
-                <div class="ct-navbarBox-meta">
-                    <div class="ct-navSearch-box">
-                        <a class="ct-js-navSearch ct-navSearch" href="#"><i class="fa fa-search"></i></a>
-                        <!-- Navbar Search  -->
-                        <div class="ct-navbar-search">
-                            <form role="form">
-                                <div class="form-group  ct-input--type2">
-                                    <input id="searchM" required="" type="text" name="field[]"
-                                           placeholder="Search website..." class="form-control">
-                                    <label for="searchM"><span>Search</span></label>
-                                    <button class="ct-navbar-search-button" type="submit">
-                                        <i class="fa fa-search fa-fw"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="ct-langPicker">
-                        <div class="ct-langPicker-content">
-                            <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
-                            <ul class="ct-langPicker-list">
-                                <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}"
-                                                             alt=""/></a></li>
-                                <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}"
-                                                             alt=""/></a></li>
-                                <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}"
-                                                              alt=""/></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> <!-- Flags -->
-                </div>
-
-                <button type="button" class="navbar-toggle">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <ul class="nav navbar-nav ct-navbar--fadeIn">
-                <!--=========================================================================-->
-                <li><a href="index.html">
-                    <div class="ct-textEffect"><span data-content="Home">Home</span></div>
-                </a></li>
-                <!--=========================================================================-->
-                <li class="dropdown"><a href="about.html">
-                    <div class="ct-textEffect"><span data-content="About Us">About Us</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="about.html"><span>About us</span></a></li>
-                        <li><a href="gallery.html"><span>Our gallery</span></a></li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li><a href="services.html">
-                    <div class="ct-textEffect"><span data-content="Services">Services</span></div>
-                </a></li>
-                <li class="dropdown"><a href="rent-now.html">
-                    <div class="ct-textEffect"><span data-content="Rent Now">Rent Now</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="rent-now.html"><span>Rent Now</span></a></li>
-                        <li><a href="rent-item.html"><span>Rent Item</span></a></li>
-                        <li class="ct-subDropdown"><a href="rent-page-variation-1.html">Rent Page</a>
-                            <ul class="ct-submenu dropdown-menu">
-                                <li><a href="rent-page-variation-1.html"><span>Rent Page v1</span></a></li>
-                                <li><a href="rent-page-variation-2.html"><span>Rent Page v2</span></a></li>
-                                <li><a href="rent-paypal.html"><span>Rent with Paypal integration</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li class="dropdown"><a href="blog.html">
-                    <div class="ct-textEffect"><span data-content="Blog">Blog</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="blog.html"><span>Blog</span></a></li>
-                        <li><a href="blog-single.html"><span>Blog Single</span></a></li>
-                        <li><a href="blog-archive.html"><span>Blog Archive</span></a></li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li class="dropdown"><a href="events.html">
-                    <div class="ct-textEffect"><span data-content="Events">Events</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="events.html"><span>Events</span></a></li>
-                        <li class="ct-subDropdown"><a href="event-single.html">Event Single</a>
-                            <ul class="ct-submenu dropdown-menu">
-                                <li><a href="event-single.html"><span>Event Single 1</span></a></li>
-                                <li><a href="event-single2.html"><span>Event Single 2</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li class="active dropdown"><a href="account.html">
-                    <div class="ct-textEffect"><span data-content="Pages">Pages</span></div>
-                </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="account.html"><span>My Account</span></a></li>
-                        <li><a href="login.html"><span>Login</span></a></li>
-
-                        <li><a href="404.html"><span>404</span></a></li>
-                    </ul>
-                </li>
-                <!--=========================================================================-->
-                <li><a href="contact.html">
-                    <div class="ct-textEffect"><span data-content="Contact">Contact</span></div>
-                </a></li>
-            </ul>
-
-        </div>
-    </nav>
+    {% include "frontEnd/nav.html" %}
 
 
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340"
@@ -240,62 +114,56 @@
         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2
                 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">成为HOST</h2></div>
     </section>
-
-    <form name="icon" class="ct-u-sectionBorder" action="/complete-account-icon/" method="post" enctype="multipart/form-data">
+    <form name="icon" class="ct-u-sectionBorder" action="/complete-account-icon/" method="post"
+          enctype="multipart/form-data">
         {% csrf_token %}
+        <div class="tabpanel ct-u-paddingTop10 ct-u-paddingBottom" style="padding-left: 10%">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a role="tab" data-toggle="tab">第一步:上传头像</a></li>
+                <li role="presentation"><a role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
+                <li role="presentation"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
+            </ul>
+        </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-12 ct-u-paddingTop80">
-                    <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <h2 class="ct-sectionHeader-title">
-                            <small><span>上传头像</span></small>
-                        </h2>
-                    </div>
+                <style>
+                    body {
+                        margin: 0;
+                        text-align: center;
+                    }
 
-                    <!--这里的头像上传暂时没有自适应-->
-                    <div>
+                    #clipArea {
+                        margin: 20px;
+                        height: 300px;
+                    }
 
-                        <style>
-                            body {
-                                margin: 0;
-                                text-align: center;
-                            }
+                    #file,
+                    #clipBtn {
+                        margin: 20px;
+                    }
 
-                            #clipArea {
-                                margin: 20px;
-                                height: 300px;
-                            }
+                    #view {
+                        margin: 0 auto;
+                        width: 200px;
+                        height: 200px;
+                    }
+                </style>
 
-                            #file,
-                            #clipBtn {
-                                margin: 20px;
-                            }
-
-                            #view {
-                                margin: 0 auto;
-                                width: 200px;
-                                height: 200px;
-                            }
-                        </style>
-
-                        <div id="clipArea"></div>
-                        <input type="file" id="file" name="icon">
-                        <!--<button id="clipBtn">截取</button>-->
-                       <!-- <div id="view"></div>  -->
-                    </div>
-                </div>
+                <div id="clipArea"></div>
+                <input type="file" id="file" name="icon" class="" >
+                <button id="clipBtn" class="btn btn-lg btn-motive" type="button">截取</button>
+                <div id="view"></div>
             </div>
 
             <div class="row" style="margin-left: 29%">
                 <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
-                    <button id="clipBtn" type="submit" class="btn btn-lg btn-wide btn-motive"><span>进入下一步</span></button>
+                    <button id="foo" type="button" class="btn btn-lg btn-wide btn-motive"><span>进入下一步</span>
+                    </button>
                 </div>
             </div>
 
         </div>
     </form>
-
-
     <footer class="ct-footer ct-u-sectionDark">
         <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
             <div class="container">
@@ -320,7 +188,7 @@
 </div>
 
 <!-- JavaScripts -->
- 
+
 <script src="{% static 'frontEnd/js/jquery-2.1.1.min.js' %}"></script>
 <script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
@@ -332,7 +200,6 @@
 
 <script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
-
 
 
 <script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
@@ -367,6 +234,31 @@
         }
     });
     //clipArea.destroy();
+</script>
+<script>
+    $(document).ready(function () {
+        /* $.ajaxSetup({
+            dataType: "json",
+            beforeSend: function (xhr, settings) {
+                var csrftoken = $.cookie('csrftoken');
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }); */
+        $("#foo").click(function () {
+            var image = $("#view").attr("style");
+            var fuck = $.ajax({
+                type: "POST",
+                url: "/image-receive/",
+                data: { data: image, c: document.cookie},
+                dataType: "jsonp",
+                async:false,
+                success: window.location.replace("/complete-account/")
+            }).always(function (data) {
+                //console.log(data)
+            });
+            console.log(fuck.responseText)
+        })
+    })
 </script>
 
 </body>

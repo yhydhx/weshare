@@ -11,14 +11,24 @@ urlpatterns = patterns('',
     url(r'^addUserView$', views.addUserView,name ='addUserView'),
     url(r'^changePasswd$', views.changePasswd,name ='changePasswd'),
     url(r'^logout$', views.logout,name ='logout'),
+
+
  
     url(r'^province/(?P<method>\w+)/?(?P<Oid>\w*)$', views.province,name ='province'),
     url(r'^school/(?P<method>\w+)/?(?P<Oid>\w*)$', views.school,name ='school'),
     url(r'^topic/(?P<method>\w+)/?(?P<Oid>\w*)$', views.topic,name ='topic'),
     url(r'^user/(?P<method>\w+)/?(?P<Oid>\w*)$', views.user,name ='user'),
-    url(r'^feature/(?P<method>\w+)/?(?P<Oid>\w*)$', views.feature,name ='feature'),    
+    url(r'^feature/(?P<method>\w+)/?(?P<Oid>\w*)$', views.feature,name ='feature'),   
+    
+    url(r'^menu/(?P<method>\w+)/?(?P<Oid>\w*)$', views.menu,name ='menu'),
+    url(r'^doc/(?P<method>\w+)/?(?P<Oid>\w*)$', views.doc,name ='doc'),   
+
     url(r'^test\.html$', views.test, name='test'),
     url(r'^s\.html$', views.s, name='s'),
+    url(r'^email\.html$', views.setEmail, name='setEmail'),
+    url(r'^getUserNameList$', views.getUserNameList,name ='getUserNameList'),
+
+    
     '''
 
     

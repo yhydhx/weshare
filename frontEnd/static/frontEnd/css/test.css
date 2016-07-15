@@ -1,0 +1,43 @@
+.squr{
+	width: 100px;
+	height: 100px;
+	background-color: yellow;
+	border: 1px solid black;
+	margin: 5px; 
+	float: left;
+}
+.tab-pane{
+	overflow:hidden;
+}
+input[type=checkbox]{
+	display: none;
+}
+.closeCheckBox{
+	position: relative;
+	left: 70%;
+	background-color: rgba(0,0,0,0);
+	border:0;
+}
+input[name=uploadFile]{
+	/*display: none;*/
+}
+#schoose{
+	/*background-color: #ccc;*/
+	/*border:1px solid red;*/
+	/*height: 200px;*/
+}
+.ct-simpleList{
+	overflow: hidden;
+}
+.ct-simpleList li.atag {
+	width: 13%;
+	border:1px solid black;
+}
+.ct-simpleList li.atag i{
+	display: none;
+}
+#gj,#sheng,#list{
+	background-color: #FFFFFF;
+	color: #0b0b0b;
+	z-index: 999;
+}
