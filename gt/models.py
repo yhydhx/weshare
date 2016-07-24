@@ -112,6 +112,7 @@ class Admin(models.Model):
 class Menu(models.Model):
     m_name = models.CharField(max_length=100)
     m_index = models.IntegerField()
+    m_upload_time = models.DateField()
 
 class Document(models.Model):
     d_menu = models.CharField(max_length=100)
@@ -126,6 +127,28 @@ class Mail(models.Model):
     host_id = models.CharField(max_length = 200)
     admin_id = models.CharField(max_length = 200)
     content = models.TextField()
+    
+    def sendMail(self, subject,to,content):
+    #to = ['yhydhx@126.com']
 
+    context = {"content": content,
+                }
 
+    email_template_name = 'backEnd/blankTemp.html'
+    t = loader.get_template(email_template_name)
+
+    from_email = EMAIL_HOST_USER
+
+    html_content = t.render(Context(context))
+    #print html_content
+    msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+    msg.attach_alternative(html_content, "text/html")
+
+    msg.send()
+
+class Message(models.Model):
+    from_user = models.CharField(max_length=100)
+    to_user = models.CharField(max_length=100)
+    message_type = models.IntegerField()
+    upload_time = models.DateField()
 

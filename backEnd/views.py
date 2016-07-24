@@ -552,6 +552,8 @@ def getUserNameList(request):
     
     return HttpResponse(json.dumps(response_data))
 
+
+
 def s(request):
     hosts = Host.objects.all()
     d_topic_detail = {}
