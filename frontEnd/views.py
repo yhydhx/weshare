@@ -463,7 +463,7 @@ def about(request):
 
 def service(request):
 
-    menu = Menu.objects.filter(m_index=2)
+    menu = Menu.objects.filter(m_index=2).order_by("id")
     services = Document.objects.all().order_by('d_index')
     menu_list = []
 
