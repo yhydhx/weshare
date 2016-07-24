@@ -62,6 +62,64 @@ class Host(models.Model):
 
         return d_topic_feature
 
+    def get_all_classes(self,school_id="none"):
+        if school_id == "none":
+            hosts = Host.objects.all()
+        d_topic_detail = {}
+        for each_host in hosts:
+            '''
+            format the payment 
+            fix the path of the image 
+            find all tags:
+            tags
+            find the topics of this users.
+            then construct a dict for topic id -> topic tag and topic name 
+            make a list of topic
+            finally add each tag to users.
+
+            '''
+
+            tag = ""
+            if each_host.gender == 1:
+                tag += "male "
+            else:
+                tag += "female "
+
+            h_topics = Host_Topic.objects.filter(host_id=each_host.id)
+
+            # classification
+            d_host_topic = {}
+            for h_topic_atom in h_topics:
+                t_id = h_topic_atom.t_id
+                f_id = h_topic_atom.f_id
+                if not d_topic_detail.has_key(t_id):
+                    single_topic = Topic.objects.get(id=t_id)
+                    d_topic_detail[t_id] = {}
+                    d_topic_detail[t_id]['name'] = single_topic.t_name
+                    d_topic_detail[t_id]['tag'] = single_topic.t_tag
+                    d_topic_detail[t_id]['number'] = 0
+                    d_topic_detail[t_id]['index'] = len(d_topic_detail)
+                    d_topic_detail[t_id]['topics'] = {}
+
+                d_topic_detail[t_id]['topics'][each_host.id] = 1
+                d_topic_detail[t_id]['number'] = len(d_topic_detail[t_id]['topics'])
+                d_host_topic[t_id] = d_topic_detail[t_id]['tag']
+
+                # print d_topic_detail[t_id]['topics']
+                # print d_topic_detail[t_id]
+                print each_host.username, d_topic_detail[t_id]['name']
+            # complete tags
+            for k, v in d_host_topic.items():
+                tag = tag + " " + v
+
+            each_host.image = "/files/icons/" + each_host.icon.split("/")[-1]
+            each_host.min_payment = int(each_host.min_payment)
+            each_host.tag = tag
+
+        Info = {}
+        Info['object'] = hosts
+        Info['topics'] = d_topic_detail.values()
+        return Info
 
 class Province(models.Model):
     p_name = models.CharField(max_length=100)

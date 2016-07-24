@@ -222,239 +222,39 @@
 <div class="ct-u-sectionMotive text-center">
     <ul class="ct-gallery-filters ct-js-gallery-filters">
         <li><a data-filter="*" class="btn btn-motive active"><span>全部</span></a></li>
-        <li><a data-filter=".sport" class="btn btn-motive"><span>课程点睛</span></a></li>
-        <li><a data-filter=".sedan" class="btn btn-motive"><span>留学咨询</span></a></li>
-        <li><a data-filter=".luxury" class="btn btn-motive"><span>科研探讨</span></a></li>
-        <li><a data-filter=".event" class="btn btn-motive"><span>学科竞赛</span></a></li>
-        <li><a data-filter=".baoyan" class="btn btn-motive"><span>保研咨询</span></a></li>
-        <li><a data-filter=".else" class="btn btn-motive"><span>其他</span></a></li>
+        {% block topic %}
+            {% for host in topics %}
+            <li><a data-filter=".{{host.tag}}" class="btn btn-motive active"><span>{{host.name}}</span></a></li>
+            {% endfor %}
+        
+        {% endblock %}
+        
     </ul>
 </div>
 
 <div id="ct-gallery" class="ct-gallery ct-gallery--col5 ct-js-magnificPortfolioPopupGroup">
+    {% block content %}
+        {% for host in object %}
+        <!-- ======================= --> 
+        <a class="ct-js-magnificPopupImage" href="/user/detail/{{host.id}}" title="{{host.username}}">
+            <figure class="ct-gallery-item sedan">
+                <img src="{{host.image}}"  alt="">
+                <figcaption>
+                    <div class="ct-u-displayTableVertical">
+                        <div class="ct-u-displayTableCell">
+                            <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
+                            <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">{{host.username}}</h6>
+                            <p>{{host.motto}}/p>
+                        </div>
+                    </div>
+                </figcaption>
+            </figure>
+        </a>
+        {% endfor %}
+    
+    {% endblock %}
 
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-02-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item sedan">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-02.jpg'%}"  alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
 
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-14-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item luxury">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-06-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item event">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-06.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-04-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item event">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-04.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-11-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item sport">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-11.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-12-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item sedan">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-12.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-01-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item luxury">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-01.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-15-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item sport">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-15.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-05-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item luxury">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-05.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-03-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item sedan">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-03.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-14-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item sedan">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-10-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item else">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-16-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item luxury">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-17-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item events">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
-    <a class="ct-js-magnificPopupImage" href="./assets/images/content/cars/gallery-18-big.jpg" title="Ahoy There Matey">
-        <figure class="ct-gallery-item sport">
-            <img src="{% static 'frontEnd/images/content/cars/gallery-14.jpg'%}" alt="">
-            <figcaption>
-                <div class="ct-u-displayTableVertical">
-                    <div class="ct-u-displayTableCell">
-                        <span class="ct-iconButton ct-iconButton--larger ct-u-marginBottom20"><i class="fa fa-search"></i></span>
-                        <h6 class="ct-u-hr ct-u-hr--center text-uppercase ct-fw-bold ct-u-marginBottom15">Ahoy There Matey</h6>
-                        <p>sports car</p>
-                    </div>
-                </div>
-            </figcaption>
-        </figure>
-    </a>
 
 </div>
 

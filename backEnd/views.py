@@ -548,8 +548,9 @@ def getUserNameList(request):
         if host_atom.username.startswith(username):
             tmpD = {}
             tmpD['userName'] = host_atom.username
+            tmpD['id'] = host_atom.id
             response_data.append(tmpD)
-    
+
     return HttpResponse(json.dumps(response_data))
 
 
