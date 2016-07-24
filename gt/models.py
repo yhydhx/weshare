@@ -119,6 +119,13 @@ class Document(models.Model):
     d_text = models.TextField()
     d_index = models.IntegerField()   # 将不同的话题区分开来
     
-    
+class Mail(models.Model):
+    subject = models.CharField(max_length = 200)
+    from_email = models.CharField(max_length = 200)
+    to_email = models.CharField(max_length = 200)
+    host_id = models.CharField(max_length = 200)
+    admin_id = models.CharField(max_length = 200)
+    content = models.TextField()
+
 
 

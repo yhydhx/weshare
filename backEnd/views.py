@@ -369,7 +369,7 @@ def user(request, method, Oid):
 
     elif method == 'delete':
         Topic.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'applying':
         users = Host.objects.filter(state=1)
         for each_host in users:
@@ -389,8 +389,46 @@ def user(request, method, Oid):
         for each_host in users:
             each_host.userState = "分享者"
         return render(request, 'backEnd/showUserList.html', {'object': users})
+    elif method == 'mail':
+        host = Host.objects.get(id=Oid)
+        return render(request, 'backEnd/sendMail.html',{'object':host})
+    elif method == 'sendMail':
+        host = Host.objects.get(id=Oid)
+        subject = request.POST.get('subject')
+        content = request.POST.get('mail_text')
+        to = [host.email]
+        sendMail(subject,to,content)
+
+        mail = Mail(
+            subject = subject,
+            from_email = EMAIL_HOST_USER,
+            to_email = host.email,
+            host_id = host.id,
+            admin_id = request.session['adminname'],
+            content = content
+            )
+        mail.save()
+        return HttpResponseRedirect("../show/")
     else:
         return HttpResponse('没有该方法')
+
+def sendMail(subject,to,content):
+    #to = ['yhydhx@126.com']
+
+    context = {"content": content,
+               "link": "http://wshere.com/identify/kaixun/jdklafwioejfioqw",
+               }
+    email_template_name = 'backEnd/blankTemp.html'
+    t = loader.get_template(email_template_name)
+
+    from_email = EMAIL_HOST_USER
+
+    html_content = t.render(Context(context))
+    #print html_content
+    msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+    msg.attach_alternative(html_content, "text/html")
+
+    msg.send()
 
 
 def menu(request, method, Oid):
@@ -506,6 +544,7 @@ def getUserNameList(request):
 
     response_data = []
     for host_atom in hosts:
+        #print host_atom.username, username , host_atom.username.startswith(username)
         if host_atom.username.startswith(username):
             tmpD = {}
             tmpD['userName'] = host_atom.username
