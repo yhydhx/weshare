@@ -46,12 +46,19 @@ def index(request):
     for t in d.values():
         obj.append(t)
 
+    #get recommended hosts
+
+    recommend_host = Host.objects.all()[0]
+    Info  = {}
+    Info = recommend_host.get_all_classes()
+    print Info
+    Info['object'] = obj
+    
     login_flag = False
     try:
-        req_username = request.session['email']
-    except:
-        return render_to_response('frontEnd/index.html')
-    try:
+        #check the user is login or not
+        req_username = request.session['email']        
+        #get the user
         user = Host.objects.get(email=req_username)
         login_flag = True
         return render_to_response('frontEnd/index.html', {'current_user': user,
