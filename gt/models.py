@@ -189,20 +189,19 @@ class Mail(models.Model):
     def sendMail(self, subject,to,content):
     #to = ['yhydhx@126.com']
 
-    context = {"content": content,
-                }
+        context = {"content": content}
 
-    email_template_name = 'backEnd/blankTemp.html'
-    t = loader.get_template(email_template_name)
+        email_template_name = 'backEnd/blankTemp.html'
+        t = loader.get_template(email_template_name)
 
-    from_email = EMAIL_HOST_USER
+        from_email = EMAIL_HOST_USER
 
-    html_content = t.render(Context(context))
-    #print html_content
-    msg = EmailMultiAlternatives(subject, html_content, from_email, to)
-    msg.attach_alternative(html_content, "text/html")
+        html_content = t.render(Context(context))
+        #print html_content
+        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
 
-    msg.send()
+        msg.send()
 
 class Message(models.Model):
     from_user = models.CharField(max_length=100)
