@@ -7,6 +7,11 @@ from django.utils import timezone
 from djangotoolbox.fields import ListField
 from django import forms
 
+#mail server
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives, EmailMessage
+from django.template import Context, loader
+from gt.settings import *
 
 class Host(models.Model):
     username = models.CharField(max_length=50)
@@ -117,7 +122,7 @@ class Host(models.Model):
             each_host.tag = tag
 
         Info = {}
-        Info['object'] = hosts
+        Info['hosts'] = hosts
         Info['topics'] = d_topic_detail.values()
         return Info
 
@@ -185,6 +190,7 @@ class Mail(models.Model):
     host_id = models.CharField(max_length = 200)
     admin_id = models.CharField(max_length = 200)
     content = models.TextField()
+    is_success = models.IntegerField()
     
     def sendMail(self, subject,to,content):
     #to = ['yhydhx@126.com']
@@ -192,6 +198,21 @@ class Mail(models.Model):
         context = {"content": content}
 
         email_template_name = 'backEnd/blankTemp.html'
+        t = loader.get_template(email_template_name)
+
+        from_email = EMAIL_HOST_USER
+
+        html_content = t.render(Context(context))
+        #print html_content
+        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+
+        msg.send()
+
+    def forgotPassword(self,subject,to,content):
+        context = {"content": content}
+
+        email_template_name = 'backEnd/forgotPasswordTemp.html'
         t = loader.get_template(email_template_name)
 
         from_email = EMAIL_HOST_USER
