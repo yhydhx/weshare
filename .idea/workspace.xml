@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0739ecb5-f8ce-40a7-a704-d49c1a062d3b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gt/static/upload/icons/a7beddd0261b3ea1f69917aced0d2d03.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/host-index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/iforget.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backEnd/templates/backEnd/host-index.html" afterPath="$PROJECT_DIR$/backEnd/templates/backEnd/host-index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backEnd/urls.py" afterPath="$PROJECT_DIR$/backEnd/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backEnd/views.py" afterPath="$PROJECT_DIR$/backEnd/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blog/urls.py" afterPath="$PROJECT_DIR$/blog/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blog/views.py" afterPath="$PROJECT_DIR$/blog/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/about.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/about.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/footer.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/index.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/modify-account.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/modify-account.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/rent-item.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/rent-item.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/school.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/school.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/services.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/services.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/tools.py" afterPath="$PROJECT_DIR$/frontEnd/tools.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/urls.py" afterPath="$PROJECT_DIR$/frontEnd/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/views.py" afterPath="$PROJECT_DIR$/frontEnd/views.py" />
@@ -42,207 +29,156 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/gt/models.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="0.7344214">
+                    <caret line="33" column="98" selection-start-line="33" selection-start-column="98" selection-end-line="33" selection-end-column="98" />
+                    <folding>
+                      <element signature="e#16#31#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="weshare" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.50889456">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="82" column="48" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
-                  <folding>
-                    <element signature="e#42#72#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="modify-account.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/modify-account.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-13.791667">
-                  <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-                  <folding>
-                    <element signature="n#script#2;n#head#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="e#7767#7893#0" expanded="false" />
-                    <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#7;n#div#1;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#7;n#div#1;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#1;n#div#0;n#div#7;n#div#1;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#2;n#div#0;n#div#7;n#div#1;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#script#21;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#script#22;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <marker date="1468308877000" expanded="true" signature="2639:2676" placeholder="..." />
-                    <marker date="1468308877000" expanded="true" signature="2750:2761" placeholder="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frontEnd/tools.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="host-index.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/host-index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.56804734">
-                  <caret line="73" column="92" selection-start-line="73" selection-start-column="92" selection-end-line="73" selection-end-column="92" />
-                  <folding>
-                    <element signature="n#style#0;n#h3#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/backEnd/urls.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
-                  <folding>
-                    <element signature="e#0#42#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/bill/views.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="nav.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="143" column="35" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
-                  <folding>
-                    <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#nav#0;n#div#2;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="account.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
-                  <folding>
-                    <element signature="n#script#3;n#head#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#ul#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#1;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#2;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#1;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <marker date="1468306985000" expanded="true" signature="2681:2718" placeholder="..." />
-                    <marker date="1468306985000" expanded="true" signature="2792:2803" placeholder="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="rent-item.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/rent-item.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
-                  <folding>
-                    <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#img#1;n#div#0;n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#h3#1;n#div#0;n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#ul#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="76.875">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/gt/models.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
-                  <folding>
-                    <element signature="e#16#31#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="complete-account.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.37278107">
-                  <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-                  <folding>
-                    <element signature="n#script#2;n#head#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#p#0;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#h3#0;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#h3#1;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#h3#2;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#h3#3;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#h3#4;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#style#0;n#div#0;n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#1;n#div#0;n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#2;n#div#0;n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#footer#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <element signature="n#script#16;n#body#0;n#html#0;n#!!top" expanded="false" />
-                    <marker date="1468309109000" expanded="true" signature="2619:2656" placeholder="..." />
-                    <marker date="1468309109000" expanded="true" signature="2730:2741" placeholder="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9195402">
+              <caret line="183" column="38" selection-start-line="183" selection-start-column="38" selection-end-line="183" selection-end-column="38" />
+              <folding>
+                <element signature="e#42#72#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gt/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.814815">
+              <caret line="100" column="2" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modify-account.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/modify-account.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.625">
+              <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+              <folding>
+                <element signature="n#script#2;n#head#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="e#7767#7893#0" expanded="false" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#7;n#div#1;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#7;n#div#1;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#7;n#div#1;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#div#7;n#div#1;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#script#21;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#script#22;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <marker date="1468308877000" expanded="true" signature="2639:2676" placeholder="..." />
+                <marker date="1468308877000" expanded="true" signature="2750:2761" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontEnd/tools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backEnd/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="74" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="account.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.254902">
+              <caret line="102" column="26" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="26" />
+              <folding>
+                <element signature="n#script#3;n#head#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1468306985000" expanded="true" signature="2681:2718" placeholder="..." />
+                <marker date="1468306985000" expanded="true" signature="2792:2803" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.7647057">
+              <caret line="83" column="55" selection-start-line="83" selection-start-column="55" selection-end-line="83" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="iforget.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/iforget.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.375">
+              <caret line="68" column="55" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontEnd/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="63" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -269,26 +205,27 @@
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/index.html" />
         <option value="$PROJECT_DIR$/frontEnd/static/frontEnd/js/tinymce/codepen.min.css" />
         <option value="$PROJECT_DIR$/frontEnd/static/frontEnd/plugins/datepicker/css/bootstrap-datepicker.css" />
-        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" />
         <option value="$PROJECT_DIR$/gt/settings.py" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/modify_account.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/school.html" />
         <option value="$PROJECT_DIR$/frontEnd/static/frontEnd/js/tinymce/tinymce-init.js" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account-icon.html" />
-        <option value="$PROJECT_DIR$/gt/models.py" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/feature-tags.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account-feature.html" />
         <option value="$PROJECT_DIR$/frontEnd/static/frontEnd/css/test.css" />
-        <option value="$PROJECT_DIR$/frontEnd/urls.py" />
         <option value="$PROJECT_DIR$/backEnd/views.py" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/rent-item.html" />
-        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html" />
-        <option value="$PROJECT_DIR$/frontEnd/tools.py" />
-        <option value="$PROJECT_DIR$/frontEnd/views.py" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/modify-account.html" />
-        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/host-index.html" />
+        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html" />
+        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" />
+        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" />
+        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/iforget.html" />
+        <option value="$PROJECT_DIR$/frontEnd/tools.py" />
+        <option value="$PROJECT_DIR$/gt/models.py" />
+        <option value="$PROJECT_DIR$/frontEnd/urls.py" />
+        <option value="$PROJECT_DIR$/frontEnd/views.py" />
       </list>
     </option>
   </component>
@@ -298,10 +235,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1920" />
-    <option name="y" value="-215" />
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -328,7 +263,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -475,7 +410,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -747,17 +682,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="-215" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16347177" sideWeight="0.4960396" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18093699" sideWeight="0.4960396" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11287129" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18811882" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45148516" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18774703" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45059288" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11363637" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20958903" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23482428" sideWeight="0.5039604" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -788,16 +723,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gt/static/upload/icons/fa6d1cac0a25afc77fdefe821a720ae0.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gt/static/upload/icons/f5624e7625a9a39a287ff78af16fb7ed.jpeg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gt/static/upload/icons/f0275a61bb145aff6324cc74f7795177.jpeg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -964,13 +889,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/static/frontEnd/js/allunivlist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontEnd/static/frontEnd/css/test.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.764706">
@@ -989,7 +907,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.0">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="83" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1000,18 +917,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gt/settings.py">
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/rent-item.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#1;n#div#0;n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#h3#1;n#div#0;n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#ul#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/urls.py">
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="72" selection-start-line="20" selection-start-column="72" selection-end-line="20" selection-end-column="72" />
-          <folding />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1469352907000" expanded="true" signature="133:189" placeholder="..." />
+            <marker date="1469352907000" expanded="true" signature="13686:13693" placeholder="..." />
+            <marker date="1469352907000" expanded="true" signature="15011:15219" placeholder="..." />
+            <marker date="1469352907000" expanded="true" signature="15029:15134" placeholder="{...}" />
+            <marker date="1469352907000" expanded="true" signature="15061:15126" placeholder="{&quot;mapWidth&quot;: 806...}" />
+            <marker date="1469352907000" expanded="true" signature="15163:15209" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/host-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="92" selection-start-line="73" selection-start-column="92" selection-end-line="73" selection-end-column="92" />
+          <folding>
+            <element signature="n#style#0;n#h3#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29506007">
+          <caret line="164" column="50" selection-start-line="164" selection-start-column="50" selection-end-line="164" selection-end-column="50" />
+          <folding>
+            <element signature="n#script#2;n#head#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h6#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#textarea#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#0;n#textarea#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#1;n#textarea#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#2;n#textarea#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#3;n#textarea#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#4;n#textarea#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#6;n#div#1;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#6;n#div#1;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#6;n#div#1;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#6;n#div#1;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#form#0;n#div#2;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#footer#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#16;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <marker date="1468312124000" expanded="true" signature="2619:2656" placeholder="..." />
+            <marker date="1468312124000" expanded="true" signature="2730:2741" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8857143">
+          <caret line="66" column="17" selection-start-line="66" selection-start-column="17" selection-end-line="66" selection-end-column="17" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#nav#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#2;n#nav#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#p#0;n#div#0;n#div#2;n#nav#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#div#0;n#div#2;n#nav#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#2;n#div#0;n#div#2;n#nav#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#3;n#div#0;n#div#2;n#nav#0;n#div#2;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1023,58 +1011,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/rent-item.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
-          <folding>
-            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#div#0;n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#1;n#div#0;n#section#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#ul#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backEnd/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="143" column="35" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#nav#0;n#div#2;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gt/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
-          <folding>
-            <element signature="e#16#31#0" expanded="true" />
-          </folding>
+          <caret line="23" column="74" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
+        <state vertical-scroll-proportion="-3.254902">
+          <caret line="102" column="26" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="26" />
           <folding>
             <element signature="n#script#3;n#head#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#ul#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#form#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1088,56 +1039,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/tools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="82" column="48" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
-          <folding>
-            <element signature="e#42#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37278107">
-          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-          <folding>
-            <element signature="n#script#2;n#head#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#1;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#2;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#3;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#4;n#textarea#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#6;n#div#1;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#footer#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#script#16;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1468309109000" expanded="true" signature="2619:2656" placeholder="..." />
-            <marker date="1468309109000" expanded="true" signature="2730:2741" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/modify-account.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.791667">
+        <state vertical-scroll-proportion="-0.625">
           <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
           <folding>
             <element signature="n#script#2;n#head#0;n#html#0;n#!!top" expanded="false" />
@@ -1158,21 +1062,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/index.html">
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="76.875">
+        <state vertical-scroll-proportion="-4.7647057">
+          <caret line="83" column="55" selection-start-line="83" selection-start-column="55" selection-end-line="83" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/iforget.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.375">
+          <caret line="68" column="55" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/static/frontEnd/js/allunivlist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/host-index.html">
+    <entry file="file://$PROJECT_DIR$/frontEnd/tools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56804734">
-          <caret line="73" column="92" selection-start-line="73" selection-start-column="92" selection-end-line="73" selection-end-column="92" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.814815">
+          <caret line="100" column="2" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gt/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7344214">
+          <caret line="33" column="98" selection-start-line="33" selection-start-column="98" selection-end-line="33" selection-end-column="98" />
           <folding>
-            <element signature="n#style#0;n#h3#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#16#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="63" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9195402">
+          <caret line="183" column="38" selection-start-line="183" selection-start-column="38" selection-end-line="183" selection-end-column="38" />
+          <folding>
+            <element signature="e#42#72#0" expanded="true" />
           </folding>
         </state>
       </provider>

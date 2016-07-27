@@ -75,6 +75,12 @@
 <div id="ct-js-wrapper" class="ct-pageWrapper">
 
     <nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
+        {% if login_flag %}
+        <div>
+            <img src="{{ current_user.icon }}"
+                 style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; margin-left: 75%; bottom: auto">
+        </div>
+        {% endif %}
 
         <div class="navbar-header">
             <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
@@ -82,23 +88,26 @@
                                                            alt=""/></a>
         </div>
 
+
         <div class="container">
             <div class="ct-navbarBox">
                 {% if login_flag %}
-                <a href="/host-center/" class="ct-login"><span>{{ current_user.username }}</span><i
+                <a href="/host-center/" class="ct-login"
+                   style="margin-top: 2px"><span>{{ current_user.username }}</span><i
                         class="fa fa-lock"></i></a>
                 {% if current_user.state == 0 %}
                 <p>您还没有成为host, 点击这里成为host
-                    <a href="/image-receive/" class="ct-login"><span>注册成为host</span><i
+                    <a href="/image-receive/" class="ct-login" style="margin-top: 2px"><span>注册成为host</span><i
                             class="fa fa-lock"></i></a></p>
                 {% elif current_user.state == 1 %}
-                <a href="" class="ct-login"><span>资料审核中</span><i class="fa fa-lock"></i></a>
-                <img src="{{ current_user.icon }}" style="height: 28px; width: 28px; border: 1px solid #cccccc; border-radius: 50%">
+                <a href="" class="ct-login" style="margin-top: 2px"><span>资料审核中</span><i class="fa fa-lock"></i></a>
                 {% endif %}
-                <a href="/logout/" class="ct-login"><span>退出登录</span><i class="fa fa-lock"></i></a>
+                <a href="/logout/" class="ct-login" style="margin-top: 2px"><span>退出登录</span><i class="fa fa-lock"></i></a>
                 {% else %}
-                <a href="/login/" class="ct-login"><span>注册/登录</span><i class="fa fa-lock"></i></a>
+                <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
                 {% endif %}
+
+
                 <div class="ct-navbarBox-meta">
                     <div class="ct-navSearch-box">
                         <a class="ct-js-navSearch ct-navSearch" href="#"><i class="fa fa-search"></i></a>
@@ -144,15 +153,15 @@
                 <li><a href="/index/">
                     <div class="ct-textEffect"><span data-content="主页">主页</span></div>
                 </a></li>
-                
+
                 <!--=========================================================================-->
 
-                <li  ><a href="javascript:findSchool()">
+                <li><a href="javascript:findSchool()">
                     <div class="ct-textEffect"><span data-content="学校">学校</span></div>
                 </a></li>
 
 
-                 <li  ><a href="javascript:findTopic()">
+                <li><a href="javascript:findTopic()">
                     <div class="ct-textEffect"><span data-content="话题">话题</span></div>
                 </a></li>
 
@@ -187,7 +196,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/service"><span>使用帮助</span></a></li>
                         <li><a href="/host-center/"><span>招贤纳士</span></a></li>
-                        
+
                     </ul>
                 </li>
 

@@ -6,6 +6,9 @@ from django.db import models
 from django.utils import timezone
 from djangotoolbox.fields import ListField
 from django import forms
+from settings import EMAIL_HOST_USER
+from django.shortcuts import render
+from django.template import Context
 
 
 class Host(models.Model):
@@ -28,6 +31,7 @@ class Host(models.Model):
     birth = models.CharField(blank=True, max_length=100)
     qq_number = models.CharField(blank=True, max_length=20)
     wechat = models.CharField(blank=True, max_length=20)
+    forget_string = models.CharField(blank=True, max_length=200)     # 这个forget_string用来进行找回密码验证的。
 
     def get_all_features(self):
         host_topics = Host_Topic.objects.filter(host_id=self.id)
@@ -62,7 +66,7 @@ class Host(models.Model):
 
         return d_topic_feature
 
-    def get_all_classes(self,school_id="none"):
+    def get_all_classes(self, school_id="none"):
         if school_id == "none":
             hosts = Host.objects.all()
         d_topic_detail = {}
@@ -110,7 +114,7 @@ class Host(models.Model):
                 print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
             for k, v in d_host_topic.items():
-                tag = tag + " " + v
+                tag = tag + " " + str(v)
 
             each_host.image = "/files/icons/" + each_host.icon.split("/")[-1]
             each_host.min_payment = int(each_host.min_payment)
@@ -120,6 +124,7 @@ class Host(models.Model):
         Info['object'] = hosts
         Info['topics'] = d_topic_detail.values()
         return Info
+
 
 class Province(models.Model):
     p_name = models.CharField(max_length=100)
@@ -136,7 +141,7 @@ class School(models.Model):
 class Topic(models.Model):
     t_name = models.CharField(max_length=200)
     t_click = models.IntegerField(default=0)
-    t_tag = models.CharField(max_length= 100, null=True)
+    t_tag = models.CharField(max_length=100, null=True)
 
 
 class Feature(models.Model):
@@ -172,22 +177,24 @@ class Menu(models.Model):
     m_index = models.IntegerField()
     m_upload_time = models.DateField()
 
+
 class Document(models.Model):
     d_menu = models.CharField(max_length=100)
     d_name = models.CharField(max_length=100)
     d_text = models.TextField()
-    d_index = models.IntegerField()   # 将不同的话题区分开来
-    
+    d_index = models.IntegerField()  # 将不同的话题区分开来
+
+
 class Mail(models.Model):
-    subject = models.CharField(max_length = 200)
-    from_email = models.CharField(max_length = 200)
-    to_email = models.CharField(max_length = 200)
-    host_id = models.CharField(max_length = 200)
-    admin_id = models.CharField(max_length = 200)
+    subject = models.CharField(max_length=200)
+    from_email = models.CharField(max_length=200)
+    to_email = models.CharField(max_length=200)
+    host_id = models.CharField(max_length=200)
+    admin_id = models.CharField(max_length=200)
     content = models.TextField()
-    
-    def sendMail(self, subject,to,content):
-    #to = ['yhydhx@126.com']
+
+    def sendMail(self, subject, to, content):
+        # to = ['yhydhx@126.com']
 
         context = {"content": content}
 
@@ -197,15 +204,15 @@ class Mail(models.Model):
         from_email = EMAIL_HOST_USER
 
         html_content = t.render(Context(context))
-        #print html_content
+        # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
 
         msg.send()
+
 
 class Message(models.Model):
     from_user = models.CharField(max_length=100)
     to_user = models.CharField(max_length=100)
     message_type = models.IntegerField()
     upload_time = models.DateField()
-

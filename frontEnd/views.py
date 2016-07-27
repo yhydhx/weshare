@@ -17,10 +17,13 @@ from django.utils import timezone
 from django.conf import settings
 import hashlib
 from tools import *
+from gt.settings import EMAIL_HOST_USER
 import json
 import chunk
 import os
 import base64
+
+SALT = 'hetongshinanshen'
 
 
 def index(request):
@@ -46,19 +49,19 @@ def index(request):
     for t in d.values():
         obj.append(t)
 
-    #get recommended hosts
+    # get recommended hosts
 
     recommend_host = Host.objects.all()[0]
-    Info  = {}
+    Info = {}
     Info = recommend_host.get_all_classes()
     print Info
     Info['object'] = obj
-    
+
     login_flag = False
     try:
-        #check the user is login or not
-        req_username = request.session['email']        
-        #get the user
+        # check the user is login or not
+        req_username = request.session['email']
+        # get the user
         user = Host.objects.get(email=req_username)
         login_flag = True
         return render_to_response('frontEnd/index.html', {'current_user': user,
@@ -149,6 +152,36 @@ def login(request):
 def logout(request):
     del request.session['email']
     return HttpResponseRedirect('/index/')
+
+
+@csrf_exempt
+def i_forget(request, attr):
+    if not request.method == 'POST':
+        return render_to_response('frontEnd/iforget.html')
+
+    # 处理上传的东西
+    elif not request.POST['email']:
+        pass  # 坑以后补上
+    else:
+        email = request.POST['email']
+        host = Host.objects.get(email=email)  # 找到host
+        # 生成找回链接
+        sha1 = hashlib.sha1()
+        string = sha1.update(email + SALT)
+        iforget_link = '127.0.0.1:8080/iforget/' + string + '/'
+
+        #######################################
+        mail = Mail(
+            subject='weshere账户密码找回,请不要回复此邮件',
+            from_email=EMAIL_HOST_USER,
+            to_email=email,
+            host_id=host.id,
+            admin_id='1',
+            content=iforget_link,
+        )
+        # mail.sendMail()
+        ######################################
+        return HttpResponse('邮件已经发送啦')
 
 
 @csrf_exempt  # 所有有这个东西的全部要删掉到时候重新部署csrf防跨站
@@ -469,7 +502,6 @@ def about(request):
 
 
 def service(request):
-
     menu = Menu.objects.filter(m_index=2).order_by("id")
     services = Document.objects.all().order_by('d_index')
     menu_list = []
@@ -481,16 +513,14 @@ def service(request):
         d_topic_question[menu_atom.m_name]['doc'] = []
         d_topic_question[menu_atom.m_name]['name'] = menu_atom.m_name
 
-    count = 0    
+    count = 0
     for service_atom in services:
         if service_atom.d_menu in menu_list:
             count += 1
-            service_atom.num = "collapes"+str(count)
+            service_atom.num = "collapes" + str(count)
             d_topic_question[service_atom.d_menu]['doc'].append(service_atom)
 
-
-    return render(request,"frontEnd/services.html",{"object":d_topic_question.values()})
-
+    return render(request, "frontEnd/services.html", {"object": d_topic_question.values()})
 
 
 def school(request, method, Oid):
@@ -555,15 +585,16 @@ def school(request, method, Oid):
 
         return render(request, "frontEnd/school.html", Info)
     else:
-        return render(request,"frontEnd/404.html")
+        return render(request, "frontEnd/404.html")
 
 
-#user view 
+# user view
 def user(request, method, Oid):
     if method == "show":
-        return render(request,"frontEnd/404.html")
+        return render(request, "frontEnd/404.html")
     else:
-        return render(request,"frontEnd/404.html")
+        return render(request, "frontEnd/404.html")
+
 
 @csrf_exempt
 def image_library(request):
@@ -602,8 +633,6 @@ def image_library(request):
             user_data[str(index)] = user_data.url
         url_list_json = json.loads(url_list)
         return HttpResponse(url_list_json)
-
-
 
 
 '''
