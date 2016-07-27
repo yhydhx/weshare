@@ -65,7 +65,9 @@
         });
         $("#list").append("<br style='clear:both;' />");
 
-    }</script>
+    }
+    var shool_button = true;
+    </script>
 </head>
 
 <body class="cssAnimate">
@@ -185,7 +187,7 @@
                         </div><!-- /btn-group -->
                         <label for="foreign-phone">手机号码</label>
                         <input type="text" class="form-control form-control--type2" aria-label="..." name="phone"
-                               id="foreign-phone" placeholder="请点击右侧三角添加区号" value="{{phone}}">
+                               id="foreign-phone" placeholder="请点击左侧三角添加区号" value="{{phone}}">
                     </div><!-- /input-group -->
 
                     <div class="form-group">
@@ -194,9 +196,9 @@
                     </div>
 
                     <div class="form-group">
-                        <div style="width:100%; margin:0 auto; overflow:hidden;">
+                        <div style="width:100%; margin:0 auto; overflow:hidden;" >
                             <label for="txtSc" class="required">你的学校</label>
-                            <input type="text" id="txtSc" name="school" value="{{h_school}}"
+                            <input type="text" id="txtSc" name="school" onfocus="changeSchoolState()" value="{{h_school}}"
                                    class="form-control form-control--type2"/>
 
                             <div id="gj"
@@ -300,6 +302,13 @@
 
             // $(".hrefClass").text().split(" ")[1]
     )
+
+    function changeSchoolState(){
+        if (shool_button==true){
+            school_button = false;
+            $("#txtSc")[0].click()
+        }
+    }
 </script>
 
 

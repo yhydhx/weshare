@@ -235,7 +235,7 @@
 <div id="ct-gallery" class="ct-gallery ct-gallery--col5 ct-js-magnificPortfolioPopupGroup">
     {% block recommend %}
         {% for host in hosts %}
-    <a class="ct-js-magnificPopupImage" href="{{host.image}}" title="{{host.username}}">
+    <a class="ct-js-magnificPopupImage" onclick="window.location.href='/user/show/{{host.id}}'" title="{{host.username}}">
         <figure class="ct-gallery-item {{host.tag}}">
             <img src="{{host.image}}" alt="">
             <figcaption>

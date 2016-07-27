@@ -65,7 +65,7 @@ def index(request):
         user = Host.objects.get(email=req_username)
         login_flag = True
         return render_to_response('frontEnd/index.html', {'current_user': user,
-                                                          'login_flag': login_flag})
+                                                          'login_flag': login_flag},Info)
     except:
         return render_to_response('frontEnd/index.html',Info)
 
@@ -539,7 +539,9 @@ def service(request):
 
 def school(request, method, Oid):
     if method == "show":
-        hosts = Host.objects.all()
+        render 
+    elif method = "detail":
+        hosts = Host.objects.filter(state=2)
         d_topic_detail = {}
         for each_host in hosts:
             '''
@@ -605,7 +607,16 @@ def school(request, method, Oid):
 # user view
 def user(request, method, Oid):
     if method == "show":
-        return render(request, "frontEnd/404.html")
+        try:
+            host = Host.objects.get(id=Oid)
+        except:
+            return render(request,"frontEnd/404.html")
+
+        features = host.get_all_features()
+        host.features = features.values()
+        host.image = "/files/icons/" + host.icon.split("/")[-1]
+
+        return render_to_response('frontEnd/host-index.html', {'user': host})
     else:
         return render(request, "frontEnd/404.html")
 

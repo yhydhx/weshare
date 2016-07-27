@@ -128,6 +128,7 @@ class Host(models.Model):
         Info = {}
         Info['hosts'] = hosts
         Info['topics'] = d_topic_detail.values()
+        print Info['topics']
         return Info
 
 
