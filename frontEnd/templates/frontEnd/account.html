@@ -165,7 +165,7 @@
 
                     <div class="form-group" style="padding-top: 1 px">
                         <label for="username">姓名</label>
-                        <input id="username" name="username" class="form-control form-control--type2">
+                        <input id="username" name="username" value="{{username}}" class="form-control form-control--type2">
                     </div>
 
 
@@ -185,18 +185,18 @@
                         </div><!-- /btn-group -->
                         <label for="foreign-phone">手机号码</label>
                         <input type="text" class="form-control form-control--type2" aria-label="..." name="phone"
-                               id="foreign-phone" placeholder="请点击右侧三角添加区号">
+                               id="foreign-phone" placeholder="请点击右侧三角添加区号" value="{{phone}}">
                     </div><!-- /input-group -->
 
                     <div class="form-group">
                         <label for="email" class="required">邮箱</label>
-                        <input id="email" name="email" required class="form-control form-control--type2">
+                        <input id="email" name="email" value="{{email}}" required class="form-control form-control--type2">
                     </div>
 
                     <div class="form-group">
                         <div style="width:100%; margin:0 auto; overflow:hidden;">
                             <label for="txtSc" class="required">你的学校</label>
-                            <input type="text" id="txtSc" name="school"
+                            <input type="text" id="txtSc" name="school" value="{{h_school}}"
                                    class="form-control form-control--type2"/>
 
                             <div id="gj"

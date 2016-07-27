@@ -81,23 +81,37 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                 h_school = request.POST['school']
                 phone = request.POST['phone']
                 email = request.POST['email']
+                
+                #keep the infomation the user has wrote
+                Info = {}
+                Info['username'] = username
+                Info['h_school'] = h_school
+                Info['phone'] = phone
+                Info['email'] = email
+
                 if not process_mail(email):
                     error = '请使用正确格式的邮箱'
-                    return render_to_response('frontEnd/account.html', {'error': error},
+                    Info['error'] = error
+                    Info['email'] = ""
+                    return render_to_response('frontEnd/account.html', Info,
                                               context_instance=RequestContext(request))
                 if not process_passwd(password):
                     error = '请使用正确要求的密码'
-                    return render_to_response('frontEnd/account.html', {'error': error},
+                    Info['error'] = error
+                    return render_to_response('frontEnd/account.html', Info,
                                               context_instance=RequestContext(request))
 
                 if not process_phone_num(phone):
                     error = '请选择国家区号'
-                    return render_to_response('frontEnd/account.html', {'error': error},
+                    Info['error'] = error
+                    Info['phone'] = ""
+                    return render_to_response('frontEnd/account.html', Info,
                                               context_instance=RequestContext(request))
                 try:
                     Host.objects.get(email=email)
                     error = '您的邮箱已经被注册了'
-                    return render_to_response('frontEnd/account.html', {'error': error},
+                    Info['email'] = ""
+                    return render_to_response('frontEnd/account.html', Info,
                                               context_instance=RequestContext(request))
                 except:
                     host = Host(username=username,
