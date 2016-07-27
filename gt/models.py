@@ -73,7 +73,7 @@ class Host(models.Model):
 
     def get_all_classes(self, school_id="none"):
         if school_id == "none":
-            hosts = Host.objects.all()
+            hosts = Host.objects.filter(state=2)
         d_topic_detail = {}
         for each_host in hosts:
             '''
