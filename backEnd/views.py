@@ -21,6 +21,7 @@ from gt.settings import *
 from django.utils.http import urlquote
 
 import hashlib,json
+import datetime
 
 '''def index(request):
     latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]
@@ -449,6 +450,7 @@ def menu(request, method, Oid):
         menu = Menu(
             m_name = name,
             m_index = index,
+            m_upload_time = datetime.datetime.now()
         )
         menu.save()
         # Oid = news.id

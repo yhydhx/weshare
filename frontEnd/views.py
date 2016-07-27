@@ -22,6 +22,8 @@ import json
 import chunk
 import os
 import base64
+import time
+import  datetime
 
 SALT = 'hetongshinanshen'
 
@@ -516,7 +518,7 @@ def about(request):
 
 
 def service(request):
-    menu = Menu.objects.filter(m_index=2).order_by("id")
+    menu = Menu.objects.filter(m_index=2).order_by("m_upload_time")
     # for k in menu:
     #     print k.id, k.m_name
     services = Document.objects.all().order_by('d_index')
@@ -612,6 +614,7 @@ def school(request, method, Oid):
 
 
 # user view
+@csrf_exempt
 def user(request, method, Oid):
     if method == "show":
         try:
@@ -623,9 +626,51 @@ def user(request, method, Oid):
         host.features = features.values()
         host.image = "/files/icons/" + host.icon.split("/")[-1]
 
-        return render_to_response('frontEnd/host-index.html', {'user': host})
+        msgs = Message.objects.filter(to_user=Oid)
+        for msg_atom in msgs:
+            msg_atom.date_format()
+            msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
+        Info = {}
+        Info['user'] = host
+        Info['msgs'] = msgs
+        return render_to_response('frontEnd/host-index.html', Info)
+
+    elif method == "msg":
+        #check whether the user is online
+        try:
+            req_username = request.session['email']
+            # get the user
+            user = Host.objects.get(email=req_username)
+        except:
+            return render(request,"frontEnd/404.html")
+
+        #check is the host exist
+        try:
+            host = Host.objects.get(id=Oid)
+        except:
+            return render(request,"frontEnd/404.html")
+
+        #save the message 
+        msg = request.POST.get("message")
+        if user.icon == "":
+            user.icon == DEFAULT_ICON
+
+        message = Message(
+            from_user = user.id , 
+            to_user = host.id ,
+            message_type =  0,  #which means normal message
+            icon = user.icon ,
+            content = msg,
+            upload_time = datetime.datetime.now(),
+            )
+        message.save()
+
+        return HttpResponseRedirect("/user/show/"+Oid)
+
     else:
         return render(request, "frontEnd/404.html")
+
+
 
 
 @csrf_exempt

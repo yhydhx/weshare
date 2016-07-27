@@ -182,7 +182,7 @@ class Admin(models.Model):
 class Menu(models.Model):
     m_name = models.CharField(max_length=100)
     m_index = models.IntegerField()
-    #m_upload_time = models.DateField(null=True)
+    m_upload_time = models.DateField(null=True)
 
 
 class Document(models.Model):
@@ -234,7 +234,14 @@ class Mail(models.Model):
         msg.send()
 
 class Message(models.Model):
+
     from_user = models.CharField(max_length=100)
     to_user = models.CharField(max_length=100)
     message_type = models.IntegerField()
+    icon = models.CharField(max_length=100)
     upload_time = models.DateField()
+    content = models.TextField()
+    def date_format(self):
+        self.upload_time = self.upload_time.strftime("%Y-%m-%d")
+
+
