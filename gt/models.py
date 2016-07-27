@@ -6,7 +6,15 @@ from django.db import models
 from django.utils import timezone
 from djangotoolbox.fields import ListField
 from django import forms
+from settings import EMAIL_HOST_USER
+from django.shortcuts import render
+from django.template import Context
 
+#mail server
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives, EmailMessage
+from django.template import Context, loader
+from gt.settings import *
 
 class Host(models.Model):
     username = models.CharField(max_length=50)
@@ -28,6 +36,7 @@ class Host(models.Model):
     birth = models.CharField(blank=True, max_length=100)
     qq_number = models.CharField(blank=True, max_length=20)
     wechat = models.CharField(blank=True, max_length=20)
+    forget_string = models.CharField(blank=True, max_length=200)     # 这个forget_string用来进行找回密码验证的。
 
     def get_all_features(self):
         host_topics = Host_Topic.objects.filter(host_id=self.id)
@@ -62,7 +71,7 @@ class Host(models.Model):
 
         return d_topic_feature
 
-    def get_all_classes(self,school_id="none"):
+    def get_all_classes(self, school_id="none"):
         if school_id == "none":
             hosts = Host.objects.all()
         d_topic_detail = {}
@@ -117,9 +126,10 @@ class Host(models.Model):
             each_host.tag = tag
 
         Info = {}
-        Info['object'] = hosts
+        Info['hosts'] = hosts
         Info['topics'] = d_topic_detail.values()
         return Info
+
 
 class Province(models.Model):
     p_name = models.CharField(max_length=100)
@@ -136,7 +146,7 @@ class School(models.Model):
 class Topic(models.Model):
     t_name = models.CharField(max_length=200)
     t_click = models.IntegerField(default=0)
-    t_tag = models.CharField(max_length= 100, null=True)
+    t_tag = models.CharField(max_length=100, null=True)
 
 
 class Feature(models.Model):
@@ -172,19 +182,22 @@ class Menu(models.Model):
     m_index = models.IntegerField()
     #m_upload_time = models.DateField(null=True)
 
+
 class Document(models.Model):
     d_menu = models.CharField(max_length=100)
     d_name = models.CharField(max_length=100)
     d_text = models.TextField()
-    d_index = models.IntegerField()   # 将不同的话题区分开来
-    
+    d_index = models.IntegerField()  # 将不同的话题区分开来
+
+
 class Mail(models.Model):
-    subject = models.CharField(max_length = 200)
-    from_email = models.CharField(max_length = 200)
-    to_email = models.CharField(max_length = 200)
-    host_id = models.CharField(max_length = 200)
-    admin_id = models.CharField(max_length = 200)
+    subject = models.CharField(max_length=200)
+    from_email = models.CharField(max_length=200)
+    to_email = models.CharField(max_length=200)
+    host_id = models.CharField(max_length=200)
+    admin_id = models.CharField(max_length=200)
     content = models.TextField()
+    is_success = models.IntegerField()
     
     def sendMail(self, subject,to,content):
     #to = ['yhydhx@126.com']
@@ -192,6 +205,21 @@ class Mail(models.Model):
         context = {"content": content}
 
         email_template_name = 'backEnd/blankTemp.html'
+        t = loader.get_template(email_template_name)
+
+        from_email = EMAIL_HOST_USER
+
+        html_content = t.render(Context(context))
+        # print html_content
+        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+
+        msg.send()
+
+    def forgotPassword(self,subject,to,content):
+        context = {"content": content}
+
+        email_template_name = 'backEnd/forgotPasswordTemp.html'
         t = loader.get_template(email_template_name)
 
         from_email = EMAIL_HOST_USER
@@ -208,4 +236,3 @@ class Message(models.Model):
     to_user = models.CharField(max_length=100)
     message_type = models.IntegerField()
     upload_time = models.DateField()
-
