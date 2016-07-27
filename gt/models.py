@@ -147,6 +147,7 @@ class School(models.Model):
 class Topic(models.Model):
     t_name = models.CharField(max_length=200)
     t_click = models.IntegerField(default=0)
+    t_intro = models.CharField(max_length=200, null=True)
     t_tag = models.CharField(max_length=100, null=True)
 
 
