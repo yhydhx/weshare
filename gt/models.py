@@ -10,6 +10,11 @@ from settings import EMAIL_HOST_USER
 from django.shortcuts import render
 from django.template import Context
 
+#mail server
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives, EmailMessage
+from django.template import Context, loader
+from gt.settings import *
 
 class Host(models.Model):
     username = models.CharField(max_length=50)
@@ -121,7 +126,7 @@ class Host(models.Model):
             each_host.tag = tag
 
         Info = {}
-        Info['object'] = hosts
+        Info['hosts'] = hosts
         Info['topics'] = d_topic_detail.values()
         return Info
 
@@ -192,9 +197,10 @@ class Mail(models.Model):
     host_id = models.CharField(max_length=200)
     admin_id = models.CharField(max_length=200)
     content = models.TextField()
-
-    def sendMail(self, subject, to, content):
-        # to = ['yhydhx@126.com']
+    is_success = models.IntegerField()
+    
+    def sendMail(self, subject,to,content):
+    #to = ['yhydhx@126.com']
 
         context = {"content": content}
 
@@ -210,6 +216,20 @@ class Mail(models.Model):
 
         msg.send()
 
+    def forgotPassword(self,subject,to,content):
+        context = {"content": content}
+
+        email_template_name = 'backEnd/forgotPasswordTemp.html'
+        t = loader.get_template(email_template_name)
+
+        from_email = EMAIL_HOST_USER
+
+        html_content = t.render(Context(context))
+        #print html_content
+        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+
+        msg.send()
 
 class Message(models.Model):
     from_user = models.CharField(max_length=100)

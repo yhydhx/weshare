@@ -66,7 +66,7 @@ DATABASES = {
         'NAME': "weshare",
         #'USER': 'jupiter',
         #'PASSWORD' : '5080',
-        'HOST' : '127.0.0.1',
+        'HOST' : '121.49.104.35',
         'PORT' : '27017',
     }
 }

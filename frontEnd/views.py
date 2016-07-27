@@ -54,7 +54,7 @@ def index(request):
     recommend_host = Host.objects.all()[0]
     Info = {}
     Info = recommend_host.get_all_classes()
-    print Info
+ 
     Info['object'] = obj
 
     login_flag = False
@@ -67,7 +67,7 @@ def index(request):
         return render_to_response('frontEnd/index.html', {'current_user': user,
                                                           'login_flag': login_flag})
     except:
-        return render_to_response('frontEnd/index.html')
+        return render_to_response('frontEnd/index.html',Info)
 
 
 @csrf_exempt
