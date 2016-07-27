@@ -517,8 +517,8 @@ def about(request):
 
 def service(request):
     menu = Menu.objects.filter(m_index=2).order_by("id")
-    for k in menu:
-        print k.id, k.m_name
+    # for k in menu:
+    #     print k.id, k.m_name
     services = Document.objects.all().order_by('d_index')
     menu_list = []
 
@@ -536,7 +536,11 @@ def service(request):
             service_atom.num = "collapes" + str(count)
             d_topic_question[service_atom.d_menu]['doc'].append(service_atom)
 
-    return render(request, "frontEnd/services.html", {"object": d_topic_question.values()})
+    result = []
+    for k in sorted(menu_list):
+        result.append(d_topic_question[k])
+
+    return render(request, "frontEnd/services.html", {"object": result})
 
 
 def school(request, method, Oid):
