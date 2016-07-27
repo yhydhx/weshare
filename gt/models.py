@@ -110,7 +110,7 @@ class Host(models.Model):
                 print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
             for k, v in d_host_topic.items():
-                tag = tag + " " + v
+                tag = tag + " " + str(v)
 
             each_host.image = "/files/icons/" + each_host.icon.split("/")[-1]
             each_host.min_payment = int(each_host.min_payment)
@@ -170,7 +170,7 @@ class Admin(models.Model):
 class Menu(models.Model):
     m_name = models.CharField(max_length=100)
     m_index = models.IntegerField()
-    m_upload_time = models.DateField()
+    #m_upload_time = models.DateField(null=True)
 
 class Document(models.Model):
     d_menu = models.CharField(max_length=100)
