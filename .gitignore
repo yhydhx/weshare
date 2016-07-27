@@ -1,3 +1,3 @@
 *.pyc
-gt/setting.py
+gt/settings.py
 *.DS_Store
