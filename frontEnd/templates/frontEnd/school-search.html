@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html >
 <!--[if IE]><![endif]-->
 <!--[if IE 8 ]>
@@ -114,75 +115,32 @@ $("#txtSc").live("click",function (){
     </div>
 </div>
 
-<footer class="ct-footer ct-u-sectionDark">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-1 col-sm-hidden col-xs-hidden"></div>
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <div class="ct-footer-logo ct-u-paddingTop50 ct-u-paddingBottom30">
-                            <img class="footerLogo" src="./assets/images/weshare/LOGO.png" alt="logo">
-                        </div>
-                        <div class="footerLink">
-                            <a href="">使用帮助链接</a><br>
-                            <a href="">招贤纳士链接</a><br>                            
-                        </div>
-                        <div class="footerCompany">
-                            <p>公司法律全名&英文</p>                             
-                        </div>
-
-                       
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <div class="footerQRcode">
-                            <img style="height: 100px;" src="./assets/images/weshare/QRcode.jpg" alt="">
-                            <img style="margin-left: 5px; height: 100px;" src="./assets/images/weshare/QRcode.jpg" alt="">               
-                        </div>
-                        <div class="footerInfo">
-                            公司地址：<br>
-                            电话：<br>
-                            邮件：<br>                    
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-hidden col-xs-hidden"></div>
-        </div>
-    </div>
-    
-    <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
-        <div class="container">
-            <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/">createIT</a> 2014</div>
-            <ul class="ct-socials">
-                <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i class="fa fa-flickr"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i class="fa fa-facebook-square"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
-
-</div>
+{% include "frontEnd/footer.html" %}
 
 <!-- JavaScripts -->
-<script src="./assets/js/jquery.min.js"></script>
-<script src="./assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="./assets/js/dependencies.js"></script>
+<script src=" {% static 'frontEnd/js/jquery.min.js'%} "></script>
 
-<script src="./assets/js/main.js"></script>
 
-<script src="./assets/plugins/ct-mediaSection/js/jquery.stellar.min.js"></script>
-<script src="./assets/plugins/ct-mediaSection/js/init.js"></script>
 
-<script src="./assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="./assets/plugins/magnific-popup/init.js"></script>
 
-<script src="./assets/plugins/slick/slick.min.js"></script>
-<script src="./assets/plugins/slick/init.js"></script>
+
+
+
+
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js'%}" ></script>
+<script src="{% static 'frontEnd/js/dependencies.js'%}" ></script>
+
+<script src="{% static 'frontEnd/js/main.js'%}"  ></script>
+
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js'%}" ></script>
+
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js'%}" ></script>
+
+<script src="{% static 'frontEnd/plugins/slick/slick.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js'%}" ></script>
+
 
 
 

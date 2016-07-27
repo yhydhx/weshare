@@ -539,8 +539,9 @@ def service(request):
 
 def school(request, method, Oid):
     if method == "show":
-        render 
-    elif method = "detail":
+        return render(request,"frontEnd/school-search.html")
+
+    elif method == "detail":
         hosts = Host.objects.filter(state=2)
         d_topic_detail = {}
         for each_host in hosts:
