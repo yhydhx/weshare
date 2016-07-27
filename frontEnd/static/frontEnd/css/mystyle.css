@@ -1,0 +1,124 @@
+/*footer*/
+@media screen and (min-width: 768px){
+	.footerLogo{
+		height: 100px;
+	}
+	.footerLink{
+
+	}
+	.footerLink a{
+		color:gray;
+	}
+	.footerCompany{
+		margin-top: 20px;
+	}
+	.footerQRcode{
+		margin-top: 80px;
+	}
+	.footerInfo{
+		color: gray;
+		margin-top: 20px;
+	}	
+}
+@media screen and (max-width: 768px){
+	.footerLogo{
+		height: 100px;
+	}
+	.footerLink{
+
+	}
+	.footerLink a{
+		color:gray;
+	}
+	.footerCompany{
+		margin-top: 20px;
+	}
+	.footerQRcode{
+		margin-top: 10px;
+	}	
+	.footerInfo{
+	color: gray;
+	margin-top: 20px;
+	}
+}
+
+/*school-search*/
+@media screen and (min-width: 768px){
+	.ssbody{
+		margin-top: 160px;
+	}
+	.ssImax{
+	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
+		background-position: center 0; 
+		background-repeat: no-repeat; 
+		background-attachment:fixed;
+		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
+	/*	background-repeat: no-repeat;
+		background-position: center;*/
+		height:800px;
+
+		display: flex;
+		justify-content:center;
+		align-items: center;
+	}
+	.ssImaxSearch{
+		width: 50%;
+		border: 20px solid rgba(0,0,0,0.3);
+	}
+	.ssImaxSearchInput{
+		border: 0;
+		width:80%;
+		height: 30px;
+	}
+	.ssImaxSearchButton{
+		border: 0;
+		width:20%;
+		height: 30px;
+		background-color: #FF615E; 
+		color:white;
+		font-family:'Microsoft YaHei'; 
+	}
+	.ssImaxSearchButton:hover{
+		background-color: #C35556; 
+	    cursor: pointer;
+	}	
+}
+@media screen and (max-width: 768px){
+	.ssbody{
+		margin-top: 0px;
+	}
+	.ssImax{
+	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
+		background-position: center 0; 
+		background-repeat: no-repeat; 
+		background-attachment:fixed;
+		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
+	/*	background-repeat: no-repeat;
+		background-position: center;*/
+		height:800px;
+
+		display: flex;
+		justify-content:center;
+		padding-top: 100px;
+	}
+	.ssImaxSearch{
+		width: 80%;
+	}
+	.ssImaxSearchInput{
+		border: 0;
+		width:80%;
+		height: 30px;
+	}
+	.ssImaxSearchButton{
+		border: 0;
+		width:20%;
+		height: 30px;
+		background-color: #FF615E; 
+		color:white; 
+		font-family:'Microsoft YaHei'; 
+	}
+	.ssImaxSearchButton:hover{
+		background-color: #C35556; 
+	    cursor: pointer;
+	}
+}

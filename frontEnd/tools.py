@@ -7,9 +7,13 @@ import base64
 
 
 def process_mail(input_mail):
+    regex  = "@([A-Za-z0-9]+\.)+[a-zA-Z]{2,}"
     is_match = bool(
-        re.match(r"^[a-zA-Z](([a-zA-Z0-9]*\.[a-zA-Z0-9]*)|[a-zA-Z0-9]*)[a-zA-Z]@([a-z0-9A-Z]+\.)+[a-zA-Z]{2,}$",
-                 input_mail, re.VERBOSE));
+        re.search(regex,  # 验证@之后的网址
+                 input_mail, re.VERBOSE))
+    # print input_mail
+    # print is_match
+    # print regex
     if is_match:
         return True
     else:
@@ -78,5 +82,3 @@ def judge_gender(gender):
         return True
     else:
         return False
-
-
