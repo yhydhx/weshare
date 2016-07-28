@@ -414,7 +414,7 @@ def host_center(request):
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
-    return HttpResponseRedirect(requst,'/user/show/'+host.id)
+    return HttpResponseRedirect('/user/show/'+host.id)
 
 
 def modify_account(request):
