@@ -125,9 +125,8 @@
                        style="margin-top: 2px"><span>{{ current_user.username }}</span><i
                             class="fa fa-lock"></i></a>
                     {% if current_user.state == 0 %}
-                    <p>您还没有成为host, 点击这里成为host
                         <a href="/image-receive/" class="ct-login" style="margin-top: 2px"><span>注册成为host</span><i
-                                class="fa fa-lock"></i></a></p>
+                                class="fa fa-lock"></i></a>
                     {% elif current_user.state == 1 %}
                     <a href="" class="ct-login" style="margin-top: 2px"><span>资料审核中</span><i class="fa fa-lock"></i></a>
                     {% endif %}
@@ -136,19 +135,23 @@
                     <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
                     {% endif %}
 
+
                     {% if login_flag %}
-                        
                     <div class="dropdown">
                       <button class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <img src="{{ current_user.icon }}" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto">{{ current_user.username }}<span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="/host-center/">个人中心</a></li>
+                        {% if current_user.state == 0 %}
+                        <li><a href="/image-receive/">注册成为host</a></li>
+                        {% elif current_user.state == 1 %}
+                        <li class="disabled"><a href="">资料审核中</a></li>
+                        <li><a href="/logout/">退出登录</a></li>
                       </ul>
                     </div>
+                    {% else %}
+                    <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
                     {% endif %}
 
 
