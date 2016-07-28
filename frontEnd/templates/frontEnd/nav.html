@@ -143,10 +143,13 @@
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
                         <li><a href="/host-center/">个人中心</a></li>
+
                         {% if current_user.state == 0 %}
                         <li><a href="/image-receive/">注册成为host</a></li>
                         {% elif current_user.state == 1 %}
                         <li class="disabled"><a href="">资料审核中</a></li>
+                        {% endif %}
+                        
                         <li><a href="/logout/">退出登录</a></li>
                       </ul>
                     </div>
