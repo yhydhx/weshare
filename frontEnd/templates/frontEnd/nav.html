@@ -137,8 +137,18 @@
                     {% endif %}
 
                     {% if login_flag %}
-                        <img src="{{ current_user.icon }}"
-                             style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; margin-left: 75%; bottom: auto">
+                        
+                    <div class="dropdown">
+                      <button class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <img src="{{ current_user.icon }}" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; margin-left: 75%; bottom: auto">
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </div>
                     {% endif %}
 
 
