@@ -54,7 +54,7 @@ def index(request):
     recommend_host = Host.objects.all()[0]
     Info = {}
     Info = recommend_host.get_all_classes()
- 
+
     Info['object'] = obj
 
     login_flag = False
@@ -67,7 +67,7 @@ def index(request):
         return render_to_response('frontEnd/index.html', {'current_user': user,
                                                           'login_flag': login_flag})
     except:
-        return render_to_response('frontEnd/index.html',Info)
+        return render_to_response('frontEnd/index.html', Info)
 
 
 @csrf_exempt
@@ -157,8 +157,10 @@ def logout(request):
 @csrf_exempt
 def i_forget(request, attr):
     if not request.method == 'POST':
-        return render_to_response('frontEnd/iforget.html')
-
+        if attr:
+            pass
+        else:
+            return render_to_response('iforget.html')
     # 处理上传的东西
     elif not request.POST['email']:
         pass  # 坑以后补上
@@ -168,7 +170,7 @@ def i_forget(request, attr):
         # 生成找回链接
         sha1 = hashlib.sha1()
         string = sha1.update(email + SALT)
-        iforget_link = '127.0.0.1:8080/iforget/' + string + '/'
+        iforget_link = '127.0.0.1:8077/iforget/' + string + '/'
 
         #######################################
         mail = Mail(
@@ -578,6 +580,7 @@ def school(request, method, Oid):
             each_host.tag = tag
 
         Info = {}
+        Info['login_flag'] = True
         Info['object'] = hosts
         Info['topics'] = d_topic_detail.values()
 

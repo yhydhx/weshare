@@ -10,8 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -26,7 +26,6 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -36,7 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'game',
+    # 'game',
     'frontEnd',
 
     'backEnd',
@@ -56,7 +55,6 @@ ROOT_URLCONF = 'gt.urls'
 
 WSGI_APPLICATION = 'gt.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -64,10 +62,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django_mongodb_engine',
         'NAME': "weshare",
-        #'USER': 'jupiter',
-        #'PASSWORD' : '5080',
-        'HOST' : '121.49.104.35',
-        'PORT' : '27017',
+        # 'USER': 'jupiter',
+        # 'PASSWORD' : '5080',
+        'HOST': '127.0.0.1',
+        'PORT': '27017',
     }
 }
 
@@ -84,7 +82,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
@@ -98,12 +95,11 @@ STATICfILES_DIRS = (
     '/var/www/html/gt/gt/static'
 )
 
-#email setting 
+# email setting
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST= 'smtp.mxhichina.com'
+EMAIL_HOST = 'smtp.mxhichina.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER='service@wshere.com'
-EMAIL_HOST_PASSWORD='WeShareHere001'
-#EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'service@wshere.com'
+EMAIL_HOST_PASSWORD = 'WeShareHere001'
+# EMAIL_USE_TLS = True
 EMAIL_SSL_PORT = 465
-

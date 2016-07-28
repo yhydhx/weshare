@@ -10,11 +10,12 @@ from settings import EMAIL_HOST_USER
 from django.shortcuts import render
 from django.template import Context
 
-#mail server
+# mail server
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template import Context, loader
 from gt.settings import *
+
 
 class Host(models.Model):
     username = models.CharField(max_length=50)
@@ -36,7 +37,7 @@ class Host(models.Model):
     birth = models.CharField(blank=True, max_length=100)
     qq_number = models.CharField(blank=True, max_length=20)
     wechat = models.CharField(blank=True, max_length=20)
-    forget_string = models.CharField(blank=True, max_length=200)     # 这个forget_string用来进行找回密码验证的。
+    forget_string = models.CharField(blank=True, max_length=200)  # 这个forget_string用来进行找回密码验证的。
 
     def get_all_features(self):
         host_topics = Host_Topic.objects.filter(host_id=self.id)
@@ -198,9 +199,9 @@ class Mail(models.Model):
     admin_id = models.CharField(max_length=200)
     content = models.TextField()
     is_success = models.IntegerField()
-    
-    def sendMail(self, subject,to,content):
-    #to = ['yhydhx@126.com']
+'''
+    def sendMail(self, subject, to, content):
+        # to = ['yhydhx@126.com']
 
         context = {"content": content}
 
@@ -216,7 +217,7 @@ class Mail(models.Model):
 
         msg.send()
 
-    def forgotPassword(self,subject,to,content):
+    def forgotPassword(self, subject, to, content):
         context = {"content": content}
 
         email_template_name = 'backEnd/forgotPasswordTemp.html'
@@ -225,12 +226,13 @@ class Mail(models.Model):
         from_email = EMAIL_HOST_USER
 
         html_content = t.render(Context(context))
-        #print html_content
+        # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
 
         msg.send()
 
+'''
 class Message(models.Model):
     from_user = models.CharField(max_length=100)
     to_user = models.CharField(max_length=100)
