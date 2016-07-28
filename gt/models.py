@@ -132,8 +132,21 @@ class Host(models.Model):
         print Info['topics']
         return Info
 
+    def get_user_message(self,user_id):
+        msgs = Message.objects.filter(to_user=user_id)
+        for msg_atom in msgs:
+            msg_atom.date_format()
+            msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
+        
+        return Info msgs
+
+
+class Country(models.Model):
+    c_name = models.CharField(max_length=100)
+    c_id = models.IntegerField()
 
 class Province(models.Model):
+    p_country = models.CharField(max_length=100, null=True)
     p_name = models.CharField(max_length=100)
     p_id = models.IntegerField()
 
@@ -143,7 +156,46 @@ class School(models.Model):
     s_province = models.CharField(max_length=200)
     s_display_index = models.IntegerField()
     s_student_number = models.IntegerField()
+    def get_country_province_school(self):
+        result = []
+        countries = Country.objects.all()
 
+        # get each country 
+        country_index = 0
+        for country in countries:
+            tmpC = {}
+            tmpC['id'] = country_index
+            tmpC['univs'] = ""
+            tmpC['name'] = country.c_name
+            tmpC['provs'] = []
+            country_index += 1
+            #get each province 
+            
+            provinces = Province.objects.filter(p_country = country.c_name)
+            province_index = 1
+            for province in provinces:
+                tmpP = {}
+                tmpP['country_id'] = tmpC['id']
+                tmpP['id'] = province_index
+                tmpP['name'] = province.p_name
+                tmpP['univs'] = []
+                province_index += 1
+
+                #get each school 
+                schools  = School.objects.filter(s_province=tmpP['name'])
+                school_index = 1
+                for school in schools:
+                    tmpS = {}
+                    tmpS['id'] = tmpP['id'] * 1000 + school_index
+                    tmpS['name'] = school.s_name
+                    tmpS['school_id'] = school.id
+                    school_index += 1
+                    tmpP['univs'].append(tmpS)
+
+                tmpC['provs'].append(tmpP)
+
+            result.append(tmpC)
+        return result
 
 class Topic(models.Model):
     t_name = models.CharField(max_length=200)
@@ -245,5 +297,6 @@ class Message(models.Model):
     content = models.TextField()
     def date_format(self):
         self.upload_time = self.upload_time.strftime("%Y-%m-%d")
+
 
 

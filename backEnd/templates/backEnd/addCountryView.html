@@ -1,0 +1,14 @@
+
+{% load staticfiles %}
+
+<form method = 'post' action = '/dc/country/addCountry/'>
+	 {% csrf_token %}
+	<h2>country<input name='country_name' value ='' ></h2>
+	
+	<h2>country_id<input name='country_id' value ='' ></h2>
+	
+
+	<input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+

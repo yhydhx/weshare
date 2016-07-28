@@ -6,14 +6,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <!-- Place this in the body of the page content -->
-<form method="post" action='../save/'>
+<form id="province" method="post" action='../save/'>
 		 {% csrf_token %}
         <input type='hidden' name="id" value={{object.id}}> 
 
 
     <h2>province name<input name='province_name' value ='{{object.p_name}}' ></h2>
     <h2>propvince id<input name='province_id' value ='{{object.p_id}}' ></h2>
-
+    <h2> Coutnry 
+    <select id="countries" name = 'c_name' form="province">
+        {% block content %}
+            {% for publisher in countries %}
+            <option value={{publisher.c_name}}>{{publisher.c_name}}</option>
+            {% endfor %}
+        {% endblock %}
+    </select>
+    </h2>   
 
 
     <input type='submit' value="确认">
@@ -23,6 +31,15 @@
 
 
 <script type="text/javascript" src="{% static 'blog/js/jstable.js' %}"></script>
+<script type="text/javascript">
+var countries = document.getElementById("countries").children;
+for(var i = 0; i < countries.length; i++){
+    if (countries[i].value == '{{object.p_country}}'){
+        countries[i].selected = true;
+    }
+}
+
+</script>
 
 
 
