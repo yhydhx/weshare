@@ -117,6 +117,30 @@
                                                               alt=""/></a></li>
                             </ul>
                         </div>
+
+                        <!-- 注册登录 -->
+                        {% if login_flag %}
+                        <div class="dropdown">
+                          <button class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <img src="{{ current_user.icon }}" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto">{{ current_user.username }}<span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <li><a href="/host-center/">个人中心</a></li>
+
+                            {% if current_user.state == 0 %}
+                            <li><a href="/image-receive/">注册成为host</a></li>
+                            {% elif current_user.state == 1 %}
+                            <li class="disabled"><a href="">资料审核中</a></li>
+                            {% endif %}
+                            
+                            <li><a href="/logout/">退出登录</a></li>
+                          </ul>
+                        </div>
+                        {% else %}
+                        <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
+                        {% endif %}
+                        <!-- 注册登录 -->
+                        
                     </div> <!-- Flags -->
 
 
@@ -136,26 +160,7 @@
                     {% endif %} -->
 
 
-                    {% if login_flag %}
-                    <div class="dropdown">
-                      <button class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <img src="{{ current_user.icon }}" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto">{{ current_user.username }}<span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a href="/host-center/">个人中心</a></li>
 
-                        {% if current_user.state == 0 %}
-                        <li><a href="/image-receive/">注册成为host</a></li>
-                        {% elif current_user.state == 1 %}
-                        <li class="disabled"><a href="">资料审核中</a></li>
-                        {% endif %}
-                        
-                        <li><a href="/logout/">退出登录</a></li>
-                      </ul>
-                    </div>
-                    {% else %}
-                    <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
-                    {% endif %}
 
 
                 </div>
