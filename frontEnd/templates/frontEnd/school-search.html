@@ -1,0 +1,148 @@
+{% load staticfiles %}
+<!DOCTYPE html >
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]>
+<html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="description" content="Rentica - The Best One Yet">
+    <meta name="author" content="CreateIT">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="./assets/images/content/cars/icon.ico">
+    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
+
+    <title>Rentica - HTML Template</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
+
+
+    <!--[if lt IE 9]>
+    <script src="./assets/bootstrap/js/html5shiv.min.js"></script>
+    <script src="./assets/bootstrap/js/respond.min.js"></script>
+    <script src="./assets/plugins/REM-unit-polyfill/js/rem.min.js"></script>
+    <![endif]-->
+    <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script>
+
+    <!-- school-search -->
+    <script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
+    <script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script>    
+</head>
+
+
+<!-- school-search css and script-->
+<style type="text/css">
+    a{text-decoration:none; outline:none;color:#666666;white-space: nowrap;display:inline-block;}
+    a:hover{text-decoration:none}
+</style>
+<script type="text/javascript">
+var school = "";
+var sf = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#gj").append("<a href='javascript:void(0);' onclick='getSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
+
+//»ñµÃÃ¿¸ö¹ú¼ÒµÄÊ¡·Ý
+function getSheng(aid,name){
+school = name;
+    $("#sheng").show();
+    $("#list").html('');
+    $("#sheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#sheng").append("ºÜ±§Ç¸£¡ÔÝÊ±Ã»ÓÐÊý¾Ý£¨Ö»Ìá¹©ÁËÖÐ¹úºÍÃÀ¹úµÄÑ§Ð£ÐÅÏ¢£©");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
+
+//»ñµÃÃ¿¸öÊ¡·ÝµÄÑ§Ð£
+function  getSchool(gid,pid,name){
+school = school.substring(0,2);
+school += " - "+name;
+$("#list").show();
+    $("#list").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+        $("#list").append("<a href='#' style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#list").append("<br style='clear:both;' />");
+        
+}
+
+$("#list a").live("click",function (){
+    $("#gj").hide();
+    $("#list").hide();
+    $("#sheng").hide();
+    school += " - "+$(this).text();
+    $("#txtSc").val(school);
+});
+$("#txtSc").live("click",function (){
+    $("#gj").show();
+    $("#list").hide();
+    $("#sheng").hide();
+});
+</script>
+
+
+
+
+
+{% include "frontEnd/nav.html" %}
+
+<div class="ssbody">
+    <div class="ssImax" style=" background-image:url('{% static 'frontEnd/images/weshare/ssImax.jpg'%}');">
+        <div class="ssImaxSearch">
+            <form  method="get">
+                <input type="text" id="txtSc" name="schoolID" class="ssImaxSearchInput" placeholder="&nbsp;&nbsp;点此选择您的学校" /><button type="submit" class="ssImaxSearchButton">搜&nbsp;索</button>
+                <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+                
+            </form>
+        </div> 
+    </div>
+</div>
+
+{% include "frontEnd/footer.html" %}
+
+<!-- JavaScripts -->
+<script src=" {% static 'frontEnd/js/jquery.min.js'%} "></script>
+
+
+
+
+
+
+
+
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js'%}" ></script>
+<script src="{% static 'frontEnd/js/dependencies.js'%}" ></script>
+
+<script src="{% static 'frontEnd/js/main.js'%}"  ></script>
+
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js'%}" ></script>
+
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js'%}" ></script>
+
+<script src="{% static 'frontEnd/plugins/slick/slick.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js'%}" ></script>
+
+
+
+
+</body>
+</html>

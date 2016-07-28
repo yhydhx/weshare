@@ -103,3 +103,9 @@ EMAIL_HOST_USER = 'service@wshere.com'
 EMAIL_HOST_PASSWORD = 'WeShareHere001'
 # EMAIL_USE_TLS = True
 EMAIL_SSL_PORT = 465
+<<<<<<< HEAD
+=======
+
+
+DEFAULT_ICON = "/file/image/111.jpg"
+>>>>>>> e5ae9146b4ade06c13096561377ac4a5a0f8fd0e

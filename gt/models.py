@@ -74,7 +74,7 @@ class Host(models.Model):
 
     def get_all_classes(self, school_id="none"):
         if school_id == "none":
-            hosts = Host.objects.all()
+            hosts = Host.objects.filter(state=2)
         d_topic_detail = {}
         for each_host in hosts:
             '''
@@ -129,6 +129,7 @@ class Host(models.Model):
         Info = {}
         Info['hosts'] = hosts
         Info['topics'] = d_topic_detail.values()
+        print Info['topics']
         return Info
 
 
@@ -147,6 +148,7 @@ class School(models.Model):
 class Topic(models.Model):
     t_name = models.CharField(max_length=200)
     t_click = models.IntegerField(default=0)
+    t_intro = models.CharField(max_length=200, null=True)
     t_tag = models.CharField(max_length=100, null=True)
 
 
@@ -181,7 +183,7 @@ class Admin(models.Model):
 class Menu(models.Model):
     m_name = models.CharField(max_length=100)
     m_index = models.IntegerField()
-    m_upload_time = models.DateField()
+    m_upload_time = models.DateField(null=True)
 
 
 class Document(models.Model):
@@ -234,7 +236,14 @@ class Mail(models.Model):
 
 '''
 class Message(models.Model):
+
     from_user = models.CharField(max_length=100)
     to_user = models.CharField(max_length=100)
     message_type = models.IntegerField()
+    icon = models.CharField(max_length=100)
     upload_time = models.DateField()
+    content = models.TextField()
+    def date_format(self):
+        self.upload_time = self.upload_time.strftime("%Y-%m-%d")
+
+

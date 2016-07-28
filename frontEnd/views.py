@@ -22,6 +22,8 @@ import json
 import chunk
 import os
 import base64
+import time
+import  datetime
 
 SALT = 'hetongshinanshen'
 
@@ -65,7 +67,7 @@ def index(request):
         user = Host.objects.get(email=req_username)
         login_flag = True
         return render_to_response('frontEnd/index.html', {'current_user': user,
-                                                          'login_flag': login_flag})
+                                                          'login_flag': login_flag},Info)
     except:
         return render_to_response('frontEnd/index.html', Info)
 
@@ -81,23 +83,37 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                 h_school = request.POST['school']
                 phone = request.POST['phone']
                 email = request.POST['email']
+                
+                #keep the infomation the user has wrote
+                Info = {}
+                Info['username'] = username
+                Info['h_school'] = h_school
+                Info['phone'] = phone
+                Info['email'] = email
+
                 if not process_mail(email):
                     error = '请使用正确格式的邮箱'
-                    return render_to_response('frontEnd/account.html', {'error': error},
+                    Info['error'] = error
+                    Info['email'] = ""
+                    return render_to_response('frontEnd/account.html', Info,
                                               context_instance=RequestContext(request))
                 if not process_passwd(password):
                     error = '请使用正确要求的密码'
-                    return render_to_response('frontEnd/account.html', {'error': error},
+                    Info['error'] = error
+                    return render_to_response('frontEnd/account.html', Info,
                                               context_instance=RequestContext(request))
 
                 if not process_phone_num(phone):
                     error = '请选择国家区号'
-                    return render_to_response('frontEnd/account.html', {'error': error},
+                    Info['error'] = error
+                    Info['phone'] = ""
+                    return render_to_response('frontEnd/account.html', Info,
                                               context_instance=RequestContext(request))
                 try:
                     Host.objects.get(email=email)
                     error = '您的邮箱已经被注册了'
-                    return render_to_response('frontEnd/account.html', {'error': error},
+                    Info['email'] = ""
+                    return render_to_response('frontEnd/account.html', Info,
                                               context_instance=RequestContext(request))
                 except:
                     host = Host(username=username,
@@ -504,7 +520,9 @@ def about(request):
 
 
 def service(request):
-    menu = Menu.objects.filter(m_index=2).order_by("id")
+    menu = Menu.objects.filter(m_index=2).order_by("m_upload_time")
+    # for k in menu:
+    #     print k.id, k.m_name
     services = Document.objects.all().order_by('d_index')
     menu_list = []
 
@@ -522,12 +540,19 @@ def service(request):
             service_atom.num = "collapes" + str(count)
             d_topic_question[service_atom.d_menu]['doc'].append(service_atom)
 
-    return render(request, "frontEnd/services.html", {"object": d_topic_question.values()})
+    result = []
+    for k in sorted(menu_list):
+        result.append(d_topic_question[k])
+
+    return render(request, "frontEnd/services.html", {"object": result})
 
 
 def school(request, method, Oid):
     if method == "show":
-        hosts = Host.objects.all()
+        return render(request,"frontEnd/school-search.html")
+
+    elif method == "detail":
+        hosts = Host.objects.filter(state=2)
         d_topic_detail = {}
         for each_host in hosts:
             '''
@@ -592,11 +617,63 @@ def school(request, method, Oid):
 
 
 # user view
+@csrf_exempt
 def user(request, method, Oid):
     if method == "show":
-        return render(request, "frontEnd/404.html")
+        try:
+            host = Host.objects.get(id=Oid)
+        except:
+            return render(request,"frontEnd/404.html")
+
+        features = host.get_all_features()
+        host.features = features.values()
+        host.image = "/files/icons/" + host.icon.split("/")[-1]
+
+        msgs = Message.objects.filter(to_user=Oid)
+        for msg_atom in msgs:
+            msg_atom.date_format()
+            msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
+        Info = {}
+        Info['user'] = host
+        Info['msgs'] = msgs
+        return render_to_response('frontEnd/host-index.html', Info)
+
+    elif method == "msg":
+        #check whether the user is online
+        try:
+            req_username = request.session['email']
+            # get the user
+            user = Host.objects.get(email=req_username)
+        except:
+            return render(request,"frontEnd/404.html")
+
+        #check is the host exist
+        try:
+            host = Host.objects.get(id=Oid)
+        except:
+            return render(request,"frontEnd/404.html")
+
+        #save the message 
+        msg = request.POST.get("message")
+        if user.icon == "":
+            user.icon == DEFAULT_ICON
+
+        message = Message(
+            from_user = user.id , 
+            to_user = host.id ,
+            message_type =  0,  #which means normal message
+            icon = user.icon ,
+            content = msg,
+            upload_time = datetime.datetime.now(),
+            )
+        message.save()
+
+        return HttpResponseRedirect("/user/show/"+Oid)
+
     else:
         return render(request, "frontEnd/404.html")
+
+
 
 
 @csrf_exempt
