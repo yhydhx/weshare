@@ -595,7 +595,7 @@ def school(request, method, Oid):
 
                 # print d_topic_detail[t_id]['topics']
                 # print d_topic_detail[t_id]
-                print each_host.username, d_topic_detail[t_id]['name']
+                #print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
             for k, v in d_host_topic.items():
                 tag = tag + " " + str(v)
