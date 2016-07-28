@@ -91,21 +91,7 @@
 
         <div class="container">
             <div class="ct-navbarBox">
-                {% if login_flag %}
-                <a href="/host-center/" class="ct-login"
-                   style="margin-top: 2px"><span>{{ current_user.username }}</span><i
-                        class="fa fa-lock"></i></a>
-                {% if current_user.state == 0 %}
-                <p>您还没有成为host, 点击这里成为host
-                    <a href="/image-receive/" class="ct-login" style="margin-top: 2px"><span>注册成为host</span><i
-                            class="fa fa-lock"></i></a></p>
-                {% elif current_user.state == 1 %}
-                <a href="" class="ct-login" style="margin-top: 2px"><span>资料审核中</span><i class="fa fa-lock"></i></a>
-                {% endif %}
-                <a href="/logout/" class="ct-login" style="margin-top: 2px"><span>退出登录</span><i class="fa fa-lock"></i></a>
-                {% else %}
-                <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
-                {% endif %}
+
 
 
                 <div class="ct-navbarBox-meta">
@@ -138,6 +124,21 @@
                             </ul>
                         </div>
                     </div> <!-- Flags -->
+                    {% if login_flag %}
+                    <a href="/host-center/" class="ct-login"
+                       style="margin-top: 2px"><span>{{ current_user.username }}</span><i
+                            class="fa fa-lock"></i></a>
+                    {% if current_user.state == 0 %}
+                    <p>您还没有成为host, 点击这里成为host
+                        <a href="/image-receive/" class="ct-login" style="margin-top: 2px"><span>注册成为host</span><i
+                                class="fa fa-lock"></i></a></p>
+                    {% elif current_user.state == 1 %}
+                    <a href="" class="ct-login" style="margin-top: 2px"><span>资料审核中</span><i class="fa fa-lock"></i></a>
+                    {% endif %}
+                    <a href="/logout/" class="ct-login" style="margin-top: 2px"><span>退出登录</span><i class="fa fa-lock"></i></a>
+                    {% else %}
+                    <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
+                    {% endif %}
                 </div>
 
                 <button type="button" class="navbar-toggle">
@@ -203,4 +204,5 @@
             </ul>
 
         </div>
+
     </nav>
