@@ -138,7 +138,7 @@ class Host(models.Model):
             msg_atom.date_format()
             msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
         
-        return Info msgs
+        return msgs
 
 
 class Country(models.Model):
