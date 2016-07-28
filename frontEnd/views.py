@@ -596,7 +596,7 @@ def school(request, method, Oid):
                 print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
             for k, v in d_host_topic.items():
-                tag = tag + " " + v
+                tag = tag + " " + str(v)
 
             each_host.image = "/files/icons/" + each_host.icon.split("/")[-1]
             each_host.min_payment = int(each_host.min_payment)
