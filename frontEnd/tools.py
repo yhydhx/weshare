@@ -7,13 +7,9 @@ import base64
 
 
 def process_mail(input_mail):
-    regex  = "@([A-Za-z0-9]+\.)+[a-zA-Z]{2,}"
-    is_match = bool(
-        re.search(regex,  # 验证@之后的网址
-                 input_mail, re.VERBOSE))
-    # print input_mail
-    # print is_match
-    # print regex
+    is_match = False
+    if '@' in input_mail:
+        is_match = True
     if is_match:
         return True
     else:
