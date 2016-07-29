@@ -243,6 +243,8 @@ class Document(models.Model):
     d_name = models.CharField(max_length=100)
     d_text = models.TextField()
     d_index = models.IntegerField()  # 将不同的话题区分开来
+    def format_menu(self):
+        self.d_menu = Menu.objects.get(id=self.d_menu).m_name
 
 
 class Mail(models.Model):

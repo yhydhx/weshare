@@ -528,6 +528,7 @@ def service(request):
 
     count = 0
     for service_atom in services:
+        service_atom.format_menu()
         if service_atom.d_menu in menu_list:
             count += 1
             service_atom.num = "collapes" + str(count)
