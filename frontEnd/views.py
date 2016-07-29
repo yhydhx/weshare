@@ -521,14 +521,14 @@ def service(request):
 
     d_topic_question = {}
     for menu_atom in menu:
-        menu_list.append(menu_atom.m_name)
-        d_topic_question[menu_atom.m_name] = {}
-        d_topic_question[menu_atom.m_name]['doc'] = []
-        d_topic_question[menu_atom.m_name]['name'] = menu_atom.m_name
+        menu_list.append(menu_atom.id)
+        d_topic_question[menu_atom.id] = {}
+        d_topic_question[menu_atom.id]['doc'] = []
+        d_topic_question[menu_atom.id]['name'] = menu_atom.m_name
 
     count = 0
     for service_atom in services:
-        service_atom.format_menu()
+
         if service_atom.d_menu in menu_list:
             count += 1
             service_atom.num = "collapes" + str(count)
@@ -536,7 +536,7 @@ def service(request):
 
     result = []
     for k in menu:
-        result.append(d_topic_question[k.m_name])
+        result.append(d_topic_question[k.id])
 
     return render(request, "frontEnd/services.html", {"object": result})
 
