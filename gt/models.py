@@ -235,7 +235,7 @@ class Admin(models.Model):
 class Menu(models.Model):
     m_name = models.CharField(max_length=100)
     m_index = models.IntegerField()
-    m_upload_time = models.DateField(null=True)
+    m_upload_time = models.DateTimeField(null=True)
 
 
 class Document(models.Model):
