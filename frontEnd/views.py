@@ -534,8 +534,8 @@ def service(request):
             d_topic_question[service_atom.d_menu]['doc'].append(service_atom)
 
     result = []
-    for k in sorted(menu_list):
-        result.append(d_topic_question[k])
+    for k in menu:
+        result.append(d_topic_question[k.m_name])
 
     return render(request, "frontEnd/services.html", {"object": result})
 
