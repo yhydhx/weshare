@@ -414,14 +414,7 @@ def host_center(request):
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
-    features = host.get_all_features()
-    host.features = features.values()
-    host.image = "/files/icons/" + host.icon.split("/")[-1]
-
-    return render_to_response('frontEnd/host-index.html', {'user': host,
-                                                           'login_flag': True,
-                                                           'current_user': host,
-                                                           'user': host})
+    return HttpResponseRedirect(request,'/user/show/'+host.id)
 
 
 def modify_account(request):
@@ -630,13 +623,12 @@ def user(request, method, Oid):
         host.features = features.values()
         host.image = "/files/icons/" + host.icon.split("/")[-1]
 
-        msgs = Message.objects.filter(to_user=Oid)
-        for msg_atom in msgs:
-            msg_atom.date_format()
-            msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
         Info = {}
         Info['user'] = host
-        Info['msgs'] = msgs
+        Info['msgs'] = host.get_user_message(host.id)
+        Info['current_user'] = host
+        Info['login_flag'] = True
+
         return render_to_response('frontEnd/host-index.html', Info)
 
     elif method == "msg":
