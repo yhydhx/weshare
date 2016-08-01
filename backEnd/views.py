@@ -317,11 +317,15 @@ def topic(request, method, Oid):
     if method == 'addProvince':
         name = request.POST.get('topic_name')
         tag = request.POST.get('topic_tag')
+        intro = request.POST.get("topic_intro")
+        index = request.POST.get("topic_index")
 
         topic = Topic(
             t_name=name,
             t_click=0,
             t_tag=tag,
+            t_index = index,
+            t_intro = intro
         )
         topic.save()
         # Oid = news.id
@@ -332,9 +336,11 @@ def topic(request, method, Oid):
         if request.method == 'POST':
             topic = {'t_name': request.POST.get('topic_name'),
                      't_tag': request.POST.get('topic_tag'),
+                     't_intro': request.POST.get('topic_intro'),
+                     't_index': request.POST.get('topic_index'),
                      'id': request.POST.get("id")
                      }
-            Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'], t_tag=topic['t_tag'])
+            Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'], t_tag=topic['t_tag'],t_intro=topic['t_intro'], t_index=topic['t_index'])
 
         return HttpResponseRedirect('/dc/topic/show/')
 

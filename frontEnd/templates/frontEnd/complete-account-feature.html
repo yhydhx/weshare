@@ -128,68 +128,31 @@
             <div class="row">
                 <div class="col-md-12 ct-u-paddingTop80">
 
+                    {% block content %}
+                    {%  for topic in user_features%}
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <form class="ct-u-sectionBorder" name="foreign" action="/complete-account-feature/"
+                        <form class="ct-u-sectionBorder" name="{{topic.tag}}" action="/complete-account-feature/"
                               method="post">
                             <h2 class="ct-sectionHeader-title">
-                                <small><span>留学咨询</span></small>
+                                <small><span>{{topic.name}}</span></small>
                             </h2>
                             <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                {% for feature in feature_list_1 %}
+                                {% for feature in topic.feature_list %}
                                 <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
                                 {% endfor %}
                             </ul>
                             <div class="form-group" style="padding-top: 1px">
-                                <label for="foreign">例如 CV修改, phd内推等</label>
-                                <input class="form-control form-control--type2" id="foreign" name="foreign">
+                                <label for="foreign">{{topic.intro}}</label>
+                                <input class="form-control form-control--type2" id="{{topic.tag}}" name="feature_name">
                                 <button type="submit" class="btn btn-lg btn-wide btn-motive">
                                     <span>提交</span></button>
 
                             </div>
                         </form>
                     </div>
-
-                    <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <form class="ct-u-sectionBorder" name="course" action="/complete-account-feature/"
-                              method="post">
-                            <h2 class="ct-sectionHeader-title">
-                                <small><span>课程咨询</span></small>
-                            </h2>
-                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                {% for feature in feature_list_2 %}
-                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
-                                {% endfor %}
-                            </ul>
-                            <div class="form-group" style="padding-top: 1px">
-                                <label for="course">例如 复习方法, 考试技巧, 学霸笔记</label>
-                                <input class="form-control form-control--type2" id="course" name="course">
-                                <button type="submit" class="btn btn-lg btn-wide btn-motive">
-                                    <span>提交</span></button>
-
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <form class="ct-u-sectionBorder" name="competition" action="/complete-account-feature/"
-                              method="post">
-                            <h2 class="ct-sectionHeader-title">
-                                <small><span>竞赛经历</span></small>
-                            </h2>
-                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                {% for feature in feature_list_3 %}
-                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
-                                {% endfor %}
-                            </ul>
-                            <div class="form-group" style="padding-top: 1px">
-                                <label for="competition">例如 数学建模辅导, 英语竞赛技巧</label>
-                                <input class="form-control form-control--type2" id="competition" name="competition">
-                                <button type="submit" class="btn btn-lg btn-wide btn-motive">
-                                    <span>提交</span></button>
-
-                            </div>
-                        </form>
-                    </div>
+                    {% endfor %}
+                    {% endblock %}
+                   
 
                 </div>
             </div>

@@ -84,6 +84,7 @@ school += "-"+ name;
 $("#list").show();
     $("#list").html('');
     $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+
         $("#list").append("<a href=\"javascript:getSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
     });
     $("#list").append("<br style='clear:both;' />");
