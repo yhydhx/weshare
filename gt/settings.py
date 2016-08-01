@@ -64,7 +64,9 @@ DATABASES = {
         'NAME': "weshare",
         # 'USER': 'jupiter',
         # 'PASSWORD' : '5080',
-        'HOST': '120.24.156.181',
+         'HOST': '120.24.156.181',
+        # 'HOST': '127.0.0.1',
+
         'PORT': '27017',
     }
 }
@@ -103,10 +105,6 @@ EMAIL_HOST_USER = 'service@wshere.com'
 EMAIL_HOST_PASSWORD = 'WeShareHere001'
 # EMAIL_USE_TLS = True
 EMAIL_SSL_PORT = 465
-<<<<<<< HEAD
-
-=======
->>>>>>> 65db945112490faa9d68ee55a793f9b93285d69c
 
 
 DEFAULT_ICON = "/file/image/111.jpg"

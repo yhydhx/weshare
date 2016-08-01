@@ -83,40 +83,27 @@ school += "-"+ name;
 $("#list").show();
     $("#list").html('');
     $.each(allUnivList[gid].provs[pid].univs,function (k,l){
-        $("#list").append("<a href='#' style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+        $("#list").append("<a href=\"javascript:getSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
     });
     $("#list").append("<br style='clear:both;' />");
         
 }
 
 //点击学校响应
-$("#list a").live("click",function (){
+function getSchoolID(school_id,school_name){
+    schoolID = school_id;
+    console.log(schoolID);
+    console.log(school_name);
     $("#gj").hide();
     $("#list").hide();
     $("#sheng").hide();
-    school += "-"+$(this).text();
-    search = school.split("-")[0];
-    $.each(allUnivList,function (i,m){
-        if(m.name === search) {
-            schoolID = i;
-        }
-    });
-    search = school.split("-")[1];
-    $.each(allUnivList[schoolID].provs,function (i,m){
-        if(m.name === search) {
-            schoolID = schoolID+"-"+i;
-        }
-    });
-    search = school.split("-")[2];
-    $.each(allUnivList[schoolID.split("-")[0]].provs[schoolID.split("-")[1]].univs,function (i,m){
-        if(m.name === search) {
-            schoolID = schoolID+"-"+m.school_id;
-        }
-    });  
+    school += "-"+school_name;
 
     $("#txtSc").val(school);
     $("#txtSc2").val(schoolID);
-});
+
+}
+
 //点击表单响应
 $("#txtSc").live("click",function (){
     $("#gj").show();
