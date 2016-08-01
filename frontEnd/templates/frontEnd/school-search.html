@@ -95,7 +95,6 @@ $("#list a").live("click",function (){
     $("#list").hide();
     $("#sheng").hide();
     school += "-"+$(this).text();
-    alert(school);
     search = school.split("-")[0];
     $.each(allUnivList,function (i,m){
         if(m.name === search) {
