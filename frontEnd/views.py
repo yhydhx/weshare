@@ -216,15 +216,13 @@ def complete_account(request):
     if request.method == 'POST':
         if request.POST['self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
             'motto'] and \
-                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
-                request.POST['school'] and request.POST['qq']:
+                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and request.POST['qq']:
             self_introduction = request.POST['self-introduction']
             gender = request.POST['selectbox']
             motto = request.POST['motto']
             min_payment = request.POST['min-payment']
             service_time = request.POST['service-time']
             max_payment = request.POST['max-payment']
-            school = request.POST['school']
             qq = request.POST['qq']
 
             #print gender
@@ -568,21 +566,22 @@ def service(request):
 
     d_topic_question = {}
     for menu_atom in menu:
-        menu_list.append(menu_atom.m_name)
-        d_topic_question[menu_atom.m_name] = {}
-        d_topic_question[menu_atom.m_name]['doc'] = []
-        d_topic_question[menu_atom.m_name]['name'] = menu_atom.m_name
+        menu_list.append(menu_atom.id)
+        d_topic_question[menu_atom.id] = {}
+        d_topic_question[menu_atom.id]['doc'] = []
+        d_topic_question[menu_atom.id]['name'] = menu_atom.m_name
 
     count = 0
     for service_atom in services:
+
         if service_atom.d_menu in menu_list:
             count += 1
             service_atom.num = "collapes" + str(count)
             d_topic_question[service_atom.d_menu]['doc'].append(service_atom)
 
     result = []
-    for k in sorted(menu_list):
-        result.append(d_topic_question[k])
+    for k in menu:
+        result.append(d_topic_question[k.id])
 
     return render(request, "frontEnd/services.html", {"object": result})
 
@@ -637,6 +636,7 @@ def school(request, method, Oid):
                 # print d_topic_detail[t_id]
                 #print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
+            
             for k, v in d_host_topic.items():
                 tag = tag + " " + str(v)
 

@@ -182,11 +182,11 @@ def country(request, method, Oid):
                         }
             Country.objects.filter(id=country['id']).update(c_name=country['c_name'], c_id=country['c_id'])
 
-        return HttpResponseRedirect('/dc/country/show')
+        return HttpResponseRedirect('/dc/country/show/')
 
     elif method == 'delete':
         Country.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
         return render(request, 'backEnd/addCountryView.html')
     elif method == 'show':
@@ -287,7 +287,7 @@ def school(request, method, Oid):
     elif method == 'delete':
         School.objects.filter(id=Oid).delete()
 
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
         provinces = Province.objects.all()
         return render(request, 'backEnd/addSchoolView.html', {'provinces': provinces})
@@ -342,11 +342,11 @@ def topic(request, method, Oid):
                      }
             Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'], t_tag=topic['t_tag'],t_intro=topic['t_intro'], t_index=topic['t_index'])
 
-        return HttpResponseRedirect('/dc/topic/show')
+        return HttpResponseRedirect('/dc/topic/show/')
 
     elif method == 'delete':
         Topic.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
         return render(request, 'backEnd/addTopicView.html')
     elif method == 'show':
@@ -372,7 +372,7 @@ def feature(request, method, Oid):
         )
         feature.save()
 
-        return HttpResponseRedirect('/dc/feature/show')
+        return HttpResponseRedirect('/dc/feature/show/')
     elif method == 'change':
         feature = Feature.objects.get(id=Oid)
         topics = Topic.objects.all()
@@ -394,7 +394,7 @@ def feature(request, method, Oid):
     elif method == 'delete':
         Feature.objects.filter(id=Oid).delete()
 
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
         topics = Topic.objects.all()
         return render(request, 'backEnd/addFeatureView.html', {'topics': topics})
@@ -596,12 +596,14 @@ def doc(request, method, Oid):
     elif method == 'delete':
         Document.objects.filter(id=Oid).delete()
 
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
         menu = Menu.objects.all()
         return render(request, 'backEnd/addDocView.html', {'menu': menu})
     elif method == 'show' or method == '':
         allFeature = Document.objects.all()
+        for doc_atom in allFeature:
+            doc_atom.format_menu()
         return render(request, 'backEnd/showDocList.html', {'object': allFeature})
 
     else:

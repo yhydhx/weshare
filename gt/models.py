@@ -290,7 +290,7 @@ class Admin(models.Model):
 class Menu(models.Model):
     m_name = models.CharField(max_length=100)
     m_index = models.IntegerField()
-    m_upload_time = models.DateField(null=True)
+    m_upload_time = models.DateTimeField(null=True)
 
 
 class Document(models.Model):
@@ -298,6 +298,8 @@ class Document(models.Model):
     d_name = models.CharField(max_length=100)
     d_text = models.TextField()
     d_index = models.IntegerField()  # 将不同的话题区分开来
+    def format_menu(self):
+        self.d_menu = Menu.objects.get(id=self.d_menu).m_name
 
 
 class Mail(models.Model):
@@ -308,7 +310,7 @@ class Mail(models.Model):
     admin_id = models.CharField(max_length=200)
     content = models.TextField()
     is_success = models.IntegerField()
-'''
+
     def sendMail(self, subject, to, content):
         # to = ['yhydhx@126.com']
 
@@ -326,10 +328,10 @@ class Mail(models.Model):
 
         msg.send()
 
-    def forgotPassword(self, subject, to, content):
+    def register_success(self,to,content):
         context = {"content": content}
 
-        email_template_name = 'backEnd/forgotPasswordTemp.html'
+        email_template_name = 'backEnd/register_success_template.html'
         t = loader.get_template(email_template_name)
 
         from_email = EMAIL_HOST_USER
@@ -341,7 +343,74 @@ class Mail(models.Model):
 
         msg.send()
 
-'''
+    def host_pass(self,to,content):
+        context = {"content": content}
+
+        email_template_name = 'backEnd/host_pass_template.html'
+        t = loader.get_template(email_template_name)
+        from_email = EMAIL_HOST_USER
+        html_content = t.render(Context(context))
+        # print html_content
+        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+    def bill_info(self,to,content):
+        context = {"content": content}
+
+        email_template_name = 'backEnd/bill_info_template.html'
+        t = loader.get_template(email_template_name)
+        from_email = EMAIL_HOST_USER
+        html_content = t.render(Context(context))
+        # print html_content
+        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+    def report(self,to,content):
+        context = {"content": content}
+
+        email_template_name = 'backEnd/report_template.html'
+        t = loader.get_template(email_template_name)
+        from_email = EMAIL_HOST_USER
+        html_content = t.render(Context(context))
+        # print html_content
+        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+
+    def recruit(self,to,content):
+        context = {"content": content}
+
+        email_template_name = 'backEnd/recruit_template.html'
+        t = loader.get_template(email_template_name)
+        from_email = EMAIL_HOST_USER
+        html_content = t.render(Context(context))
+        # print html_content
+        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+
+           
+    def forgotPassword(self, subject, to, content):
+        context = {"content": content}
+
+        email_template_name = 'backEnd/forget_password_template.html'
+        t = loader.get_template(email_template_name)
+
+        from_email = EMAIL_HOST_USER
+
+        html_content = t.render(Context(context))
+        # print html_content
+        msg = EmailMultiAlternatives(subject, html_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+
+        msg.send()
+
+
+
 class Message(models.Model):
 
     from_user = models.CharField(max_length=100)

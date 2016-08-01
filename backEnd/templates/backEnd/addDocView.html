@@ -12,7 +12,7 @@
 	<select name = 'd_menu' form="feature">
 		{% block content %}
 			{% for publisher in menu %}
-			<option value={{publisher.m_name}}>{{publisher.m_name}}</option>
+			<option value={{publisher.id}}>{{publisher.m_name}}</option>
 			{% endfor %}
 		{% endblock %}
 	</select>

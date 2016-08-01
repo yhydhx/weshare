@@ -1,13 +1,11 @@
 {% load staticfiles %}
-
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<!--[if IE 8 ]>
-<html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>
-<html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8" lang="en"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9" lang="en"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!--<![endif]-->
+
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="description" content="Rentica - The Best One Yet">
@@ -15,10 +13,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico'%}">
     <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
 
-    <title>Rentica - HTML Template</title>
+    <title>weshare</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}">
@@ -27,8 +25,8 @@
 
     <!--[if lt IE 9]>
     <script src="./assets/bootstrap/js/html5shiv.min.js"></script>
-	<script src="./assets/bootstrap/js/respond.min.js"></script>
- 	<script src="./assets/plugins/REM-unit-polyfill/js/rem.min.js"></script>
+    <script src="./assets/bootstrap/js/respond.min.js"></script>
+    <script src="./assets/plugins/REM-unit-polyfill/js/rem.min.js"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script>
 
@@ -37,6 +35,7 @@
     <script type="text/javascript" src="{% static 'frontEnd/js/map/lib/raphael-min.js'%}" ></script>
     <script type="text/javascript" src="{% static 'frontEnd/js/map/res/chinaMapConfig.js'%}" ></script>
     <script type="text/javascript" src="{% static 'frontEnd/js/map/map-min.js'%}" ></script>
+
 <style>
     *{margin:0;padding:0;border: none;}
     body { color: #333; text-align: center; font: 12px "微软雅黑";background-color: #dcf5ed; }
@@ -55,6 +54,7 @@
 </style>
 
 </head>
+
 <body class="cssAnimate">
 {% if session_timeout %}
 <p style="color: #ffffff; background-color: #ec8c8c"> 您的session 已经失效,请重新登录 </p>
