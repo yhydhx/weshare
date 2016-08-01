@@ -155,6 +155,49 @@ def index(request):
 # delete news,and add new news
 # News contain three parts , title content date                 
 ########################################################
+
+def country(request, method, Oid):
+    try:
+        request.session['adminname']
+    except KeyError, e:
+        return HttpResponseRedirect('login.html')
+    if method == 'addCountry':
+        name = request.POST.get('country_name')
+        c_id = request.POST.get('country_id')
+
+        country = Country(
+            c_name=name,
+            c_id=int(c_id),
+        )
+        country.save()
+        # Oid = news.id
+        return HttpResponseRedirect('/dc/country/show/')
+    elif method == 'change':
+        return render(request, 'backEnd/changeCountry.html', {'object': Country.objects.get(id=Oid)})
+    elif method == 'save':
+        if request.method == 'POST':
+            country = {'c_name': request.POST.get('country_name'),
+                        'c_id': request.POST.get('country_id'),
+                        'id': request.POST.get("id")
+                        }
+            Country.objects.filter(id=country['id']).update(c_name=country['c_name'], c_id=country['c_id'])
+
+        return HttpResponseRedirect('/dc/country/show/')
+
+    elif method == 'delete':
+        Country.objects.filter(id=Oid).delete()
+        return HttpResponseRedirect('../show/')
+    elif method == 'add':
+        return render(request, 'backEnd/addCountryView.html')
+    elif method == 'show':
+        # return HttpResponse("hello")
+        return render(request, 'backEnd/showCountryList.html', {'object': Country.objects.all()})
+    else:
+        return HttpResponse('没有该方法')
+
+
+
+
 def province(request, method, Oid):
     try:
         request.session['adminname']
@@ -163,31 +206,38 @@ def province(request, method, Oid):
     if method == 'addProvince':
         name = request.POST.get('province_name')
         p_id = request.POST.get('province_id')
-
+        c_name = request.POST.get("c_name")
         province = Province(
-            p_name=name,
-            p_id=int(p_id),
+            p_name= name,
+            p_id= int(p_id),
+            p_country = c_name
         )
+
         province.save()
         # Oid = news.id
         return HttpResponseRedirect('/dc/province/show/')
     elif method == 'change':
-        return render(request, 'backEnd/changeProvince.html', {'object': Province.objects.get(id=Oid)})
+        countries = Country.objects.all()
+        return render(request, 'backEnd/changeProvince.html', {'object': Province.objects.get(id=Oid),'countries':countries})
     elif method == 'save':
         if request.method == 'POST':
             province = {'p_name': request.POST.get('province_name'),
                         'p_id': request.POST.get('province_id'),
+                        'p_country': request.POST.get('c_name'),
                         'id': request.POST.get("id")
                         }
-            Province.objects.filter(id=province['id']).update(p_name=province['p_name'], p_id=province['p_id'])
+            Province.objects.filter(id=province['id']).update(p_name=province['p_name'], p_id=province['p_id'],p_country=province['p_country'])
 
-        return HttpResponseRedirect('/dc/province/show')
+        return HttpResponseRedirect('/dc/province/show/')
 
     elif method == 'delete':
         Province.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
-        return render(request, 'backEnd/addProvinceView.html')
+        countries = Country.objects.all()
+        Info = {}
+        Info['countries'] = countries
+        return render(request, 'backEnd/addProvinceView.html',Info)
     elif method == 'show':
         # return HttpResponse("hello")
         return render(request, 'backEnd/showProvinceList.html', {'object': Province.objects.all()})
@@ -213,7 +263,7 @@ def school(request, method, Oid):
         )
         school.save()
 
-        return HttpResponseRedirect('/dc/school/show')
+        return HttpResponseRedirect('/dc/school/show/')
     elif method == 'change':
         school = School.objects.get(id=Oid)
         provinces = Province.objects.all()
@@ -232,12 +282,12 @@ def school(request, method, Oid):
                                                       s_display_index=school['s_display_index']
                                                       )
 
-        return HttpResponseRedirect('/dc/school/show')
+        return HttpResponseRedirect('/dc/school/show/')
 
     elif method == 'delete':
         School.objects.filter(id=Oid).delete()
 
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
         provinces = Province.objects.all()
         return render(request, 'backEnd/addSchoolView.html', {'provinces': provinces})
@@ -245,9 +295,19 @@ def school(request, method, Oid):
         allSchool = School.objects.all()
         return render(request, 'backEnd/showSchoolList.html', {'object': allSchool})
 
+    elif method == 'generateJS':
+        s = School.objects.all()[0]
+        result = s.get_country_province_school()
+        write_js(result)
+        return HttpResponse(result)
+        return render(request, 'backEnd/school/show/')
     else:
         return HttpResponse('没有该方法')
 
+def write_js(result):
+    output_file = file("frontEnd/static/frontEnd/js/schoolsearch/allunivlist.js",'w')
+    output_file.write('var allUnivList = ')
+    output_file.write(json.dumps(result))
 
 def topic(request, method, Oid):
     try:
@@ -276,11 +336,11 @@ def topic(request, method, Oid):
                      }
             Topic.objects.filter(id=topic['id']).update(t_name=topic['t_name'], t_tag=topic['t_tag'])
 
-        return HttpResponseRedirect('/dc/topic/show')
+        return HttpResponseRedirect('/dc/topic/show/')
 
     elif method == 'delete':
         Topic.objects.filter(id=Oid).delete()
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
         return render(request, 'backEnd/addTopicView.html')
     elif method == 'show':
@@ -306,7 +366,7 @@ def feature(request, method, Oid):
         )
         feature.save()
 
-        return HttpResponseRedirect('/dc/feature/show')
+        return HttpResponseRedirect('/dc/feature/show/')
     elif method == 'change':
         feature = Feature.objects.get(id=Oid)
         topics = Topic.objects.all()
@@ -328,7 +388,7 @@ def feature(request, method, Oid):
     elif method == 'delete':
         Feature.objects.filter(id=Oid).delete()
 
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
         topics = Topic.objects.all()
         return render(request, 'backEnd/addFeatureView.html', {'topics': topics})
@@ -530,12 +590,14 @@ def doc(request, method, Oid):
     elif method == 'delete':
         Document.objects.filter(id=Oid).delete()
 
-        return HttpResponseRedirect('../show')
+        return HttpResponseRedirect('../show/')
     elif method == 'add':
         menu = Menu.objects.all()
         return render(request, 'backEnd/addDocView.html', {'menu': menu})
     elif method == 'show' or method == '':
         allFeature = Document.objects.all()
+        for doc_atom in allFeature:
+            doc_atom.format_menu()
         return render(request, 'backEnd/showDocList.html', {'object': allFeature})
 
     else:
@@ -708,3 +770,5 @@ def setEmail(request):
     msg.send()
 
     return HttpResponse("succuss")
+
+

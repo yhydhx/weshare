@@ -412,14 +412,7 @@ def host_center(request):
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
-    features = host.get_all_features()
-    host.features = features.values()
-    host.image = "/files/icons/" + host.icon.split("/")[-1]
-
-    return render_to_response('frontEnd/host-index.html', {'user': host,
-                                                           'login_flag': True,
-                                                           'current_user': host,
-                                                           'user': host})
+    return HttpResponseRedirect('/user/show/'+host.id)
 
 
 def modify_account(request):
@@ -526,21 +519,22 @@ def service(request):
 
     d_topic_question = {}
     for menu_atom in menu:
-        menu_list.append(menu_atom.m_name)
-        d_topic_question[menu_atom.m_name] = {}
-        d_topic_question[menu_atom.m_name]['doc'] = []
-        d_topic_question[menu_atom.m_name]['name'] = menu_atom.m_name
+        menu_list.append(menu_atom.id)
+        d_topic_question[menu_atom.id] = {}
+        d_topic_question[menu_atom.id]['doc'] = []
+        d_topic_question[menu_atom.id]['name'] = menu_atom.m_name
 
     count = 0
     for service_atom in services:
+
         if service_atom.d_menu in menu_list:
             count += 1
             service_atom.num = "collapes" + str(count)
             d_topic_question[service_atom.d_menu]['doc'].append(service_atom)
 
     result = []
-    for k in sorted(menu_list):
-        result.append(d_topic_question[k])
+    for k in menu:
+        result.append(d_topic_question[k.id])
 
     return render(request, "frontEnd/services.html", {"object": result})
 
@@ -595,6 +589,7 @@ def school(request, method, Oid):
                 # print d_topic_detail[t_id]
                 #print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
+            
             for k, v in d_host_topic.items():
                 tag = tag + " " + str(v)
 
@@ -627,13 +622,12 @@ def user(request, method, Oid):
         host.features = features.values()
         host.image = "/files/icons/" + host.icon.split("/")[-1]
 
-        msgs = Message.objects.filter(to_user=Oid)
-        for msg_atom in msgs:
-            msg_atom.date_format()
-            msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
         Info = {}
         Info['user'] = host
-        Info['msgs'] = msgs
+        Info['msgs'] = host.get_user_message(host.id)
+        Info['current_user'] = host
+        Info['login_flag'] = True
+
         return render_to_response('frontEnd/host-index.html', Info)
 
     elif method == "msg":
