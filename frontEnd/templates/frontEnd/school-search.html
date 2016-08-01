@@ -75,12 +75,15 @@ school += " - "+name;
 $("#list").show();
     $("#list").html('');
     $.each(allUnivList[gid].provs[pid].univs,function (k,l){
-        $("#list").append("<a href='#' style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+        $("#list").append("<a href=\"javascript:getSchoolId(\'"+l.school_id+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
     });
     $("#list").append("<br style='clear:both;' />");
         
 }
 
+function getSchoolId(school_id){
+    console.log(school_id)
+}
 $("#list a").live("click",function (){
     $("#gj").hide();
     $("#list").hide();

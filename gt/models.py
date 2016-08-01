@@ -202,11 +202,66 @@ class Topic(models.Model):
     t_click = models.IntegerField(default=0)
     t_intro = models.CharField(max_length=200, null=True)
     t_tag = models.CharField(max_length=100, null=True)
+    t_index = models.IntegerField(null=True)
 
 
 class Feature(models.Model):
     f_name = models.CharField(max_length=200)
     f_topic = models.CharField(max_length=100)
+    def get_one_user_features(self, user_id):
+        h_topics = Host_Topic.objects.filter(host_id=user_id)
+
+        # classification
+        d_topic_feature = {}
+        for h_topic_atom in h_topics:
+            t_id = h_topic_atom.t_id
+            f_id = h_topic_atom.f_id
+            if not d_topic_feature.has_key(t_id):
+                d_topic_feature[t_id] = {}
+                d_topic_feature[t_id]['feature_list'] = [f_id]
+                d_topic_feature[t_id]['intro'] = ""
+            else:
+                d_topic_feature[t_id]['feature_list'].append(f_id)
+
+
+        # transform the id into chinese
+        result = []
+        d_topic_feature_translate = {}
+        for k, v in d_topic_feature.items():
+            tmp_topic = Topic.objects.get(id=k)
+            topic_name = tmp_topic.t_name
+            topic_intro = tmp_topic.t_intro
+            topic_id = tmp_topic.id
+            topic_tag = tmp_topic.t_tag
+            d_topic_feature_translate[topic_name] = {}
+            d_topic_feature_translate[topic_name]['intro'] = topic_intro
+            d_topic_feature_translate[topic_name]['name'] = topic_name
+            d_topic_feature_translate[topic_name]['id'] = topic_id
+            d_topic_feature_translate[topic_name]['tag'] = topic_tag
+            d_topic_feature_translate[topic_name]['feature_list'] = []
+
+            for feature_atom_id in v['feature_list']:
+
+                feature_name = Feature.objects.get(id=feature_atom_id).f_name
+                d_topic_feature_translate[topic_name]['feature_list'].append(feature_name)
+
+        return  d_topic_feature_translate
+
+    def get_one_user_features_with_all_topic(self, user_id):
+        d_topic_feature_translate = self.get_one_user_features(user_id)
+        topics = Topic.objects.all().order_by('t_index')
+        result = []
+        for topic_atom in topics:
+            if not d_topic_feature_translate.has_key(topic_atom.t_name):
+                tmp_dic = {}
+                tmp_dic['intro'] = topic_atom.t_intro
+                tmp_dic['name'] = topic_atom.t_name
+                tmp_dic['id'] = topic_atom.id
+                tmp_dic['feature_list'] = []
+                result.append(tmp_dic)
+            else:
+                result.append(d_topic_feature_translate[topic_atom.t_name])
+        return result
 
 
 class Host_Topic(models.Model):

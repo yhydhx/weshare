@@ -53,7 +53,7 @@ def index(request):
 
     # get recommended hosts
 
-    recommend_host = Host.objects.all()[0]
+    recommend_host = Host()
     Info = {}
     Info = recommend_host.get_all_classes()
 
@@ -227,7 +227,7 @@ def complete_account(request):
             school = request.POST['school']
             qq = request.POST['qq']
 
-            print gender
+            #print gender
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
 
@@ -273,6 +273,53 @@ def complete_account_feature(request):
         return HttpResponse('您所持有的session和不能匹配任何一个用户')
 
     if request.method == 'POST':
+        '''
+        renew the feature
+        '''
+        topic_id = request.POST.get('topic_id')
+        feature_name = request.POST.get("feature_name")
+        host_id = host.id
+
+        #check this feature is exist or not 
+        try:
+            feature = Feature.objects.get(f_name = feature_name,
+                                        f_topic = topic_id)[0]
+        except:
+            feature = Feature(f_name = feature_name,
+                            f_topic = topic_id)[0])
+            feature.save()
+
+        host_topic  = Host_Topic(
+            host_id = host.id,
+            t_id = topic_id,
+            f_id = feature.id  # 然后把id相互关联起来
+        )
+        host_topic.save()
+
+        return HttpResponse(json.dumps(feature.get_one_user_features_with_all_topic(host.id)))
+
+    else:
+        '''
+        show the list
+        '''
+
+        topics = Topic.objects.all()
+        feature = Feature()
+        user_features = feature.get_one_user_features_with_all_topic(host.id)
+
+        Info = {}
+        Info['user_features'] = user_features
+        Info['host'] = host,
+        Info['current_user'] = host
+        Info['login_flag'] = True
+        return render(request,'frontEnd/complete-account-feature.html',Info)
+
+
+
+
+
+
+
         foreign = ''
         course = ''
         competition = ''
