@@ -216,15 +216,13 @@ def complete_account(request):
     if request.method == 'POST':
         if request.POST['self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
             'motto'] and \
-                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
-                request.POST['school'] and request.POST['qq']:
+                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and request.POST['qq']:
             self_introduction = request.POST['self-introduction']
             gender = request.POST['selectbox']
             motto = request.POST['motto']
             min_payment = request.POST['min-payment']
             service_time = request.POST['service-time']
             max_payment = request.POST['max-payment']
-            school = request.POST['school']
             qq = request.POST['qq']
 
             print gender
