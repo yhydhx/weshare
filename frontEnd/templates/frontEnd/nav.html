@@ -86,80 +86,64 @@
         <div class="container">
             <div class="ct-navbarBox">
 
+                <div style=" ">
+                    <div style="float:right;">
+                        <div class="navbar-login">
+                            {% if login_flag %}
+                            <div class="dropdown" style="display: inline;">
+                              <button class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="background-color:transparent;">
+                                <img src="{{ current_user.icon }}" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto">{{ current_user.username }}<span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
+                                <li><a href="/host-center/">个人中心</a></li>
 
+                                {% if current_user.state == 0 %}
+                                <li><a href="/image-receive/">注册成为host</a></li>
+                                {% elif current_user.state == 1 %}
+                                <li class="disabled"><a href="">资料审核中</a></li>
+                                {% endif %}
 
-                <div class="ct-navbarBox-meta">
-                    <div class="ct-navSearch-box">
-                        <a class="ct-js-navSearch ct-navSearch" href="#"><i class="fa fa-search"></i></a>
-                        <!-- Navbar Search  -->
-                        <div class="ct-navbar-search">
-                            <form role="form">
-                                <div class="form-group  ct-input--type2">
-                                    <input id="searchM" required="" type="text" name="field[]"
-                                           placeholder="Search website..." class="form-control">
-                                    <label for="searchM"><span>Search</span></label>
-                                    <button class="ct-navbar-search-button" type="submit">
-                                        <i class="fa fa-search fa-fw"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="ct-langPicker">
-                        <div class="ct-langPicker-content">
-                            <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
-                            <ul class="ct-langPicker-list">
-                                <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}"
-                                                             alt=""/></a></li>
-                                <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}"
-                                                             alt=""/></a></li>
-                                <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}"
-                                                              alt=""/></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- Flags -->
-                    <div>
-                        {% if login_flag %}
-                        <div class="dropdown">
-                          <button class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="background-color:transparent;">
-                            <img src="{{ current_user.icon }}" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto">{{ current_user.username }}<span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
-                            <li><a href="/host-center/">个人中心</a></li>
-
-                            {% if current_user.state == 0 %}
-                            <li><a href="/image-receive/">注册成为host</a></li>
-                            {% elif current_user.state == 1 %}
-                            <li class="disabled"><a href="">资料审核中</a></li>
+                                <li><a href="/logout/">退出登录</a></li>
+                              </ul>
+                            </div>
+                            {% else %}
+                            <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
                             {% endif %}
-
-                            <li><a href="/logout/">退出登录</a></li>
-                          </ul>
                         </div>
-                        {% else %}
-                        <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
-                        {% endif %}
                     </div>
-
-
-<!--                     {% if login_flag %}
-                    <a href="/host-center/" class="ct-login"
-                       style="margin-top: 2px"><span>{{ current_user.username }}</span><i
-                            class="fa fa-lock"></i></a>
-                    {% if current_user.state == 0 %}
-                        <a href="/image-receive/" class="ct-login" style="margin-top: 2px"><span>注册成为host</span><i
-                                class="fa fa-lock"></i></a>
-                    {% elif current_user.state == 1 %}
-                    <a href="" class="ct-login" style="margin-top: 2px"><span>资料审核中</span><i class="fa fa-lock"></i></a>
-                    {% endif %}
-                    <a href="/logout/" class="ct-login" style="margin-top: 2px"><span>退出登录</span><i class="fa fa-lock"></i></a>
-                    {% else %}
-                    <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
-                    {% endif %} -->
-
-
-
-
+                    <div style="float:right;">
+                        <div class="ct-navbarBox-meta">
+                            <div class="ct-navSearch-box">
+                                <a class="ct-js-navSearch ct-navSearch" href="#"><i class="fa fa-search"></i></a>
+                                <!-- Navbar Search  -->
+                                <div class="ct-navbar-search">
+                                    <form role="form">
+                                        <div class="form-group  ct-input--type2">
+                                            <input id="searchM" required="" type="text" name="field[]"
+                                                   placeholder="Search website..." class="form-control">
+                                            <label for="searchM"><span>Search</span></label>
+                                            <button class="ct-navbar-search-button" type="submit">
+                                                <i class="fa fa-search fa-fw"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="ct-langPicker">
+                                <div class="ct-langPicker-content">
+                                    <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
+                                    <ul class="ct-langPicker-list">
+                                        <li><a href="#">English <img src="{% static 'frontEnd/images/content/flag-01.jpg' %}"
+                                                                     alt=""/></a></li>
+                                        <li><a href="#">Español <img src="{% static 'frontEnd/images/content/flag-03.jpg' %}"
+                                                                     alt=""/></a></li>
+                                        <li><a href="#">Italiano <img src="{% static 'frontEnd/images/content/flag-02.jpg' %}"
+                                                                      alt=""/></a></li>
+                                    </ul>
+                                </div>
+                            </div> <!-- Flags -->
+                        </div>
+                    </div>
                 </div>
 
                 <button type="button" class="navbar-toggle">
@@ -168,6 +152,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
+
             </div>
 
             <ul class="nav navbar-nav ct-navbar--fadeIn">

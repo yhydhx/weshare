@@ -1,5 +1,35 @@
 {% load staticfiles %}
-{% include "frontEnd/header.html" %}
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]>
+<html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="description" content="Rentica - The Best One Yet">
+    <meta name="author" content="CreateIT">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon' %}">
+    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png' %}">-->
+
+    <title>Rentica - HTML Template</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
+         <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
+	<script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
+ 	<script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
+    <![endif]-->
+    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
+</head>
 
 <body class="cssAnimate">
 <div class="ct-preloader-container">                                            <!-- Preloader -->
