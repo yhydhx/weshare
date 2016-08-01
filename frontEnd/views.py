@@ -284,7 +284,7 @@ def complete_account_feature(request):
                                         f_topic = topic_id)[0]
         except:
             feature = Feature(f_name = feature_name,
-                            f_topic = topic_id)[0])
+                            f_topic = topic_id)
             feature.save()
 
         host_topic  = Host_Topic(
