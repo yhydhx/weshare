@@ -456,6 +456,8 @@ def service(request):
 
 def school(request, method, Oid):
     if method == "show":
+        if request.GET.get("schoolID"):
+            return HttpResponseRedirect("/school/detail/"+request.GET.get("schoolID"))
         return render(request,"frontEnd/school-search.html")
 
     elif method == "detail":
