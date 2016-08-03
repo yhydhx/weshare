@@ -461,7 +461,8 @@ def school(request, method, Oid):
         return render(request,"frontEnd/school-search.html")
 
     elif method == "detail":
-        hosts = Host.objects.filter(state=2)
+        #find the passed host of the school 
+        hosts = Host.objects.filter(state=2, h_school=Oid)
         d_topic_detail = {}
         for each_host in hosts:
             '''
