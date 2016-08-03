@@ -136,7 +136,7 @@
                             <h2 class="ct-sectionHeader-title">
                                 <small><span>{{topic.name}}</span></small>
                             </h2>
-                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}">
                                 {% for feature in topic.feature_list %}
                                 <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
                                 {% endfor %}
@@ -144,6 +144,8 @@
                             <div class="form-group" style="padding-top: 1px">
                                 <label for="foreign">{{topic.intro}}</label>
                                 <input class="form-control form-control--type2" id="{{topic.tag}}" name="feature_name">
+                                <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>
+                                <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
                                 <button type="submit" class="btn btn-lg btn-wide btn-motive">
                                     <span>提交</span></button>
 
