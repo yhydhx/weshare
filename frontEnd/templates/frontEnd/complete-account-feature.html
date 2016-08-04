@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/test.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
     <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
@@ -118,8 +119,8 @@
         {% csrf_token %}
         <div class="tabpanel ct-u-paddingTop10 ct-u-paddingBottom" style="padding-left: 10%">
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation"><a role="tab" data-toggle="tab">第一步:上传头像</a></li>
-                <li role="presentation" ><a role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
+                <li role="presentation"><a href="javascript:return false;" role="tab" data-toggle="tab">第一步:上传头像</a></li>
+                <li role="presentation" ><a href="javascript:return false;" role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
                 <li role="presentation" class="active"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
             </ul>
         </div>
@@ -127,68 +128,33 @@
             <div class="row">
                 <div class="col-md-12 ct-u-paddingTop80">
 
+                    {% block content %}
+                    {%  for topic in user_features%}
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <form class="ct-u-sectionBorder" name="foreign" action="/complete-account-feature/"
+                        <form class="ct-u-sectionBorder" name="{{topic.tag}}" action="/complete-account-feature/"
                               method="post">
                             <h2 class="ct-sectionHeader-title">
-                                <small><span>留学咨询</span></small>
+                                <small><span>{{topic.name}}</span></small>
                             </h2>
-                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                {% for feature in feature_list_1 %}
+                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}">
+                                {% for feature in topic.feature_list %}
                                 <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
                                 {% endfor %}
                             </ul>
                             <div class="form-group" style="padding-top: 1px">
-                                <label for="foreign">例如 CV修改, phd内推等</label>
-                                <input class="form-control form-control--type2" id="foreign" name="foreign">
+                                <label for="foreign">{{topic.intro}}</label>
+                                <input class="form-control form-control--type2" id="{{topic.tag}}" name="feature_name">
+                                <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>
+                                <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
                                 <button type="submit" class="btn btn-lg btn-wide btn-motive">
                                     <span>提交</span></button>
 
                             </div>
                         </form>
                     </div>
-
-                    <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <form class="ct-u-sectionBorder" name="course" action="/complete-account-feature/"
-                              method="post">
-                            <h2 class="ct-sectionHeader-title">
-                                <small><span>课程咨询</span></small>
-                            </h2>
-                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                {% for feature in feature_list_2 %}
-                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
-                                {% endfor %}
-                            </ul>
-                            <div class="form-group" style="padding-top: 1px">
-                                <label for="course">例如 复习方法, 考试技巧, 学霸笔记</label>
-                                <input class="form-control form-control--type2" id="course" name="course">
-                                <button type="submit" class="btn btn-lg btn-wide btn-motive">
-                                    <span>提交</span></button>
-
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <form class="ct-u-sectionBorder" name="competition" action="/complete-account-feature/"
-                              method="post">
-                            <h2 class="ct-sectionHeader-title">
-                                <small><span>竞赛经历</span></small>
-                            </h2>
-                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                {% for feature in feature_list_3 %}
-                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
-                                {% endfor %}
-                            </ul>
-                            <div class="form-group" style="padding-top: 1px">
-                                <label for="competition">例如 数学建模辅导, 英语竞赛技巧</label>
-                                <input class="form-control form-control--type2" id="competition" name="competition">
-                                <button type="submit" class="btn btn-lg btn-wide btn-motive">
-                                    <span>提交</span></button>
-
-                            </div>
-                        </form>
-                    </div>
+                    {% endfor %}
+                    {% endblock %}
+                   
 
                 </div>
             </div>

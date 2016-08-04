@@ -20,6 +20,7 @@
     <title>Rentica - HTML Template</title>
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
 
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
@@ -67,7 +68,7 @@
              data-bg-image="{% static 'frontEnd/images/content/cars/mediaHeader-02.jpg' %}"
              data-bg-image-mobile="{% static 'frontEnd/images/content/cars/mediaHeader-02.jpg' %}">
         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom text-center ct-u-paddingBottom20"
-             data-stellar-ratio="0.7">
+             data-stellar-ratio="0.7" style="background:url('{% static 'frontEnd/images/weshare/hostImax.png'%}');">
             {% if not user.state %}
             <img src="{% static 'frontEnd/images/question' %}" style="text-align: center;  width: 150px; height: 150px">
             {% else %}
@@ -130,7 +131,51 @@
                         </div>
                     </div>
 
-                    <a href="#" class="btn btn-lg btn-wide btn-motive"><span>预约</span></a>
+                    <button class="btn btn-lg btn-wide btn-motive"  data-toggle="modal" data-target="#myModal"><span>预约</span></button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="row">
+                                <div class="col-xs-1"></div>
+                                <div class="col-xs-2"><div class="row">预约</div><div class="row">1</div></div>
+                                <div class="col-xs-2"><div class="row">等待确认</div><div class="row">2</div></div>
+                                <div class="col-xs-2"><div class="row">付款</div><div class="row">3</div></div>
+                                <div class="col-xs-2"><div class="row">完成</div><div class="row">4</div></div>
+                                <div class="col-xs-2"><div class="row">评价</div><div class="row">5</div></div>
+                                <div class="col-xs-1"></div>
+                            </div>
+
+                            <!-- Single button -->
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                下拉选择咨询问题 <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">问题1</a></li>
+                                <li><a href="#">问题2</a></li>
+                                <li><a href="#">问题3</a></li>
+                                <li><a href="#">问题4</a></li>
+                              </ul>
+                            </div>
+
+                            <form>
+                                <div class="form-group">
+                                    <label>简要介绍自己的情况，并描述要咨询的问题：</label>
+                                    <textarea class="form-control" rows="3"></textarea>
+                                </div>                                
+                                <div class="form-group">
+                                    <label>告诉分享者你所希望的见面时间与约聊时长：</label>
+                                    <textarea class="form-control" rows="3"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-danger">确认预约</button>
+                            </form>
+
+                        </div>
+                      </div>
+                    </div>
                 </div>
 
                 <div class="col-md-9 col-md-pull-3 ct-u-paddingTop50">

@@ -53,7 +53,7 @@ def index(request):
 
     # get recommended hosts
 
-    recommend_host = Host.objects.all()[0]
+    recommend_host = Host()
     Info = {}
     Info = recommend_host.get_all_classes()
 
@@ -206,7 +206,8 @@ def i_forget(request, attr=False):
                 #  生成找回链接
                 print 'host has found'
 
-                string = hashlib.md5(str(email) + str(timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S"))).hexdigest()
+                string = hashlib.md5(
+                    str(email) + str(timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S"))).hexdigest()
                 print string
                 forget = Forget(user_id=host.id,
                                 forget_string=str(string),
@@ -263,7 +264,6 @@ def ichange(request):
         return render_to_response('frontEnd/ichange.html', {'current_user': user})
 
 
-
 @csrf_exempt  # 所有有这个东西的全部要删掉到时候重新部署csrf防跨站
 def complete_account(request):
     try:
@@ -279,17 +279,16 @@ def complete_account(request):
         if request.POST['self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
             'motto'] and \
                 request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
-                request.POST['school'] and request.POST['qq']:
+                request.POST['qq']:
             self_introduction = request.POST['self-introduction']
             gender = request.POST['selectbox']
             motto = request.POST['motto']
             min_payment = request.POST['min-payment']
             service_time = request.POST['service-time']
             max_payment = request.POST['max-payment']
-            school = request.POST['school']
             qq = request.POST['qq']
 
-            print gender
+            # print gender
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
 
@@ -307,8 +306,7 @@ def complete_account(request):
             host.state = 1
             host.qq_number = qq
             host.save()
-            return render_to_response('frontEnd/complete-account-feature.html', {'login_flag': True,
-                                                                                 'currrent_user': host})
+            return HttpResponseRedirect('/complete_account_feature')
         else:
             return HttpResponse('请把表单填写完整')
     else:
@@ -335,134 +333,50 @@ def complete_account_feature(request):
         return HttpResponse('您所持有的session和不能匹配任何一个用户')
 
     if request.method == 'POST':
-        foreign = ''
-        course = ''
-        competition = ''
+        '''
+        renew the feature
+        '''
+        topic_id = request.POST.get('topic_id')
+        feature_name = request.POST.get("feature_name")
+        host_id = host.id
+        showTag = request.POST.get("topic_tag")
+        # check this feature is exist or not
         try:
-            foreign = request.POST['foreign']
+            feature = Feature.objects.get(f_name=feature_name,
+                                          f_topic=topic_id)
         except:
-            try:
-                course = request.POST['course']
-            except:
-                try:
-                    competition = request.POST['competition']
-                except:
-                    return HttpResponse('请填写表单')
-
-        if foreign:
-            feature = Feature()
-            topic = Topic()
-            host_topic = Host_Topic()  # 先把相关联的对象相关联起来
-
-            try:
-                topic = Topic.objects.get(t_name=u'留学咨询')
-
-            except:
-                print "could not find the topic"
-                topic.t_name = u'留学咨询'
-                topic.t_click = 0
-                topic.save()
-
-            feature.f_name = foreign
-            feature.f_topic = topic.t_name
-
+            feature = Feature(f_name=feature_name,
+                              f_topic=topic_id)
             feature.save()
 
-            host_topic.host_id = host.id
-            host_topic.t_id = topic.id
-            host_topic.f_id = feature.id  # 然后把id相互关联起来
-            host_topic.save()
+        host_topic = Host_Topic(
+            host_id=host.id,
+            t_id=topic_id,
+            f_id=feature.id  # 然后把id相互关联起来
+        )
+        host_topic.save()
 
-        if course:
-            feature = Feature()
-            topic = Topic()
-            host_topic = Host_Topic()  # 先把相关联的对象相关联起来
+        Info['topic_tag'] = showTag
+        Info['feature_name'] = feature_name
 
-            try:
-                topic = Topic.objects.get(t_name=u'课程咨询')
-            except:
-                topic.t_name = u'课程咨询'
-                topic.t_click = 0
-                topic.save()
+        return HttpResponse(json.dumps(Info))
 
-            feature.f_name = course
-            feature.f_topic = topic.t_name
+    else:
+        '''
+        show the list
+        '''
 
-            topic.save()
-            feature.save()
+        topics = Topic.objects.all()
+        feature = Feature()
+        user_features = feature.get_one_user_features_with_all_topic(host.id)
 
-            host_topic.host_id = host.id
-            host_topic.t_id = topic.id
-            host_topic.f_id = feature.id  # 然后把id相互关联起来
-            host_topic.save()
-
-        if competition:
-            feature = Feature()
-            topic = Topic()
-            host_topic = Host_Topic()  # 先把相关联的对象相关联起来
-
-            try:
-                topic = Topic.objects.get(t_name=u'竞赛经历')
-            except:
-                topic.t_name = u'竞赛经历'
-                topic.t_click = 0
-                topic.save()
-
-            feature.f_name = competition
-            feature.f_topic = topic.t_name
-
-            topic.save()
-            feature.save()
-
-            host_topic.host_id = host.id
-            host_topic.t_id = topic.id
-            host_topic.f_id = feature.id  # 然后把id相互关联起来
-            host_topic.save()
-
-    feature_list_1 = []
-    feature_list_2 = []
-    feature_list_3 = []
-
-    h_topics = Host_Topic.objects.filter(host_id=host.id)
-    print len(h_topics)
-    # classification
-    d_topic_feature = {}
-    for h_topic_atom in h_topics:
-        t_id = h_topic_atom.t_id
-        f_id = h_topic_atom.f_id
-        if not d_topic_feature.has_key(t_id):
-            d_topic_feature[t_id] = [f_id]
-        else:
-            d_topic_feature[t_id].append(f_id)
-
-    print d_topic_feature
-
-    # transform the id into chinese
-    d_topic_feature_translate = {}
-    for k, v in d_topic_feature.items():
-        topic_name = Topic.objects.get(id=k).t_name
-        d_topic_feature_translate[topic_name] = []
-        for feature_atom_id in v:
-            feature_name = get_object_or_404(Feature, id=feature_atom_id).f_name
-            d_topic_feature_translate[topic_name].append(feature_name)
-
-    print d_topic_feature_translate
-
-    for topic, feature_list in d_topic_feature_translate.items():
-        if topic == u'留学咨询':
-            feature_list_1 = feature_list
-        elif topic == u'课程咨询':
-            feature_list_2 = feature_list
-        elif topic == u'竞赛经历':
-            feature_list_3 = feature_list
-
-    return render_to_response('frontEnd/complete-account-feature.html', {'feature_list_1': feature_list_1,
-                                                                         'feature_list_2': feature_list_2,
-                                                                         'feature_list_3': feature_list_3,
-                                                                         'host': host,
-                                                                         'current_user': host,
-                                                                         'login_flag': True},
-                              context_instance=RequestContext(request))
+        Info = {}
+        Info['user_features'] = user_features
+        Info['host'] = host,
+        Info['current_user'] = host
+        Info['login_flag'] = True
+        print Info
+        return render(request, 'frontEnd/complete-account-feature.html', Info)
 
 
 def host_center(request):
@@ -476,14 +390,7 @@ def host_center(request):
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
-    features = host.get_all_features()
-    host.features = features.values()
-    host.image = "/files/icons/" + host.icon.split("/")[-1]
-
-    return render_to_response('frontEnd/host-index.html', {'user': host,
-                                                           'login_flag': True,
-                                                           'current_user': host,
-                                                           'user': host})
+    return HttpResponseRedirect('/user/show/' + host.id)
 
 
 def modify_account(request):
@@ -590,31 +497,36 @@ def service(request):
 
     d_topic_question = {}
     for menu_atom in menu:
-        menu_list.append(menu_atom.m_name)
-        d_topic_question[menu_atom.m_name] = {}
-        d_topic_question[menu_atom.m_name]['doc'] = []
-        d_topic_question[menu_atom.m_name]['name'] = menu_atom.m_name
+        menu_list.append(menu_atom.id)
+        d_topic_question[menu_atom.id] = {}
+        d_topic_question[menu_atom.id]['doc'] = []
+        d_topic_question[menu_atom.id]['name'] = menu_atom.m_name
 
     count = 0
     for service_atom in services:
+
         if service_atom.d_menu in menu_list:
             count += 1
             service_atom.num = "collapes" + str(count)
             d_topic_question[service_atom.d_menu]['doc'].append(service_atom)
 
     result = []
-    for k in sorted(menu_list):
-        result.append(d_topic_question[k])
+    for k in menu:
+        result.append(d_topic_question[k.id])
 
     return render(request, "frontEnd/services.html", {"object": result})
 
 
 def school(request, method, Oid):
     if method == "show":
+        if request.GET.get("schoolID"):
+            return HttpResponseRedirect("/school/detail/" + request.GET.get("schoolID"))
         return render(request, "frontEnd/school-search.html")
 
+
     elif method == "detail":
-        hosts = Host.objects.filter(state=2)
+        # find the passed host of the school
+        hosts = Host.objects.filter(state=2, h_school=Oid)
         d_topic_detail = {}
         for each_host in hosts:
             '''
@@ -657,10 +569,11 @@ def school(request, method, Oid):
 
                 # print d_topic_detail[t_id]['topics']
                 # print d_topic_detail[t_id]
-                print each_host.username, d_topic_detail[t_id]['name']
+                # print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
+
             for k, v in d_host_topic.items():
-                tag = tag + " " + v
+                tag = tag + " " + str(v)
 
             each_host.image = "/files/icons/" + each_host.icon.split("/")[-1]
             each_host.min_payment = int(each_host.min_payment)
@@ -691,13 +604,12 @@ def user(request, method, Oid):
         host.features = features.values()
         host.image = "/files/icons/" + host.icon.split("/")[-1]
 
-        msgs = Message.objects.filter(to_user=Oid)
-        for msg_atom in msgs:
-            msg_atom.date_format()
-            msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
         Info = {}
         Info['user'] = host
-        Info['msgs'] = msgs
+        Info['msgs'] = host.get_user_message(host.id)
+        Info['current_user'] = host
+        Info['login_flag'] = True
+
         return render_to_response('frontEnd/host-index.html', Info)
 
     elif method == "msg":

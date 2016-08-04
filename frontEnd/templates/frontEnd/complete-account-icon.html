@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
 
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
@@ -120,8 +121,8 @@
         <div class="tabpanel ct-u-paddingTop10 ct-u-paddingBottom" style="padding-left: 10%">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a role="tab" data-toggle="tab">第一步:上传头像</a></li>
-                <li role="presentation"><a role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
-                <li role="presentation"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
+                <li role="presentation"><a href ="javascript:return false;" role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
+                <li role="presentation"><a href ="javascript:return false;" role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
             </ul>
         </div>
         <div class="container">
@@ -216,6 +217,8 @@
 
 
 <script>
+
+    var flag = false;
     //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     var clipArea = new bjj.PhotoClip("#clipArea", {
         size: [260, 260],
@@ -228,14 +231,14 @@
         },
         loadComplete: function () {
             console.log("照片读取完成");
+            flag = true;
         },
         clipFinish: function (dataURL) {
-            console.log(dataURL);
+            //console.log(dataURL);
         }
     });
     //clipArea.destroy();
-</script>
-<script>
+
     $(document).ready(function () {
         /* $.ajaxSetup({
             dataType: "json",
@@ -245,18 +248,23 @@
             }
         }); */
         $("#foo").click(function () {
-            var image = $("#view").attr("style");
-            var fuck = $.ajax({
-                type: "POST",
-                url: "/image-receive/",
-                data: { data: image, c: document.cookie},
-                dataType: "jsonp",
-                async:false,
-                success: window.location.replace("/complete-account/")
-            }).always(function (data) {
-                //console.log(data)
-            });
-            console.log(fuck.responseText)
+            if (flag) {
+                var image = $("#view").attr("style");
+                var fuck = $.ajax({
+                    type: "POST",
+                    url: "/image-receive/",
+                    data: { data: image, c: document.cookie},
+                    dataType: "jsonp",
+                    async:false,
+                    success: window.location.replace("/complete-account/")
+                }).always(function (data) {
+                    console.log(data)
+                });
+                console.log(fuck.responseText)               
+            }
+            else{
+                alert('请上传头像');
+            }
         })
     })
 </script>

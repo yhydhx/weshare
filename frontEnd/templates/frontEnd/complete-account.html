@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/test.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
 
     <!--[if lt IE 9]>
     <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
@@ -68,6 +69,27 @@
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
     <script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
     <script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
+
+    <!-- 选择学历 -->
+    <script>
+        function showEducation(value){
+            console.log(value);
+            if (value === '博士') {
+                $("#Education").html("<div class=\"form-group\"><label>请输入您的本科学校</label><input type=\"text\" name=\"school1\" required class=\"form-control form-control--type2\"></div>"
+                    +"<div class=\"form-group\"><label>请输入您的研究生学校</label><input type=\"text\" name=\"school2\" required class=\"form-control form-control--type2\"></div>"+"<div class=\"form-group\"><label>请输入您的博士学校</label><input type=\"text\" name=\"school3\" required class=\"form-control form-control--type2\"></div>");
+            }
+            else if (value === '硕士') {
+                $("#Education").html("<div class=\"form-group\"><label>请输入您的本科学校</label><input type=\"text\" name=\"school1\" required class=\"form-control form-control--type2\"></div>"
+                    +"<div class=\"form-group\"><label>请输入您的研究生学校</label><input type=\"text\" name=\"school2\" required class=\"form-control form-control--type2\"></div>");
+            }
+            else if (value ==='本科') {
+                $("#Education").html(" <label>请输入您的本科学校</label><input type=\"text\" name=\"school1\" required class=\"form-control form-control--type2\">");
+            }
+            else{
+
+            }  
+        }
+    </script>
 </head>
 
 <body class="cssAnimate">
@@ -156,9 +178,9 @@
     <div class="container">
         <div class="tabpanel ct-u-paddingTop10 ct-u-paddingBottom" style="padding-left: 25%">
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation"><a role="tab" data-toggle="tab">第一步:上传头像</a></li>
+                <li role="presentation"><a href="javascript:return false;" role="tab" data-toggle="tab">第一步:上传头像</a></li>
                 <li role="presentation" class="active"><a role="tab" data-toggle="tab">第二步: 自我介绍与完善资料</a></li>
-                <li role="presentation"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
+                <li role="presentation"><a href="javascript:return false;" role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
             </ul>
         </div>
         <div class="col-md-7" style="padding-left: 30%; height: 40px">
@@ -253,8 +275,7 @@
                         <input id="max-payment" name="max-payment" type="number" required value="请填写数字"
                                class="form-control form-control--type2">
                     </div>
-
-                    <div class="form-group">
+<!--                     <div class="form-group">
                         <div style="width:100%; margin:0 auto; overflow:hidden;">
                             <label for="txtSc" class="required">你的学校</label>
                             <input type="text" id="txtSc" name="school"
@@ -267,11 +288,26 @@
                             <div id="list"
                                  style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none; background-color: #FFFFFF;z-index:999;height:300px; overflow-y:auto;"></div>
                         </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="phone" class="required">手机号</label>
+                        <input id="phone" name="phone" required class="form-control form-control--type2">
                     </div>
 
                     <div class="form-group">
                         <label for="qq" class="required">QQ号</label>
                         <input id="qq" name="qq" required class="form-control form-control--type2">
+                    </div>
+
+                    <label>请选择您的学历</label>
+                    <select class="form-control" onchange="showEducation(this.value)">
+                      <option>本科</option>
+                      <option>硕士</option>
+                      <option>博士</option>
+                    </select>
+                    <div id="Education">
+                        <label>请输入您的本科学校</label>
+                        <input type="text" name="school1" required class="form-control form-control--type2">
                     </div>
 
 

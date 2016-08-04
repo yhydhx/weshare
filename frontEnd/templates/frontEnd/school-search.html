@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
+    
 
 
     <!--[if lt IE 9]>
@@ -45,20 +46,25 @@
 <script type="text/javascript">
 var school = "";
 var sf = "";
+
+var schoolID = "";
+var search = "";
 $(function (){
     $.each(allUnivList,function (j,m){      
         $("#gj").append("<a href='javascript:void(0);' onclick='getSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
     });
 });
 
-//»ñµÃÃ¿¸ö¹ú¼ÒµÄÊ¡·Ý
+//获取某国家的省份
+//参数 aid 
+//参数 name
 function getSheng(aid,name){
 school = name;
     $("#sheng").show();
     $("#list").html('');
     $("#sheng").html('');
     if (allUnivList[aid].provs.length == 0){
-        $("#sheng").append("ºÜ±§Ç¸£¡ÔÝÊ±Ã»ÓÐÊý¾Ý£¨Ö»Ìá¹©ÁËÖÐ¹úºÍÃÀ¹úµÄÑ§Ð£ÐÅÏ¢£©");
+        $("#sheng").append("暂不支持");
     }
     else
     {
@@ -68,26 +74,39 @@ school = name;
     }
 }
 
-//»ñµÃÃ¿¸öÊ¡·ÝµÄÑ§Ð£
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
 function  getSchool(gid,pid,name){
-school = school.substring(0,2);
-school += " - "+name;
+school = school.substring(0,2);//取schoo字符串中前两个字符
+school += "-"+ name;
 $("#list").show();
     $("#list").html('');
     $.each(allUnivList[gid].provs[pid].univs,function (k,l){
-        $("#list").append("<a href='#' style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+
+        $("#list").append("<a href=\"javascript:getSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
     });
     $("#list").append("<br style='clear:both;' />");
         
 }
 
-$("#list a").live("click",function (){
+//点击学校响应
+function getSchoolID(school_id,school_name){
+    schoolID = school_id;
+    console.log(schoolID);
+    console.log(school_name);
     $("#gj").hide();
     $("#list").hide();
     $("#sheng").hide();
-    school += " - "+$(this).text();
+    school += "-"+school_name;
+
     $("#txtSc").val(school);
-});
+    $("#txtSc2").val(schoolID);
+
+}
+
+//点击表单响应
 $("#txtSc").live("click",function (){
     $("#gj").show();
     $("#list").hide();
@@ -100,12 +119,16 @@ $("#txtSc").live("click",function (){
 
 
 {% include "frontEnd/nav.html" %}
+<div id="debug">
+    
+</div>
 
 <div class="ssbody">
     <div class="ssImax" style=" background-image:url('{% static 'frontEnd/images/weshare/ssImax.jpg'%}');">
         <div class="ssImaxSearch">
             <form  method="get">
-                <input type="text" id="txtSc" name="schoolID" class="ssImaxSearchInput" placeholder="&nbsp;&nbsp;点此选择您的学校" /><button type="submit" class="ssImaxSearchButton">搜&nbsp;索</button>
+                <input type="hidden" id="txtSc2" name="schoolID">
+                <input type="text" id="txtSc" name="school" class="ssImaxSearchInput" placeholder="&nbsp;&nbsp;点此选择您的学校" /><button type="submit" class="ssImaxSearchButton">搜&nbsp;索</button>
                 <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                 <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                 <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
