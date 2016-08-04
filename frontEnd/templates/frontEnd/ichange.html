@@ -66,17 +66,23 @@
     <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom">
         <div class="container" style="padding-left: 30%">
             <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
-                <form class="ct-panel" method="post" id="email-form">
+                <form class="ct-panel" method="post" id="email-form" action="/ichange/">
                     {% csrf_token %}
+
+                    {% if  %}
                     <div class="ct-panel-inner">
                         <h2 class="ct-u-marginBottom30">
-                            <small class="ct-fw-300"><span class="ct-fw-bold">忘记了密码?</span></small>
+                            <small class="ct-fw-300"><span class="ct-fw-bold">您好, {{ current_user.username }}</span></small>
                         </h2>
                         <div class="form-group">
-                            <label for="email" class="required">输入您用于注册的邮箱</label>
-                            <input id="email" name="email" required class="form-control form-control--type2">
+                            <label for="new-passwd" class="required">请输入您的新密码</label>
+                            <input id="new-passwd" name="new-passwd" required class="form-control form-control--type2">
                         </div>
-                        <a id="email-submit" type="submit" class="btn btn-motive"><span>发送验证邮件</span></a>
+                        <div class="form-group">
+                            <label for="new-passwd-confirm" class="required">请重复输入您的新密码</label>
+                            <input id="new-passwd-confirm" name="new-passwd-confirm" required class="form-control form-control--type2">
+                        </div>
+                        <button id="new-passwd-submit" type="submit" class="btn btn-motive"><span>更改密码</span></button>
                     </div>
                 </form>
             </div>
@@ -124,23 +130,7 @@
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
 <script>
-    
 
 
-    $(document).ready(function(){
-        $("a#email-submit").click(function () {
-            var email=$("#email").val();
-            $.ajax({
-                type: "POST",
-                url: "/iforget/",
-                data: { data: email },
-                dataType: "json",
-                async: true,
-                success: $("#email-form").replaceWith("<p>邮件已经发送亲注意查收</p>")
-            })
-        })
-    })
+
 </script>
-
-</body>
-</html>
