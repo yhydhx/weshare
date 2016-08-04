@@ -7586,7 +7586,7 @@ p {
   padding-bottom: 60px !important;
 }
 .ct-u-paddingTop60 {
-  padding-top: 60px !important;
+  padding-top: 160px !important; /*hostImax*/
 }
 .ct-u-paddingBottom60 {
   padding-bottom: 60px !important;
