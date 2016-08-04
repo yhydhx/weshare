@@ -293,6 +293,7 @@ def complete_account_feature(request):
         )
         host_topic.save()
 
+        Info = {}
         Info['topic_tag'] = showTag
         Info['feature_name'] = feature_name
 
@@ -519,7 +520,7 @@ def school(request, method, Oid):
         Info['login_flag'] = True
         Info['object'] = hosts
         Info['topics'] = d_topic_detail.values()
-
+        Info['school'] = School.objects.get(id=Oid)
         Info['allPeople'] = len(hosts)
 
         return render(request, "frontEnd/school.html", Info)
