@@ -1,6 +1,5 @@
 # coding:utf-8
 
-import datetime
 from django_mongodb_engine.contrib import MongoDBManager
 from django.db import models
 from django.utils import timezone
@@ -37,7 +36,9 @@ class Host(models.Model):
     birth = models.CharField(blank=True, max_length=100)
     qq_number = models.CharField(blank=True, max_length=20)
     wechat = models.CharField(blank=True, max_length=20)
-    forget_string = models.CharField(blank=True, max_length=200)  # 这个forget_string用来进行找回密码验证的。
+
+    def __unicode__(self):
+        return self.username
 
     def get_all_features(self):
         host_topics = Host_Topic.objects.filter(host_id=self.id)
@@ -73,6 +74,7 @@ class Host(models.Model):
         return d_topic_feature
 
     def get_all_classes(self, school_id="none"):
+        hosts=[]
         if school_id == "none":
             hosts = Host.objects.filter(state=2)
         d_topic_detail = {}
@@ -302,6 +304,15 @@ class Document(models.Model):
         self.d_menu = Menu.objects.get(id=self.d_menu).m_name
 
 
+class Forget(models.Model):
+    user_id = models.CharField(max_length=200)
+    forget_string = models.CharField(max_length=200)
+    timestamp = models.DateTimeField()
+
+    def _add_time(self):
+        self.timestamp = timezone.datetime.now()
+
+
 class Mail(models.Model):
     subject = models.CharField(max_length=200)
     from_email = models.CharField(max_length=200)
@@ -311,6 +322,11 @@ class Mail(models.Model):
     content = models.TextField()
     is_success = models.IntegerField()
 
+
+
+'''
+=======
+>>>>>>> d629c30bae50c156b1ae6f8819cd90061c3e4f57
     def sendMail(self, subject, to, content):
         # to = ['yhydhx@126.com']
 
@@ -409,18 +425,19 @@ class Mail(models.Model):
 
         msg.send()
 
+<<<<<<< HEAD
+'''
+
 
 
 class Message(models.Model):
-
     from_user = models.CharField(max_length=100)
     to_user = models.CharField(max_length=100)
     message_type = models.IntegerField()
     icon = models.CharField(max_length=100)
     upload_time = models.DateField()
     content = models.TextField()
+
     def date_format(self):
         self.upload_time = self.upload_time.strftime("%Y-%m-%d")
-
-
 

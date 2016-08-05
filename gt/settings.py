@@ -107,4 +107,5 @@ EMAIL_HOST_PASSWORD = 'WeShareHere001'
 EMAIL_SSL_PORT = 465
 
 
+
 DEFAULT_ICON = "/file/image/111.jpg"
