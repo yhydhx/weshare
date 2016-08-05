@@ -103,6 +103,7 @@ class Host(models.Model):
                 t_id = h_topic_atom.t_id
                 f_id = h_topic_atom.f_id
                 if not d_topic_detail.has_key(t_id):
+                    print t_id
                     single_topic = Topic.objects.get(id=t_id)
                     d_topic_detail[t_id] = {}
                     d_topic_detail[t_id]['name'] = single_topic.t_name
@@ -139,6 +140,24 @@ class Host(models.Model):
             msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
         
         return msgs
+
+    def search_user_with_key(self,keyword):
+        result_hosts = []
+        all_hosts = Host.objects.all()
+        
+        for host_atom in all_hosts:
+            #first step : search the name
+            if keyword in host_atom.username:
+                result_hosts.append(host_atom)
+            #second step : search the introduction
+            if keyword in host_atom.introduction:
+                result_hosts.append(host_atom)
+            #third type , search the motto
+            if keyword in host_atom.motto:
+                result_hosts.append(host_atom)
+
+        return result_hosts
+
 
 
 class Country(models.Model):
