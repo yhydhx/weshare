@@ -30,12 +30,20 @@ class Host(models.Model):
     service_time = models.CharField(max_length=100, default=True)
     max_payment = models.FloatField(default=0)
     min_payment = models.FloatField(default=0)
-    h_school = models.CharField(max_length=200)
+    
     state = models.IntegerField(default=0)  # normal user  => 0  examing => 1  sharer => 2
 
     birth = models.CharField(blank=True, max_length=100)
     qq_number = models.CharField(blank=True, max_length=20)
     wechat = models.CharField(blank=True, max_length=20)
+    h_school = models.CharField(max_length=200)
+
+    #Education Infomation
+    education = models.IntegerField()
+    bacholor = models.CharField(max_length=100)
+    graduate = models.CharField(max_length=100)
+    phd = models.CharField(max_length=100)
+    
 
     def __unicode__(self):
         return self.username
