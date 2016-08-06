@@ -141,6 +141,35 @@ class Host(models.Model):
         
         return msgs
 
+    def get_index_statistic(self):
+        '''
+        get guests'number and hosts' number 
+        And schools' number
+        '''
+        Info = {}
+        Info['register_num'] = 0
+        Info['host_num'] = 0
+        Info['normal_num'] = 0
+        hosts = Host.objects.all()
+        univ = {}
+        for host_atom in hosts:
+            Info['register_num'] += 1
+            if host_atom.state == 2:
+                Info['host_num'] += 1
+            elif host_atom.state == 1 or host_atom.state == 0:
+                Info['normal_num'] += 1
+
+            #Get the School Infomation 
+            if not univ.has_key(host_atom.h_school):
+                univ[host_atom.h_school] = 1
+            else:
+                univ[host_atom.h_school] += 1
+
+        Info['school_num'] = len(univ)
+
+        return Info
+
+
     def search_user_with_key(self,keyword):
         result_hosts = []
         all_hosts = Host.objects.all()

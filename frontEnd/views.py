@@ -56,6 +56,7 @@ def index(request):
     recommend_host = Host()
     Info = {}
     Info = recommend_host.get_all_classes()
+    Info.update(recommend_host.get_index_statistic())
 
     Info['object'] = obj
 
