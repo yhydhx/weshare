@@ -39,11 +39,11 @@ class Host(models.Model):
     h_school = models.CharField(max_length=200)
 
     #Education Infomation
-    education = models.IntegerField()
+    education = models.IntegerField()  # bachlor => 0  graduate => 1 phd => 2 else => 3
     bacholor = models.CharField(max_length=100)
     graduate = models.CharField(max_length=100)
     phd = models.CharField(max_length=100)
-    
+
 
     def __unicode__(self):
         return self.username
@@ -128,7 +128,7 @@ class Host(models.Model):
 
                 # print d_topic_detail[t_id]['topics']
                 # print d_topic_detail[t_id]
-                print each_host.username, d_topic_detail[t_id]['name']
+                #print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
             for k, v in d_host_topic.items():
                 tag = tag + " " + str(v)
@@ -140,7 +140,7 @@ class Host(models.Model):
         Info = {}
         Info['hosts'] = hosts
         Info['topics'] = d_topic_detail.values()
-        print Info['topics']
+        #print Info['topics']
         return Info
 
     def get_user_message(self,user_id):
@@ -380,9 +380,7 @@ class Mail(models.Model):
 
 
 
-'''
-=======
->>>>>>> d629c30bae50c156b1ae6f8819cd90061c3e4f57
+
     def sendMail(self, subject, to, content):
         # to = ['yhydhx@126.com']
 
@@ -481,8 +479,6 @@ class Mail(models.Model):
 
         msg.send()
 
-<<<<<<< HEAD
-'''
 
 
 
