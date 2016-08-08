@@ -358,21 +358,13 @@ def complete_account_feature(request):
         host_topic.save()
 
         Info = {}
-<<<<<<< HEAD
-        Info['status'] = 0 # 
-        Info['data'] = {}
-        Info['msg'] = "" 
 
-        Info['topic_tag'] = showTag
-        Info['feature_name'] = feature_name
-=======
         Info['data'] = {}
         Info['state'] = 0
         Info['message'] = ""
 
         Info['data']['topic_tag'] = showTag
         Info['data']['feature_name'] = feature_name
->>>>>>> 65487bf74b432cddb3962c67d503093a2b7de2d3
 
         return HttpResponse(json.dumps(Info))
 

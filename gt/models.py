@@ -39,10 +39,10 @@ class Host(models.Model):
     h_school = models.CharField(max_length=200)
 
     #Education Infomation
-    education = models.IntegerField()  # bachlor => 0  graduate => 1 phd => 2 else => 3
-    bacholor = models.CharField(max_length=100)
-    graduate = models.CharField(max_length=100)
-    phd = models.CharField(max_length=100)
+    education = models.IntegerField(default=0)  # bachlor => 0  graduate => 1 phd => 2 else => 3
+    bacholor = models.CharField(blank=True, max_length=100)
+    graduate = models.CharField(blank=True, max_length=100)
+    phd = models.CharField(blank=True, max_length=100)
 
 
     def __unicode__(self):
