@@ -294,6 +294,10 @@ def complete_account_feature(request):
         host_topic.save()
 
         Info = {}
+        Info['status'] = 0 # 
+        Info['data'] = {}
+        Info['msg'] = "" 
+
         Info['topic_tag'] = showTag
         Info['feature_name'] = feature_name
 
