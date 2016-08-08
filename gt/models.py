@@ -1,6 +1,5 @@
 # coding:utf-8
 
-import datetime
 from django_mongodb_engine.contrib import MongoDBManager
 from django.db import models
 from django.utils import timezone
@@ -31,13 +30,23 @@ class Host(models.Model):
     service_time = models.CharField(max_length=100, default=True)
     max_payment = models.FloatField(default=0)
     min_payment = models.FloatField(default=0)
-    h_school = models.CharField(max_length=200)
+    
     state = models.IntegerField(default=0)  # normal user  => 0  examing => 1  sharer => 2
 
     birth = models.CharField(blank=True, max_length=100)
     qq_number = models.CharField(blank=True, max_length=20)
     wechat = models.CharField(blank=True, max_length=20)
-    forget_string = models.CharField(blank=True, max_length=200)  # 这个forget_string用来进行找回密码验证的。
+    h_school = models.CharField(max_length=200)
+
+    #Education Infomation
+    education = models.IntegerField()  # bachlor => 0  graduate => 1 phd => 2 else => 3
+    bacholor = models.CharField(max_length=100)
+    graduate = models.CharField(max_length=100)
+    phd = models.CharField(max_length=100)
+
+
+    def __unicode__(self):
+        return self.username
 
     def get_all_features(self):
         host_topics = Host_Topic.objects.filter(host_id=self.id)
@@ -73,6 +82,7 @@ class Host(models.Model):
         return d_topic_feature
 
     def get_all_classes(self, school_id="none"):
+        hosts=[]
         if school_id == "none":
             hosts = Host.objects.filter(state=2)
         d_topic_detail = {}
@@ -103,6 +113,7 @@ class Host(models.Model):
                 t_id = h_topic_atom.t_id
                 f_id = h_topic_atom.f_id
                 if not d_topic_detail.has_key(t_id):
+                    print t_id
                     single_topic = Topic.objects.get(id=t_id)
                     d_topic_detail[t_id] = {}
                     d_topic_detail[t_id]['name'] = single_topic.t_name
@@ -117,7 +128,7 @@ class Host(models.Model):
 
                 # print d_topic_detail[t_id]['topics']
                 # print d_topic_detail[t_id]
-                print each_host.username, d_topic_detail[t_id]['name']
+                #print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
             for k, v in d_host_topic.items():
                 tag = tag + " " + str(v)
@@ -129,7 +140,7 @@ class Host(models.Model):
         Info = {}
         Info['hosts'] = hosts
         Info['topics'] = d_topic_detail.values()
-        print Info['topics']
+        #print Info['topics']
         return Info
 
     def get_user_message(self,user_id):
@@ -139,6 +150,53 @@ class Host(models.Model):
             msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
         
         return msgs
+
+    def get_index_statistic(self):
+        '''
+        get guests'number and hosts' number 
+        And schools' number
+        '''
+        Info = {}
+        Info['register_num'] = 0
+        Info['host_num'] = 0
+        Info['normal_num'] = 0
+        hosts = Host.objects.all()
+        univ = {}
+        for host_atom in hosts:
+            Info['register_num'] += 1
+            if host_atom.state == 2:
+                Info['host_num'] += 1
+            elif host_atom.state == 1 or host_atom.state == 0:
+                Info['normal_num'] += 1
+
+            #Get the School Infomation 
+            if not univ.has_key(host_atom.h_school):
+                univ[host_atom.h_school] = 1
+            else:
+                univ[host_atom.h_school] += 1
+
+        Info['school_num'] = len(univ)
+
+        return Info
+
+
+    def search_user_with_key(self,keyword):
+        result_hosts = []
+        all_hosts = Host.objects.all()
+        
+        for host_atom in all_hosts:
+            #first step : search the name
+            if keyword in host_atom.username:
+                result_hosts.append(host_atom)
+            #second step : search the introduction
+            if keyword in host_atom.introduction:
+                result_hosts.append(host_atom)
+            #third type , search the motto
+            if keyword in host_atom.motto:
+                result_hosts.append(host_atom)
+
+        return result_hosts
+
 
 
 class Country(models.Model):
@@ -302,6 +360,15 @@ class Document(models.Model):
         self.d_menu = Menu.objects.get(id=self.d_menu).m_name
 
 
+class Forget(models.Model):
+    user_id = models.CharField(max_length=200)
+    forget_string = models.CharField(max_length=200)
+    timestamp = models.DateTimeField()
+
+    def _add_time(self):
+        self.timestamp = timezone.datetime.now()
+
+
 class Mail(models.Model):
     subject = models.CharField(max_length=200)
     from_email = models.CharField(max_length=200)
@@ -310,6 +377,9 @@ class Mail(models.Model):
     admin_id = models.CharField(max_length=200)
     content = models.TextField()
     is_success = models.IntegerField()
+
+
+
 
     def sendMail(self, subject, to, content):
         # to = ['yhydhx@126.com']
@@ -411,16 +481,15 @@ class Mail(models.Model):
 
 
 
-class Message(models.Model):
 
+class Message(models.Model):
     from_user = models.CharField(max_length=100)
     to_user = models.CharField(max_length=100)
     message_type = models.IntegerField()
     icon = models.CharField(max_length=100)
     upload_time = models.DateField()
     content = models.TextField()
+
     def date_format(self):
         self.upload_time = self.upload_time.strftime("%Y-%m-%d")
-
-
 

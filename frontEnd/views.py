@@ -23,7 +23,7 @@ import chunk
 import os
 import base64
 import time
-import  datetime
+import datetime
 
 SALT = 'hetongshinanshen'
 
@@ -56,6 +56,7 @@ def index(request):
     recommend_host = Host()
     Info = {}
     Info = recommend_host.get_all_classes()
+    Info.update(recommend_host.get_index_statistic())
 
     Info['object'] = obj
 
@@ -67,7 +68,7 @@ def index(request):
         user = Host.objects.get(email=req_username)
         login_flag = True
         return render_to_response('frontEnd/index.html', {'current_user': user,
-                                                          'login_flag': login_flag},Info)
+                                                          'login_flag': login_flag}, Info)
     except:
         return render_to_response('frontEnd/index.html', Info)
 
@@ -83,8 +84,8 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                 h_school = request.POST['school']
                 phone = request.POST['phone']
                 email = request.POST['email']
-                
-                #keep the infomation the user has wrote
+
+                # keep the infomation the user has wrote
                 Info = {}
                 Info['username'] = username
                 Info['h_school'] = h_school
@@ -171,24 +172,58 @@ def logout(request):
 
 
 @csrf_exempt
-def i_forget(request, attr):
+def i_forget(request, attr=False):
     if not request.method == 'POST':
-        if attr:
-            pass
-        else:
-            return render_to_response('iforget.html')
-    # 处理上传的东西
-    elif not request.POST['email']:
-        pass  # 坑以后补上
-    else:
-        email = request.POST['email']
-        host = Host.objects.get(email=email)  # 找到host
-        # 生成找回链接
-        sha1 = hashlib.sha1()
-        string = sha1.update(email + SALT)
-        iforget_link = '127.0.0.1:8077/iforget/' + string + '/'
 
-        #######################################
+        # 处理密码找回工作
+        if attr:
+            print 'attr found' + '  ' + str(attr)
+            try:
+                forget = Forget.objects.get(forget_string=str(attr))
+                print 'forget_object find'
+                host = Host.objects.get(id=forget.user_id)
+                print 'host find'
+                time_now = timezone.datetime.now()
+                print 'time marked'
+                if (time_now - forget.timestamp).seconds <= 1800:
+                    request.session['email'] = host.email
+                    return HttpResponseRedirect('/ichange/')
+                else:
+                    return HttpResponse('您验证的时间过期了,请重新发送验证邮件')
+            except:
+                return HttpResponse('attr没找到相应的东西')
+
+        # 处理页面显示工作
+        else:
+            return render_to_response('frontEnd/iforget.html')
+
+    # 处理上传的东西
+    else:
+        try:
+            email = request.POST.get("data", None)
+            try:
+                host = Host.objects.get(email=email)  # 找到host
+                print host
+                #  生成找回链接
+                print 'host has found'
+
+                string = hashlib.md5(
+                    str(email) + str(timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S"))).hexdigest()
+                print string
+                forget = Forget(user_id=host.id,
+                                forget_string=str(string),
+                                timestamp=timezone.datetime.now())
+                forget.save()
+                print 'forger_object has been found'
+
+                iforget_link = '127.0.0.1:8077/iforget/' + str(string) + '/'
+                print iforget_link
+            except:
+                return HttpResponse('没找到对应的用户,请检查您输入的email')
+        except:
+            return HttpResponse("后台没有接受到数据")
+
+        '''#######################################
         mail = Mail(
             subject='weshere账户密码找回,请不要回复此邮件',
             from_email=EMAIL_HOST_USER,
@@ -199,7 +234,35 @@ def i_forget(request, attr):
         )
         # mail.sendMail()
         ######################################
-        return HttpResponse('邮件已经发送啦')
+        return HttpResponse('邮件已经发送啦')'''
+
+
+def ichange(request):
+    try:
+        email = request.session['email']
+    except:
+        return HttpResponse('没有找到您的session')  # 之后改为404错误
+    try:
+        user = Host.objects.get(email=email)
+    except:
+        return HttpResponse('没有找到您所持有的session所对应的用户')
+    ERROR = []
+    MARK = []
+    if request.method == 'POST':
+        if request.POST['new-passwd'] and request.POST['new-passwd-confirm']:
+            new_password = request.POST['new-passwd']
+            new_password_confirm = request.POST['new-passwd-confirm']
+            if new_password != new_password_confirm:
+                PASSWORD_CONFIRM_ERROR = True
+                return render_to_response('frontEnd/ichange.html', {'current_user': user,
+                                                                    'PASSWORDCONFIRMERROR': PASSWORD_CONFIRM_ERROR})
+            else:
+                user.password = new_password
+                user.save()
+                return render_to_response('frontEnd/ichange.html', {'current_user': user,
+                                                                    'change_mark': True})
+    else:
+        return render_to_response('frontEnd/ichange.html', {'current_user': user})
 
 
 @csrf_exempt  # 所有有这个东西的全部要删掉到时候重新部署csrf防跨站
@@ -216,7 +279,8 @@ def complete_account(request):
     if request.method == 'POST':
         if request.POST['self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
             'motto'] and \
-                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and request.POST['qq']:
+                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
+                request.POST['qq']:
             self_introduction = request.POST['self-introduction']
             gender = request.POST['selectbox']
             motto = request.POST['motto']
@@ -225,7 +289,7 @@ def complete_account(request):
             max_payment = request.POST['max-payment']
             qq = request.POST['qq']
 
-            #print gender
+            # print gender
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
 
@@ -249,7 +313,7 @@ def complete_account(request):
     else:
         return render_to_response('frontEnd/complete-account.html',
                                   {'login_flag': True,
-                                   'current_user': host },
+                                   'current_user': host},
                                   context_instance=RequestContext(request))
 
 
@@ -277,29 +341,38 @@ def complete_account_feature(request):
         feature_name = request.POST.get("feature_name")
         host_id = host.id
         showTag = request.POST.get("topic_tag")
-        #check this feature is exist or not 
+        # check this feature is exist or not
         try:
-            feature = Feature.objects.get(f_name = feature_name,
-                                        f_topic = topic_id)
+            feature = Feature.objects.get(f_name=feature_name,
+                                          f_topic=topic_id)
         except:
-            feature = Feature(f_name = feature_name,
-                            f_topic = topic_id)
+            feature = Feature(f_name=feature_name,
+                              f_topic=topic_id)
             feature.save()
 
-        host_topic  = Host_Topic(
-            host_id = host.id,
-            t_id = topic_id,
-            f_id = feature.id  # 然后把id相互关联起来
+        host_topic = Host_Topic(
+            host_id=host.id,
+            t_id=topic_id,
+            f_id=feature.id  # 然后把id相互关联起来
         )
         host_topic.save()
 
         Info = {}
+<<<<<<< HEAD
         Info['status'] = 0 # 
         Info['data'] = {}
         Info['msg'] = "" 
 
         Info['topic_tag'] = showTag
         Info['feature_name'] = feature_name
+=======
+        Info['data'] = {}
+        Info['state'] = 0
+        Info['message'] = ""
+
+        Info['data']['topic_tag'] = showTag
+        Info['data']['feature_name'] = feature_name
+>>>>>>> 65487bf74b432cddb3962c67d503093a2b7de2d3
 
         return HttpResponse(json.dumps(Info))
 
@@ -317,8 +390,8 @@ def complete_account_feature(request):
         Info['host'] = host,
         Info['current_user'] = host
         Info['login_flag'] = True
-        print Info
-        return render(request,'frontEnd/complete-account-feature.html',Info)
+
+        return render(request, 'frontEnd/complete-account-feature.html', Info)
 
 
 def host_center(request):
@@ -332,7 +405,7 @@ def host_center(request):
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
-    return HttpResponseRedirect('/user/show/'+host.id)
+    return HttpResponseRedirect('/user/show/' + host.id)
 
 
 def modify_account(request):
@@ -462,11 +535,12 @@ def service(request):
 def school(request, method, Oid):
     if method == "show":
         if request.GET.get("schoolID"):
-            return HttpResponseRedirect("/school/detail/"+request.GET.get("schoolID"))
-        return render(request,"frontEnd/school-search.html")
+            return HttpResponseRedirect("/school/detail/" + request.GET.get("schoolID"))
+        return render(request, "frontEnd/school-search.html")
+
 
     elif method == "detail":
-        #find the passed host of the school 
+        # find the passed host of the school
         hosts = Host.objects.filter(state=2, h_school=Oid)
         d_topic_detail = {}
         for each_host in hosts:
@@ -510,9 +584,9 @@ def school(request, method, Oid):
 
                 # print d_topic_detail[t_id]['topics']
                 # print d_topic_detail[t_id]
-                #print each_host.username, d_topic_detail[t_id]['name']
+                # print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
-            
+
             for k, v in d_host_topic.items():
                 tag = tag + " " + str(v)
 
@@ -539,7 +613,7 @@ def user(request, method, Oid):
         try:
             host = Host.objects.get(id=Oid)
         except:
-            return render(request,"frontEnd/404.html")
+            return render(request, "frontEnd/404.html")
 
         features = host.get_all_features()
         host.features = features.values()
@@ -554,41 +628,39 @@ def user(request, method, Oid):
         return render_to_response('frontEnd/host-index.html', Info)
 
     elif method == "msg":
-        #check whether the user is online
+        # check whether the user is online
         try:
             req_username = request.session['email']
             # get the user
             user = Host.objects.get(email=req_username)
         except:
-            return render(request,"frontEnd/404.html")
+            return render(request, "frontEnd/404.html")
 
-        #check is the host exist
+        # check is the host exist
         try:
             host = Host.objects.get(id=Oid)
         except:
-            return render(request,"frontEnd/404.html")
+            return render(request, "frontEnd/404.html")
 
-        #save the message 
+        # save the message
         msg = request.POST.get("message")
         if user.icon == "":
             user.icon == DEFAULT_ICON
 
         message = Message(
-            from_user = user.id , 
-            to_user = host.id ,
-            message_type =  0,  #which means normal message
-            icon = user.icon ,
-            content = msg,
-            upload_time = datetime.datetime.now(),
-            )
+            from_user=user.id,
+            to_user=host.id,
+            message_type=0,  # which means normal message
+            icon=user.icon,
+            content=msg,
+            upload_time=datetime.datetime.now(),
+        )
         message.save()
 
-        return HttpResponseRedirect("/user/show/"+Oid)
+        return HttpResponseRedirect("/user/show/" + Oid)
 
     else:
         return render(request, "frontEnd/404.html")
-
-
 
 
 @csrf_exempt
