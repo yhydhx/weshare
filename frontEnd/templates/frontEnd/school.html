@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
     <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
 
-    <title>Rentica - HTML Template</title>
+    <title>{{school.s_name}}</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
@@ -63,6 +63,7 @@
     </style>
 
 </head>
+{% include "frontEnd/nav.html" %}
 
 <body class="cssAnimate">
 
@@ -70,7 +71,7 @@
          data-type="parallax" data-stellar-background-ratio="0.2" data-bg-image="./assets/images/content/cars/bg-02.jpg"
          data-bg-image-mobile="./assets/images/content/cars/bg-01-mobile.jpg">
     <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2
-            class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">电子科技大学</h2></div>
+            class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">{{school.s_name}}</h2></div>
 </section>
 
 <div class="ct-u-sectionBorder ct-u-paddingTop60">

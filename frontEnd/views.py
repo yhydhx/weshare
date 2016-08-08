@@ -357,8 +357,14 @@ def complete_account_feature(request):
         )
         host_topic.save()
 
-        Info['topic_tag'] = showTag
-        Info['feature_name'] = feature_name
+        Info = {}
+
+        Info['data'] = {}
+        Info['state'] = 0
+        Info['message'] = ""
+
+        Info['data']['topic_tag'] = showTag
+        Info['data']['feature_name'] = feature_name
 
         return HttpResponse(json.dumps(Info))
 
@@ -376,7 +382,7 @@ def complete_account_feature(request):
         Info['host'] = host,
         Info['current_user'] = host
         Info['login_flag'] = True
-        print Info
+
         return render(request, 'frontEnd/complete-account-feature.html', Info)
 
 
@@ -584,7 +590,7 @@ def school(request, method, Oid):
         Info['login_flag'] = True
         Info['object'] = hosts
         Info['topics'] = d_topic_detail.values()
-
+        Info['school'] = School.objects.get(id=Oid)
         Info['allPeople'] = len(hosts)
 
         return render(request, "frontEnd/school.html", Info)
