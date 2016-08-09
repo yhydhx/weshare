@@ -329,14 +329,55 @@
 
                     <!-- Tab #3 -->
                     <div role="tabpanel" class="tab-pane fade" id="details">
-                        <h3 class="ct-fw-lighter ct-u-marginBoth50">Technical Details</h3>
-                        <h6 class="ct-u-hr ct-u-hr--left ct-fw-bold text-uppercase">Lorem ipsum dolor sit amet</h6>
-                        <p class="ct-u-marginBottom50">Quisque at nulla a tortor finibus tempor eget nec lacus.
-                            Donec gravida molestie mauris.
-                            TENDERS & TOYS 2 x 30ft inflatable tenders type 90 EFB with 350hp YaCHa inboard engine.
-                            1 x Classic Runnerboat with 360hp SRYreN inboard engine. 5 x YaCHa Waverunners 1 x YaCHa
-                            Jetskis 570ft/25m floating trampoline 6 x kayak AMENITIES A glass bottomed Jacuzzi for 5
-                            A sauna and fully equipped spa room</p>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 ct-u-paddingTop80">
+
+                                    {% block content %}
+                                    {%  for topic in user_features%}
+                                    <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
+                                        <form class="ct-u-sectionBorder" name="{{topic.tag}}" action="/complete-account-feature/"
+                                              method="post">
+                                            <h2 class="ct-sectionHeader-title">
+                                                <small><span>{{topic.name}}</span></small>
+                                            </h2>
+                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}">
+                                                {% for feature in topic.feature_list %}
+                                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                            <div class="form-group" style="padding-top: 1px">
+                                                <label for="foreign">{{topic.intro}}</label>
+                                                <input class="form-control form-control--type2" id="{{topic.tag}}" name="feature_name">
+                                                <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>
+                                                <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
+                                                <button type="submit" class="btn btn-lg btn-wide btn-motive">
+                                                    <span>提交</span></button>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    {% endfor %}
+                                    {% endblock %}
+                                   
+
+                                </div>
+                            </div>
+                            <div class="row" style="margin-left: 29%">
+                                <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
+                                    <script>
+                                        function openpage() {
+                                            window.location.replace("/index/")
+                                        }
+                                    </script>
+                                    <button id="clipBtn" onclick="openpage()" class="btn btn-lg btn-wide btn-motive">
+                                        <span>完成全部的内容</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
