@@ -10731,7 +10731,7 @@ body.boxed .ct-topBar + .ct-menuMobile + .ct-pageWrapper nav.navbar,
 .ct-footer p {
   color: #aaa;
 }
-.ct-footer:after {
+/*.ct-footer:after {
   content: "";
   position: absolute;
   top: -10px;
@@ -10741,7 +10741,7 @@ body.boxed .ct-topBar + .ct-menuMobile + .ct-pageWrapper nav.navbar,
   width: 20px;
   border-style: solid;
   border-width: 0 10px 10px 10px;
-}
+}*/
 /*.ct-footer.ct-u-sectionDark:after {
   border-color: transparent transparent #333 transparent;
 }*/
