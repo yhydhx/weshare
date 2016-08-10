@@ -52,6 +52,10 @@
                     console.log(str2['data']['feature_name']);
                     $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span>"+str2['data']['feature_name']+"</span></li>");
                 }
+                error : function(msg){
+                    console.log(msg);
+                }
+
             })
         // });
     }
