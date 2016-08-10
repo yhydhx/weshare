@@ -31,7 +31,7 @@
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
 
-    <!-- 选择特质 -->
+    <!-- 添加特质 -->
     <script>
     function showFeatures(tag){
         console.log('aa');
@@ -50,7 +50,7 @@
                     str2 = JSON.parse(str);
                     console.log(str2);
                     console.log(str2['data']['feature_name']);
-                    $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span>"+str2['data']['feature_name']+"</span></li>");
+                    $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span><a href=\"\"><i class=\"fa fa-trash\"></i></a>"+str2['data']['feature_name']+"</span></li>");
                 }
 
             })
@@ -165,7 +165,7 @@
                             <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}">
                                 <div id="{{topic.id}}TXT">
                                 {% for feature in topic.feature_list %}
-                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
+                                <li><i class="fa fa-check"></i><span><a href=""><i class="fa fa-trash"></i></a>{{ feature }}</span></li>
                                 {% endfor %}
                                 </div>
                             </ul>
