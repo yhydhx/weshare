@@ -48,6 +48,7 @@ class Host(models.Model):
     def __unicode__(self):
         return self.username
 
+
     def format_dict(self):
         tmpHost = {}
         tmpHost["username"] =  self.username
