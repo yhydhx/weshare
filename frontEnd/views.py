@@ -307,7 +307,7 @@ def complete_account(request):
             host.state = 1
             host.qq_number = qq
             host.save()
-            return HttpResponseRedirect('/complete_account_feature')
+            return HttpResponseRedirect('/complete-account-feature')
         else:
             return HttpResponse('请把表单填写完整')
     else:
