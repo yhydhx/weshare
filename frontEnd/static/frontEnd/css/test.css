@@ -9,9 +9,9 @@
 .tab-pane{
 	overflow:hidden;
 }
-input[type=checkbox]{
+/*input[type=checkbox]{
 	display: none;
-}
+}*/
 .closeCheckBox{
 	position: relative;
 	left: 70%;
