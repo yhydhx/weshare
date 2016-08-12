@@ -1,72 +1,41 @@
-Index 
+#Index 
 
-url: /
-
-template: 'front/index.html'
+url: /api/index
 
 function:
+1. 显示话题信息及其包含的用户
+2. 显示网站的统计数据
+3. 显示部分用户（最多*人）
+4. 用户是否在线
 
 API:
-
+%%正确的返回信息：
 Info = {
 	state: Int # 0 表示成功，其他数字表示不成功
 	message: Char # 错误的提示信息
 	data: {
-		'object': [
-			{
-				'name': char # 省份名字
-				'id': int # 省份 ID
-				'schools': [
-					{
-						'name':  char # 学校的名字
-						'id': char # 学校的独立ID
-					}，
-					{
-						'name':  char # 学校的名字
-						'id': char # 学校的独立ID
-					}，
-					...
-				]
-			},
-			{
-				'name': char # 省份名字
-				'id': int # 省份 ID
-				'schools': [
-					{
-						'name':  char # 学校的名字
-						'id': char # 学校的独立ID
-					}，
-					{
-						'name':  char # 学校的名字
-						'id': char # 学校的独立ID
-					}，
-					...
-				]
-			},
-			...
-		]，
 
 		'topics': [
 			{
-				'name' : char # 话题姓名
-	            'tag' : char # 话题标签
-	            'number' : int # 话题中包含用户的数量
-	            'index' : int # 话题的位置
-	            'topics' : {    # 里面包含每个用户的ID
-	            	host_id_1 : 1,
-	            	host_id_2 : 2,
-	            	...
-	            } 	
+				'name' : char ~话题姓名
+				'tag' : char ~ 话题标签
+				'number' : int ~ 话题中包含用户的数量
+				'index' : int ~ 话题的位置
+				'topics' : {    ~ 里面包含每个用户的ID
+					host_id_1 : 1,
+					host_id_2 : 2,
+					...
+				} 	
 			},{
-				'name' : char # 话题姓名
-	            'tag' : char # 话题标签
-	            'number' : int # 话题中包含用户的数量
-	            'index' : int # 话题的位置
-	            'topics' : {    # 里面包含每个用户的ID
-	            	host_id_1 : 1,
-	            	host_id_2 : 2,
-	            	...
-	            } 	
+				'name' : char ~ 话题姓名
+				'tag' : char ~ 话题标签
+				'number' : int ~ 话题中包含用户的数量
+				'index' : int ~ 话题的位置
+				'topics' : {    ~ 里面包含每个用户的ID
+					host_id_1 : 1,
+					host_id_2 : 2,
+					...
+				} 	
 			},
 			...
 		]
@@ -74,63 +43,494 @@ Info = {
 		'hosts' : [
 			{
 				"username" : char
-			    gender : int   # 1是男生0是女生
-			    motto : char   # 座右铭
-			    introduction : char  #简介
-			    icon : char  # 头像
-			    orders = int  #订单数量
-			    service_time = char #提供服务的时间
-			    max_payment = float  
-			    min_payment = float 
-			    
-			    state = int   #状态 normal user  => 0  examing => 1  sharer => 2
+				"gender" : int   ~ 1是男生0是女生
+				"motto" : char   ~ 座右铭
+				"introduction" : char  ~简介
+				"icon" : char  ~ 头像
+				"orders" : int  ~订单数量
+				"service_time" : char ~提供服务的时间
+				"max_payment" : float  
+				"min_payment" : float 
+				
+				"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
 
-			    birth = char #生日
-			    qq_number = char #qq号码
-			    wechat = char #微信号
+				"birth" : char ~生日
+				"qq_number" : char ~qq号码
+				"wechat" : char ~微信号
 
-			    #Education Infomation
-			    education = int  #目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
-			    bacholor = char #本科学校
-			    graduate = char  #硕士学校
-			    phd = char  # 博士学校
+				%%Education Infomation
+				"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+				"bacholor" : char ~本科学校
+				"graduate" : char  ~硕士学校
+				"phd" : char  ~ 博士学校
 			},
 			......
 		],
 
-		'register_num' : int #  注册人数
-        'host_num' : int # 分享者人数
-        'normal_num' : int # 普通用户人数
-        'school_num' : int # 学校数量
+		'register_num' : int ~ 注册人数
+		'host_num' : int ~ 分享者人数
+		'normal_num' : int ~ 普通用户人数
+		'school_num' : int ~ 学校数量
+		'login_flag' : int ~ 用户是否在线 0表示不在线，1表示在线
 	}
 }
 
+错误的返回信息：
+待定
+
+-----------------------------------------------------------------------------------------------
+
+#user 
+
+%%url: /api/user/show/{user_id}
+
+function:
+%%{user_id}即为host的id，可以为空
+1. 显示查看host的具体信息
+2. 显示该host下的留言
+
+API:
+正确的返回信息：
+%%当用户登录的时候
+Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message: Char # 错误的提示信息
+	data: {
+		'user' : {
+			"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+				
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+
+			‘features’ : [
+				'{topic_id}':{
+					'name' : ~ char 话题的名字
+	                'features' : [       ~所有feature的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ]
+	                'row1' : [  ~第一列的特征的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ],
+	                'row2' : [	~第二列的特征的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ],
+	                'row3' : [ 	~第三列的特征的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ],
+	                'row4' : [	~第四列的特征的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ],
+				}
+			]
+		}，
+
+		'msgs' : ""   ~提示信息
+		'current_user' : {   ~当前登录的用户的信息
+			"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+				
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+		}
+		'login_flag' : 1
+
+%%当用户未登录的时候
+	Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message: Char # 错误的提示信息
+	data: {
+		'user' : {
+			"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+				
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+
+			‘features’ : [
+				'{topic_id}':{
+					'name' : ~ char 话题的名字
+	                'features' : [       ~所有feature的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ]
+	                'row1' : [  ~第一列的特征的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ],
+	                'row2' : [	~第二列的特征的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ],
+	                'row3' : [ 	~第三列的特征的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ],
+	                'row4' : [	~第四列的特征的名字
+	                	'{feature_name_1}':  ~特征1的名字
+	                	'{feature_name_2}':  ~特征2的名字
+	                	'{feature_name_3}':  ~特征3的名字
+	                	......
+	                ],
+				}
+			]
+		}，
+
+		'msgs' : ""   ~提示信息
+		'current_user' : None ~用户未登录，显示信息为空
+		'login_flag' = 0
+
+错误的返回信息：
+
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘找不到该用户’   Char # 错误的提示信息
+	data: {}
 
 
-url: /complete_account_feature
+-----------------------------------------------------------------------------------------------
 
-method: post
-提交的数据
+#school 
 
-	{
-		"topic_id" :  char  # 话题的ID
-		"feature_name" : char  # 新增的feature的名字
- 		"topic_tag" : char  # 话题的tag，用来识别topic
+%%url: /api/school/show
+
+function:
+1. 显示查看所有 school
+
+API:
+正确的返回信息：
+%%忽视用户登录信息
+
+
+Info = {
+	state: 0  Int # 0 表示成功，其他数字表示不成功
+	message: ""   Char # 错误的提示信息
+	data: {
+		'all_countries' : [
+			{
+				'id' :   ~ Int 从0递增的数字，国家的index
+	            'name' :  ~ int  国家的名字
+	            'provs' : [
+	            	{
+	            		'country_id' :  ~  char 所属国家的id
+		                'id' :  ~  int 省份的index， 从1递增
+		                'name' :  ~  char  省份的名字
+		                'univs' :  [ ~ 学校的名字
+		                	{
+		                		'id' :  ~  int  省份的ID * 1000 +学校的index， 递增
+			                    'name' :  ~  char 学校的名字
+			                    'school_id' :  ~  char 学校的id，唯一表示
+		                	},{
+		                		'id' :  ~  int  省份的ID * 1000 +学校的index， 递增
+			                    'name' :  ~  char 学校的名字
+			                    'school_id' :  ~  char 学校的id，唯一表示
+		                	},
+		                	......
+		                ]
+	           		},{
+	            		'country_id' :  ~  char 所属国家的id
+		                'id' :  ~  int 省份的index， 从1递增
+		                'name' :  ~  char  省份的名字
+		                'univs' :  [ ~ 学校的名字
+		                	{
+		                		'id' :  ~  int  省份的ID * 1000 +学校的index， 递增
+			                    'name' :  ~  char 学校的名字
+			                    'school_id' :  ~  char 学校的id，唯一表示
+		                	},{
+		                		'id' :  ~  int  省份的ID * 1000 +学校的index， 递增
+			                    'name' :  ~  char 学校的名字
+			                    'school_id' :  ~  char 学校的id，唯一表示
+		                	},
+		                	......
+		                ]
+	           		},
+	           		......
+	            	
+	            ]
+			},{
+				'id' :   ~ Int 从0递增的数字，国家的index
+	            'name' :  ~ int  国家的名字
+	            'provs' : [
+	            	{
+	            		'country_id' :  ~  char 所属国家的id
+		                'id' :  ~  int 省份的index， 从1递增
+		                'name' :  ~  char  省份的名字
+		                'univs' :  [ ~ 学校的名字
+		                	{
+		                		'id' :  ~  int  省份的ID * 1000 +学校的index， 递增
+			                    'name' :  ~  char 学校的名字
+			                    'school_id' :  ~  char 学校的id，唯一表示
+		                	},{
+		                		'id' :  ~  int  省份的ID * 1000 +学校的index， 递增
+			                    'name' :  ~  char 学校的名字
+			                    'school_id' :  ~  char 学校的id，唯一表示
+		                	},
+		                	......
+		                ]
+	           		},{
+	            		'country_id' :  ~  char 所属国家的id
+		                'id' :  ~  int 省份的index， 从1递增
+		                'name' :  ~  char  省份的名字
+		                'univs' :  [ ~ 学校的名字
+		                	{
+		                		'id' :  ~  int  省份的ID * 1000 +学校的index， 递增
+			                    'name' :  ~  char 学校的名字
+			                    'school_id' :  ~  char 学校的id，唯一表示
+		                	},{
+		                		'id' :  ~  int  省份的ID * 1000 +学校的index， 递增
+			                    'name' :  ~  char 学校的名字
+			                    'school_id' :  ~  char 学校的id，唯一表示
+		                	},
+		                	......
+		                ]
+	           		},
+	           		......
+	            	
+	            ]
+			},
+			.......
+			
+		]
 	}
+
+
+-----------------------------------------------------------------------------------------------
+
+#school 
+
+%%url: /api/school/detail/{school_id}
+
+function:
+%%{school_id} 即为school的id，可以为空
+1. 显示查看school的具体信息
+2. 显示该school 下已经注册成功的host
+
+API:
+正确的返回信息：
+%%忽视用户登录信息
+
+Info = {
+	state: 0   Int # 0 表示成功，其他数字表示不成功
+	message: ''   Char # 错误的提示信息
+	data: {
+		'login_flag'  :  ~    int 用户的登录信息，已经登录为1，未登录为0
+        
+        'school'  : {
+        	's_name' : ~  char 学校的名字= self.s_name
+	        's_province' : ~  char 所属的省份
+	        's_display_index' : ~  int 学校的index
+	        's_student_number' : ~  = int 学校的host人数
+        } 
+        'allPeople'  :  ~   int  学校的host人数
+        'topics'  : [
+	        {
+	        	'name' :  ~   char  学校的名字
+	            'tag' :  ~   char  这个topic的标签（缩写）
+	            'number' :  ~   int 这个topic下的host数量
+	            'index' :  ~   从0递增
+	            'topics' :  {  ~ 每个host的信息
+	            	'host_id_1' :1,
+	            	'host_id_1' :1,
+	            	'host_id_1' :1,
+	            	....
+	            }		
+	        },{
+	        	'name' :  ~   char  学校的名字
+	            'tag' :  ~   char  这个topic的标签（缩写）
+	            'number' :  ~   int 这个topic下的host数量
+	            'index' :  ~   从0递增
+	            'topics' :  {  ~ 每个host的信息
+	            	'host_id_1' :1,
+	            	'host_id_1' :1,
+	            	'host_id_1' :1,
+	            	....
+	            }		
+	        },
+	        .......
+        ]
+        'object'  :  [
+        	{
+        		"username" : char
+				"gender" : int   ~ 1是男生0是女生
+				"motto" : char   ~ 座右铭
+				"introduction" : char  ~简介
+				"icon" : char  ~ 头像
+				"orders" : int  ~订单数量
+				"service_time" : char ~提供服务的时间
+				"max_payment" : float  
+				"min_payment" : float 
+					
+				"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+				"birth" : char ~生日
+				"qq_number" : char ~qq号码
+				"wechat" : char ~微信号
+
+				%%Education Infomation
+				"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+				"bacholor" : char ~本科学校
+				"graduate" : char  ~硕士学校
+				"phd" : char  ~ 博士学校
+
+				'tag' : ~ char 显示该用户的标签集合 用空格隔开
+			},{
+        		"username" : char
+				"gender" : int   ~ 1是男生0是女生
+				"motto" : char   ~ 座右铭
+				"introduction" : char  ~简介
+				"icon" : char  ~ 头像
+				"orders" : int  ~订单数量
+				"service_time" : char ~提供服务的时间
+				"max_payment" : float  
+				"min_payment" : float 
+					
+				"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+				"birth" : char ~生日
+				"qq_number" : char ~qq号码
+				"wechat" : char ~微信号
+
+				%%Education Infomation
+				"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+				"bacholor" : char ~本科学校
+				"graduate" : char  ~硕士学校
+				"phd" : char  ~ 博士学校
+
+				'tag' : ~ char 显示该用户的标签集合 用空格隔开
+			},
+			.......
+        	
+        ]
+	}
+
+
+
+
+错误的返回信息：
+
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘找不到该学校’   Char # 错误的提示信息
+	data: {}
+
+
+
+-----------------------------------------------------------------------------------------------
+
+
+删除feature
+
+url:   /delete_feature
+method :POST
+
+function :
+1. 删除该用户的该TOPIC下的feature
+
+API:
+
+传输的数据
+
+{
+	'topic_id' : ~ topic的ID
+    "feature_name" :  ~ feature 的名字
+    "topic_tag"  :  ~ char  topic的一个标识符
+}
 
 
 返回：
 
-{
-        'state' : = 0
-        'message' : = ""
-		'data' : = {
-			'topic_tag' : char  #话题的tag，用来识别topic
-        	'feature_name' : char  #新增的feature的名字
-		}
-       
+#查不到用户信息
+
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘找不到该用户’   Char # 错误的提示信息
+	data: {}
 }
 
-method: get
+#找不到该TOPIC，Feature 
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘删除失败，找不到该Topic或Feature’   Char # 错误的提示信息
+	data: {}
+}
 
-无需提交数据
+#删除成功
+
+Info = {
+	state: 0   Int # 0 表示成功，其他数字表示不成功
+	message: '删除成功'   Char # 错误的提示信息
+	data: {
+		"feature_name" :  ~ feature 的名字
+    	"topic_tag"  :  ~ char  topic的一个标识符
+	}
+}
+
+
+
+

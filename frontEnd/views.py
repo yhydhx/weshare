@@ -385,6 +385,51 @@ def complete_account_feature(request):
 
         return render(request, 'frontEnd/complete-account-feature.html', Info)
 
+def delete_feature(request):
+    if request.method == 'POST':
+        '''
+        renew the feature
+        '''
+        topic_id = request.POST.get('topic_id')
+        feature_name = request.POST.get("feature_name")
+        host_id = host.id
+        showTag = request.POST.get("topic_tag")
+        # check this feature is exist or not
+        
+        Info = {}
+        Info['state'] = 0
+        Info['message'] = ""
+        Info['data'] = {}
+
+        #find the host
+        try:
+            host = Host.objects.get(email=username)
+        except:
+            Info['state'] = 404
+            Info['message'] = "找不到这个host"
+            return HttpResponse(json.dumps(Info))
+        #find and delete the feature
+        try:
+            feature = Feature.objects.get(f_name=feature_name,f_topic=topic_id)
+            host_topic = Host_Topic.objects.get(
+                host_id=host.id,
+                t_id=topic_id,
+                f_id=feature.id  # 然后把id相互关联起来
+            ).delete()
+        except:
+            Info['state'] = 404
+            Info['message'] = "找不到这个feature"
+            return HttpResponse(json.dumps(Info))
+
+        Info = {}
+
+        Info['data'] = {}
+        Info['data']['topic_tag'] = showTag
+        Info['data']['feature_name'] = feature_name
+        Info['state'] = 0
+        Info['message'] = "删除成功"
+        return HttpResponse(json.dumps(Info))
+
 
 def host_center(request):
     try:
