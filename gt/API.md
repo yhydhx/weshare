@@ -554,9 +554,12 @@ API:
 	phone			~ char 电话号码
 	password			~密码
 	password-confirm	~重新输入的密码，前后端均进行验证
-	school1			~本科学校
-	school2			~硕士学校	，
-	school3 		~博士学校
+	school1			~本科学校名字
+	school2			~硕士学校	名字
+	school3 		~博士学校名字
+	schoolID1		~本科学校ID
+	schoolID2		~硕士学校ID
+	schoolID3		~博士学校ID
 	education   	~int   0 表示本科， 1 表示研究生， 2 表示 博士生 ， 3 表示其他
 }
 

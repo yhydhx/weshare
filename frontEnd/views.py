@@ -76,7 +76,7 @@ def index(request):
 @csrf_exempt
 def init_register(request):  # 暂时统一用用户名注册,以后的一些坑以后再填
     if request.method == 'POST':
-        username = request.POST['username']
+        username = request.POST['username'] 
         password = request.POST['password']
         password_confirm = request.POST['password-confirm']
         phone = request.POST['phone']
