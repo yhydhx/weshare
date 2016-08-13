@@ -407,14 +407,14 @@ $("#PtxtSc").live("click",function (){
                         <h2 class="ct-sectionHeader-title">
                             <small><span>账户信息</span></small>
                         </h2>
-                        {% if error %}
-                        <p style="color: #da4f49">{{ error }}</p>
+                        {% if state %}
+                        <p style="color: #da4f49">{{ message }}</p>
                         {% endif %}
                     </div>
 
                     <div class="form-group" style="padding-top: 1 px">
                         <label for="username">姓名</label>
-                        <input id="username" name="username" value="{{username}}" class="form-control form-control--type2">
+                        <input id="username" name="username" value="{{data.username}}" class="form-control form-control--type2">
                     </div>
 
 
@@ -434,12 +434,12 @@ $("#PtxtSc").live("click",function (){
                         </div><!-- /btn-group -->
                         <label for="foreign-phone">手机号码</label>
                         <input type="text" class="form-control form-control--type2" aria-label="..." name="phone"
-                               id="foreign-phone" placeholder="请点击左侧三角添加区号" value="{{phone}}">
+                               id="foreign-phone" placeholder="请点击左侧三角添加区号" value="{{data.phone}}">
                     </div><!-- /input-group -->
 
                     <div class="form-group">
                         <label for="email" class="required">邮箱</label>
-                        <input id="email" name="email" value="{{email}}" required class="form-control form-control--type2">
+                        <input id="email" name="email" value="{{data.email}}" required class="form-control form-control--type2">
                     </div>
 
                     <label>请选择您的学历</label>
