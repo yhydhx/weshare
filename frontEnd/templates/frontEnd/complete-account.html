@@ -70,26 +70,7 @@
     <script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
     <script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
 
-    <!-- 选择学历 -->
-    <script>
-        function showEducation(value){
-            console.log(value);
-            if (value === '博士') {
-                $("#Education").html("<div class=\"form-group\"><label>请输入您的本科学校</label><input type=\"text\" name=\"school1\" required class=\"form-control form-control--type2\"></div>"
-                    +"<div class=\"form-group\"><label>请输入您的研究生学校</label><input type=\"text\" name=\"school2\" required class=\"form-control form-control--type2\"></div>"+"<div class=\"form-group\"><label>请输入您的博士学校</label><input type=\"text\" name=\"school3\" required class=\"form-control form-control--type2\"></div>");
-            }
-            else if (value === '硕士') {
-                $("#Education").html("<div class=\"form-group\"><label>请输入您的本科学校</label><input type=\"text\" name=\"school1\" required class=\"form-control form-control--type2\"></div>"
-                    +"<div class=\"form-group\"><label>请输入您的研究生学校</label><input type=\"text\" name=\"school2\" required class=\"form-control form-control--type2\"></div>");
-            }
-            else if (value ==='本科') {
-                $("#Education").html(" <label>请输入您的本科学校</label><input type=\"text\" name=\"school1\" required class=\"form-control form-control--type2\">");
-            }
-            else{
 
-            }  
-        }
-    </script>
 </head>
 
 <body class="cssAnimate">
@@ -289,26 +270,13 @@
                                  style="width:100%; border:1px #000000 solid; padding:10px; overflow:hidden; line-height:25px;display:none; background-color: #FFFFFF;z-index:999;height:300px; overflow-y:auto;"></div>
                         </div>
                     </div> -->
-                    <div class="form-group">
-                        <label for="phone" class="required">手机号</label>
-                        <input id="phone" name="phone" required class="form-control form-control--type2">
-                    </div>
 
                     <div class="form-group">
                         <label for="qq" class="required">QQ号</label>
                         <input id="qq" name="qq" required class="form-control form-control--type2">
                     </div>
 
-                    <label>请选择您的学历</label>
-                    <select class="form-control" onchange="showEducation(this.value)">
-                      <option>本科</option>
-                      <option>硕士</option>
-                      <option>博士</option>
-                    </select>
-                    <div id="Education">
-                        <label>请输入您的本科学校</label>
-                        <input type="text" name="school1" required class="form-control form-control--type2">
-                    </div>
+
 
 
                     <!--<div class="form-group">

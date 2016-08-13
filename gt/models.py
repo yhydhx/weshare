@@ -48,6 +48,32 @@ class Host(models.Model):
     def __unicode__(self):
         return self.username
 
+
+    def format_dict(self):
+        tmpHost = {}
+        tmpHost["username"] =  self.username
+        tmpHost["gender"] =  self.gender
+        tmpHost["motto"] =  self.motto
+        tmpHost["introduction"] =  self.introduction
+        tmpHost["icon"] =  self.icon
+        tmpHost["orders"] =  self.orders
+        tmpHost["service_time"] =  self.service_time
+        tmpHost["max_payment"] =  self.max_payment
+        tmpHost["min_payment"] =  self.min_payment
+        
+        tmpHost["state"] =  self.state
+
+        tmpHost["birth"] =  self.birth
+        tmpHost["qq_number"] =  self.qq_number
+        tmpHost["wechat"] =  self.wechat
+
+        #Education Infomation
+        tmpHost["education"] =  self.education
+        tmpHost["bacholor"] =  self.bacholor
+        tmpHost["graduate"] =  self.graduate
+        tmpHost["phd"] =  self.phd
+        return tmpHost
+
     def get_all_features(self):
         host_topics = Host_Topic.objects.filter(host_id=self.id)
         d_topic_feature = {}
@@ -137,8 +163,15 @@ class Host(models.Model):
             each_host.min_payment = int(each_host.min_payment)
             each_host.tag = tag
 
+
+
         Info = {}
-        Info['hosts'] = hosts
+        Info['hosts'] = []
+
+        for host_atom in hosts:
+            tmpHost = host_atom.format_dict()
+            Info['hosts'].append(tmpHost)
+
         Info['topics'] = d_topic_detail.values()
         #print Info['topics']
         return Info
@@ -214,6 +247,15 @@ class School(models.Model):
     s_province = models.CharField(max_length=200)
     s_display_index = models.IntegerField()
     s_student_number = models.IntegerField()
+    
+    def format_dict(self):
+        tmp_school = {}
+        tmp_school['s_name'] = self.s_name
+        tmp_school['s_province'] = self.s_province
+        tmp_school['s_display_index'] = self.s_display_index
+        tmp_school['s_student_number'] = self.s_student_number
+        return tmp_school
+
     def get_country_province_school(self):
         result = []
         countries = Country.objects.all()
