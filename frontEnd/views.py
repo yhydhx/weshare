@@ -91,10 +91,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
         Info['data']['username'] = username 
         Info['data']['phone'] = phone 
         Info['data']['email'] = email 
-        Info['data']['education '] = education  
-        Info['data']['bacholor'] = bacholor 
-        Info['data']['graduate'] = graduate 
-        Info['data']['phd'] = phd 
+
 
         #check blank info 
         if not (username and password  and password_confirm and phone  and email ):

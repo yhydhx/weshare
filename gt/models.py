@@ -15,6 +15,8 @@ from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template import Context, loader
 from gt.settings import *
 
+import hashlib
+
 
 class Host(models.Model):
     username = models.CharField(max_length=50)
