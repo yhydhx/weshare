@@ -419,30 +419,40 @@ $("#PtxtSc").live("click",function (){
 
 
                     <div class="form-group">
-                        <div class="input-group-btn" style="display: inline-block;top:30px;right:80px;z-index:9;">
-                            <button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">区号 <span
-                                    class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a class="hrefClass">美国 +1</a></li>
-                                <li><a class="hrefClass">加拿大 +1</a></li>
-                                <li><a class="hrefClass">英国 +44</a></li>
-                                <li><a class="hrefClass">中国 +86</a></li>
-                                <li><a class="hrefClass">香港 +852</a></li>
-                                <li><a class="hrefClass">日本 +81</a></li>
-                            </ul>
-                        </div><!-- /btn-group -->
+                        
                         <label for="foreign-phone">手机号码</label>
-                        <input type="text" class="form-control form-control--type2" aria-label="..." name="phone"
+                        <div class="row">
+                            <div class="col-xs-2" >
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false"  style="padding-right:5px;padding-left:5px;">区号 <span
+                                            class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="hrefClass">美国 +1</a></li>
+                                        <li><a class="hrefClass">加拿大 +1</a></li>
+                                        <li><a class="hrefClass">英国 +44</a></li>
+                                        <li><a class="hrefClass">中国 +86</a></li>
+                                        <li><a class="hrefClass">香港 +852</a></li>
+                                        <li><a class="hrefClass">日本 +81</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xs-10" style="">
+                                <input type="text" class="form-control form-control--type2" aria-label="..." name="phone"
                                id="foreign-phone" placeholder="请点击左侧三角添加区号" value="{{data.phone}}">
+                            </div>
+                        </div>
                     </div><!-- /input-group -->
+
+                    
+                    
 
                     <div class="form-group">
                         <label for="email" class="required">邮箱</label>
                         <input id="email" name="email" value="{{data.email}}" required class="form-control form-control--type2">
                     </div>
 
-                    <label>请选择您的学历</label>
+                    <!-- <label>请选择您的学历</label>
                     <select class="form-control" onchange="showEducation(this.value)">
                       <option>本科</option>
                       <option>硕士</option>
@@ -470,7 +480,7 @@ $("#PtxtSc").live("click",function (){
                     <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" style="display:none;"/>
                     <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                     <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
-                    <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+                    <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div> -->
 
 
 
@@ -500,26 +510,7 @@ $("#PtxtSc").live("click",function (){
     </form>
 
 
-    <footer class="ct-footer ct-u-sectionDark">
-        <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
-            <div class="container">
-                <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/">createIT</a> 2014
-                </div>
-                <ul class="ct-socials">
-                    <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i
-                            class="fa fa-flickr"></i></a></li>
-                    <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i
-                            class="fa fa-instagram"></i></a></li>
-                    <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i
-                            class="fa fa-pinterest"></i></a></li>
-                    <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i
-                            class="fa fa-facebook-square"></i></a></li>
-                    <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i
-                            class="fa fa-twitter"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+{% include "frontEnd/footer.html" %}
 
 </div>
 
@@ -557,7 +548,7 @@ $("#PtxtSc").live("click",function (){
             $("#txtSc").val(school);
         });
 
-    });</script>
+    });</script> -->
 <script>
     $(document).ready(
             $(".hrefClass").click(function () {
@@ -574,7 +565,7 @@ $("#PtxtSc").live("click",function (){
             $("#txtSc")[0].click()
         }
     }
-</script> -->
+</script>
 
 
 </body>
