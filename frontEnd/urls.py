@@ -27,6 +27,6 @@ urlpatterns = patterns('',
 
                       url(r'^center-edit$', views.center_edit, name='center_edit'),
                       url(r'^center-manage$', views.center_manage, name='center_manage'),
-                      url(r'^center_auth$', views.center_auth, name='center_auth'),
+                      url(r'^center-auth$', views.center_auth, name='center_auth'),
 
                        )
