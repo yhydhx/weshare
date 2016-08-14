@@ -50,6 +50,9 @@ def index(request):
 
     return HttpResponse(json.dumps(Info))
 
+
+
+
 def user(request, method, Oid):
     Info = output_init()
     if method == "show":
@@ -78,6 +81,97 @@ def user(request, method, Oid):
         Info['data']['login_flag'] = login_flag
 
         return HttpResponse(json.dumps(Info))
+
+    elif method == 'register':
+        if request.method == 'POST':
+            username = request.POST['username'] 
+            password = request.POST['password']
+            password_confirm = request.POST['password-confirm']
+            phone = request.POST['phone']
+            email = request.POST['email']
+            
+
+            Info = {}
+            Info['state'] = 0
+            Info['message'] = ""
+            Info['data'] = {}
+            
+            Info['data']['username'] = username 
+            Info['data']['phone'] = phone 
+            Info['data']['email'] = email 
+
+
+            #check blank info 
+            if not (username and password  and password_confirm and phone  and email  ):
+                Info['state'] = 400
+                Info['message'] = "信息不完整"
+            # check the password is the same or not
+            elif  password_confirm != password:
+                Info['state'] = 401
+                Info['message'] = "两次密码输入要相同"
+            elif not process_mail(email):
+                Info['state'] = 402
+                Info['data']['email'] = ""
+                Info['message'] = '请使用正确格式的邮箱'
+            elif not process_passwd(password):
+                Info['state'] = 403
+                Info['message'] = '请使用正确要求的密码'
+            elif  not process_phone_num(phone):
+                Info['state'] = 404
+                Info['data']['phone'] = ""
+                Info['message'] = '请选择国家区号'
+            else:
+                try:
+                    Host.objects.get(email=email)
+                    Info['state'] = 405
+                    Info['message'] = '您的邮箱已经被注册了'
+                    Info['data']['email'] = ""
+                except:
+                    host = Host(username=username,
+                                password=password,
+                                email=email,
+                                phone_number=phone,
+                                )
+                    #encode password
+                    host.password = host.encode_password(password)
+                    host.save()
+                    Info['state'] = 0
+                    Info['message'] = "注册成功"
+                    return HttpResponse(json.dumps(Info))
+
+            return HttpResponse(json.dumps(Info))
+        else:
+            #method = "get"
+            Info['state'] = '404'
+            Info['message'] = "找不到这个方法"
+            return HttpResponse(json.dumps(Info))
+
+    elif method == "login":
+        if request.method == 'POST':
+            if request.POST['email'] and request.POST['password']:
+                host = Host()
+                email = request.POST['email']
+                password = host.encode_password(request.POST['password'])
+                try:
+                    user = Host.objects.get(email=email)
+
+                    if user.password != password:
+                        Info['state'] = 404
+                        Info['message'] = "密码错误"
+                        return HttpResponse(json.dumps(Info))
+                    else:
+                        request.session['email'] = email
+                        Info['message'] = "登录成功"
+                        Info['state'] = 0
+                        return HttpResponse(json.dumps(Info))
+                except:
+                    Info['message'] = '用户名或者密码不正确,或者账户处于被冻结的状态'
+                    Info['state'] = 400
+                    return HttpResponse(json.dumps(Info))
+        else:
+            Info['state'] = 303
+            Info['message'] = "您的操作失误，本次操作已被记录"
+            return HttpResponse(json.dumps(Info))
 
     elif method == "msg":
         # check whether the user is online
@@ -110,6 +204,7 @@ def user(request, method, Oid):
         message.save()
 
         return HttpResponseRedirect("/user/show/" + Oid)
+
 
     else:
         return render(request, "frontEnd/404.html")

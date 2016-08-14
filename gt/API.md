@@ -1,3 +1,76 @@
+#用户
+url: /api/user/register
+
+method: post
+
+function:
+1. 用户注册信息
+2. 检测部分字段是否为空
+3. 检测密码
+4. 返回错误信息
+
+
+
+API:
+{
+	'username' :   ~用户名
+	'phone' :   ~手机号
+	'email' :   ~邮箱
+	'password 
+    'password_confirm 
+	'education  :   ~
+	'bacholor' :   ~
+	'graduate' :   ~
+	'phd' :   ~
+}
+
+
+%%正确的返回信息：
+Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message:'注册成功，请登录'  Char # 错误的提示信息
+	data: {}
+
+%%错误的返回信息:
+
+Info = {
+	state: Int # 非零数字表示不成功
+	message : ~ 错误提示信息
+	data:{}
+}
+
+-----------------------------------------------------------------------------------------------
+url: /api/user/register
+
+method: post
+
+function:
+1. 用户注册信息
+2. 检测部分字段是否为空
+3. 检测密码
+4. 返回错误信息
+
+API:
+%%正确的返回信息：
+Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message:'注册成功，请登录'  Char # 错误的提示信息
+	data: {}
+
+%%错误的返回信息:
+
+Info = {
+	state: Int # 非零数字表示不成功
+	message : ~ 错误提示信息
+	data:{}
+}
+
+
+
+-----------------------------------------------------------------------------------------------
+
+
+
 #Index 
 
 url: /api/index
