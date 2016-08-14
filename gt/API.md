@@ -12,16 +12,14 @@ function:
 
 
 API:
+前段提交数据
 {
 	'username' :   ~用户名
 	'phone' :   ~手机号
 	'email' :   ~邮箱
-	'password 
-    'password_confirm 
-	'education  :   ~
-	'bacholor' :   ~
-	'graduate' :   ~
-	'phd' :   ~
+	'password:   ~密码
+    'password_confirm  ~密码验证
+	
 }
 
 
@@ -40,17 +38,22 @@ Info = {
 }
 
 -----------------------------------------------------------------------------------------------
-url: /api/user/register
+url: /api/user/login
 
 method: post
 
 function:
-1. 用户注册信息
-2. 检测部分字段是否为空
-3. 检测密码
-4. 返回错误信息
+1. 用户登录
+2. 返回提示信息
 
 API:
+%%用户提交
+{
+	'email' :  ~ 用户邮箱 
+	'password' :  ~用户密码
+}
+
+
 %%正确的返回信息：
 Info = {
 	state: Int # 0 表示成功，其他数字表示不成功

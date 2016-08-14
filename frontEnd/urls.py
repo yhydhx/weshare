@@ -23,5 +23,10 @@ urlpatterns = patterns('',
                        url(r'^about$', views.about, name='about'),
                        url(r'^service$', views.service, name='service'),
                        url(r'^school/(?P<method>\w+)/?(?P<Oid>\w*)$', views.school,name ='school'),
-                       url(r'^user/(?P<method>\w+)/?(?P<Oid>\w*)$', views.user,name ='user'),   
+                       url(r'^user/(?P<method>\w+)/?(?P<Oid>\w*)$', views.user,name ='user'), 
+
+                      url(r'^center-edit$', views.center_edit, name='center_edit'),
+                      url(r'^center-manage$', views.center_manage, name='center_manage'),
+                      url(r'^center_auth$', views.center_auth, name='center_auth'),
+
                        )
