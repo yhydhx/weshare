@@ -15,6 +15,8 @@ from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template import Context, loader
 from gt.settings import *
 
+import hashlib
+
 
 class Host(models.Model):
     username = models.CharField(max_length=50)
@@ -48,6 +50,8 @@ class Host(models.Model):
     def __unicode__(self):
         return self.username
 
+    def encode_password(self,s):
+        return hashlib.md5(s).hexdigest()
 
     def format_dict(self):
         tmpHost = {}
@@ -247,6 +251,7 @@ class School(models.Model):
     s_province = models.CharField(max_length=200)
     s_display_index = models.IntegerField()
     s_student_number = models.IntegerField()
+    s_image = models.CharField(max_length=100,null=True)
     
     def format_dict(self):
         tmp_school = {}

@@ -81,17 +81,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
         password_confirm = request.POST['password-confirm']
         phone = request.POST['phone']
         email = request.POST['email']
-        education  = request.POST['education']
-        bacholor = ""
-        graduate = ""
-        phd = ""
-        if education == 0:
-            bacholor = request.POST['school1']
-        elif education == 1:
-            graduate = request.POST['school2']
-        elif education ==2:
-            phd = request.POST['school3']
-
+        
 
         Info = {}
         Info['state'] = 0
@@ -101,13 +91,10 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
         Info['data']['username'] = username 
         Info['data']['phone'] = phone 
         Info['data']['email'] = email 
-        Info['data']['education '] = education  
-        Info['data']['bacholor'] = bacholor 
-        Info['data']['graduate'] = graduate 
-        Info['data']['phd'] = phd 
+
 
         #check blank info 
-        if not (username and password  and password_confirm and phone  and email and education ):
+        if not (username and password  and password_confirm and phone  and email ):
             Info['state'] = 400
             Info['message'] = "信息不完整"
         # check the password is the same or not
@@ -136,11 +123,9 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             password=password,
                             email=email,
                             phone_number=phone,
-                            education = education,
-                            bacholor = bacholor,
-                            graduate = graduate,
-                            phd = phd
                             )
+                #encode password
+                host.password = host.encode_password(password)
                 host.save()
                 return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
 
@@ -164,6 +149,8 @@ def login(request):
         if request.POST['email'] and request.POST['password']:
             email = request.POST['email']
             password = request.POST['password']
+            host = Host()
+            password = host.encode_password(password)
             try:
                 user = Host.objects.get(email=email)
 
