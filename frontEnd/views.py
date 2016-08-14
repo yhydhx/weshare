@@ -569,6 +569,18 @@ def service(request):
     return render(request, "frontEnd/services.html", {"object": result})
 
 
+def center_edit(request):
+    return render(request,"frontEnd/center-edit.html")
+
+def center_manage(request):
+    return render(request,"frontEnd/center-manage.html")
+
+def center_auth(request):
+    return render(request,"frontEnd/center-auth.html")
+
+
+
+
 def school(request, method, Oid):
     if method == "show":
         if request.GET.get("schoolID"):

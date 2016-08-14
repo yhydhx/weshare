@@ -155,3 +155,17 @@
 	    cursor: pointer;
 	}
 }
+
+/*center*/
+.centerLeftbarIcon{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.centerLeftbarButton{
+	font-size: 16px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.centerLeftbarButton a{
+	color: gray;
+}
