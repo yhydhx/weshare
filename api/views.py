@@ -86,7 +86,7 @@ def user(request, method, Oid):
         if request.method == 'POST':
             username = request.POST['username'] 
             password = request.POST['password']
-            password_confirm = request.POST['password-confirm']
+            password_confirm = request.POST['password_confirm']
             phone = request.POST['phone']
             email = request.POST['email']
             
