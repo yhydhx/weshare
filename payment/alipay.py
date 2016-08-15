@@ -1,8 +1,9 @@
-
+# coding: utf-8  
+# 
 import types  
 from urllib import urlencode, urlopen  
-from hashcompat import md5_constructor as md5<span style="white-space:pre">   </span>#见hashcompact.py  
-from config import settings<span style="white-space:pre">         </span>#见config.py  
+from hashcompact import md5_constructor as md5      #见hashcompact.py  
+from config import settings                 #见config.py  
   
 #字符串编解码处理  
 def smart_str(s, encoding='utf-8', strings_only=False, errors='strict'):  

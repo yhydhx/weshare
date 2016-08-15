@@ -16,7 +16,6 @@ import datetime
 from django.utils import timezone
 from django.conf import settings
 import hashlib
-from tools import *
 from gt.settings import EMAIL_HOST_USER
 import json
 import chunk
@@ -24,27 +23,29 @@ import os
 import base64
 import time
 import datetime
+from alipay import *
 
 #确认支付  
 def pay(request):  
-    cbid=request.POST.get('id')  
-    try:  
-        cb=cBill.objects.get(id=cbid)  
-    except ObjectDoesNotExist:  
-        return HttpResponseRedirect("/err/no_object")  
+    # cbid=request.POST.get('id')  
+
+    # try:  
+    #     cb=cBill.objects.get(id=cbid)  
+    # except ObjectDoesNotExist:  
+    #     return HttpResponseRedirect("/err/no_object")  
       
     #如果网关是支付宝  
-    if cb.cbank.gateway=='alipay':  
-            tn=cb.id  
-            subject=''  
-            body=''  
-            bank=cb.cbank.id  
-            tf='%.2f' % cb.amount  
-            url=create_direct_pay_by_user (tn,subject,body,bank,tf)  
-  
+    # if cb.cbank.gateway=='alipay':  
+    #         tn=cb.id  
+    #         subject=''  
+    #         body=''  
+    #         bank=cb.cbank.id  
+    #         tf='%.2f' % cb.amount  
+    #         url=create_direct_pay_by_user (tn,subject,body,bank,tf)  
+    url=create_direct_pay_by_user ("12345","","","","21")  
     #如果网关是财付通  
-    elif cb.cbank.gateway=='tenpay':  
-        pass  
+    # elif cb.cbank.gateway=='tenpay':  
+    #     pass  
       
     #去支付页面  
     return HttpResponseRedirect (url)  

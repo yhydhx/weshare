@@ -277,28 +277,47 @@ def complete_account(request):
         host = Host.objects.get(email=username)
     except:
         return HttpResponse('你所持有的session并不在数据库中找到对应内容')
+
     if request.method == 'POST':
         if request.POST['self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
             'motto'] and \
                 request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
                 request.POST['qq']:
+
+
             self_introduction = request.POST['self-introduction']
-            gender = request.POST['selectbox']
+            gender = request.POST['gender']
             motto = request.POST['motto']
             min_payment = request.POST['min-payment']
             service_time = request.POST['service-time']
             max_payment = request.POST['max-payment']
             qq = request.POST['qq']
 
-            # print gender
+            #Education Infomation
+            education = request.POST['education'] 
+            try:
+                bacholor = request.POST['bacholor'] 
+                bacholor_major = request.POST['bacholor_major']
+            except:
+                bacholor = ""
+                bacholor_major = ""
+            try:
+                graduate = request.POST['graduate']
+                graduate_major = request.POST['graduate_major'] 
+            except:
+                graduate = ""
+                graduate_major = ""
+            try:
+                phd_major = request.POST['phd_major']
+                phd = request.POST['phd'] 
+            except:
+                phd_major = request.POST['phd_major']
+                phd = request.POST['phd'] 
+                
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
 
-            if gender == u'1':
-                host.gender = 0
-            elif gender == u'2':
-                host.gender = 1
-
+            host.gender = gender
             host.introduction = self_introduction
             host.motto = motto
             host.min_payment = min_payment
@@ -307,6 +326,16 @@ def complete_account(request):
             host.h_school = school
             host.state = 1
             host.qq_number = qq
+
+            host.education = education
+            host.bacholor = bacholor
+            host.graduate = graduate
+            host.phd = phd
+            host.bacholor_major = bacholor_major
+            host.graduate_major = graduate_major
+            host.phd_major = phd_major
+
+
             host.save()
             return HttpResponseRedirect('/complete-account-feature')
         else:
@@ -583,6 +612,8 @@ def host_center(request,method,Oid):
         return render(request,"frontEnd/center-manage.html",Info)
     elif method == "auth":
         return render(request,"frontEnd/center-auth.html",Info)
+    elif method == "detail":
+        return render(request,"frontEnd/center-manage-detail.html",Info)
     else:
         return HttpResponseRedirect('/user/show/' + host.id)
 
