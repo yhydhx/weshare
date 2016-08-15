@@ -30,8 +30,8 @@
     <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
-    <script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
-    <script src="{% static 'frontEnd/js/allunivlist.js' %}"></script>
+    <script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
+    <script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script> 
 <!--     <script>var school = "";
     var sf = "";
     $(function () {
@@ -519,6 +519,37 @@ $("#PtxtSc").live("click",function (){
                         <label for="qq" class="required">QQ号</label>
                         <input id="qq" name="qq" required class="form-control form-control--type2">
                     </div>
+
+
+                    <label>请选择您的学历</label>
+                    <select class="form-control" onchange="showEducation(this.value)">
+                      <option>本科</option>
+                      <option>硕士</option>
+                      <option>博士</option>
+                    </select>
+                    <div id="Education">
+                        <input type="hidden" name="education" value="1">   
+                    </div>
+
+                    
+
+                    <input type="hidden"  id="txtSc2" name="schoolID1">
+                    <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" />
+                    <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                    <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                    <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+                    <input type="hidden"  id="MtxtSc2" name="schoolID2">
+                    <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" style="display:none;"/>
+                    <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                    <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                    <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+                    <input type="hidden"  id="PtxtSc2" name="schoolID3">
+                    <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" style="display:none;"/>
+                    <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                    <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                    <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
 
 
 
