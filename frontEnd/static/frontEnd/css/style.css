@@ -10961,7 +10961,7 @@ body.boxed .ct-topBar + .ct-menuMobile + .ct-pageWrapper nav.navbar,
   background: #e74c46;
   color: #fff;
 }
-.panel {
+/*.panel {
   background: transparent;
   margin: 0 !important;
 }
@@ -11024,7 +11024,7 @@ body.boxed .ct-topBar + .ct-menuMobile + .ct-pageWrapper nav.navbar,
 .panel-motive-o .panel-heading a.collapsed,
 .panel-motive-o .panel-heading a.collapsed * {
   color: #777;
-}
+}*/
 .ct-featuredButton-container a {
   vertical-align: bottom;
   margin-right: 10px;
