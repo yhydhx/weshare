@@ -80,6 +80,11 @@ class Host(models.Model):
         tmpHost["bacholor"] =  self.bacholor
         tmpHost["graduate"] =  self.graduate
         tmpHost["phd"] =  self.phd
+
+        try:
+            tmpHost['id'] = self.id
+        except:
+            pass
         return tmpHost
 
     def get_all_features(self):
