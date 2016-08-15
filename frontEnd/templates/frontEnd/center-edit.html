@@ -28,6 +28,255 @@
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script>
+
+    <!-- 选择学校JS -->
+    <script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
+    <script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script> 
+<!-- 选择学历 -->
+<script>
+
+    function showEducation(value){
+        console.log(value);
+        if (value === '博士') {
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"3\">");
+            $("#MtxtSc").show();
+            $("#PtxtSc").show();
+
+        }
+        else if (value === '硕士') {
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"2\">");
+            $("#MtxtSc").show();
+            $("#PtxtSc").hide();
+        }
+        else if (value ==='本科') {
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"1\">");
+            $("#MtxtSc").hide();
+            $("#PtxtSc").hide();
+        }
+        else{
+
+        }  
+    }
+</script>
+
+<!-- 本科school-search -->
+<script type="text/javascript">
+var school = "";
+var sf = "";
+
+var schoolID = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#gj").append("<a href='javascript:void(0);' onclick='getSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
+
+//获取某国家的省份
+//参数 aid 
+//参数 name
+function getSheng(aid,name){
+school = name;
+    $("#sheng").show();
+    $("#list").html('');
+    $("#sheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#sheng").append("暂不支持");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
+
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
+function  getSchool(gid,pid,name){
+school = school.substring(0,2);//取schoo字符串中前两个字符
+school += "-"+ name;
+$("#list").show();
+    $("#list").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+
+        $("#list").append("<a href=\"javascript:getSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#list").append("<br style='clear:both;' />");
+        
+}
+
+//点击学校响应
+function getSchoolID(school_id,school_name){
+    schoolID = school_id;
+    console.log(schoolID);
+    console.log(school_name);
+    $("#gj").hide();
+    $("#list").hide();
+    $("#sheng").hide();
+    school += "-"+school_name;
+
+    $("#txtSc").val(school);
+    $("#txtSc2").val(schoolID);
+
+}
+
+//点击表单响应
+$("#txtSc").live("click",function (){
+    $("#gj").show();
+    $("#list").hide();
+    $("#sheng").hide();
+});
+</script>
+
+
+
+<!-- 硕士school-search -->
+<script type="text/javascript">
+var Mschool = "";
+var Msf = "";
+
+var MschoolID = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#Mgj").append("<a href='javascript:void(0);' onclick='MgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
+
+//获取某国家的省份
+//参数 aid 
+//参数 name
+function MgetSheng(aid,name){
+Mschool = name;
+    $("#Msheng").show();
+    $("#Mlist").html('');
+    $("#Msheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#Msheng").append("暂不支持");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#Msheng").append("<a href='javascript:void(0);' onclick='MgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
+
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
+function  MgetSchool(gid,pid,name){
+Mschool = Mschool.substring(0,2);//取schoo字符串中前两个字符
+Mschool += "-"+ name;
+$("#Mlist").show();
+    $("#Mlist").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+
+        $("#Mlist").append("<a href=\"javascript:MgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#Mlist").append("<br style='clear:both;' />");
+        
+}
+
+//点击学校响应
+function MgetSchoolID(school_id,school_name){
+    MschoolID = school_id;
+    console.log(MschoolID);
+    console.log(school_name);
+    $("#Mgj").hide();
+    $("#Mlist").hide();
+    $("#Msheng").hide();
+    Mschool += "-"+school_name;
+
+    $("#MtxtSc").val(Mschool);
+    $("#MtxtSc2").val(MschoolID);
+
+}
+
+//点击表单响应
+$("#MtxtSc").live("click",function (){
+    $("#Mgj").show();
+    $("#Mlist").hide();
+    $("#Msheng").hide();
+});
+</script>
+
+
+
+<!-- 博士school-search -->
+<script type="text/javascript">
+var Pschool = "";
+var Psf = "";
+
+var PschoolID = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#Pgj").append("<a href='javascript:void(0);' onclick='PgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
+
+//获取某国家的省份
+//参数 aid 
+//参数 name
+function PgetSheng(aid,name){
+Pschool = name;
+    $("#Psheng").show();
+    $("#Plist").html('');
+    $("#Psheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#Psheng").append("暂不支持");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#Psheng").append("<a href='javascript:void(0);' onclick='PgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
+
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
+function  PgetSchool(gid,pid,name){
+Pschool = Pschool.substring(0,2);//取schoo字符串中前两个字符
+Pschool += "-"+ name;
+$("#Plist").show();
+    $("#Plist").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+
+        $("#Plist").append("<a href=\"javascript:PgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#Plist").append("<br style='clear:both;' />");
+        
+}
+
+//点击学校响应
+function PgetSchoolID(school_id,school_name){
+    PschoolID = school_id;
+    console.log(PschoolID);
+    console.log(school_name);
+    $("#Pgj").hide();
+    $("#Plist").hide();
+    $("#Psheng").hide();
+    Pschool += "-"+school_name;
+
+    $("#PtxtSc").val(Pschool);
+    $("#PtxtSc2").val(PschoolID);
+
+}
+
+//点击表单响应
+$("#PtxtSc").live("click",function (){
+    $("#Pgj").show();
+    $("#Plist").hide();
+    $("#Psheng").hide();
+});
+</script>
+
+
 </head>
 
 <body class="cssAnimate" style="background-color:white;">
@@ -60,15 +309,159 @@
 
 {% include "frontEnd/nav.html" %}
 
-<div class="container" style="margin-top: 60px; padding-top: 30px;">
+<div class="container" style="margin-top: 60px;">
 	<div class="row">
 		<div class="col-md-2" style="text-align:center;">
 			<div class="row centerLeftbarIcon"><img src="{{ current_user.icon }}" style="height: 100px; width: 100px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-			<div class="row centerLeftbarButton"><a href="/center-edit" style="color:black;">修改信息</a></div> 
-			<div class="row centerLeftbarButton"><a href="/center-manage">订单管理</a></div>
-			<div class="row centerLeftbarButton"><a href="/center-auth">申请认证</a></div>
+			<div class="row centerLeftbarButton"><a href="/host_center/edit" style="color:black;">修改信息</a></div> 
+			<div class="row centerLeftbarButton"><a href="/host_center/manage">订单管理</a></div>
+			<div class="row centerLeftbarButton"><a href="/image-receive/">申请认证</a></div>
 		</div>
-		<div class="col-md-10">修改信息页面</div>
+		<div class="col-md-10"">
+
+			<!-- 修改头像 -->
+			<div class="row" style="display: flex;align-items: center; padding-top:60px;">
+				<div class="col-xs-4"><hr></div>
+				<div class="col-xs-4" style="text-align:center;"><h4>修改头像</h4></div>
+				<div class="col-xs-4"><hr></div>
+			</div>	
+			<div class="row">
+				<div role="tabpanel" class="tab-pane fade in active" id="description">
+	                <style>
+	                    body {
+	                        margin: 0;
+	                        text-align: center;
+	                    }
+
+	                    #clipArea {
+	                        margin: 20px;
+	                        height: 300px;
+	                    }
+
+	                    #file,
+	                    #clipBtn {
+	                        margin: 20px;
+	                    }
+
+	                    #view {
+	                        margin: 0 auto;
+	                        width: 200px;
+	                        height: 200px;
+	                    }
+	                </style>
+	                <div class="col-md-8 col-sm-12">
+	                    <div id="clipArea"></div>
+	                    <input type="file" id="file" name="icon">
+	                    <button id="clipBtn" class="btn btn-lg btn-motive" type="button">截取</button>
+	                </div>
+	                <div id="view" class="col-md-4 col-sm-12" style="margin-top: 30px;"></div>
+
+	                <div class="col-md-12 col-sm-12" style="margin-top:20px;">
+	                    <button id="foo" type="button" class="btn btn-lg btn-wide btn-motive" style="width:50%;">
+	                        <span>修改头像</span>
+	                    </button>
+	                </div>
+	            </div>
+			</div>
+
+			<!-- 修改生日、性别、姓名 -->
+			<div class="row" style="display: flex;align-items: center; padding-top:60px; ">
+				<div class="col-xs-4"><hr></div>
+				<div class="col-xs-4" style="text-align:center;"><h4>修改基本资料</h4></div>
+				<div class="col-xs-4"><hr></div>
+			</div>
+
+        	<form class=" ct-u-marginBottom input-daterange input-group"
+                  action="/modify-account/" method="post" id="form1">
+                {% csrf_token %}
+                <div class="col-md-6 col-md-offset-3 ct-u-paddingTop80">
+
+                    <div class="ct-panel-inner">
+                        <div class="form-group ">
+                            <label for="username" style="text-align: left">真实姓名</label>
+                            <input id="username" name="username" type="text"
+                                   value="{{ current_user.username }}"
+                                   class="form-control form-control--type2">
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="phone">电话号码</label>
+                            <input id="phone" name="phone" type="text"
+                                   value="{{ current_user.phone_number }}"
+                                   class="form-control form-control--type2">
+                        </div>
+
+                        <label for="birth">生日</label>
+                        <input type="text" id="birth" class="form-control form-control--type2"
+                               value="{{ current_user.birth }}"
+                               name="birth" title="from">
+
+
+	                    <div class="form-group">
+	                        <label for="">性别</label>
+	                        <select class="form-control" name="gender">
+	                            <option value="1">女</option>
+	                            <option value="0">男</option>
+	                        </select>                      
+	                    </div>
+
+
+                        <div class="form-group ">
+                            <label for="motto">个性签名</label>
+                            <input id="motto" name="motto" type="text"
+                                   value="{{ current_user.motto }}"
+                                   class="form-control form-control--type2">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="qq" class="required">QQ号</label>
+                            <input id="qq" name="qq" required
+                                   value="{{ current_user.qq_number }}"
+                                   class="form-control form-control--type2">
+                        </div>
+
+	                    <label>请选择您的学历</label>
+	                    <select class="form-control" onchange="showEducation(this.value)">
+	                      <option>本科</option>
+	                      <option>硕士</option>
+	                      <option>博士</option>
+	                    </select>
+	                    <div id="Education">
+	                        <input type="hidden" name="education" value="1">   
+	                    </div>
+
+	                    
+
+	                    <input type="hidden"  id="txtSc2" name="schoolID1">
+	                    <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" />
+	                    <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+	                    <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+	                    <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+	                    <input type="hidden"  id="MtxtSc2" name="schoolID2">
+	                    <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" style="display:none;"/>
+	                    <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+	                    <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+	                    <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+	                    <input type="hidden"  id="PtxtSc2" name="schoolID3">
+	                    <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" style="display:none;"/>
+	                    <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+	                    <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+	                    <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+                    </div>
+                </div>
+                <div class="row" style="">
+                    <div class="col-md-6 col-md-offset-3 ct-u-paddingTop40 ct-u-paddingBottom150">
+                        <input id="submit" type="submit"
+                               class="btn btn-lg btn-wide btn-motive"
+                               value="确认修改" onclick="alert('修改资料成功。')">
+                    </div>
+                </div>
+            </form>
+
+		</div>
 	</div>
 </div>
 
@@ -94,13 +487,68 @@
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
 
+<!-- 时间选择 -->
 <script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
-<script>jQuery('.input-daterange').datepicker({});</script>
+<script>jQuery('.input-daterange #birth').datepicker({});</script>
 
 <script src="{% static 'frontEnd/plugins/bootstrap-slider/js/bootstrap-slider.js' %}"></script>
 <script>jQuery('.sliderAmount').slider();</script>
 
 <script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js"></script>
+
+
+<!-- 头像截取与上传 -->
+<script src="{% static 'frontEnd/js/photo-cut/iscroll-zoom.js' %}"></script>
+<script src="{% static 'frontEnd/js/photo-cut/hammer.js' %}"></script>
+<script src="{% static 'frontEnd/js/photo-cut/lrz.all.bundle.js' %}"></script>
+<script src="{% static 'frontEnd/js/photo-cut/jquery.photoClip.js' %}"></script>
+<script>
+    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    var clipArea = new bjj.PhotoClip("#clipArea", {
+        size: [260, 260],
+        outputSize: [640, 640],
+        file: "#file",
+        view: "#view",
+        ok: "#clipBtn",
+        loadStart: function () {
+            console.log("照片读取中");
+        },
+        loadComplete: function () {
+            console.log("照片读取完成");
+        },
+        clipFinish: function (dataURL) {
+            console.log(dataURL);
+        }
+    });
+    //clipArea.destroy();
+</script>
+<script>
+    $(document).ready(function () {
+        /* $.ajaxSetup({
+         dataType: "json",
+         beforeSend: function (xhr, settings) {
+         var csrftoken = $.cookie('csrftoken');
+         xhr.setRequestHeader("X-CSRFToken", csrftoken);
+         }
+         }); */
+        $("#foo").click(function () {
+            var image = $("#view").attr("style");
+            var fuck = $.ajax({
+                type: "POST",
+                url: "/image-receive/",
+                data: {data: image, c: document.cookie},
+                dataType: "jsonp",
+                async: false,
+                success: window.location.replace("/index/")
+            }).always(function (data) {
+                //console.log(data)
+            });
+            console.log(fuck.responseText)
+        })
+    })
+</script>
+
+
 
 
 </body>

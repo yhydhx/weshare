@@ -30,9 +30,9 @@
     <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
-    <script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
-    <script src="{% static 'frontEnd/js/allunivlist.js' %}"></script>
-    <script>var school = "";
+    <script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
+    <script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script> 
+<!--     <script>var school = "";
     var sf = "";
     $(function () {
         $.each(allUnivList, function (j, m) {
@@ -65,7 +65,261 @@
         });
         $("#list").append("<br style='clear:both;' />");
 
-    }</script>
+    }</script> -->
+
+
+    <!-- 富文本编辑器 -->
+    <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/kindeditor.js'%}"></script>
+    <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/lang/zh-CN.js'%}"></script>
+    <script>
+            KindEditor.ready(function(K) {
+                    window.editor = K.create('#editor_id');
+            });
+    </script>
+
+    <!-- 选择学历 -->
+    <script>
+
+        function showEducation(value){
+            console.log(value);
+            if (value === '博士') {
+                $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"3\">");
+                $("#MtxtSc").show();
+                $("#PtxtSc").show();
+
+            }
+            else if (value === '硕士') {
+                $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"2\">");
+                $("#MtxtSc").show();
+                $("#PtxtSc").hide();
+            }
+            else if (value ==='本科') {
+                $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"1\">");
+                $("#MtxtSc").hide();
+                $("#PtxtSc").hide();
+            }
+            else{
+
+            }  
+        }
+    </script>
+
+<!-- 本科school-search -->
+<script type="text/javascript">
+var school = "";
+var sf = "";
+
+var schoolID = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#gj").append("<a href='javascript:void(0);' onclick='getSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
+
+//获取某国家的省份
+//参数 aid 
+//参数 name
+function getSheng(aid,name){
+school = name;
+    $("#sheng").show();
+    $("#list").html('');
+    $("#sheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#sheng").append("暂不支持");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
+
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
+function  getSchool(gid,pid,name){
+school = school.substring(0,2);//取schoo字符串中前两个字符
+school += "-"+ name;
+$("#list").show();
+    $("#list").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+
+        $("#list").append("<a href=\"javascript:getSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#list").append("<br style='clear:both;' />");
+        
+}
+
+//点击学校响应
+function getSchoolID(school_id,school_name){
+    schoolID = school_id;
+    console.log(schoolID);
+    console.log(school_name);
+    $("#gj").hide();
+    $("#list").hide();
+    $("#sheng").hide();
+    school += "-"+school_name;
+
+    $("#txtSc").val(school);
+    $("#txtSc2").val(schoolID);
+
+}
+
+//点击表单响应
+$("#txtSc").live("click",function (){
+    $("#gj").show();
+    $("#list").hide();
+    $("#sheng").hide();
+});
+</script>
+
+
+
+<!-- 硕士school-search -->
+<script type="text/javascript">
+var Mschool = "";
+var Msf = "";
+
+var MschoolID = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#Mgj").append("<a href='javascript:void(0);' onclick='MgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
+
+//获取某国家的省份
+//参数 aid 
+//参数 name
+function MgetSheng(aid,name){
+Mschool = name;
+    $("#Msheng").show();
+    $("#Mlist").html('');
+    $("#Msheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#Msheng").append("暂不支持");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#Msheng").append("<a href='javascript:void(0);' onclick='MgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
+
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
+function  MgetSchool(gid,pid,name){
+Mschool = Mschool.substring(0,2);//取schoo字符串中前两个字符
+Mschool += "-"+ name;
+$("#Mlist").show();
+    $("#Mlist").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+
+        $("#Mlist").append("<a href=\"javascript:MgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#Mlist").append("<br style='clear:both;' />");
+        
+}
+
+//点击学校响应
+function MgetSchoolID(school_id,school_name){
+    MschoolID = school_id;
+    console.log(MschoolID);
+    console.log(school_name);
+    $("#Mgj").hide();
+    $("#Mlist").hide();
+    $("#Msheng").hide();
+    Mschool += "-"+school_name;
+
+    $("#MtxtSc").val(Mschool);
+    $("#MtxtSc2").val(MschoolID);
+
+}
+
+//点击表单响应
+$("#MtxtSc").live("click",function (){
+    $("#Mgj").show();
+    $("#Mlist").hide();
+    $("#Msheng").hide();
+});
+</script>
+
+
+
+<!-- 博士school-search -->
+<script type="text/javascript">
+var Pschool = "";
+var Psf = "";
+
+var PschoolID = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#Pgj").append("<a href='javascript:void(0);' onclick='PgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
+
+//获取某国家的省份
+//参数 aid 
+//参数 name
+function PgetSheng(aid,name){
+Pschool = name;
+    $("#Psheng").show();
+    $("#Plist").html('');
+    $("#Psheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#Psheng").append("暂不支持");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#Psheng").append("<a href='javascript:void(0);' onclick='PgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
+
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
+function  PgetSchool(gid,pid,name){
+Pschool = Pschool.substring(0,2);//取schoo字符串中前两个字符
+Pschool += "-"+ name;
+$("#Plist").show();
+    $("#Plist").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+
+        $("#Plist").append("<a href=\"javascript:PgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#Plist").append("<br style='clear:both;' />");
+        
+}
+
+//点击学校响应
+function PgetSchoolID(school_id,school_name){
+    PschoolID = school_id;
+    console.log(PschoolID);
+    console.log(school_name);
+    $("#Pgj").hide();
+    $("#Plist").hide();
+    $("#Psheng").hide();
+    Pschool += "-"+school_name;
+
+    $("#PtxtSc").val(Pschool);
+    $("#PtxtSc2").val(PschoolID);
+
+}
+
+//点击表单响应
+$("#PtxtSc").live("click",function (){
+    $("#Pgj").show();
+    $("#Plist").hide();
+    $("#Psheng").hide();
+});
+</script>
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
     <script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
     <script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
@@ -176,7 +430,39 @@
                             <small><span>自我介绍</span></small>
                         </h2>
                     </div>
-                    <textarea name="self-introduction" id="self-introduction">
+                    <!-- <textarea name="self-introduction" id="self-introduction">
+                        <p style="text-align: left">请按照一下模板更改哦(注:若没有请删除完成后请把这段话删掉)</p>
+                        <h3 style="text-align: left">性格特点</h3>
+                          <p>
+                              (示例)我是一个萌萌的逗比,幽默风趣,会讲笑话,很牛逼.<br>
+                              Note that any <strong>性格和善,和人们自来熟</strong> file and image management functionality in
+                              this example is part of our commercial offering – the demo is to show the integration.
+                          </p>
+                        <h3 style="text-align: left">留学情况</h3>
+                        <p>
+                            (实例)<br>
+                            2014 - 2015 <strong>香港理工大学</strong> 网络工程研究生
+                            <br>
+                            2015 - 现在 <strong>香港科技大学</strong> 通信网络博士
+                        </p>
+                        <h3 style="text-align: left">学业情况</h3>
+                        <p>
+                            大学平均G点3.9哇,被同学尊称为何满绩,何大神。托福裸考105,二战111, 雅思8.5, GRE 2398分, 被CMU, UCLA, Stanford, 等名校录取
+                        </p>
+                        <h3 style="text-align: left">竞赛经历</h3>
+                        <p>
+                            2015年全国大学生英语竞赛特等奖<br>
+                            2014年全国大学生数学建模比赛特等奖<br>
+                            2015年世界大学生数学建模二等奖<br>
+                            2014年全国ACM上海站第三名<br>
+                        </p>
+                        <h3 style="text-align: left">科研背景</h3>
+                        <p>
+
+                        </p>
+                    </textarea> -->
+
+                    <textarea id="editor_id" name="self-introduction" style="width:100%;height:500px;">
                         <p style="text-align: left">请按照一下模板更改哦(注:若没有请删除完成后请把这段话删掉)</p>
                         <h3 style="text-align: left">性格特点</h3>
                           <p>
@@ -221,16 +507,24 @@
                            name="birth" title="from">
 
 
-                    <div class="ct-checkbox ct-u-paddingTop10 ct-u-paddingMD-bot10">
+                    <!-- <div class="ct-checkbox ct-u-paddingTop10 ct-u-paddingMD-bot10">
                         <label for="gender">性别</label>
-                        <input class="form-control form-control--type2" id="gender" name="gender" type="checkbox"
-                               checked>
+                        <input class="form-control form-control--type2" id="gender" name="gender" type="checkbox" checked>
                     </div>
 
                     <select class="ct-select ct-js-selectize" title="Sorting" name="selectbox">
                         <option value="女">女</option>
                         <option value="男">男</option>
-                    </select>
+                    </select> -->
+
+                    <div class="form-group">
+                        <label for="">性别</label>
+                        <select class="form-control" name="gender">
+                            <option value="1">女</option>
+                            <option value="0">男</option>
+                        </select>                      
+                    </div>
+
 
 
                     <div class="form-group ">
@@ -277,6 +571,37 @@
                     </div>
 
 
+                    <label>请选择您的学历</label>
+                    <select class="form-control" onchange="showEducation(this.value)">
+                      <option>本科</option>
+                      <option>硕士</option>
+                      <option>博士</option>
+                    </select>
+                    <div id="Education">
+                        <input type="hidden" name="education" value="1">   
+                    </div>
+
+                    
+
+                    <input type="hidden"  id="txtSc2" name="schoolID1">
+                    <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" />
+                    <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                    <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                    <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+                    <input type="hidden"  id="MtxtSc2" name="schoolID2">
+                    <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" style="display:none;"/>
+                    <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                    <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                    <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+                    <input type="hidden"  id="PtxtSc2" name="schoolID3">
+                    <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" style="display:none;"/>
+                    <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                    <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                    <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+
 
 
                     <!--<div class="form-group">
@@ -304,28 +629,9 @@
 </div>
 
 
-<footer class="ct-footer ct-u-sectionDark">
-    <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
-        <div class="container">
-            <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/">createIT</a> 2014
-            </div>
-            <ul class="ct-socials">
-                <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i
-                        class="fa fa-flickr"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i
-                        class="fa fa-instagram"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i
-                        class="fa fa-pinterest"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i
-                        class="fa fa-facebook-square"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i
-                        class="fa fa-twitter"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
+{% include "frontEnd/footer.html" %}
 
-<a class="btn btn-primary" data-toggle="modal" href='#modal-id' id="fuckJS">fuckJS</a>
+<!-- <a class="btn btn-primary" data-toggle="modal" href='#modal-id' id="fuckJS">fuckJS</a>
 <div class="modal fade" id="modal-id">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -335,7 +641,7 @@
             </div>
             <div class="modal-body">
                 <div role="tabpanel">
-                    <!-- Nav tabs -->
+
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active">
                             <a href="#choose" aria-controls="choose" role="tab" data-toggle="tab">choose</a>
@@ -345,7 +651,6 @@
                         </li>
                     </ul>
 
-                    <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="choose">
                             <div class="squr"><input type="checkbox" name="c1"></div>
@@ -365,7 +670,7 @@
         </div>
     </div>
 
-</div>
+</div> -->
 
 
 <!-- JavaScripts -->
@@ -456,7 +761,7 @@
 
 
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function () {
         $("#txtSc").on("click", function () {
             $("#gj").show();
@@ -473,7 +778,7 @@
             $("#txtSc").val(school);
         });
 
-    });</script>
+    });</script> -->
 
 
 </body>

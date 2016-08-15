@@ -33,6 +33,38 @@
 
 /*footer*/
 @media screen and (min-width: 768px){
+	.footerImg{
+	background-position: center 0; 
+	background-repeat: no-repeat; 
+	background-attachment:fixed;
+	background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
+	height:359px;
+
+	display: flex;
+	align-items: center;
+
+	font-family: "Hiragino Sans GB"; /*冬青*/
+	}
+	.footerImg p{color:white;}
+	.footerImg a{color:white;} a:hover{color:gray;}
+}
+@media screen and (max-width: 768px){
+	.footerImg{
+	background-position: center 0; 
+	background-attachment:fixed;
+	background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
+
+	display: flex;
+	align-items: center;
+
+	font-family: "Hiragino Sans GB"; /*冬青*/
+	}
+	.footerImg p{color:white;}
+	.footerImg a{color:white;} a:hover{color:gray;}
+}
+
+
+@media screen and (min-width: 768px){
 	.footerLogo{
 		height: 100px;
 	}

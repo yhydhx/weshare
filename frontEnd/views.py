@@ -613,7 +613,8 @@ def host_center(request,method,Oid):
     elif method == "auth":
         return render(request,"frontEnd/center-auth.html",Info)
     elif method == "detail":
-        return render(request,"frontEnd/center-manage-detail.html",Info)
+
+        return render(request,"frontEnd/center-manage-detail.html",Info)     
     else:
         return HttpResponseRedirect('/user/show/' + host.id)
 

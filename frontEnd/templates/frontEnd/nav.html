@@ -117,7 +117,7 @@
                                 <img src="{{ current_user.icon }}" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto"><span>{{ current_user.username }}</span><span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
-                                <li><a href="/center-edit">个人中心</a></li>
+                                <li><a href="/host_center/edit">个人中心</a></li>
 
                                 {% if current_user.state == 0 %}
                                 <li><a href="/image-receive/">注册成为host</a></li>
@@ -180,13 +180,13 @@
                     </ul>
                 </li>
                 <!--=========================================================================-->
-                <li class="dropdown"><a href="account.html">
+                <li class="dropdown"><a href="/index/">
                     <div class="ct-textEffect"><span data-content="个人信息">个人信息</span></div>
                 </a>
                     <ul class="dropdown-menu">
 
                         <li><a href="/host_center/show"><span>我的主页</span></a></li>
-                        <li><a href="/modify-account/"><span>修改账户资料</span></a></li>
+                        <li><a href="/host_center/edit"><span>个人中心</span></a></li>
 
                     </ul>
                 </li>

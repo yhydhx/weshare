@@ -28,6 +28,44 @@
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script>
+
+
+    <!-- 富文本编辑器 -->
+    <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/kindeditor.js'%}"></script>
+    <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/lang/zh-CN.js'%}"></script>
+    <script>
+            KindEditor.ready(function(K) {
+                    window.editor = K.create('#editor_id');
+            });
+    </script>
+
+
+    <!-- 添加特质 -->
+    <script>
+    function showFeatures(tag){
+        console.log('aa');
+        console.log(tag);
+        // $("#features").submit(function(){
+            var data1 = $("#"+tag).serialize();
+            console.log(data1);
+            $.ajax({
+                url : "/complete-account-feature/",
+                type : "POST",
+                dataType : "html",
+                data : $("#"+tag).serialize(),
+                success : function(str){
+                    console.log('成功');
+                    console.log(str);
+                    str2 = JSON.parse(str);
+                    console.log(str2);
+                    console.log(str2['data']['feature_name']);
+                    $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span><a href=\"\"><i class=\"fa fa-trash\"></i></a>"+str2['data']['feature_name']+"</span></li>");
+                }
+
+            })
+        // });
+    }
+    </script>
 </head>
 
 <body class="cssAnimate" style="background-color:white;">
@@ -64,11 +102,168 @@
 	<div class="row">
 		<div class="col-md-2" style="text-align:center;">
 			<div class="row centerLeftbarIcon"><img src="{{ current_user.icon }}" style="height: 100px; width: 100px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-			<div class="row centerLeftbarButton"><a href="/center-edit">修改信息</a></div> 
-			<div class="row centerLeftbarButton"><a href="/center-manage">订单管理</a></div>
-			<div class="row centerLeftbarButton"><a href="/center-auth" style="color:black;">申请认证</a></div>
+			<div class="row centerLeftbarButton"><a href="/host_center/edit">修改信息</a></div> 
+			<div class="row centerLeftbarButton"><a href="/host_center/manage">订单管理</a></div>
+			<div class="row centerLeftbarButton"><a href="/image-receive/" style="color:black;">申请认证</a></div>
 		</div>
-		<div class="col-md-10" style="padding-bottom:800px;">认证页面</div>
+		<div class="col-md-10" style="padding-bottom:800px;">
+
+            <!-- 修改主页资料 -->
+            <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
+                <div class="col-xs-4"><hr></div>
+                <div class="col-xs-4" style="text-align:center;"><h4>主页资料修改</h4></div>
+                <div class="col-xs-4"><hr></div>
+            </div>
+
+            <form class=" ct-u-marginBottom input-daterange input-group"
+                  action="/modify-account/" method="post" id="form1">
+                {% csrf_token %}
+                <div class="col-md-6 col-md-offset-3 ct-u-paddingTop80">
+
+                    <div class="ct-panel-inner">
+
+                        <div class="form-group ">
+                            <label for="phone">一句话简介</label>
+                            <input id="" name="" type="text"
+                                   value=""
+                                   class="form-control form-control--type2">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service-time" class="required">您方便服务的时间</label>
+                            <input id="service-time" name="service-time" required
+                                   value="{{ current_user.service_time }}"
+                                   class="form-control form-control--type2">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
+                            <input id="min-payment" name="min-payment" type="number" required value="请填写数字"
+                                   class="form-control form-control--type2">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
+                            <input id="max-payment" name="max-payment" type="number" required value="请填写数字"
+                                   class="form-control form-control--type2">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row" style="">
+                    <div class="col-md-6 col-md-offset-3 ct-u-paddingTop40">
+                        <input id="submit" type="submit"
+                               class="btn btn-lg btn-wide btn-motive"
+                               value="确认修改" onclick="alert('修改资料成功。')">
+                    </div>
+                </div>
+            </form>
+
+
+            <!-- 修改个人介绍 -->
+            <div class="row" style="display: flex;align-items: center; padding-top:60px; padding-bottom: 30px; ">
+                <div class="col-xs-4"><hr></div>
+                <div class="col-xs-4" style="text-align:center;"><h4>个人介绍修改</h4></div>
+                <div class="col-xs-4"><hr></div>
+            </div>
+
+            <textarea id="editor_id" name="self-introduction" style="width:100%;height:500px;">
+                <p style="text-align: left">请按照一下模板更改哦(注:若没有请删除完成后请把这段话删掉)</p>
+                <h3 style="text-align: left">性格特点</h3>
+                  <p>
+                      (示例)我是一个萌萌的逗比,幽默风趣,会讲笑话,很牛逼.<br>
+                      Note that any <strong>性格和善,和人们自来熟</strong> file and image management functionality in
+                      this example is part of our commercial offering – the demo is to show the integration.
+                  </p>
+                <h3 style="text-align: left">留学情况</h3>
+                <p>
+                    (实例)<br>
+                    2014 - 2015 <strong>香港理工大学</strong> 网络工程研究生
+                    <br>
+                    2015 - 现在 <strong>香港科技大学</strong> 通信网络博士
+                </p>
+                <h3 style="text-align: left">学业情况</h3>
+                <p>
+                    大学平均G点3.9哇,被同学尊称为何满绩,何大神。托福裸考105,二战111, 雅思8.5, GRE 2398分, 被CMU, UCLA, Stanford, 等名校录取
+                </p>
+                <h3 style="text-align: left">竞赛经历</h3>
+                <p>
+                    2015年全国大学生英语竞赛特等奖<br>
+                    2014年全国大学生数学建模比赛特等奖<br>
+                    2015年世界大学生数学建模二等奖<br>
+                    2014年全国ACM上海站第三名<br>
+                </p>
+                <h3 style="text-align: left">科研背景</h3>
+                <p>
+
+                </p>
+            </textarea>
+
+            <!-- 修改个人特质 -->
+            <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
+                <div class="col-xs-4"><hr></div>
+                <div class="col-xs-4" style="text-align:center;"><h4>服务项目修改</h4></div>
+                <div class="col-xs-4"><hr></div>
+            </div>
+
+
+            <div style="width:80%">
+
+                {% block content %}
+                <div class="row">
+                    <div class="col-md-12 ct-u-paddingTop80">
+
+
+                        {%  for topic in user_features%}
+                        <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
+                            <form class="ct-u-sectionBorder" name="{{topic.tag}}" action="" id="{{topic.id}}">
+                                <h2 class="ct-sectionHeader-title">
+                                    <small><span>{{topic.name}}</span></small>
+                                </h2>
+                                <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}">
+                                    <div id="{{topic.id}}TXT">
+                                    {% for feature in topic.feature_list %}
+                                    <li><i class="fa fa-check"></i><span><a href=""><i class="fa fa-trash"></i></a>{{ feature }}</span></li>
+                                    {% endfor %}
+                                    </div>
+                                </ul>
+                                <div class="form-group" style="padding-top: 1px">
+                                    <label for="foreign">{{topic.intro}}</label>
+                                    <input class="form-control form-control--type2" id="{{topic.tag}}" name="feature_name">
+                                    <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>
+                                    <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
+                                    <!-- <button type="submit" class="btn btn-lg btn-wide btn-motive" onclick="showFeatures()">
+                                        <span>添加</span></button> -->
+
+                                </div>
+                            </form>
+                            <button onclick="showFeatures('{{topic.id}}')" class="btn btn-lg btn-wide btn-motive">添加</button>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                {% endblock %}
+
+                <div class="row" style="margin-left: 29%">
+                    <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
+                        <script>
+                            function openpage() {
+                                window.location.replace("/index/")
+                            }
+                        </script>
+                        <button id="clipBtn" onclick="openpage()" class="btn btn-lg btn-wide btn-motive">
+                            <span>完成全部的内容</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
 	</div>
 </div>
 
@@ -94,8 +289,9 @@
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
 
+<!-- 时间选择 -->
 <script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
-<script>jQuery('.input-daterange').datepicker({});</script>
+<script>jQuery('.input-daterange #birth').datepicker({});</script>
 
 <script src="{% static 'frontEnd/plugins/bootstrap-slider/js/bootstrap-slider.js' %}"></script>
 <script>jQuery('.sliderAmount').slider();</script>

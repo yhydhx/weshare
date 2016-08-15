@@ -60,15 +60,61 @@
 
 {% include "frontEnd/nav.html" %}
 
-<div class="container" style="margin-top: 60px; padding-top: 30px;">
+<div class="container" style="margin-top: 60px;">
 	<div class="row">
         <div class="col-md-2" style="text-align:center;">
             <div class="row centerLeftbarIcon"><img src="{{ current_user.icon }}" style="height: 100px; width: 100px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-            <div class="row centerLeftbarButton"><a href="/center-edit">修改信息</a></div> 
-            <div class="row centerLeftbarButton"><a href="/center-manage" style="color:black;">订单管理</a></div>
-            <div class="row centerLeftbarButton"><a href="/center-auth">申请认证</a></div>
+            <div class="row centerLeftbarButton"><a href="/host_center/edit">修改信息</a></div> 
+            <div class="row centerLeftbarButton"><a href="/host_center/manage" style="color:black;">订单管理</a></div>
+            <div class="row centerLeftbarButton"><a href="/image-receive/">申请认证</a></div>
         </div>
-		<div class="col-md-10" style="padding-bottom:800px;">订单管理页面</div>
+		<div class="col-md-9" style="padding-top:30px;">
+            <table class="table table-bordered ">
+              <tr>
+                  <td colspan="3" style="text-align:left;">编号：1674654564564654 发起时间：2016-07-31</td>
+              </tr>
+              <tr>
+                  <td>
+                      <div class="row">
+                          <div class="col-md-3"><img src="{{ current_user.icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
+                          <div class="col-md-9"><h3>香港大学offer申请</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
+                      </div>
+                  </td>
+                  <td><h4>待确认</h4></td>
+                  <td><a href="/host_center/detail">查看详情</a></td>
+              </tr>
+            </table>
+            <table class="table table-bordered ">
+              <tr>
+                  <td colspan="3" style="text-align:left;">编号：1674654564564654 发起时间：2016-07-31</td>
+              </tr>
+              <tr>
+                  <td>
+                      <div class="row">
+                          <div class="col-md-3"><img src="{{ current_user.icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
+                          <div class="col-md-9"><h3>香港大学offer申请</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
+                      </div>
+                  </td>
+                  <td><h4>待确认</h4></td>
+                  <td><a href="/host_center/detail">查看详情</a></td>
+              </tr>
+            </table>
+            <table class="table table-bordered ">
+              <tr>
+                  <td colspan="3" style="text-align:left;">编号：1674654564564654 发起时间：2016-07-31</td>
+              </tr>
+              <tr>
+                  <td>
+                      <div class="row">
+                          <div class="col-md-3"><img src="{{ current_user.icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
+                          <div class="col-md-9"><h3>香港大学offer申请</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
+                      </div>
+                  </td>
+                  <td><h4>待确认</h4></td>
+                  <td><a href="/host_center/detail">查看详情</a></td>
+              </tr>
+            </table>
+        </div>
 	</div>
 </div>
 
