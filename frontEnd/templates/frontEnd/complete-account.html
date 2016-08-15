@@ -67,6 +67,16 @@
 
     }</script> -->
 
+
+    <!-- 富文本编辑器 -->
+    <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/kindeditor.js'%}"></script>
+    <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/lang/zh-CN.js'%}"></script>
+    <script>
+            KindEditor.ready(function(K) {
+                    window.editor = K.create('#editor_id');
+            });
+    </script>
+
     <!-- 选择学历 -->
     <script>
 
@@ -420,7 +430,39 @@ $("#PtxtSc").live("click",function (){
                             <small><span>自我介绍</span></small>
                         </h2>
                     </div>
-                    <textarea name="self-introduction" id="self-introduction">
+                    <!-- <textarea name="self-introduction" id="self-introduction">
+                        <p style="text-align: left">请按照一下模板更改哦(注:若没有请删除完成后请把这段话删掉)</p>
+                        <h3 style="text-align: left">性格特点</h3>
+                          <p>
+                              (示例)我是一个萌萌的逗比,幽默风趣,会讲笑话,很牛逼.<br>
+                              Note that any <strong>性格和善,和人们自来熟</strong> file and image management functionality in
+                              this example is part of our commercial offering – the demo is to show the integration.
+                          </p>
+                        <h3 style="text-align: left">留学情况</h3>
+                        <p>
+                            (实例)<br>
+                            2014 - 2015 <strong>香港理工大学</strong> 网络工程研究生
+                            <br>
+                            2015 - 现在 <strong>香港科技大学</strong> 通信网络博士
+                        </p>
+                        <h3 style="text-align: left">学业情况</h3>
+                        <p>
+                            大学平均G点3.9哇,被同学尊称为何满绩,何大神。托福裸考105,二战111, 雅思8.5, GRE 2398分, 被CMU, UCLA, Stanford, 等名校录取
+                        </p>
+                        <h3 style="text-align: left">竞赛经历</h3>
+                        <p>
+                            2015年全国大学生英语竞赛特等奖<br>
+                            2014年全国大学生数学建模比赛特等奖<br>
+                            2015年世界大学生数学建模二等奖<br>
+                            2014年全国ACM上海站第三名<br>
+                        </p>
+                        <h3 style="text-align: left">科研背景</h3>
+                        <p>
+
+                        </p>
+                    </textarea> -->
+
+                    <textarea id="editor_id" name="content" style="width:100%;height:500px;">
                         <p style="text-align: left">请按照一下模板更改哦(注:若没有请删除完成后请把这段话删掉)</p>
                         <h3 style="text-align: left">性格特点</h3>
                           <p>
@@ -467,8 +509,7 @@ $("#PtxtSc").live("click",function (){
 
                     <div class="ct-checkbox ct-u-paddingTop10 ct-u-paddingMD-bot10">
                         <label for="gender">性别</label>
-                        <input class="form-control form-control--type2" id="gender" name="gender" type="checkbox"
-                               checked>
+                        <input class="form-control form-control--type2" id="gender" name="gender" type="checkbox" checked>
                     </div>
 
                     <select class="ct-select ct-js-selectize" title="Sorting" name="selectbox">
@@ -579,28 +620,9 @@ $("#PtxtSc").live("click",function (){
 </div>
 
 
-<footer class="ct-footer ct-u-sectionDark">
-    <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
-        <div class="container">
-            <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/">createIT</a> 2014
-            </div>
-            <ul class="ct-socials">
-                <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i
-                        class="fa fa-flickr"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i
-                        class="fa fa-instagram"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i
-                        class="fa fa-pinterest"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i
-                        class="fa fa-facebook-square"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i
-                        class="fa fa-twitter"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
+{% include "frontEnd/footer.html" %}
 
-<a class="btn btn-primary" data-toggle="modal" href='#modal-id' id="fuckJS">fuckJS</a>
+<!-- <a class="btn btn-primary" data-toggle="modal" href='#modal-id' id="fuckJS">fuckJS</a>
 <div class="modal fade" id="modal-id">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -610,7 +632,7 @@ $("#PtxtSc").live("click",function (){
             </div>
             <div class="modal-body">
                 <div role="tabpanel">
-                    <!-- Nav tabs -->
+
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active">
                             <a href="#choose" aria-controls="choose" role="tab" data-toggle="tab">choose</a>
@@ -620,7 +642,6 @@ $("#PtxtSc").live("click",function (){
                         </li>
                     </ul>
 
-                    <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="choose">
                             <div class="squr"><input type="checkbox" name="c1"></div>
@@ -640,7 +661,7 @@ $("#PtxtSc").live("click",function (){
         </div>
     </div>
 
-</div>
+</div> -->
 
 
 <!-- JavaScripts -->
