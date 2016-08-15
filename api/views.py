@@ -52,7 +52,7 @@ def index(request):
 
 
 
-
+@csrf_exempt
 def user(request, method, Oid):
     Info = output_init()
     if method == "show":
@@ -209,6 +209,8 @@ def user(request, method, Oid):
     else:
         return render(request, "frontEnd/404.html")
 
+
+@csrf_exempt
 def school(request, method, Oid):
     try:
         user = Host().objects.get(email=request.session['email'])
