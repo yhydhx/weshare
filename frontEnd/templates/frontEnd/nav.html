@@ -44,7 +44,7 @@
         </li>
         <li class="dropdown"><a href="/host-center/"><span>个人信息</span></a>
             <ul class="dropdown-menu">
-                <li><a href="/host-center/"><span>我的主页</span></a></li>
+                <li><a href="/host_center/show"><span>我的主页</span></a></li>
                 <li><a href="/modify-account/"><span>修改账户资料</span></a></li>
 
             </ul>
@@ -122,7 +122,7 @@
                                 {% if current_user.state == 0 %}
                                 <li><a href="/image-receive/">注册成为host</a></li>
                                 {% elif current_user.state == 1 %}
-                                <li><a href="/host-center/">我的主页</a></li>
+                                <li><a href="/host_center/show">我的主页</a></li>
                                 {% endif %}
 
                                 <li><a href="/logout/">退出登录</a></li>
@@ -184,8 +184,10 @@
                     <div class="ct-textEffect"><span data-content="个人信息">个人信息</span></div>
                 </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/host-center/"><span>我的主页</span></a></li>
-                        <li><a href="/center-edit"><span>个人中心</span></a></li>
+
+                        <li><a href="/host_center/show"><span>我的主页</span></a></li>
+                        <li><a href="/modify-account/"><span>修改账户资料</span></a></li>
+
                     </ul>
                 </li>
                 <!--=========================================================================-->

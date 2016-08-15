@@ -46,6 +46,10 @@ class Host(models.Model):
     graduate = models.CharField(blank=True, max_length=100)
     phd = models.CharField(blank=True, max_length=100)
 
+    bacholor_major = models.CharField(blank=True, max_length=100)
+    graduate_major = models.CharField(blank=True, max_length=100)
+    phd_major = models.CharField(blank=True, max_length=100)
+
 
     def __unicode__(self):
         return self.username
