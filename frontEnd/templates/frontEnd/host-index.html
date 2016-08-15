@@ -139,37 +139,77 @@
                         <div class="modal-content">
                             <div class="row">
                                 <div class="col-xs-1"></div>
-                                <div class="col-xs-2"><div class="row">预约</div><div class="row">1</div></div>
-                                <div class="col-xs-2"><div class="row">等待确认</div><div class="row">2</div></div>
-                                <div class="col-xs-2"><div class="row">付款</div><div class="row">3</div></div>
-                                <div class="col-xs-2"><div class="row">完成</div><div class="row">4</div></div>
-                                <div class="col-xs-2"><div class="row">评价</div><div class="row">5</div></div>
+                                <div class="col-xs-2">
+                                    <div class="row" style="color:red; font-size: 20px; padding-top:5px; padding-bottom:5px; ">预约</div>
+                                    <div class="row" style="display: flex;justify-content: center; ">
+                                        <div style=" width:40px; height:40px; background-color:#F00; border-radius:20px;">
+                                            <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">1</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">等待确认</div>
+                                    <div class="row" style="display: flex;justify-content: center; ">
+                                        <div style=" width:40px; height:40px; background-color:gray; border-radius:20px;">
+                                            <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">付款</div>
+                                    <div class="row" style="display: flex;justify-content: center; ">
+                                        <div style=" width:40px; height:40px; background-color:gray; border-radius:20px;">
+                                            <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">完成</div>
+                                    <div class="row" style="display: flex;justify-content: center; ">
+                                        <div style=" width:40px; height:40px; background-color:gray; border-radius:20px;">
+                                            <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">4</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">评价</div>
+                                    <div class="row" style="display: flex;justify-content: center; ">
+                                        <div style=" width:40px; height:40px; background-color:gray; border-radius:20px;">
+                                            <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">5</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-xs-1"></div>
                             </div>
 
-                            <form action="/host_center/manage">
-                                <div class="form-inline">
-                                    <label>选择咨询问题</label>
-                                    <select class="form-control">
-                                      <option>问题1</option>
-                                      <option>问题2</option>
-                                      <option>问题3</option>
-                                      <option>问题4</option>
-                                    </select> 
-                                </div>
-                                
+                            <div class="row" style="margin-top: 30px;margin-bottom: 30px; ">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <form action="/host_center/manage">
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; ">请选择咨询问题</label>
+                                            <select class="form-control" style="padding:0;border: 1 1 1 1 solid gray; ">
+                                              <option>问题1</option>
+                                              <option>问题2</option>
+                                              <option>问题3</option>
+                                              <option>问题4</option>
+                                            </select>
+                                        </div>                               
 
-                                <div class="form-group">
-                                    <label>简要介绍自己的情况，并描述要咨询的问题：</label>
-                                    <textarea class="form-control" rows="3"></textarea>
-                                </div>                                
-                                <div class="form-group">
-                                    <label>告诉分享者你所希望的见面时间与约聊时长：</label>
-                                    <textarea class="form-control" rows="3"></textarea>
-                                </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; ">简要介绍自己的情况，并描述要咨询的问题</label>
+                                            <textarea class="form-control" rows="4" placeholder="例如：我是清华大学计算机专业大三的学生，专业排名前百分之三十，有多个关于自动驾驶的项目经历。本科毕业后想去BAT等公司从事与计算机视觉相关的工作。想知道现在开始该如何准备？比如该熟悉哪些开源项目，或是该多积累哪种平台的开发经验。"></textarea>
+                                        </div>                                
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; ">告诉分享者你所希望的见面时间与约聊时长</label>
+                                            <textarea class="form-control" rows="4" placeholder="例如：我每周一／三下午2点到晚上6点都有空，我想请教的细节问题比较多，觉得预约3个小时比较合适。"></textarea>
+                                        </div>
 
-                                <button type="submit" class="btn btn-danger">提交预约</button>
-                            </form>
+                                        <button type="submit" class="btn btn-danger">提交预约</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            
 
                         </div>
                       </div>
