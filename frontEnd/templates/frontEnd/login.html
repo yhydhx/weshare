@@ -30,10 +30,14 @@
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
+<<<<<<< HEAD
     <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101340075" charset="utf-8"></script>
+=======
+    <script type="text/javascript" sre="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101340075" charset="utf-8"></script>
+>>>>>>> e3abd6049d2b30106d8efaa722566caab31a81ce
 </head>
 
-<body class="cssAnimate">
+<body class="cssAnimate" style="background-color: white; ">
 <div class="ct-preloader-container">                                            <!-- Preloader -->
     <div class='ct-preloader'>
         <div>
@@ -62,59 +66,70 @@
 {% include "frontEnd/nav.html" %}
 
 
-<section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop50" data-height="840" data-type="pattern"
+<!-- <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop50" data-height="840" data-type="pattern"
          data-bg-image="./assets/images/content/cars/bg-05.jpg"
-         data-bg-image-mobile="./assets/images/content/cars/bg-05.jpg">
-    <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom">
+         data-bg-image-mobile="./assets/images/content/cars/bg-05.jpg"> -->
+    <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" style="margin-top:180px;">
         <div class="container">
 
             <div class="row">
                 <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
+                    <div class="ct-panel text-center">
+                        <div class="ct-panel-inner">
+                            <h3 class="ct-u-marginBottom30">
+                                <small class="ct-fw-300"><span class="ct-fw-bold">欢迎登陆『为啥』</span></small>
+                            </h3>
+                            <h3 class="ct-u-marginBottom30">
+                                <small class="ct-fw-300"><span class="ct-fw-bold">探索国内外名校服务</span></small>
+                            </h3>
+                            <br>
+                            <br>
+                            <p style="font-size:14px;">没有账号？&nbsp;&nbsp;<a href="/account/" class="btn btn-motive">注册</a></p>    
+                        </div>
+                    </div>
+                </div>
 
-                    <form class="ct-panel" action="/login/" method="post">
+                <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
+
+                    <form class="ct-panel" action="/login/" method="post" style="padding-left:20%;padding-right:20%;">
                         {% csrf_token %}
                         <div class="ct-panel-inner">
                             <div class="form-group">
-                                <label for="email" class="required">邮箱登录</label>
-                                <input id="email" name="email" required class="form-control form-control--type2">
+                                <input id="email" name="email" required class="form-control form-control--type2" placeholder="用户名/邮箱/手机号">
                             </div>
                             <div class="form-group">
-                                <label for="password" class="required">密码</label>
                                 <input id="password" name="password" type="password" required
-                                       class="form-control form-control--type2">
+                                       class="form-control form-control--type2" placeholder="密码">
                             </div>
                             <div class="ct-panel-meta">
-                                <button type="submit" class="btn btn-motive"><span>登录</span></button>
+                                
                                 <div class="ct-checkbox text-center">
                                     <input id="remember" type="checkbox">
-                                    <label for="remember" class="checkbox-inline text-lowercase">记住我的登录状态</label>
+                                    <label for="remember" class="checkbox-inline text-lowercase">下次自动登陆</label>
                                 </div>
                                 <a href="/iforget/">忘记密码?</a>
                                 <div class="clearfix"></div>
                             </div>
+                            <button type="submit" class="btn btn-motive btn-lg btn-wide" style="margin-top:15px;"><span>登录</span></button>
                             <div style="text-align: right; padding-top: 10%">
+<<<<<<< HEAD
                                 <span id="qqLoginBtn"></span>  
 				<a href="#">微信登录</a> <a href="#">微博登录</a>       <!--先留在这里,到时候加上图标这些-->
+=======
+                                <span id="qqLoginBtn"></span>
+                                <a href="#">微信登录</a> <a href="#">微博登录</a>       <!--先留在这里,到时候加上图标这些-->
+>>>>>>> e3abd6049d2b30106d8efaa722566caab31a81ce
                             </div>
                         </div>
                     </form>
-
-
                 </div>
-                <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
-                    <div class="ct-panel text-center">
-                        <div class="ct-panel-inner">
-                            <h2 class="ct-u-marginBottom30">
-                                <small class="ct-fw-300"><span class="ct-fw-bold">新用户?</span></small>
-                            </h2>
-                            <a href="/account/" class="btn btn-motive"><span>注册</span></a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
-</section>
+
+
+<!-- </section> -->
 
 
 {% include "frontEnd/footer.html" %}
@@ -137,10 +152,18 @@
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
 	QC.Login({
 		btnId:"qqLoginBtn"	//插入按钮的节点id
 	});
 </script>
+=======
+        QC.login({
+                btnId:"qqLoginBtn"      //插入按钮的节点id
+        });
+</script>
+
+>>>>>>> e3abd6049d2b30106d8efaa722566caab31a81ce
 
 </body>
 </html>
