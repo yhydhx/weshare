@@ -147,20 +147,18 @@
                                 <div class="col-xs-1"></div>
                             </div>
 
-                            <!-- Single button -->
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                下拉选择咨询问题 <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">问题1</a></li>
-                                <li><a href="#">问题2</a></li>
-                                <li><a href="#">问题3</a></li>
-                                <li><a href="#">问题4</a></li>
-                              </ul>
-                            </div>
+                            <form action="/host_center/manage">
+                                <div class="form-inline">
+                                    <label>选择咨询问题</label>
+                                    <select class="form-control">
+                                      <option>问题1</option>
+                                      <option>问题2</option>
+                                      <option>问题3</option>
+                                      <option>问题4</option>
+                                    </select> 
+                                </div>
+                                
 
-                            <form>
                                 <div class="form-group">
                                     <label>简要介绍自己的情况，并描述要咨询的问题：</label>
                                     <textarea class="form-control" rows="3"></textarea>
@@ -170,7 +168,7 @@
                                     <textarea class="form-control" rows="3"></textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-danger">确认预约</button>
+                                <button type="submit" class="btn btn-danger">提交预约</button>
                             </form>
 
                         </div>
