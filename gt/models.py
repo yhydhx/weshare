@@ -46,6 +46,10 @@ class Host(models.Model):
     graduate = models.CharField(blank=True, max_length=100)
     phd = models.CharField(blank=True, max_length=100)
 
+    bacholor_major = models.CharField(blank=True, max_length=100)
+    graduate_major = models.CharField(blank=True, max_length=100)
+    phd_major = models.CharField(blank=True, max_length=100)
+
 
     def __unicode__(self):
         return self.username
@@ -76,6 +80,11 @@ class Host(models.Model):
         tmpHost["bacholor"] =  self.bacholor
         tmpHost["graduate"] =  self.graduate
         tmpHost["phd"] =  self.phd
+
+        try:
+            tmpHost['id'] = self.id
+        except:
+            pass
         return tmpHost
 
     def get_all_features(self):

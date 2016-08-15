@@ -123,6 +123,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             password=password,
                             email=email,
                             phone_number=phone,
+                            education = -1,
                             )
                 #encode password
                 host.password = host.encode_password(password)
@@ -431,18 +432,6 @@ def delete_feature(request):
         return HttpResponse(json.dumps(Info))
 
 
-def host_center(request):
-    try:
-        username = request.session['email']
-    except:
-        return render_to_response('frontEnd/login.html', {'session_timeout': True})
-
-    try:
-        host = Host.objects.get(email=username)
-    except:
-        return HttpResponse('您所持有的用户名不能匹配任何一个host')
-
-    return HttpResponseRedirect('/user/show/' + host.id)
 
 
 def modify_account(request):
@@ -569,15 +558,33 @@ def service(request):
     return render(request, "frontEnd/services.html", {"object": result})
 
 
-def center_edit(request):
-    return render(request,"frontEnd/center-edit.html")
+def host_center(request,method,Oid):
+    Info = {}
+    Info['state'] = 0
+    Info['message'] = ""
+    Info['data'] = {}
 
-def center_manage(request):
-    return render(request,"frontEnd/center-manage.html")
+    try:
+        username = request.session['email']
+    except:
+        return render_to_response('frontEnd/login.html', {'session_timeout': True})
 
-def center_auth(request):
-    return render(request,"frontEnd/center-auth.html")
+    try:
+        host = Host.objects.get(email=username)
+        Info['data']['host'] = host.format_dict()
+    except:
+        return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
+
+
+    if method == "edit":
+        return render(request,"frontEnd/center-edit.html",Info)
+    elif method == "manage":
+        return render(request,"frontEnd/center-manage.html",Info)
+    elif method == "auth":
+        return render(request,"frontEnd/center-auth.html",Info)
+    else:
+        return HttpResponseRedirect('/user/show/' + host.id)
 
 
 

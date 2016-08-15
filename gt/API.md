@@ -71,6 +71,134 @@ Info = {
 
 
 -----------------------------------------------------------------------------------------------
+url: /host_center/edit
+template: frontEnd/center-edit.html
+method: get
+
+function:
+1. 
+
+API:
+
+
+%%正确的返回信息：
+Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message:'注册成功，请登录'  Char # 错误的提示信息
+	data: {
+		'host':{
+			"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+			
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 -1表示未填写 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+		}
+	}
+
+-----------------------------------------------------------------------------------------------
+url: /host_center/manage
+template: frontEnd/center-manage.html
+method: get
+
+function:
+1. 
+
+API:
+
+
+%%正确的返回信息：
+Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message:'注册成功，请登录'  Char # 错误的提示信息
+	data: {
+		'host':{
+			"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+			
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 -1表示未填写 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+		}
+	}
+
+-----------------------------------------------------------------------------------------------
+url: /host_center/auth
+template: frontEnd/center-auth.html
+method: get
+
+function:
+1. 
+
+API:
+
+
+%%正确的返回信息：
+Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message:'注册成功，请登录'  Char # 错误的提示信息
+	data: {
+		'host':{
+			"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+			
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 -1表示未填写 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+		}
+	}
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------
 
 
 
