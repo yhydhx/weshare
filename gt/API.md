@@ -765,6 +765,18 @@ data = {
             	},
             	......
             ]
+            'minor_topic_list' : [
+            	{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},
+            	....
+            ]
     	},{
             'intro' :  ~ char 话题的介绍
             'name' : ~char 话题的名字
@@ -783,6 +795,18 @@ data = {
 	                'm_id' :   ~ char 小标题的ID
             	},
             	......
+            ]
+            'minor_topic_list' : [
+            	{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},
+            	....
             ]
     	},
     	......
