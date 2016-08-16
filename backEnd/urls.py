@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^province/(?P<method>\w+)/?(?P<Oid>\w*)$', views.province,name ='province'),
     url(r'^school/(?P<method>\w+)/?(?P<Oid>\w*)$', views.school,name ='school'),
     url(r'^topic/(?P<method>\w+)/?(?P<Oid>\w*)$', views.topic,name ='topic'),
+    url(r'^minortopic/(?P<method>\w+)/?(?P<Oid>\w*)$', views.minortopic,name ='minortopic'),
     url(r'^user/(?P<method>\w+)/?(?P<Oid>\w*)$', views.user,name ='user'),
     url(r'^feature/(?P<method>\w+)/?(?P<Oid>\w*)$', views.feature,name ='feature'),   
     

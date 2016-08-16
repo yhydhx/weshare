@@ -356,6 +356,68 @@ def topic(request, method, Oid):
         return HttpResponse('没有该方法')
 
 
+
+def minortopic(request, method, Oid):
+    try:
+        request.session['adminname']
+    except KeyError, e:
+        return HttpResponseRedirect('/dc/login.html')
+
+    if method == 'addMinorTopic':
+
+        m_name = request.POST.get("m_name")
+        m_topic = request.POST.get("m_topic")
+        m_index = request.POST.get("m_index")
+        m_introduction = request.POST.get("m_introduction")
+
+
+        minortopic = Minor_Topic(
+            m_name = m_name ,
+            m_topic = m_topic ,
+            m_index = m_index ,
+            m_introduction = m_introduction ,
+        )
+        minortopic.save()
+
+        return HttpResponseRedirect('/dc/minortopic/show/')
+    elif method == 'change':
+        minor = Minor_Topic.objects.get(id=Oid)
+        topics = Topic.objects.all()
+        return render(request, 'backEnd/changeMinorTopic.html', {'minor': minor, 'topics': topics})
+
+    elif method == 'save':
+        if request.method == 'POST':
+            minor = {   'id' : request.POST.get('id'),
+                       "m_name" : request.POST.get("m_name"),
+                        "m_topic":  request.POST.get("m_topic"),
+                        "m_index" : request.POST.get("m_index"),
+                        "m_introduction" : request.POST.get("m_introduction"),
+                       }
+
+        Minor_Topic.objects.filter(id=minor['id']).update(
+                                                        m_name = minor['m_name'],
+                                                        m_topic = minor['m_topic'],
+                                                        m_index = minor['m_index'],
+                                                        m_introduction = minor['m_introduction'],
+                                                        )
+
+        return HttpResponseRedirect('/dc/minortopic/show/')
+
+    elif method == 'delete':
+        Feature.objects.filter(id=Oid).delete()
+
+        return HttpResponseRedirect('../show/')
+    elif method == 'add':
+        topics = Topic.objects.all()
+        return render(request, 'backEnd/addMinorTopicView.html', {'topics': topics})
+    elif method == 'show' or method == '':
+        allMinorTopic = Minor_Topic.objects.all()
+        return render(request, 'backEnd/showMinorTopicList.html', {'object': allMinorTopic})
+
+    else:
+        return HttpResponse('没有该方法')
+
+
 def feature(request, method, Oid):
     try:
         request.session['adminname']

@@ -371,6 +371,7 @@ def complete_account_feature(request):
         feature_name = request.POST.get("feature_name")
         host_id = host.id
         showTag = request.POST.get("topic_tag")
+        m_id = request.POST.get("minor_topic_id")
         # check this feature is exist or not
         try:
             feature = Feature.objects.get(f_name=feature_name,
@@ -383,7 +384,8 @@ def complete_account_feature(request):
         host_topic = Host_Topic(
             host_id=host.id,
             t_id=topic_id,
-            f_id=feature.id  # 然后把id相互关联起来
+            f_id=feature.id,  # 然后把id相互关联起来
+            m_id = m_id
         )
         host_topic.save()
 
@@ -395,6 +397,7 @@ def complete_account_feature(request):
 
         Info['data']['topic_tag'] = showTag
         Info['data']['feature_name'] = feature_name
+        Info['data']['m_id'] = m_id
 
         return HttpResponse(json.dumps(Info))
 
@@ -424,6 +427,8 @@ def delete_feature(request):
         feature_name = request.POST.get("feature_name")
         host_id = host.id
         showTag = request.POST.get("topic_tag")
+        m_id = request.POST.get("minor_topic_id")
+
         # check this feature is exist or not
         
         Info = {}
@@ -444,7 +449,8 @@ def delete_feature(request):
             host_topic = Host_Topic.objects.get(
                 host_id=host.id,
                 t_id=topic_id,
-                f_id=feature.id  # 然后把id相互关联起来
+                f_id=feature.id,
+                m_id = m_id
             ).delete()
         except:
             Info['state'] = 404
@@ -455,11 +461,18 @@ def delete_feature(request):
 
         Info['data'] = {}
         Info['data']['topic_tag'] = showTag
+        Info['data']['topic_id'] = topic_id
         Info['data']['feature_name'] = feature_name
+        Info['data']['m_id'] = m_id
         Info['state'] = 0
         Info['message'] = "删除成功"
         return HttpResponse(json.dumps(Info))
-
+    else:
+        Info = {}
+        Info['state'] = 303
+        Info['message'] = "操作错误，本次操作已被记录"
+        Info['data'] = {}
+        return HttpResponse(json.dumps(Info))
 
 
 
@@ -556,6 +569,9 @@ def image_receive(request):
 
 def about(request):
     return render(request, "frontEnd/about.html")
+
+def recruit(request):
+    return render(request, "frontEnd/recruitment.html")
 
 
 def service(request):
