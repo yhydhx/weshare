@@ -319,7 +319,11 @@ class Topic(models.Model):
     t_index = models.IntegerField(null=True)
 
     def get_minor_topic_of_one_topic(self,topic_name):
+        result = []
         minor_topics = Minor_Topic.objects.filter(m_topic=topic_name)
+        for minor_topic_atom in minor_topics:
+            result.append(minor_topic_atom.format_dict())
+        return result
 
 
 
@@ -329,7 +333,15 @@ class Minor_Topic(models.Model):
     m_topic = models.CharField(max_length=100)
     m_index = models.IntegerField(default=0)
     m_introduction = models.CharField(max_length=100)
-
+    def format_dict(self):
+        tmp_dict = {}
+        tmp_dict['m_name'] = self.m_name
+        tmp_dict['m_click'] = self.m_click
+        tmp_dict['m_topic'] = self.m_topic
+        tmp_dict['m_index'] = self.m_index
+        tmp_dict['m_introduction'] = self.m_introduction
+        tmp_dict['id'] = self.id
+        return tmp_dict
 
 class Feature(models.Model):
     f_name = models.CharField(max_length=200)
