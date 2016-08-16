@@ -685,56 +685,6 @@ Info = {
 
 
 
------------------------------------------------------------------------------------------------
-
-
-删除feature
-
-url:   /delete_feature
-method :POST
-
-function :
-1. 删除该用户的该TOPIC下的feature
-
-API:
-
-传输的数据
-
-{
-	'topic_id' : ~ topic的ID
-    "feature_name" :  ~ feature 的名字
-    "topic_tag"  :  ~ char  topic的一个标识符
-}
-
-
-返回：
-
-#查不到用户信息
-
-Info = {
-	state: 404   Int # 0 表示成功，其他数字表示不成功
-	message: ‘找不到该用户’   Char # 错误的提示信息
-	data: {}
-}
-
-#找不到该TOPIC，Feature 
-Info = {
-	state: 404   Int # 0 表示成功，其他数字表示不成功
-	message: ‘删除失败，找不到该Topic或Feature’   Char # 错误的提示信息
-	data: {}
-}
-
-#删除成功
-
-Info = {
-	state: 0   Int # 0 表示成功，其他数字表示不成功
-	message: '删除成功'   Char # 错误的提示信息
-	data: {
-		"feature_name" :  ~ feature 的名字
-    	"topic_tag"  :  ~ char  topic的一个标识符
-	}
-}
-
 
 
 
@@ -773,6 +723,191 @@ API:
 {
     'state': :  ~ int 类似于 404，如果为非零数即为出粗
     'message' : ~ char 出错信息
+}
+
+
+
+
+
+-----------------------------------------------------------------------------------------------
+显示页面
+url:/complete_account_feature/
+method :GET
+
+function :
+1. 显示所有的topic 和topic下的minor topic
+2. 如果用户在该minor topic 添加过feature，显示feature
+
+API:
+
+返回的数据格式：
+
+data = {
+	
+    'login_flag' : True
+    'user_features' : [
+    	{
+            'intro' :  ~ char 话题的介绍
+            'name' : ~char 话题的名字
+            'id' : ~ char 话题ID
+            'tag' : ~ char 话题的小标签
+            'feature_list': [
+            	{
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
+            	},{
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
+            	},
+            	......
+            ]
+            'minor_topic_list' : [
+            	{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},
+            	....
+            ]
+    	},{
+            'intro' :  ~ char 话题的介绍
+            'name' : ~char 话题的名字
+            'id' : ~ char 话题ID
+            'tag' : ~ char 话题的小标签
+            'feature_list': [
+            	{
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
+            	},{
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
+            	},
+            	......
+            ]
+            'minor_topic_list' : [
+            	{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},
+            	....
+            ]
+    	},
+    	......
+    ]
+	'host' = host,
+
+}
+
+
+-----------------------------------------------------------------------------------------------
+
+
+添加feature
+
+url:   /complete_account_feature/
+method :POST
+
+function :
+1. 添加topic下的minor topic的feature
+2. 如果发生feature 重复，额外输入，返回错误信息
+
+API:
+
+传输的数据
+
+{
+	'topic_id' : ~ topic的ID
+    "feature_name" :  ~ feature 的名字
+
+    "topic_tag"  :  ~ char  要在这个topic下添加的一个标识符
+    "minor_topic_id" : ~ char 要添加的minor_topic 的ID
+}
+
+
+返回：
+
+{
+
+    'state' = 0
+    'message' = "添加成功"
+	'data' = {
+		'topic_tag' :   ~ char  前段传过来的topic的小tag
+		'topic_id' : ~ topic的ID
+		'feature_name' :   ~ 添加的feature ID
+		"m_id" : ~添加的 minor topic ID
+	}
+    
+
+}
+
+
+
+-----------------------------------------------------------------------------------------------
+
+
+删除feature
+
+url:   /delete_feature/{}
+method :POST
+
+function :
+1. 删除该用户的该TOPIC下的feature
+
+API:
+
+传输的数据
+
+{
+	'topic_id' : ~ topic的ID
+    "feature_name" :  ~ feature 的名字
+    "topic_tag"  :  ~ char  topic的一个标识符
+    "m_id" : ~添加的 minor topic ID
+}
+
+
+返回：
+
+#查不到用户信息
+
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘找不到该用户’   Char # 错误的提示信息
+	data: {}
+}
+
+#找不到该TOPIC，Feature 
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘删除失败，找不到该Topic或Feature’   Char # 错误的提示信息
+	data: {}
+}
+
+#删除成功
+
+Info = {
+	state: 0   Int # 0 表示成功，其他数字表示不成功
+	message: '删除成功'   Char # 错误的提示信息
+	data: {
+		"feature_name" :  ~ feature 的名字
+    	"topic_tag"  :  ~ char  topic的一个标识符
+	}
 }
 
 

@@ -1,3 +1,14 @@
+/*font*/
+/*@font-face
+{
+font-family: "Hiragino Sans GB";
+src: url('{% static 'frontEnd/fonts/dongqing.otf' %}');
+}*/
+
+@font-face {
+font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' %}") format("opentype");
+}
+
 /*common*/
     *{margin:0;padding:0;border: none;}
     body { color: #333; text-align: center; font: 12px "微软雅黑";background-color: #dcf5ed; }
@@ -29,6 +40,34 @@
 	}
 }
 
+/*index*/
+	.IndexSearch{
+		height:100px; 
+		display: flex;
+		justify-content: center;
+		align-items: center; 
+		
+		filter:Alpha(Opacity=50);
+		background-color:rgba(0, 0, 0, 0.5);
+	}
+	.IndexSearchInput{
+		border: 0;
+		border-radius: 5px 0 0 5px;
+		width:80%;
+		height: 40px;
+		padding-left: 10%; 
+
+	}
+	.IndexSearchButton{
+		border: 0;
+		border-radius: 0 5px 5px 0;
+		width:20%;
+		height: 40px;
+		background-color: #FF615E; 
+		color:white;
+		font-family:'Microsoft YaHei'; 
+	}
+
 
 
 /*footer*/
@@ -43,7 +82,7 @@
 	display: flex;
 	align-items: center;
 
-	font-family: "Hiragino Sans GB"; /*冬青*/
+	font-family: Hiragino Sans GB; /*冬青*/
 	}
 	.footerImg p{color:white;}
 	.footerImg a{color:white;} a:hover{color:gray;}
@@ -57,7 +96,7 @@
 	display: flex;
 	align-items: center;
 
-	font-family: "Hiragino Sans GB"; /*冬青*/
+	font-family: Hiragino Sans GB; /*冬青*/
 	}
 	.footerImg p{color:white;}
 	.footerImg a{color:white;} a:hover{color:gray;}
