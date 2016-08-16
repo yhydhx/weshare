@@ -318,6 +318,11 @@ class Topic(models.Model):
     t_tag = models.CharField(max_length=100, null=True)
     t_index = models.IntegerField(null=True)
 
+    def get_minor_topic_of_one_topic(self,topic_name):
+        minor_topics = Minor_Topic.objects.filter(m_topic=topic_name)
+
+
+
 class Minor_Topic(models.Model):
     m_name = models.CharField(max_length=100)
     m_click = models.IntegerField(default=0)
@@ -368,8 +373,12 @@ class Feature(models.Model):
             d_topic_feature_translate[topic_name]['id'] = topic_id
             d_topic_feature_translate[topic_name]['tag'] = topic_tag
             d_topic_feature_translate[topic_name]['feature_list'] = []
+            d_topic_feature_translate[topic_name]['minor_topic_list'] = tmp_topic.get_minor_topic_of_one_topic(topic_name)
 
+            #get all minor topics 
+            #
             
+            #get all feature
             for feature_atom in v['feature_list']:
                 tmp_feature = {}
                 feature_single  = Feature.objects.get(id=feature_atom['f_id'])
@@ -394,9 +403,8 @@ class Feature(models.Model):
                 tmp_dic['name'] = topic_atom.t_name
                 tmp_dic['id'] = topic_atom.id
                 tmp_dic['feature_list'] = []
-
+                tmp_dic['minor_topic_list'] = topic_atom.get_minor_topic_of_one_topic(topic_atom.t_name)
                 result.append(tmp_dic)
-
             else:
                 result.append(d_topic_feature_translate[topic_atom.t_name])
         return result
