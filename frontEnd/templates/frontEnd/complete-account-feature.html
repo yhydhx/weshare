@@ -57,6 +57,46 @@
         // });
     }
     </script>
+    <!-- 删除特质 -->
+    <script>
+        function delete_feature(id,z,t){
+            console.log('aa');
+            console.log(id);
+            console.log(z);
+            console.log(t);
+            // $.ajax({
+            //     url : "/delete_feature",
+            //     type : "POST",
+            //     dataType : "JSON",
+            //     data : {
+            //         'topic_id' : id,
+            //         'feature_name' : z,
+            //         'topic_tag' : t,
+            //     }
+            //     success : function(str){
+            //         console.log('成功');
+            //         console.log(str);
+            //     }
+            // })
+            $.ajax({
+                url : "/delete_feature",
+                type : "POST",
+                dataType : "JSON",
+                data : "",
+                success : function(str){
+                    console.log('成功');
+                    console.log(str);
+                },
+                error : function(err){
+                    console.log('失败');
+                    console.log(err);
+                }
+
+
+
+            })
+        }
+    </script>
 </head>
 
 <body class="cssAnimate">
@@ -165,7 +205,7 @@
                             <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}">
                                 <div id="{{topic.id}}TXT">
                                 {% for feature in topic.feature_list %}
-                                <li><i class="fa fa-check"></i><span><a href=""><i class="fa fa-trash"></i></a>{{ feature }}</span></li>
+                                <li><i class="fa fa-check"></i><span><a href="javascript:void(0);" onclick="delete_feature( '{{ topic.id }}','{{ feature }}','{{ topic.tag }}' )"><i class="fa fa-trash"></i></a>{{ feature }}</span></li>
                                 {% endfor %}
                                 </div>
                             </ul>
