@@ -24,7 +24,7 @@ class Host(models.Model):
     phone_number = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
     # 以上为必选信息
-    gender = models.IntegerField(default=1, blank=True)  # 1是男生0是女生
+    gender = models.IntegerField(default=1, blank=True)  # 1是男生 0是女生
     motto = models.CharField(max_length=100, blank=True)
     introduction = models.CharField(max_length=2000, blank=True)
     icon = models.CharField(max_length=200)

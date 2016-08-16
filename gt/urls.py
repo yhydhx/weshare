@@ -9,5 +9,6 @@ urlpatterns = patterns('',
                        url(r'', include('frontEnd.urls')),
                        url(r'^dc/', include('backEnd.urls')),
                        url(r'^api/', include('api.urls')),
+                       url(r'^alipay/', include('payment.urls')),
                        (r'^files/(?P<path>.*)','django.views.static.serve',{'document_root':settings.UPLOAD_PATH}), 
                        )
