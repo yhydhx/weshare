@@ -1,3 +1,14 @@
+/*font*/
+/*@font-face
+{
+font-family: "Hiragino Sans GB";
+src: url('{% static 'frontEnd/fonts/dongqing.otf' %}');
+}*/
+
+@font-face {
+font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' %}") format("opentype");
+}
+
 /*common*/
     *{margin:0;padding:0;border: none;}
     body { color: #333; text-align: center; font: 12px "微软雅黑";background-color: #dcf5ed; }
@@ -43,7 +54,7 @@
 	display: flex;
 	align-items: center;
 
-	font-family: "Hiragino Sans GB"; /*冬青*/
+	font-family: Hiragino Sans GB; /*冬青*/
 	}
 	.footerImg p{color:white;}
 	.footerImg a{color:white;} a:hover{color:gray;}
@@ -57,7 +68,7 @@
 	display: flex;
 	align-items: center;
 
-	font-family: "Hiragino Sans GB"; /*冬青*/
+	font-family: Hiragino Sans GB; /*冬青*/
 	}
 	.footerImg p{color:white;}
 	.footerImg a{color:white;} a:hover{color:gray;}
