@@ -318,6 +318,11 @@ class Topic(models.Model):
     t_tag = models.CharField(max_length=100, null=True)
     t_index = models.IntegerField(null=True)
 
+    def get_minor_topic_of_one_topic(self,topic_name):
+        minor_topics = Minor_Topic.objects.filter(m_topic=topic_name)
+
+
+
 class Minor_Topic(models.Model):
     m_name = models.CharField(max_length=100)
     m_click = models.IntegerField(default=0)
@@ -343,17 +348,13 @@ class Feature(models.Model):
             #check the topic_id
             if not d_topic_feature.has_key(t_id):
                 d_topic_feature[t_id] = {}
-                d_topic_feature[t_id]['minor_list'] = {}
+                d_topic_feature[t_id]['feature_list'] = []
                 d_topic_feature[t_id]['intro'] = ""
-            #check the minor_topic_id
             
-            if not d_topic_feature.has_key(m_id):
-                d_topic_feature[t_id]['minor_list'][m_id] = {}
-                d_topic_feature[t_id]['minor_list'][m_id]['feature_list'] = [f_id] 
-            else:
-
-                d_topic_feature[t_id]['minor_list'][m_id]['feature_list'].append(f_id)
-
+            feature_atom = {}
+            feature_atom['f_id'] = f_id
+            feature_atom['m_id'] = m_id
+            d_topic_feature[t_id]['feature_list'].append(feature_list)
 
 
 
@@ -371,24 +372,23 @@ class Feature(models.Model):
             d_topic_feature_translate[topic_name]['name'] = topic_name
             d_topic_feature_translate[topic_name]['id'] = topic_id
             d_topic_feature_translate[topic_name]['tag'] = topic_tag
-            d_topic_feature_translate[topic_name]['minor_topic_list'] = []
+            d_topic_feature_translate[topic_name]['feature_list'] = []
+            d_topic_feature_translate[topic_name]['minor_topic_list'] = tmp_topic.get_minor_topic_of_one_topic(topic_name)
 
-            for m_atom, m_value in v['minor_list'].items():
-                tmp_minor_topic = Minor_Topic.objects.get(id=m_atom)
-                minor_topic_name = tmp_minor_topic.m_name
-                minor_topic_intro = tmp_minor_topic.m_introduction
+            #get all minor topics 
+            #
+            
+            #get all feature
+            for feature_atom in v['feature_list']:
+                tmp_feature = {}
+                feature_single  = Feature.objects.get(id=feature_atom['f_id'])
+                minor_singel = Minor_Topic.objects.get(id=feature_atom['m_id'])
+                tmp_feature['f_name'] = feature_single.f_name
+                tmp_feature['m_name'] = minor_singel.m_name
+                tmp_feature['f_id'] = feature_single.id
+                tmp_feature['m_id'] = minor_singel.id
 
-                dict_minor_topic = {}
-                dict_minor_topic['name'] = minor_topic_name
-                dict_minor_topic['id'] = m_atom
-                dict_minor_topic['feature_list'] = []
-                for feature_id in m_value['feature_list']:
-                    f_name = Feature.objects.get(id=feature_id).f_name
-                    dict_minor_topic['feature_list'].append(f_name)
-
-                d_topic_feature_translate[topic_name]['minor_topic_list'].append(dict_minor_topic)
-
-
+                d_topic_feature_translate[topic_name]['feature_list'].append(tmp_feature)
         return  d_topic_feature_translate
 
     def get_one_user_features_with_all_topic(self, user_id):
@@ -402,18 +402,9 @@ class Feature(models.Model):
                 tmp_dic['intro'] = topic_atom.t_intro
                 tmp_dic['name'] = topic_atom.t_name
                 tmp_dic['id'] = topic_atom.id
-                tmp_dic['minor_topic_list'] = []
-
-                minor_topics = Minor_Topic.objects.filter(m_topic=topic_atom.t_name)
-                for minor_topic_atom in minor_topics:
-                    tmp_minor_topic = {}
-                    tmp_minor_topic['name'] = minor_topic_atom.m_name
-                    tmp_minor_topic['id'] = minor_topic_atom.id
-                    tmp_minor_topic['feature_list'] = []
-                    tmp_dic['minor_topic_list'].append(tmp_minor_topic)
-
+                tmp_dic['feature_list'] = []
+                tmp_dic['minor_topic_list'] = topic_atom.get_minor_topic_of_one_topic(topic_atom.t_name)
                 result.append(tmp_dic)
-
             else:
                 result.append(d_topic_feature_translate[topic_atom.t_name])
         return result
