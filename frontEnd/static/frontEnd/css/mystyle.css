@@ -73,7 +73,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 /*footer*/
 @media screen and (min-width: 768px){
 	.footerImg{
-	background-position: center 0; 
+	background-position: center; 
 	background-repeat: no-repeat; 
 	background-attachment:fixed;
 	background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
@@ -89,7 +89,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 }
 @media screen and (max-width: 768px){
 	.footerImg{
-	background-position: center 0; 
+	background-position: center; 
 	background-attachment:fixed;
 	background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
 
@@ -153,7 +153,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 	}
 	.ssImax{
 	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
-		background-position: center 0; 
+		background-position: center; 
 		background-repeat: no-repeat; 
 		background-attachment:fixed;
 		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
@@ -193,7 +193,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 	}
 	.ssImax{
 	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
-		background-position: center 0; 
+		background-position: center; 
 		background-repeat: no-repeat; 
 		background-attachment:fixed;
 		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
