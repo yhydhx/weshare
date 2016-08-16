@@ -207,12 +207,12 @@
                             {% for feature in topic.feature_list %}
                                 <div class="row" style="padding-top:5px;padding-bottom: 5px; ">
                                     <div class="col-md-12">                           
-                                        <h4><span style="float: left; ">{{ feature }} </span><a href="" class="btn btn-danger" style="float: right; ">删除</a></h4>
+                                        <h4><span style="float: left; ">{{ feature.f_name }} </span><a href="" class="btn btn-danger" style="float: right; ">删除</a></h4>
                                     </div>
                                 </div>
 
                             {% endfor %}
-                                <div class="row" style="padding-top:5px;padding-bottom: 5px; ">
+<!--                                 <div class="row" style="padding-top:5px;padding-bottom: 5px; ">
                                     <div class="col-md-12">                           
                                         <p style="float: left;font-size:15px;"> <span class="label label-primary">选校定位</span> 如何选择留学学校？ </p>
                                         <a href="" class="btn btn-danger" style="float: right; ">删除</a>
@@ -223,13 +223,21 @@
                                         <p style="float: left;font-size:15px;"> <span class="label label-primary">面试指导</span> 如何打动面试官？ </p>
                                         <a href="" class="btn btn-danger" style="float: right; ">删除</a>
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
                         </ul>
 
                         <hr>
                         <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="return showFeatures('{{topic.id}}')">
+
+                            <select class="form-control">
+                                <option>选择小话题</option>
+
+                                {% for feature in topic.feature_list %}
+                                <option>1</option>
+                                {% endfor %}
+                            </select>
                           <div class="form-group">
                             <input type="text" class="form-control" id="{{topic.tag}}" name="feature_name" placeholder="点此添加您要提供的服务">
                             <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>

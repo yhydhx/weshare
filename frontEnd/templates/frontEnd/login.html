@@ -69,9 +69,9 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
-                    <div class="ct-panel text-center">
-                        <div class="ct-panel-inner">
+                <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150" >
+                    <div class="ct-panel text-center" style="background:url('{% static 'frontEnd/images/weshare/login.png'%}'); background-position: center;">
+                        <div class="ct-panel-inner" >
                             <h3 class="ct-u-marginBottom30">
                                 <small class="ct-fw-300"><span class="ct-fw-bold">欢迎登陆『为啥』</span></small>
                             </h3>
@@ -87,7 +87,7 @@
 
                 <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
 
-                    <form class="ct-panel" action="/login/" method="post" style="padding-left:20%;padding-right:20%;">
+                    <form class="ct-panel" action="/login/" method="post" style="padding-left:20%;padding-right:20%;background:url('{% static 'frontEnd/images/weshare/login2.png'%}'); background-position: center;">
                         {% csrf_token %}
                         <div class="ct-panel-inner">
                             <div class="form-group">
