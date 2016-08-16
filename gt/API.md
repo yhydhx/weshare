@@ -751,59 +751,41 @@ data = {
             'name' : ~char 话题的名字
             'id' : ~ char 话题ID
             'tag' : ~ char 话题的小标签
-            'minor_topic_list': [
+            'feature_list': [
             	{
-            		'name' :   ~ char 小话题的名字
-	                'id' :   ~  小话题的ID
-	                'feature_list' :   ~  [
-	                	"feature1",
-	                	"feature2",
-	                	"feature3",
-	                	...
-	                ]
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
             	},{
-            		'name' :   ~ char 小话题的名字
-	                'id' :   ~  小话题的ID
-	                'feature_list' :   ~  [
-	                	"feature1",
-	                	"feature2",
-	                	"feature3",
-	                	...
-	                ]
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
             	},
-            	...
-            	
+            	......
             ]
     	},{
             'intro' :  ~ char 话题的介绍
             'name' : ~char 话题的名字
             'id' : ~ char 话题ID
             'tag' : ~ char 话题的小标签
-            'minor_topic_list': [
+            'feature_list': [
             	{
-            		'name' :   ~ char 小话题的名字
-	                'id' :   ~  小话题的ID
-	                'feature_list' :   ~  [
-	                	"feature1",
-	                	"feature2",
-	                	"feature3",
-	                	...
-	                ]
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
             	},{
-            		'name' :   ~ char 小话题的名字
-	                'id' :   ~  小话题的ID
-	                'feature_list' :   ~  [
-	                	"feature1",
-	                	"feature2",
-	                	"feature3",
-	                	...
-	                ]
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
             	},
-            	...
-            	
+            	......
             ]
     	},
-    	...
+    	......
     ]
 	'host' = host,
 

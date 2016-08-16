@@ -311,8 +311,8 @@ def complete_account(request):
                 phd_major = request.POST['phd_major']
                 phd = request.POST['phd'] 
             except:
-                phd_major = request.POST['phd_major']
-                phd = request.POST['phd'] 
+                phd_major = ""
+                phd = ""
                 
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
