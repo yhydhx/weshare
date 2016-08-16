@@ -373,7 +373,7 @@ class Feature(models.Model):
             d_topic_feature_translate[topic_name]['tag'] = topic_tag
             d_topic_feature_translate[topic_name]['minor_topic_list'] = []
 
-            for m_atom, m_value in v['minor_list']:
+            for m_atom, m_value in v['minor_list'].items():
                 tmp_minor_topic = Minor_Topic.objects.get(id=m_atom)
                 minor_topic_name = tmp_minor_topic.m_name
                 minor_topic_intro = tmp_minor_topic.m_introduction
@@ -413,7 +413,7 @@ class Feature(models.Model):
                     tmp_dic['minor_topic_list'].append(tmp_minor_topic)
 
                 result.append(tmp_dic)
-                
+
             else:
                 result.append(d_topic_feature_translate[topic_atom.t_name])
         return result
