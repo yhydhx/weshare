@@ -23,12 +23,14 @@ import os
 import base64
 import time
 import datetime
+from frontEnd.tools import *
 
 def output_init():
     Info = {}
     Info['state'] = 0
     Info['message'] = ""
     Info['data'] = {}
+    process_mail("123")
     return Info
 
 def index(request):
