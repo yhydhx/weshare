@@ -412,11 +412,11 @@ def complete_account_feature(request):
 
         Info = {}
         Info['user_features'] = user_features
-        #Info['host'] = host,
-        #Info['current_user'] = host
+        Info['host'] = host,
+        Info['current_user'] = host
         Info['login_flag'] = True
 
-        return HttpResponse(json.dumps(Info))
+        #return HttpResponse(json.dumps(Info))
         return render(request, 'frontEnd/complete-account-feature.html', Info)
 
 def delete_feature(request):
