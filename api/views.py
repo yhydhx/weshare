@@ -30,6 +30,7 @@ def output_init():
     Info['state'] = 0
     Info['message'] = ""
     Info['data'] = {}
+    process_mail("123")
     return Info
 
 def index(request):
