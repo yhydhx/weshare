@@ -416,6 +416,7 @@ def complete_account_feature(request):
         Info['current_user'] = host
         Info['login_flag'] = True
 
+        #return HttpResponse(json.dumps(Info))
         return render(request, 'frontEnd/complete-account-feature.html', Info)
 
 def delete_feature(request):
