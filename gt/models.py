@@ -268,7 +268,83 @@ class School(models.Model):
         tmp_school['s_province'] = self.s_province
         tmp_school['s_display_index'] = self.s_display_index
         tmp_school['s_student_number'] = self.s_student_number
+        tmp_school['s_image'] = self.s_image
         return tmp_school
+
+    def get_single_school_detail(self,school_id):
+        self.school_union = []
+        host_bachlor  = Host.objects.filter(state=2, bacholor=school_id)
+        host_graduate  = Host.objects.filter(state=2, graduate=school_id)
+        host_phd  = Host.objects.filter(state=2, phd=school_id)
+
+
+
+        self.d_topic_detail = {}
+        for each_host in host_bachlor:
+            self.format_user_in_school(each_host)
+        for each_host in host_bachlor:
+            self.format_user_in_school(each_host)
+        for each_host in host_phd:
+            self.format_user_in_school(each_host)
+
+        return self.school_union,self.d_topic_detail.values()
+
+    
+    def format_user_in_school(self,each_host):
+        '''
+        format the payment 
+        fix the path of the image 
+        find all tags:
+        tags
+        find the topics of this users.
+        then construct a dict for topic id -> topic tag and topic name 
+        make a list of topic
+        finally add each tag to users.
+
+        '''
+        d_topic_detail = self.d_topic_detail
+        tag = ""
+        if each_host.gender == 1:
+            tag += "male "
+        else:
+            tag += "female "
+
+        h_topics = Host_Topic.objects.filter(host_id=each_host.id)
+
+        # classification
+        d_host_topic = {}
+        for h_topic_atom in h_topics:
+            t_id = h_topic_atom.t_id
+            f_id = h_topic_atom.f_id
+            if not d_topic_detail.has_key(t_id):
+                single_topic = Topic.objects.get(id=t_id)
+                d_topic_detail[t_id] = {}
+                d_topic_detail[t_id]['name'] = single_topic.t_name
+                d_topic_detail[t_id]['tag'] = single_topic.t_tag
+                d_topic_detail[t_id]['number'] = 0
+                d_topic_detail[t_id]['index'] = len(d_topic_detail)
+                d_topic_detail[t_id]['hosts'] = {}
+
+            d_topic_detail[t_id]['hosts'][each_host.id] = 1
+            d_topic_detail[t_id]['number'] = len(d_topic_detail[t_id]['hosts'])
+            d_host_topic[t_id] = d_topic_detail[t_id]['tag']
+
+            # print d_topic_detail[t_id]['topics']
+            # print d_topic_detail[t_id]
+            # print each_host.username, d_topic_detail[t_id]['name']
+        # complete tags
+
+        for k, v in d_host_topic.items():
+            tag = tag + " " + str(v)
+
+        tmp_host = Host.format_dict(each_host)
+        tmp_host['image'] =  "/files/icons/" + each_host.icon.split("/")[-1]
+        tmp_host['min_payment'] = int(each_host.min_payment)
+        tmp_host['tag'] =  tag
+
+        self.school_union.append(tmp_host)
+
+        self.d_topic_detail = d_topic_detail
 
     def get_country_province_school(self):
         result = []
