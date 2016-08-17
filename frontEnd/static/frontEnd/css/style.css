@@ -10961,7 +10961,7 @@ body.boxed .ct-topBar + .ct-menuMobile + .ct-pageWrapper nav.navbar,
   background: #e74c46;
   color: #fff;
 }
-.panel {
+/*.panel {
   background: transparent;
   margin: 0 !important;
 }
@@ -11024,7 +11024,7 @@ body.boxed .ct-topBar + .ct-menuMobile + .ct-pageWrapper nav.navbar,
 .panel-motive-o .panel-heading a.collapsed,
 .panel-motive-o .panel-heading a.collapsed * {
   color: #777;
-}
+}*/
 .ct-featuredButton-container a {
   vertical-align: bottom;
   margin-right: 10px;
@@ -11091,7 +11091,7 @@ body.boxed .ct-topBar + .ct-menuMobile + .ct-pageWrapper nav.navbar,
 .ct-callToAction.ct-u-sectionMotive {
   border-color: #333;
 }
-.form-control {
+/*.form-control {
   border-radius: 0;
   box-shadow: none !important;
   outline: none !important;
@@ -11104,7 +11104,7 @@ body.boxed .ct-topBar + .ct-menuMobile + .ct-pageWrapper nav.navbar,
   font-family: "Lato", sans-serif;
   padding: 0.56em 0.76em;
   border-color: #b2b2b2;
-}
+}*/
 .form-control:focus {
   border-color: #e74c46;
 }

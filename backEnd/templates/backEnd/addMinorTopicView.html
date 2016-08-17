@@ -1,0 +1,21 @@
+
+{% load staticfiles %}
+
+<form id= "feature" method = 'post' action = '/dc/minortopic/addMinorTopic/'>
+	 {% csrf_token %}
+	<h2>minor topic name<input name='m_name' value ='' ></h2>
+	<h2>minor topic index<input name='m_index' value ='' ></h2>
+	<h2>minor topic introduction<input name='m_introduction' value ='' ></h2>
+	<h2> Minor Topic 
+	<select name = 'm_topic' form="feature">
+		{% block content %}
+			{% for publisher in topics %}
+			<option value={{publisher.t_name}}>{{publisher.t_name}}</option>
+			{% endfor %}
+		{% endblock %}
+	</select>
+	</h2>
+	</br>
+	<input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>

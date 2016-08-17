@@ -24,7 +24,7 @@ class Host(models.Model):
     phone_number = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
     # 以上为必选信息
-    gender = models.IntegerField(default=1, blank=True)  # 1是男生0是女生
+    gender = models.IntegerField(default=1, blank=True)  # 1是男生 0是女生
     motto = models.CharField(max_length=100, blank=True)
     introduction = models.CharField(max_length=2000, blank=True)
     icon = models.CharField(max_length=200)
@@ -45,6 +45,10 @@ class Host(models.Model):
     bacholor = models.CharField(blank=True, max_length=100)
     graduate = models.CharField(blank=True, max_length=100)
     phd = models.CharField(blank=True, max_length=100)
+
+    bacholor_major = models.CharField(blank=True, max_length=100)
+    graduate_major = models.CharField(blank=True, max_length=100)
+    phd_major = models.CharField(blank=True, max_length=100)
 
 
     def __unicode__(self):
@@ -76,6 +80,11 @@ class Host(models.Model):
         tmpHost["bacholor"] =  self.bacholor
         tmpHost["graduate"] =  self.graduate
         tmpHost["phd"] =  self.phd
+
+        try:
+            tmpHost['id'] = self.id
+        except:
+            pass
         return tmpHost
 
     def get_all_features(self):
@@ -309,10 +318,35 @@ class Topic(models.Model):
     t_tag = models.CharField(max_length=100, null=True)
     t_index = models.IntegerField(null=True)
 
+    def get_minor_topic_of_one_topic(self,topic_name):
+        result = []
+        minor_topics = Minor_Topic.objects.filter(m_topic=topic_name)
+        for minor_topic_atom in minor_topics:
+            result.append(minor_topic_atom.format_dict())
+        return result
+
+
+
+class Minor_Topic(models.Model):
+    m_name = models.CharField(max_length=100)
+    m_click = models.IntegerField(default=0)
+    m_topic = models.CharField(max_length=100)
+    m_index = models.IntegerField(default=0)
+    m_introduction = models.CharField(max_length=100)
+    def format_dict(self):
+        tmp_dict = {}
+        tmp_dict['m_name'] = self.m_name
+        tmp_dict['m_click'] = self.m_click
+        tmp_dict['m_topic'] = self.m_topic
+        tmp_dict['m_index'] = self.m_index
+        tmp_dict['m_introduction'] = self.m_introduction
+        tmp_dict['id'] = self.id
+        return tmp_dict
 
 class Feature(models.Model):
     f_name = models.CharField(max_length=200)
     f_topic = models.CharField(max_length=100)
+
     def get_one_user_features(self, user_id):
         h_topics = Host_Topic.objects.filter(host_id=user_id)
 
@@ -321,12 +355,19 @@ class Feature(models.Model):
         for h_topic_atom in h_topics:
             t_id = h_topic_atom.t_id
             f_id = h_topic_atom.f_id
+            m_id = h_topic_atom.m_id
+
+            #check the topic_id
             if not d_topic_feature.has_key(t_id):
                 d_topic_feature[t_id] = {}
-                d_topic_feature[t_id]['feature_list'] = [f_id]
+                d_topic_feature[t_id]['feature_list'] = []
                 d_topic_feature[t_id]['intro'] = ""
-            else:
-                d_topic_feature[t_id]['feature_list'].append(f_id)
+            
+            feature_atom = {}
+            feature_atom['f_id'] = f_id
+            feature_atom['m_id'] = m_id
+            d_topic_feature[t_id]['feature_list'].append(feature_list)
+
 
 
         # transform the id into chinese
@@ -344,15 +385,26 @@ class Feature(models.Model):
             d_topic_feature_translate[topic_name]['id'] = topic_id
             d_topic_feature_translate[topic_name]['tag'] = topic_tag
             d_topic_feature_translate[topic_name]['feature_list'] = []
+            d_topic_feature_translate[topic_name]['minor_topic_list'] = tmp_topic.get_minor_topic_of_one_topic(topic_name)
 
-            for feature_atom_id in v['feature_list']:
+            #get all minor topics 
+            #
+            
+            #get all feature
+            for feature_atom in v['feature_list']:
+                tmp_feature = {}
+                feature_single  = Feature.objects.get(id=feature_atom['f_id'])
+                minor_singel = Minor_Topic.objects.get(id=feature_atom['m_id'])
+                tmp_feature['f_name'] = feature_single.f_name
+                tmp_feature['m_name'] = minor_singel.m_name
+                tmp_feature['f_id'] = feature_single.id
+                tmp_feature['m_id'] = minor_singel.id
 
-                feature_name = Feature.objects.get(id=feature_atom_id).f_name
-                d_topic_feature_translate[topic_name]['feature_list'].append(feature_name)
-
+                d_topic_feature_translate[topic_name]['feature_list'].append(tmp_feature)
         return  d_topic_feature_translate
 
     def get_one_user_features_with_all_topic(self, user_id):
+        #COMPLETE THE BLANK MINOR TOPIC
         d_topic_feature_translate = self.get_one_user_features(user_id)
         topics = Topic.objects.all().order_by('t_index')
         result = []
@@ -363,6 +415,7 @@ class Feature(models.Model):
                 tmp_dic['name'] = topic_atom.t_name
                 tmp_dic['id'] = topic_atom.id
                 tmp_dic['feature_list'] = []
+                tmp_dic['minor_topic_list'] = topic_atom.get_minor_topic_of_one_topic(topic_atom.t_name)
                 result.append(tmp_dic)
             else:
                 result.append(d_topic_feature_translate[topic_atom.t_name])
@@ -372,6 +425,7 @@ class Feature(models.Model):
 class Host_Topic(models.Model):
     host_id = models.CharField(max_length=100)
     t_id = models.CharField(max_length=100)
+    m_id = models.CharField(max_length=100)  #minor topic
     f_id = models.CharField(max_length=100)  # 关系库
 
 

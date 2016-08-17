@@ -123,6 +123,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             password=password,
                             email=email,
                             phone_number=phone,
+                            education = -1,
                             )
                 #encode password
                 host.password = host.encode_password(password)
@@ -276,28 +277,47 @@ def complete_account(request):
         host = Host.objects.get(email=username)
     except:
         return HttpResponse('你所持有的session并不在数据库中找到对应内容')
+
     if request.method == 'POST':
         if request.POST['self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
             'motto'] and \
                 request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
                 request.POST['qq']:
+
+
             self_introduction = request.POST['self-introduction']
-            gender = request.POST['selectbox']
+            gender = request.POST['gender']
             motto = request.POST['motto']
             min_payment = request.POST['min-payment']
             service_time = request.POST['service-time']
             max_payment = request.POST['max-payment']
             qq = request.POST['qq']
 
-            # print gender
+            #Education Infomation
+            education = request.POST['education'] 
+            try:
+                bacholor = request.POST['bacholor'] 
+                bacholor_major = request.POST['bacholor_major']
+            except:
+                bacholor = ""
+                bacholor_major = ""
+            try:
+                graduate = request.POST['graduate']
+                graduate_major = request.POST['graduate_major'] 
+            except:
+                graduate = ""
+                graduate_major = ""
+            try:
+                phd_major = request.POST['phd_major']
+                phd = request.POST['phd'] 
+            except:
+                phd_major = ""
+                phd = ""
+                
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
 
-            if gender == u'1':
-                host.gender = 0
-            elif gender == u'2':
-                host.gender = 1
-
+            host.gender = gender
             host.introduction = self_introduction
             host.motto = motto
             host.min_payment = min_payment
@@ -306,6 +326,16 @@ def complete_account(request):
             host.h_school = school
             host.state = 1
             host.qq_number = qq
+
+            host.education = education
+            host.bacholor = bacholor
+            host.graduate = graduate
+            host.phd = phd
+            host.bacholor_major = bacholor_major
+            host.graduate_major = graduate_major
+            host.phd_major = phd_major
+
+
             host.save()
             return HttpResponseRedirect('/complete-account-feature')
         else:
@@ -341,6 +371,7 @@ def complete_account_feature(request):
         feature_name = request.POST.get("feature_name")
         host_id = host.id
         showTag = request.POST.get("topic_tag")
+        m_id = request.POST.get("minor_topic_id")
         # check this feature is exist or not
         try:
             feature = Feature.objects.get(f_name=feature_name,
@@ -353,7 +384,8 @@ def complete_account_feature(request):
         host_topic = Host_Topic(
             host_id=host.id,
             t_id=topic_id,
-            f_id=feature.id  # 然后把id相互关联起来
+            f_id=feature.id,  # 然后把id相互关联起来
+            m_id = m_id
         )
         host_topic.save()
 
@@ -365,6 +397,7 @@ def complete_account_feature(request):
 
         Info['data']['topic_tag'] = showTag
         Info['data']['feature_name'] = feature_name
+        Info['data']['m_id'] = m_id
 
         return HttpResponse(json.dumps(Info))
 
@@ -383,6 +416,7 @@ def complete_account_feature(request):
         Info['current_user'] = host
         Info['login_flag'] = True
 
+        #return HttpResponse(json.dumps(Info))
         return render(request, 'frontEnd/complete-account-feature.html', Info)
 
 def delete_feature(request):
@@ -394,6 +428,8 @@ def delete_feature(request):
         feature_name = request.POST.get("feature_name")
         host_id = host.id
         showTag = request.POST.get("topic_tag")
+        m_id = request.POST.get("minor_topic_id")
+
         # check this feature is exist or not
         
         Info = {}
@@ -414,7 +450,8 @@ def delete_feature(request):
             host_topic = Host_Topic.objects.get(
                 host_id=host.id,
                 t_id=topic_id,
-                f_id=feature.id  # 然后把id相互关联起来
+                f_id=feature.id,
+                m_id = m_id
             ).delete()
         except:
             Info['state'] = 404
@@ -425,24 +462,19 @@ def delete_feature(request):
 
         Info['data'] = {}
         Info['data']['topic_tag'] = showTag
+        Info['data']['topic_id'] = topic_id
         Info['data']['feature_name'] = feature_name
+        Info['data']['m_id'] = m_id
         Info['state'] = 0
         Info['message'] = "删除成功"
         return HttpResponse(json.dumps(Info))
+    else:
+        Info = {}
+        Info['state'] = 303
+        Info['message'] = "操作错误，本次操作已被记录"
+        Info['data'] = {}
+        return HttpResponse(json.dumps(Info))
 
-
-def host_center(request):
-    try:
-        username = request.session['email']
-    except:
-        return render_to_response('frontEnd/login.html', {'session_timeout': True})
-
-    try:
-        host = Host.objects.get(email=username)
-    except:
-        return HttpResponse('您所持有的用户名不能匹配任何一个host')
-
-    return HttpResponseRedirect('/user/show/' + host.id)
 
 
 def modify_account(request):
@@ -539,6 +571,9 @@ def image_receive(request):
 def about(request):
     return render(request, "frontEnd/about.html")
 
+def recruit(request):
+    return render(request, "frontEnd/recruitment.html")
+
 
 def service(request):
     menu = Menu.objects.filter(m_index=2).order_by("m_upload_time")
@@ -567,6 +602,39 @@ def service(request):
         result.append(d_topic_question[k.id])
 
     return render(request, "frontEnd/services.html", {"object": result})
+
+
+def host_center(request,method,Oid):
+    Info = {}
+    Info['state'] = 0
+    Info['message'] = ""
+    Info['data'] = {}
+
+    try:
+        username = request.session['email']
+    except:
+        return render_to_response('frontEnd/login.html', {'session_timeout': True})
+
+    try:
+        host = Host.objects.get(email=username)
+        Info['data']['host'] = host.format_dict()
+    except:
+        return HttpResponse('您所持有的用户名不能匹配任何一个host')
+
+
+
+    if method == "edit":
+        return render(request,"frontEnd/center-edit.html",Info)
+    elif method == "manage":
+        return render(request,"frontEnd/center-manage.html",Info)
+    elif method == "auth":
+        return render(request,"frontEnd/center-auth.html",Info)
+    elif method == "detail":
+
+        return render(request,"frontEnd/center-manage-detail.html",Info)     
+    else:
+        return HttpResponseRedirect('/user/show/' + host.id)
+
 
 
 def school(request, method, Oid):

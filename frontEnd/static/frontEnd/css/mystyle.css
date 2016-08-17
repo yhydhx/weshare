@@ -1,3 +1,14 @@
+/*font*/
+/*@font-face
+{
+font-family: "Hiragino Sans GB";
+src: url('{% static 'frontEnd/fonts/dongqing.otf' %}');
+}*/
+
+@font-face {
+font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' %}") format("opentype");
+}
+
 /*common*/
     *{margin:0;padding:0;border: none;}
     body { color: #333; text-align: center; font: 12px "微软雅黑";background-color: #dcf5ed; }
@@ -29,9 +40,69 @@
 	}
 }
 
+/*index*/
+	.IndexSearch{
+		height:100px; 
+		display: flex;
+		justify-content: center;
+		align-items: center; 
+		
+		filter:Alpha(Opacity=50);
+		background-color:rgba(0, 0, 0, 0.5);
+	}
+	.IndexSearchInput{
+		border: 0;
+		border-radius: 5px 0 0 5px;
+		width:80%;
+		height: 40px;
+		padding-left: 10%; 
+
+	}
+	.IndexSearchButton{
+		border: 0;
+		border-radius: 0 5px 5px 0;
+		width:20%;
+		height: 40px;
+		background-color: #FF615E; 
+		color:white;
+		font-family:'Microsoft YaHei'; 
+	}
+
 
 
 /*footer*/
+@media screen and (min-width: 768px){
+	.footerImg{
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-attachment:fixed;
+	background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
+	height:359px;
+
+	display: flex;
+	align-items: center;
+
+	font-family: Hiragino Sans GB; /*冬青*/
+	}
+	.footerImg p{color:white;}
+	.footerImg a{color:white;} a:hover{color:gray;}
+}
+@media screen and (max-width: 768px){
+	.footerImg{
+	background-position: center; 
+	background-attachment:fixed;
+	background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
+
+	display: flex;
+	align-items: center;
+
+	font-family: Hiragino Sans GB; /*冬青*/
+	}
+	.footerImg p{color:white;}
+	.footerImg a{color:white;} a:hover{color:gray;}
+}
+
+
 @media screen and (min-width: 768px){
 	.footerLogo{
 		height: 100px;
@@ -82,7 +153,7 @@
 	}
 	.ssImax{
 	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
-		background-position: center 0; 
+		background-position: center; 
 		background-repeat: no-repeat; 
 		background-attachment:fixed;
 		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
@@ -122,7 +193,7 @@
 	}
 	.ssImax{
 	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
-		background-position: center 0; 
+		background-position: center; 
 		background-repeat: no-repeat; 
 		background-attachment:fixed;
 		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
@@ -154,4 +225,18 @@
 		background-color: #C35556; 
 	    cursor: pointer;
 	}
+}
+
+/*center*/
+.centerLeftbarIcon{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.centerLeftbarButton{
+	font-size: 16px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.centerLeftbarButton a{
+	color: gray;
 }

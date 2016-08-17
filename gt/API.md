@@ -12,16 +12,14 @@ function:
 
 
 API:
+前段提交数据
 {
 	'username' :   ~用户名
 	'phone' :   ~手机号
 	'email' :   ~邮箱
-	'password 
-    'password_confirm 
-	'education  :   ~
-	'bacholor' :   ~
-	'graduate' :   ~
-	'phd' :   ~
+	'password:   ~密码
+    'password_confirm  ~密码验证
+	
 }
 
 
@@ -40,17 +38,22 @@ Info = {
 }
 
 -----------------------------------------------------------------------------------------------
-url: /api/user/register
+url: /api/user/login
 
 method: post
 
 function:
-1. 用户注册信息
-2. 检测部分字段是否为空
-3. 检测密码
-4. 返回错误信息
+1. 用户登录
+2. 返回提示信息
 
 API:
+%%用户提交
+{
+	'email' :  ~ 用户邮箱 
+	'password' :  ~用户密码
+}
+
+
 %%正确的返回信息：
 Info = {
 	state: Int # 0 表示成功，其他数字表示不成功
@@ -64,6 +67,134 @@ Info = {
 	message : ~ 错误提示信息
 	data:{}
 }
+
+
+
+-----------------------------------------------------------------------------------------------
+url: /host_center/edit
+template: frontEnd/center-edit.html
+method: get
+
+function:
+1. 
+
+API:
+
+
+%%正确的返回信息：
+Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message:'注册成功，请登录'  Char # 错误的提示信息
+	data: {
+		'host':{
+			"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+			
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 -1表示未填写 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+		}
+	}
+
+-----------------------------------------------------------------------------------------------
+url: /host_center/manage
+template: frontEnd/center-manage.html
+method: get
+
+function:
+1. 
+
+API:
+
+
+%%正确的返回信息：
+Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message:'注册成功，请登录'  Char # 错误的提示信息
+	data: {
+		'host':{
+			"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+			
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 -1表示未填写 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+		}
+	}
+
+-----------------------------------------------------------------------------------------------
+url: /host_center/auth
+template: frontEnd/center-auth.html
+method: get
+
+function:
+1. 
+
+API:
+
+
+%%正确的返回信息：
+Info = {
+	state: Int # 0 表示成功，其他数字表示不成功
+	message:'注册成功，请登录'  Char # 错误的提示信息
+	data: {
+		'host':{
+			"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+			
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 -1表示未填写 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+		}
+	}
+
+
+
 
 
 
@@ -554,56 +685,6 @@ Info = {
 
 
 
------------------------------------------------------------------------------------------------
-
-
-删除feature
-
-url:   /delete_feature
-method :POST
-
-function :
-1. 删除该用户的该TOPIC下的feature
-
-API:
-
-传输的数据
-
-{
-	'topic_id' : ~ topic的ID
-    "feature_name" :  ~ feature 的名字
-    "topic_tag"  :  ~ char  topic的一个标识符
-}
-
-
-返回：
-
-#查不到用户信息
-
-Info = {
-	state: 404   Int # 0 表示成功，其他数字表示不成功
-	message: ‘找不到该用户’   Char # 错误的提示信息
-	data: {}
-}
-
-#找不到该TOPIC，Feature 
-Info = {
-	state: 404   Int # 0 表示成功，其他数字表示不成功
-	message: ‘删除失败，找不到该Topic或Feature’   Char # 错误的提示信息
-	data: {}
-}
-
-#删除成功
-
-Info = {
-	state: 0   Int # 0 表示成功，其他数字表示不成功
-	message: '删除成功'   Char # 错误的提示信息
-	data: {
-		"feature_name" :  ~ feature 的名字
-    	"topic_tag"  :  ~ char  topic的一个标识符
-	}
-}
-
 
 
 
@@ -642,6 +723,191 @@ API:
 {
     'state': :  ~ int 类似于 404，如果为非零数即为出粗
     'message' : ~ char 出错信息
+}
+
+
+
+
+
+-----------------------------------------------------------------------------------------------
+显示页面
+url:/complete_account_feature/
+method :GET
+
+function :
+1. 显示所有的topic 和topic下的minor topic
+2. 如果用户在该minor topic 添加过feature，显示feature
+
+API:
+
+返回的数据格式：
+
+data = {
+	
+    'login_flag' : True
+    'user_features' : [
+    	{
+            'intro' :  ~ char 话题的介绍
+            'name' : ~char 话题的名字
+            'id' : ~ char 话题ID
+            'tag' : ~ char 话题的小标签
+            'feature_list': [
+            	{
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
+            	},{
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
+            	},
+            	......
+            ]
+            'minor_topic_list' : [
+            	{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},
+            	....
+            ]
+    	},{
+            'intro' :  ~ char 话题的介绍
+            'name' : ~char 话题的名字
+            'id' : ~ char 话题ID
+            'tag' : ~ char 话题的小标签
+            'feature_list': [
+            	{
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
+            	},{
+            		'f_name' :   ~ char feature 的名字 
+	                'm_name' :   ~ char 小标题的名字
+	                'f_id' :   ~ char feature 的ID
+	                'm_id' :   ~ char 小标题的ID
+            	},
+            	......
+            ]
+            'minor_topic_list' : [
+            	{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},{
+            		m_name :  ~ char 小话题的名字
+				    m_topic :   ~ char 所属大话题的名字
+				    m_introduction :  ~ char 小话题的介绍
+            	},
+            	....
+            ]
+    	},
+    	......
+    ]
+	'host' = host,
+
+}
+
+
+-----------------------------------------------------------------------------------------------
+
+
+添加feature
+
+url:   /complete_account_feature/
+method :POST
+
+function :
+1. 添加topic下的minor topic的feature
+2. 如果发生feature 重复，额外输入，返回错误信息
+
+API:
+
+传输的数据
+
+{
+	'topic_id' : ~ topic的ID
+    "feature_name" :  ~ feature 的名字
+
+    "topic_tag"  :  ~ char  要在这个topic下添加的一个标识符
+    "minor_topic_id" : ~ char 要添加的minor_topic 的ID
+}
+
+
+返回：
+
+{
+
+    'state' = 0
+    'message' = "添加成功"
+	'data' = {
+		'topic_tag' :   ~ char  前段传过来的topic的小tag
+		'topic_id' : ~ topic的ID
+		'feature_name' :   ~ 添加的feature ID
+		"m_id" : ~添加的 minor topic ID
+	}
+    
+
+}
+
+
+
+-----------------------------------------------------------------------------------------------
+
+
+删除feature
+
+url:   /delete_feature/{}
+method :POST
+
+function :
+1. 删除该用户的该TOPIC下的feature
+
+API:
+
+传输的数据
+
+{
+	'topic_id' : ~ topic的ID
+    "feature_name" :  ~ feature 的名字
+    "topic_tag"  :  ~ char  topic的一个标识符
+    "m_id" : ~添加的 minor topic ID
+}
+
+
+返回：
+
+#查不到用户信息
+
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘找不到该用户’   Char # 错误的提示信息
+	data: {}
+}
+
+#找不到该TOPIC，Feature 
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘删除失败，找不到该Topic或Feature’   Char # 错误的提示信息
+	data: {}
+}
+
+#删除成功
+
+Info = {
+	state: 0   Int # 0 表示成功，其他数字表示不成功
+	message: '删除成功'   Char # 错误的提示信息
+	data: {
+		"feature_name" :  ~ feature 的名字
+    	"topic_tag"  :  ~ char  topic的一个标识符
+	}
 }
 
 
