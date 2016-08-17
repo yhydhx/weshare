@@ -24,8 +24,12 @@ import os
 import base64
 import time
 import datetime
+from urllib import urlencode, unquote
+import urllib2
 
 SALT = 'hetongshinanshen'
+TENCENT_APPID = 101340075
+TENCENT_APPKEY = '8a66f6a4a93ef09b970afd245ed8b8fc'
 
 
 def index(request):
@@ -61,6 +65,8 @@ def index(request):
     Info['object'] = obj
 
     login_flag = False
+
+
     try:
         # check the user is login or not
         req_username = request.session['email']
@@ -70,7 +76,22 @@ def index(request):
         return render_to_response('frontEnd/index.html', {'current_user': user,
                                                           'login_flag': login_flag}, Info)
     except:
-        return render_to_response('frontEnd/index.html', Info)
+
+        ##########处理qq登录#######
+        try:
+            code = request.GET['code']
+            qdict = {'grant_type': 'authorization_code',
+                     'client_id': TENCENT_APPID,
+                     'client_secret': TENCENT_APPKEY,
+                     'code': code,
+                     'redirect_uri': 'http://www.wshere.com'}
+            address = 'https://graph.qq.com/oauth2.0/token?'+urlencode(qdict)
+            ret_qq_token = urllib2.urlopen(address).read()
+            ret_token = urlencode2dict(ret_qq_token)
+            return render_to_response('frontEnd/index.html', Info)
+
+        except:
+            return render_to_response('frontEnd/index.html', Info)
 
 
 @csrf_exempt
