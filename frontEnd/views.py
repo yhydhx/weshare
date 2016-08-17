@@ -662,7 +662,8 @@ def school(request, method, Oid):
         Info['topics'] = topics
         Info['school'] = School.objects.get(id=Oid)
         Info['allPeople'] = len(school_union)
-        Info['current_user'] = host
+        if login_flag == True:
+            Info['current_user'] = host
 
         return render(request, "frontEnd/school.html", Info)
     else:
