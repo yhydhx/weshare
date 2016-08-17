@@ -32,8 +32,6 @@
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
-    <script src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101340075"
-            charset="utf-8" data-redirecturi="www.wshere.com"></script>
 </head>
 
 <body class="cssAnimate" style="background-color: white; ">
@@ -111,7 +109,7 @@
                             </div>
                             <button type="submit" class="btn btn-motive btn-lg btn-wide" style="margin-top:15px;"><span>登录</span></button>
                             <div style="text-align: right; padding-top: 10%">
-                                <span id="qqLoginBtn"></span>
+                                <img alt="QQ登录" id="qqlogin" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101340075&redirect_uri=http://www.wshere.com&state=test&scope=get_user_info" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png">
                                 <a href="#">微信登录</a> <a href="#">微博登录</a>       <!--先留在这里,到时候加上图标这些-->
                             </div>
                         </div>
@@ -145,11 +143,6 @@
 
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
-<script type="text/javascript">
-        QC.login({
-                btnId:"qqLoginBtn"      //插入按钮的节点id
-        });
-</script>
 
 
 </body>
