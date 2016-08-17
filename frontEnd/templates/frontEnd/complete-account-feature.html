@@ -31,7 +31,32 @@
     <![endif]-->
     <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
 
+    <!-- 添加特质 -->
+    <script>
+    function showFeatures(tag){
+        console.log('aa');
+        console.log(tag);
+        // $("#features").submit(function(){
+            var data1 = $("#"+tag).serialize();
+            console.log(data1);
+            $.ajax({
+                url : "/complete-account-feature/",
+                type : "POST",
+                dataType : "html",
+                data : $("#"+tag).serialize(),
+                success : function(str){
+                    console.log('成功');
+                    console.log(str);
+                    str2 = JSON.parse(str);
+                    console.log(str2);
+                    console.log(str2['data']['feature_name']);
+                    $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span><a href=\"\"><i class=\"fa fa-trash\"></i></a>"+str2['data']['feature_name']+"</span></li>");
+                }
 
+            })
+        // });
+    }
+    </script>
 </head>
 
 <body class="cssAnimate">
@@ -124,40 +149,44 @@
                 <li role="presentation" class="active"><a role="tab" data-toggle="tab">第三步: 个人优势与提供服务</a></li>
             </ul>
         </div>
-        <div class="container">
+        <div class="container" style="width:80%">
+
+            {% block content %}
             <div class="row">
                 <div class="col-md-12 ct-u-paddingTop80">
 
-                    {% block content %}
+
                     {%  for topic in user_features%}
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
-                        <form class="ct-u-sectionBorder" name="{{topic.tag}}" action="/complete-account-feature/"
-                              method="post">
+                        <form class="ct-u-sectionBorder" name="{{topic.tag}}" action="" id="{{topic.id}}">
                             <h2 class="ct-sectionHeader-title">
                                 <small><span>{{topic.name}}</span></small>
                             </h2>
                             <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}">
+                                <div id="{{topic.id}}TXT">
                                 {% for feature in topic.feature_list %}
-                                <li><i class="fa fa-check"></i><span>{{ feature }}</span></li>
+                                <li><i class="fa fa-check"></i><span><a href=""><i class="fa fa-trash"></i></a>{{ feature }}</span></li>
                                 {% endfor %}
+                                </div>
                             </ul>
                             <div class="form-group" style="padding-top: 1px">
                                 <label for="foreign">{{topic.intro}}</label>
                                 <input class="form-control form-control--type2" id="{{topic.tag}}" name="feature_name">
                                 <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>
                                 <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
-                                <button type="submit" class="btn btn-lg btn-wide btn-motive">
-                                    <span>提交</span></button>
+                                <!-- <button type="submit" class="btn btn-lg btn-wide btn-motive" onclick="showFeatures()">
+                                    <span>添加</span></button> -->
 
                             </div>
                         </form>
+                        <button onclick="showFeatures('{{topic.id}}')" class="btn btn-lg btn-wide btn-motive">添加</button>
                     </div>
                     {% endfor %}
-                    {% endblock %}
-                   
 
                 </div>
             </div>
+
+            {% endblock %}
 
 
             <div class="row" style="margin-left: 29%">

@@ -56,6 +56,7 @@ def index(request):
     recommend_host = Host()
     Info = {}
     Info = recommend_host.get_all_classes()
+    Info.update(recommend_host.get_index_statistic())
 
     Info['object'] = obj
 
@@ -75,63 +76,61 @@ def index(request):
 @csrf_exempt
 def init_register(request):  # 暂时统一用用户名注册,以后的一些坑以后再填
     if request.method == 'POST':
-        if request.POST['username'] and request.POST['password'] and request.POST['password-confirm'] \
-                and request.POST['phone'] and request.POST['email'] and request.POST['school']:
-            if request.POST['password'] == request.POST['password-confirm']:  # 初级的用户注册完成了
-                username = request.POST['username']
-                password = request.POST['password']
-                h_school = request.POST['school']
-                phone = request.POST['phone']
-                email = request.POST['email']
+        username = request.POST['username'] 
+        password = request.POST['password']
+        password_confirm = request.POST['password-confirm']
+        phone = request.POST['phone']
+        email = request.POST['email']
+        
 
-                # keep the infomation the user has wrote
-                Info = {}
-                Info['username'] = username
-                Info['h_school'] = h_school
-                Info['phone'] = phone
-                Info['email'] = email
+        Info = {}
+        Info['state'] = 0
+        Info['message'] = ""
+        Info['data'] = {}
+        
+        Info['data']['username'] = username 
+        Info['data']['phone'] = phone 
+        Info['data']['email'] = email 
 
-                if not process_mail(email):
-                    error = '请使用正确格式的邮箱'
-                    Info['error'] = error
-                    Info['email'] = ""
-                    return render_to_response('frontEnd/account.html', Info,
-                                              context_instance=RequestContext(request))
-                if not process_passwd(password):
-                    error = '请使用正确要求的密码'
-                    Info['error'] = error
-                    return render_to_response('frontEnd/account.html', Info,
-                                              context_instance=RequestContext(request))
 
-                if not process_phone_num(phone):
-                    error = '请选择国家区号'
-                    Info['error'] = error
-                    Info['phone'] = ""
-                    return render_to_response('frontEnd/account.html', Info,
-                                              context_instance=RequestContext(request))
-                try:
-                    Host.objects.get(email=email)
-                    error = '您的邮箱已经被注册了'
-                    Info['email'] = ""
-                    return render_to_response('frontEnd/account.html', Info,
-                                              context_instance=RequestContext(request))
-                except:
-                    host = Host(username=username,
-                                password=password,
-                                email=email,
-                                phone_number=phone,
-                                h_school=h_school,
-                                )
-                    host.save()
-                    return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
-            else:
-                error = '两次密码输入要相同'
-                return render_to_response('frontEnd/account.html', {'error': error},
-                                          context_instance=RequestContext(request))
+        #check blank info 
+        if not (username and password  and password_confirm and phone  and email ):
+            Info['state'] = 400
+            Info['message'] = "信息不完整"
+        # check the password is the same or not
+        elif  password_confirm != password:
+            Info['state'] = 401
+            Info['message'] = "两次密码输入要相同"
+        elif not process_mail(email):
+            Info['state'] = 402
+            Info['data']['email'] = ""
+            Info['message'] = '请使用正确格式的邮箱'
+        elif not process_passwd(password):
+            Info['state'] = 403
+            Info['message'] = '请使用正确要求的密码'
+        elif  not process_phone_num(phone):
+            Info['state'] = 404
+            Info['data']['phone'] = ""
+            Info['message'] = '请选择国家区号'
         else:
-            error = '请填满表单中的每一项'
-            return render_to_response('frontEnd/account.html', {'error': error},
-                                      context_instance=RequestContext(request))
+            try:
+                Host.objects.get(email=email)
+                Info['state'] = 405
+                Info['message'] = '您的邮箱已经被注册了'
+                Info['data']['email'] = ""
+            except:
+                host = Host(username=username,
+                            password=password,
+                            email=email,
+                            phone_number=phone,
+                            )
+                #encode password
+                host.password = host.encode_password(password)
+                host.save()
+                return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
+
+        return render_to_response('frontEnd/account.html', Info,
+                                          context_instance=RequestContext(request))
     else:
         return render_to_response('frontEnd/account.html', {'error': False}, context_instance=RequestContext(request))
 
@@ -150,6 +149,8 @@ def login(request):
         if request.POST['email'] and request.POST['password']:
             email = request.POST['email']
             password = request.POST['password']
+            host = Host()
+            password = host.encode_password(password)
             try:
                 user = Host.objects.get(email=email)
 
@@ -306,7 +307,7 @@ def complete_account(request):
             host.state = 1
             host.qq_number = qq
             host.save()
-            return HttpResponseRedirect('/complete_account_feature')
+            return HttpResponseRedirect('/complete-account-feature')
         else:
             return HttpResponse('请把表单填写完整')
     else:
@@ -356,8 +357,14 @@ def complete_account_feature(request):
         )
         host_topic.save()
 
-        Info['topic_tag'] = showTag
-        Info['feature_name'] = feature_name
+        Info = {}
+
+        Info['data'] = {}
+        Info['state'] = 0
+        Info['message'] = ""
+
+        Info['data']['topic_tag'] = showTag
+        Info['data']['feature_name'] = feature_name
 
         return HttpResponse(json.dumps(Info))
 
@@ -375,8 +382,53 @@ def complete_account_feature(request):
         Info['host'] = host,
         Info['current_user'] = host
         Info['login_flag'] = True
-        print Info
+
         return render(request, 'frontEnd/complete-account-feature.html', Info)
+
+def delete_feature(request):
+    if request.method == 'POST':
+        '''
+        renew the feature
+        '''
+        topic_id = request.POST.get('topic_id')
+        feature_name = request.POST.get("feature_name")
+        host_id = host.id
+        showTag = request.POST.get("topic_tag")
+        # check this feature is exist or not
+        
+        Info = {}
+        Info['state'] = 0
+        Info['message'] = ""
+        Info['data'] = {}
+
+        #find the host
+        try:
+            host = Host.objects.get(email=username)
+        except:
+            Info['state'] = 404
+            Info['message'] = "找不到这个host"
+            return HttpResponse(json.dumps(Info))
+        #find and delete the feature
+        try:
+            feature = Feature.objects.get(f_name=feature_name,f_topic=topic_id)
+            host_topic = Host_Topic.objects.get(
+                host_id=host.id,
+                t_id=topic_id,
+                f_id=feature.id  # 然后把id相互关联起来
+            ).delete()
+        except:
+            Info['state'] = 404
+            Info['message'] = "找不到这个feature"
+            return HttpResponse(json.dumps(Info))
+
+        Info = {}
+
+        Info['data'] = {}
+        Info['data']['topic_tag'] = showTag
+        Info['data']['feature_name'] = feature_name
+        Info['state'] = 0
+        Info['message'] = "删除成功"
+        return HttpResponse(json.dumps(Info))
 
 
 def host_center(request):
@@ -583,7 +635,7 @@ def school(request, method, Oid):
         Info['login_flag'] = True
         Info['object'] = hosts
         Info['topics'] = d_topic_detail.values()
-
+        Info['school'] = School.objects.get(id=Oid)
         Info['allPeople'] = len(hosts)
 
         return render(request, "frontEnd/school.html", Info)

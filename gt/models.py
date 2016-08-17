@@ -15,6 +15,8 @@ from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template import Context, loader
 from gt.settings import *
 
+import hashlib
+
 
 class Host(models.Model):
     username = models.CharField(max_length=50)
@@ -30,15 +32,51 @@ class Host(models.Model):
     service_time = models.CharField(max_length=100, default=True)
     max_payment = models.FloatField(default=0)
     min_payment = models.FloatField(default=0)
-    h_school = models.CharField(max_length=200)
+    
     state = models.IntegerField(default=0)  # normal user  => 0  examing => 1  sharer => 2
 
     birth = models.CharField(blank=True, max_length=100)
     qq_number = models.CharField(blank=True, max_length=20)
     wechat = models.CharField(blank=True, max_length=20)
+    h_school = models.CharField(max_length=200)
+
+    #Education Infomation
+    education = models.IntegerField(default=0)  # bachlor => 0  graduate => 1 phd => 2 else => 3
+    bacholor = models.CharField(blank=True, max_length=100)
+    graduate = models.CharField(blank=True, max_length=100)
+    phd = models.CharField(blank=True, max_length=100)
+
 
     def __unicode__(self):
         return self.username
+
+    def encode_password(self,s):
+        return hashlib.md5(s).hexdigest()
+
+    def format_dict(self):
+        tmpHost = {}
+        tmpHost["username"] =  self.username
+        tmpHost["gender"] =  self.gender
+        tmpHost["motto"] =  self.motto
+        tmpHost["introduction"] =  self.introduction
+        tmpHost["icon"] =  self.icon
+        tmpHost["orders"] =  self.orders
+        tmpHost["service_time"] =  self.service_time
+        tmpHost["max_payment"] =  self.max_payment
+        tmpHost["min_payment"] =  self.min_payment
+        
+        tmpHost["state"] =  self.state
+
+        tmpHost["birth"] =  self.birth
+        tmpHost["qq_number"] =  self.qq_number
+        tmpHost["wechat"] =  self.wechat
+
+        #Education Infomation
+        tmpHost["education"] =  self.education
+        tmpHost["bacholor"] =  self.bacholor
+        tmpHost["graduate"] =  self.graduate
+        tmpHost["phd"] =  self.phd
+        return tmpHost
 
     def get_all_features(self):
         host_topics = Host_Topic.objects.filter(host_id=self.id)
@@ -105,6 +143,7 @@ class Host(models.Model):
                 t_id = h_topic_atom.t_id
                 f_id = h_topic_atom.f_id
                 if not d_topic_detail.has_key(t_id):
+                    print t_id
                     single_topic = Topic.objects.get(id=t_id)
                     d_topic_detail[t_id] = {}
                     d_topic_detail[t_id]['name'] = single_topic.t_name
@@ -119,7 +158,7 @@ class Host(models.Model):
 
                 # print d_topic_detail[t_id]['topics']
                 # print d_topic_detail[t_id]
-                print each_host.username, d_topic_detail[t_id]['name']
+                #print each_host.username, d_topic_detail[t_id]['name']
             # complete tags
             for k, v in d_host_topic.items():
                 tag = tag + " " + str(v)
@@ -128,10 +167,17 @@ class Host(models.Model):
             each_host.min_payment = int(each_host.min_payment)
             each_host.tag = tag
 
+
+
         Info = {}
-        Info['hosts'] = hosts
+        Info['hosts'] = []
+
+        for host_atom in hosts:
+            tmpHost = host_atom.format_dict()
+            Info['hosts'].append(tmpHost)
+
         Info['topics'] = d_topic_detail.values()
-        print Info['topics']
+        #print Info['topics']
         return Info
 
     def get_user_message(self,user_id):
@@ -141,6 +187,53 @@ class Host(models.Model):
             msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
         
         return msgs
+
+    def get_index_statistic(self):
+        '''
+        get guests'number and hosts' number 
+        And schools' number
+        '''
+        Info = {}
+        Info['register_num'] = 0
+        Info['host_num'] = 0
+        Info['normal_num'] = 0
+        hosts = Host.objects.all()
+        univ = {}
+        for host_atom in hosts:
+            Info['register_num'] += 1
+            if host_atom.state == 2:
+                Info['host_num'] += 1
+            elif host_atom.state == 1 or host_atom.state == 0:
+                Info['normal_num'] += 1
+
+            #Get the School Infomation 
+            if not univ.has_key(host_atom.h_school):
+                univ[host_atom.h_school] = 1
+            else:
+                univ[host_atom.h_school] += 1
+
+        Info['school_num'] = len(univ)
+
+        return Info
+
+
+    def search_user_with_key(self,keyword):
+        result_hosts = []
+        all_hosts = Host.objects.all()
+        
+        for host_atom in all_hosts:
+            #first step : search the name
+            if keyword in host_atom.username:
+                result_hosts.append(host_atom)
+            #second step : search the introduction
+            if keyword in host_atom.introduction:
+                result_hosts.append(host_atom)
+            #third type , search the motto
+            if keyword in host_atom.motto:
+                result_hosts.append(host_atom)
+
+        return result_hosts
+
 
 
 class Country(models.Model):
@@ -158,6 +251,16 @@ class School(models.Model):
     s_province = models.CharField(max_length=200)
     s_display_index = models.IntegerField()
     s_student_number = models.IntegerField()
+    s_image = models.CharField(max_length=100,null=True)
+    
+    def format_dict(self):
+        tmp_school = {}
+        tmp_school['s_name'] = self.s_name
+        tmp_school['s_province'] = self.s_province
+        tmp_school['s_display_index'] = self.s_display_index
+        tmp_school['s_student_number'] = self.s_student_number
+        return tmp_school
+
     def get_country_province_school(self):
         result = []
         countries = Country.objects.all()
@@ -324,9 +427,7 @@ class Mail(models.Model):
 
 
 
-'''
-=======
->>>>>>> d629c30bae50c156b1ae6f8819cd90061c3e4f57
+
     def sendMail(self, subject, to, content):
         # to = ['yhydhx@126.com']
 
@@ -425,8 +526,6 @@ class Mail(models.Model):
 
         msg.send()
 
-<<<<<<< HEAD
-'''
 
 
 

@@ -2,8 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0739ecb5-f8ce-40a7-a704-d49c1a062d3b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gt/API.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gt/static/upload/icons/12abfc9628f2a827f7b25296d7c7f252.jpeg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gt/static/upload/icons/1a2046812416a4f177a1ac5768b3a46f.jpeg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/payment/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/payment/alipay.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/payment/config.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/payment/hashcompact.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/payment/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/payment/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/payment/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/static/frontEnd/css/style.css" afterPath="$PROJECT_DIR$/frontEnd/static/frontEnd/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/static/frontEnd/css/test.css" afterPath="$PROJECT_DIR$/frontEnd/static/frontEnd/css/test.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/static/frontEnd/js/schoolsearch/allunivlist.js" afterPath="$PROJECT_DIR$/frontEnd/static/frontEnd/js/schoolsearch/allunivlist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/account.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account-feature.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account-feature.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account-icon.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account-icon.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/footer.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/index.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/modify-account.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/modify-account.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/onepage.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/onepage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/school-search.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/school-search.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/school.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/school.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/services.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/services.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/views.py" afterPath="$PROJECT_DIR$/frontEnd/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gt/models.py" afterPath="$PROJECT_DIR$/gt/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gt/settings.py" afterPath="$PROJECT_DIR$/gt/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gt/urls.py" afterPath="$PROJECT_DIR$/gt/urls.py" />
     </list>
     <ignored path="weshare.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,34 +63,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gt/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="324" column="0" selection-start-line="324" selection-start-column="0" selection-end-line="324" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.029032258">
-              <caret line="84" column="55" selection-start-line="84" selection-start-column="55" selection-end-line="84" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="523" column="61" selection-start-line="523" selection-start-column="61" selection-end-line="523" selection-end-column="61" />
-              <folding>
-                <element signature="e#42#72#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.028037382">
+              <caret line="575" column="61" selection-start-line="575" selection-start-column="61" selection-end-line="575" selection-end-column="61" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -64,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/gt/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="75" selection-start-line="10" selection-start-column="75" selection-end-line="10" selection-end-column="75" />
+              <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -109,9 +122,9 @@
         <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account-icon.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="245" column="8" selection-start-line="245" selection-start-column="8" selection-end-line="245" selection-end-column="8" />
+              <caret line="227" column="8" selection-start-line="227" selection-start-column="8" selection-end-line="227" selection-end-column="8" />
               <folding>
-                <marker date="1470317836000" expanded="true" signature="11489:11499" placeholder="{...}" />
+                <marker date="1471148985000" expanded="true" signature="10323:10333" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -178,14 +191,15 @@
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/host-index.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" />
-        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" />
         <option value="$PROJECT_DIR$/frontEnd/tools.py" />
         <option value="$PROJECT_DIR$/frontEnd/urls.py" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/iforget.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/ichange.html" />
         <option value="$PROJECT_DIR$/gt/models.py" />
-        <option value="$PROJECT_DIR$/frontEnd/views.py" />
         <option value="$PROJECT_DIR$/gt/settings.py" />
+        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/onepage.html" />
+        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" />
+        <option value="$PROJECT_DIR$/frontEnd/views.py" />
       </list>
     </option>
   </component>
@@ -369,8 +383,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -645,14 +659,14 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19709209" sideWeight="0.4960396" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2003231" sideWeight="0.4960396" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.112021856" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18630137" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44808742" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08196721" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23087431" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23482428" sideWeight="0.5039604" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -809,13 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/onepage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontEnd/static/frontEnd/js/phone_input/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.875">
@@ -931,33 +938,36 @@
     <entry file="file://$PROJECT_DIR$/gt/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="324" column="0" selection-start-line="324" selection-start-column="0" selection-end-line="324" selection-end-column="0" />
-          <folding />
+          <caret line="425" column="0" selection-start-line="425" selection-start-column="0" selection-end-line="425" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/onepage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="25.489195">
+          <caret line="957" column="0" selection-start-line="957" selection-start-column="0" selection-end-line="957" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.029032258">
-          <caret line="84" column="55" selection-start-line="84" selection-start-column="55" selection-end-line="84" selection-end-column="55" />
-          <folding />
+        <state vertical-scroll-proportion="0.8231827">
+          <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="523" column="61" selection-start-line="523" selection-start-column="61" selection-end-line="523" selection-end-column="61" />
-          <folding>
-            <element signature="e#42#72#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.028037382">
+          <caret line="575" column="61" selection-start-line="575" selection-start-column="61" selection-end-line="575" selection-end-column="61" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gt/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="75" selection-start-line="10" selection-start-column="75" selection-end-line="10" selection-end-column="75" />
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -994,9 +1004,9 @@
     <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account-icon.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="245" column="8" selection-start-line="245" selection-start-column="8" selection-end-line="245" selection-end-column="8" />
+          <caret line="227" column="8" selection-start-line="227" selection-start-column="8" selection-end-line="227" selection-end-column="8" />
           <folding>
-            <marker date="1470317836000" expanded="true" signature="11489:11499" placeholder="{...}" />
+            <marker date="1471148985000" expanded="true" signature="10323:10333" placeholder="{...}" />
           </folding>
         </state>
       </provider>
