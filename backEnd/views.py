@@ -404,8 +404,7 @@ def minortopic(request, method, Oid):
         return HttpResponseRedirect('/dc/minortopic/show/')
 
     elif method == 'delete':
-        Feature.objects.filter(id=Oid).delete()
-
+        Minor_Topic.objects.filter(id=Oid).delete()
         return HttpResponseRedirect('../show/')
     elif method == 'add':
         topics = Topic.objects.all()

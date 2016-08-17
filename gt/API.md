@@ -600,7 +600,7 @@ Info = {
 	            'tag' :  ~   char  这个topic的标签（缩写）
 	            'number' :  ~   int 这个topic下的host数量
 	            'index' :  ~   从0递增
-	            'topics' :  {  ~ 每个host的信息
+	            'hosts' :  {  ~ 每个host的信息
 	            	'host_id_1' :1,
 	            	'host_id_1' :1,
 	            	'host_id_1' :1,
@@ -611,7 +611,7 @@ Info = {
 	            'tag' :  ~   char  这个topic的标签（缩写）
 	            'number' :  ~   int 这个topic下的host数量
 	            'index' :  ~   从0递增
-	            'topics' :  {  ~ 每个host的信息
+	            'hosts' :  {  ~ 每个host的信息
 	            	'host_id_1' :1,
 	            	'host_id_1' :1,
 	            	'host_id_1' :1,
