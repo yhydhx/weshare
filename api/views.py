@@ -303,4 +303,9 @@ def school(request, method, Oid):
     else:
         return HttpResponse("not found")
 
+def test(request):
+    host = Host.objects.all()[0]
+    d = {}
+
+    return HttpResponse(dir(host))
 
