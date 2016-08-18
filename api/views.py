@@ -319,8 +319,7 @@ def school(request, method, Oid):
         return HttpResponse("not found")
 
 def test(request):
-    host = Host.objects.all()[0]
-    d = {}
+    Info['test'] = "this is a test"
 
-    return HttpResponse(dir(host))
+    return HttpResponse(json.dumps(Info),content_type="application/json")
 
