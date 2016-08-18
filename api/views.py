@@ -25,6 +25,7 @@ import time
 import datetime
 from frontEnd.tools import *
 
+
 def output_init():
     Info = {}
     Info['state'] = 0
@@ -49,7 +50,7 @@ def index(request):
     Info['data'].update( host.get_all_classes())
     Info['data'].update(host.get_index_statistic())
 
-    return HttpResponse(json.dumps(Info))
+    return HttpResponse(json.dumps(Info),content_type="application/json")
 
 
 
@@ -81,7 +82,7 @@ def user(request, method, Oid):
         Info['data']['current_user'] = user.format_dict()
         Info['data']['login_flag'] = login_flag
 
-        return HttpResponse(json.dumps(Info))
+        return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == 'register':
         if request.method == 'POST':
@@ -138,9 +139,9 @@ def user(request, method, Oid):
                     host.save()
                     Info['state'] = 0
                     Info['message'] = "注册成功"
-                    return HttpResponse(json.dumps(Info))
+                    return HttpResponse(json.dumps(Info),content_type="application/json")
 
-            return HttpResponse(json.dumps(Info))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
         else:
             #method = "get"
             Info['state'] = '404'
@@ -159,20 +160,20 @@ def user(request, method, Oid):
                     if user.password != password:
                         Info['state'] = 404
                         Info['message'] = "密码错误"
-                        return HttpResponse(json.dumps(Info))
+                        return HttpResponse(json.dumps(Info),content_type="application/json")
                     else:
                         request.session['email'] = email
                         Info['message'] = "登录成功"
                         Info['state'] = 0
-                        return HttpResponse(json.dumps(Info))
+                        return HttpResponse(json.dumps(Info),content_type="application/json")
                 except:
                     Info['message'] = '用户名或者密码不正确,或者账户处于被冻结的状态'
                     Info['state'] = 400
-                    return HttpResponse(json.dumps(Info))
+                    return HttpResponse(json.dumps(Info),content_type="application/json")
         else:
             Info['state'] = 303
             Info['message'] = "您的操作失误，本次操作已被记录"
-            return HttpResponse(json.dumps(Info))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == "msg":
         # check whether the user is online
@@ -211,6 +212,20 @@ def user(request, method, Oid):
         return render(request, "frontEnd/404.html")
 
 
+def register_host(request,method,Oid):
+    Info = output_init()
+    try:
+        username = request.session['email']
+        host = Host.objects.get(email=username)
+    except:
+        Info['state'] = 404
+        Info['message'] = "找不到该用户"
+
+    if method == "step1":
+        pass
+
+
+
 @csrf_exempt
 def school(request, method, Oid):
     try:
@@ -224,7 +239,7 @@ def school(request, method, Oid):
         s = School()
         result = s.get_country_province_school()
         Info['data']['all_countries'] = result
-        return HttpResponse(json.dumps(Info))
+        return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == "detail":
         #check if the school is exist
@@ -233,7 +248,7 @@ def school(request, method, Oid):
         except:
             Info['state'] = 404
             Info['message'] = "找不到这个学校"
-            return HttpResponse(json.dumps(Info))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
 
         # find the passed host of the school
         hosts = Host.objects.filter(state=2, h_school=Oid)
@@ -299,7 +314,7 @@ def school(request, method, Oid):
         Info['school'] = School.objects.get(id=Oid).format_dict()
         Info['allPeople'] = len(hosts)
 
-        return HttpResponse(json.dumps(Info))
+        return HttpResponse(json.dumps(Info),content_type="application/json")
     else:
         return HttpResponse("not found")
 
