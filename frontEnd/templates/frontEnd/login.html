@@ -1,66 +1,8 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<!--[if IE 8 ]>
-<html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>
-<html class="no-js ie9" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
-<head lang="en">
-    <meta charset="UTF-8">
-    <meta name="description" content="Rentica - The Best One Yet">
-    <meta name="author" content="CreateIT">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 --> 
 
-    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
-    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
-
-    <title>Rentica - HTML Template</title>
-
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
-
-    <!--[if lt IE 9]>
-    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
-    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
-    <![endif]-->
-    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
-    <script type="text/javascript" sre="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101340075" charset="utf-8"></script>
-</head>
-
+{% block body %}<!-- 网页主体 -->
 <body class="cssAnimate" style="background-color: white; ">
-<div class="ct-preloader-container">                                            <!-- Preloader -->
-    <div class='ct-preloader'>
-        <div>
-            <div>
-                <div>
-                    <div>
-                        <div>
-                            <div>
-                                <div>
-                                    <div>
-                                        <div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-{% include "frontEnd/nav.html" %}
-
 
 <!-- <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop50" data-height="840" data-type="pattern"
          data-bg-image="./assets/images/content/cars/bg-05.jpg"
@@ -118,36 +60,27 @@
             </div>
         </div>
     </div>
-
-
 <!-- </section> -->
+</body>
+{% endblock %}
 
 
-{% include "frontEnd/footer.html" %}
 
-</div>
 
-<!-- JavaScripts -->
-<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
-<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
-
-<script src="{% static 'frontEnd/js/main.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
+{% block js %}
+<!-- 模板自带：勿删 -->
+<!-- <script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
-
 <script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script> -->
 
-<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+
+<!-- 徐锐 -->
+<!-- <script type="text/javascript" sre="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101340075" charset="utf-8"></script> 
 <script type="text/javascript">
         QC.login({
                 btnId:"qqLoginBtn"      //插入按钮的节点id
         });
 </script>
-
-
-</body>
-</html>
+-->
+{% endblock %}
