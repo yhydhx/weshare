@@ -21,4 +21,4 @@ class settings:
   ALIPAY_NOTIFY_URL='http://www.wshere.com/alipay/notify/'  
 
   # 不知道什么东西，集成中需要
-  ALIPAY_NOTIFY_URL='http://www.wshere.com/alipay/show/'  
+  ALIPAY_SHOW_URL='http://www.wshere.com/alipay/show/'  

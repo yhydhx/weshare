@@ -1,6 +1,7 @@
 {% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
 {% load staticfiles %}<!-- 加载全局变量 --> 
 
+
 {% block body %}<!-- 网页主体 -->
 <body class="cssAnimate" style="background-color: white; ">
 
@@ -50,7 +51,7 @@
                             </div>
                             <button type="submit" class="btn btn-motive btn-lg btn-wide" style="margin-top:15px;"><span>登录</span></button>
                             <div style="text-align: right; padding-top: 10%">
-                                <span id="qqLoginBtn"></span>
+                                <a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101340075&redirect_uri=http://www.wshere.com&state=test&scope=get_user_info"><img alt="QQ登录" id="qqlogin" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
                                 <a href="#">微信登录</a> <a href="#">微博登录</a>       <!--先留在这里,到时候加上图标这些-->
                             </div>
                         </div>
@@ -74,7 +75,6 @@
 <script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script> -->
 
-
 <!-- 徐锐 -->
 <!-- <script type="text/javascript" sre="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101340075" charset="utf-8"></script> 
 <script type="text/javascript">
@@ -84,3 +84,4 @@
 </script>
 -->
 {% endblock %}
+

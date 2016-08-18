@@ -25,6 +25,7 @@ import time
 import datetime
 from frontEnd.tools import *
 
+
 def output_init():
     Info = {}
     Info['state'] = 0
@@ -49,7 +50,7 @@ def index(request):
     Info['data'].update( host.get_all_classes())
     Info['data'].update(host.get_index_statistic())
 
-    return HttpResponse(json.dumps(Info))
+    return HttpResponse(json.dumps(Info),content_type="application/json")
 
 
 
@@ -81,7 +82,7 @@ def user(request, method, Oid):
         Info['data']['current_user'] = user.format_dict()
         Info['data']['login_flag'] = login_flag
 
-        return HttpResponse(json.dumps(Info))
+        return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == 'register':
         if request.method == 'POST':
@@ -138,9 +139,9 @@ def user(request, method, Oid):
                     host.save()
                     Info['state'] = 0
                     Info['message'] = "注册成功"
-                    return HttpResponse(json.dumps(Info))
+                    return HttpResponse(json.dumps(Info),content_type="application/json")
 
-            return HttpResponse(json.dumps(Info))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
         else:
             #method = "get"
             Info['state'] = '404'
@@ -159,20 +160,20 @@ def user(request, method, Oid):
                     if user.password != password:
                         Info['state'] = 404
                         Info['message'] = "密码错误"
-                        return HttpResponse(json.dumps(Info))
+                        return HttpResponse(json.dumps(Info),content_type="application/json")
                     else:
                         request.session['email'] = email
                         Info['message'] = "登录成功"
                         Info['state'] = 0
-                        return HttpResponse(json.dumps(Info))
+                        return HttpResponse(json.dumps(Info),content_type="application/json")
                 except:
                     Info['message'] = '用户名或者密码不正确,或者账户处于被冻结的状态'
                     Info['state'] = 400
-                    return HttpResponse(json.dumps(Info))
+                    return HttpResponse(json.dumps(Info),content_type="application/json")
         else:
             Info['state'] = 303
             Info['message'] = "您的操作失误，本次操作已被记录"
-            return HttpResponse(json.dumps(Info))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == "msg":
         # check whether the user is online
@@ -211,6 +212,20 @@ def user(request, method, Oid):
         return render(request, "frontEnd/404.html")
 
 
+def register_host(request,method,Oid):
+    Info = output_init()
+    try:
+        username = request.session['email']
+        host = Host.objects.get(email=username)
+    except:
+        Info['state'] = 404
+        Info['message'] = "找不到该用户"
+
+    if method == "step1":
+        pass
+
+
+
 @csrf_exempt
 def school(request, method, Oid):
     try:
@@ -224,7 +239,7 @@ def school(request, method, Oid):
         s = School()
         result = s.get_country_province_school()
         Info['data']['all_countries'] = result
-        return HttpResponse(json.dumps(Info))
+        return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == "detail":
         #check if the school is exist
@@ -233,74 +248,28 @@ def school(request, method, Oid):
         except:
             Info['state'] = 404
             Info['message'] = "找不到这个学校"
-            return HttpResponse(json.dumps(Info))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
 
         # find the passed host of the school
-        hosts = Host.objects.filter(state=2, h_school=Oid)
-        d_topic_detail = {}
-        all_host = []
-        for each_host in hosts:
-            '''
-            format the payment 
-            fix the path of the image 
-            find all tags:
-            tags
-            find the topics of this users.
-            then construct a dict for topic id -> topic tag and topic name 
-            make a list of topic
-            finally add each tag to users.
+        school = School()
+        school_union, topics = school.get_single_school_detail(Oid)
 
-            '''
-            tmpHost = {}
-            tag = ""
-            if each_host.gender == 1:
-                tag += "male "
-            else:
-                tag += "female "
+        Info = output_init()
+        Info['data']['login_flag'] = login_flag
+        Info['data']['object'] = school_union
+        Info['data']['topics'] = topics
+        Info['data']['school'] = School.objects.get(id=Oid)
+        Info['data']['allPeople'] = len(school_union)
+        if login_flag == True:
+            Info['data']['current_user'] = host
 
-            h_topics = Host_Topic.objects.filter(host_id=each_host.id)
-
-            # classification
-            d_host_topic = {}
-            for h_topic_atom in h_topics:
-                t_id = h_topic_atom.t_id
-                f_id = h_topic_atom.f_id
-                if not d_topic_detail.has_key(t_id):
-                    single_topic = Topic.objects.get(id=t_id)
-                    d_topic_detail[t_id] = {}
-                    d_topic_detail[t_id]['name'] = single_topic.t_name
-                    d_topic_detail[t_id]['tag'] = single_topic.t_tag
-                    d_topic_detail[t_id]['number'] = 0
-                    d_topic_detail[t_id]['index'] = len(d_topic_detail)
-                    d_topic_detail[t_id]['topics'] = {}
-
-                d_topic_detail[t_id]['topics'][each_host.id] = 1
-                d_topic_detail[t_id]['number'] = len(d_topic_detail[t_id]['topics'])
-                d_host_topic[t_id] = d_topic_detail[t_id]['tag']
-
-                # print d_topic_detail[t_id]['topics']
-                # print d_topic_detail[t_id]
-                # print each_host.username, d_topic_detail[t_id]['name']
-            # complete tags
-
-            for k, v in d_host_topic.items():
-                tag = tag + " " + str(v)
-
-            tmpHost = each_host.format_dict()
-            tmpHost['image'] = "/files/icons/" + each_host.icon.split("/")[-1]
-            tmpHost['min_payment'] = int(each_host.min_payment)
-            tmpHost['tag'] = tag
-            all_host.append(tmpHost)
-
-        Info = {}
-        Info['login_flag'] = login_flag
-        Info['object'] = all_host
-        Info['topics'] = d_topic_detail.values()
-        Info['school'] = School.objects.get(id=Oid).format_dict()
-        Info['allPeople'] = len(hosts)
-
-        return HttpResponse(json.dumps(Info))
+        return HttpResponse(json.dumps(Info),content_type="application/json")
     else:
         return HttpResponse("not found")
 
+def test(request):
+    Info = output_init()
+    Info['test'] = "this is a test"
+    Info['data']['a'] = 'b' 
+    return HttpResponse(json.dumps(Info),content_type="application/json")
 

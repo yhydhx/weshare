@@ -1,8 +1,10 @@
 {% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
 {% load staticfiles %}<!-- 加载全局变量 --> 
 
+
 {% block body %}<!-- 网页主体 -->
 <body class="cssAnimate">
+<<<<<<< HEAD
     <!-- 首页轮播模块 -->
     <div class="ct-slick ct-js-slick" data-adaptiveHeight="true" data-animations="true" data-autoplay="true" data-infinite="true" data-autoplaySpeed="6000" data-draggable="false" data-touchMove="false" data-arrows="true" data-items="1">
         <div class="item" data-bg="">
@@ -102,7 +104,6 @@
     <!-- 首页地图-发现学校 模块 -->
     <section class="ct-u-marginTop90 ct-u-paddingBottom10">
         <div class="container">
-
             <div id='school' class="ct-sectionHeader ct-u-marginBottom70">
                 <h2 class="ct-sectionHeader-title"><small>探索 <span>学校</span></small></h2>
                 <div class="ct-sectionHeader-separator">
@@ -113,12 +114,11 @@
                 </div>
                 <p>发现校园达人</p>
             </div>
-
             <div class="row">
-    <div class="itemCon" style="float: left">
-        <div id="ChinaMap" style="margin-left: 20%;"></div>
-        <div id="stateTip" style="position: absolute;left: 100%;text-align: left;display: inline;"></div>
-    </div>
+                <div class="itemCon" style="float: left">
+                    <div id="ChinaMap" style="margin-left: 20%;"></div>
+                    <div id="stateTip" style="position: absolute;left: 100%;text-align: left;display: inline;"></div>
+                </div>
                 <div id="mapTipContent" style="width: 900px;margin: 0 auto;display: none">
                     
                     {% block content %}
@@ -136,16 +136,11 @@
                         </div>
 
                         {% endfor %}
-                    {% endblock %}
-
-                    
+                    {% endblock %}   
                 </div>
-
-                
             </div>
         </div>
     </section>
-
 
 
     <!-- 首页发现话题模块 -->
@@ -201,15 +196,12 @@
         <a href="#" class="btn btn-motive ct-loadMoreButton"><span class="h2"><small>Load <b>More</b><i class="fa fa-arrow-down"></i></small></span></a>
     </div>
 
-
 </body>
 {% endblock %}
 
 
+
 {% block js %}
-<!-- 模板JS -->
-<script src="{% static 'frontEnd/js/dependencies.js'%}" ></script>
-<script src="{% static 'frontEnd/js/main.js'%}"  ></script>
 <!-- 首页轮播JS -->
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js'%}"  ></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js'%}" ></script>
@@ -218,17 +210,16 @@
 <script type="text/javascript" src="{% static 'frontEnd/js/map/res/chinaMapConfig.js'%}" ></script>
 <script type="text/javascript" src="{% static 'frontEnd/js/map/map-min.js'%}" ></script>
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         $('#ChinaMap').SVGMap({
             mapWidth: 806,
             mapHeight: 396
         });
     });
-    function findSchool() {  
-        window.scrollTo(100,800);   
-    } 
+    function findSchool() {
+        window.scrollTo(100, 800);
+    }
 </script>
-
 
 <!-- 模板自带：勿删 -->
 <!-- <script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js'%}"  ></script>
