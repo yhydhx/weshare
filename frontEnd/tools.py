@@ -78,3 +78,12 @@ def judge_gender(gender):
         return True
     else:
         return False
+
+
+def urlencode2dict(urlencoded):
+    dict = {}
+    tmp_list = urlencoded.split('&')
+    for equel in tmp_list:
+        tmp_equal = equel.split('=')
+        dict[tmp_equal[0]] = tmp_equal[1]
+    return dict
