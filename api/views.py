@@ -319,6 +319,7 @@ def school(request, method, Oid):
         return HttpResponse("not found")
 
 def test(request):
+    Info = output_init()
     Info['test'] = "this is a test"
 
     return HttpResponse(json.dumps(Info),content_type="application/json")
