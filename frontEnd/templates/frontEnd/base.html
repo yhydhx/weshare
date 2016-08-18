@@ -32,15 +32,18 @@
     <script src="{% static 'frontEnd/js/map/lib/jquery-1.11.1.min.js'%}"></script><!-- jQuery依赖：必须在首位 -->
     <script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js'%}" ></script><!-- bootstrap -->
 	<!-- 模板自带：请勿删除 -->
-	<script src="{% static 'frontEnd/js/dependencies.js'%}" ></script>
-	<script src="{% static 'frontEnd/js/main.js'%}"  ></script>
+
     <!-- <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script> -->
 </head>
 
 {% include "frontEnd/nav.html" %}<!-- 加载导航栏 -->
 
 {% block body %}{% endblock %}<!-- 网页主体 -->
-{% block js %}{% endblock %}<!-- 网页JS -->
 
 {% include "frontEnd/footer.html" %}<!-- 加载footer -->
+
+{% block js %}{% endblock %}<!-- 网页JS -->
+<script src="{% static 'frontEnd/js/dependencies.js'%}" ></script><!-- 模板自带JS -->
+<script src="{% static 'frontEnd/js/main.js'%}"  ></script><!-- 模板自带JS -->
+
 </html>
