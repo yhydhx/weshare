@@ -1,5 +1,6 @@
 {% load staticfiles %}
-<div class="ct-preloader-container">                                            <!-- Preloader -->
+<!-- 加载特效：旋转 -->
+<div class="ct-preloader-container">
     <div class='ct-preloader'>
         <div>
             <div>
@@ -23,77 +24,43 @@
     </div>
 </div>
 
-{% if session_timeout %}
-<p style="color: #ffffff; background-color: #ec8c8c"> 您的session 已经失效,请重新登录 </p>
-{% endif %}
-
+<!-- 手机端侧滑菜单 -->
 <div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
-                                                              alt=""/></a></div>
+    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/weshare/logo.png' %}" style="height:80px;" /></a></div>
     <ul class="ct-menuMobile-navbar">
         <li class="active"><a href="/index/"><span>主页</span></a></li>
         <li><a href="/school/show"><span>学校</span></a></li>
-
         <li><a href="/"><span>话题</span></a></li>
         <li class="dropdown"><a href="/"><span>查看活动</span></a>
             <ul class="dropdown-menu">
-                <li><a href="rent-now.html"><span>活动1</span></a></li>
-                <li><a href="rent-item.html"><span>活动2</span></a></li>
-
+                <li><a href=""><span>活动即将开放</span></a></li>
+                <li><a href=""><span>敬请期待</span></a></li>
             </ul>
         </li>
         <li class="dropdown"><a href="/host-center/"><span>个人信息</span></a>
             <ul class="dropdown-menu">
                 <li><a href="/host_center/show"><span>我的主页</span></a></li>
-                <li><a href="/modify-account/"><span>修改账户资料</span></a></li>
-
+                <li><a href="/host_center/edit"><span>个人中心</span></a></li>
             </ul>
         </li>
         <li class="dropdown"><a href="/about"><span>关于我们</span></a>
             <ul class="dropdown-menu">
                 <li><a href="/service"><span>使用帮助</span></a></li>
-                <li><a href="host-center"><span>招贤纳士</span></a></li>
-
+                <li><a href="/recruit"><span>招贤纳士</span></a></li>
             </ul>
         </li>
-
     </ul>
 </div>
-
+<!-- 导航栏 -->
 <div id="ct-js-wrapper" class="ct-pageWrapper">
-
     <nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
-
-        <!-- <div class="navbar-header">
-            <a class="ct-logoDark" href="index.html"><img src="{% static 'frontEnd/images/content/logo.png' %}" alt=""/></a>
-            <a class="ct-logoWhite" href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
-                                                           alt=""/></a>
-        </div> -->
-
-
         <div class="container">
+            <!-- PC端和手机端都显示的内容 -->
             <div class="ct-navbarBox">
-
                 <div style=" ">
-
+                    <!-- 语言选择按钮 -->
                     <div style="float:right;">
                         <div class="ct-navbarBox-meta">
-                            <!-- <div class="ct-navSearch-box">
-                                <a class="ct-js-navSearch ct-navSearch" href="#"><i class="fa fa-search"></i></a>
-
-                                <div class="ct-navbar-search">
-                                    <form role="form">
-                                        <div class="form-group  ct-input--type2">
-                                            <input id="searchM" required="" type="text" name="field[]"
-                                                   placeholder="Search website..." class="form-control">
-                                            <label for="searchM"><span>Search</span></label>
-                                            <button class="ct-navbar-search-button" type="submit">
-                                                <i class="fa fa-search fa-fw"></i>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div> -->
                             <div class="ct-langPicker">
                                 <div class="ct-langPicker-content">
                                     <a href="#"><img src="{% static 'frontEnd/images/content/flag-01.jpg' %}" alt=""/></a>
@@ -109,6 +76,7 @@
                             </div> 
                         </div>
                     </div>
+                    <!-- 头像按钮 -->
                     <div style="float:right;">
                         <div class="navbar-login">
                             {% if login_flag %}
@@ -132,42 +100,33 @@
                             <a href="/login/" class="ct-login" style="margin-top: 2px"><span>注册/登录</span><i class="fa fa-lock"></i></a>
                             {% endif %}
                         </div>
-                        
                     </div>
-
                 </div>
-
+                <!-- 手机端菜单触发按钮 -->
                 <button type="button" class="navbar-toggle">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-
             </div>
-
+            <!-- PC端显示：导航栏 -->
             <ul class="nav navbar-nav ct-navbar--fadeIn">
-                <!--=========================================================================-->
                 <li><a href="/index/">
                     <div class="ct-textEffect"><span data-content="主页">主页</span></div>
                 </a></li>
-
-                <!--=========================================================================-->
 
                 <li><a href="/school/show">
                     <div class="ct-textEffect"><span data-content="学校">学校</span></div>
                 </a></li>
 
-
-                <li><a href="javascript:findTopic()">
+                <li><a href="">
                     <div class="ct-textEffect"><span data-content="话题">话题</span></div>
                 </a></li>
 
-                <!--=========================================================================-->
-
-                <li class="dropdown"><a onclick="school()">
-                    <div class="ct-textEffect"><span data-content="活动">活动</span></div>
+                <!-- 备用：二级下拉菜单 -->
+                <!-- <li class="dropdown"><a onclick="school()">
+                    <div class="ct-textEffect"><span data-content="活动">查看活动</span></div>
                 </a>
                     <ul class="dropdown-menu">
                         <li><a href="events.html"><span>活动概览</span></a></li>
@@ -178,7 +137,19 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li> -->
+
+                <!--=========================================================================-->
+                <li class="dropdown"><a href="">
+                    <div class="ct-textEffect"><span data-content="查看活动">查看活动</span></div>
+                </a>
+                    <ul class="dropdown-menu">
+
+                        <li><a href=""><span>活动即将开放</span></a></li>
+                        <li><a href=""><span>敬请期待</span></a></li>
+
+                    </ul>
+                </li>                
                 <!--=========================================================================-->
                 <li class="dropdown"><a href="/index/">
                     <div class="ct-textEffect"><span data-content="个人信息">个人信息</span></div>
@@ -196,13 +167,10 @@
                 </a>
                     <ul class="dropdown-menu">
                         <li><a href="/service"><span>使用帮助</span></a></li>
-                        <li><a href="/host-center/"><span>招贤纳士</span></a></li>
+                        <li><a href="/recruit"><span>招贤纳士</span></a></li>
 
                     </ul>
                 </li>
-
             </ul>
-
         </div>
-
     </nav>

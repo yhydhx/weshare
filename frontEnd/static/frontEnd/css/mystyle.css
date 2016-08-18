@@ -5,9 +5,9 @@ font-family: "Hiragino Sans GB";
 src: url('{% static 'frontEnd/fonts/dongqing.otf' %}');
 }*/
 
-@font-face {
+/*@font-face {
 font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' %}") format("opentype");
-}
+}*/
 
 /*common*/
     *{margin:0;padding:0;border: none;}
