@@ -1,12 +1,11 @@
 """
 Django settings for gt project.
-
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
-
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -66,7 +65,7 @@ DATABASES = {
         'NAME': "weshare",
         # 'USER': 'jupiter',
         # 'PASSWORD' : '5080',
-         'HOST': '127.0.0.1',
+         'HOST': '120.24.156.181',
         # 'HOST': '127.0.0.1',
 
         'PORT': '27017',
