@@ -421,7 +421,7 @@ def complete_account_feature(request):
                                     t_id=topic_id,
                                     f_id=feature.id,  # 然后把id相互关联起来
                                     m_id = m_id)
-            Info['state'] = 303
+            Info['state'] = 300
             Info['message'] = "这个特征已经存在，请添加其他的特征"
             return HttpResponse(json.dumps(Info),content_type="application/json")
         except:
@@ -512,6 +512,7 @@ def delete_feature(request):
         Info['data']['topic_id'] = topic_id
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
+        Info['data']['f_id'] = feature.id
         Info['state'] = 0
         Info['message'] = "删除成功"
         return HttpResponse(json.dumps(Info))

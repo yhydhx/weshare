@@ -87,6 +87,7 @@ def user(request, method, Oid):
         try:
             user = Host.objects.get(email= request.session['email'])
             login_flag = 1
+            Info['data']['current_user'] = user.format_dict()
         except:
             login_flag = 0
 
@@ -97,7 +98,6 @@ def user(request, method, Oid):
         Info['data']['user'] = host.format_dict()
         Info['data']['user']['features'] = features.values()
         Info['data']['msgs'] = host.get_user_message(host.id)
-        Info['data']['current_user'] = user.format_dict()
         Info['data']['login_flag'] = login_flag
 
         return HttpResponse(json.dumps(Info),content_type="application/json")
