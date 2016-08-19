@@ -798,10 +798,12 @@ data = {
             ]
             'minor_topic_list' : [
             	{
+            		id :  char~  minor topic 的id
             		m_name :  ~ char 小话题的名字
 				    m_topic :   ~ char 所属大话题的名字
 				    m_introduction :  ~ char 小话题的介绍
             	},{
+            		id :  char~  minor topic 的id
             		m_name :  ~ char 小话题的名字
 				    m_topic :   ~ char 所属大话题的名字
 				    m_introduction :  ~ char 小话题的介绍
@@ -911,7 +913,32 @@ Info = {
 }
 
 
+-----------------------------------------------------------------------------------------------
 
+
+搜索
+
+url:   /general_search     ~给网页端用的
+url:   /api/general_search     ~给app用的
+
+method :GET
+
+function :
+1.  找查以下信息
+	a).   “分享家”的一句话简介；
+    b).   学校&专业；
+    c).   咨询服务列表（“分享家”自定义输入的具体内容）；
+    d).   前述咨询服务列表所涉及到的大话题&小话题；
+    e).   详细的自我介绍；
+2.返回结果，如果没有结果，提示前段/app
+
+API:
+
+提交的数据
+{
+	'word_1' :  ~char 关键字1
+	'word_1' :  ~char 关键字2
+}
 
 
 

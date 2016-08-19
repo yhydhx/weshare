@@ -54,6 +54,94 @@ class Host(models.Model):
     def __unicode__(self):
         return self.username
 
+    def general_search(self,word_1,word_2):
+        '''
+        a).   “分享家”的一句话简介；
+        b).   学校&专业；
+        c).   咨询服务列表（“分享家”自定义输入的具体内容）；
+        d).   前述咨询服务列表所涉及到的大话题&小话题；
+        e).   详细的自我介绍；
+        f).    线上问答的数据（如果有线上问答&且线上问答有文字数据记录的话，例如：分答的提问是文字形式，回答只有语音，则只需要从提问的问题中检索关键字）；
+        g).   “提问者”在完成订单后的文字评价（如果技术上复杂，则可以免去这个部分的信息）；
+        '''
+        all_host = Host.objects.all()
+        result = []
+
+        for host_atom in all_host:
+            search_string = ""
+            search_string += host_atom.username+" "
+            search_string += host_atom.motto+" "
+            education = host_atom.education
+            #get the school infomation
+            if education == 0:
+                try:
+                    search_string += bacholor_school + " "
+                    bacholor_school = School.objects.get(s_name = host_atom.bacholor).s_name
+                except :
+                    pass
+            elif education == 1:
+                try:
+                    graduate_school = School.objects.get(s_name = host_atom.graduate).s_name
+                    search_string += graduate + " "
+                    bacholor_school = School.objects.get(s_name = host_atom.bacholor).s_name
+                    search_string += bacholor_school + " "
+                except:
+                    pass
+            elif education == 2:
+                try:
+                    graduate_school = School.objects.get(s_name = host_atom.graduate).s_name
+                    search_string += graduate + " "
+                    bacholor_school = School.objects.get(s_name = host_atom.bacholor).s_name
+                    search_string += bacholor_school + " "
+                    phd_school = School.objects.get(s_name = host_atom.phd).s_name
+                    search_string += phd_school + " "
+                except:
+                    pass
+            #服务列表
+            
+            topic_hosts = Host_Topic.objects.filter(host_id = host_atom.id)
+            topic_list = {}
+            minor_topic_list = {}
+            feature_list = {}
+            for topic_host_atom in topic_hosts:
+                t_id = topic_host_atom.t_id
+                m_id = topic_host_atom.m_id
+                f_id = topic_host_atom.f_id
+
+                topic_list[t_id] = 1
+                minor_topic_list[m_id] = 1
+                feature_list[f_id] = 1
+
+            # add topic 
+            for topic_atom in topic_list:
+                topic = Topic.objects.get(id=topic_atom)
+                search_string += topic.t_name + " "
+
+
+            for minor_atom in minor_topic_list:
+                minor = Minor_Topic.objects.get(id=minor_atom)
+                search_string += minor.m_name + " "
+
+            for feature_atom in feature_list:
+                feature = Feature.objects.get(id=feature_atom)
+                search_string += feature.f_name + " "
+            
+
+            #introduction 
+            search_string += host_atom.introduction + " "
+
+            #etc
+            #
+
+            if word_1 in search_string and word_2 in search_string:
+                result.append(host_atom.format_dict())
+
+        return result
+
+
+
+
+
     def encode_password(self,s):
         return hashlib.md5(s).hexdigest()
 
@@ -442,7 +530,8 @@ class Feature(models.Model):
             feature_atom = {}
             feature_atom['f_id'] = f_id
             feature_atom['m_id'] = m_id
-            d_topic_feature[t_id]['feature_list'].append(feature_list)
+            feature_atom['t_id'] = t_id
+            d_topic_feature[t_id]['feature_list'].append(feature_atom)
 
 
 
