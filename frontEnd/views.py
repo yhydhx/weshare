@@ -415,12 +415,23 @@ def complete_account_feature(request):
             Info['message'] = "找不到这个小话题"
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
-        host_topic = Host_Topic(
-            host_id=host.id,
-            t_id=topic_id,
-            f_id=feature.id,  # 然后把id相互关联起来
-            m_id = m_id
-        )
+        # check this is exist or not 
+        try:
+            Host_Topic.objects.get(host_id=host.id,
+                                    t_id=topic_id,
+                                    f_id=feature.id,  # 然后把id相互关联起来
+                                    m_id = m_id)
+            Info['state'] = 300
+            Info['message'] = "这个特征已经存在，请添加其他的特征"
+            return HttpResponse(json.dumps(Info),content_type="application/json")
+        except:
+            host_topic = Host_Topic(
+                host_id=host.id,
+                t_id=topic_id,
+                f_id=feature.id,  # 然后把id相互关联起来
+                m_id = m_id
+            )
+        #get the m_name and save the relationship
         try:
             m_name = Minor_Topic.objects.get(id=m_id).m_name
             host_topic.save()
@@ -455,6 +466,7 @@ def complete_account_feature(request):
         #return HttpResponse(json.dumps(Info))
         return render(request, 'frontEnd/complete-account-feature.html', Info)
 
+@csrf_exempt
 def delete_feature(request):
     if request.method == 'POST':
         '''
@@ -463,7 +475,6 @@ def delete_feature(request):
         topic_id = request.POST.get('topic_id')
         feature_name = request.POST.get("feature_name")
         host_id = host.id
-        showTag = request.POST.get("topic_tag")
         m_id = request.POST.get("minor_topic_id")
 
         # check this feature is exist or not
@@ -497,10 +508,10 @@ def delete_feature(request):
         Info = {}
 
         Info['data'] = {}
-        Info['data']['topic_tag'] = showTag
         Info['data']['topic_id'] = topic_id
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
+        Info['data']['f_id'] = feature.id
         Info['state'] = 0
         Info['message'] = "删除成功"
         return HttpResponse(json.dumps(Info))

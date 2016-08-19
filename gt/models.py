@@ -279,11 +279,13 @@ class Host(models.Model):
 
     def get_user_message(self,user_id):
         msgs = Message.objects.filter(to_user=user_id)
+        msg_result = []
         for msg_atom in msgs:
-            msg_atom.date_format()
-            msg_atom.name = Host.objects.get(id=msg_atom.from_user).username
-        
-        return msgs
+            tmp_message = {}
+            tmp_message = msg_atom.format_dict()
+            tmp_message['name'] = Host.objects.get(id=msg_atom.from_user).username
+            msg_result.append(tmp_message)
+        return msg_result
 
     def get_index_statistic(self):
         '''
@@ -758,4 +760,21 @@ class Message(models.Model):
 
     def date_format(self):
         self.upload_time = self.upload_time.strftime("%Y-%m-%d")
+
+    def format_dict(self):
+        self.date_format()
+        tmp_message = {}
+        tmp_message['from_user'] = self.from_user
+        tmp_message['to_user'] = self.to_user
+        tmp_message['message_type'] = self.message_type
+        tmp_message['icon'] = self.icon
+        tmp_message['upload_time'] = self.upload_time
+        tmp_message['content'] = self.content
+
+        try:
+            tmp_message['id'] = self.id
+        except:
+            pass
+            
+        return tmp_message
 

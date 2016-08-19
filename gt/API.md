@@ -866,7 +866,7 @@ API:
 
 删除feature
 
-url:   /delete_feature/{}
+url:   /delete-feature
 method :POST
 
 function :
@@ -879,7 +879,6 @@ API:
 {
 	'topic_id' : ~ topic的ID
     "feature_name" :  ~ feature 的名字
-    "topic_tag"  :  ~ char  topic的一个标识符
     "m_id" : ~添加的 minor topic ID
 }
 
@@ -908,7 +907,10 @@ Info = {
 	message: '删除成功'   Char # 错误的提示信息
 	data: {
 		"feature_name" :  ~ feature 的名字
-    	"topic_tag"  :  ~ char  topic的一个标识符
+        'topic_id'       ~    topic 的 id标识符
+        'feature_name'       ~    feature 的名字
+        'm_id'       ~    minor 的id标识符
+        'f_id'       ~    feature的id 标识符
 	}
 }
 
