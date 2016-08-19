@@ -474,7 +474,6 @@ def delete_feature(request):
         topic_id = request.POST.get('topic_id')
         feature_name = request.POST.get("feature_name")
         host_id = host.id
-        showTag = request.POST.get("topic_tag")
         m_id = request.POST.get("minor_topic_id")
 
         # check this feature is exist or not
@@ -508,7 +507,6 @@ def delete_feature(request):
         Info = {}
 
         Info['data'] = {}
-        Info['data']['topic_tag'] = showTag
         Info['data']['topic_id'] = topic_id
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
