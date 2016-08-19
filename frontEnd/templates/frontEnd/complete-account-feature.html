@@ -234,8 +234,8 @@
                             <select class="form-control">
                                 <option>选择小话题</option>
 
-                                {% for feature in topic.feature_list %}
-                                <option>1</option>
+                                {% for minor in topic.minor_topic_list %}
+                                <option>{{ minor.m_name }}</option>
                                 {% endfor %}
                             </select>
                           <div class="form-group">
