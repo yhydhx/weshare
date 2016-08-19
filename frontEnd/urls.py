@@ -23,6 +23,7 @@ urlpatterns = patterns('',
                        url(r'^about$', views.about, name='about'),
                        url(r'^service$', views.service, name='service'),
                        url(r'^recruit$', views.recruit, name='recruit'),
+                       url(r'^general_search$', views.general_search, name='general_search'),
                        url(r'^school/(?P<method>\w+)/?(?P<Oid>\w*)$', views.school,name ='school'),
                        url(r'^user/(?P<method>\w+)/?(?P<Oid>\w*)$', views.user,name ='user'), 
 

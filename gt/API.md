@@ -798,10 +798,12 @@ data = {
             ]
             'minor_topic_list' : [
             	{
+            		id :  char~  minor topic 的id
             		m_name :  ~ char 小话题的名字
 				    m_topic :   ~ char 所属大话题的名字
 				    m_introduction :  ~ char 小话题的介绍
             	},{
+            		id :  char~  minor topic 的id
             		m_name :  ~ char 小话题的名字
 				    m_topic :   ~ char 所属大话题的名字
 				    m_introduction :  ~ char 小话题的介绍
@@ -907,11 +909,98 @@ Info = {
 	data: {
 		"feature_name" :  ~ feature 的名字
     	"topic_tag"  :  ~ char  topic的一个标识符
+        'topic_id'       ~    topic 的 id标识符
+        'feature_name'       ~    feature 的名字
+        'm_id'       ~    minor 的id标识符
+        'f_id'       ~    feature的id 标识符
 	}
 }
 
 
+-----------------------------------------------------------------------------------------------
 
 
+搜索
 
+url:   /general_search     ~给网页端用的
+url:   /api/general_search     ~给app用的
+
+method :GET
+
+function :
+1.  找查以下信息
+	a).   “分享家”的一句话简介；
+    b).   学校&专业；
+    c).   咨询服务列表（“分享家”自定义输入的具体内容）；
+    d).   前述咨询服务列表所涉及到的大话题&小话题；
+    e).   详细的自我介绍；
+2.返回结果是包含这两个关键字的用户列表，如果没有结果，提示前段/app
+
+API:
+
+提交的数据
+{
+	'word_1' :  ~char 关键字1
+	'word_1' :  ~char 关键字2
+}
+
+返回数据
+
+#有数据的情况
+
+data = {
+	state: 0   Int # 0 表示成功，其他数字表示不成功
+	message: '删除成功'   Char # 错误的提示信息
+	'search_result'  :  [
+    	{
+    		'id' : char  用户的唯一标识符
+    		"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+				
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+
+		},{
+			'id' : char  用户的唯一标识符
+    		"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+				
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+
+		},
+		.......       	
+    ],
+    'search_number'  ~int 找到host的个数
+}
 
