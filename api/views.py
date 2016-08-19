@@ -35,10 +35,14 @@ def general_search(request):
     h = Host()
     search_result = h.general_search(word_1,word_2)
     Info['data']['search_result'] = search_result
+    Info['data']['search_number'] = len(search_result)
 
     if len(search_result == 0):
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
+
+    return HttpResponse(json.dumps(Info),content_type="application/json")
+
 
 def output_init():
     Info = {}

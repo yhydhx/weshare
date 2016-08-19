@@ -811,6 +811,7 @@ def general_search(request):
     h = Host()
     search_result = h.general_search(word_1,word_2)
     Info['data']['search_result'] = search_result
+    Info['data']['search_number'] = len(search_result)
 
     if len(search_result == 0):
         Info['state'] = 404
