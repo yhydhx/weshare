@@ -466,6 +466,7 @@ def complete_account_feature(request):
         #return HttpResponse(json.dumps(Info))
         return render(request, 'frontEnd/complete-account-feature.html', Info)
 
+@csrf_exempt
 def delete_feature(request):
     if request.method == 'POST':
         '''
