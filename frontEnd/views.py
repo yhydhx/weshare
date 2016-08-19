@@ -88,6 +88,7 @@ def index(request):
             address = 'https://graph.qq.com/oauth2.0/token?'+urlencode(qdict)
             ret_qq_token = urllib2.urlopen(address).read()
             ret_token = urlencode2dict(ret_qq_token)
+
             return render_to_response('frontEnd/index.html', Info)
 
         except:
