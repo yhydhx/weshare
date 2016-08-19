@@ -415,12 +415,23 @@ def complete_account_feature(request):
             Info['message'] = "找不到这个小话题"
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
-        host_topic = Host_Topic(
-            host_id=host.id,
-            t_id=topic_id,
-            f_id=feature.id,  # 然后把id相互关联起来
-            m_id = m_id
-        )
+        # check this is exist or not 
+        try:
+            Host_Topic.objects.get(host_id=host.id,
+                                    t_id=topic_id,
+                                    f_id=feature.id,  # 然后把id相互关联起来
+                                    m_id = m_id)
+            Info['state'] = 303
+            Info['message'] = "这个特征已经存在，请添加其他的特征"
+            return HttpResponse(json.dumps(Info),content_type="application/json")
+        except:
+            host_topic = Host_Topic(
+                host_id=host.id,
+                t_id=topic_id,
+                f_id=feature.id,  # 然后把id相互关联起来
+                m_id = m_id
+            )
+        #get the m_name and save the relationship
         try:
             m_name = Minor_Topic.objects.get(id=m_id).m_name
             host_topic.save()
