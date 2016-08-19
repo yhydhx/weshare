@@ -376,6 +376,12 @@ def complete_account(request):
 
 @csrf_exempt
 def complete_account_feature(request):
+    Info = {}
+
+    Info['data'] = {}
+    Info['state'] = 0
+    Info['message'] = ""
+
     try:
         username = request.session['email']
     except:
@@ -403,25 +409,45 @@ def complete_account_feature(request):
                               f_topic=topic_id)
             feature.save()
 
-        host_topic = Host_Topic(
-            host_id=host.id,
-            t_id=topic_id,
-            f_id=feature.id,  # 然后把id相互关联起来
-            m_id = m_id
-        )
-        host_topic.save()
 
-        Info = {}
+        #check the error
+        if m_id == "":
+            Info['state'] = 404
+            Info['message'] = "找不到这个小话题"
+            return HttpResponse(json.dumps(Info),content_type="application/json")
 
-        Info['data'] = {}
-        Info['state'] = 0
-        Info['message'] = ""
+        # check this is exist or not 
+        try:
+            Host_Topic.objects.get(host_id=host.id,
+                                    t_id=topic_id,
+                                    f_id=feature.id,  # 然后把id相互关联起来
+                                    m_id = m_id)
+            Info['state'] = 300
+            Info['message'] = "这个特征已经存在，请添加其他的特征"
+            return HttpResponse(json.dumps(Info),content_type="application/json")
+        except:
+            host_topic = Host_Topic(
+                host_id=host.id,
+                t_id=topic_id,
+                f_id=feature.id,  # 然后把id相互关联起来
+                m_id = m_id
+            )
+        #get the m_name and save the relationship
+        try:
+            m_name = Minor_Topic.objects.get(id=m_id).m_name
+            host_topic.save()
+        except:
+            Info['state'] = 303
+            Info['message'] = "保存信息失败"
+            return HttpResponse(json.dumps(Info),content_type="application/json")
+        
 
         Info['data']['topic_tag'] = showTag
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
+        Info['data']['m_name'] = m_name
 
-        return HttpResponse(json.dumps(Info))
+        return HttpResponse(json.dumps(Info),content_type="application/json")
 
     else:
         '''
@@ -441,31 +467,35 @@ def complete_account_feature(request):
         #return HttpResponse(json.dumps(Info))
         return render(request, 'frontEnd/complete-account-feature.html', Info)
 
+@csrf_exempt
 def delete_feature(request):
+    Info = {}
+    Info['state'] = 0
+    Info['message'] = ""
+    Info['data'] = {}
+
+
+    try:
+        username = request.session['email']
+        host = Host.objects.get(email=username)
+    except:
+        Info['state'] = 404
+        Info['message'] = "对不起，您尚未登录！"
+        return HttpResponse(json.dumps(Info),content_type="application/json")
+
     if request.method == 'POST':
         '''
         renew the feature
         '''
+
+
         topic_id = request.POST.get('topic_id')
         feature_name = request.POST.get("feature_name")
         host_id = host.id
-        showTag = request.POST.get("topic_tag")
         m_id = request.POST.get("minor_topic_id")
 
         # check this feature is exist or not
-        
-        Info = {}
-        Info['state'] = 0
-        Info['message'] = ""
-        Info['data'] = {}
-
-        #find the host
-        try:
-            host = Host.objects.get(email=username)
-        except:
-            Info['state'] = 404
-            Info['message'] = "找不到这个host"
-            return HttpResponse(json.dumps(Info))
+    
         #find and delete the feature
         try:
             feature = Feature.objects.get(f_name=feature_name,f_topic=topic_id)
@@ -483,10 +513,10 @@ def delete_feature(request):
         Info = {}
 
         Info['data'] = {}
-        Info['data']['topic_tag'] = showTag
         Info['data']['topic_id'] = topic_id
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
+        Info['data']['f_id'] = feature.id
         Info['state'] = 0
         Info['message'] = "删除成功"
         return HttpResponse(json.dumps(Info))
@@ -786,6 +816,27 @@ def image_library(request):
             user_data[str(index)] = user_data.url
         url_list_json = json.loads(url_list)
         return HttpResponse(url_list_json)
+
+def general_search(request):
+    Info = {}
+    Info['state'] = 0
+    Info['message'] = 0
+    Info['data'] = {}
+
+    word_1 = request.GET.get("word_1")
+    word_2 = request.GET.get("word_2") 
+
+    h = Host()
+    search_result = h.general_search(word_1,word_2)
+    Info['data']['search_result'] = search_result
+    Info['data']['search_number'] = len(search_result)
+
+    if len(search_result == 0):
+        Info['state'] = 404
+        Info['message'] = "找不到包含关键字的内容"
+
+    return HttpResponse(json.dumps(search_result),content_type="application/json")
+
 
 
 '''
