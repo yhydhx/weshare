@@ -422,6 +422,7 @@ def complete_account_feature(request):
             m_id = m_id
         )
         try:
+            m_name = Minor_Topic.objects.get(id=m_id).m_name
             host_topic.save()
         except:
             Info['state'] = 303
@@ -432,6 +433,7 @@ def complete_account_feature(request):
         Info['data']['topic_tag'] = showTag
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
+        Info['data']['m_name'] = m_name
 
         return HttpResponse(json.dumps(Info),content_type="application/json")
 
@@ -811,6 +813,7 @@ def general_search(request):
     h = Host()
     search_result = h.general_search(word_1,word_2)
     Info['data']['search_result'] = search_result
+    Info['data']['search_number'] = len(search_result)
 
     if len(search_result == 0):
         Info['state'] = 404
