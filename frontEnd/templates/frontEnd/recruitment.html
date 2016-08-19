@@ -1,10 +1,12 @@
-{% load staticfiles %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 --> 
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>手风琴demo</title>
+<title>手风琴demo</title> -->
 
+{% block body %}
 <style type="text/css">
 *{padding:0;margin:0;list-style-type:none;}
 a,img{border:0;}
@@ -46,7 +48,8 @@ $(document).ready(function(e){
 });
 </script>
 
-</head>
+<!-- </head>-->
+
 <body>
 
 
@@ -74,4 +77,8 @@ $(document).ready(function(e){
 </ul>
 
 </body>
-</html>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
