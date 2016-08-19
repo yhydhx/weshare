@@ -26,6 +26,20 @@ import datetime
 from frontEnd.tools import *
 
 
+
+def general_search(request):
+    Info = output_init()
+    word_1 = request.GET.get("word_1")
+    word_2 = request.GET.get("word_2") 
+
+    h = Host()
+    search_result = h.general_search(word_1,word_2)
+    Info['data']['search_result'] = search_result
+
+    if len(search_result == 0):
+        Info['state'] = 404
+        Info['message'] = "找不到包含关键字的内容"
+
 def output_init():
     Info = {}
     Info['state'] = 0
@@ -258,7 +272,7 @@ def school(request, method, Oid):
         Info['data']['login_flag'] = login_flag
         Info['data']['object'] = school_union
         Info['data']['topics'] = topics
-        Info['data']['school'] = School.objects.get(id=Oid)
+        Info['data']['school'] = school.format_dict()
         Info['data']['allPeople'] = len(school_union)
         if login_flag == True:
             Info['data']['current_user'] = host
