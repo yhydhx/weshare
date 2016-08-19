@@ -413,7 +413,7 @@ def complete_account_feature(request):
         if m_id == "":
             Info['state'] = 404
             Info['message'] = "找不到这个小话题"
-            return HttpResponse(json.dumps(Info),content_type="application/json"))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
 
         host_topic = Host_Topic(
             host_id=host.id,
@@ -426,14 +426,14 @@ def complete_account_feature(request):
         except:
             Info['state'] = 303
             Info['message'] = "保存信息失败"
-            return HttpResponse(json.dumps(Info),content_type="application/json"))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
         
 
         Info['data']['topic_tag'] = showTag
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
 
-        return HttpResponse(json.dumps(Info),content_type="application/json"))
+        return HttpResponse(json.dumps(Info),content_type="application/json")
 
     else:
         '''
