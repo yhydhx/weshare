@@ -375,6 +375,12 @@ def complete_account(request):
 
 @csrf_exempt
 def complete_account_feature(request):
+    Info = {}
+
+    Info['data'] = {}
+    Info['state'] = 0
+    Info['message'] = ""
+
     try:
         username = request.session['email']
     except:
@@ -402,25 +408,32 @@ def complete_account_feature(request):
                               f_topic=topic_id)
             feature.save()
 
+
+        #check the error
+        if m_id == "":
+            Info['state'] = 404
+            Info['message'] = "找不到这个小话题"
+            return HttpResponse(json.dumps(Info),content_type="application/json"))
+
         host_topic = Host_Topic(
             host_id=host.id,
             t_id=topic_id,
             f_id=feature.id,  # 然后把id相互关联起来
             m_id = m_id
         )
-        host_topic.save()
-
-        Info = {}
-
-        Info['data'] = {}
-        Info['state'] = 0
-        Info['message'] = ""
+        try:
+            host_topic.save()
+        except:
+            Info['state'] = 303
+            Info['message'] = "保存信息失败"
+            return HttpResponse(json.dumps(Info),content_type="application/json"))
+        
 
         Info['data']['topic_tag'] = showTag
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
 
-        return HttpResponse(json.dumps(Info))
+        return HttpResponse(json.dumps(Info),content_type="application/json"))
 
     else:
         '''
@@ -802,7 +815,7 @@ def general_search(request):
     if len(search_result == 0):
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
-        
+
     return HttpResponse(json.dumps(search_result),content_type="application/json")
 
 
