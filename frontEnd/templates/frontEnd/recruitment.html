@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -30,8 +31,9 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 #demo li:nth-of-type(5){transform-origin:bottom right;}
 </style>
 
-<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="jquery.indexSlidePattern.js"></script>
+
+<script src="{% static 'frontEnd/js/shoufengqin/jquery-1.8.2.min.js'%}"></script>
+<script src="{% static 'frontEnd/js/shoufengqin/jquery.indexSlidePattern.js'%}"></script> 
 <script language="javascript">
 $(document).ready(function(e){
 	  var opt	=	{
@@ -50,28 +52,26 @@ $(document).ready(function(e){
 
 <ul id="demo">
 	<li class="active">
-		<a href="#"><img src="images/1.jpg"  /></a>
+		<a href="#"><img src="{% static 'frontEnd/images/weshare/shoufengqin/1.jpg'%}" /></a>
 		<div><a href="#">标题1</a></div>
 	</li>
 	<li>
-		<a href="#"><img src="images/2.jpg"  /></a>
+		<a href="#"><img src="{% static 'frontEnd/images/weshare/shoufengqin/2.jpg'%}" /></a>
 		<div><a href="#">标题2</a></div>
 	</li>
 	<li>
-		<a href="#"><img src="images/3.jpg"  /></a>
+		<a href="#"><img src="{% static 'frontEnd/images/weshare/shoufengqin/3.jpg'%}" /></a>
 		<div><a href="#">标题3</a></div>
 	</li>
 	<li>
-		<a href="#"><img src="images/4.jpg"  /></a>
+		<a href="#"><img src="{% static 'frontEnd/images/weshare/shoufengqin/4.jpg'%}" /></a>
 		<div><a href="3">标题4</a></div>
 	</li>
 	<li>
-		<a href="#"><img src="images/5.jpg"  /></a>
+		<a href="#"><img src="{% static 'frontEnd/images/weshare/shoufengqin/5.jpg'%}" /></a>
 		<div><a href="#">标题5</a></div>
 	</li>
 </ul>
-<div style="text-align:center;">
-<p>来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
-</div>
+
 </body>
 </html>
