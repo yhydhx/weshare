@@ -23,7 +23,9 @@ import os
 import base64
 import time
 import datetime
+import random
 from alipay import *
+
 
 #确认支付  
 def pay(request):  
@@ -43,7 +45,7 @@ def pay(request):
     #         tf='%.2f' % cb.amount  
     #         url=create_direct_pay_by_user (tn,subject,body,bank,tf)  
     # def create_direct_pay_by_user(tn, subject, body, bank, total_fee):  
-    url=create_direct_pay_by_user ("12345","weshare","weshare","","0.01")  
+    url=create_direct_pay_by_user (str(random.random()),"weshare","weshare","","0.01")  
     #如果网关是财付通  
     # elif cb.cbank.gateway=='tenpay':  
     #     pass  
