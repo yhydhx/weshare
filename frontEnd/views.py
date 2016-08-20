@@ -79,7 +79,7 @@ def index(request):
 
         ##########处理qq登录#######
         try:
-            code = request.GET['code']
+            code = request.GET.get['code']
             qdict = {'grant_type': 'authorization_code',
                      'client_id': TENCENT_APPID,
                      'client_secret': TENCENT_APPKEY,
@@ -88,6 +88,28 @@ def index(request):
             address = 'https://graph.qq.com/oauth2.0/token?'+urlencode(qdict)
             ret_qq_token = urllib2.urlopen(address).read()
             ret_token = urlencode2dict(ret_qq_token)
+
+            access_token = ret_token['access_token']
+
+            # 获取用户的open_ID:
+            access_token_dict = {'access_token': access_token}
+            address_2 = 'https://graph.qq.com/oauth2.0/me?'+urlencode(access_token_dict)
+            ret_open_id = urllib2.urlopen(address_2).read()
+            open_id = urlencode2dict(ret_open_id.split(' '))['openid']
+            try:
+                user = Host.objects.get(open_id=open_id)  # 已经有了
+                return render_to_response('frontEnd/index.html', Info, {'current_user': user,
+                                                                        'login_flag': True})
+            except:
+
+                request_dict = {'access_token': access_token,
+                                'oauth_consumer_key': TENCENT_APPID,
+                                'openid': open_id}
+                address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
+                ret_user_info = urllib2.urlopen(address_3).read()
+                user_info = json.loads(ret_user_info)
+                Host.
+
 
             return render_to_response('frontEnd/index.html', Info)
 

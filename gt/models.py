@@ -50,6 +50,8 @@ class Host(models.Model):
     graduate_major = models.CharField(blank=True, max_length=100)
     phd_major = models.CharField(blank=True, max_length=100)
 
+    #  qq_login information::
+    open_id = models.CharField(blank=True, max_length=100)
 
     def __unicode__(self):
         return self.username
