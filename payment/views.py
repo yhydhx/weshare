@@ -42,13 +42,14 @@ def pay(request):
     #         bank=cb.cbank.id  
     #         tf='%.2f' % cb.amount  
     #         url=create_direct_pay_by_user (tn,subject,body,bank,tf)  
-    url=create_direct_pay_by_user ("12345","","","","21")  
+    # def create_direct_pay_by_user(tn, subject, body, bank, total_fee):  
+    url=create_direct_pay_by_user ("12345","a","b","","0.01")  
     #如果网关是财付通  
     # elif cb.cbank.gateway=='tenpay':  
     #     pass  
       
     #去支付页面  
-    return HttpResponseRedirect (url)  
+    return HttpResponseRedirect(url)  
   
 #alipay异步通知  
  
@@ -89,13 +90,13 @@ def alipay_return_url (request):
         trade_status = request.GET.get('trade_status')  
             
         cb = cBill.objects.get(pk=tn)  
-        log=Log(operation='return_'+trade_status+'_'+trade_no)  
-        log.save()  
+        #log=Log(operation='return_'+trade_status+'_'+trade_no)  
+        #log.save()  
         return HttpResponseRedirect ("/public/verify/"+tn)  
     else:  
         #错误或者黑客攻击  
-        log=Log(operation='err_return_'+trade_status+'_'+trade_no)  
-        log.save()  
+        #log=Log(operation='err_return_'+trade_status+'_'+trade_no)  
+        #log.save()  
         return HttpResponseRedirect ("/")  
   
   
