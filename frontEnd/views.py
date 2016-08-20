@@ -468,29 +468,33 @@ def complete_account_feature(request):
 
 @csrf_exempt
 def delete_feature(request):
+    Info = {}
+    Info['state'] = 0
+    Info['message'] = ""
+    Info['data'] = {}
+
+
+    try:
+        username = request.session['email']
+        host = Host.objects.get(email=username)
+    except:
+        Info['state'] = 404
+        Info['message'] = "对不起，您尚未登录！"
+        return HttpResponse(json.dumps(Info),content_type="application/json")
+
     if request.method == 'POST':
         '''
         renew the feature
         '''
+
+
         topic_id = request.POST.get('topic_id')
         feature_name = request.POST.get("feature_name")
         host_id = host.id
         m_id = request.POST.get("minor_topic_id")
 
         # check this feature is exist or not
-        
-        Info = {}
-        Info['state'] = 0
-        Info['message'] = ""
-        Info['data'] = {}
-
-        #find the host
-        try:
-            host = Host.objects.get(email=username)
-        except:
-            Info['state'] = 404
-            Info['message'] = "找不到这个host"
-            return HttpResponse(json.dumps(Info))
+    
         #find and delete the feature
         try:
             feature = Feature.objects.get(f_name=feature_name,f_topic=topic_id)
