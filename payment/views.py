@@ -89,13 +89,13 @@ def alipay_return_url (request):
         trade_status = request.GET.get('trade_status')  
             
         cb = cBill.objects.get(pk=tn)  
-        log=Log(operation='return_'+trade_status+'_'+trade_no)  
-        log.save()  
+        #log=Log(operation='return_'+trade_status+'_'+trade_no)  
+        #log.save()  
         return HttpResponseRedirect ("/public/verify/"+tn)  
     else:  
         #错误或者黑客攻击  
-        log=Log(operation='err_return_'+trade_status+'_'+trade_no)  
-        log.save()  
+        #log=Log(operation='err_return_'+trade_status+'_'+trade_no)  
+        #log.save()  
         return HttpResponseRedirect ("/")  
   
   
