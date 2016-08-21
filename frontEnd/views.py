@@ -26,10 +26,7 @@ import time
 import datetime
 from urllib import urlencode, unquote
 import urllib2
-
-SALT = 'hetongshinanshen'
-TENCENT_APPID = 101340075
-TENCENT_APPKEY = '8a66f6a4a93ef09b970afd245ed8b8fc'
+from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY
 
 
 def index(request):
@@ -66,7 +63,6 @@ def index(request):
 
     login_flag = False
 
-
     try:
         # check the user is login or not
         req_username = request.session['email']
@@ -85,7 +81,7 @@ def index(request):
                      'client_secret': TENCENT_APPKEY,
                      'code': code,
                      'redirect_uri': 'http://www.wshere.com'}
-            address = 'https://graph.qq.com/oauth2.0/token?'+urlencode(qdict)
+            address = 'https://graph.qq.com/oauth2.0/token?' + urlencode(qdict)
             ret_qq_token = urllib2.urlopen(address).read()
             ret_token = urlencode2dict(ret_qq_token)
 
@@ -93,7 +89,7 @@ def index(request):
 
             # 获取用户的open_ID:
             access_token_dict = {'access_token': access_token}
-            address_2 = 'https://graph.qq.com/oauth2.0/me?'+urlencode(access_token_dict)
+            address_2 = 'https://graph.qq.com/oauth2.0/me?' + urlencode(access_token_dict)
             ret_open_id = urllib2.urlopen(address_2).read()
             open_id = urlencode2dict(ret_open_id.split(' '))['openid']
             try:
@@ -108,8 +104,10 @@ def index(request):
                 address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
                 ret_user_info = urllib2.urlopen(address_3).read()
                 user_info = json.loads(ret_user_info)
-                Host.
-
+                info_string = []
+                info_string.append(user_info['nickname'])
+                info_string.append(user_info['gender'])
+                info_string.append(user_info[''])
 
             return render_to_response('frontEnd/index.html', Info)
 
@@ -120,29 +118,27 @@ def index(request):
 @csrf_exempt
 def init_register(request):  # 暂时统一用用户名注册,以后的一些坑以后再填
     if request.method == 'POST':
-        username = request.POST['username'] 
+        username = request.POST['username']
         password = request.POST['password']
         password_confirm = request.POST['password-confirm']
         phone = request.POST['phone']
         email = request.POST['email']
-        
 
         Info = {}
         Info['state'] = 0
         Info['message'] = ""
         Info['data'] = {}
-        
-        Info['data']['username'] = username 
-        Info['data']['phone'] = phone 
-        Info['data']['email'] = email 
 
+        Info['data']['username'] = username
+        Info['data']['phone'] = phone
+        Info['data']['email'] = email
 
-        #check blank info 
-        if not (username and password  and password_confirm and phone  and email ):
+        # check blank info
+        if not (username and password and password_confirm and phone and email):
             Info['state'] = 400
             Info['message'] = "信息不完整"
         # check the password is the same or not
-        elif  password_confirm != password:
+        elif password_confirm != password:
             Info['state'] = 401
             Info['message'] = "两次密码输入要相同"
         elif not process_mail(email):
@@ -152,7 +148,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
         elif not process_passwd(password):
             Info['state'] = 403
             Info['message'] = '请使用正确要求的密码'
-        elif  not process_phone_num(phone):
+        elif not process_phone_num(phone):
             Info['state'] = 404
             Info['data']['phone'] = ""
             Info['message'] = '请选择国家区号'
@@ -167,15 +163,15 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             password=password,
                             email=email,
                             phone_number=phone,
-                            education = -1,
+                            education=-1,
                             )
-                #encode password
+                # encode password
                 host.password = host.encode_password(password)
                 host.save()
                 return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
 
         return render_to_response('frontEnd/account.html', Info,
-                                          context_instance=RequestContext(request))
+                                  context_instance=RequestContext(request))
     else:
         return render_to_response('frontEnd/account.html', {'error': False}, context_instance=RequestContext(request))
 
@@ -328,7 +324,6 @@ def complete_account(request):
                 request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
                 request.POST['qq']:
 
-
             self_introduction = request.POST['self-introduction']
             gender = request.POST['gender']
             motto = request.POST['motto']
@@ -337,27 +332,27 @@ def complete_account(request):
             max_payment = request.POST['max-payment']
             qq = request.POST['qq']
 
-            #Education Infomation
-            education = request.POST['education'] 
+            # Education Infomation
+            education = request.POST['education']
             try:
-                bacholor = request.POST['bacholor'] 
+                bacholor = request.POST['bacholor']
                 bacholor_major = request.POST['bacholor_major']
             except:
                 bacholor = ""
                 bacholor_major = ""
             try:
                 graduate = request.POST['graduate']
-                graduate_major = request.POST['graduate_major'] 
+                graduate_major = request.POST['graduate_major']
             except:
                 graduate = ""
                 graduate_major = ""
             try:
                 phd_major = request.POST['phd_major']
-                phd = request.POST['phd'] 
+                phd = request.POST['phd']
             except:
                 phd_major = ""
                 phd = ""
-                
+
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
 
@@ -378,7 +373,6 @@ def complete_account(request):
             host.bacholor_major = bacholor_major
             host.graduate_major = graduate_major
             host.phd_major = phd_major
-
 
             host.save()
             return HttpResponseRedirect('/complete-account-feature')
@@ -431,45 +425,43 @@ def complete_account_feature(request):
                               f_topic=topic_id)
             feature.save()
 
-
-        #check the error
+        # check the error
         if m_id == "":
             Info['state'] = 404
             Info['message'] = "找不到这个小话题"
-            return HttpResponse(json.dumps(Info),content_type="application/json")
+            return HttpResponse(json.dumps(Info), content_type="application/json")
 
         # check this is exist or not 
         try:
             Host_Topic.objects.get(host_id=host.id,
-                                    t_id=topic_id,
-                                    f_id=feature.id,  # 然后把id相互关联起来
-                                    m_id = m_id)
+                                   t_id=topic_id,
+                                   f_id=feature.id,  # 然后把id相互关联起来
+                                   m_id=m_id)
             Info['state'] = 300
             Info['message'] = "这个特征已经存在，请添加其他的特征"
-            return HttpResponse(json.dumps(Info),content_type="application/json")
+            return HttpResponse(json.dumps(Info), content_type="application/json")
         except:
             host_topic = Host_Topic(
                 host_id=host.id,
                 t_id=topic_id,
                 f_id=feature.id,  # 然后把id相互关联起来
-                m_id = m_id
+                m_id=m_id
             )
-        #get the m_name and save the relationship
+        # get the m_name and save the relationship
         try:
             m_name = Minor_Topic.objects.get(id=m_id).m_name
             host_topic.save()
         except:
             Info['state'] = 303
             Info['message'] = "保存信息失败"
-            return HttpResponse(json.dumps(Info),content_type="application/json")
-        
+            return HttpResponse(json.dumps(Info), content_type="application/json")
 
         Info['data']['topic_tag'] = showTag
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
         Info['data']['m_name'] = m_name
 
-        return HttpResponse(json.dumps(Info),content_type="application/json")
+        return HttpResponse(json.dumps(Info), content_type="application/json")
 
     else:
         '''
@@ -486,8 +478,9 @@ def complete_account_feature(request):
         Info['current_user'] = host
         Info['login_flag'] = True
 
-        #return HttpResponse(json.dumps(Info))
+        # return HttpResponse(json.dumps(Info))
         return render(request, 'frontEnd/complete-account-feature.html', Info)
+
 
 @csrf_exempt
 def delete_feature(request):
@@ -496,20 +489,18 @@ def delete_feature(request):
     Info['message'] = ""
     Info['data'] = {}
 
-
     try:
         username = request.session['email']
         host = Host.objects.get(email=username)
     except:
         Info['state'] = 404
         Info['message'] = "对不起，您尚未登录！"
-        return HttpResponse(json.dumps(Info),content_type="application/json")
+        return HttpResponse(json.dumps(Info), content_type="application/json")
 
     if request.method == 'POST':
         '''
         renew the feature
         '''
-
 
         topic_id = request.POST.get('topic_id')
         feature_name = request.POST.get("feature_name")
@@ -517,15 +508,15 @@ def delete_feature(request):
         m_id = request.POST.get("minor_topic_id")
 
         # check this feature is exist or not
-    
-        #find and delete the feature
+
+        # find and delete the feature
         try:
-            feature = Feature.objects.get(f_name=feature_name,f_topic=topic_id)
+            feature = Feature.objects.get(f_name=feature_name, f_topic=topic_id)
             host_topic = Host_Topic.objects.get(
                 host_id=host.id,
                 t_id=topic_id,
                 f_id=feature.id,
-                m_id = m_id
+                m_id=m_id
             ).delete()
         except:
             Info['state'] = 404
@@ -548,7 +539,6 @@ def delete_feature(request):
         Info['message'] = "操作错误，本次操作已被记录"
         Info['data'] = {}
         return HttpResponse(json.dumps(Info))
-
 
 
 def modify_account(request):
@@ -644,6 +634,7 @@ def image_receive(request):
 def about(request):
     return render(request, "frontEnd/about.html")
 
+
 def recruit(request):
     return render(request, "frontEnd/recruitment.html")
 
@@ -677,7 +668,7 @@ def service(request):
     return render(request, "frontEnd/services.html", {"object": result})
 
 
-def host_center(request,method,Oid):
+def host_center(request, method, Oid):
     Info = {}
     Info['state'] = 0
     Info['message'] = ""
@@ -694,20 +685,17 @@ def host_center(request,method,Oid):
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
-
-
     if method == "edit":
-        return render(request,"frontEnd/center-edit.html",Info)
+        return render(request, "frontEnd/center-edit.html", Info)
     elif method == "manage":
-        return render(request,"frontEnd/center-manage.html",Info)
+        return render(request, "frontEnd/center-manage.html", Info)
     elif method == "auth":
-        return render(request,"frontEnd/center-auth.html",Info)
+        return render(request, "frontEnd/center-auth.html", Info)
     elif method == "detail":
 
-        return render(request,"frontEnd/center-manage-detail.html",Info)     
+        return render(request, "frontEnd/center-manage-detail.html", Info)
     else:
         return HttpResponseRedirect('/user/show/' + host.id)
-
 
 
 def school(request, method, Oid):
@@ -839,6 +827,7 @@ def image_library(request):
         url_list_json = json.loads(url_list)
         return HttpResponse(url_list_json)
 
+
 def general_search(request):
     Info = {}
     Info['state'] = 0
@@ -846,10 +835,10 @@ def general_search(request):
     Info['data'] = {}
 
     word_1 = request.GET.get("word_1")
-    word_2 = request.GET.get("word_2") 
+    word_2 = request.GET.get("word_2")
 
     h = Host()
-    search_result = h.general_search(word_1,word_2)
+    search_result = h.general_search(word_1, word_2)
     Info['data']['search_result'] = search_result
     Info['data']['search_number'] = len(search_result)
 
@@ -857,8 +846,7 @@ def general_search(request):
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
 
-    return HttpResponse(json.dumps(search_result),content_type="application/json")
-
+    return HttpResponse(json.dumps(search_result), content_type="application/json")
 
 
 '''
