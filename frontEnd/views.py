@@ -334,6 +334,7 @@ def complete_account(request):
 
             # Education Infomation
             education = request.POST['education']
+
             try:
                 bacholor = request.POST['bacholor']
                 bacholor_major = request.POST['bacholor_major']
