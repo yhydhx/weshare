@@ -66,17 +66,17 @@
             console.log(z);
             console.log(t);
             var jsondata = {  
-                            "topic_id" : id,
-                            "feature_name" :  z,
-                            "m_id" : t,
+                            // "topic_id" : id,
+                            // "feature_name" :  z,
+                            // "m_id" : t,
                         };
 
             $.ajax({
                 type : "POST",
-                url : "/delete-feature",
-                contentType: "application/json;charset=utf-8",
+                url : "/delete-feature/",
+                // contentType: "application/json;charset=utf-8",
                 dataType : "JSON",
-                data : JSON.stringify(jsondata),
+                data : {},
                 success : function(str){
                     console.log('成功');
                     console.log(str);
