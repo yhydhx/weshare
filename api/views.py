@@ -269,7 +269,7 @@ def school(request, method, Oid):
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
         # find the passed host of the school
-        school = School()
+
         school_union, topics = school.get_single_school_detail(Oid)
 
         Info = output_init()
