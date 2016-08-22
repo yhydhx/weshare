@@ -62,10 +62,10 @@ def create_direct_pay_by_user(tn, subject, body, bank, total_fee):
     params['partner']           = settings.ALIPAY_PARTNER  
     params['seller_id']         = settings.ALIPAY_PARTNER  
     params['seller_email']      = settings.ALIPAY_SELLER_EMAIL  
-    params['return_url']        = settings.ALIPAY_RETURN_URL  
-    params['notify_url']        = settings.ALIPAY_NOTIFY_URL  
+    #params['return_url']        = settings.ALIPAY_RETURN_URL  
+    #params['notify_url']        = settings.ALIPAY_NOTIFY_URL  
     params['_input_charset']    = settings.ALIPAY_INPUT_CHARSET  
-    params['show_url']          = settings.ALIPAY_SHOW_URL  
+    #params['show_url']          = settings.ALIPAY_SHOW_URL  
       
     # 从订单数据中动态获取到的必填参数  
     params['out_trade_no']  = tn        # 请与贵网站订单系统中的唯一订单号匹配  
