@@ -164,6 +164,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             email=email,
                             phone_number=phone,
                             education=-1,
+                            register_time = datetime.datetime.now(),
                             )
                 # encode password
                 host.password = host.encode_password(password)
@@ -336,11 +337,11 @@ def complete_account(request):
             education = request.POST['education']
 
             try:
-                bacholor = request.POST['bacholor']
-                bacholor_major = request.POST['bacholor_major']
+                bachelor = request.POST['bachelor']
+                bachelor_major = request.POST['bachelor_major']
             except:
-                bacholor = ""
-                bacholor_major = ""
+                bachelor = ""
+                bachelor_major = ""
             try:
                 graduate = request.POST['graduate']
                 graduate_major = request.POST['graduate_major']
@@ -363,15 +364,15 @@ def complete_account(request):
             host.min_payment = min_payment
             host.service_time = service_time
             host.max_payment = max_payment
-            host.h_school = school
+
             host.state = 1
             host.qq_number = qq
 
             host.education = education
-            host.bacholor = bacholor
+            host.bachelor = bachelor
             host.graduate = graduate
             host.phd = phd
-            host.bacholor_major = bacholor_major
+            host.bachelor_major = bachelor_major
             host.graduate_major = graduate_major
             host.phd_major = phd_major
 
