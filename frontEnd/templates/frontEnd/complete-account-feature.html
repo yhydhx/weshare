@@ -55,7 +55,6 @@
 
             })
         // });
-        return false;
     }
     </script>
     <!-- 删除特质 -->
@@ -65,21 +64,24 @@
             console.log(id);
             console.log(z);
             console.log(t);
-            var jsondata = {  
-                            // "topic_id" : id,
-                            // "feature_name" :  z,
-                            // "m_id" : t,
-                        };
+            // var jsondata = {  
+            //                 "topic_id" : id,
+            //                 "feature_name" :  z,
+            //                 "m_id" : t,
+            //             };
 
             $.ajax({
                 type : "POST",
                 url : "/delete-feature/",
                 // contentType: "application/json;charset=utf-8",
                 dataType : "JSON",
-                data : {},
+                data : {"topic_id":id,"feature_name":z,"minor_topic_id":t},
                 success : function(str){
                     console.log('成功');
                     console.log(str);
+                    console.log(str['data']['f_id']);
+                    var strID = str['data']['f_id'];
+                    $('#'+strID).html("");
                 },
                 error : function(err){
                     console.log('失败');
@@ -87,8 +89,6 @@
                 }
 
             })
-
-            return false;
         }
     </script>
 </head>
@@ -201,7 +201,7 @@
                                 <div class="row" style="padding-top:5px;padding-bottom: 5px; " id="{{ feature.f_id }}">
                                     <div class="col-md-12">                           
                                         <p style="float: left;font-size:15px;"> <span class="label label-primary">{{ feature.m_name }}</span> {{ feature.f_name }} </p>
-                                        <a href="" class="btn btn-danger" style="float: right; " onclick="delete_feature('{{ topic.id }}','{{ feature.f_name }}','{{ feature.m_id }}')">删除</a>
+                                        <a href="" class="btn btn-danger" style="float: right; " onclick="delete_feature('{{ topic.id }}','{{ feature.f_name }}','{{ feature.m_id }}');return false">删除</a>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -222,7 +222,7 @@
                         </ul>
 
                         <hr>
-                        <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="return showFeatures('{{topic.id}}')">
+                        <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
 
                             <select class="form-control" id="minor_topic_id" name="minor_topic_id" required>
                                 <option value="">选择小话题</option>
