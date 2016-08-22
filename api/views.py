@@ -262,7 +262,7 @@ def school(request, method, Oid):
     elif method == "detail":
         #check if the school is exist
         try:
-            school = School().objects.get(id=Oid)
+            school = School.objects.get(id=Oid)
         except:
             Info['state'] = 404
             Info['message'] = "找不到这个学校"
