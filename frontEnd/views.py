@@ -338,21 +338,21 @@ def complete_account(request):
 
             try:
                 bachelor = request.POST['schoolID1']
-                bachelor_major = request.POST['bachelor_major']
+                #bachelor_major = request.POST['bachelor_major']
             except:
                 bachelor = ""
-                bachelor_major = ""
+                #bachelor_major = ""
             try:
                 graduate = request.POST['schoolID2']
-                graduate_major = request.POST['graduate_major']
+                #graduate_major = request.POST['graduate_major']
             except:
                 graduate = ""
-                graduate_major = ""
+                #graduate_major = ""
             try:
-                phd_major = request.POST['schoolID3']
+                #phd_major = request.POST['schoolID3']
                 phd = request.POST['phd']
             except:
-                phd_major = ""
+                #phd_major = ""
                 phd = ""
 
             if not judge_limit(min_payment, max_payment):
@@ -372,9 +372,9 @@ def complete_account(request):
             host.bachelor = bachelor
             host.graduate = graduate
             host.phd = phd
-            host.bachelor_major = bachelor_major
-            host.graduate_major = graduate_major
-            host.phd_major = phd_major
+            # host.bachelor_major = bachelor_major
+            # host.graduate_major = graduate_major
+            # host.phd_major = phd_major
 
             host.save()
             return HttpResponseRedirect('/complete-account-feature')
