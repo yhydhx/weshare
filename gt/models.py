@@ -365,7 +365,7 @@ class School(models.Model):
         return tmp_school
 
     def get_single_school_detail(self,school_id):
-        self.school_union = []
+        self.school_union = {}
         host_bachelor  = Host.objects.filter(state=2, bachelor=school_id)
         host_graduate  = Host.objects.filter(state=2, graduate=school_id)
         host_phd  = Host.objects.filter(state=2, phd=school_id)
@@ -380,7 +380,7 @@ class School(models.Model):
         for each_host in host_phd:
             self.format_user_in_school(each_host)
 
-        return self.school_union,self.d_topic_detail.values()
+        return self.school_union.values(),self.d_topic_detail.values()
 
     
     def format_user_in_school(self,each_host):
@@ -435,7 +435,7 @@ class School(models.Model):
         tmp_host['min_payment'] = int(each_host.min_payment)
         tmp_host['tag'] =  tag
 
-        self.school_union.append(tmp_host)
+        self.school_union[each_host.id] = tmp_host
 
         self.d_topic_detail = d_topic_detail
 
