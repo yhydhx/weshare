@@ -127,3 +127,8 @@ EMAIL_SSL_PORT = 465
 
 
 DEFAULT_ICON = "/file/image/111.jpg"
+
+
+SALT = 'hetongshinanshen'
+TENCENT_APPID = 101340075
+TENCENT_APPKEY = '8a66f6a4a93ef09b970afd245ed8b8fc'
