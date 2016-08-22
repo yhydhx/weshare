@@ -314,7 +314,7 @@ def complete_account(request):
             max_payment = request.POST['max-payment']
             qq = request.POST['qq']
 
-            #Education Infomation
+            
             education = request.POST['education'] 
             try:
                 bacholor = request.POST['bacholor'] 

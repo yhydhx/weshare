@@ -1,3 +1,6 @@
+
+# coding:utf-8
+
 """
 Django settings for gt project.
 
@@ -66,12 +69,25 @@ DATABASES = {
         'NAME': "weshare",
         # 'USER': 'jupiter',
         # 'PASSWORD' : '5080',
-         'HOST': '120.24.156.181',
+        'HOST': '120.24.156.181',
         # 'HOST': '127.0.0.1',
 
         'PORT': '27017',
     }
 }
+
+#用户状态
+HOST_STATE = {
+    'GUEST' : 0,
+    'APPLY' : 1,
+    'HOST'  : 2,
+}
+
+#订单的状态
+BILL_STATE = {
+    'INIT' : 0,
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

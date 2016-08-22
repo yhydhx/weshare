@@ -462,7 +462,7 @@ class School(models.Model):
                 province_index += 1
 
                 #get each school 
-                schools  = School.objects.filter(s_province=tmpP['name'])
+                schools  = School.objects.filter(s_province=tmpP['name'], s_display_index = 1)
                 school_index = 1
                 for school in schools:
                     tmpS = {}
@@ -777,4 +777,35 @@ class Message(models.Model):
             pass
             
         return tmp_message
+
+
+class Bill(models.Model):
+    bill_id = models.CharField(max_length = 100)        # 请与贵网站订单系统中的唯一订单号匹配  
+    subject = models.CharField(max_length = 100)       # 订单名称，显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里。  
+    body = models.CharField(max_length = 200)          # 订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里，可以为空  
+    bank = models.CharField(max_length = 200, default='alipay')
+    total_fee = models.FloatField()                    
+    create_time = models.DateTimeField()
+    finish_time = models.DateTimeField()
+    state =  models.IntegerField()
+    from_user_id = models.CharField(max_length = 100)
+    to_host_id = models.CharField(max_length = 100)
+
+class Appointment(models.Model):
+    '''
+    这个来创建预约的步骤和环境，
+    第一步：简要介绍自己的信息和想要咨询的问题，并告诉Host你想见面的时间和时长
+    第二步：
+    '''
+    state = models.IntegerField()    #表示订单的状态
+    from_user_id = models.CharField(max_length = 100)
+    to_host_id = models.CharField(max_length = 100)  
+    intro_and_question = models.CharField(max_length = 400)          #介绍情况和问题
+    appointment_time = models.CharField(max_length = 200)      #约定的时间和时间长度
+    recommend_info = models.CharField(max_length = 200, null = True)       #分享者回复的消息
+    recommend_time = models.DateTimeField()                    #建议的时间
+    recommend_length = models.FloatField()                     #建议的时长
+    
+
+
 

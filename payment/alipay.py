@@ -70,8 +70,8 @@ def create_direct_pay_by_user(tn, subject, body, bank, total_fee):
     # 从订单数据中动态获取到的必填参数  
     params['out_trade_no']  = tn        # 请与贵网站订单系统中的唯一订单号匹配  
     params['subject']       = subject   # 订单名称，显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里。  
-    params['body']          = body      # 订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里，可以为空  
-    params['total_fee']     = total_fee # 订单总金额，显示在支付宝收银台里的“应付总额”里，精确到小数点后两位  
+    params['body']          = body      # 订单描述、订单详细、订单备注，显示在支付宝收银台# 订单总金额，显示在支付宝收银台里的“应付总额”里，精确到小数点后两位  里的“商品描述”里，可以为空  
+    params['total_fee']     = total_fee 
       
     # 扩展功能参数——网银提前  
     if bank=='alipay' or bank=='':  
