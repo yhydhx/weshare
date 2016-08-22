@@ -337,19 +337,19 @@ def complete_account(request):
             education = request.POST['education']
 
             try:
-                bachelor = request.POST['bachelor']
+                bachelor = request.POST['schoolID1']
                 bachelor_major = request.POST['bachelor_major']
             except:
                 bachelor = ""
                 bachelor_major = ""
             try:
-                graduate = request.POST['graduate']
+                graduate = request.POST['schoolID2']
                 graduate_major = request.POST['graduate_major']
             except:
                 graduate = ""
                 graduate_major = ""
             try:
-                phd_major = request.POST['phd_major']
+                phd_major = request.POST['schoolID3']
                 phd = request.POST['phd']
             except:
                 phd_major = ""
