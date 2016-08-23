@@ -286,14 +286,34 @@ def school(request, method, Oid):
 
     elif method == 'delete':
         School.objects.filter(id=Oid).delete()
-
         return HttpResponseRedirect('../show/')
+
     elif method == 'add':
         provinces = Province.objects.all()
         return render(request, 'backEnd/addSchoolView.html', {'provinces': provinces})
     elif method == 'show' or method == '':
         allSchool = School.objects.all()
         return render(request, 'backEnd/showSchoolList.html', {'object': allSchool})
+
+    elif method == 'addImageView':
+        school = School.objects.get(id=Oid)
+        return render(request, 'backEnd/addSchoolImage.html', {'school': school})
+
+    elif method == 'addImage':
+        if request.method == "POST":
+            mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
+            des_origin_path = settings.UPLOAD_PATH + 'icons/' + mark_list + '.jpeg'  # mark_list是唯一的标志
+            des_origin_f = open(des_origin_path, "ab")
+            tmpImg = request.FILES['img']
+            for chunk in tmpImg.chunks():
+                des_origin_f.write(chunk)
+            des_origin_f.close()
+            
+            Scholl.objects.filter(id=Oid).update( s_image = des_origin_path)
+            img.save()
+            return HttpResponseRedirect('showImgList')
+        else:
+            return HttpResponse('allowed only via POST')
 
     elif method == 'generateJS':
         s = School.objects.all()[0]

@@ -23,6 +23,7 @@ class Host(models.Model):
     password = models.CharField(max_length=20)
     phone_number = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
+    register_time = models.DateTimeField(null=True)
     # 以上为必选信息
     gender = models.IntegerField(default=1, blank=True)  # 1是男生 0是女生
     motto = models.CharField(max_length=100, blank=True)
@@ -42,11 +43,11 @@ class Host(models.Model):
 
     #Education Infomation
     education = models.IntegerField(default=0)  # bachlor => 0  graduate => 1 phd => 2 else => 3
-    bacholor = models.CharField(blank=True, max_length=100)
+    bachelor = models.CharField(blank=True, max_length=100)
     graduate = models.CharField(blank=True, max_length=100)
     phd = models.CharField(blank=True, max_length=100)
 
-    bacholor_major = models.CharField(blank=True, max_length=100)
+    bachelor_major = models.CharField(blank=True, max_length=100)
     graduate_major = models.CharField(blank=True, max_length=100)
     phd_major = models.CharField(blank=True, max_length=100)
 
@@ -77,24 +78,24 @@ class Host(models.Model):
             #get the school infomation
             if education == 0:
                 try:
-                    search_string += bacholor_school + " "
-                    bacholor_school = School.objects.get(s_name = host_atom.bacholor).s_name
+                    bachelor_school = School.objects.get(s_name = host_atom.bachelor).s_name
+                    search_string += bachelor_school + " "
                 except :
                     pass
             elif education == 1:
                 try:
                     graduate_school = School.objects.get(s_name = host_atom.graduate).s_name
                     search_string += graduate + " "
-                    bacholor_school = School.objects.get(s_name = host_atom.bacholor).s_name
-                    search_string += bacholor_school + " "
+                    bachelor_school = School.objects.get(s_name = host_atom.bachelor).s_name
+                    search_string += bachelor_school + " "
                 except:
                     pass
             elif education == 2:
                 try:
                     graduate_school = School.objects.get(s_name = host_atom.graduate).s_name
                     search_string += graduate + " "
-                    bacholor_school = School.objects.get(s_name = host_atom.bacholor).s_name
-                    search_string += bacholor_school + " "
+                    bachelor_school = School.objects.get(s_name = host_atom.bachelor).s_name
+                    search_string += bachelor_school + " "
                     phd_school = School.objects.get(s_name = host_atom.phd).s_name
                     search_string += phd_school + " "
                 except:
@@ -167,7 +168,7 @@ class Host(models.Model):
 
         #Education Infomation
         tmpHost["education"] =  self.education
-        tmpHost["bacholor"] =  self.bacholor
+        tmpHost["bachelor"] =  self.bachelor
         tmpHost["graduate"] =  self.graduate
         tmpHost["phd"] =  self.phd
 
@@ -364,22 +365,22 @@ class School(models.Model):
         return tmp_school
 
     def get_single_school_detail(self,school_id):
-        self.school_union = []
-        host_bachlor  = Host.objects.filter(state=2, bacholor=school_id)
+        self.school_union = {}
+        host_bachelor  = Host.objects.filter(state=2, bachelor=school_id)
         host_graduate  = Host.objects.filter(state=2, graduate=school_id)
         host_phd  = Host.objects.filter(state=2, phd=school_id)
 
 
 
         self.d_topic_detail = {}
-        for each_host in host_bachlor:
+        for each_host in host_bachelor:
             self.format_user_in_school(each_host)
-        for each_host in host_bachlor:
+        for each_host in host_graduate:
             self.format_user_in_school(each_host)
         for each_host in host_phd:
             self.format_user_in_school(each_host)
 
-        return self.school_union,self.d_topic_detail.values()
+        return self.school_union.values(),self.d_topic_detail.values()
 
     
     def format_user_in_school(self,each_host):
@@ -434,7 +435,7 @@ class School(models.Model):
         tmp_host['min_payment'] = int(each_host.min_payment)
         tmp_host['tag'] =  tag
 
-        self.school_union.append(tmp_host)
+        self.school_union[each_host.id] = tmp_host
 
         self.d_topic_detail = d_topic_detail
 
@@ -464,7 +465,7 @@ class School(models.Model):
                 province_index += 1
 
                 #get each school 
-                schools  = School.objects.filter(s_province=tmpP['name'])
+                schools  = School.objects.filter(s_province=tmpP['name'], s_display_index = 1)
                 school_index = 1
                 for school in schools:
                     tmpS = {}
@@ -779,4 +780,35 @@ class Message(models.Model):
             pass
             
         return tmp_message
+
+
+class Bill(models.Model):
+    bill_id = models.CharField(max_length = 100)        # 请与贵网站订单系统中的唯一订单号匹配  
+    subject = models.CharField(max_length = 100)       # 订单名称，显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里。  
+    body = models.CharField(max_length = 200)          # 订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里，可以为空  
+    bank = models.CharField(max_length = 200, default='alipay')
+    total_fee = models.FloatField()                    
+    create_time = models.DateTimeField()
+    finish_time = models.DateTimeField()
+    state =  models.IntegerField()
+    from_user_id = models.CharField(max_length = 100)
+    to_host_id = models.CharField(max_length = 100)
+
+class Appointment(models.Model):
+    '''
+    这个来创建预约的步骤和环境，
+    第一步：简要介绍自己的信息和想要咨询的问题，并告诉Host你想见面的时间和时长
+    第二步：
+    '''
+    state = models.IntegerField()    #表示订单的状态
+    from_user_id = models.CharField(max_length = 100)
+    to_host_id = models.CharField(max_length = 100)  
+    intro_and_question = models.CharField(max_length = 400)          #介绍情况和问题
+    appointment_time = models.CharField(max_length = 200)      #约定的时间和时间长度
+    recommend_info = models.CharField(max_length = 200, null = True)       #分享者回复的消息
+    recommend_time = models.DateTimeField()                    #建议的时间
+    recommend_length = models.FloatField()                     #建议的时长
+    
+
+
 

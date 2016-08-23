@@ -225,6 +225,15 @@ def user(request, method, Oid):
 
         return HttpResponseRedirect("/user/show/" + Oid)
 
+    elif method == 'logout':
+        if request.session.has_key('email'):
+            del request.session['email']
+            Info['message'] = "登出成功"
+
+        else:
+            Info['state'] = 404
+            Info['message'] = "您已经登出"
+        return HttpResponse(json.dumps(Info),content_type="application/json")
 
     else:
         return render(request, "frontEnd/404.html")
@@ -262,14 +271,14 @@ def school(request, method, Oid):
     elif method == "detail":
         #check if the school is exist
         try:
-            school = School().objects.get(id=Oid)
+            school = School.objects.get(id=Oid)
         except:
             Info['state'] = 404
             Info['message'] = "找不到这个学校"
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
         # find the passed host of the school
-        school = School()
+
         school_union, topics = school.get_single_school_detail(Oid)
 
         Info = output_init()
