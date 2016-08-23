@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # 'game',
     'frontEnd',
-
+    'bill',
     'backEnd',
     'payment',
     'api'
@@ -69,8 +69,8 @@ DATABASES = {
         'NAME': "weshare",
         # 'USER': 'jupiter',
         # 'PASSWORD' : '5080',
-        'HOST': '120.24.156.181',
-        # 'HOST': '127.0.0.1',
+        # 'HOST': '120.24.156.181',
+        'HOST': '127.0.0.1',
 
         'PORT': '27017',
     }
@@ -78,16 +78,36 @@ DATABASES = {
 
 #用户状态
 HOST_STATE = {
-    'GUEST' : 0,
+    'GUEST' : 0,    
     'APPLY' : 1,
     'HOST'  : 2,
 }
 
-#订单的状态
-BILL_STATE = {
-    'INIT' : 0,
+#预约的状态
+APPOINTMENT_STATE = {
+    'INITED' : 0,    #创建订单
+    'CERTIFIED' : 1,    #确认
+    'PAID' : 2,   #    付款
+    'COMPLETED' : 3,   #完成了
+    'FINISHED'   : 4     #结算完成
 }
 
+#BILL_TYPE  描述订单的类型，目前只有交流
+BILL_TYPE = {
+    "APPOINTMENT": 0,
+}
+
+#BILL_STATE  订单的成功与否
+BILL_STATE = {
+    "UNPAID" : 0,
+    "PAID" : 1
+}
+
+
+MESSAGE_TYPE = {
+    "APPOINTMENT_COMM" : 1,
+
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

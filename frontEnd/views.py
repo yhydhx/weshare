@@ -366,7 +366,7 @@ def complete_account(request):
             host.service_time = service_time
             host.max_payment = max_payment
 
-            host.state = 1
+            host.state = HOST_STATE.APPLY
             host.qq_number = qq
 
             host.education = education
@@ -689,15 +689,18 @@ def host_center(request, method, Oid):
         host = Host.objects.get(email=username)
         Info['current_user'] = host.format_dict()
         login_flag = True
+        Info['login_flag'] = login_flag
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
-
-
 
 
     if method == "edit":
         return render(request, "frontEnd/center-edit.html", Info)
     elif method == "manage":
+        Info['sent_bills'] = host.get_one_user_host_bills()
+        if host.state != HOST_STATE.GUEST:
+            Info['got_bills'] = host.get_one_host_user_bills()
+
         return render(request, "frontEnd/center-manage.html", Info)
     elif method == "auth":
         return render(request, "frontEnd/center-auth.html", Info)
@@ -745,6 +748,15 @@ def school(request, method, Oid):
 # user view
 @csrf_exempt
 def user(request, method, Oid):
+    login_flag = False
+    try:
+        username = request.session['email']
+        user = Host.objects.get(email=username)
+        login_flag = True
+    except:
+        pass
+
+
     if method == "show":
         try:
             host = Host.objects.get(id=Oid)
@@ -754,12 +766,17 @@ def user(request, method, Oid):
         features = host.get_all_features()
         host.features = features.values()
         host.image = "/files/icons/" + host.icon.split("/")[-1]
+        f = Feature()
+        questions = f.get_one_host_questions(Oid)
 
         Info = {}
-        Info['user'] = host
+        Info['host'] = host
         Info['msgs'] = host.get_user_message(host.id)
-        Info['current_user'] = host
-        Info['login_flag'] = True
+        Info['questions'] = questions
+
+        if login_flag:
+            Info['current_user'] = user
+        Info['login_flag'] = login_flag
 
         return render_to_response('frontEnd/host-index.html', Info)
 
