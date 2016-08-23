@@ -165,6 +165,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             phone_number=phone,
                             education=-1,
                             register_time = datetime.datetime.now(),
+                            icon = DEFAULT_ICON,
                             )
                 # encode password
                 host.password = host.encode_password(password)
