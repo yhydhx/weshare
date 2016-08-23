@@ -31,23 +31,23 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 </style>
 
 
-<body style="">
+<body style="background-color: white; color: black; ">
 
 	<ul id="demo" style="margin-top: 100px; ">
 		<li class="active">
-			<a href="#"><img src="{% static 'frontEnd/images/weshare/shoufengqin/1.png'%}" /></a>
+			<a href="/recruit/1"><img src="{% static 'frontEnd/images/weshare/shoufengqin/1.png'%}" /></a>
 			<!-- <div><a href="#">标题1</a></div> -->
 		</li>
 		<li>
-			<a href="#"><img src="{% static 'frontEnd/images/weshare/shoufengqin/2.png'%}" /></a>
+			<a href="/recruit/2"><img src="{% static 'frontEnd/images/weshare/shoufengqin/2.png'%}" /></a>
 			<!-- <div><a href="#">标题2</a></div> -->
 		</li>
 		<li>
-			<a href="#"><img src="{% static 'frontEnd/images/weshare/shoufengqin/3.png'%}" /></a>
+			<a href="/recruit/3"><img src="{% static 'frontEnd/images/weshare/shoufengqin/3.png'%}" /></a>
 			<!-- <div><a href="#">标题3</a></div> -->
 		</li>
 		<li>
-			<a href="#"><img src="{% static 'frontEnd/images/weshare/shoufengqin/4.png'%}" /></a>
+			<a href="/recruit/4"><img src="{% static 'frontEnd/images/weshare/shoufengqin/4.png'%}" /></a>
 			<!-- <div><a href="3">标题4</a></div> -->
 		</li>
 		<!-- <li>
@@ -55,6 +55,44 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 			<div><a href="#">标题5</a></div>
 		</li> -->
 	</ul>
+
+	<div class="container">
+		<div class="row" style="padding-top: 30px; padding-bottom: 50px; ">
+			<div class="col-md-12">
+				<p>这里都是干货，这里有问必答。</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1" style="text-align: left; ">
+				<p>为啥为你提供：</p>
+
+				<div class="media">
+				  <div class="media-body">
+				    <h5 class="media-heading">寻找校园达人以答疑解惑</h5>
+				    <h5>注册成为提问者，根据需求来搜索分享着，支付并进行线上或线下咨询。</h5>
+				  </div>
+				  <div class="media-right">
+				    <a href="#">
+				      <img class="media-object" style="height:80px;" src="{% static 'frontEnd/images/weshare/recruit/label1.png'%}">
+				    </a>
+				  </div>
+				</div>
+
+				<div class="media">
+				  <div class="media-body">
+				    <h5 class="media-heading">寻找校园达人以答疑解惑</h5>
+				    <h5>注册成为提问者，根据需求来搜索分享着，支付并进行线上或线下咨询。</h5>
+				  </div>
+				  <div class="media-right">
+				    <a href="#">
+				      <img class="media-object" style="height:80px;" src="{% static 'frontEnd/images/weshare/recruit/label2.png'%}">
+				    </a>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 {% endblock %}
