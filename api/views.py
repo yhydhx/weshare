@@ -225,6 +225,15 @@ def user(request, method, Oid):
 
         return HttpResponseRedirect("/user/show/" + Oid)
 
+    elif method == 'logout':
+        if request.session.has_key('email'):
+            del request.session['email']
+            Info['message'] = "登出成功"
+
+        else:
+            Info['state'] = 404
+            Info['message'] = "您已经登出"
+        return HttpResponse(json.dumps(Info),content_type="application/json")
 
     else:
         return render(request, "frontEnd/404.html")
