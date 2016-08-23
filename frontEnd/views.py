@@ -637,8 +637,14 @@ def about(request):
     return render(request, "frontEnd/about.html")
 
 
-def recruit(request):
-    return render(request, "frontEnd/recruitment.html")
+def recruit(request,method,Oid):
+    if method == "index":
+        return render(request, "frontEnd/recruitment.html")
+    else:
+        return render(request, "frontEnd/recruit"+method+".html")
+
+
+    
 
 
 def service(request):
