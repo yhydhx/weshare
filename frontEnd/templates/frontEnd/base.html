@@ -18,7 +18,6 @@
 
     <title>weshare</title>
     
-	
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}"><!-- bootstrap -->
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}"><!-- 模板自带：请勿删除 -->
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}"><!-- mystyle：Z 请勿删除 -->
@@ -31,11 +30,6 @@
     <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
     <![endif]-->
 
-
-<!--     <script src="{% static 'frontEnd/js/map/lib/jquery-1.11.1.min.js'%}"></script>jQuery依赖：必须在首位
-    <script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js'%}" ></script>bootstrap -->
-	
-    
     <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script><!-- 模板自带：请勿删除 -->
 </head>
 
@@ -45,30 +39,18 @@
 
 {% include "frontEnd/footer.html" %}<!-- 加载footer -->
 
-
-<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
-<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script><!-- jquery依赖 -->
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script><!-- bootstrap -->
+<!-- 模板自带：请勿删除 -->
 <script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
-
 <script src="{% static 'frontEnd/js/main.js' %}"></script>
-
 <script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
-
 <script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
-
-
 <script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
-
 <script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
 {% block js %}{% endblock %}<!-- 网页JS -->
-
-
-
-
-<!-- <script src="{% static 'frontEnd/js/dependencies.js'%}" ></script>模板自带JS
-<script src="{% static 'frontEnd/js/main.js'%}"  ></script>模板自带JS -->
 
 </html>
