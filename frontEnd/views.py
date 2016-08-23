@@ -679,10 +679,7 @@ def service(request):
 
 def host_center(request, method, Oid):
     Info = {}
-    Info['state'] = 0
-    Info['message'] = ""
-    Info['data'] = {}
-
+    login_flag = False
     try:
         username = request.session['email']
     except:
@@ -690,9 +687,13 @@ def host_center(request, method, Oid):
 
     try:
         host = Host.objects.get(email=username)
-        Info['data']['host'] = host.format_dict()
+        Info['current_user'] = host.format_dict()
+        login_flag = True
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
+
+
+
 
     if method == "edit":
         return render(request, "frontEnd/center-edit.html", Info)
