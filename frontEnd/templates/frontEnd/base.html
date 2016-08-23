@@ -1,7 +1,7 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="no-js ie8" lang="en"><![endif]-->
-<!--[if IE 9 ]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8" lang="en" xmlns="http://www.w3.org/1999/xhtml"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9" lang="en" xmlns="http://www.w3.org/1999/xhtml"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <!--<![endif]-->
@@ -21,14 +21,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}"><!-- bootstrap -->
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}"><!-- 模板自带：请勿删除 -->
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}"><!-- mystyle：Z 请勿删除 -->
-    
-    
-	<!-- 大概是兼容性 -->
-    <!--[if lt IE 9]>
-    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
-    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
-    <![endif]-->
 
     <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script><!-- 模板自带：请勿删除 -->
 </head>
