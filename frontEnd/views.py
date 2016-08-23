@@ -165,6 +165,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             phone_number=phone,
                             education=-1,
                             register_time = datetime.datetime.now(),
+                            icon = DEFAULT_ICON,
                             )
                 # encode password
                 host.password = host.encode_password(password)
@@ -328,9 +329,9 @@ def complete_account(request):
             self_introduction = request.POST['self-introduction']
             gender = request.POST['gender']
             motto = request.POST['motto']
-            min_payment = request.POST['min-payment']
+            min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
-            max_payment = request.POST['max-payment']
+            max_payment = float(request.POST['max-payment'])
             qq = request.POST['qq']
 
             # Education Infomation
@@ -563,9 +564,9 @@ def modify_account(request):
             self_introduction = request.POST['self-introduction']
             gender = request.POST['selectbox']
             motto = request.POST['motto']
-            min_payment = request.POST['min-payment']
+            min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
-            max_payment = request.POST['max-payment']
+            max_payment = float(request.POST['max-payment'])
             school = request.POST['school']
             qq = request.POST['qq']
 
