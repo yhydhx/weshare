@@ -1,38 +1,28 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="no-js ie8" lang="en"><![endif]-->
-<!--[if IE 9 ]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8" lang="en" xmlns="http://www.w3.org/1999/xhtml"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9" lang="en" xmlns="http://www.w3.org/1999/xhtml"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <!--<![endif]-->
 
-<head lang="zh">
+<head lang="en">
     <meta charset="UTF-8">
+    <meta name="description" content="weshare"><!-- 网页描述 -->
+    <meta name="author" content="weshare"><!-- 作者：weshare团队 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no"><!-- 手机自适应 -->
     <meta name="keywords" content="weshare"><!-- 搜索关键字 -->
-    <meta name="description" content="weshare"><!-- 网页描述 -->
-    <meta name="author" content="weshare"><!-- 作者：weshare团队 -->
+    
+    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico'%}"><!-- 模板自带：请勿删除 -->
+
     <title>weshare</title>
     
-	
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}"><!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}"><!-- 模板自带：请勿删除 -->
     <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}"><!-- mystyle：Z 请勿删除 -->
-    <!-- 模板自带：请勿删除 -->
-    <!-- <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico'%}"> -->
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}">
-	<!-- 大概是兼容性 -->
-    <!--[if lt IE 9]>
-    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
-    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
-    <![endif]-->
 
-
-    <script src="{% static 'frontEnd/js/map/lib/jquery-1.11.1.min.js'%}"></script><!-- jQuery依赖：必须在首位 -->
-    <script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js'%}" ></script><!-- bootstrap -->
-	<!-- 模板自带：请勿删除 -->
-    <!-- <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script> -->
+    <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script><!-- 模板自带：请勿删除 -->
 </head>
 
 {% include "frontEnd/nav.html" %}<!-- 加载导航栏 -->
@@ -41,8 +31,18 @@
 
 {% include "frontEnd/footer.html" %}<!-- 加载footer -->
 
+<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script><!-- jquery依赖 -->
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script><!-- bootstrap -->
+<!-- 模板自带：请勿删除 -->
+<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
+<script src="{% static 'frontEnd/js/main.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
 {% block js %}{% endblock %}<!-- 网页JS -->
-<script src="{% static 'frontEnd/js/dependencies.js'%}" ></script><!-- 模板自带JS -->
-<script src="{% static 'frontEnd/js/main.js'%}"  ></script><!-- 模板自带JS -->
 
 </html>
