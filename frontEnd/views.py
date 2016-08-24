@@ -799,7 +799,7 @@ def user(request, method, Oid):
             Info['current_user'] = user
         Info['login_flag'] = login_flag
 
-        return render_to_response('frontEnd/host-index.html', Info)
+        return render(request,'frontEnd/host-index.html', Info)
 
     elif method == "msg":
         # check whether the user is online
