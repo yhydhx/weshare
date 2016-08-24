@@ -1,404 +1,8 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<!--[if IE 8 ]>
-<html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>
-<html class="no-js ie9" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
-<head lang="en">
-    <meta charset="UTF-8">
-    <meta name="description" content="Rentica - The Best One Yet">
-    <meta name="author" content="CreateIT">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 -->
 
-    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
-    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png' %}">-->
-
-    <title>完善账户信息</title>
-
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/test.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
-
-    <!--[if lt IE 9]>
-    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
-    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
-    <![endif]-->
-    <script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
-    <script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script> 
-<!--     <script>var school = "";
-    var sf = "";
-    $(function () {
-        $.each(allUnivList, function (j, m) {
-            $("#gj").append("<a href='javascript:void(0);' onclick='getSheng(" + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
-        });
-    });
-
-    function getSheng(aid, name) {
-        school = name;
-        $("#sheng").show();
-        $("#list").html('');
-        $("#sheng").html('');
-        if (allUnivList[aid].provs.length == 0) {
-            $("#sheng").append("不好意思暂时还没有开放这些国家与地区的注册");
-        }
-        else {
-            $.each(allUnivList[aid].provs, function (j, m) {
-                $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool(" + aid + "," + j + ",\"" + m.name + "\")'>" + m.name + "</a>");
-            });
-        }
-    }
-
-    function getSchool(gid, pid, name) {
-        school = school.substring(0, 2);
-        school += " - " + name;
-        $("#list").show();
-        $("#list").html('');
-        $.each(allUnivList[gid].provs[pid].univs, function (k, l) {
-            $("#list").append("<a style='width:270px;display:block;float:left;'>" + l.name + "</a>");
-        });
-        $("#list").append("<br style='clear:both;' />");
-
-    }</script> -->
-
-
-    <!-- 富文本编辑器 -->
-    <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/kindeditor.js'%}"></script>
-    <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/lang/zh-CN.js'%}"></script>
-    <script>
-            KindEditor.ready(function(K) {
-                    window.editor = K.create('#editor_id');
-            });
-    </script>
-
-    <!-- 选择学历 -->
-    <script>
-
-        function showEducation(value){
-            console.log(value);
-            if (value === '博士') {
-                $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"3\">");
-                $("#MtxtSc").show();
-                $("#PtxtSc").show();
-
-            }
-            else if (value === '硕士') {
-                $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"2\">");
-                $("#MtxtSc").show();
-                $("#PtxtSc").hide();
-            }
-            else if (value ==='本科') {
-                $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"1\">");
-                $("#MtxtSc").hide();
-                $("#PtxtSc").hide();
-            }
-            else{
-
-            }  
-        }
-    </script>
-
-<!-- 本科school-search -->
-<script type="text/javascript">
-var school = "";
-var sf = "";
-
-var schoolID = "";
-$(function (){
-    $.each(allUnivList,function (j,m){      
-        $("#gj").append("<a href='javascript:void(0);' onclick='getSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
-    });
-});
-
-//获取某国家的省份
-//参数 aid 
-//参数 name
-function getSheng(aid,name){
-school = name;
-    $("#sheng").show();
-    $("#list").html('');
-    $("#sheng").html('');
-    if (allUnivList[aid].provs.length == 0){
-        $("#sheng").append("暂不支持");
-    }
-    else
-    {
-        $.each(allUnivList[aid].provs,function (j,m){               
-            $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
-        });
-    }
-}
-
-//获取某省份的学校
-//参数 gid
-//参数 pid
-//参数 name:学校名字
-function  getSchool(gid,pid,name){
-school = school.substring(0,2);//取schoo字符串中前两个字符
-school += "-"+ name;
-$("#list").show();
-    $("#list").html('');
-    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
-
-        $("#list").append("<a href=\"javascript:getSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
-    });
-    $("#list").append("<br style='clear:both;' />");
-        
-}
-
-//点击学校响应
-function getSchoolID(school_id,school_name){
-    schoolID = school_id;
-    console.log(schoolID);
-    console.log(school_name);
-    $("#gj").hide();
-    $("#list").hide();
-    $("#sheng").hide();
-    school += "-"+school_name;
-
-    $("#txtSc").val(school);
-    $("#txtSc2").val(schoolID);
-
-}
-
-//点击表单响应
-$("#txtSc").live("click",function (){
-    $("#gj").show();
-    $("#list").hide();
-    $("#sheng").hide();
-});
-</script>
-
-
-
-<!-- 硕士school-search -->
-<script type="text/javascript">
-var Mschool = "";
-var Msf = "";
-
-var MschoolID = "";
-$(function (){
-    $.each(allUnivList,function (j,m){      
-        $("#Mgj").append("<a href='javascript:void(0);' onclick='MgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
-    });
-});
-
-//获取某国家的省份
-//参数 aid 
-//参数 name
-function MgetSheng(aid,name){
-Mschool = name;
-    $("#Msheng").show();
-    $("#Mlist").html('');
-    $("#Msheng").html('');
-    if (allUnivList[aid].provs.length == 0){
-        $("#Msheng").append("暂不支持");
-    }
-    else
-    {
-        $.each(allUnivList[aid].provs,function (j,m){               
-            $("#Msheng").append("<a href='javascript:void(0);' onclick='MgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
-        });
-    }
-}
-
-//获取某省份的学校
-//参数 gid
-//参数 pid
-//参数 name:学校名字
-function  MgetSchool(gid,pid,name){
-Mschool = Mschool.substring(0,2);//取schoo字符串中前两个字符
-Mschool += "-"+ name;
-$("#Mlist").show();
-    $("#Mlist").html('');
-    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
-
-        $("#Mlist").append("<a href=\"javascript:MgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
-    });
-    $("#Mlist").append("<br style='clear:both;' />");
-        
-}
-
-//点击学校响应
-function MgetSchoolID(school_id,school_name){
-    MschoolID = school_id;
-    console.log(MschoolID);
-    console.log(school_name);
-    $("#Mgj").hide();
-    $("#Mlist").hide();
-    $("#Msheng").hide();
-    Mschool += "-"+school_name;
-
-    $("#MtxtSc").val(Mschool);
-    $("#MtxtSc2").val(MschoolID);
-
-}
-
-//点击表单响应
-$("#MtxtSc").live("click",function (){
-    $("#Mgj").show();
-    $("#Mlist").hide();
-    $("#Msheng").hide();
-});
-</script>
-
-
-
-<!-- 博士school-search -->
-<script type="text/javascript">
-var Pschool = "";
-var Psf = "";
-
-var PschoolID = "";
-$(function (){
-    $.each(allUnivList,function (j,m){      
-        $("#Pgj").append("<a href='javascript:void(0);' onclick='PgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
-    });
-});
-
-//获取某国家的省份
-//参数 aid 
-//参数 name
-function PgetSheng(aid,name){
-Pschool = name;
-    $("#Psheng").show();
-    $("#Plist").html('');
-    $("#Psheng").html('');
-    if (allUnivList[aid].provs.length == 0){
-        $("#Psheng").append("暂不支持");
-    }
-    else
-    {
-        $.each(allUnivList[aid].provs,function (j,m){               
-            $("#Psheng").append("<a href='javascript:void(0);' onclick='PgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
-        });
-    }
-}
-
-//获取某省份的学校
-//参数 gid
-//参数 pid
-//参数 name:学校名字
-function  PgetSchool(gid,pid,name){
-Pschool = Pschool.substring(0,2);//取schoo字符串中前两个字符
-Pschool += "-"+ name;
-$("#Plist").show();
-    $("#Plist").html('');
-    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
-
-        $("#Plist").append("<a href=\"javascript:PgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
-    });
-    $("#Plist").append("<br style='clear:both;' />");
-        
-}
-
-//点击学校响应
-function PgetSchoolID(school_id,school_name){
-    PschoolID = school_id;
-    console.log(PschoolID);
-    console.log(school_name);
-    $("#Pgj").hide();
-    $("#Plist").hide();
-    $("#Psheng").hide();
-    Pschool += "-"+school_name;
-
-    $("#PtxtSc").val(Pschool);
-    $("#PtxtSc2").val(PschoolID);
-
-}
-
-//点击表单响应
-$("#PtxtSc").live("click",function (){
-    $("#Pgj").show();
-    $("#Plist").hide();
-    $("#Psheng").hide();
-});
-</script>
-    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
-    <script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
-    <script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
-
-
-</head>
-
+{% block body %}
 <body class="cssAnimate">
-<div class="ct-preloader-container">                                            <!-- Preloader -->
-    <div class='ct-preloader'>
-        <div>
-            <div>
-                <div>
-                    <div>
-                        <div>
-                            <div>
-                                <div>
-                                    <div>
-                                        <div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/content/logo2.png' %}"
-                                                              alt=""/></a></div>
-    <ul class="ct-menuMobile-navbar">
-        <li class="active"><a href="index.html"><span>Home</span></a></li>
-        <li><a href="about.html"><span>About us</span></a></li>
-        <li><a href="gallery.html"><span>Our gallery</span></a></li>
-        <li class="dropdown"><a href="rent-now.html"><span>Rent Now</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="rent-now.html"><span>Rent Now</span></a></li>
-                <li><a href="rent-item.html"><span>Rent Item</span></a></li>
-                <li><a href="rent-page-variation-1.html"><span>Rent Page v1</span></a></li>
-                <li><a href="rent-page-variation-2.html"><span>Rent Page v2</span></a></li>
-                <li><a href="rent-paypal.html"><span>Rent with Paypal integration</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="blog.html"><span>Blog</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="blog.html"><span>Blog</span></a></li>
-                <li><a href="blog-single.html"><span>Blog Single</span></a></li>
-                <li><a href="blog-archive.html"><span>Blog Archive</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="events.html"><span>Events</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="events.html"><span>Events</span></a></li>
-                <li><a href="event-single.html"><span>Event Single 1</span></a></li>
-                <li><a href="event-single2.html"><span>Event Single 2</span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown"><a href="account.html"><span>Pages</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="account.html"><span>My Account</span></a></li>
-                <li><a href="login.html"><span>Login</span></a></li>
-
-                <li><a href="404.html"><span>404</span></a></li>
-            </ul>
-        </li>
-        <li><a href="services.html"><span>Services</span></a></li>
-        <li><a href="contact.html"><span>Contact</span></a></li>
-    </ul>
-</div>
-
-<div id="ct-js-wrapper" class="ct-pageWrapper">
-
-    {% include "frontEnd/nav.html" %}
-
 
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340"
              data-type="parallax" data-stellar-background-ratio="0.3"
@@ -626,73 +230,272 @@ $("#PtxtSc").live("click",function (){
 
     </div>
 
-</div>
+</div><!-- 接：<div id="ct-js-wrapper" class="ct-pageWrapper"> 很重要：勿删 -->
+
+</body>
+{% endblock %}
+
+{% block js %}
+<!-- 富文本编辑器 -->
+<script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/kindeditor.js'%}"></script>
+<script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/lang/zh-CN.js'%}"></script>
+<script>
+        KindEditor.ready(function(K) {
+                window.editor = K.create('#editor_id');
+        });
+</script>
+
+<!-- 选择学历 -->
+<script>
+
+    function showEducation(value){
+        console.log(value);
+        if (value === '博士') {
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"3\">");
+            $("#MtxtSc").show();
+            $("#PtxtSc").show();
+
+        }
+        else if (value === '硕士') {
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"2\">");
+            $("#MtxtSc").show();
+            $("#PtxtSc").hide();
+        }
+        else if (value ==='本科') {
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"1\">");
+            $("#MtxtSc").hide();
+            $("#PtxtSc").hide();
+        }
+        else{
+
+        }  
+    }
+</script>
+
+<!-- 选择学校JS -->
+<script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
+<script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script> 
+
+<!-- 本科school-search -->
+<script type="text/javascript">
+var school = "";
+var sf = "";
+
+var schoolID = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#gj").append("<a href='javascript:void(0);' onclick='getSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
+
+//获取某国家的省份
+//参数 aid 
+//参数 name
+function getSheng(aid,name){
+school = name;
+    $("#sheng").show();
+    $("#list").html('');
+    $("#sheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#sheng").append("暂不支持");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
+
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
+function  getSchool(gid,pid,name){
+school = school.substring(0,2);//取schoo字符串中前两个字符
+school += "-"+ name;
+$("#list").show();
+    $("#list").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+
+        $("#list").append("<a href=\"javascript:getSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#list").append("<br style='clear:both;' />");
+        
+}
+
+//点击学校响应
+function getSchoolID(school_id,school_name){
+    schoolID = school_id;
+    console.log(schoolID);
+    console.log(school_name);
+    $("#gj").hide();
+    $("#list").hide();
+    $("#sheng").hide();
+    school += "-"+school_name;
+
+    $("#txtSc").val(school);
+    $("#txtSc2").val(schoolID);
+
+}
+
+//点击表单响应
+$("#txtSc").live("click",function (){
+    $("#gj").show();
+    $("#list").hide();
+    $("#sheng").hide();
+});
+</script>
 
 
-{% include "frontEnd/footer.html" %}
 
-<!-- <a class="btn btn-primary" data-toggle="modal" href='#modal-id' id="fuckJS">fuckJS</a>
-<div class="modal fade" id="modal-id">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Choose a picture or upload one</h4>
-            </div>
-            <div class="modal-body">
-                <div role="tabpanel">
+<!-- 硕士school-search -->
+<script type="text/javascript">
+var Mschool = "";
+var Msf = "";
 
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#choose" aria-controls="choose" role="tab" data-toggle="tab">choose</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">upload</a>
-                        </li>
-                    </ul>
+var MschoolID = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#Mgj").append("<a href='javascript:void(0);' onclick='MgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
 
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="choose">
-                            <div class="squr"><input type="checkbox" name="c1"></div>
-                            <div class="squr"><input type="checkbox" name="c2"></div>
-                            <div class="squr"><input type="checkbox" name="c3"></div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="upload">
-                            <iframe src="uploadFile.html"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
+//获取某国家的省份
+//参数 aid 
+//参数 name
+function MgetSheng(aid,name){
+Mschool = name;
+    $("#Msheng").show();
+    $("#Mlist").html('');
+    $("#Msheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#Msheng").append("暂不支持");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#Msheng").append("<a href='javascript:void(0);' onclick='MgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
 
-</div> -->
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
+function  MgetSchool(gid,pid,name){
+Mschool = Mschool.substring(0,2);//取schoo字符串中前两个字符
+Mschool += "-"+ name;
+$("#Mlist").show();
+    $("#Mlist").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
+
+        $("#Mlist").append("<a href=\"javascript:MgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#Mlist").append("<br style='clear:both;' />");
+        
+}
+
+//点击学校响应
+function MgetSchoolID(school_id,school_name){
+    MschoolID = school_id;
+    console.log(MschoolID);
+    console.log(school_name);
+    $("#Mgj").hide();
+    $("#Mlist").hide();
+    $("#Msheng").hide();
+    Mschool += "-"+school_name;
+
+    $("#MtxtSc").val(Mschool);
+    $("#MtxtSc2").val(MschoolID);
+
+}
+
+//点击表单响应
+$("#MtxtSc").live("click",function (){
+    $("#Mgj").show();
+    $("#Mlist").hide();
+    $("#Msheng").hide();
+});
+</script>
 
 
-<!-- JavaScripts -->
 
-<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
-<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
+<!-- 博士school-search -->
+<script type="text/javascript">
+var Pschool = "";
+var Psf = "";
 
-<script src="{% static 'frontEnd/js/main.js' %}"></script>
-<script src="{% static 'frontEnd/js/shop.js' %}"></script>
+var PschoolID = "";
+$(function (){
+    $.each(allUnivList,function (j,m){      
+        $("#Pgj").append("<a href='javascript:void(0);' onclick='PgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    });
+});
 
+//获取某国家的省份
+//参数 aid 
+//参数 name
+function PgetSheng(aid,name){
+Pschool = name;
+    $("#Psheng").show();
+    $("#Plist").html('');
+    $("#Psheng").html('');
+    if (allUnivList[aid].provs.length == 0){
+        $("#Psheng").append("暂不支持");
+    }
+    else
+    {
+        $.each(allUnivList[aid].provs,function (j,m){               
+            $("#Psheng").append("<a href='javascript:void(0);' onclick='PgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
+        });
+    }
+}
 
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
+//获取某省份的学校
+//参数 gid
+//参数 pid
+//参数 name:学校名字
+function  PgetSchool(gid,pid,name){
+Pschool = Pschool.substring(0,2);//取schoo字符串中前两个字符
+Pschool += "-"+ name;
+$("#Plist").show();
+    $("#Plist").html('');
+    $.each(allUnivList[gid].provs[pid].univs,function (k,l){
 
-<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
+        $("#Plist").append("<a href=\"javascript:PgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
+    });
+    $("#Plist").append("<br style='clear:both;' />");
+        
+}
 
+//点击学校响应
+function PgetSchoolID(school_id,school_name){
+    PschoolID = school_id;
+    console.log(PschoolID);
+    console.log(school_name);
+    $("#Pgj").hide();
+    $("#Plist").hide();
+    $("#Psheng").hide();
+    Pschool += "-"+school_name;
 
-<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+    $("#PtxtSc").val(Pschool);
+    $("#PtxtSc2").val(PschoolID);
 
+}
+
+//点击表单响应
+$("#PtxtSc").live("click",function (){
+    $("#Pgj").show();
+    $("#Plist").hide();
+    $("#Psheng").hide();
+});
+</script>
+
+<!-- <script src="{% static 'frontEnd/js/shop.js' %}"></script> -->
+
+<!-- 时间选择 -->
 <script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
 <script>jQuery('.input-daterange #birth').datepicker({});</script>
 
@@ -701,7 +504,8 @@ $("#PtxtSc").live("click",function (){
 
 <script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
 
-<script type="text/javascript">
+
+<!-- <script type="text/javascript">
     var mypics = [];
     $(document).ready(function ($) {
         $("#fuckJS").click(function (event) {
@@ -758,28 +562,5 @@ $("#PtxtSc").live("click",function (){
                     console.log("complete");
                 })
     })
-
-
-</script>
-<!-- <script type="text/javascript">
-    $(document).ready(function () {
-        $("#txtSc").on("click", function () {
-            $("#gj").show();
-            $("#list").hide();
-            $("#sheng").hide();
-        });
-
-        $("#list").delegate("a", "click", function () {
-            console.log("fuck js")
-            $("#gj").hide();
-            $("#list").hide();
-            $("#sheng").hide();
-            school += " - " + $(this).text();
-            $("#txtSc").val(school);
-        });
-
-    });</script> -->
-
-
-</body>
-</html>
+</script> -->
+{% endblock %}

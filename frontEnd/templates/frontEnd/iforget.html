@@ -1,133 +1,41 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<!--[if IE 8 ]>
-<html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>
-<html class="no-js ie9" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
-<head lang="en">
-    <meta charset="UTF-8">
-    <meta name="description" content="Rentica - The Best One Yet">
-    <meta name="author" content="CreateIT">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 -->
 
-    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
-    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
-
-    <title>Rentica - HTML Template</title>
-
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
-
-    <!--[if lt IE 9]>
-    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
-    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
-    <![endif]-->
-    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
-</head>
-
+{% block body %}
 <body class="cssAnimate">
-<div class="ct-preloader-container">                                            <!-- Preloader -->
-    <div class='ct-preloader'>
-        <div>
-            <div>
-                <div>
-                    <div>
-                        <div>
-                            <div>
-                                <div>
-                                    <div>
-                                        <div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
+
+    <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop50" data-height="840" data-type="pattern"
+             data-bg-image="./assets/images/content/cars/bg-05.jpg"
+             data-bg-image-mobile="./assets/images/content/cars/bg-05.jpg">
+        <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom">
+            <div class="container" style="padding-left: 30%">
+                <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
+                    <form class="ct-panel" method="post" id="email-form">
+                        {% csrf_token %}
+                        <div class="ct-panel-inner">
+                            <h2 class="ct-u-marginBottom30">
+                                <small class="ct-fw-300"><span class="ct-fw-bold">忘记了密码?</span></small>
+                            </h2>
+                            <div class="form-group">
+                                <label for="email" class="required">输入您用于注册的邮箱</label>
+                                <input id="email" name="email" required class="form-control form-control--type2">
                             </div>
+                            <a id="email-submit" type="submit" class="btn btn-motive"><span>发送验证邮件</span></a>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
+</div><!-- 接：<div id="ct-js-wrapper" class="ct-pageWrapper"> 很重要：勿删 -->
 
-{% include "frontEnd/nav.html" %}
+</body>
+{% endblock %}
 
-
-<section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop50" data-height="840" data-type="pattern"
-         data-bg-image="./assets/images/content/cars/bg-05.jpg"
-         data-bg-image-mobile="./assets/images/content/cars/bg-05.jpg">
-    <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom">
-        <div class="container" style="padding-left: 30%">
-            <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
-                <form class="ct-panel" method="post" id="email-form">
-                    {% csrf_token %}
-                    <div class="ct-panel-inner">
-                        <h2 class="ct-u-marginBottom30">
-                            <small class="ct-fw-300"><span class="ct-fw-bold">忘记了密码?</span></small>
-                        </h2>
-                        <div class="form-group">
-                            <label for="email" class="required">输入您用于注册的邮箱</label>
-                            <input id="email" name="email" required class="form-control form-control--type2">
-                        </div>
-                        <a id="email-submit" type="submit" class="btn btn-motive"><span>发送验证邮件</span></a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<footer class="ct-footer ct-u-sectionDark">
-
-    <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
-        <div class="container">
-            <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/"></a> 2014</div>
-            <ul class="ct-socials">
-                <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i
-                        class="fa fa-flickr"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i
-                        class="fa fa-instagram"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i
-                        class="fa fa-pinterest"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i
-                        class="fa fa-facebook-square"></i></a></li>
-                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i
-                        class="fa fa-twitter"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
-
-</div>
-
-<!-- JavaScripts -->
-<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
-<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
-
-<script src="{% static 'frontEnd/js/main.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+{% block js %}
+<!-- 发送邮件JS -->
 <script>
-    
-
-
     $(document).ready(function(){
         $("a#email-submit").click(function () {
             var email=$("#email").val();
@@ -142,6 +50,4 @@
         })
     })
 </script>
-
-</body>
-</html>
+{% endblock %}
