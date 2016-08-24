@@ -146,7 +146,7 @@ EMAIL_SSL_PORT = 465
 
 
 
-DEFAULT_ICON = "/files/icons/c0f8af6b6e5670f4f229abc2c964899e.jpeg"
+DEFAULT_ICON = "/files/icons/5755fbd9298a02edff10f3535e22c8f5.jpeg"
 
 
 SALT = 'hetongshinanshen'

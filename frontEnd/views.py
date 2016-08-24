@@ -27,7 +27,7 @@ import datetime
 from urllib import urlencode, unquote
 import urllib2
 from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY
-
+                                                                  
 
 def index(request):
     provinces = Province.objects.all()
@@ -618,15 +618,21 @@ def image_receive(request):
             data = request.POST.get("data", None)
         except:
             return HttpResponse('data为空')
+        
         processed_data = str(data).split('/jpeg;base64,')[1].split('); background-position: 50% 50')[0]
         processed_pic = base64.b64decode(processed_data)
         mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
         des_origin_path = settings.UPLOAD_PATH + 'icons/' + mark_list + '.jpeg'  # mark_list是唯一的标志
-        des_origin_file = open(des_origin_path, 'w')
-        des_origin_file.write(processed_pic)
-        des_origin_file.close()
-        host.icon = '/files/icons/' + mark_list + '.jpeg'
-        host.save()
+        try:
+            des_origin_file = open(des_origin_path, 'w')
+            des_origin_file.write(processed_pic)
+            des_origin_file.close()
+            host.icon = '/files/icons/' + mark_list + '.jpeg'
+            host.save()
+        except:
+            #maybe the picture is too big
+            return render(request,'frontEnd/error.html')
+
         return HttpResponse('ACKACK')
     else:
         return render_to_response('frontEnd/complete-account-icon.html', {'login_flag': True,
@@ -698,7 +704,7 @@ def host_center(request, method, Oid):
         return render(request, "frontEnd/center-edit.html", Info)
     elif method == "manage":
         Info['sent_bills'] = host.get_one_user_host_bills()
-        if host.state != HOST_STATE.GUEST:
+        if host.state != HOST_STATE['GUEST']:
             Info['got_bills'] = host.get_one_host_user_bills()
 
         return render(request, "frontEnd/center-manage.html", Info)
