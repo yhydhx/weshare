@@ -152,19 +152,19 @@ TENCENT_APPKEY = '8a66f6a4a93ef09b970afd245ed8b8fc'
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'standard': {
-            'format': '%(levelname)s %(asctime)s %(message)s'
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/weshare/weshare/debug.log',
         },
     },
-    'filters': {
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     },
-    'handlers': {'test1_handler': {
-        'level': 'DEBUG',
-        'class': 'logging.handlers.RotatingFileHandler',
-        'filename': 'viewloggingbugs',
-        'formatter': 'standard',
-    },
-    }
 }
