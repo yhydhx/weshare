@@ -55,7 +55,8 @@ def bill(request,method,Oid):
     		return render(request,"frontEnd/404.html")
 
 		#generate bill id
-		
+		#
+
 
 		appointment = Appointment(
 			state = APPOINTMENT_STATE.INITED ,
@@ -66,7 +67,10 @@ def bill(request,method,Oid):
 		    intro_and_question = intro_and_question,
 		    appointment_time = appointment_time,
 		    appointment_id = 1,
+		    feature_id = feature_id,
 		)
+
+		appointment.appointment_id = appointment.generate_id()
 		try:
 			appointment.save()
 			return HttpResponseRedirect('/host_center/manage')

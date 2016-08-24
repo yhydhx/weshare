@@ -15,7 +15,7 @@ from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template import Context, loader
 from gt.settings import *
 
-import hashlib
+import hashlib,binascii
 
 
 class Host(models.Model):
@@ -852,8 +852,22 @@ class Appointment(models.Model):
     recommend_length = models.FloatField()                     #建议的时长
     recommend_payment = models.FloatField()                    #每小时多少钱
     recommend_salary = models.FloatField()                      #总共多少钱
-    
+    feature_id = models.CharField(max_length = 100)            #feature_id
     appointment_id = models.CharField(max_length=100)     #唯一的订单号-》
+
+
+    def generate_id(self):
+        tmp_id = ""
+        ymd = datetime.datetime.now().strftime("%Y%m%d")
+        tmp_id = tmp_id + ymd
+        host = Host.objects.get(id=self.to_host_id)
+        tmp_id = tmp_id + binascii.b2a_hex(host.id)[:6]
+        appointment_number = str(Appointment.objects.count())
+        app_num_length = len(appointment_number)
+        tmp_id = tmp_id +'0'* (6-app_num_length) + binascii.b2a_hex(host.id)[:6]
+        return tmp_id
+
+
 
     def format_dict_on_manage(self):
         tmp_dict = self.format_dict()
