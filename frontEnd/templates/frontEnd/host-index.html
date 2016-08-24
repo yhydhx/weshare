@@ -136,10 +136,7 @@
                                             <select class="form-control" style="padding:0;border: 1 1 1 1 solid gray; ">
                                               {% block quesiton%}
                                               {% for q in questions %}
-                                              <option>问题1</option>
-                                              <option>问题2</option>
-                                              <option>问题3</option>
-                                              <option>问题4</option>
+                                              <option>{{ q.feature_name }}</option>
                                               {% endfor %}
                                               {% endblock %}
                                             </select>
