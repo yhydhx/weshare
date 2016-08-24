@@ -60,6 +60,7 @@ def index(request):
     Info.update(recommend_host.get_index_statistic())
 
     Info['object'] = obj
+    Info['data'] = {}
 
     login_flag = False
 
@@ -104,12 +105,13 @@ def index(request):
                 address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
                 ret_user_info = urllib2.urlopen(address_3).read()
                 user_info = json.loads(ret_user_info)
-                info_string = []
-                info_string.append(user_info['nickname'])
-                info_string.append(user_info['gender'])
-                info_string.append(user_info[''])
+                info_string = {}
+                info_string['nickname'] = user_info['nickname']
+                info_string['gender'] = user_info['gender']
+                info_string['figureurl_qq_1'] = user_info['figureurl_qq_1']
+                Info['data'] = info_string
 
-            return render_to_response('frontEnd/index.html', Info)
+            return render_to_response('frontEnd/account.html', Info)
 
         except:
             return render_to_response('frontEnd/index.html', Info)
