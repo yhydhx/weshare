@@ -31,7 +31,7 @@ from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY
                                                                   
 
 def index(request):
-    log = logging.getLogger('viewloggingbugs')
+    log = logging.getLogger(__name__)
     provinces = Province.objects.all()
     d = {}
     for s_province in provinces:
