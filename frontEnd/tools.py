@@ -87,3 +87,13 @@ def urlencode2dict(urlencoded):
         tmp_equal = equel.split('=')
         dict[tmp_equal[0]] = tmp_equal[1]
     return dict
+
+
+class TmpQQUser(object):
+    def __init__(self, nickname, icon, gender):
+        self.nickname = nickname
+        self.icon = icon
+        self.gender = gender
+
+    def __unicode__(self):
+        return self.nickname
