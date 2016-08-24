@@ -1,37 +1,172 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<!--[if IE 8 ]>
-<html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>
-<html class="no-js ie9" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
-<head lang="en">
-    <meta charset="UTF-8">
-    <meta name="description" content="Rentica - The Best One Yet">
-    <meta name="author" content="CreateIT">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 -->
 
-    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
+{% block body %}
+<body class="cssAnimate" style="background-color:white;">
 
-    <title>Rentica - HTML Template</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}">
-        <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
+    <div class="container" style="margin-top: 60px;">
+    	<div class="row">
+    		<div class="col-md-2" style="text-align:center;">
+    			<div class="row centerLeftbarIcon"><img src="{{ current_user.icon }}" style="height: 100px; width: 100px; border: 1px solid #cccccc; border-radius: 50%;"></div>
+    			<div class="row centerLeftbarButton"><a href="/host_center/edit" style="color:black;">修改信息</a></div> 
+    			<div class="row centerLeftbarButton"><a href="/host_center/manage">订单管理</a></div>
+    			<div class="row centerLeftbarButton"><a href="/image-receive/">申请认证</a></div>
+    		</div>
+    		<div class="col-md-10"">
 
-    <!--[if lt IE 9]>
-    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
-    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
-    <![endif]-->
-    <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script>
+    			<!-- 修改头像 -->
+    			<div class="row" style="display: flex;align-items: center; padding-top:60px;">
+    				<div class="col-xs-4"><hr></div>
+    				<div class="col-xs-4" style="text-align:center;"><h4>修改头像</h4></div>
+    				<div class="col-xs-4"><hr></div>
+    			</div>	
+    			<div class="row">
+    				<div role="tabpanel" class="tab-pane fade in active" id="description">
+    	                <style>
+    	                    body {
+    	                        margin: 0;
+    	                        text-align: center;
+    	                    }
 
-    <!-- 选择学校JS -->
-    <script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
-    <script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script> 
+    	                    #clipArea {
+    	                        margin: 20px;
+    	                        height: 300px;
+    	                    }
+
+    	                    #file,
+    	                    #clipBtn {
+    	                        margin: 20px;
+    	                    }
+
+    	                    #view {
+    	                        margin: 0 auto;
+    	                        width: 200px;
+    	                        height: 200px;
+    	                    }
+    	                </style>
+    	                <div class="col-md-8 col-sm-12">
+    	                    <div id="clipArea"></div>
+    	                    <input type="file" id="file" name="icon">
+    	                    <button id="clipBtn" class="btn btn-lg btn-motive" type="button">截取</button>
+    	                </div>
+    	                <div id="view" class="col-md-4 col-sm-12" style="margin-top: 30px;"></div>
+
+    	                <div class="col-md-12 col-sm-12" style="margin-top:20px;">
+    	                    <button id="foo" type="button" class="btn btn-lg btn-wide btn-motive" style="width:50%;">
+    	                        <span>修改头像</span>
+    	                    </button>
+    	                </div>
+    	            </div>
+    			</div>
+
+    			<!-- 修改生日、性别、姓名 -->
+    			<div class="row" style="display: flex;align-items: center; padding-top:60px; ">
+    				<div class="col-xs-4"><hr></div>
+    				<div class="col-xs-4" style="text-align:center;"><h4>修改基本资料</h4></div>
+    				<div class="col-xs-4"><hr></div>
+    			</div>
+
+            	<form class=" ct-u-marginBottom input-daterange input-group"
+                      action="/modify-account/" method="post" id="form1">
+                    {% csrf_token %}
+                    <div class="col-md-6 col-md-offset-3 ct-u-paddingTop80">
+
+                        <div class="ct-panel-inner">
+                            <div class="form-group ">
+                                <label for="username" style="text-align: left">真实姓名</label>
+                                <input id="username" name="username" type="text"
+                                       value="{{ current_user.username }}"
+                                       class="form-control form-control--type2">
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="phone">电话号码</label>
+                                <input id="phone" name="phone" type="text"
+                                       value="{{ current_user.phone_number }}"
+                                       class="form-control form-control--type2">
+                            </div>
+
+                            <label for="birth">生日</label>
+                            <input type="text" id="birth" class="form-control form-control--type2"
+                                   value="{{ current_user.birth }}"
+                                   name="birth" title="from">
+
+
+    	                    <div class="form-group">
+    	                        <label for="">性别</label>
+    	                        <select class="form-control" name="gender">
+    	                            <option value="1">女</option>
+    	                            <option value="0">男</option>
+    	                        </select>                      
+    	                    </div>
+
+
+                            <div class="form-group ">
+                                <label for="motto">个性签名</label>
+                                <input id="motto" name="motto" type="text"
+                                       value="{{ current_user.motto }}"
+                                       class="form-control form-control--type2">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="qq" class="required">QQ号</label>
+                                <input id="qq" name="qq" required
+                                       value="{{ current_user.qq_number }}"
+                                       class="form-control form-control--type2">
+                            </div>
+
+    	                    <label>请选择您的学历</label>
+    	                    <select class="form-control" onchange="showEducation(this.value)">
+    	                      <option>本科</option>
+    	                      <option>硕士</option>
+    	                      <option>博士</option>
+    	                    </select>
+    	                    <div id="Education">
+    	                        <input type="hidden" name="education" value="1">   
+    	                    </div>
+
+    	                    
+
+    	                    <input type="hidden"  id="txtSc2" name="schoolID1">
+    	                    <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" />
+    	                    <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+    	                    <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+    	                    <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+    	                    <input type="hidden"  id="MtxtSc2" name="schoolID2">
+    	                    <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" style="display:none;"/>
+    	                    <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+    	                    <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+    	                    <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+    	                    <input type="hidden"  id="PtxtSc2" name="schoolID3">
+    	                    <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" style="display:none;"/>
+    	                    <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+    	                    <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+    	                    <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+
+                        </div>
+                    </div>
+                    <div class="row" style="">
+                        <div class="col-md-6 col-md-offset-3 ct-u-paddingTop40 ct-u-paddingBottom150">
+                            <input id="submit" type="submit"
+                                   class="btn btn-lg btn-wide btn-motive"
+                                   value="确认修改" onclick="alert('修改资料成功。')">
+                        </div>
+                    </div>
+                </form>
+
+    		</div>
+    	</div>
+    </div>
+
+</body>
+{% endblock %}
+
+{% block js %}
+<!-- 选择学校JS -->
+<script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
+<script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script> 
 <!-- 选择学历 -->
 <script>
 
@@ -277,215 +412,7 @@ $("#PtxtSc").live("click",function (){
 </script>
 
 
-</head>
-
-<body class="cssAnimate" style="background-color:white;">
-<div class="ct-preloader-container">                                            <!-- Preloader -->
-    <div class='ct-preloader'>
-        <div>
-            <div>
-                <div>
-                    <div>
-                        <div>
-                            <div>
-                                <div>
-                                    <div>
-                                        <div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div id="ct-js-wrapper" class="ct-pageWrapper">
-
-{% include "frontEnd/nav.html" %}
-
-<div class="container" style="margin-top: 60px;">
-	<div class="row">
-		<div class="col-md-2" style="text-align:center;">
-			<div class="row centerLeftbarIcon"><img src="{{ current_user.icon }}" style="height: 100px; width: 100px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-			<div class="row centerLeftbarButton"><a href="/host_center/edit" style="color:black;">修改信息</a></div> 
-			<div class="row centerLeftbarButton"><a href="/host_center/manage">订单管理</a></div>
-			<div class="row centerLeftbarButton"><a href="/image-receive/">申请认证</a></div>
-		</div>
-		<div class="col-md-10"">
-
-			<!-- 修改头像 -->
-			<div class="row" style="display: flex;align-items: center; padding-top:60px;">
-				<div class="col-xs-4"><hr></div>
-				<div class="col-xs-4" style="text-align:center;"><h4>修改头像</h4></div>
-				<div class="col-xs-4"><hr></div>
-			</div>	
-			<div class="row">
-				<div role="tabpanel" class="tab-pane fade in active" id="description">
-	                <style>
-	                    body {
-	                        margin: 0;
-	                        text-align: center;
-	                    }
-
-	                    #clipArea {
-	                        margin: 20px;
-	                        height: 300px;
-	                    }
-
-	                    #file,
-	                    #clipBtn {
-	                        margin: 20px;
-	                    }
-
-	                    #view {
-	                        margin: 0 auto;
-	                        width: 200px;
-	                        height: 200px;
-	                    }
-	                </style>
-	                <div class="col-md-8 col-sm-12">
-	                    <div id="clipArea"></div>
-	                    <input type="file" id="file" name="icon">
-	                    <button id="clipBtn" class="btn btn-lg btn-motive" type="button">截取</button>
-	                </div>
-	                <div id="view" class="col-md-4 col-sm-12" style="margin-top: 30px;"></div>
-
-	                <div class="col-md-12 col-sm-12" style="margin-top:20px;">
-	                    <button id="foo" type="button" class="btn btn-lg btn-wide btn-motive" style="width:50%;">
-	                        <span>修改头像</span>
-	                    </button>
-	                </div>
-	            </div>
-			</div>
-
-			<!-- 修改生日、性别、姓名 -->
-			<div class="row" style="display: flex;align-items: center; padding-top:60px; ">
-				<div class="col-xs-4"><hr></div>
-				<div class="col-xs-4" style="text-align:center;"><h4>修改基本资料</h4></div>
-				<div class="col-xs-4"><hr></div>
-			</div>
-
-        	<form class=" ct-u-marginBottom input-daterange input-group"
-                  action="/modify-account/" method="post" id="form1">
-                {% csrf_token %}
-                <div class="col-md-6 col-md-offset-3 ct-u-paddingTop80">
-
-                    <div class="ct-panel-inner">
-                        <div class="form-group ">
-                            <label for="username" style="text-align: left">真实姓名</label>
-                            <input id="username" name="username" type="text"
-                                   value="{{ current_user.username }}"
-                                   class="form-control form-control--type2">
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="phone">电话号码</label>
-                            <input id="phone" name="phone" type="text"
-                                   value="{{ current_user.phone_number }}"
-                                   class="form-control form-control--type2">
-                        </div>
-
-                        <label for="birth">生日</label>
-                        <input type="text" id="birth" class="form-control form-control--type2"
-                               value="{{ current_user.birth }}"
-                               name="birth" title="from">
-
-
-	                    <div class="form-group">
-	                        <label for="">性别</label>
-	                        <select class="form-control" name="gender">
-	                            <option value="1">女</option>
-	                            <option value="0">男</option>
-	                        </select>                      
-	                    </div>
-
-
-                        <div class="form-group ">
-                            <label for="motto">个性签名</label>
-                            <input id="motto" name="motto" type="text"
-                                   value="{{ current_user.motto }}"
-                                   class="form-control form-control--type2">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="qq" class="required">QQ号</label>
-                            <input id="qq" name="qq" required
-                                   value="{{ current_user.qq_number }}"
-                                   class="form-control form-control--type2">
-                        </div>
-
-	                    <label>请选择您的学历</label>
-	                    <select class="form-control" onchange="showEducation(this.value)">
-	                      <option>本科</option>
-	                      <option>硕士</option>
-	                      <option>博士</option>
-	                    </select>
-	                    <div id="Education">
-	                        <input type="hidden" name="education" value="1">   
-	                    </div>
-
-	                    
-
-	                    <input type="hidden"  id="txtSc2" name="schoolID1">
-	                    <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" />
-	                    <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
-	                    <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
-	                    <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
-
-	                    <input type="hidden"  id="MtxtSc2" name="schoolID2">
-	                    <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" style="display:none;"/>
-	                    <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
-	                    <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
-	                    <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
-
-	                    <input type="hidden"  id="PtxtSc2" name="schoolID3">
-	                    <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" style="display:none;"/>
-	                    <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
-	                    <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
-	                    <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
-
-                    </div>
-                </div>
-                <div class="row" style="">
-                    <div class="col-md-6 col-md-offset-3 ct-u-paddingTop40 ct-u-paddingBottom150">
-                        <input id="submit" type="submit"
-                               class="btn btn-lg btn-wide btn-motive"
-                               value="确认修改" onclick="alert('修改资料成功。')">
-                    </div>
-                </div>
-            </form>
-
-		</div>
-	</div>
-</div>
-
-
-
-{% include 'frontEnd/footer.html' %}
-
-<!-- JavaScripts -->
-<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
-<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'frontEnd/js/dependencies.js'%}"></script>
-
-<script src="{% static 'frontEnd/js/main.js'%}"></script>
-
-<script src="{% static 'frontEnd/js/shop.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+<!-- <script src="{% static 'frontEnd/js/shop.js' %}"></script> -->
 
 <!-- 时间选择 -->
 <script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
@@ -547,9 +474,4 @@ $("#PtxtSc").live("click",function (){
         })
     })
 </script>
-
-
-
-
-</body>
-</html>
+{% endblock %}

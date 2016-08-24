@@ -1,65 +1,11 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<!--[if IE 8 ]>
-<html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>
-<html class="no-js ie9" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
-<head lang="en">
-    <meta charset="UTF-8">
-    <meta name="description" content="Rentica - The Best One Yet">
-    <meta name="author" content="CreateIT">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 -->
 
-    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
-
-    <title>Rentica - HTML Template</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}">
-        <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
-
-    <!--[if lt IE 9]>
-    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
-    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
-    <![endif]-->
-    <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script>
-</head>
-
+{% block body %}
 <body class="cssAnimate">
-<div class="ct-preloader-container">                                            <!-- Preloader -->
-    <div class='ct-preloader'>
-        <div>
-            <div>
-                <div>
-                    <div>
-                        <div>
-                            <div>
-                                <div>
-                                    <div>
-                                        <div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
+    {% if current_user.state == 0 %}
 
-<div id="ct-js-wrapper" class="ct-pageWrapper">
-
-    {% include "frontEnd/nav.html" %}
-    {% if host.state == 0 %}
     <h3 style="padding-top: 35%; padding-bottom: 25%; text-align: center">只有<a href="/image-receive/">注册成为HOST</a>才可以成为获得个人主页
     </h3>
     {% else %}
@@ -377,38 +323,19 @@
     </div>
     {% endif %}
 
+</div><!-- 接：<div id="ct-js-wrapper" class="ct-pageWrapper"> 很重要：勿删 -->
 
+</body>
+{% endblock %}
 
-</div>
+{% block js %}
+<!-- <script src="{% static 'frontEnd/js/shop.js' %}"></script> -->
 
-{% include 'frontEnd/footer.html' %}
-
-<!-- JavaScripts -->
-<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
-<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'frontEnd/js/dependencies.js'%}"></script>
-
-<script src="{% static 'frontEnd/js/main.js'%}"></script>
-
-<script src="{% static 'frontEnd/js/shop.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+<!-- <script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
 <script>jQuery('.input-daterange').datepicker({});</script>
 
 <script src="{% static 'frontEnd/plugins/bootstrap-slider/js/bootstrap-slider.js' %}"></script>
 <script>jQuery('.sliderAmount').slider();</script>
 
-<script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js"></script>
-
-
-</body>
-</html>
+<script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js"></script> -->
+{% endblock %}
