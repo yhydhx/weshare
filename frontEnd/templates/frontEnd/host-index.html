@@ -130,25 +130,27 @@
 
                             <div class="row" style="margin-top: 30px;margin-bottom: 30px; ">
                                 <div class="col-xs-10 col-xs-offset-1">
-                                    <form action="/host_center/manage">
+                                    <form action="/host_center/manage" action="/bill/init" method="post" id="zzz">
+
+                                        {% csrf_token %}
                                         <div class="form-group">
                                             <label style="font-size: 15px; ">请选择咨询问题</label>
-                                            <select class="form-control" style="padding:0;border: 1 1 1 1 solid gray; ">
+                                            <select class="form-control" name="feature_id" required style="padding:0;border: 1 1 1 1 solid gray; ">
                                               {% block quesiton%}
                                               {% for q in questions %}
-                                              <option>{{ q.feature_name }}</option>
+                                              <option value="{{ q.feature_id }}">{{ q.feature_name }}</option>
                                               {% endfor %}
                                               {% endblock %}
                                             </select>
                                         </div>                               
-
+                                        <input type="hidden" name="host_id" value="{{ host.id }}">
                                         <div class="form-group">
                                             <label style="font-size: 15px; ">简要介绍自己的情况，并描述要咨询的问题</label>
-                                            <textarea class="form-control" rows="4" placeholder="例如：我是清华大学计算机专业大三的学生，专业排名前百分之三十，有多个关于自动驾驶的项目经历。本科毕业后想去BAT等公司从事与计算机视觉相关的工作。想知道现在开始该如何准备？比如该熟悉哪些开源项目，或是该多积累哪种平台的开发经验。"></textarea>
+                                            <textarea class="form-control" rows="4" name="intro_and_question" placeholder="例如：我是清华大学计算机专业大三的学生，专业排名前百分之三十，有多个关于自动驾驶的项目经历。本科毕业后想去BAT等公司从事与计算机视觉相关的工作。想知道现在开始该如何准备？比如该熟悉哪些开源项目，或是该多积累哪种平台的开发经验。"></textarea>
                                         </div>                                
                                         <div class="form-group">
                                             <label style="font-size: 15px; ">告诉分享者你所希望的见面时间与约聊时长</label>
-                                            <textarea class="form-control" rows="4" placeholder="例如：我每周一／三下午2点到晚上6点都有空，我想请教的细节问题比较多，觉得预约3个小时比较合适。"></textarea>
+                                            <textarea class="form-control" rows="4" name="appointment_time" placeholder="例如：我每周一／三下午2点到晚上6点都有空，我想请教的细节问题比较多，觉得预约3个小时比较合适。"></textarea>
                                         </div>
 
                                         <button type="submit" class="btn btn-danger">提交预约</button>
