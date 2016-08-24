@@ -386,7 +386,7 @@ def complete_account(request):
             host.service_time = service_time
             host.max_payment = max_payment
 
-            host.state = HOST_STATE.APPLY
+            host.state = HOST_STATE['APPLY']
             host.qq_number = qq
 
             host.education = education
