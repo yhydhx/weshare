@@ -390,7 +390,7 @@ def complete_account(request):
             host.service_time = service_time
             host.max_payment = max_payment
 
-            host.state = HOST_STATE.APPLY
+            host.state = HOST_STATE['APPLY']
             host.qq_number = qq
 
             host.education = education
@@ -803,7 +803,7 @@ def user(request, method, Oid):
             Info['current_user'] = user
         Info['login_flag'] = login_flag
 
-        return render_to_response('frontEnd/host-index.html', Info)
+        return render(request,'frontEnd/host-index.html', Info)
 
     elif method == "msg":
         # check whether the user is online
