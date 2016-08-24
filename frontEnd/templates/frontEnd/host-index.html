@@ -4,7 +4,7 @@
 {% block body %}
 <body class="cssAnimate">
 
-    {% if current_user.state == 0 %}
+    {% if host.state == 0 %}
 
     <h3 style="padding-top: 35%; padding-bottom: 25%; text-align: center">只有<a href="/image-receive/">注册成为HOST</a>才可以成为获得个人主页
     </h3>
@@ -24,7 +24,7 @@
             <h3 class="ct-u-marginBottom20" style="color: transparent">
                 <small class="ct-fw-lighter ct-u-colorMotive">- {{ host.motto }} -</small>
             </h3>
-            {% if current_user.state == 1 %}
+            {% if host.state == 1 %}
             <a href="/host-center/" class="ct-login"><span>审核中</span><i class="fa fa-lock"></i></a>
             {% else%}
             <a href="/host-center/" class="ct-login"><span>审核通过</span><i class="fa fa-unlock"></i></a>
