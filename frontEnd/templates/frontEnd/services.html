@@ -1,129 +1,70 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<!--[if IE 8 ]>
-<html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>
-<html class="no-js ie9" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
-<head lang="en">
-    <meta charset="UTF-8">
-    <meta name="description" content="Rentica - The Best One Yet">
-    <meta name="author" content="CreateIT">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
-
-    <link rel="shortcut icon" href="./assets/images/content/cars/icon.ico">
-    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
-
-    <title>Rentica - HTML Template</title>
-
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/mystyle.css'%}">
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 --> 
 
 
-    <!--[if lt IE 9]>
-    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
-    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
-    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
-    <![endif]-->
-    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
-</head>
-
+{% block body %}
 <body class="cssAnimate">
 
-{% include "frontEnd/nav.html" %}
 
-<section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340" data-type="parallax" data-stellar-background-ratio="0.3" data-bg-image="./assets/images/content/cars/mediaHeader-01.jpg" data-bg-image-mobile="./assets/images/content/cars/mediaHeader-01.jpg">
-    <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">services</h2></div>
-</section>
+    <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340" data-type="parallax" data-stellar-background-ratio="0.3" data-bg-image="./assets/images/content/cars/mediaHeader-01.jpg" data-bg-image-mobile="./assets/images/content/cars/mediaHeader-01.jpg">
+        <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center">services</h2></div>
+    </section>
 
 
 {% block topic %}
 {% for menu in object %}
-
-<section class="ct-u-sectionBorder">
-    <div class="container">
-        <div class="ct-sectionHeader ct-u-paddingTop60 ct-u-paddingBottom10">
-            <h2 class="ct-sectionHeader-title"><small> {{menu.name}}</small></h2>
-            <div class="ct-sectionHeader-separator">
-                <span class="minus"></span>
-                <span class="slash">/</span>
-                <span class="slash">/</span>
-                <span class="minus"></span>
+    <section class="ct-u-sectionBorder">
+        <div class="container">
+            <div class="ct-sectionHeader ct-u-paddingTop60 ct-u-paddingBottom10">
+                <h2 class="ct-sectionHeader-title"><small> {{menu.name}}</small></h2>
+                <div class="ct-sectionHeader-separator">
+                    <span class="minus"></span>
+                    <span class="slash">/</span>
+                    <span class="slash">/</span>
+                    <span class="minus"></span>
+                </div>
+                <p>100% satisfaction or the money back policy is what we believe in and we do mean business.</p>
             </div>
-            <p>100% satisfaction or the money back policy is what we believe in and we do mean business.</p>
-        </div>
 
-        
-
-    </div>
-</section>
-
-
-<section class="ct-mediaSection ct-mediaSection--desktop" data-type="pattern" data-bg-image="./assets/images/content/cars/bg-08.jpg" data-bg-image-mobile="./assets/images/content/cars/bg-08.jpg">
-    <div class="container">
-        <div class="row">
             
-            <div class=" ct-u-paddingTop10 ct-u-paddingBottom50" style = " width: 80%; margin-left: 10%;">
 
-                <div class="panel-group" id="accordion">
-                    {% for doc in menu.doc%}
-                    <div class="panel panel-motive">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <a class="h5 collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{doc.num}}">
-                                    <small>{{doc.d_name}}</small>
-                                </a>
+        </div>
+    </section>
+
+
+    <section class="ct-mediaSection ct-mediaSection--desktop" data-type="pattern" data-bg-image="./assets/images/content/cars/bg-08.jpg" data-bg-image-mobile="./assets/images/content/cars/bg-08.jpg">
+        <div class="container">
+            <div class="row">
+                
+                <div class=" ct-u-paddingTop10 ct-u-paddingBottom50" style = " width: 80%; margin-left: 10%;">
+
+                    <div class="panel-group" id="accordion">
+                        {% for doc in menu.doc%}
+                        <div class="panel panel-motive">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a class="h5 collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{doc.num}}">
+                                        <small>{{doc.d_name}}</small>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="{{doc.num}}" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>{{doc.d_text |  safe }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div id="{{doc.num}}" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <p>{{doc.d_text |  safe }}
-                                </p>
-                            </div>
-                        </div>
+                        {%  endfor %}
                     </div>
-                    {%  endfor %}
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
 {% endfor %}
 {% endblock %}
 
 
-
-
-
-
-{% include "frontEnd/footer.html" %}
-</div>
-
-
-
-<!-- JavaScripts -->
-<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
-<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'frontEnd/js/dependencies.js' %}"></script>
-
-<script src="{% static 'frontEnd/js/main.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
-
-<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
-<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
-
-
-
-
+</div><!-- 接：<div id="ct-js-wrapper" class="ct-pageWrapper"> 很重要：勿删 -->
 </body>
-</html>
+{% endblock %}

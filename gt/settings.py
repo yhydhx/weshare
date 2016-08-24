@@ -1,4 +1,3 @@
-
 # coding:utf-8
 
 """
@@ -76,36 +75,35 @@ DATABASES = {
     }
 }
 
-#用户状态
+# 用户状态
 HOST_STATE = {
-    'GUEST' : 0,    
-    'APPLY' : 1,
-    'HOST'  : 2,
+    'GUEST': 0,
+    'APPLY': 1,
+    'HOST': 2,
 }
 
-#预约的状态
+# 预约的状态
 APPOINTMENT_STATE = {
-    'INITED' : 0,    #创建订单
-    'CERTIFIED' : 1,    #确认
-    'PAID' : 2,   #    付款
-    'COMPLETED' : 3,   #完成了
-    'FINISHED'   : 4     #结算完成
+    'INITED': 0,  # 创建订单
+    'CERTIFIED': 1,  # 确认
+    'PAID': 2,  # 付款
+    'COMPLETED': 3,  # 完成了
+    'FINISHED': 4  # 结算完成
 }
 
-#BILL_TYPE  描述订单的类型，目前只有交流
+# BILL_TYPE  描述订单的类型，目前只有交流
 BILL_TYPE = {
     "APPOINTMENT": 0,
 }
 
-#BILL_STATE  订单的成功与否
+# BILL_STATE  订单的成功与否
 BILL_STATE = {
-    "UNPAID" : 0,
-    "PAID" : 1
+    "UNPAID": 0,
+    "PAID": 1
 }
 
-
 MESSAGE_TYPE = {
-    "APPOINTMENT_COMM" : 1,
+    "APPOINTMENT_COMM": 1,
 
 }
 
@@ -145,10 +143,28 @@ EMAIL_HOST_PASSWORD = 'WeShareHere001'
 EMAIL_SSL_PORT = 465
 
 
-
 DEFAULT_ICON = "/files/icons/5755fbd9298a02edff10f3535e22c8f5.jpeg"
 
 
 SALT = 'hetongshinanshen'
 TENCENT_APPID = 101340075
 TENCENT_APPKEY = '8a66f6a4a93ef09b970afd245ed8b8fc'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        },
+    },
+    'filters': {
+    },
+    'handlers': {'test1_handler': {
+        'level': 'DEBUG',
+        'class': 'logging.handlers.RotatingFileHandler',
+        'filename': 'viewloggingbugs',
+        'formatter': 'standard',
+    },
+    }
+}
