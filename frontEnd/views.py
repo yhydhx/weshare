@@ -26,10 +26,12 @@ import time
 import datetime
 from urllib import urlencode, unquote
 import urllib2
+import logging
 from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY
-
+                                                                  
 
 def index(request):
+    log = logging.getLogger(__name__)
     provinces = Province.objects.all()
     d = {}
     for s_province in provinces:
@@ -95,19 +97,17 @@ def index(request):
             open_id = urlencode2dict(ret_open_id.split(' '))['openid']
 
             #### for test ####
-            f = open('test_v.txt', 'w')
-            f.write('return code get, and handle request\n')
-            f.write('code: ' + code + '\n')
-            f.write('qdict: ' + str(qdict) + '\n')
-            f.write('address: ' + address + '\n')
-            f.write('ret_qq_token: ' + ret_qq_token + '\n')
-            f.write('ret_token: ' + ret_token + '\n')
-            f.write('access_token: ' + access_token + '\n')
-            f.write('access_token_dict: ' + str(access_token_dict) + '\n')
-            f.write('address_2: ' + address_2 + '\n')
-            f.write('ret_open_id: ' + ret_open_id + '\n')
-            f.write('ret_open_id ' + ret_open_id + '\n')
-            f.close()
+            log.debug('return code get, and handle request\n')
+            log.debug('code: %s\n', code)
+            log.debug('qdict: %s\n', str(qdict))
+            log.debug('address: %s\n', address)
+            log.debug('ret_qq_token: %s\n', ret_qq_token)
+            log.debug('ret_token: %s\n', ret_token)
+            log.debug('access_token: %s\n', access_token)
+            log.debug('access_token_dict: %s\n', str(access_token_dict))
+            log.debug('address_2: %s\n', address_2)
+            log.debug('ret_open_id: %s\n', ret_open_id)
+            log.debug('ret_open_id: %s\n', ret_open_id)
 
             ####
             try:
@@ -131,9 +131,7 @@ def index(request):
             return render_to_response('frontEnd/account.html', Info)
 
         except:
-            f = open('test_v.txt', 'w')
-            f.write('no code get and did not handle the code')
-            f.close()
+            log.debug('no code get and did not handle the code')
             return render_to_response('frontEnd/index.html', Info)
 
 
@@ -640,15 +638,21 @@ def image_receive(request):
             data = request.POST.get("data", None)
         except:
             return HttpResponse('data为空')
+        
         processed_data = str(data).split('/jpeg;base64,')[1].split('); background-position: 50% 50')[0]
         processed_pic = base64.b64decode(processed_data)
         mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
         des_origin_path = settings.UPLOAD_PATH + 'icons/' + mark_list + '.jpeg'  # mark_list是唯一的标志
-        des_origin_file = open(des_origin_path, 'w')
-        des_origin_file.write(processed_pic)
-        des_origin_file.close()
-        host.icon = '/files/icons/' + mark_list + '.jpeg'
-        host.save()
+        try:
+            des_origin_file = open(des_origin_path, 'w')
+            des_origin_file.write(processed_pic)
+            des_origin_file.close()
+            host.icon = '/files/icons/' + mark_list + '.jpeg'
+            host.save()
+        except:
+            #maybe the picture is too big
+            return render(request,'frontEnd/error.html')
+
         return HttpResponse('ACKACK')
     else:
         return render_to_response('frontEnd/complete-account-icon.html', {'login_flag': True,
@@ -716,7 +720,7 @@ def host_center(request, method, Oid):
         return render(request, "frontEnd/center-edit.html", Info)
     elif method == "manage":
         Info['sent_bills'] = host.get_one_user_host_bills()
-        if host.state != HOST_STATE.GUEST:
+        if host.state != HOST_STATE['GUEST']:
             Info['got_bills'] = host.get_one_host_user_bills()
 
         return render(request, "frontEnd/center-manage.html", Info)
