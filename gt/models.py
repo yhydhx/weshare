@@ -211,6 +211,7 @@ class Host(models.Model):
 
         return d_topic_feature
 
+
     def get_all_classes(self, school_id="none"):
         hosts=[]
         if school_id == "none":
@@ -336,7 +337,22 @@ class Host(models.Model):
 
         return result_hosts
 
+    def get_one_user_host_bills(self):
+        bills = Bill.objects.filter(from_user_id = self.id)
+        result = []
+        for bill_atom in bills:
+            tmp_bill = bill_atom.format_dict_on_manage()
+            result.append(tmp_bill)
 
+        return result
+
+    def get_one_host_user_bills(self):
+        bills = Bill.objects.filter(to_host_id = self.id)
+        result = []
+        for bill_atom in bills:
+            tmp_bill = bill_atom.format_dict_on_manage()
+            result.append(tmp_bill)
+        return result
 
 class Country(models.Model):
     c_name = models.CharField(max_length=100)
@@ -591,6 +607,28 @@ class Feature(models.Model):
                 result.append(d_topic_feature_translate[topic_atom.t_name])
         return result
 
+    def get_one_host_questions(self,user_id):
+        h_topics = Host_Topic.objects.filter(host_id=user_id)
+
+        # classification
+        d_feature = {}
+        for h_topic_atom in h_topics:
+            f_id = h_topic_atom.f_id
+            m_id = h_topic_atom.m_id
+            t_id = h_topic_atom.t_id
+            d_feature[f_id] = {}
+            d_feature[f_id]['m_id'] = m_id
+            d_feature[f_id]['t_id'] = t_id
+
+
+
+        for feature_atom in d_feature:
+            feature = Feature.objects.get(id=feature_atom)
+            d_feature[feature_atom]['feature_name'] = feature.f_name
+            d_feature[feature_atom]['feature_id'] = feature.id
+
+        return d_feature.values()
+
 
 class Host_Topic(models.Model):
     host_id = models.CharField(max_length=100)
@@ -720,7 +758,6 @@ class Mail(models.Model):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-
     def recruit(self,to,content):
         context = {"content": content}
 
@@ -733,8 +770,6 @@ class Mail(models.Model):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-
-           
     def forgotPassword(self, subject, to, content):
         context = {"content": content}
 
@@ -758,8 +793,9 @@ class Message(models.Model):
     to_user = models.CharField(max_length=100)
     message_type = models.IntegerField()
     icon = models.CharField(max_length=100)
-    upload_time = models.DateField()
+    upload_time = models.DateTimeField()
     content = models.TextField()
+    extra_id = models.CharField(max_length = 100, null = True)
 
     def date_format(self):
         self.upload_time = self.upload_time.strftime("%Y-%m-%d")
@@ -793,6 +829,9 @@ class Bill(models.Model):
     state =  models.IntegerField()
     from_user_id = models.CharField(max_length = 100)
     to_host_id = models.CharField(max_length = 100)
+    bill_type = models.IntegerField()
+
+
 
 class Appointment(models.Model):
     '''
@@ -803,12 +842,55 @@ class Appointment(models.Model):
     state = models.IntegerField()    #表示订单的状态
     from_user_id = models.CharField(max_length = 100)
     to_host_id = models.CharField(max_length = 100)  
+    from_user_icon = models.CharField(max_length=100)
+    to_host_icon = models.CharField(max_length = 100)
     intro_and_question = models.CharField(max_length = 400)          #介绍情况和问题
     appointment_time = models.CharField(max_length = 200)      #约定的时间和时间长度
     recommend_info = models.CharField(max_length = 200, null = True)       #分享者回复的消息
-    recommend_time = models.DateTimeField()                    #建议的时间
+    recommend_begin_time = models.DateTimeField()                    #建议的时间
+    recommend_end_time = models.DateTimeField()                    #建议的时间
     recommend_length = models.FloatField()                     #建议的时长
+    recommend_payment = models.FloatField()                    #每小时多少钱
+    recommend_salary = models.FloatField()                      #总共多少钱
     
+    appointment_id = models.CharField(max_length=100)     #唯一的订单号-》
 
+    def format_dict_on_manage(self):
+        tmp_dict = self.format_dict()
+        host = Host.objects.get(id= tmp_dict['to_host_id'])
 
+        tmp_dict['host_name'] = host.username
+        tmp_dict['host_motto'] = host.motto
+        return tmp_dict
 
+    def format_dict(self):
+        tmp_dict = {}
+
+        tmp_dict['id']  = self.id
+        tmp_dict['state']  = self.state
+        tmp_dict['from_user_id']  = self.from_user_id
+        tmp_dict['to_host_id']  = self.to_host_id
+        tmp_dict['from_user_icon']  = self.from_user_icon
+        tmp_dict['to_host_icon']  = self.to_host_icon
+        tmp_dict['intro_and_question']  = self.intro_and_question
+        tmp_dict['appointment_time']  = self.appointment_time
+        tmp_dict['recommend_info']  = self.recommend_info
+        tmp_dict['recommend_begin_time']  = self.recommend_begin_time
+        tmp_dict['recommend_end_time']  = self.recommend_end_time
+        tmp_dict['recommend_length']  = self.recommend_length
+        tmp_dict['appointment_id']  = self.appointment_id
+        return tmp_dict
+    
+    def get_appointment_messages(self):
+        messages = Message.objects.filter(extra_id = appointment.id, message_type = MESSAGE_TYPE.APPOINTMENT_COMM).order_by("upload_time")
+        result = []
+        for msg in messages:
+            tmp_msg = {}
+            from_user = Host.objects.get(id = msg.from_user )
+            tmp_msg['from_user_name'] = from_user.username
+            tmp_msg['user_icon'] = from_user.icon
+            tmp_msg['message'] = msg.content
+            result.append(tmp_msg)
+
+        return result
+            

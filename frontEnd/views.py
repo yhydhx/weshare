@@ -60,6 +60,7 @@ def index(request):
     Info.update(recommend_host.get_index_statistic())
 
     Info['object'] = obj
+    Info['data'] = {}
 
     login_flag = False
 
@@ -92,6 +93,23 @@ def index(request):
             address_2 = 'https://graph.qq.com/oauth2.0/me?' + urlencode(access_token_dict)
             ret_open_id = urllib2.urlopen(address_2).read()
             open_id = urlencode2dict(ret_open_id.split(' '))['openid']
+
+            #### for test ####
+            f = open('test_v.txt', 'w')
+            f.write('return code get, and handle request\n')
+            f.write('code: ' + code + '\n')
+            f.write('qdict: ' + str(qdict) + '\n')
+            f.write('address: ' + address + '\n')
+            f.write('ret_qq_token: ' + ret_qq_token + '\n')
+            f.write('ret_token: ' + ret_token + '\n')
+            f.write('access_token: ' + access_token + '\n')
+            f.write('access_token_dict: ' + str(access_token_dict) + '\n')
+            f.write('address_2: ' + address_2 + '\n')
+            f.write('ret_open_id: ' + ret_open_id + '\n')
+            f.write('ret_open_id ' + ret_open_id + '\n')
+            f.close()
+
+            ####
             try:
                 user = Host.objects.get(open_id=open_id)  # 已经有了
                 return render_to_response('frontEnd/index.html', Info, {'current_user': user,
@@ -104,14 +122,18 @@ def index(request):
                 address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
                 ret_user_info = urllib2.urlopen(address_3).read()
                 user_info = json.loads(ret_user_info)
-                info_string = []
-                info_string.append(user_info['nickname'])
-                info_string.append(user_info['gender'])
-                info_string.append(user_info[''])
+                info_string = {}
+                info_string['nickname'] = user_info['nickname']
+                info_string['gender'] = user_info['gender']
+                info_string['figureurl_qq_1'] = user_info['figureurl_qq_1']
+                Info['data'] = info_string
 
-            return render_to_response('frontEnd/index.html', Info)
+            return render_to_response('frontEnd/account.html', Info)
 
         except:
+            f = open('test_v.txt', 'w')
+            f.write('no code get and did not handle the code')
+            f.close()
             return render_to_response('frontEnd/index.html', Info)
 
 
@@ -164,8 +186,8 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             email=email,
                             phone_number=phone,
                             education=-1,
-                            register_time = datetime.datetime.now(),
-                            icon = DEFAULT_ICON,
+                            register_time=datetime.datetime.now(),
+                            icon=DEFAULT_ICON,
                             )
                 # encode password
                 host.password = host.encode_password(password)
@@ -339,21 +361,21 @@ def complete_account(request):
 
             try:
                 bachelor = request.POST['schoolID1']
-                #bachelor_major = request.POST['bachelor_major']
+                # bachelor_major = request.POST['bachelor_major']
             except:
                 bachelor = ""
-                #bachelor_major = ""
+                # bachelor_major = ""
             try:
                 graduate = request.POST['schoolID2']
-                #graduate_major = request.POST['graduate_major']
+                # graduate_major = request.POST['graduate_major']
             except:
                 graduate = ""
-                #graduate_major = ""
+                # graduate_major = ""
             try:
-                #phd_major = request.POST['schoolID3']
+                # phd_major = request.POST['schoolID3']
                 phd = request.POST['phd']
             except:
-                #phd_major = ""
+                # phd_major = ""
                 phd = ""
 
             if not judge_limit(min_payment, max_payment):
@@ -366,7 +388,7 @@ def complete_account(request):
             host.service_time = service_time
             host.max_payment = max_payment
 
-            host.state = 1
+            host.state = HOST_STATE.APPLY
             host.qq_number = qq
 
             host.education = education
@@ -638,14 +660,11 @@ def about(request):
     return render(request, "frontEnd/about.html")
 
 
-def recruit(request,method,Oid):
+def recruit(request, method, Oid):
     if method == "index":
         return render(request, "frontEnd/recruitment.html")
     else:
-        return render(request, "frontEnd/recruit"+method+".html")
-
-
-    
+        return render(request, "frontEnd/recruit" + method + ".html")
 
 
 def service(request):
@@ -679,10 +698,7 @@ def service(request):
 
 def host_center(request, method, Oid):
     Info = {}
-    Info['state'] = 0
-    Info['message'] = ""
-    Info['data'] = {}
-
+    login_flag = False
     try:
         username = request.session['email']
     except:
@@ -690,13 +706,19 @@ def host_center(request, method, Oid):
 
     try:
         host = Host.objects.get(email=username)
-        Info['data']['host'] = host.format_dict()
+        Info['current_user'] = host.format_dict()
+        login_flag = True
+        Info['login_flag'] = login_flag
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
     if method == "edit":
         return render(request, "frontEnd/center-edit.html", Info)
     elif method == "manage":
+        Info['sent_bills'] = host.get_one_user_host_bills()
+        if host.state != HOST_STATE.GUEST:
+            Info['got_bills'] = host.get_one_host_user_bills()
+
         return render(request, "frontEnd/center-manage.html", Info)
     elif method == "auth":
         return render(request, "frontEnd/center-auth.html", Info)
@@ -744,6 +766,14 @@ def school(request, method, Oid):
 # user view
 @csrf_exempt
 def user(request, method, Oid):
+    login_flag = False
+    try:
+        username = request.session['email']
+        user = Host.objects.get(email=username)
+        login_flag = True
+    except:
+        pass
+
     if method == "show":
         try:
             host = Host.objects.get(id=Oid)
@@ -753,12 +783,17 @@ def user(request, method, Oid):
         features = host.get_all_features()
         host.features = features.values()
         host.image = "/files/icons/" + host.icon.split("/")[-1]
+        f = Feature()
+        questions = f.get_one_host_questions(Oid)
 
         Info = {}
-        Info['user'] = host
+        Info['host'] = host
         Info['msgs'] = host.get_user_message(host.id)
-        Info['current_user'] = host
-        Info['login_flag'] = True
+        Info['questions'] = questions
+
+        if login_flag:
+            Info['current_user'] = user
+        Info['login_flag'] = login_flag
 
         return render_to_response('frontEnd/host-index.html', Info)
 
