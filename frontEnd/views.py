@@ -166,6 +166,8 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             email=email,
                             phone_number=phone,
                             education=-1,
+                            register_time = datetime.datetime.now(),
+                            icon = DEFAULT_ICON,
                             )
                 # encode password
                 host.password = host.encode_password(password)
@@ -329,30 +331,31 @@ def complete_account(request):
             self_introduction = request.POST['self-introduction']
             gender = request.POST['gender']
             motto = request.POST['motto']
-            min_payment = request.POST['min-payment']
+            min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
-            max_payment = request.POST['max-payment']
+            max_payment = float(request.POST['max-payment'])
             qq = request.POST['qq']
 
             # Education Infomation
             education = request.POST['education']
+
             try:
-                bacholor = request.POST['bacholor']
-                bacholor_major = request.POST['bacholor_major']
+                bachelor = request.POST['schoolID1']
+                #bachelor_major = request.POST['bachelor_major']
             except:
-                bacholor = ""
-                bacholor_major = ""
+                bachelor = ""
+                #bachelor_major = ""
             try:
-                graduate = request.POST['graduate']
-                graduate_major = request.POST['graduate_major']
+                graduate = request.POST['schoolID2']
+                #graduate_major = request.POST['graduate_major']
             except:
                 graduate = ""
-                graduate_major = ""
+                #graduate_major = ""
             try:
-                phd_major = request.POST['phd_major']
+                #phd_major = request.POST['schoolID3']
                 phd = request.POST['phd']
             except:
-                phd_major = ""
+                #phd_major = ""
                 phd = ""
 
             if not judge_limit(min_payment, max_payment):
@@ -364,17 +367,17 @@ def complete_account(request):
             host.min_payment = min_payment
             host.service_time = service_time
             host.max_payment = max_payment
-            host.h_school = school
-            host.state = 1
+
+            host.state = HOST_STATE.APPLY
             host.qq_number = qq
 
             host.education = education
-            host.bacholor = bacholor
+            host.bachelor = bachelor
             host.graduate = graduate
             host.phd = phd
-            host.bacholor_major = bacholor_major
-            host.graduate_major = graduate_major
-            host.phd_major = phd_major
+            # host.bachelor_major = bachelor_major
+            # host.graduate_major = graduate_major
+            # host.phd_major = phd_major
 
             host.save()
             return HttpResponseRedirect('/complete-account-feature')
@@ -563,9 +566,9 @@ def modify_account(request):
             self_introduction = request.POST['self-introduction']
             gender = request.POST['selectbox']
             motto = request.POST['motto']
-            min_payment = request.POST['min-payment']
+            min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
-            max_payment = request.POST['max-payment']
+            max_payment = float(request.POST['max-payment'])
             school = request.POST['school']
             qq = request.POST['qq']
 
@@ -637,8 +640,14 @@ def about(request):
     return render(request, "frontEnd/about.html")
 
 
-def recruit(request):
-    return render(request, "frontEnd/recruitment.html")
+def recruit(request,method,Oid):
+    if method == "index":
+        return render(request, "frontEnd/recruitment.html")
+    else:
+        return render(request, "frontEnd/recruit"+method+".html")
+
+
+    
 
 
 def service(request):
@@ -672,10 +681,7 @@ def service(request):
 
 def host_center(request, method, Oid):
     Info = {}
-    Info['state'] = 0
-    Info['message'] = ""
-    Info['data'] = {}
-
+    login_flag = False
     try:
         username = request.session['email']
     except:
@@ -683,13 +689,20 @@ def host_center(request, method, Oid):
 
     try:
         host = Host.objects.get(email=username)
-        Info['data']['host'] = host.format_dict()
+        Info['current_user'] = host.format_dict()
+        login_flag = True
+        Info['login_flag'] = login_flag
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
+
 
     if method == "edit":
         return render(request, "frontEnd/center-edit.html", Info)
     elif method == "manage":
+        Info['sent_bills'] = host.get_one_user_host_bills()
+        if host.state != HOST_STATE.GUEST:
+            Info['got_bills'] = host.get_one_host_user_bills()
+
         return render(request, "frontEnd/center-manage.html", Info)
     elif method == "auth":
         return render(request, "frontEnd/center-auth.html", Info)
@@ -737,6 +750,15 @@ def school(request, method, Oid):
 # user view
 @csrf_exempt
 def user(request, method, Oid):
+    login_flag = False
+    try:
+        username = request.session['email']
+        user = Host.objects.get(email=username)
+        login_flag = True
+    except:
+        pass
+
+
     if method == "show":
         try:
             host = Host.objects.get(id=Oid)
@@ -746,12 +768,17 @@ def user(request, method, Oid):
         features = host.get_all_features()
         host.features = features.values()
         host.image = "/files/icons/" + host.icon.split("/")[-1]
+        f = Feature()
+        questions = f.get_one_host_questions(Oid)
 
         Info = {}
-        Info['user'] = host
+        Info['host'] = host
         Info['msgs'] = host.get_user_message(host.id)
-        Info['current_user'] = host
-        Info['login_flag'] = True
+        Info['questions'] = questions
+
+        if login_flag:
+            Info['current_user'] = user
+        Info['login_flag'] = login_flag
 
         return render_to_response('frontEnd/host-index.html', Info)
 

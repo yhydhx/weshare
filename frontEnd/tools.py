@@ -67,7 +67,7 @@ def process_passwd(passwd):
 
 
 def judge_limit(low, height):
-    if low <= height:
+    if float(low) <= float(height):
         return True
     else:
         return False

@@ -59,7 +59,7 @@
 <div id="ct-js-wrapper" class="ct-pageWrapper">
 
     {% include "frontEnd/nav.html" %}
-    {% if current_user.state == 0 %}
+    {% if host.state == 0 %}
     <h3 style="padding-top: 35%; padding-bottom: 25%; text-align: center">只有<a href="/image-receive/">注册成为HOST</a>才可以成为获得个人主页
     </h3>
     {% else %}
@@ -69,14 +69,14 @@
              data-bg-image-mobile="{% static 'frontEnd/images/content/cars/mediaHeader-02.jpg' %}">
         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom text-center ct-u-paddingBottom20"
              data-stellar-ratio="0.7" style="background:url('{% static 'frontEnd/images/weshare/hostImax.png'%}');">
-            {% if not user.state %}
+            {% if not host.state %}
             <img src="{% static 'frontEnd/images/question' %}" style="text-align: center;  width: 150px; height: 150px">
             {% else %}
-            <img src="{{ user.image }}" style="height: 120px; width: 120px; border: 3px solid #cccccc; border-radius: 50%">
+            <img src="{{ host.image }}" style="height: 120px; width: 120px; border: 3px solid #cccccc; border-radius: 50%">
             {% endif %}
-            <h3 class="ct-fw-lighter ct-u-hr ct-u-hr--wide ct-u-marginBottom10">{{ user.username }}</h3>
+            <h3 class="ct-fw-lighter ct-u-hr ct-u-hr--wide ct-u-marginBottom10">{{ host.username }}</h3>
             <h3 class="ct-u-marginBottom20" style="color: transparent">
-                <small class="ct-fw-lighter ct-u-colorMotive">- {{ user.motto }} -</small>
+                <small class="ct-fw-lighter ct-u-colorMotive">- {{ host.motto }} -</small>
             </h3>
             {% if current_user.state == 1 %}
             <a href="/host-center/" class="ct-login"><span>审核中</span><i class="fa fa-lock"></i></a>
@@ -112,7 +112,7 @@
                         <form id="ct-js-driverCheckbox" class="ct-js-radio-group ct-widget-content">
                             <div class="ct-u-displayTableVertical">
                                 <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                    <li><span>{{ user.service_time }}</span></li>
+                                    <li><span>{{ host.service_time }}</span></li>
 
                                 </ul>
                             </div>
@@ -126,7 +126,7 @@
                         </h3>
                         <div class="ct-widget-content">
                             <h4 class="ct-checkout-error">
-                                <small><span>{{ user.min_payment }} - {{ user.max_payment }}</span></small>
+                                <small><span>{{ host.min_payment }} - {{ host.max_payment }}</span></small>
                             </h4>
                         </div>
                     </div>
@@ -188,10 +188,14 @@
                                         <div class="form-group">
                                             <label style="font-size: 15px; ">请选择咨询问题</label>
                                             <select class="form-control" style="padding:0;border: 1 1 1 1 solid gray; ">
+                                              {% block quesiton%}
+                                              {% for q in questions %}
                                               <option>问题1</option>
                                               <option>问题2</option>
                                               <option>问题3</option>
                                               <option>问题4</option>
+                                              {% endfor %}
+                                              {% endblock %}
                                             </select>
                                         </div>                               
 
@@ -231,14 +235,14 @@
                         <div class="tab-content">
                             <!-- Tab #1 -->
                             <div role="tabpanel" class="tab-pane fade in active" id="description">
-                                {{ user.introduction | safe}}
+                                {{ host.introduction | safe}}
                             </div>
 
                             <div role="tabpanel" class="tab-pane fade" id="amenities">
 
 
                                 {% block content %}
-                                {% for topic in user.features %}
+                                {% for topic in host.features %}
                                 <h3 class="ct-fw-lighter ct-u-marginTop50 ct-u-marginBottom20 ct-u-paddingBottom15 ct-u-borderBottom">
                                     {{topic.name}}</h3>
                                 <div class="row">

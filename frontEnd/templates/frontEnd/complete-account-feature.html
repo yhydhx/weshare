@@ -49,13 +49,12 @@
                     console.log(str);
                     str2 = JSON.parse(str);
                     console.log(str2);
-                    console.log(str2['data']['feature_name']);
-                    $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span><a href=\"\"><i class=\"fa fa-trash\"></i></a>"+str2['data']['feature_name']+"</span></li>");
+                    // $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span><a href=\"\"><i class=\"fa fa-trash\"></i></a>"+str2['data']['feature_name']+"</span></li>");
+                    $('#'+tag+"TXT").append("<div class=\"row\" style=\"padding-top:5px;padding-bottom: 5px; \"><div class=\"col-md-12\"><p style=\"float: left;font-size:15px;\"> <span class=\"label label-primary\">"+ str2['data']['m_name'] +"</span> "+ str2['data']['feature_name'] +" </p><a href=\"\" class=\"btn btn-danger\" style=\"float: right; \">删除</a></div></div>");
                 }
 
             })
         // });
-        return false;
     }
     </script>
     <!-- 删除特质 -->
@@ -65,35 +64,29 @@
             console.log(id);
             console.log(z);
             console.log(t);
-            // $.ajax({
-            //     url : "/delete_feature",
-            //     type : "POST",
-            //     dataType : "JSON",
-            //     data : {
-            //         'topic_id' : id,
-            //         'feature_name' : z,
-            //         'topic_tag' : t,
-            //     }
-            //     success : function(str){
-            //         console.log('成功');
-            //         console.log(str);
-            //     }
-            // })
+            // var jsondata = {  
+            //                 "topic_id" : id,
+            //                 "feature_name" :  z,
+            //                 "m_id" : t,
+            //             };
+
             $.ajax({
-                url : "/delete_feature",
                 type : "POST",
+                url : "/delete-feature/",
+                // contentType: "application/json;charset=utf-8",
                 dataType : "JSON",
-                data : "",
+                data : {"topic_id":id,"feature_name":z,"minor_topic_id":t},
                 success : function(str){
                     console.log('成功');
                     console.log(str);
+                    console.log(str['data']['f_id']);
+                    var strID = str['data']['f_id'];
+                    $('#'+strID).html("");
                 },
                 error : function(err){
                     console.log('失败');
                     console.log(err);
                 }
-
-
 
             })
         }
@@ -205,12 +198,12 @@
                         <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}" style="width:80%;margin-left:10%;">
                             <div id="{{topic.id}}TXT">
                             {% for feature in topic.feature_list %}
-                                <div class="row" style="padding-top:5px;padding-bottom: 5px; ">
+                                <div class="row" style="padding-top:5px;padding-bottom: 5px; " id="{{ feature.f_id }}">
                                     <div class="col-md-12">                           
-                                        <h4><span style="float: left; ">{{ feature.f_name }} </span><a href="" class="btn btn-danger" style="float: right; ">删除</a></h4>
+                                        <p style="float: left;font-size:15px;"> <span class="label label-primary">{{ feature.m_name }}</span> {{ feature.f_name }} </p>
+                                        <a href="" class="btn btn-danger" style="float: right; " onclick="delete_feature('{{ topic.id }}','{{ feature.f_name }}','{{ feature.m_id }}');return false">删除</a>
                                     </div>
                                 </div>
-
                             {% endfor %}
 <!--                                 <div class="row" style="padding-top:5px;padding-bottom: 5px; ">
                                     <div class="col-md-12">                           
@@ -229,13 +222,13 @@
                         </ul>
 
                         <hr>
-                        <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="return showFeatures('{{topic.id}}')">
+                        <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
 
-                            <select class="form-control">
-                                <option>选择小话题</option>
+                            <select class="form-control" id="minor_topic_id" name="minor_topic_id" required>
+                                <option value="">选择小话题</option>
 
-                                {% for feature in topic.feature_list %}
-                                <option>1</option>
+                                {% for minor in topic.minor_topic_list %}
+                                <option value="{{ minor.id }}">{{ minor.m_name }}</option>
                                 {% endfor %}
                             </select>
                           <div class="form-group">

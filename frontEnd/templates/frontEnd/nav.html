@@ -26,31 +26,35 @@
 
 <!-- 手机端侧滑菜单 -->
 <div class="ct-menuMobile">
-    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/weshare/LOGO.png' %}" style="height:80px;" /></a></div>
+    <div class="ct-menuMobile-logo"><a href="index.html"><img src="{% static 'frontEnd/images/weshare/LOGO.png' %}" alt="" style="height: 80px; " /></a></div>
     <ul class="ct-menuMobile-navbar">
         <li class="active"><a href="/index/"><span>主页</span></a></li>
         <li><a href="/school/show"><span>学校</span></a></li>
         <li><a href="/"><span>话题</span></a></li>
+
         <li class="dropdown"><a href="/"><span>查看活动</span></a>
             <ul class="dropdown-menu">
                 <li><a href=""><span>活动即将开放</span></a></li>
                 <li><a href=""><span>敬请期待</span></a></li>
+
             </ul>
         </li>
         <li class="dropdown"><a href="/host-center/"><span>个人信息</span></a>
             <ul class="dropdown-menu">
                 <li><a href="/host_center/show"><span>我的主页</span></a></li>
-                <li><a href="/host_center/edit"><span>个人中心</span></a></li>
+                <li><a href="/modify-account/"><span>修改账户资料</span></a></li>
+
             </ul>
         </li>
         <li class="dropdown"><a href="/about"><span>关于我们</span></a>
             <ul class="dropdown-menu">
                 <li><a href="/service"><span>使用帮助</span></a></li>
-                <li><a href="/recruit"><span>招贤纳士</span></a></li>
+                <li><a href="/recruit/1"><span>招贤纳士</span></a></li>
             </ul>
         </li>
     </ul>
 </div>
+
 <!-- 导航栏 -->
 <div id="ct-js-wrapper" class="ct-pageWrapper">
     <nav class="navbar navbar-default ct-navbar ct-shadow ct-shadow--type1">
@@ -112,21 +116,20 @@
             </div>
             <!-- PC端显示：导航栏 -->
             <ul class="nav navbar-nav ct-navbar--fadeIn">
+                <!--=========================================================================-->
                 <li><a href="/index/">
                     <div class="ct-textEffect"><span data-content="主页">主页</span></div>
                 </a></li>
-
                 <li><a href="/school/show">
                     <div class="ct-textEffect"><span data-content="学校">学校</span></div>
                 </a></li>
-
                 <li><a href="">
                     <div class="ct-textEffect"><span data-content="话题">话题</span></div>
                 </a></li>
-
+                <!--=========================================================================-->
                 <!-- 备用：二级下拉菜单 -->
                 <!-- <li class="dropdown"><a onclick="school()">
-                    <div class="ct-textEffect"><span data-content="活动">查看活动</span></div>
+                    <div class="ct-textEffect"><span data-content="活动">活动</span></div>
                 </a>
                     <ul class="dropdown-menu">
                         <li><a href="events.html"><span>活动概览</span></a></li>
@@ -138,8 +141,6 @@
                         </li>
                     </ul>
                 </li> -->
-
-                <!--=========================================================================-->
                 <li class="dropdown"><a href="">
                     <div class="ct-textEffect"><span data-content="查看活动">查看活动</span></div>
                 </a>
@@ -149,7 +150,7 @@
                         <li><a href=""><span>敬请期待</span></a></li>
 
                     </ul>
-                </li>                
+                </li> 
                 <!--=========================================================================-->
                 <li class="dropdown"><a href="/index/">
                     <div class="ct-textEffect"><span data-content="个人信息">个人信息</span></div>
@@ -166,8 +167,9 @@
                     <div class="ct-textEffect"><span data-content="团队信息">关于我们</span></div>
                 </a>
                     <ul class="dropdown-menu">
+
                         <li><a href="/service"><span>使用帮助</span></a></li>
-                        <li><a href="/recruit"><span>招贤纳士</span></a></li>
+                        <li><a href="/recruit/1"><span>招贤纳士</span></a></li>
 
                     </ul>
                 </li>
