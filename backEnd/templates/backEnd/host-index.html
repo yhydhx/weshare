@@ -58,7 +58,7 @@
 <div id="ct-js-wrapper" class="ct-pageWrapper">
 
     {% include "frontEnd/nav.html" %}
-
+    {% csrf_token %}
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="553"
              data-type="parallax" data-stellar-background-ratio="0.2"
              data-bg-image="{% static 'frontEnd/images/content/cars/mediaHeader-02.jpg' %}"
@@ -93,6 +93,7 @@
                     <div class="ct-widget ct-widget-checkbox-2items ct-u-marginBottom30">
                         <h3 class="ct-widget-header">认证</h3>
                         <form id="ct-js-driverCheckbox" class="ct-js-radio-group ct-widget-content">
+                            
                             <div class="ct-u-displayTableVertical">
                                 <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
                                     <li><i class="fa fa-check"></i><span>百度CEO</span></li>
