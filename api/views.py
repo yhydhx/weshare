@@ -60,6 +60,7 @@ def index(request):
         user_email = request.session['email'] 
         host = Host.objects.get(email=user_email)
         login_flag = 1
+        Info['data']['current_user'] = host
     except:
         host = Host()
         login_flag = 0
@@ -67,7 +68,7 @@ def index(request):
     Info['data']['login_flag'] = login_flag
     Info['data'].update( host.get_all_classes())
     Info['data'].update(host.get_index_statistic())
-
+    
     return HttpResponse(json.dumps(Info),content_type="application/json")
 
 
@@ -112,7 +113,7 @@ def user(request, method, Oid):
             
 
             Info = {}
-            Info['state'] = 0
+            Info['state'] = HOST_STATE['GUEST']
             Info['message'] = ""
             Info['data'] = {}
             
@@ -147,10 +148,26 @@ def user(request, method, Oid):
                     Info['message'] = '您的邮箱已经被注册了'
                     Info['data']['email'] = ""
                 except:
+                    #check if there is openid 
+                    try:
+                        open_id = request.POST.get("union_id")
+                    except :
+                        open_id = ""
+
+                    #check if there is icon 
+                    try:
+                        icon = request.POST.get("icon")
+                    except :
+                        icon = ""
+                    if icon == "":
+                        icon = DEFAULT_ICON
+
                     host = Host(username=username,
                                 password=password,
                                 email=email,
                                 phone_number=phone,
+                                open_id = open_id,
+                                icon = icon,
                                 )
                     #encode password
                     host.password = host.encode_password(password)
@@ -183,6 +200,8 @@ def user(request, method, Oid):
                         request.session['email'] = email
                         Info['message'] = "登录成功"
                         Info['state'] = 0
+                        Info['data']['login_flag'] = 1
+                        Info['current_user'] = user
                         return HttpResponse(json.dumps(Info),content_type="application/json")
                 except:
                     Info['message'] = '用户名或者密码不正确,或者账户处于被冻结的状态'
@@ -191,6 +210,41 @@ def user(request, method, Oid):
         else:
             Info['state'] = 303
             Info['message'] = "您的操作失误，本次操作已被记录"
+            return HttpResponse(json.dumps(Info),content_type="application/json")
+
+    elif method == "qqlogin":
+        if request.method == "POST":
+            
+            try:
+                username = request.POST.get("username")
+                icon = request.POST.get("icon")
+                union_id = request.POST.get("union_id")
+            except:
+                Info['state'] = 404
+                Info['message'] = "操作错误"
+                return HttpResponse(json.dumps(Info),content_type="application/json")
+
+            #check our server has this account or not 
+            
+            try:
+                host = Host.objects.get(open_id = union_id)
+                #login success
+
+                request.session['email'] = host.email
+                Info['data']['registed'] = True
+                Info['message'] = "登录成功"
+            except:
+                Info['message'] = "由于您是第一次登录,请完善部分信息"
+                Info['data']['registed'] = False
+
+                Info['data']['username'] = username
+                Info['data']['icon'] = icon
+                Info['data']['union_id'] = union_id
+            return HttpResponse(json.dumps(Info),content_type="application/json")    
+
+        else:
+            Info['state'] = 500
+            Info['message'] = "您的操作有误，本次操作已经被记录"
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == "msg":
