@@ -75,68 +75,7 @@ def index(request):
         return render_to_response('frontEnd/index.html', {'current_user': user,
                                                           'login_flag': login_flag}, Info)
     except:
-
-        ##########处理qq登录#######
-        try:
-            f = open('test_v.txt', 'a+')
-
-            code = request.GET.get['code']
-            f.write(code)
-
-            qdict = {'grant_type': 'authorization_code',
-                     'client_id': TENCENT_APPID,
-                     'client_secret': TENCENT_APPKEY,
-                     'code': code,
-                     'redirect_uri': 'http://www.wshere.com'}
-            f.write(str(qdict))
-
-            address = 'https://graph.qq.com/oauth2.0/token?' + urlencode(qdict)
-            f.write(address)
-
-            ret_qq_token = urllib2.urlopen(address).read()
-            f.write(ret_qq_token)
-
-            ret_token = urlencode2dict(ret_qq_token)
-            f.write(ret_token)
-
-            access_token = ret_token['access_token']
-            f.write(access_token)
-
-            # 获取用户的open_ID:
-            access_token_dict = {'access_token': access_token}
-            f.write(str(access_token_dict))
-            address_2 = 'https://graph.qq.com/oauth2.0/me?' + urlencode(access_token_dict)
-            f.write(address_2)
-            ret_open_id = urllib2.urlopen(address_2).read()
-            open_id = urlencode2dict(ret_open_id.split(' '))['openid']
-            f.write(open_id)
-            f.close()
-
-            try:
-                user = Host.objects.get(open_id=open_id)  # 已经有了
-                return render_to_response('frontEnd/index.html', Info, {'current_user': user,
-                                                                        'login_flag': True})
-            except:
-
-                request_dict = {'access_token': access_token,
-                                'oauth_consumer_key': TENCENT_APPID,
-                                'openid': open_id}
-                address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
-                ret_user_info = urllib2.urlopen(address_3).read()
-                user_info = json.loads(ret_user_info)
-                info_string = {}
-                info_string['nickname'] = user_info['nickname']
-                info_string['gender'] = user_info['gender']
-                info_string['figureurl_qq_1'] = user_info['figureurl_qq_1']
-                Info['data'] = info_string
-
-            return render_to_response('frontEnd/account.html', Info)
-
-        except:
-            f = open('test_v.txt', 'a+')
-            f.write('did not get the code')
-            f.close()
-            return render_to_response('frontEnd/index.html', Info)
+        return render_to_response('frontEnd/index.html', Info)
 
 
 @csrf_exempt
@@ -236,6 +175,70 @@ def login(request):
 def logout(request):
     del request.session['email']
     return HttpResponseRedirect('/index/')
+
+
+def qq_login(request):
+    Info = {}
+ ##########处理qq登录#######
+    try:
+        f = open('test_v.txt', 'a+')
+
+        code = request.GET.get['code']
+        f.write(code)
+
+        qdict = {'grant_type': 'authorization_code',
+                     'client_id': TENCENT_APPID,
+                     'client_secret': TENCENT_APPKEY,
+                     'code': code,
+                     'redirect_uri': 'http://www.wshere.com'}
+        f.write(str(qdict))
+
+        address = 'https://graph.qq.com/oauth2.0/token?' + urlencode(qdict)
+        f.write(address)
+
+        ret_qq_token = urllib2.urlopen(address).read()
+        f.write(ret_qq_token)
+
+        ret_token = urlencode2dict(ret_qq_token)
+        f.write(ret_token)
+
+        access_token = ret_token['access_token']
+        f.write(access_token)
+
+        # 获取用户的open_ID:
+        access_token_dict = {'access_token': access_token}
+        f.write(str(access_token_dict))
+        address_2 = 'https://graph.qq.com/oauth2.0/me?' + urlencode(access_token_dict)
+        f.write(address_2)
+        ret_open_id = urllib2.urlopen(address_2).read()
+        open_id = urlencode2dict(ret_open_id.split(' '))['openid']
+        f.write(open_id)
+        f.close()
+
+        try:
+            user = Host.objects.get(open_id=open_id)  # 已经有了
+            return render_to_response('frontEnd/index.html', Info, {'current_user': user,
+                                                                        'login_flag': True})
+        except:
+
+            request_dict = {'access_token': access_token,
+                                'oauth_consumer_key': TENCENT_APPID,
+                                'openid': open_id}
+            address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
+            ret_user_info = urllib2.urlopen(address_3).read()
+            user_info = json.loads(ret_user_info)
+            info_string = {}
+            info_string['nickname'] = user_info['nickname']
+            info_string['gender'] = user_info['gender']
+            info_string['figureurl_qq_1'] = user_info['figureurl_qq_1']
+            Info['data'] = info_string
+            return render_to_response('frontEnd/account.html', Info)
+
+    except:
+        f = open('test_v.txt', 'a+')
+        f.write('did not get the code')
+        f.close()
+        return None
 
 
 
