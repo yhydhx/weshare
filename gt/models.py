@@ -848,6 +848,7 @@ class Appointment(models.Model):
     to_host_icon = models.CharField(max_length = 100)
     intro_and_question = models.CharField(max_length = 400)          #介绍情况和问题
     appointment_time = models.CharField(max_length = 200)      #约定的时间和时间长度
+    appointment_init_time = models.DateTimeField(null = True)   #订单创建的时间
     recommend_info = models.CharField(max_length = 200, null = True)       #分享者回复的消息
     recommend_begin_time = models.DateTimeField( null = True)                    #建议的时间
     recommend_end_time = models.DateTimeField( null = True)                    #建议的时间
@@ -894,7 +895,11 @@ class Appointment(models.Model):
         tmp_dict['recommend_begin_time']  = self.recommend_begin_time
         tmp_dict['recommend_end_time']  = self.recommend_end_time
         tmp_dict['recommend_length']  = self.recommend_length
+        tmp_dict['appointment_init_time']  = self.appointment_init_time
         tmp_dict['appointment_id']  = self.appointment_id
+        appt_feature = Feature.objects.get(id=self.feature_id).f_name
+        tmp_dict['feature_name'] = appt_feature
+
         return tmp_dict
     
     def get_appointment_messages(self):

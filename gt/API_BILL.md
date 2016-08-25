@@ -178,7 +178,9 @@ data = {
 	        'recommend_begin_time'  :     ~  
 	        'recommend_end_time'  :     ~  
 	        'recommend_length'  :     ~  
-	        'appointment_id'  :     ~  唯一的订单号
+	        'feature_name'     :     	~ 话题内容
+	        'appointment_init_time':    ~订单创建时间
+ 	        'appointment_id'  :     ~  唯一的订单号
 		}
 	]
 }
