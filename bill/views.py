@@ -32,7 +32,7 @@ def bill(request,method,Oid):
     '''
     订单系统的主页
     '''
-
+    Info = {}
     try:
         username = request.session['email']
         user = Host.objects.get(email=username)
@@ -44,22 +44,22 @@ def bill(request,method,Oid):
 
     if method == "init":
 
-    	try:
+        try:
     		feature_id  = request.POST.get("feature_id")
     		host_id  = request.POST.get("host_id")
     		intro_and_question  = request.POST.get("intro_and_question")    
     		appointment_time  = request.POST.get("appointment_time")
     		user = Host.objects.get(email = request.session['email'])
     		host = Host.objects.get(id = host_id)
-    	except:
-    		return render(request,"frontEnd/404.html")
+        except:
+            return render(request,"frontEnd/404.html")
 
 		#generate bill id
 		#
 
 
-		appointment = Appointment(
-			state = APPOINTMENT_STATE.INITED ,
+    	appointment = Appointment(
+			state = APPOINTMENT_STATE['INITED'] ,
 		    from_user_id = user.id,
 		    to_host_id = host.id,  
 		    from_user_icon = user.icon,
@@ -70,9 +70,9 @@ def bill(request,method,Oid):
 		    feature_id = feature_id,
 		)
 
-		appointment.appointment_id = appointment.generate_id()
-		appointment.save()
-		return HttpResponseRedirect('/host_center/manage')
+        appointment.appointment_id = appointment.generate_id()
+        appointment.save()
+        return HttpResponseRedirect('/host_center/manage')
 		
 
     elif method == "detail":
@@ -181,4 +181,9 @@ def bill(request,method,Oid):
 			return render(request,"frontEnd/error.html")
 
 		return HttpResponseRedirect('host_center/manage')
-    return HttpResponse("end")
+
+    elif method == "test":
+		return HttpResponse("test")
+
+    else:
+		return HttpResponse("end")
