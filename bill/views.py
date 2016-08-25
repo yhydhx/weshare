@@ -32,7 +32,7 @@ def bill(request,method,Oid):
     '''
     订单系统的主页
     '''
-
+    Info = {}
     try:
         username = request.session['email']
         user = Host.objects.get(email=username)
