@@ -13,52 +13,34 @@
               <div class="row centerLeftbarButton"><a href="/host_center/manage" style="color:black;">订单管理</a></div>
               <div class="row centerLeftbarButton"><a href="/image-receive/">申请认证</a></div>
           </div>
-  		<div class="col-md-9" style="padding-top:30px;">
-              <table class="table table-bordered ">
-                <tr>
-                    <td colspan="3" style="text-align:left;">编号：1674654564564654 发起时间：2016-07-31</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="row">
-                            <div class="col-md-3"><img src="{{ current_user.icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-                            <div class="col-md-9"><h3>香港大学offer申请</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
-                        </div>
-                    </td>
-                    <td><h4>待确认</h4></td>
-                    <td><a href="/host_center/detail">查看详情</a></td>
-                </tr>
-              </table>
-              <table class="table table-bordered ">
-                <tr>
-                    <td colspan="3" style="text-align:left;">编号：1674654564564654 发起时间：2016-07-31</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="row">
-                            <div class="col-md-3"><img src="{{ current_user.icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-                            <div class="col-md-9"><h3>香港大学offer申请</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
-                        </div>
-                    </td>
-                    <td><h4>待确认</h4></td>
-                    <td><a href="/host_center/detail">查看详情</a></td>
-                </tr>
-              </table>
-              <table class="table table-bordered ">
-                <tr>
-                    <td colspan="3" style="text-align:left;">编号：1674654564564654 发起时间：2016-07-31</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="row">
-                            <div class="col-md-3"><img src="{{ current_user.icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-                            <div class="col-md-9"><h3>香港大学offer申请</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
-                        </div>
-                    </td>
-                    <td><h4>待确认</h4></td>
-                    <td><a href="/host_center/detail">查看详情</a></td>
-                </tr>
-              </table>
+  		    <div class="col-md-9" style="padding-top:30px;">
+              
+              {% if current_user.state == 0 %}
+
+                  我是：guest
+                  {% block sent %}
+                  {% for bill in sent_bills %}
+                  <table class="table table-bordered ">
+                    <tr>
+                        <td colspan="3" style="text-align:left;">编号：1674654564564654 发起时间：2016-07-31</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-3"><img src="{{ current_user.icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
+                                <div class="col-md-9"><h3>香港大学offer申请</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
+                            </div>
+                        </td>
+                        <td><h4>待确认</h4></td>
+                        <td><a href="/host_center/detail">查看详情</a></td>
+                    </tr>
+                  </table>
+                  {% endfor %}
+                  {% endblock %}
+                  
+              {% elif current_user.state == 1 %}
+                  我是：host
+              {% endif %}
           </div>
   	</div>
   </div>
