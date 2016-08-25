@@ -68,6 +68,7 @@ def bill(request,method,Oid):
 		    appointment_time = appointment_time,
 		    appointment_id = 1,
 		    feature_id = feature_id,
+		    appointment_init_time = datetime.datetime.now(),
 		)
 
         appointment.appointment_id = appointment.generate_id()
