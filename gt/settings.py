@@ -147,24 +147,6 @@ DEFAULT_ICON = "/files/icons/5755fbd9298a02edff10f3535e22c8f5.jpeg"
 
 
 SALT = 'hetongshinanshen'
-TENCENT_APPID = 101340075
-TENCENT_APPKEY = '8a66f6a4a93ef09b970afd245ed8b8fc'
+TENCENT_APPID = 101349090
+TENCENT_APPKEY = 'ee063d616b010904c5d35795d554f6c6'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/home/weshare/weshare/debug.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
