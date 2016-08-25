@@ -15,7 +15,8 @@ from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template import Context, loader
 from gt.settings import *
 
-import hashlib,binascii
+
+import hashlib,binascii,datetime
 
 
 class Host(models.Model):
@@ -847,11 +848,11 @@ class Appointment(models.Model):
     intro_and_question = models.CharField(max_length = 400)          #介绍情况和问题
     appointment_time = models.CharField(max_length = 200)      #约定的时间和时间长度
     recommend_info = models.CharField(max_length = 200, null = True)       #分享者回复的消息
-    recommend_begin_time = models.DateTimeField()                    #建议的时间
-    recommend_end_time = models.DateTimeField()                    #建议的时间
-    recommend_length = models.FloatField()                     #建议的时长
-    recommend_payment = models.FloatField()                    #每小时多少钱
-    recommend_salary = models.FloatField()                      #总共多少钱
+    recommend_begin_time = models.DateTimeField( null = True)                    #建议的时间
+    recommend_end_time = models.DateTimeField( null = True)                    #建议的时间
+    recommend_length = models.FloatField( null = True)                     #建议的时长
+    recommend_payment = models.FloatField( null = True)                    #每小时多少钱
+    recommend_salary = models.FloatField( null = True)                      #总共多少钱
     feature_id = models.CharField(max_length = 100)            #feature_id
     appointment_id = models.CharField(max_length=100)     #唯一的订单号-》
 
