@@ -238,6 +238,8 @@ def logout(request):
     return HttpResponseRedirect('/index/')
 
 
+
+
 @csrf_exempt
 def i_forget(request, attr=False):
     if not request.method == 'POST':

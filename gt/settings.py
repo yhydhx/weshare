@@ -150,21 +150,3 @@ SALT = 'hetongshinanshen'
 TENCENT_APPID = 101349090
 TENCENT_APPKEY = 'ee063d616b010904c5d35795d554f6c6'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/home/weshare/weshare/debug.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
