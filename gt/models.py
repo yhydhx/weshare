@@ -339,7 +339,8 @@ class Host(models.Model):
         return result_hosts
 
     def get_one_user_host_bills(self):
-        bills = Bill.objects.filter(from_user_id = self.id)
+        bills = Appointment.objects.filter(from_user_id = self.id)
+
         result = []
         for bill_atom in bills:
             tmp_bill = bill_atom.format_dict_on_manage()
@@ -348,7 +349,7 @@ class Host(models.Model):
         return result
 
     def get_one_host_user_bills(self):
-        bills = Bill.objects.filter(to_host_id = self.id)
+        bills = Appointment.objects.filter(to_host_id = self.id)
         result = []
         for bill_atom in bills:
             tmp_bill = bill_atom.format_dict_on_manage()
