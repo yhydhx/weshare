@@ -71,12 +71,9 @@ def bill(request,method,Oid):
 		)
 
 		appointment.appointment_id = appointment.generate_id()
-		try:
-			appointment.save()
-			return HttpResponseRedirect('/host_center/manage')
-		except:
-			return render(request,'error.html')
-
+		appointment.save()
+		return HttpResponseRedirect('/host_center/manage')
+		
 
     elif method == "detail":
 

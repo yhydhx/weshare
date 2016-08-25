@@ -104,7 +104,11 @@ BILL_STATE = {
 
 MESSAGE_TYPE = {
     "APPOINTMENT_COMM": 1,
+}
 
+GENDER = {
+    "MALE" : 1,
+    "FEMALE" : 0,
 }
 
 # Internationalization
