@@ -199,8 +199,8 @@ def qq_login(request):
         ret_qq_token = urllib2.urlopen(address).read()
         f.write('ret_qq_token: ' + ret_qq_token + '\n')
 
-        ret_token = urlencode2dict(str(ret_qq_token))
-        f.write('ret_token: ' + ret_token + '\n')
+        ret_token = urlencode2dict(str(ret_qq_token))   # ret_token is a dict
+        f.write('ret_token: ' + str(ret_token) + '\n')
 
         access_token = ret_token['access_token']
         f.write('access_token: ' + access_token + '\n')
