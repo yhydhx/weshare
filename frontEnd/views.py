@@ -208,9 +208,13 @@ def qq_login(request):
         # 获取用户的open_ID:
         access_token_dict = {'access_token': access_token}
         f.write('access_token_dict: ' + str(access_token_dict) + '\n')
+
         address_2 = 'https://graph.qq.com/oauth2.0/me?' + urlencode(access_token_dict)
         f.write('address_2: ' + address_2 + '\n')
+
         ret_open_id = urllib2.urlopen(address_2).read()
+        f.write('ret_open_id: ' + str(ret_open_id) + '\n')   # callback 返回包
+
         open_id = urlencode2dict(ret_open_id.split(' '))['openid']
         f.write('open_id: ' + open_id + '\n')
         f.close()
@@ -234,7 +238,7 @@ def qq_login(request):
             Info['data'] = info_string
             return render_to_response('frontEnd/account.html', Info)
 
-    except:
+    except IOError:
         f = open('test_v.txt', 'a+')
         f.write('did not get the code')
         f.close()
