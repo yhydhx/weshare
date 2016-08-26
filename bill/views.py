@@ -79,8 +79,8 @@ def bill(request,method,Oid):
     elif method == "detail":
 
     	try:
-    		Info['appointment'] = appointment
     		appointment = Appointment.objects.get(id = Oid)
+    		Info['appointment'] = appointment
     	except:
     		return render(request,'frontEnd/404.html')
 

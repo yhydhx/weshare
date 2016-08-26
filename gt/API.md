@@ -304,6 +304,7 @@ function:
 2. 显示网站的统计数据
 3. 显示部分用户（最多*人）
 4. 用户是否在线
+5. 显示前几个学校
 
 API:
 %%正确的返回信息：
@@ -311,7 +312,30 @@ Info = {
 	state: Int # 0 表示成功，其他数字表示不成功
 	message: Char # 错误的提示信息
 	data: {
-
+		"schools": [
+			{
+		        "s_province": 			# 学校所代表的省份
+		        "s_image": 				#学校的图片
+		        "s_name": 				~学校的姓名
+		        "s_display_index": 		~暂时是无关变量
+		        "s_student_number": 	~学校有学生的姓名
+		    },
+		    {
+		        "s_province": 			# 学校所代表的省份
+		        "s_image": 				#学校的图片
+		        "s_name": 				~学校的姓名
+		        "s_display_index": 		~暂时是无关变量
+		        "s_student_number": 	~学校有学生的姓名
+		    },
+		    {
+		        "s_province": 			# 学校所代表的省份
+		        "s_image": 				#学校的图片
+		        "s_name": 				~学校的姓名
+		        "s_display_index": 		~暂时是无关变量
+		        "s_student_number": 	~学校有学生的姓名
+		    },
+		    ......
+		]
 		'topics': [
 			{
 				'name' : char ~话题姓名

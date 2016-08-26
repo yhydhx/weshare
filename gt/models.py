@@ -16,7 +16,7 @@ from django.template import Context, loader
 from gt.settings import *
 
 
-import hashlib,binascii,datetime
+import hashlib,binascii,datetime,random
 
 
 class Host(models.Model):
@@ -320,6 +320,15 @@ class Host(models.Model):
 
         return Info
 
+    def get_index_schools(self):
+        '''
+            show top schools on index 
+        '''
+        schools = School.objects.all().order_by('s_student_number')[:6]
+        result = []
+        for school_atom in schools:
+            result.append(school_atom.format_dict())
+        return result
 
     def search_user_with_key(self,keyword):
         result_hosts = []
@@ -866,8 +875,8 @@ class Appointment(models.Model):
         host = Host.objects.get(id=self.to_host_id)
         tmp_id = tmp_id + binascii.b2a_hex(host.id)[:6]
         appointment_number = str(Appointment.objects.count())
-        app_num_length = len(appointment_number)
-        tmp_id = tmp_id +'0'* (6-app_num_length) + binascii.b2a_hex(host.id)[:6]
+        app_num_length = appointment_number
+        tmp_id = tmp_id +str(random.random())[-2:]+'0'* (5-app_num_length) + binascii.b2a_hex(host.id)[:6]
         return tmp_id
 
 
