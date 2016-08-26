@@ -218,7 +218,7 @@ def qq_login(request):
         callback_dict = json.loads(str(ret_open_id).split(' ')[1])  # unicode 类型
         f.write('callback_dict: ' + str(callback_dict) + '\n')
 
-        open_id = callback_dict['open_id']
+        open_id = callback_dict[u'openid']
         f.write('open_id: ' + str(open_id) + '\n')
         f.close()
 
@@ -231,14 +231,17 @@ def qq_login(request):
             request_dict = {'access_token': access_token,
                             'oauth_consumer_key': TENCENT_APPID,
                             'openid': open_id}
+            f.write('request_dict: ' + str(request_dict) + '\n')
             address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
             ret_user_info = urllib2.urlopen(address_3).read()
             user_info = json.loads(ret_user_info)
+            f.write('user_info: ' + user_info + '\n')
             info_string = {}
             info_string['nickname'] = user_info['nickname']
             info_string['gender'] = user_info['gender']
             info_string['figureurl_qq_1'] = user_info['figureurl_qq_1']
             Info['data'] = info_string
+            f.close()
             return render_to_response('frontEnd/account.html', Info)
 
     except IOError:
