@@ -90,7 +90,7 @@ def urlencode2dict(urlencoded):
 
 
 class TmpQQUser(object):
-    def __init__(self, nickname, icon, gender):
+    def __init__(self, nickname, icon):
         self.nickname = nickname
         self.icon = icon
 
