@@ -183,7 +183,7 @@ def qq_login(request):
     try:
         f = open('test_v.txt', 'a+')
 
-        code = request.GET.get['code']
+        code = request.GET['code']
         f.write(code)
 
         qdict = {'grant_type': 'authorization_code',
