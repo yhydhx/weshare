@@ -239,14 +239,10 @@ def qq_login(request):
             user_info = json.loads(ret_user_info)
             f.write('user_info: ' + str(user_info) + '\n')
 
-            info_string = {}
-            info_string['nickname'] = user_info['nickname']
-            info_string['gender'] = user_info['gender']
-            info_string['figureurl_qq_1'] = user_info['figureurl_qq_1']
-            Info['data'] = info_string
             qq_user = TmpQQUser(user_info['nickname'], user_info['figureurl_qq_1'])
             f.close()
-            return render_to_response('frontEnd/account.html', {'current_user': qq_user}, Info)
+            return render_to_response('frontEnd/account.html', {'current_user': qq_user}, Info,
+                                      content_instance=RequestContext(request))
 
     except IOError:
         f = open('test_v.txt', 'a+')
