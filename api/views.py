@@ -68,7 +68,7 @@ def index(request):
     Info['data']['login_flag'] = login_flag
     Info['data'].update( host.get_all_classes())
     Info['data'].update(host.get_index_statistic())
-    
+    Info['schools'] = host.get_index_schools()
     return HttpResponse(json.dumps(Info),content_type="application/json")
 
 
@@ -76,6 +76,15 @@ def index(request):
 @csrf_exempt
 def user(request, method, Oid):
     Info = output_init()
+    try:
+        host = Host.objects.get(email=request.session['email'])
+        Info['current_user'] = host.format_dict()
+        login_flag = True
+        Info['data']['current_user'] = host
+    except:
+        login_flag = False
+    Info['data']['login_flag'] = login_flag
+
     if method == "show":
         #check the user is exist or not
         try:
@@ -289,6 +298,12 @@ def user(request, method, Oid):
             Info['message'] = "您已经登出"
         return HttpResponse(json.dumps(Info),content_type="application/json")
 
+    elif method == "manage_bill":
+        Info['data']['sent_bills'] = host.get_one_user_host_bills()
+        if host.state != HOST_STATE['GUEST']:
+            Info['data']['got_bills'] = host.get_one_host_user_bills()
+        return HttpResponse(json.dumps(Info),content_type="application/json")
+
     else:
         return render(request, "frontEnd/404.html")
 
@@ -348,9 +363,198 @@ def school(request, method, Oid):
     else:
         return HttpResponse("not found")
 
+@csrf_exempt
+def bill(request,method,Oid):
+    '''
+    订单系统的主页
+    '''
+    Info = output_init()
+    try:
+        username = request.session['email']
+        user = Host.objects.get(email=username)
+    except:
+        Info['state'] = 404
+        Info['message'] = "对不起，您尚未登录！"
+        return HttpResponse(json.dumps(Info), content_type="application/json")
+    #get the host
+
+    if method == "init":
+
+        try:
+            feature_id  = request.POST.get("feature_id")
+            host_id  = request.POST.get("host_id")
+            intro_and_question  = request.POST.get("intro_and_question")    
+            appointment_time  = request.POST.get("appointment_time")
+            user = Host.objects.get(email = request.session['email'])
+            host = Host.objects.get(id = host_id)
+        except:
+            Info['state'] = 404
+            Info['message'] = "对不起，您尚未登录！"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
+        #generate bill id
+
+        appointment = Appointment(
+            state = APPOINTMENT_STATE['INITED'] ,
+            from_user_id = user.id,
+            to_host_id = host.id,  
+            from_user_icon = user.icon,
+            to_host_icon = host.icon,
+            intro_and_question = intro_and_question,
+            appointment_time = appointment_time,
+            appointment_id = 1,
+            feature_id = feature_id,
+            appointment_init_time = datetime.datetime.now(),
+        )
+
+        appointment.appointment_id = appointment.generate_id()
+        appointment.save()
+        
+        Info['message'] = "订单创建成功"
+        return HttpResponse(json.dumps(Info), content_type="application/json")
+        
+
+    elif method == "detail":
+
+        try:
+            appointment = Appointment.objects.get(id = Oid)
+            Info['data']['appointment'] = appointment
+            
+        except:
+            Info['state'] = 404
+            Info['message'] = "对不起，该订单不存在！"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+            
+        #show the comment 
+        
+        Info['messages'] = appointment.get_appointment_messages()
+        #check this user is the host or not 
+        if user.id == appointment.from_user_id : 
+            Info['user_page'] = True
+            Info['message'] = "查询成功，返回用户页面！"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+        else:
+            Info['user_page'] = False
+            Info['message'] = "查询成功，返回Host页面！"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
+    
+    elif method == "host_certify":
+        try:
+            appnt_id = request.POST.get("appnt_id")
+            recommend_info = request.POST.get("recommend_info")
+            recommend_begin_time = request.POST.get("recommend_begin_time")
+            recommend_end_time = request.POST.get("recommend_end_time")
+            recommend_length = request.POST.get("recommend_length")
+            recommend_payment = request.POST.get("recommend_payment")
+            recommend_salary = request.POST.get("recommend_salary")
+        except:
+            Info['state'] = 404
+            Info['message'] = "对不起，该订单不存在！"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
+        #format the time
+        try:
+            recommend_begin_time = datetime.datetime.strptime(recommend_begin_time, "%Y-%m-%d %H:%M:%S")
+            recommend_end_time = datetime.datetime.strptime(recommend_end_time, "%Y-%m-%d %H:%M:%S")
+        except:
+            Info['state'] = 303
+            Info['message'] = "对不起，时间格式错误！"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
+        Appointment.objects.filter(id=appnt_id).update(
+                                                            recommend_info = recommend_info,
+                                                            recommend_begin_time = recommend_begin_time,
+                                                            recommend_end_time = recommend_end_time,
+                                                            recommend_length = recommend_length,
+                                                            recommend_payment = recommend_payment,
+                                                            recommend_salary = recommend_salary,
+                                                            state = APPOINTMENT_STATE.CERTIFIED
+                                                            )
+        Info['message'] = "订单修改成功，请客户检查并付款"
+        return HttpResponse(json.dumps(Info), content_type="application/json")
+
+    elif method == "communicate":
+        appnt_id = request.POST.get("appnt_id")
+        message = request.POST.get("message")
+        try:
+            appointment = Appointment.objects.get(id= appnt_id)
+            message_type =  MESSAGE_TYPE.APPOINTMENT_COMM
+            new_message = Message(    
+                                from_user = user.id,
+                                to_user = appointment.to_host_id,
+                                message_type = message_type,
+                                icon = user.icon,
+                                upload_time = datetime.datetime.now(),
+                                content = message,
+                                extra_id = appnt_id,
+                                )
+            new_message.save()
+            Info['message'] = "信息提交成功"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+        except:
+            Info['state'] = 500
+            Info['message'] = "对不起，提交错误！"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
+    elif method == "pay":
+        try:
+            appnt_id = request.POST.get("appnt_id")
+            appointment = Appointment.objects.get(id = appnt_id)
+            host = Host.objects.get(id= appointment.to_host_id)
+        except:
+            Info['state'] = 404
+            Info['message'] = "对不起,该订单不存在！"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
+
+        bill = Bill(
+            bill_id = appointment.appointment_id ,      # 请与贵网站订单系统中的唯一订单号匹配  
+            subject = u"与"+host.username+u"交流"+str(appointment.recommend_length)+u"小时",     # 订单名称，显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里。  
+            body = u"与"+host.username+u"交流"+str(appointment.recommend_length)+u"小时",           # 订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里，可以为空  
+            total_fee = appointment.recommend_salary,                  
+            create_time = datetime.datetime.now(),
+            state =  BILL_STATE.UNPAID,
+            from_user_id = appointment.from_user_id,
+            to_host_id = appointment.to_host_id,
+            bill_type = BILL_TYPE.APPOINTMENT,
+        )
+        bill.save()
+
+        url=create_direct_pay_by_user (bill.bill_id,bill.subject,bill.body,"",bill.total_fee)  
+
+        Info['state'] = 0
+        Info['message'] = "付款链接创建成功！"
+        Info['data']['url'] = url
+        return HttpResponse(json.dumps(Info), content_type="application/json")
+
+    elif method == "verify":
+        '''
+            从阿里巴巴返回的数据
+        '''
+        try:
+            bill = Bill.objects.get(bill_id = Oid)
+            bill.state = BILL_STATE.PAID
+            bill.save()
+            appointment = Appointment.objects.get(appointment_id = bill.bill_id)
+            appointment.state = APPOINTMENT_STATE.PAID
+            appointment.save()
+        except:
+            return render(request,"frontEnd/error.html")
+
+        return HttpResponseRedirect('host_center/manage')
+
+    elif method == "test":
+        return HttpResponse("test")
+
+    else:
+        return HttpResponse("end")
+
+
+
 def test(request):
     Info = output_init()
     Info['test'] = "this is a test"
-    Info['data']['a'] = 'b' 
+    Info['data']['c'] = Appointment.objects.count() 
     return HttpResponse(json.dumps(Info),content_type="application/json")
 
