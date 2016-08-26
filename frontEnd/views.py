@@ -215,8 +215,8 @@ def qq_login(request):
         ret_open_id = urllib2.urlopen(address_2).read()
         f.write('ret_open_id: ' + str(ret_open_id) + '\n')   # callback 返回包
 
-        open_id = urlencode2dict(ret_open_id.split(' '))['openid']
-        f.write('open_id: ' + open_id + '\n')
+        open_id = json.loads(str(ret_open_id).split(' ')[1])['open_id']  # unicode 类型
+        f.write('open_id: ' + str(open_id) + '\n')
         f.close()
 
         try:
