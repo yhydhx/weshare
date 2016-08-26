@@ -199,7 +199,7 @@ def qq_login(request):
         ret_qq_token = urllib2.urlopen(address).read()
         f.write('ret_qq_token: ' + ret_qq_token + '\n')
 
-        ret_token = urlencode2dict(str(ret_qq_token))   # ret_token is a dict
+        ret_token = urlencode2dict(str(ret_qq_token))  # ret_token is a dict
         f.write('ret_token: ' + str(ret_token) + '\n')
 
         access_token = ret_token['access_token']
@@ -213,9 +213,12 @@ def qq_login(request):
         f.write('address_2: ' + address_2 + '\n')
 
         ret_open_id = urllib2.urlopen(address_2).read()
-        f.write('ret_open_id: ' + str(ret_open_id) + '\n')   # callback 返回包
+        f.write('ret_open_id: ' + str(ret_open_id) + '\n')  # callback 返回包
 
-        open_id = json.loads(str(ret_open_id).split(' ')[1])['open_id']  # unicode 类型
+        callback_dict = json.loads(str(ret_open_id).split(' ')[1])  # unicode 类型
+        f.write('callback_dict: ' + callback_dict + '\n')
+
+        open_id = callback_dict['open_id']
         f.write('open_id: ' + str(open_id) + '\n')
         f.close()
 
