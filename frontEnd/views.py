@@ -221,7 +221,6 @@ def qq_login(request):
         open_id = callback_dict[u'openid']
         f.write('open_id: ' + str(open_id) + '\n')
 
-
         try:
             user = Host.objects.get(open_id=open_id)  # 已经有了
             return render_to_response('frontEnd/index.html', Info, {'current_user': user,
@@ -234,8 +233,11 @@ def qq_login(request):
             f.write('request_dict: ' + str(request_dict) + '\n')
             address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
             ret_user_info = urllib2.urlopen(address_3).read()
+            f.write('ret_user_info: ' + ret_user_info + '\n')
+
             user_info = json.loads(ret_user_info)
-            f.write('user_info: ' + user_info + '\n')
+
+            f.write('user_info: ' + str(user_info) + '\n')
             info_string = {}
             info_string['nickname'] = user_info['nickname']
             info_string['gender'] = user_info['gender']
