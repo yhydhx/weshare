@@ -216,7 +216,7 @@ def qq_login(request):
         f.write('ret_open_id: ' + str(ret_open_id) + '\n')  # callback 返回包
 
         callback_dict = json.loads(str(ret_open_id).split(' ')[1])  # unicode 类型
-        f.write('callback_dict: ' + callback_dict + '\n')
+        f.write('callback_dict: ' + str(callback_dict) + '\n')
 
         open_id = callback_dict['open_id']
         f.write('open_id: ' + str(open_id) + '\n')
