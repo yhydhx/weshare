@@ -232,19 +232,21 @@ def qq_login(request):
                             'openid': open_id}
             f.write('request_dict: ' + str(request_dict) + '\n')
             address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
+
             ret_user_info = urllib2.urlopen(address_3).read()
             f.write('ret_user_info: ' + ret_user_info + '\n')
 
             user_info = json.loads(ret_user_info)
-
             f.write('user_info: ' + str(user_info) + '\n')
+
             info_string = {}
             info_string['nickname'] = user_info['nickname']
             info_string['gender'] = user_info['gender']
             info_string['figureurl_qq_1'] = user_info['figureurl_qq_1']
             Info['data'] = info_string
+            qq_user = TmpQQUser(user_info['nickname'], user_info['figureurl_qq_1'])
             f.close()
-            return render_to_response('frontEnd/account.html', Info)
+            return render_to_response('frontEnd/account.html', {'current_user': qq_user}, Info)
 
     except IOError:
         f = open('test_v.txt', 'a+')

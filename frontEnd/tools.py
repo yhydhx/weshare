@@ -93,7 +93,6 @@ class TmpQQUser(object):
     def __init__(self, nickname, icon, gender):
         self.nickname = nickname
         self.icon = icon
-        self.gender = gender
 
     def __unicode__(self):
         return self.nickname
