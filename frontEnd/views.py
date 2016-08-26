@@ -28,7 +28,7 @@ from urllib import urlencode, unquote
 import urllib2
 import logging
 from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY
-                                                                  
+
 
 def index(request):
     log = logging.getLogger(__name__)
@@ -179,68 +179,76 @@ def logout(request):
 
 def qq_login(request):
     Info = {}
- ##########处理qq登录#######
+    ##########处理qq登录#######
     try:
         f = open('test_v.txt', 'a+')
 
         code = request.GET['code']
-        f.write(code)
+        f.write('code: ' + code + '\n')
 
         qdict = {'grant_type': 'authorization_code',
-                     'client_id': TENCENT_APPID,
-                     'client_secret': TENCENT_APPKEY,
-                     'code': code,
-                     'redirect_uri': 'http://www.wshere.com'}
-        f.write(str(qdict))
+                 'client_id': TENCENT_APPID,
+                 'client_secret': TENCENT_APPKEY,
+                 'code': code,
+                 'redirect_uri': 'http://www.wshere.com/qqlogin/'}
+        f.write('qdict: ' + str(qdict) + '\n')
 
         address = 'https://graph.qq.com/oauth2.0/token?' + urlencode(qdict)
-        f.write(address)
+        f.write('address: ' + address + '\n')
 
         ret_qq_token = urllib2.urlopen(address).read()
-        f.write(ret_qq_token)
+        f.write('ret_qq_token: ' + ret_qq_token + '\n')
 
-        ret_token = urlencode2dict(ret_qq_token)
-        f.write(ret_token)
+        ret_token = urlencode2dict(str(ret_qq_token))  # ret_token is a dict
+        f.write('ret_token: ' + str(ret_token) + '\n')
 
         access_token = ret_token['access_token']
-        f.write(access_token)
+        f.write('access_token: ' + access_token + '\n')
 
         # 获取用户的open_ID:
         access_token_dict = {'access_token': access_token}
-        f.write(str(access_token_dict))
+        f.write('access_token_dict: ' + str(access_token_dict) + '\n')
+
         address_2 = 'https://graph.qq.com/oauth2.0/me?' + urlencode(access_token_dict)
-        f.write(address_2)
+        f.write('address_2: ' + address_2 + '\n')
+
         ret_open_id = urllib2.urlopen(address_2).read()
-        open_id = urlencode2dict(ret_open_id.split(' '))['openid']
-        f.write(open_id)
-        f.close()
+        f.write('ret_open_id: ' + str(ret_open_id) + '\n')  # callback 返回包
+
+        callback_dict = json.loads(str(ret_open_id).split(' ')[1])  # unicode 类型
+        f.write('callback_dict: ' + str(callback_dict) + '\n')
+
+        open_id = callback_dict[u'openid']
+        f.write('open_id: ' + str(open_id) + '\n')
 
         try:
             user = Host.objects.get(open_id=open_id)  # 已经有了
             return render_to_response('frontEnd/index.html', Info, {'current_user': user,
-                                                                        'login_flag': True})
+                                                                    'login_flag': True})
         except:
 
             request_dict = {'access_token': access_token,
-                                'oauth_consumer_key': TENCENT_APPID,
-                                'openid': open_id}
+                            'oauth_consumer_key': TENCENT_APPID,
+                            'openid': open_id}
+            f.write('request_dict: ' + str(request_dict) + '\n')
             address_3 = 'https://graph.qq.com/user/get_user_info?' + urlencode(request_dict)
-            ret_user_info = urllib2.urlopen(address_3).read()
-            user_info = json.loads(ret_user_info)
-            info_string = {}
-            info_string['nickname'] = user_info['nickname']
-            info_string['gender'] = user_info['gender']
-            info_string['figureurl_qq_1'] = user_info['figureurl_qq_1']
-            Info['data'] = info_string
-            return render_to_response('frontEnd/account.html', Info)
 
-    except:
+            ret_user_info = urllib2.urlopen(address_3).read()
+            f.write('ret_user_info: ' + ret_user_info + '\n')
+
+            user_info = json.loads(ret_user_info)
+            f.write('user_info: ' + str(user_info) + '\n')
+
+            qq_user = TmpQQUser(user_info['nickname'], user_info['figureurl_qq_1'])
+            f.close()
+            return render_to_response('frontEnd/account.html', {'current_user': qq_user}, Info,
+                                      context_instance=RequestContext(request))
+
+    except IOError:
         f = open('test_v.txt', 'a+')
         f.write('did not get the code')
         f.close()
         return None
-
-
 
 
 @csrf_exempt
@@ -647,7 +655,7 @@ def image_receive(request):
             data = request.POST.get("data", None)
         except:
             return HttpResponse('data为空')
-        
+
         processed_data = str(data).split('/jpeg;base64,')[1].split('); background-position: 50% 50')[0]
         processed_pic = base64.b64decode(processed_data)
         mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
@@ -659,8 +667,8 @@ def image_receive(request):
             host.icon = '/files/icons/' + mark_list + '.jpeg'
             host.save()
         except:
-            #maybe the picture is too big
-            return render(request,'frontEnd/error.html')
+            # maybe the picture is too big
+            return render(request, 'frontEnd/error.html')
 
         return HttpResponse('ACKACK')
     else:
@@ -808,7 +816,7 @@ def user(request, method, Oid):
             Info['current_user'] = user
         Info['login_flag'] = login_flag
 
-        return render(request,'frontEnd/host-index.html', Info)
+        return render(request, 'frontEnd/host-index.html', Info)
 
     elif method == "msg":
         # check whether the user is online
