@@ -220,7 +220,7 @@ def qq_login(request):
 
         open_id = callback_dict[u'openid']
         f.write('open_id: ' + str(open_id) + '\n')
-        f.close()
+
 
         try:
             user = Host.objects.get(open_id=open_id)  # 已经有了
