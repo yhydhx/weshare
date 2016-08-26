@@ -60,7 +60,7 @@ def index(request):
         user_email = request.session['email'] 
         host = Host.objects.get(email=user_email)
         login_flag = 1
-        Info['data']['current_user'] = host
+        Info['data']['current_user'] = host.format_dict()
     except:
         host = Host()
         login_flag = 0
