@@ -22,22 +22,22 @@
                   {% for bill in sent_bills %}
                   <table class="table table-bordered ">
                     <tr>
-                        <td colspan="3" style="text-align:left;">编号：1674654564564654 发起时间：2016-07-31</td>
+                        <td colspan="3" style="text-align:left;">编号：{{ bill.appointment_id }} 发起时间：{{ bill.appointment_init_time }}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="row">
-                                <div class="col-md-3"><img src="{{ current_user.icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-                                <div class="col-md-9"><h3>香港大学offer申请</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
+                                <div class="col-md-3"><img src="{{ bill.to_host_icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
+                            <div class="col-md-9"><h3>{{ bill.feature_name }}</h3><p>{{ bill.host_name }} {{ bill.host_motto }}</p></div>
                             </div>
                         </td>
-                        <td><h4>待确认</h4></td>
-                        <td><a href="/host_center/detail">查看详情</a></td>
+                        <td><h4>{{ bill.state }}</h4></td>
+                        <td><a href="/bill/detail/{{ bill.id }}">查看详情</a></td>
                     </tr>
                   </table>
                   {% endfor %}
                   {% endblock %}
-                  
+
               {% elif current_user.state == 1 %}
                   我是：host
               {% endif %}
