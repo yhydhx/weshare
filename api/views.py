@@ -78,9 +78,9 @@ def user(request, method, Oid):
     Info = output_init()
     try:
         host = Host.objects.get(email=request.session['email'])
-        Info['current_user'] = host.format_dict()
+
         login_flag = True
-        Info['data']['current_user'] = host
+        Info['data']['current_user'] = host.format_dict()
     except:
         login_flag = False
     Info['data']['login_flag'] = login_flag
