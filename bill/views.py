@@ -37,9 +37,9 @@ def bill(request,method,Oid):
 
         username = request.session['email']
         user = Host.objects.get(email=username)
-		login_flag = True
-		Info['current_user'] = user
-		Info['login_flag']  = login_flag
+    	login_flag = True
+    	Info['current_user'] = user
+    	Info['login_flag']  = login_flag
     except:
         Info['state'] = 404
         Info['message'] = "对不起，您尚未登录！"
