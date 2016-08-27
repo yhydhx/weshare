@@ -122,7 +122,7 @@ def user(request, method, Oid):
             
 
             Info = {}
-            Info['state'] = HOST_STATE['GUEST']
+            Info['data']['state'] = HOST_STATE['GUEST']
             Info['message'] = ""
             Info['data'] = {}
             
@@ -190,7 +190,7 @@ def user(request, method, Oid):
             #method = "get"
             Info['state'] = '404'
             Info['message'] = "找不到这个方法"
-            return HttpResponse(json.dumps(Info))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == "login":
         if request.method == 'POST':
