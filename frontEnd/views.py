@@ -122,19 +122,36 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                 Info['message'] = '您的邮箱已经被注册了'
                 Info['data']['email'] = ""
             except:
-                host = Host(username=username,
-                            password=password,
-                            email=email,
-                            phone_number=phone,
-                            education=-1,
-                            register_time=datetime.datetime.now(),
-                            icon=DEFAULT_ICON,
-                            )
-                # encode password
-                host.password = host.encode_password(password)
-                host.save()
-                return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
+                try:
+                    # 拥有qq_openid注册
+                    openid = request.session['openid']
+                    host = Host(username=username,
+                                password=password,
+                                email=email,
+                                phone_number=phone,
+                                education=-1,
+                                register_time=datetime.datetime.now(),
+                                icon=DEFAULT_ICON,
+                                open_id=openid,
+                                )
+                    # encode password
+                    host.password = host.encode_password(password)
+                    host.save()
+                    return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
+                except:
 
+                    host = Host(username=username,
+                                password=password,
+                                email=email,
+                                phone_number=phone,
+                                education=-1,
+                                register_time=datetime.datetime.now(),
+                                icon=DEFAULT_ICON,
+                                )
+                    # encode password
+                    host.password = host.encode_password(password)
+                    host.save()
+                    return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
         return render_to_response('frontEnd/account.html', Info,
                                   context_instance=RequestContext(request))
     else:
@@ -175,6 +192,7 @@ def login(request):
 def logout(request):
     del request.session['email']
     return HttpResponseRedirect('/index/')
+
 
 @csrf_exempt
 def qq_login(request):
@@ -241,7 +259,9 @@ def qq_login(request):
 
             qq_user = TmpQQUser(user_info['nickname'], user_info['figureurl_qq_1'])
             f.close()
-            return render_to_response('frontEnd/account.html', {'login_flag': True ,'current_user': qq_user},
+
+            request.session['openid'] = open_id
+            return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': qq_user},
                                       context_instance=RequestContext(request))
 
     except IOError:
