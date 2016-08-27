@@ -34,8 +34,12 @@ def bill(request,method,Oid):
     '''
     Info = {}
     try:
+
         username = request.session['email']
         user = Host.objects.get(email=username)
+    	login_flag = True
+    	Info['current_user'] = user
+    	Info['login_flag']  = login_flag
     except:
         Info['state'] = 404
         Info['message'] = "对不起，您尚未登录！"
@@ -80,7 +84,7 @@ def bill(request,method,Oid):
 
     	try:
     		appointment = Appointment.objects.get(id = Oid)
-    		Info['appointment'] = appointment
+    		Info['appointment'] = appointment.format_dict_on_manage()
     	except:
     		return render(request,'frontEnd/404.html')
 
@@ -90,7 +94,7 @@ def bill(request,method,Oid):
     	#check this user is the host or not 
     	if user.id == appointment.from_user_id : 
     		return render(request,'frontEnd/appoint_guest.html',Info)
-    	else:
+    	elif user.id == appointment.to_host_id :
     		return render(request,'frontEnd/appoint_host.html',Info)
 
 	
