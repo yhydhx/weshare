@@ -94,7 +94,7 @@ def bill(request,method,Oid):
     	#check this user is the host or not 
     	if user.id == appointment.from_user_id : 
     		return render(request,'frontEnd/appoint_guest.html',Info)
-    	else:
+    	elif user.id == appointment.to_host_id :
     		return render(request,'frontEnd/appoint_host.html',Info)
 
 	

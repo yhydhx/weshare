@@ -418,7 +418,7 @@ def bill(request,method,Oid):
 
         try:
             appointment = Appointment.objects.get(id = Oid)
-            Info['data']['appointment'] = appointment
+            Info['data']['appointment'] = appointment.format_dict_on_manage()
             
         except:
             Info['state'] = 404
@@ -433,7 +433,7 @@ def bill(request,method,Oid):
             Info['user_page'] = True
             Info['message'] = "查询成功，返回用户页面！"
             return HttpResponse(json.dumps(Info), content_type="application/json")
-        else:
+        elif user.id == appointment.to_host_id :
             Info['user_page'] = False
             Info['message'] = "查询成功，返回Host页面！"
             return HttpResponse(json.dumps(Info), content_type="application/json")
