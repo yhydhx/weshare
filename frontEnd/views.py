@@ -241,7 +241,7 @@ def qq_login(request):
 
             qq_user = TmpQQUser(user_info['nickname'], user_info['figureurl_qq_1'])
             f.close()
-            return render_to_response('frontEnd/account.html', {'current_user': qq_user},
+            return render_to_response('frontEnd/account.html', {'login_flag': True ,'current_user': qq_user},
                                       context_instance=RequestContext(request))
 
     except IOError:
