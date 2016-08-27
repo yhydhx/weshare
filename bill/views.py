@@ -80,7 +80,7 @@ def bill(request,method,Oid):
 
     	try:
     		appointment = Appointment.objects.get(id = Oid)
-    		Info['appointment'] = appointment
+    		Info['appointment'] = appointment.format_dict_on_manage()
     	except:
     		return render(request,'frontEnd/404.html')
 
