@@ -871,12 +871,15 @@ class Appointment(models.Model):
     def generate_id(self):
         tmp_id = ""
         ymd = datetime.datetime.now().strftime("%Y%m%d")
-        tmp_id = tmp_id + ymd
         host = Host.objects.get(id=self.to_host_id)
-        tmp_id = tmp_id + binascii.b2a_hex(host.id)[:6]
+        user = Host.objects.get(id=self.from_user_id)
         appointment_number = str(Appointment.objects.count())
-        app_num_length = appointment_number
-        tmp_id = tmp_id +str(random.random())[-2:]+'0'* (5-app_num_length) + binascii.b2a_hex(host.id)[:6]
+        app_num_length = len(appointment_number)
+        random_string = str(random.random())[-2:]
+        bill_string = '0' * (5-int(app_num_length))+ appointment_number
+        host_string = binascii.b2a_hex(host.id)[-6:]
+        user_string = binascii.b2a_hex(user.id)[-6:]
+        tmp_id = ymd + random_string + host_string + bill_string + user_string 
         return tmp_id
 
 
@@ -912,7 +915,7 @@ class Appointment(models.Model):
         return tmp_dict
     
     def get_appointment_messages(self):
-        messages = Message.objects.filter(extra_id = appointment.id, message_type = MESSAGE_TYPE.APPOINTMENT_COMM).order_by("upload_time")
+        messages = Message.objects.filter(extra_id = self.id, message_type = MESSAGE_TYPE['APPOINTMENT_COMM']).order_by("upload_time")
         result = []
         for msg in messages:
             tmp_msg = {}
