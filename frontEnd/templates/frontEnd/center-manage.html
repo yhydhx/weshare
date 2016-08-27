@@ -38,6 +38,27 @@
                   {% endfor %}
                   {% endblock %}
 
+              {% elif current_user.state == 1 %}
+                  我是：正在审核中的guest
+                  {% block sent %}
+                  {% for bill in sent_bills %}
+                  <table class="table table-bordered ">
+                    <tr>
+                        <td colspan="3" style="text-align:left;">编号：{{ bill.appointment_id }} 发起时间：{{ bill.appointment_init_time }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-3"><img src="{{ bill.to_host_icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
+                            <div class="col-md-9"><h3>{{ bill.feature_name }}</h3><p>{{ bill.host_name }} {{ bill.host_motto }}</p></div>
+                            </div>
+                        </td>
+                        <td><h4>{{ bill.state }}</h4></td>
+                        <td><a href="/bill/detail/{{ bill.id }}">查看详情</a></td>
+                    </tr>
+                  </table>
+                  {% endfor %}
+                  {% endblock %}
               {% elif current_user.state == 2 %}
                   我是：host
               {% endif %}
