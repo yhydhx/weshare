@@ -60,17 +60,17 @@
 
               <table class="table table-bordered ">
                 <tr>
-                    <td colspan="3" style="text-align:left;">编号：1674654564564654 发起时间：2016-07-31</td>
+                    <td colspan="3" style="text-align:left;">编号：{{ appointment.appointment_id }} 发起时间：{{ appointment.recommend_begin_time }}</td>
                 </tr>
                 <tr>
                     <td>
                         <div class="row">
-                            <div class="col-md-3"><img src="{{ current_user.icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-                            <div class="col-md-9"><h3>香港大学offer申请</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
+                            <div class="col-md-3"><img src="{{ appointment.to_host_icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
+                            <div class="col-md-9"><h3>{{ appointment.recommend_info }}</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
                         </div>
                     </td>
-                    <td><h4>待确认</h4></td>
-                    <td><a href="">查看详情</a></td>
+                    <td><h4>{{ appointment.state }}</h4></td>
+                    
                 </tr>
               </table>
 
@@ -88,25 +88,20 @@
               <div class="panel panel-default">
                 <div class="panel-heading"><h4>简要介绍自己的情况，并描述要咨询的问题</h4></div>
                 <div class="panel-body">
-                  <p style="font-size:20px;">我是清华大学计算机专业大三的学生，专业排名前百分之三十，有多个关于自动驾驶的项目经历。本科毕业后想去BAT等公司从事与计算机视觉相关的工作。想知道现在开始该如何准备？比如该熟悉哪些开源项目，或是该多积累哪种平台的开发经验。</p>
+                  <p style="font-size:20px;">{{ appointment.intro_and_question }}</p>
                 </div>
               </div>
 
               <div class="panel panel-default">
                 <div class="panel-heading"><h4>告诉分享者你所希望的见面时间与约聊时长</h4></div>
                 <div class="panel-body">
-                  <p style="font-size:20px;">我每周一／三下午2点到晚上6点都有空，我想请教的细节问题比较多，觉得预约3个小时比较合适。</p>
+                  <p style="font-size:20px;">{{ appointment.appointment_time }}</p>
                 </div>
               </div>
 
               <hr style="border: none;border-top: 1px solid black; ">
 
-              <div class="panel panel-default">
-                <div class="panel-heading"><h4>分享者的名字 说：</h4></div>
-                <div class="panel-body">
-                  <p style="font-size:20px;">你的情况比较棘手啊，我建议这个周三3点在XXX见面，时间上我觉得两个小时足够了，你感觉如何？有啥问题的话你就回复我，没问题的话你就付款吧。</p>
-                </div>
-              </div>
+
 
               <table class="table table-bordered ">
                 <tr>
