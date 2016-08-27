@@ -96,6 +96,8 @@
                                 <li><a href="/image-receive/">注册成为host</a></li>
                                 {% elif current_user.state == 1 %}
                                 <li><a href="/host_center/show">我的主页</a></li>
+                                {% elif current_user.state == 2 %}
+                                <li><a href="/host_center/show">我的主页</a></li>
                                 {% endif %}
 
                                 <li><a href="/logout/">退出登录</a></li>
