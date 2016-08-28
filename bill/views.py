@@ -130,9 +130,25 @@ def bill(request,method,Oid):
     elif method == "communicate":
 		appnt_id = request.POST.get("appnt_id")
 		message = request.POST.get("message")
+		
+
+		appointment = Appointment.objects.get(id= appnt_id)
+		message_type =  MESSAGE_TYPE['APPOINTMENT_COMM']
+		new_message = Message(    
+							from_user = user.id,
+						    to_user = appointment.to_host_id,
+						    message_type = message_type,
+						    icon = user.icon,
+						    upload_time = datetime.datetime.now(),
+						    content = message,
+						    extra_id = appnt_id,
+						    )
+		new_message.save()
+		return HttpResponseRedirect('/bill/detail/'+appnt_id)
+
 		try:
 			appointment = Appointment.objects.get(id= appnt_id)
-			message_type =  MESSAGE_TYPE.APPOINTMENT_COMM
+			message_type =  MESSAGE_TYPE['APPOINTMENT_COMM']
 			new_message = Message(    
 								from_user = user.id,
 							    to_user = appointment.to_host_id,
@@ -143,6 +159,8 @@ def bill(request,method,Oid):
 							    extra_id = appnt_id,
 							    )
 			new_message.save()
+			return HttpResponseRedirect('/bill/detail/'+appnt_id)
+
 		except:
 			return render(request,"frontEnd/error.html")
     elif method == "pay":
