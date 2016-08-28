@@ -195,6 +195,11 @@ def logout(request):
 
 
 @csrf_exempt
+def weibo_login(request):
+    return None
+
+
+@csrf_exempt
 def qq_login(request):
     Info = {}
     ##########处理qq登录#######
@@ -256,6 +261,8 @@ def qq_login(request):
 
             user_info = json.loads(ret_user_info)
             f.write('user_info: ' + str(user_info) + '\n')
+
+            f.write('###############end##################')
 
             qq_user = TmpQQUser(user_info['nickname'], user_info['figureurl_qq_1'])
             f.close()
