@@ -78,9 +78,9 @@ def user(request, method, Oid):
     Info = output_init()
     try:
         host = Host.objects.get(email=request.session['email'])
-        Info['current_user'] = host.format_dict()
+
         login_flag = True
-        Info['data']['current_user'] = host
+        Info['data']['current_user'] = host.format_dict()
     except:
         login_flag = False
     Info['data']['login_flag'] = login_flag
@@ -122,7 +122,7 @@ def user(request, method, Oid):
             
 
             Info = {}
-            Info['state'] = HOST_STATE['GUEST']
+            Info['data']['state'] = HOST_STATE['GUEST']
             Info['message'] = ""
             Info['data'] = {}
             
@@ -190,7 +190,7 @@ def user(request, method, Oid):
             #method = "get"
             Info['state'] = '404'
             Info['message'] = "找不到这个方法"
-            return HttpResponse(json.dumps(Info))
+            return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == "login":
         if request.method == 'POST':
