@@ -143,6 +143,8 @@ def bill(request,method,Oid):
 							    extra_id = appnt_id,
 							    )
 			new_message.save()
+			return HttpResponseRedirect('/bill/detail/'+appnt_id)
+
 		except:
 			return render(request,"frontEnd/error.html")
     elif method == "pay":
