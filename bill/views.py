@@ -148,7 +148,7 @@ def bill(request,method,Oid):
 
 		try:
 			appointment = Appointment.objects.get(id= appnt_id)
-			message_type =  MESSAGE_TYPE.APPOINTMENT_COMM
+			message_type =  MESSAGE_TYPE['APPOINTMENT_COMM']
 			new_message = Message(    
 								from_user = user.id,
 							    to_user = appointment.to_host_id,
