@@ -224,12 +224,15 @@ def weibo_login(request):
         f.write('user_info[important]: ' + str(user_info) + '\n')
         id=user_info['id']
         username = user_info['name']
-
+        f.close()
         return None
 
 
 
     except:
+        f = open('test_wb', 'a+')
+        f.write("=============boom in log in=========")
+        f.close()
         pass
     return None
 
