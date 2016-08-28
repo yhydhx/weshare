@@ -134,6 +134,9 @@
               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 回复
               </button>
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+                约见
+              </button>
 
               <!-- Modal -->
               <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -144,12 +147,14 @@
                       <h4 class="modal-title" id="myModalLabel">输入回复内容</h4>
                     </div>
 
-                    <form>
+                    <form action="/bill/communicate" method="post">
 
+                    {% csrf_token %}
                     <div class="modal-body">
                         
+                          <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
                           <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea class="form-control" name="message" rows="3"></textarea>
                           </div>
                         
                     </div>
@@ -157,14 +162,42 @@
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-primary">确认</button>
                     </div>
-                    
+
                     </form>
 
                   </div>
                 </div>
               </div>
-              <br><br>
 
+              <!-- Modal2 -->
+              <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">请选择约见日期、时间和费用</h4>
+                    </div>
+
+                    <form action="/bill/communicate" method="post">
+
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        
+                          
+                        
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">确认</button>
+                    </div>
+
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+
+              <br><br>
           </div>
   	</div>
   </div>
@@ -174,4 +207,13 @@
 
 {% block js %}
 <!-- <script src="{% static 'frontEnd/js/shop.js' %}"></script> -->
+
+<!-- 时间选择 -->
+<script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+<script>jQuery('.input-daterange #birth').datepicker({});</script>
+
+<script src="{% static 'frontEnd/plugins/bootstrap-slider/js/bootstrap-slider.js' %}"></script>
+<script>jQuery('.sliderAmount').slider();</script>
+
+<script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
 {% endblock %}
