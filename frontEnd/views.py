@@ -27,7 +27,7 @@ import datetime
 from urllib import urlencode, unquote
 import urllib2
 import logging
-from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY
+from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY, WEIBO_APPKEY, WEIBO_SECRET
 
 
 def index(request):
@@ -196,6 +196,41 @@ def logout(request):
 
 @csrf_exempt
 def weibo_login(request):
+    try:
+        f = open('test_wb', 'a+')
+        code = request.GET['code']
+        f.write('===================weibo start!==================')
+        f.write('code: ' + code + '\n')
+
+        wdict = {'grant_type': 'authorization_code',
+                 'client_id': WEIBO_APPKEY,
+                 'client_secret': WEIBO_SECRET,
+                 'code': code,
+                 'redirect_uri': 'http://www.wshere.com/weibologin/'}
+        address = 'https://api.weibo.com/oauth2/access_token?' + urlencode(wdict)
+        f.write('address: ' + address + '\n')
+
+        ret_weibo_token = json.loads(urllib2.urlopen(address).read())  # ret_weibo_token是一个dict
+        f.write('ret_weibo_token: ' + str(ret_weibo_token) + '\n')
+
+        access_token = ret_weibo_token['access_token']
+        expires_in = ret_weibo_token['expires_in']
+        remind_in = ret_weibo_token['remind_in']
+        uid = ret_weibo_token['uid']
+
+        user_token = {'access_token': access_token, 'uid': uid}
+        address2 = 'https://api.weibo.com/2/users/show.json?' + urlencode(user_token)
+        user_info = json.loads(urllib2.urlopen(address2).read())
+        f.write('user_info[important]: ' + str(user_info) + '\n')
+        id=user_info['id']
+        username = user_info['name']
+
+        return None
+
+
+
+    except:
+        pass
     return None
 
 
@@ -271,7 +306,7 @@ def qq_login(request):
             return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': qq_user},
                                       context_instance=RequestContext(request))
 
-    except IOError:
+    except:
         f = open('test_v.txt', 'a+')
         f.write('did not get the code')
         f.close()
