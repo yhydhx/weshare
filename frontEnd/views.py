@@ -227,12 +227,11 @@ def weibo_login(request):
         f.close()
         return None
 
-    except IOError:
+    except EnvironmentError:
         f = open('test_wb', 'a+')
         f.write("=============boom in log in=========")
         f.close()
         return HttpResponse('something happened!!!')
-    return None
 
 
 @csrf_exempt
