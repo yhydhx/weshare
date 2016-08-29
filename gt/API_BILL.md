@@ -254,6 +254,8 @@ method ： post
         'recommend_end_time' :   		~建议的结束时间
         'recommend_length' :   			~建议的时长
         'appnt_id' :   					~订单的ID
+		'recommend_payment' :           ~订单的每小时的钱数
+		"recommend_salary" :			~订单总钱数
 }
 
 
