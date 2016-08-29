@@ -69,7 +69,7 @@ DATABASES = {
         # 'USER': 'jupiter',
         # 'PASSWORD' : '5080',
         'HOST': '120.24.156.181',
-        #'HOST': '127.0.0.1',
+        # 'HOST': '127.0.0.1',
 
         'PORT': '27017',
     }
@@ -107,8 +107,8 @@ MESSAGE_TYPE = {
 }
 
 GENDER = {
-    "MALE" : 1,
-    "FEMALE" : 0,
+    "MALE": 1,
+    "FEMALE": 0,
 }
 
 # Internationalization
@@ -146,11 +146,11 @@ EMAIL_HOST_PASSWORD = 'WeShareHere001'
 # EMAIL_USE_TLS = True
 EMAIL_SSL_PORT = 465
 
-
 DEFAULT_ICON = "/files/icons/5755fbd9298a02edff10f3535e22c8f5.jpeg"
-
 
 SALT = 'hetongshinanshen'
 TENCENT_APPID = 101349090
 TENCENT_APPKEY = 'ee063d616b010904c5d35795d554f6c6'
 
+WEIBO_APPKEY = 4233883551
+WEIBO_SECRET = '808b84c17718f3e255cfd0421dca451b'
