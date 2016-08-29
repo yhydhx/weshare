@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0739ecb5-f8ce-40a7-a704-d49c1a062d3b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/urls.py" afterPath="$PROJECT_DIR$/frontEnd/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/views.py" afterPath="$PROJECT_DIR$/frontEnd/views.py" />
     </list>
     <ignored path="weshare.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,11 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="234" column="17" selection-start-line="234" selection-start-column="17" selection-end-line="234" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.8895349">
+              <caret line="235" column="50" selection-start-line="235" selection-start-column="50" selection-end-line="235" selection-end-column="50" />
               <folding>
                 <element signature="e#42#72#0" expanded="true" />
               </folding>
@@ -121,10 +119,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6052632">
+            <state vertical-scroll-proportion="-21.083334">
               <caret line="54" column="167" selection-start-line="54" selection-start-column="167" selection-end-line="54" selection-end-column="167" />
               <folding />
             </state>
@@ -180,9 +178,9 @@
         <option value="$PROJECT_DIR$/frontEnd/tools.py" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/base.html" />
         <option value="$PROJECT_DIR$/gt/settings.py" />
-        <option value="$PROJECT_DIR$/frontEnd/views.py" />
         <option value="$PROJECT_DIR$/frontEnd/urls.py" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html" />
+        <option value="$PROJECT_DIR$/frontEnd/views.py" />
       </list>
     </option>
   </component>
@@ -930,16 +928,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="234" column="17" selection-start-line="234" selection-start-column="17" selection-end-line="234" selection-end-column="17" />
-          <folding>
-            <element signature="e#42#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gt/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -974,9 +962,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6052632">
+        <state vertical-scroll-proportion="-21.083334">
           <caret line="54" column="167" selection-start-line="54" selection-start-column="167" selection-end-line="54" selection-end-column="167" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8895349">
+          <caret line="235" column="50" selection-start-line="235" selection-start-column="50" selection-end-line="235" selection-end-column="50" />
+          <folding>
+            <element signature="e#42#72#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

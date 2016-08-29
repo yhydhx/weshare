@@ -199,14 +199,14 @@ def weibo_login(request):
     try:
         f = open('test_wb', 'a+')
         code = request.GET['code']
-        f.write('===================weibo start!==================')
+        f.write('===================weibo start!=================='+'\n')
         f.write('code: ' + code + '\n')
 
         wdict = {'grant_type': 'authorization_code',
                  'client_id': WEIBO_APPKEY,
                  'client_secret': WEIBO_SECRET,
                  'code': code,
-                 'redirect_uri': 'http://www.wshere.com/weibologin/'}
+                 'redirect_uri': 'http://www.wshere.com/wblogin/'}
         address = 'https://api.weibo.com/oauth2/access_token?' + urlencode(wdict)
         f.write('address: ' + address + '\n')
 
@@ -233,7 +233,7 @@ def weibo_login(request):
         f = open('test_wb', 'a+')
         f.write("=============boom in log in=========")
         f.close()
-        pass
+        return HttpResponse('something happened!!!')
     return None
 
 
