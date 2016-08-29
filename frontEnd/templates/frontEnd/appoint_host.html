@@ -105,7 +105,7 @@
               <hr style="border: none;border-top: 1px solid black; ">
 
               
-              {% block messages %}
+<!--               {% block messages %}
               {% for messages in messages %}
                 <div class="panel panel-default">
                   <div class="panel-heading" style="text-align: left;display: flex;align-items: center; "><img src="{{ messages.user_icon }}" alt="" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto;"><h4>&nbsp;{{ messages.from_user_name }} :</h4></div>
@@ -114,7 +114,7 @@
                   </div>
                 </div>
               {% endfor %}
-              {% endblock %}
+              {% endblock %} -->
 
 <!--               <table class="table table-bordered ">
                 <tr>
@@ -144,15 +144,15 @@
 
               <!-- bootstrap 弹出框 -->
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+              <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 回复
-              </button>
+              </button> -->
               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
                 约见
               </button>
 
               <!-- Modal -->
-              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -180,7 +180,7 @@
 
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <!-- Modal2 -->
               <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -188,7 +188,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">请选择约见日期、时间和费用</h4>
+                      <h4 class="modal-title" id="myModalLabel">请编辑约见信息、时间和费用</h4>
                     </div>
 
                     <form action="/bill/host_certify" method="post" id="yuejian">
@@ -196,25 +196,34 @@
                     {% csrf_token %}
                     <div class="modal-body">
                       <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
+                      <input type="hidden" name="recommend_begin_time" id="recommend_begin_time" value="">
+                      <input type="hidden" name="recommend_end_time" id="recommend_end_time" value="">
+
+                      <label for="">编辑回复</label>
+                      <textarea name="recommend_info" class="form-control" rows="3"></textarea>
                       
                       <label for="">约见日期</label>
                       <input type="text" id="date" class="form-control form-date" placeholder="点击选择约见日期">
+
                       <label for="">开始时间</label>
                       <input type="text" id="begin" class="form-control form-time" placeholder="请输入此次约见的开始时间" onchange="InputBegin();InputTime();InputPrices(); ">
+
                       <label for="">结束时间</label>
                       <input type="text" id="end" class="form-control form-time" placeholder="请输入此次约见的结束时间" onchange="InputEnd();InputTime();InputPrices(); ">
+
                       <label for="">约见时长(h)</label>
                       <input type="text" name="recommend_length" id="time" class="form-control" readonly="readonly">
                       
                       <label for="">费用单价</label>
                       <input type="number" name="recommend_payment" id="price" class="form-control" placeholder="请输入每小时的费用" onchange="InputPrice();InputPrices();">
+                      
                       <label for="">费用总价</label>
                       <input type="number" name="recommend_salary" id="prices" class="form-control" readonly="readonly">
                         
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">确认</button>
+                      <button class="btn btn-primary" onclick="yuejian();return false;">确认</button>
                     </div>
 
                     </form>
@@ -278,6 +287,8 @@ $(".form-time").datetimepicker({
 });
 </script>
 
+
+
 <!-- 约见表单处理JS -->
 <script>
 //读取表单
@@ -313,9 +324,7 @@ var TIME = 0;
 function InputTime(){
   if (flagBegin && flagEnd == 1) {
     var begin = form.elements['begin'].value;
-    console.log(begin);
     var end = form.elements['end'].value;
-    console.log(end);
     TIME = (end.substring(0,2)*60 + end.substring(3,5)*1 ) - (begin.substring(0,2)*60 + begin.substring(3,5)*1 );
     if (TIME <= 0) {
       alert('请输入正确的开始和结束时间');
@@ -329,7 +338,6 @@ function InputTime(){
     }
     else{
       TIME = (TIME/60).toFixed(2);
-      console.log(TIME);
       document.getElementById("time").value =TIME;
     }
 
@@ -341,17 +349,14 @@ function InputTime(){
 
 //标志位：费用单价（填写为1，未填为0）
 var flagPrice = 0;
-console.log(flagPrice);
 //改变标志位：开始时间
 function InputPrice(){
   var price = form.elements['price'].value;
   if (price != '') {
     flagPrice = 1;
-    console.log(flagPrice);
   }
   else{
     flagPrice = 0;
-    console.log(flagPrice);
   }
 }
 
@@ -371,9 +376,16 @@ function InputPrices(){
   }
 }
 
-
-
-
+//提交表单
+function yuejian(){
+  var beginTime = form.elements['date'].value + ' ' + form.elements['begin'].value;
+  var endTime = form.elements['date'].value + ' ' + form.elements['end'].value;
+  document.getElementById("recommend_begin_time").value = beginTime;
+  document.getElementById("recommend_end_time").value = endTime;
+  document.getElementById("yuejian").submit();
+}
 </script>
+
+
 
 {% endblock %}
