@@ -199,7 +199,7 @@ def weibo_login(request):
     try:
         f = open('test_wb', 'a+')
         code = request.GET['code']
-        f.write('===================weibo start!=================='+'\n')
+        f.write('===================weibo start!==================' + '\n')
         f.write('code: ' + code + '\n')
 
         wdict = {'grant_type': 'authorization_code',
@@ -222,14 +222,12 @@ def weibo_login(request):
         address2 = 'https://api.weibo.com/2/users/show.json?' + urlencode(user_token)
         user_info = json.loads(urllib2.urlopen(address2).read())
         f.write('user_info[important]: ' + str(user_info) + '\n')
-        id=user_info['id']
+        id = user_info['id']
         username = user_info['name']
         f.close()
         return None
 
-
-
-    except:
+    except IOError:
         f = open('test_wb', 'a+')
         f.write("=============boom in log in=========")
         f.close()
