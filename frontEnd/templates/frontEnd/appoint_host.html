@@ -2,6 +2,9 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}
+<!-- ZUI 时间选择器 -->
+<link rel="stylesheet" type="text/css" href="{% static 'frontEnd/plugins/datetimepicker/datetimepicker.min.css'%}">
+
 <body class="cssAnimate" style="background-color:white;">
 
   <div class="container" style="margin-top: 60px;">
@@ -101,7 +104,17 @@
 
               <hr style="border: none;border-top: 1px solid black; ">
 
-
+              
+              {% block messages %}
+              {% for messages in messages %}
+                <div class="panel panel-default">
+                  <div class="panel-heading" style="text-align: left;display: flex;align-items: center; "><img src="{{ messages.user_icon }}" alt="" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto;"><h4>&nbsp;{{ messages.from_user_name }} :</h4></div>
+                  <div class="panel-body">
+                    <p style="font-size:20px;">{{ messages.message }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+              {% endblock %}
 
 <!--               <table class="table table-bordered ">
                 <tr>
@@ -183,7 +196,9 @@
                     {% csrf_token %}
                     <div class="modal-body">
                         
-                          
+                      <input type="text" name="" class="form-control form-datetime" placeholder="点击选择约见日期和时间">
+                      <br>
+                      <input type="number" name="" class="form-control" placeholder="请输入此次服务的费用">
                         
                     </div>
                     <div class="modal-footer">
@@ -208,12 +223,48 @@
 {% block js %}
 <!-- <script src="{% static 'frontEnd/js/shop.js' %}"></script> -->
 
-<!-- 时间选择 -->
-<script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
-<script>jQuery('.input-daterange #birth').datepicker({});</script>
+<!-- ZUI 时间选择器 -->
+<script src="{% static 'frontEnd/plugins/datetimepicker/datetimepicker.min.js'%}"></script>
+<script>
+// 选择时间和日期
+$(".form-datetime").datetimepicker(
+{
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1,
+    format: "yyyy-mm-dd hh:ii"
+});
+// 仅选择日期
+$(".form-date").datetimepicker(
+{
+    language:  "zh-CN",
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: "yyyy-mm-dd"
+});
 
-<script src="{% static 'frontEnd/plugins/bootstrap-slider/js/bootstrap-slider.js' %}"></script>
-<script>jQuery('.sliderAmount').slider();</script>
+// 选择时间
+$(".form-time").datetimepicker({
+    language:  "zh-CN",
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 1,
+    minView: 0,
+    maxView: 1,
+    forceParse: 0,
+    format: 'hh:ii'
+});
+</script>
 
-<script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js' %}"></script>
 {% endblock %}
