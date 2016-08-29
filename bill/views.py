@@ -124,7 +124,7 @@ def bill(request,method,Oid):
 														    recommend_length = recommend_length,
 														    recommend_payment = recommend_payment,
 														    recommend_salary = recommend_salary,
-														    state = APPOINTMENT_STATE.CERTIFIED
+														    state = APPOINTMENT_STATE['CERTIFIED']
 														    )
 		return HttpResponseRedirect("/host_center/manage")
     elif method == "communicate":
