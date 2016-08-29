@@ -210,7 +210,7 @@ def user(request, method, Oid):
                         Info['message'] = "登录成功"
                         Info['state'] = 0
                         Info['data']['login_flag'] = 1
-                        Info['current_user'] = user
+                        Info['current_user'] = user.format_dict()
                         return HttpResponse(json.dumps(Info),content_type="application/json")
                 except:
                     Info['message'] = '用户名或者密码不正确,或者账户处于被冻结的状态'
