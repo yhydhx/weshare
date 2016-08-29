@@ -191,14 +191,25 @@
                       <h4 class="modal-title" id="myModalLabel">请选择约见日期、时间和费用</h4>
                     </div>
 
-                    <form action="/bill/communicate" method="post">
+                    <form action="/bill/host_certify" method="post" id="yuejian">
 
                     {% csrf_token %}
                     <div class="modal-body">
-                        
-                      <input type="text" name="" class="form-control form-datetime" placeholder="点击选择约见日期和时间">
-                      <br>
-                      <input type="number" name="" class="form-control" placeholder="请输入此次服务的费用">
+                      <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
+                      
+                      <label for="">约见日期</label>
+                      <input type="text" id="date" class="form-control form-date" placeholder="点击选择约见日期">
+                      <label for="">开始时间</label>
+                      <input type="text" id="begin" class="form-control form-time" placeholder="请输入此次约见的开始时间" onchange="InputBegin();InputTime();InputPrices(); ">
+                      <label for="">结束时间</label>
+                      <input type="text" id="end" class="form-control form-time" placeholder="请输入此次约见的结束时间" onchange="InputEnd();InputTime();InputPrices(); ">
+                      <label for="">约见时长(h)</label>
+                      <input type="text" name="recommend_length" id="time" class="form-control" readonly="readonly">
+                      
+                      <label for="">费用单价</label>
+                      <input type="number" name="recommend_payment" id="price" class="form-control" placeholder="请输入每小时的费用" onchange="InputPrice();InputPrices();">
+                      <label for="">费用总价</label>
+                      <input type="number" name="recommend_salary" id="prices" class="form-control" readonly="readonly">
                         
                     </div>
                     <div class="modal-footer">
@@ -265,6 +276,104 @@ $(".form-time").datetimepicker({
     forceParse: 0,
     format: 'hh:ii'
 });
+</script>
+
+<!-- 约见表单处理JS -->
+<script>
+//读取表单
+var form = document.forms['yuejian'];
+
+//标志位：开始时间（填写为1，未填为0）
+var flagBegin = 0;
+//改变标志位：开始时间
+function InputBegin(){
+  var begin = form.elements['begin'].value;
+  if (begin != '') {
+    flagBegin = 1;
+  }
+  else{
+    flagBegin = 0;
+  }
+}
+//标志位：结束时间（填写为1，未填为0）
+var flagEnd = 0;
+//改变标志位：开始时间
+function InputEnd(){
+  var end = form.elements['end'].value;
+  if (end != '') {
+    flagEnd = 1;
+  }
+  else{
+    flagEnd = 0;
+  }
+}
+
+//自动填写：约见时长
+var TIME = 0;
+function InputTime(){
+  if (flagBegin && flagEnd == 1) {
+    var begin = form.elements['begin'].value;
+    console.log(begin);
+    var end = form.elements['end'].value;
+    console.log(end);
+    TIME = (end.substring(0,2)*60 + end.substring(3,5)*1 ) - (begin.substring(0,2)*60 + begin.substring(3,5)*1 );
+    if (TIME <= 0) {
+      alert('请输入正确的开始和结束时间');
+      document.getElementById("begin").value ='';
+      document.getElementById("end").value ='';
+      document.getElementById("time").value = 0;
+      document.getElementById("prices").value = 0;
+      flagBegin = 0;
+      flagEnd = 0;
+
+    }
+    else{
+      TIME = (TIME/60).toFixed(2);
+      console.log(TIME);
+      document.getElementById("time").value =TIME;
+    }
+
+  }
+  else{
+    document.getElementById("time").value = 0;
+  }
+}
+
+//标志位：费用单价（填写为1，未填为0）
+var flagPrice = 0;
+console.log(flagPrice);
+//改变标志位：开始时间
+function InputPrice(){
+  var price = form.elements['price'].value;
+  if (price != '') {
+    flagPrice = 1;
+    console.log(flagPrice);
+  }
+  else{
+    flagPrice = 0;
+    console.log(flagPrice);
+  }
+}
+
+//自动填写：费用总价
+function InputPrices(){
+  if (flagPrice = 1) {
+    p = form.elements['price'].value * TIME;
+    if (p < 0) {
+      document.getElementById("prices").value = 0;
+    }
+    else{
+      document.getElementById("prices").value = p;
+    }
+  }
+  else{
+    document.getElementById("prices").value = 0;
+  }
+}
+
+
+
+
 </script>
 
 {% endblock %}
