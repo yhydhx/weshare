@@ -196,3 +196,7 @@ def bill(request,method,Oid):
 
     else:
 		return HttpResponse("end")
+
+
+def generate_time():
+    return django.util.timezone.now()

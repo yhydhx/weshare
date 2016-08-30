@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+import os,time
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -116,13 +116,14 @@ GENDER = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+#TIME_ZONE = 'Etc/GMT%+-d'%(time.timezone/3600)
+TIME_ZONE = 'Asia/Shanghai'
 
-USE_I18N = True
+# USE_I18N = True
 
-USE_L10N = True
+# USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
