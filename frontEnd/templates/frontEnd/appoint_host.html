@@ -72,7 +72,21 @@
                             <div class="col-md-9"><h3>{{ appointment.feature_name }}</h3><p>{{ appointment.host_name }} {{ appointment.host_motto }}</p></div>
                         </div>
                     </td>
-                    <td><h4>{{ appointment.state }}</h4></td>
+                    <td>
+                      <h4>
+                        {% if appointment.state == 0 %}
+                          创建订单
+                        {% elif appointment.state == 1 %}
+                          等待确认
+                        {% elif appointment.state == 2 %}
+                          等待付款
+                        {% elif appointment.state == 3 %}
+                          完成付款
+                        {% elif appointment.state == 4 %}
+                          结算完成
+                        {% endif %}
+                      </h4>
+                    </td>
                     
                 </tr>
               </table>
@@ -145,7 +159,6 @@
 
               <!-- bootstrap 弹出框 -->
               <!-- Button trigger modal -->
-              
               {% if appointment.state == 0 %}
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
                   约见
