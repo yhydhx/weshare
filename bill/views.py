@@ -167,7 +167,7 @@ def bill(request,method,Oid):
 		    state =  BILL_STATE['UNPAID'],
 		    from_user_id = appointment.from_user_id,
 		    to_host_id = appointment.to_host_id,
-		    bill_type = BILL_TYPE.APPOINTMENT,
+		    bill_type = BILL_TYPE['APPOINTMENT'],
 		)
 		bill.save()
 
