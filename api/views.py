@@ -469,7 +469,7 @@ def bill(request,method,Oid):
                                                             recommend_length = recommend_length,
                                                             recommend_payment = recommend_payment,
                                                             recommend_salary = recommend_salary,
-                                                            state = APPOINTMENT_STATE.CERTIFIED
+                                                            state = APPOINTMENT_STATE['CERTIFIED']
                                                             )
         Info['message'] = "订单修改成功，请客户检查并付款"
         return HttpResponse(json.dumps(Info), content_type="application/json")

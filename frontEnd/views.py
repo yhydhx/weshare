@@ -23,7 +23,6 @@ import chunk
 import os
 import base64
 import time
-import datetime
 from urllib import urlencode, unquote
 import urllib2
 import logging
