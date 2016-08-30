@@ -836,7 +836,7 @@ class Bill(models.Model):
     bank = models.CharField(max_length = 200, default='alipay')
     total_fee = models.FloatField()                    
     create_time = models.DateTimeField()
-    finish_time = models.DateTimeField()
+    finish_time = models.DateTimeField(null = True)
     state =  models.IntegerField()
     from_user_id = models.CharField(max_length = 100)
     to_host_id = models.CharField(max_length = 100)
