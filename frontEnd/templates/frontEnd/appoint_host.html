@@ -198,55 +198,111 @@
                 </div>
               </div> -->
 
-              <!-- Modal2 -->
-              <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">请编辑约见信息、时间和费用</h4>
-                    </div>
+              {% if appointment.state == 0 %}
+                <!-- Modal2 -->
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">请编辑约见信息、时间和费用</h4>
+                      </div>
 
-                    <form action="/bill/host_certify" method="post" id="yuejian">
+                      <form action="/bill/host_certify" method="post" id="yuejian">
 
-                    {% csrf_token %}
-                    <div class="modal-body">
-                      <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
-                      <input type="hidden" name="recommend_begin_time" id="recommend_begin_time" value="">
-                      <input type="hidden" name="recommend_end_time" id="recommend_end_time" value="">
+                      {% csrf_token %}
+                      <div class="modal-body">
+                        <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
+                        <input type="hidden" name="recommend_begin_time" id="recommend_begin_time" value="">
+                        <input type="hidden" name="recommend_end_time" id="recommend_end_time" value="">
 
-                      <label for="">编辑回复</label>
-                      <textarea name="recommend_info" class="form-control" rows="3"></textarea>
-                      
-                      <label for="">约见日期</label>
-                      <input type="text" id="date" class="form-control form-date" placeholder="点击选择约见日期">
-
-                      <label for="">开始时间</label>
-                      <input type="text" id="begin" class="form-control form-time" placeholder="请输入此次约见的开始时间" onchange="InputBegin();InputTime();InputPrices(); ">
-
-                      <label for="">结束时间</label>
-                      <input type="text" id="end" class="form-control form-time" placeholder="请输入此次约见的结束时间" onchange="InputEnd();InputTime();InputPrices(); ">
-
-                      <label for="">约见时长(h)</label>
-                      <input type="text" name="recommend_length" id="time" class="form-control" readonly="readonly">
-                      
-                      <label for="">费用单价</label>
-                      <input type="number" name="recommend_payment" id="price" class="form-control" placeholder="请输入每小时的费用" onchange="InputPrice();InputPrices();">
-                      
-                      <label for="">费用总价</label>
-                      <input type="number" name="recommend_salary" id="prices" class="form-control" readonly="readonly">
+                        <label for="">编辑回复</label>
+                        <textarea name="recommend_info" class="form-control" rows="3"></textarea>
                         
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button class="btn btn-primary" onclick="yuejian();return false;">确认</button>
-                    </div>
+                        <label for="">约见日期</label>
+                        <input type="text" id="date" class="form-control form-date" placeholder="点击选择约见日期">
 
-                    </form>
+                        <label for="">开始时间</label>
+                        <input type="text" id="begin" class="form-control form-time" placeholder="请输入此次约见的开始时间" onchange="InputBegin();InputTime();InputPrices(); ">
 
+                        <label for="">结束时间</label>
+                        <input type="text" id="end" class="form-control form-time" placeholder="请输入此次约见的结束时间" onchange="InputEnd();InputTime();InputPrices(); ">
+
+                        <label for="">约见时长(h)</label>
+                        <input type="text" name="recommend_length" id="time" class="form-control" readonly="readonly">
+                        
+                        <label for="">费用单价</label>
+                        <input type="number" name="recommend_payment" id="price" class="form-control" placeholder="请输入每小时的费用" onchange="InputPrice();InputPrices();">
+                        
+                        <label for="">费用总价</label>
+                        <input type="number" name="recommend_salary" id="prices" class="form-control" readonly="readonly">
+                          
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" onclick="yuejian();return false;">确认</button>
+                      </div>
+
+                      </form>
+
+                    </div>
                   </div>
                 </div>
-              </div>
+              {% elif appointment.state == 1 %}
+
+                <!-- Modal2 -->
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">修改约见信息、时间和费用</h4>
+                      </div>
+
+                      <form action="/bill/host_certify" method="post" id="yuejian">
+
+                      {% csrf_token %}
+                      <div class="modal-body">
+                        <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
+                        <input type="hidden" name="recommend_begin_time" id="recommend_begin_time" value="">
+                        <input type="hidden" name="recommend_end_time" id="recommend_end_time" value="">
+
+                        <label for="">编辑回复</label>
+                        <textarea name="recommend_info" class="form-control" rows="3">{{ appointment.recommend_info }}</textarea>
+                        
+                        <label for="">约见日期</label>
+                        <input type="text" id="date" class="form-control form-date" placeholder="点击选择约见日期" value="{{ appointment.recommend_begin_time | date:'Y-m-d' }}">
+
+                        <label for="">开始时间</label>
+                        <input type="text" id="begin" class="form-control form-time" placeholder="请输入此次约见的开始时间" onchange="InputBegin();InputTime();InputPrices(); " value="{{ appointment.recommend_begin_time | date:'H:i'  }}">
+
+                        <label for="">结束时间</label>
+                        <input type="text" id="end" class="form-control form-time" placeholder="请输入此次约见的结束时间" onchange="InputEnd();InputTime();InputPrices(); " value="{{ appointment.recommend_end_time | date:'H:i'  }}">
+
+                        <label for="">约见时长(h)</label>
+                        <input type="text" name="recommend_length" id="time" class="form-control" readonly="readonly" value="{{ appointment.recommend_length }}">
+                        
+                        <label for="">费用单价</label>
+                        <input type="number" name="recommend_payment" id="price" class="form-control" placeholder="请输入每小时的费用" onchange="InputPrice();InputPrices();" value="{{ appointment.recommend_payment }}">
+                        
+                        <label for="">费用总价</label>
+                        <input type="number" name="recommend_salary" id="prices" class="form-control" readonly="readonly" value="{{ appointment.recommend_salary }}">
+                          
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" onclick="yuejian();return false;">确认</button>
+                      </div>
+
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+
+
 
               <br><br>
           </div>
@@ -400,7 +456,19 @@ function yuejian(){
   document.getElementById("recommend_end_time").value = endTime;
   document.getElementById("yuejian").submit();
 }
+
+
+
+
 </script>
+{% if appointment.state == 1 %}
+<script>
+
+console.log(flagBegin);
+console.log(flagEnd);
+console.log(flagPrice);
+</script>
+{% endif %}
 
 
 
