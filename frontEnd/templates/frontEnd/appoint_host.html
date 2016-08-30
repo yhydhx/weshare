@@ -69,7 +69,7 @@
                     <td>
                         <div class="row">
                             <div class="col-md-3"><img src="{{ appointment.from_user_icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-                            <div class="col-md-9"><h3>{{ appointment.recommend_info }}</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
+                            <div class="col-md-9"><h3>{{ appointment.feature_name }}</h3><p>{{ appointment.host_name }} {{ appointment.host_motto }}</p></div>
                         </div>
                     </td>
                     <td><h4>{{ appointment.state }}</h4></td>
@@ -116,7 +116,16 @@
               {% endfor %}
               {% endblock %} -->
 
-<!--               <table class="table table-bordered ">
+              {% if appointment.state == 1 %}
+
+              <div class="panel panel-default" >
+                <div class="panel-heading" style="text-align: left; "><h4>{{ appointment.host_name }} 说：</h4></div>
+                <div class="panel-body">
+                  <p style="font-size:20px;">{{ appointment.recommend_info }}</p>
+                </div>
+              </div>
+
+              <table class="table table-bordered ">
                 <tr>
                     <td>
                       日期
@@ -130,16 +139,17 @@
                 </tr>
                 <tr>
                     <td>
-                      2016/09/22
+                      {{ appointment.recommend_begin_time | date:"Y-m-d" }}
                     </td>
                     <td>
-                      下午3:30
+                      {{ appointment.recommend_begin_time | date:"H:i" }}
                     </td>
                     <td>
-                      2小时共计300元
+                      {{ appointment.recommend_length }}小时共计{{ appointment.recommend_salary }}元
                     </td>
                 </tr>
-              </table> -->
+              </table>
+              {% endif %}
 
 
               <!-- bootstrap 弹出框 -->
@@ -147,9 +157,15 @@
               <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 回复
               </button> -->
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
-                约见
-              </button>
+              {% if appointment.state == 0 %}
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+                  约见
+                </button>
+              {% elif appointment.state == 1 %}
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+                  编辑
+                </button>
+              {% endif %}
 
               <!-- Modal -->
               <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
