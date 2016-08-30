@@ -184,7 +184,7 @@ def bill(request,method,Oid):
 			bill.state = BILL_STATE.PAID
 			bill.save()
 			appointment = Appointment.objects.get(appointment_id = bill.bill_id)
-			appointment.state = APPOINTMENT_STATE.PAID
+			appointment.state = APPOINTMENT_STATE['PAID']
 			appointment.save()
 		except:
 			return render(request,"frontEnd/error.html")
