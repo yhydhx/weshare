@@ -112,8 +112,8 @@ def bill(request,method,Oid):
 
 		#format the time
 		try:
-			recommend_begin_time = datetime.datetime.strptime(recommend_begin_time, "%Y-%m-%d %H:%M:%S")
-			recommend_end_time = datetime.datetime.strptime(recommend_end_time, "%Y-%m-%d %H:%M:%S")
+			recommend_begin_time = datetime.datetime.strptime(recommend_begin_time, "%Y-%m-%d %H:%M")
+			recommend_end_time = datetime.datetime.strptime(recommend_end_time, "%Y-%m-%d %H:%M")
 		except:
 			return render(request,"frontEnd/error.hmtl")
 
