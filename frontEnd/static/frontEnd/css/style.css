@@ -8297,7 +8297,7 @@ p {
   line-height: 60px;
 }
 .navbar.ct-navbar .ct-navbarBox {
-  position: absolute;
+  /*position: absolute;*/
   bottom: 0;
   right: 0;
   min-width: 90px;
