@@ -909,6 +909,9 @@ class Appointment(models.Model):
         tmp_dict['recommend_length']  = self.recommend_length
         tmp_dict['appointment_init_time']  = self.appointment_init_time
         tmp_dict['appointment_id']  = self.appointment_id
+        tmp_dict['recommend_payment']  = self.recommend_payment
+        tmp_dict['recommend_salary']  = self.recommend_salary
+        recommend_salary = models.FloatField( null = True) 
         appt_feature = Feature.objects.get(id=self.feature_id).f_name
         tmp_dict['feature_name'] = appt_feature
 

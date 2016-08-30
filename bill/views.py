@@ -126,7 +126,7 @@ def bill(request,method,Oid):
 														    recommend_salary = recommend_salary,
 														    state = APPOINTMENT_STATE['CERTIFIED']
 														    )
-		return HttpResponseRedirect("/host_center/manage")
+		return HttpResponseRedirect("/bill/detail/"+appnt_id)
     elif method == "communicate":
 		appnt_id = request.POST.get("appnt_id")
 		message = request.POST.get("message")
