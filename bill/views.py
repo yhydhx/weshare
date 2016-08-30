@@ -164,7 +164,7 @@ def bill(request,method,Oid):
 		    body = u"与"+host.username+u"交流"+str(appointment.recommend_length)+u"小时",           # 订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里，可以为空  
 		    total_fee = appointment.recommend_salary,                  
 		    create_time = datetime.datetime.now(),
-		    state =  BILL_STATE.UNPAID,
+		    state =  BILL_STATE['UNPAID'],
 		    from_user_id = appointment.from_user_id,
 		    to_host_id = appointment.to_host_id,
 		    bill_type = BILL_TYPE.APPOINTMENT,
