@@ -101,9 +101,18 @@
 
               <hr style="border: none;border-top: 1px solid black; ">
 
+              <!-- {% block messages %}
+              {% for messages in messages %}
+                <div class="panel panel-default">
+                  <div class="panel-heading" style="text-align: left;display: flex;align-items: center; "><img src="{{ messages.user_icon }}" alt="" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto;"><h4>&nbsp;{{ messages.from_user_name }} :</h4></div>
+                  <div class="panel-body">
+                    <p style="font-size:20px;">{{ messages.message }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+              {% endblock %} -->
 
-
-              <table class="table table-bordered ">
+              <!-- <table class="table table-bordered ">
                 <tr>
                     <td>
                       日期
@@ -126,9 +135,75 @@
                       2小时共计300元
                     </td>
                 </tr>
-              </table>
+              </table> -->
 
-              <a href="" class="btn btn-danger">回复</a> <a href="" class="btn btn-danger">付款</a>
+              <!-- bootstrap 弹出框 -->
+              <!-- Button trigger modal -->
+              <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                回复
+              </button>
+              <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal2">
+                付款
+              </button> -->
+
+              <!-- Modal -->
+              <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">输入回复内容</h4>
+                    </div>
+
+                    <form action="/bill/communicate" method="post">
+
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        
+                          <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
+                          <div class="form-group">
+                            <textarea class="form-control" name="message" rows="3"></textarea>
+                          </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">确认</button>
+                    </div>
+
+                    </form>
+
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- Modal2 -->
+              <!-- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">请选择约见日期、时间和费用</h4>
+                    </div>
+
+                    <form action="/bill/communicate" method="post">
+
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        
+                          
+                        
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">确认</button>
+                    </div>
+
+                    </form>
+
+                  </div>
+                </div>
+              </div> -->
 
               <br><br>
 
