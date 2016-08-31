@@ -97,8 +97,12 @@ def alipay_return_url (request):
         log.save() 
         
         bill = Bill.objects.get(bill_id = tn)
-        appt_id = bill.paid()
-        return HttpResponseRedirect("/bill/detail/"+appt_id) 
+        if bill.paid() == True:
+            if self.bill_type == BILL_TYPE["APPOINTMENT"]:
+                appt_id = bill.get_appt_id()
+                return HttpResponseRedirect("/bill/detail/"+appt_id) 
+        else:
+            return render("frontEnd/error.html")
 
     else:  
         #错误或者黑客攻击  
