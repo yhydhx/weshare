@@ -181,7 +181,8 @@ def bill(request,method,Oid):
 		'''
 
 		bill = Bill.objects.get(bill_id = Oid)
-		appt_id = bill.paid()
+		#appt_id = bill.paid()
+		return HttpResponse("error")
 		return HttpResponseRedirect("/bill/detail/"+appt_id)
 
     elif method == "test":
