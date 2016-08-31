@@ -60,16 +60,30 @@
 
               <table class="table table-bordered ">
                 <tr>
-                    <td colspan="3" style="text-align:left;">编号：{{ appointment.appointment_id }} 发起时间：{{ appointment.recommend_begin_time }}</td>
+                    <td colspan="3" style="text-align:left;">编号：{{ appointment.appointment_id }} 发起时间：{{ appointment.recommend_begin_time | date:"Y-m-d" }}</td>
                 </tr>
                 <tr>
                     <td>
                         <div class="row">
                             <div class="col-md-3"><img src="{{ appointment.to_host_icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-                            <div class="col-md-9"><h3>{{ appointment.recommend_info }}</h3><p>Lorraine Lee 香港知名大学申请达人</p></div>
+                            <div class="col-md-9"><h3>{{ appointment.feature_name }}</h3><p>{{ appointment.host_name }} {{ appointment.host_motto }}</p></div>
                         </div>
                     </td>
-                    <td><h4>{{ appointment.state }}</h4></td>
+                    <td>
+                      <h4>
+                        {% if appointment.state == 0 %}
+                          创建订单
+                        {% elif appointment.state == 1 %}
+                          等待确认
+                        {% elif appointment.state == 2 %}
+                          等待付款
+                        {% elif appointment.state == 3 %}
+                          完成付款
+                        {% elif appointment.state == 4 %}
+                          结算完成
+                        {% endif %}
+                      </h4>
+                    </td>
                     
                 </tr>
               </table>
@@ -101,18 +115,18 @@
 
               <hr style="border: none;border-top: 1px solid black; ">
 
-              <!-- {% block messages %}
-              {% for messages in messages %}
-                <div class="panel panel-default">
-                  <div class="panel-heading" style="text-align: left;display: flex;align-items: center; "><img src="{{ messages.user_icon }}" alt="" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto;"><h4>&nbsp;{{ messages.from_user_name }} :</h4></div>
-                  <div class="panel-body">
-                    <p style="font-size:20px;">{{ messages.message }}</p>
-                  </div>
-                </div>
-              {% endfor %}
-              {% endblock %} -->
+              
 
-              <!-- <table class="table table-bordered ">
+              {% if appointment.state == 1 %}
+
+              <div class="panel panel-default" >
+                <div class="panel-heading" style="text-align: left; "><h4>{{ appointment.host_name }} 说：</h4></div>
+                <div class="panel-body">
+                  <p style="font-size:20px;">{{ appointment.recommend_info }}</p>
+                </div>
+              </div>
+
+              <table class="table table-bordered ">
                 <tr>
                     <td>
                       日期
@@ -126,28 +140,40 @@
                 </tr>
                 <tr>
                     <td>
-                      2016/09/22
+                      {{ appointment.recommend_begin_time | date:"Y-m-d" }}
                     </td>
                     <td>
-                      下午3:30
+                      {{ appointment.recommend_begin_time | date:"H:i" }}
                     </td>
                     <td>
-                      2小时共计300元
+                      {{ appointment.recommend_length }}小时共计{{ appointment.recommend_salary }}元
                     </td>
                 </tr>
-              </table> -->
+              </table>
+              {% endif %}
 
               <!-- bootstrap 弹出框 -->
               <!-- Button trigger modal -->
-              <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                回复
-              </button>
-              <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal2">
-                付款
-              </button> -->
+              
+              
+              {% if appointment.state == 1 %}
+              <div style="display: flex;justify-content: center; ">
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                  回复
+                </button>
+                <form action="/bill/pay" method="post" style="margin-left:5px;">
+                  {% csrf_token %}
+                  <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
+                  <button type="submit" class="btn btn-danger btn-lg">付款</button>
+                </form>
+              </div>
+                
+              {% endif %}
 
+
+              {% if appointment.state == 1 %}
               <!-- Modal -->
-              <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -175,35 +201,22 @@
 
                   </div>
                 </div>
-              </div> -->
+              </div>
 
-              <!-- Modal2 -->
-              <!-- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">请选择约见日期、时间和费用</h4>
-                    </div>
+              {% endif %}
 
-                    <form action="/bill/communicate" method="post">
+              <br><br>
 
-                    {% csrf_token %}
-                    <div class="modal-body">
-                        
-                          
-                        
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">确认</button>
-                    </div>
-
-                    </form>
-
+              {% block messages %}
+              {% for messages in messages %}
+                <div class="panel panel-default">
+                  <div class="panel-heading" style="text-align: left;display: flex;align-items: center; "><img src="{{ messages.user_icon }}" alt="" style="height: 38px; width: 38px; border: 1px solid #cccccc; border-radius: 50%; bottom: auto;"><h4>&nbsp;{{ messages.from_user_name }} :</h4></div>
+                  <div class="panel-body">
+                    <p style="font-size:20px;">{{ messages.message }}</p>
                   </div>
                 </div>
-              </div> -->
+              {% endfor %}
+              {% endblock %}
 
               <br><br>
 
