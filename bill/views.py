@@ -179,13 +179,11 @@ def bill(request,method,Oid):
 		'''
 			从阿里巴巴返回的数据
 		'''
-		try:
-			bill = Bill.objects.get(bill_id = Oid)
-			if bill.paid() == True:
-				return HttpResponseRedirect("/bill/detail/"+Oid)
 
-		except:
-			return render(request,"frontEnd/error.html")
+		bill = Bill.objects.get(bill_id = Oid)
+		if bill.paid() == True:
+			return HttpResponseRedirect("/bill/detail/"+Oid)
+
 
 		return HttpResponseRedirect('host_center/manage')
 
