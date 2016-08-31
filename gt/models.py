@@ -841,10 +841,10 @@ class Bill(models.Model):
     bill_type = models.IntegerField()                   #各个支付的类型
 
     def paid(self):
-        cb.finish_time = datetime.datetime.now()
-        cb.state = BILL_STATE["PAID"]
-        cb.save()
-        if cb.bill_type == BILL_TYPE["APPOINTMENT"]:
+        self.finish_time = datetime.datetime.now()
+        self.state = BILL_STATE["PAID"]
+        self.save()
+        if self.bill_type == BILL_TYPE["APPOINTMENT"]:
             #完成订单
             appointment = Appointment.objects.get(appointment_id = cbid)
             appointment.state = APPOINTMENT_STATE['PAID']
