@@ -797,8 +797,6 @@ class Mail(models.Model):
         msg.send()
 
 
-
-
 class Message(models.Model):
     from_user = models.CharField(max_length=100)
     to_user = models.CharField(max_length=100)
@@ -854,8 +852,6 @@ class Bill(models.Model):
             return True
         else:
             return False
-
-
 
 
 class Appointment(models.Model):
@@ -918,10 +914,10 @@ class Appointment(models.Model):
         tmp_dict['intro_and_question']  = self.intro_and_question
         tmp_dict['appointment_time']  = self.appointment_time
         tmp_dict['recommend_info']  = self.recommend_info
-        tmp_dict['recommend_begin_time']  = self.recommend_begin_time
-        tmp_dict['recommend_end_time']  = self.recommend_end_time
+        tmp_dict['recommend_begin_time']  = self.format_time(self.recommend_begin_time)
+        tmp_dict['recommend_end_time']  = self.format_time(self.recommend_end_time)
         tmp_dict['recommend_length']  = self.recommend_length
-        tmp_dict['appointment_init_time']  = self.appointment_init_time
+        tmp_dict['appointment_init_time']  = self.format_time(self.appointment_init_time)
         tmp_dict['appointment_id']  = self.appointment_id
         tmp_dict['recommend_payment']  = self.recommend_payment
         tmp_dict['recommend_salary']  = self.recommend_salary
@@ -931,6 +927,12 @@ class Appointment(models.Model):
 
         return tmp_dict
     
+    def format_time(self,time_objcet):
+        if time_objcet == None:
+            return None
+        else:
+            return time_objcet.strftime("%Y-%m-%d %H:%M:%S")
+
     def get_appointment_messages(self):
         messages = Message.objects.filter(extra_id = self.id, message_type = MESSAGE_TYPE['APPOINTMENT_COMM']).order_by("upload_time")
         result = []
