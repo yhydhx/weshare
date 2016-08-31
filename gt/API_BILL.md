@@ -282,6 +282,5 @@ method : POST
 
 {
 	'appnt_id':    ~ 订单的ID
-	'message': 			~ 用户输入的数据
 }
 

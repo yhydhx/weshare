@@ -65,13 +65,15 @@ def alipay_notify_url (request):
             trade_no=request.POST.get('trade_no')  
             #返回支付状态  
             trade_status = request.POST.get('trade_status')  
-            cb = cBill.objects.get(pk=tn)  
-              
+            cb = Bill.objects.get(bill_id=cbid)
+            
             if trade_status == 'TRADE_SUCCESS':  
-                cb.exe()  
+                cb.paid()  
                 log=Log(operation='notify1_'+trade_status+'_'+trade_no)  
                 log.save()  
+
                 return HttpResponse("success")  
+
             else:  
                 #写入日志  
                 log=Log(operation='notify2_'+trade_status+'_'+trade_no)  
@@ -106,7 +108,10 @@ def alipay_return_url (request):
 #客户可能通过xxx.com操作，但是支付宝只能返回www.xxx.com，域名不同，session丢失。  
 def verify(request,cbid):  
     try:  
-        cb=cBill.objects.get(id=cbid)  
+        cb = Bill.objects.get(bill_id=cbid)
+        if cb.paid() == True:
+            return HttpResponseRedirect("/bill/detail/"+cbid)
+
         #如果订单时间距现在超过1天，跳转到错误页面！  
         #避免网站信息流失  
           

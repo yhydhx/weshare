@@ -840,7 +840,21 @@ class Bill(models.Model):
     state =  models.IntegerField()
     from_user_id = models.CharField(max_length = 100)
     to_host_id = models.CharField(max_length = 100)
-    bill_type = models.IntegerField()
+    bill_type = models.IntegerField()                   #各个支付的类型
+
+    def paid(self):
+        cb.finish_time = datetime.datetime.now()
+        cb.state = BILL_STATE["PAID"]
+        cb.save()
+        if cb.bill_type == BILL_TYPE["APPOINTMENT"]:
+            #完成订单
+            appointment = Appointment.objects.get(appointment_id = cbid)
+            appointment.state = APPOINTMENT_STATE['PAID']
+            appointment.save()
+            return True
+        else:
+            return False
+
 
 
 
@@ -930,3 +944,6 @@ class Appointment(models.Model):
 
         return result
             
+class Log(models.Model):
+    #记录支付宝的
+    operation = models.CharField(max_length = 200)
