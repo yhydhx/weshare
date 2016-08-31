@@ -182,7 +182,7 @@ def bill(request,method,Oid):
 
 		bill = Bill.objects.get(bill_id = Oid)
 		if bill.paid() == True:
-			return HttpResponseRedirect("/bill/detail/"+Oid)
+			return HttpResponseRedirect("/bill/detail/"+bill.id)
 
 
 		return HttpResponseRedirect('host_center/manage')
