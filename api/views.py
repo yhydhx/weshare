@@ -105,6 +105,9 @@ def user(request, method, Oid):
         host.features = features.values()
         host.image = "/files/icons/" + host.icon.split("/")[-1]
 
+        f = Feature()
+        questions = f.get_one_host_questions(Oid)
+        Info['data']['questions'] = questions
         Info['data']['user'] = host.format_dict()
         Info['data']['user']['features'] = features.values()
         Info['data']['msgs'] = host.get_user_message(host.id)
