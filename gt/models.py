@@ -846,7 +846,7 @@ class Bill(models.Model):
         self.save()
         if self.bill_type == BILL_TYPE["APPOINTMENT"]:
             #完成订单
-            appointment = Appointment.objects.get(appointment_id = cbid)
+            appointment = Appointment.objects.get(appointment_id = self.bill_id)
             appointment.state = APPOINTMENT_STATE['PAID']
             appointment.save()
             return True
