@@ -209,8 +209,10 @@ def weibo_login(request):
         address = 'https://api.weibo.com/oauth2/access_token?' + urlencode(wdict)
         f.write('address: ' + address + '\n')
 
-        ret_weibo_token = json.loads(urllib2.urlopen(address).read())  # ret_weibo_token是一个dict
-        f.write('ret_weibo_token: ' + str(ret_weibo_token) + '\n')
+        ret_token = urllib2.urlopen(address).read()  # ret_weibo_token是一个dict
+        f.write('ret_weibo_token: ' + str(ret_token) + '\n')
+
+        ret_weibo_token = json.loads(ret_token)
 
         access_token = ret_weibo_token['access_token']
         expires_in = ret_weibo_token['expires_in']
@@ -224,13 +226,13 @@ def weibo_login(request):
         id = user_info['id']
         username = user_info['name']
         f.close()
-        return None
+        return render_to_response('frontEnd/index.html')
 
-    except EnvironmentError:
+    except IOError:
         f = open('test_wb', 'a+')
         f.write("=============boom in log in=========")
         f.close()
-        return HttpResponse('something happened!!!')
+        return None
 
 
 @csrf_exempt
