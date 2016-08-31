@@ -98,7 +98,7 @@ def alipay_return_url (request):
         
         bill = Bill.objects.get(bill_id = tn)
         if bill.paid() == True:
-            if self.bill_type == BILL_TYPE["APPOINTMENT"]:
+            if bill.bill_type == BILL_TYPE["APPOINTMENT"]:
                 appt_id = bill.get_appt_id()
                 return HttpResponseRedirect("/bill/detail/"+appt_id) 
         else:
