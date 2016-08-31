@@ -849,7 +849,7 @@ class Bill(models.Model):
             appointment = Appointment.objects.get(appointment_id = self.bill_id)
             appointment.state = APPOINTMENT_STATE['PAID']
             appointment.save()
-            return True
+            return appointment.id
         else:
             return False
 

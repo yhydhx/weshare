@@ -181,11 +181,8 @@ def bill(request,method,Oid):
 		'''
 
 		bill = Bill.objects.get(bill_id = Oid)
-		if bill.paid() == True:
-			return HttpResponseRedirect("/bill/detail/"+bill.id)
-
-
-		return HttpResponseRedirect('host_center/manage')
+		appt_id = bill.paid()
+		return HttpResponseRedirect("/bill/detail/"+appt_id)
 
     elif method == "test":
 		return HttpResponse("test")
