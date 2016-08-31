@@ -78,9 +78,9 @@ def user(request, method, Oid):
     Info = output_init()
     try:
         host = Host.objects.get(email=request.session['email'])
-
         login_flag = True
         Info['data']['current_user'] = host.format_dict()
+
     except:
         login_flag = False
     Info['data']['login_flag'] = login_flag
@@ -299,6 +299,11 @@ def user(request, method, Oid):
         return HttpResponse(json.dumps(Info),content_type="application/json")
 
     elif method == "manage_bill":
+        if login_flag == False:
+            Info['state'] = 303
+            Info['message'] = "请先登录"
+            return HttpResponse(json.dumps(Info),content_type="application/json")
+
         Info['data']['sent_bills'] = host.get_one_user_host_bills()
         if host.state != HOST_STATE['GUEST']:
             Info['data']['got_bills'] = host.get_one_host_user_bills()

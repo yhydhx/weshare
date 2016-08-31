@@ -931,7 +931,7 @@ class Appointment(models.Model):
         if time_objcet == None:
             return None
         else:
-            return time_objcet.strftime("%Y-%m-%d %H:%M:%S")
+            return time_objcet.strftime("%Y-%m-%d %H:%M")
 
     def get_appointment_messages(self):
         messages = Message.objects.filter(extra_id = self.id, message_type = MESSAGE_TYPE['APPOINTMENT_COMM']).order_by("upload_time")
