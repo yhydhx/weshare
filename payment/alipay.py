@@ -5,6 +5,7 @@ from urllib import urlencode, urlopen
 from hashcompact import md5_constructor as md5      #见hashcompact.py  
 from config import settings                 #见config.py  
 import datetime
+import json
 
 #字符串编解码处理  
 def smart_str(s, encoding='utf-8', strings_only=False, errors='strict'):  
@@ -132,11 +133,11 @@ def create_direct_pay_by_user_on_app(tn, subject, body, bank, total_fee):
     params['biz_content']['seller_id'] = settings.ALIPAY_PARTNER
     params['biz_content']['product_code'] = "QUICK_MSECURITY_PAY"
 
-
+    params['biz_content'] = json.dumps(params['biz_content'])
 
     params,prestr = params_filter(params)  
-      
+
     params['sign'] = build_mysign(prestr, settings.ALIPAY_KEY, settings.ALIPAY_SIGN_TYPE)  
     params['sign_type'] = settings.ALIPAY_SIGN_TYPE  
       
-    return urlencode(params)  
+    return urlencode(params)
