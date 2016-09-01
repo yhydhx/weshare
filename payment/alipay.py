@@ -6,6 +6,10 @@ from hashcompact import md5_constructor as md5      #见hashcompact.py
 from config import settings                 #见config.py  
 import datetime
 import json
+from Crypto.Signature import PKCS1_v1_5 as pk
+from Crypto.PublicKey import RSA 
+from Crypto.Hash import SHA 
+import base64
 
 #字符串编解码处理  
 def smart_str(s, encoding='utf-8', strings_only=False, errors='strict'):  
@@ -33,8 +37,8 @@ _GATEWAY = 'https://mapi.alipay.com/gateway.do?'
 # 对数组排序并除去数组中的空值和签名参数  
 # 返回数组和链接串  
 def params_filter(params):  
-    ks = params.keys()  
-    ks.sort()  
+    ks = sorted(params.keys())
+
     newparams = {}  
     prestr = ''  
     for k in ks:  
@@ -51,8 +55,23 @@ def params_filter(params):
 def build_mysign(prestr, key, sign_type = 'MD5'):  
     if sign_type == 'MD5':  
         return md5(prestr + key).hexdigest()  
+    elif sign_type == "RSA":
+        return rsa_sign(prestr)
     return ''  
-  
+
+#RSA 签名
+
+
+def rsa_sign(signdata): 
+    ''' 
+    @param signdata: 需要签名的字符串 
+    ''' 
+    privatekey=RSA.importKey(open('payment/rsa_private_key.pem','r').read()) 
+    h=SHA.new(signdata) 
+    signer = pk.new(privatekey) 
+    signn=signer.sign(h) 
+    signn=base64.b64encode(signn) 
+    return signn 
   
 # 即时到账交易接口  
 def create_direct_pay_by_user(tn, subject, body, bank, total_fee):  
@@ -137,7 +156,8 @@ def create_direct_pay_by_user_on_app(tn, subject, body, bank, total_fee):
 
     params,prestr = params_filter(params)  
 
-    params['sign'] = build_mysign(prestr, settings.ALIPAY_KEY, settings.ALIPAY_SIGN_TYPE)  
-    params['sign_type'] = settings.ALIPAY_SIGN_TYPE  
+
+    params['sign'] = build_mysign(prestr, settings.ALIPAY_KEY, "RSA")  
+    params['sign_type'] = "RSA"  
       
     return urlencode(params)
