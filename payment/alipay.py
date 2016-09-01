@@ -168,7 +168,9 @@ def generate_rsa_str(params):
             continue
         tmp_dict = {}
         tmp_dict[k] = params[k]
+        #print k,tmp_dict[k]
         rsa_str += urlencode(tmp_dict)+"&"
+    tmp_dict = {}
     k= "sign"
     tmp_dict[k] = params[k]
     rsa_str += urlencode(tmp_dict)
