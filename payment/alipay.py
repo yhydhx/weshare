@@ -4,7 +4,9 @@ import types
 from urllib import urlencode, urlopen  
 from hashcompact import md5_constructor as md5      #见hashcompact.py  
 from config import settings                 #见config.py  
-  
+import datetime
+import json
+
 #字符串编解码处理  
 def smart_str(s, encoding='utf-8', strings_only=False, errors='strict'):  
     if strings_only and isinstance(s, (types.NoneType, int)):  
@@ -108,3 +110,34 @@ def notify_verify(post):
     if verify_result.lower().strip() == 'true':  
         return True  
     return False  
+
+def create_direct_pay_by_user_on_app(tn, subject, body, bank, total_fee): 
+    params = {}  
+    
+    params['app_id'] = settings.ALIPAY_PARTNER
+    params['method'] = "alipay.trade.app.pay"
+    params['format'] = "JSON"
+    params['charset'] = "utf-8"
+    
+    params['timestamp'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M%S")
+    params['version'] = "1.0"
+    params['notify_url'] = settings.ALIPAY_NOTIFY_URL
+
+    params['biz_content'] = {}
+
+    params['biz_content']['body'] = body
+    params['biz_content']['subject'] = subject
+    params['biz_content']['out_trade_no'] = tn
+    params['biz_content']['timeout_express'] = "90m"
+    params['biz_content']['total_amount'] = total_fee
+    params['biz_content']['seller_id'] = settings.ALIPAY_PARTNER
+    params['biz_content']['product_code'] = "QUICK_MSECURITY_PAY"
+
+    params['biz_content'] = json.dumps(params['biz_content'])
+
+    params,prestr = params_filter(params)  
+
+    params['sign'] = build_mysign(prestr, settings.ALIPAY_KEY, settings.ALIPAY_SIGN_TYPE)  
+    params['sign_type'] = settings.ALIPAY_SIGN_TYPE  
+      
+    return urlencode(params)
