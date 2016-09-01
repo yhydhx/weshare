@@ -896,6 +896,14 @@ class Appointment(models.Model):
         return tmp_id
 
 
+    def format_dict_via_app(self):
+        tmp_dict =  self.format_dict_on_manage()
+
+        tmp_dict['recommend_begin_time']  = self.format_time(self.recommend_begin_time)
+        tmp_dict['recommend_end_time']  = self.format_time(self.recommend_end_time)
+        tmp_dict['appointment_init_time']  = self.format_time(self.appointment_init_time)
+
+        return tmp_dict
 
     def format_dict_on_manage(self):
         tmp_dict = self.format_dict()
@@ -917,10 +925,10 @@ class Appointment(models.Model):
         tmp_dict['intro_and_question']  = self.intro_and_question
         tmp_dict['appointment_time']  = self.appointment_time
         tmp_dict['recommend_info']  = self.recommend_info
-        tmp_dict['recommend_begin_time']  = self.format_time(self.recommend_begin_time)
-        tmp_dict['recommend_end_time']  = self.format_time(self.recommend_end_time)
+        tmp_dict['recommend_begin_time']  = self.recommend_begin_time
+        tmp_dict['recommend_end_time']  = self.recommend_end_time
         tmp_dict['recommend_length']  = self.recommend_length
-        tmp_dict['appointment_init_time']  = self.format_time(self.appointment_init_time)
+        tmp_dict['appointment_init_time']  = self.appointment_init_time
         tmp_dict['appointment_id']  = self.appointment_id
         tmp_dict['recommend_payment']  = self.recommend_payment
         tmp_dict['recommend_salary']  = self.recommend_salary
@@ -934,7 +942,7 @@ class Appointment(models.Model):
         if time_objcet == None:
             return None
         else:
-            return time_objcet.strftime("%Y-%m-%d %H:%M")
+            return time_objcet.strftime("%Y-%m-%d %H:%M%S")
 
     def get_appointment_messages(self):
         messages = Message.objects.filter(extra_id = self.id, message_type = MESSAGE_TYPE['APPOINTMENT_COMM']).order_by("upload_time")

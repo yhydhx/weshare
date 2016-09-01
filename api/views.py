@@ -426,7 +426,7 @@ def bill(request,method,Oid):
 
         try:
             appointment = Appointment.objects.get(id = Oid)
-            Info['data']['appointment'] = appointment.format_dict_on_manage()
+            Info['data']['appointment'] = appointment.format_dict_via_app()
             
         except:
             Info['state'] = 404
