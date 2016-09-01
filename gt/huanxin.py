@@ -159,7 +159,7 @@ def send_file(org, app, auth, file_path):
 
 if __name__ == '__main__':
     # 测试数据
-    f = file("../info.json")
+    f = file("./info.json")
     s = json.load(f)
     test_app_key = s['appkey']
     org_name, app_name = parse_appkey(test_app_key)

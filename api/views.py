@@ -596,7 +596,7 @@ def bill(request,method,Oid):
             Info['message'] = "添加成功"
 
     elif method == "test":
-        url = create_direct_pay_by_user_on_app(str(random.random()),"weshare","weshare","","0.01")
+        url = create_direct_pay_by_user_on_app(str(random.random())[-5:],"weshare","weshare","","0.01")
         return HttpResponse(url, content_type="application/json")
 
     else:
