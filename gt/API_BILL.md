@@ -167,7 +167,7 @@ data = {
 			
 	        'host_name'  :     ~  分享着的名字
 	        'host_motto'  :     ~  分享者的一句话简介
-	        'state'  :     ~  目前的订单状态    0,    #创建订单  1,    #等待确认   2,   #等待付款   3,   #完成了付款   4     #结算完成
+	        'state'  :     ~  目前的订单状态        'INITED': 0,  # 创建订单    'CERTIFIED': 1,  # 确认   'PAID': 2,  # 付款     'COMPLETED': 3,  # 完成了  'FINISHED': 4  # 结算完成
 	        'from_user_id'  :     ~  
 	        'to_host_id'  :     ~  
 	        'from_user_icon'  :     ~  
@@ -203,7 +203,7 @@ template :  'frontEnd/appoint_guest.html'
 data = {
 	'appointment'  : {
 						'id':         ~该订单的唯一标示符号
-				        'state'  :     ~  目前的订单状态    0,    #创建订单  1,    #等待确认   2,   #等待付款   3,   #完成了付款   4     #结算完成
+				        'state'  :     ~  目前的订单状态    'INITED': 0,  # 创建订单    'CERTIFIED': 1,  # 确认   'PAID': 2,  # 付款     'COMPLETED': 3,  # 完成了  'FINISHED': 4  # 结算完成
 				        'from_user_id'  :     ~  
 				        'to_host_id'  :     ~  
 				        'from_user_icon'  :     ~  
@@ -283,4 +283,31 @@ method : POST
 {
 	'appnt_id':    ~ 订单的ID
 }
+
+
+
+第八步：
+聊完点击完成
+
+url : /bill/end_talk
+method : POST
+
+{
+	'appnt_id':    ~ 订单的ID
+}
+
+点击完会让人填写此次经历的评价
+
+第九步：
+评价
+
+url : /bill/evaluation	
+method : POST
+
+{
+	appt_id :    ~ 订单的ID
+	content :    ~ 评价的内容
+}
+
+随后会返回host主页
 

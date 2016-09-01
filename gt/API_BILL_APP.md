@@ -174,7 +174,7 @@ data = {
 				
 		        'host_name'  :     ~  分享着的名字
 		        'host_motto'  :     ~  分享者的一句话简介
-		        'state'  :     ~  目前的订单状态    0,    #创建订单  1,    #等待确认   2,   #等待付款   3,   #完成了付款   4     #结算完成
+		        'state'  :     ~  目前的订单状态     'INITED': 0,  # 创建订单    'CERTIFIED': 1,  # 确认   'PAID': 2,  # 付款     'COMPLETED': 3,  # 完成了  'FINISHED': 4  # 结算完成
 		        'from_user_id'  :     ~  
 		        'to_host_id'  :     ~  
 		        'from_user_icon'  :     ~  
@@ -192,7 +192,7 @@ data = {
 				
 		        'host_name'  :     ~  分享着的名字
 		        'host_motto'  :     ~  分享者的一句话简介
-		        'state'  :     ~  目前的订单状态    0,    #创建订单  1,    #等待确认   2,   #等待付款   3,   #完成了付款   4     #结算完成
+		        'state'  :     ~  目前的订单状态    'INITED': 0,  # 创建订单    'CERTIFIED': 1,  # 确认   'PAID': 2,  # 付款     'COMPLETED': 3,  # 完成了  'FINISHED': 4  # 结算完成
 		        'from_user_id'  :     ~  
 		        'to_host_id'  :     ~  
 		        'from_user_icon'  :     ~  
@@ -214,7 +214,7 @@ data = {
 				
 		        'host_name'  :     ~  分享着的名字
 		        'host_motto'  :     ~  分享者的一句话简介
-		        'state'  :     ~  目前的订单状态    0,    #创建订单  1,    #等待确认   2,   #等待付款   3,   #完成了付款   4     #结算完成
+		        'state'  :     ~  目前的订单状态     'INITED': 0,  # 创建订单    'CERTIFIED': 1,  # 确认   'PAID': 2,  # 付款     'COMPLETED': 3,  # 完成了  'FINISHED': 4  # 结算完成
 		        'from_user_id'  :     ~  
 		        'to_host_id'  :     ~  
 		        'from_user_icon'  :     ~  
@@ -232,7 +232,7 @@ data = {
 				
 		        'host_name'  :     ~  分享着的名字
 		        'host_motto'  :     ~  分享者的一句话简介
-		        'state'  :     ~  目前的订单状态    0,    #创建订单  1,    #等待确认   2,   #等待付款   3,   #完成了付款   4     #结算完成
+		        'state'  :     ~  目前的订单状态     'INITED': 0,  # 创建订单    'CERTIFIED': 1,  # 确认   'PAID': 2,  # 付款     'COMPLETED': 3,  # 完成了  'FINISHED': 4  # 结算完成
 		        'from_user_id'  :     ~  
 		        'to_host_id'  :     ~  
 		        'from_user_icon'  :     ~  
@@ -276,7 +276,7 @@ data = {
 	'data':{
 		'appointment'  : {
 							'id':         ~该订单的唯一标示符号
-					        'state'  :     ~  目前的订单状态    0,    #创建订单  1,    #等待确认   2,   #等待付款   3,   #完成了付款   4     #结算完成
+					        'state'  :     ~  目前的订单状态     'INITED': 0,  # 创建订单    'CERTIFIED': 1,  # 确认   'PAID': 2,  # 付款     'COMPLETED': 3,  # 完成了  'FINISHED': 4  # 结算完成
 					        'from_user_id'  :     ~  
 					        'to_host_id'  :     ~  
 					        'from_user_icon'  :     ~  
