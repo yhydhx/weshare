@@ -4,6 +4,8 @@
 
 import re
 import base64
+import urllib2
+import urllib
 
 
 def process_mail(input_mail):
@@ -96,3 +98,13 @@ class TmpQQUser(object):
 
     def __unicode__(self):
         return self.username
+
+
+def post(url, data):
+    request = urllib2.Request(url)
+    post_data = urllib.urlencode(data)
+    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
+    response = opener.open(request, post_data)
+    return response.read()
+
+

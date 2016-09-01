@@ -206,10 +206,10 @@ def weibo_login(request):
                  'client_secret': WEIBO_SECRET,
                  'code': code,
                  'redirect_uri': 'http://www.wshere.com/wblogin/'}
-        address = 'https://api.weibo.com/oauth2/access_token?' + urlencode(wdict)
-        f.write('address: ' + address + '\n')
 
-        ret_token = urllib2.urlopen(address).read()  # ret_weibo_token是一个dict
+        access_token_url = 'https://api.weibo.com/oauth2/access_token'
+
+        ret_token = post(access_token_url, wdict)
         f.write('ret_weibo_token: ' + str(ret_token) + '\n')
 
         ret_weibo_token = json.loads(ret_token)
