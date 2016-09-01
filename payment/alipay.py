@@ -47,6 +47,7 @@ def params_filter(params):
         if k not in ('sign','sign_type') and v != '':  
             newparams[k] = smart_str(v, settings.ALIPAY_INPUT_CHARSET)  
             prestr += '%s=%s&' % (k, newparams[k])  
+            #print k,prestr
     prestr = prestr[:-1]  
     return newparams, prestr  
   
@@ -153,11 +154,38 @@ def create_direct_pay_by_user_on_app(tn, subject, body, bank, total_fee):
     params['biz_content']['product_code'] = "QUICK_MSECURITY_PAY"
 
     params['biz_content'] = json.dumps(params['biz_content'])
-
-    params,prestr = params_filter(params)  
-
-
-    params['sign'] = build_mysign(prestr, settings.ALIPAY_KEY, "RSA")  
     params['sign_type'] = "RSA"  
-      
-    return urlencode(params)
+    params,prestr = params_filter_app(params)  
+    
+    params['sign'] = build_mysign(prestr, settings.ALIPAY_KEY, "RSA")  
+
+    return generate_rsa_str(params)
+
+def generate_rsa_str(params):
+    rsa_str = ""
+    for k in sorted(params.keys()):
+        if k == "sign":
+            continue
+        tmp_dict = {}
+        tmp_dict[k] = params[k]
+        rsa_str += urlencode(tmp_dict)+"&"
+    k= "sign"
+    tmp_dict[k] = params[k]
+    rsa_str += urlencode(tmp_dict)
+    return rsa_str
+
+
+def params_filter_app(params):
+    ks = sorted(params.keys())
+
+    newparams = {}  
+    prestr = ''  
+    for k in ks:  
+        v = params[k]  
+        k = smart_str(k, settings.ALIPAY_INPUT_CHARSET)  
+        if k not in ('sign',) and v != '':  
+            newparams[k] = smart_str(v, settings.ALIPAY_INPUT_CHARSET)  
+            prestr += '%s=%s&' % (k, newparams[k])  
+            #print k,prestr
+    prestr = prestr[:-1]  
+    return newparams, prestr  
