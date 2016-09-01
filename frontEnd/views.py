@@ -223,10 +223,15 @@ def weibo_login(request):
         address2 = 'https://api.weibo.com/2/users/show.json?' + urlencode(user_token)
         user_info = json.loads(urllib2.urlopen(address2).read())
         f.write('user_info[important]: ' + str(user_info) + '\n')
+
         id = user_info['id']
         username = user_info['name']
+        icon = user_info['profile_image_url']
+
+        weibo_user = TmpUser(username=username, icon=icon)
         f.close()
-        return render_to_response('frontEnd/index.html')
+        return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': weibo_user},
+                                  context_instance=RequestContext(request))
 
     except IOError:
         f = open('test_wb', 'a+')
@@ -300,7 +305,7 @@ def qq_login(request):
 
             f.write('###############end##################')
 
-            qq_user = TmpQQUser(user_info['nickname'], user_info['figureurl_qq_1'])
+            qq_user = TmpUser(user_info['nickname'], user_info['figureurl_qq_1'])
             f.close()
 
             request.session['openid'] = open_id
