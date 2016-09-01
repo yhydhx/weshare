@@ -36,11 +36,11 @@
                             {% if bill.state == 0 %}
                               创建订单
                             {% elif bill.state == 1 %}
-                              等待确认
+                              确认
                             {% elif bill.state == 2 %}
-                              等待付款
+                              付款
                             {% elif bill.state == 3 %}
-                              完成付款
+                              完成了
                             {% elif bill.state == 4 %}
                               结算完成
                             {% endif %}
@@ -72,11 +72,11 @@
                             {% if bill.state == 0 %}
                               创建订单
                             {% elif bill.state == 1 %}
-                              等待确认
+                              确认
                             {% elif bill.state == 2 %}
-                              等待付款
+                              付款
                             {% elif bill.state == 3 %}
-                              完成付款
+                              完成了
                             {% elif bill.state == 4 %}
                               结算完成
                             {% endif %}
@@ -104,7 +104,21 @@
                             <div class="col-md-9"><h3>{{ bill.feature_name }}</h3><p>{{ bill.host_name }} {{ bill.host_motto }}</p></div>
                             </div>
                         </td>
-                        <td><h4>{{ bill.state }}</h4></td>
+                        <td>
+                          <h4>
+                            {% if bill.state == 0 %}
+                              创建订单
+                            {% elif bill.state == 1 %}
+                              确认
+                            {% elif bill.state == 2 %}
+                              付款
+                            {% elif bill.state == 3 %}
+                              完成了
+                            {% elif bill.state == 4 %}
+                              结算完成
+                            {% endif %}
+                          </h4>
+                        </td>
                         <td><a href="/bill/detail/{{ bill.id }}">查看详情</a></td>
                     </tr>
                   </table>
@@ -128,11 +142,11 @@
                             {% if bill.state == 0 %}
                               创建订单
                             {% elif bill.state == 1 %}
-                              等待确认
+                              确认
                             {% elif bill.state == 2 %}
-                              等待付款
+                              付款
                             {% elif bill.state == 3 %}
-                              完成付款
+                              完成了
                             {% elif bill.state == 4 %}
                               结算完成
                             {% endif %}
