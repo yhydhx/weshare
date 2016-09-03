@@ -67,7 +67,7 @@ def rsa_sign(signdata):
     ''' 
     @param signdata: 需要签名的字符串 
     ''' 
-    privatekey=RSA.importKey(open('payment/rsa_private_key.pem','r').read()) 
+    privatekey=RSA.importKey(open('payment/rsa_private_key_pkcs8.pem','r').read()) 
     h=SHA.new(signdata) 
     signer = pk.new(privatekey) 
     signn=signer.sign(h) 
@@ -134,12 +134,12 @@ def notify_verify(post):
 def create_direct_pay_by_user_on_app(tn, subject, body, bank, total_fee): 
     params = {}  
     
-    params['app_id'] = settings.ALIPAY_PARTNER
+    params['app_id'] = settings.ALIPAY_APP_ID
     params['method'] = "alipay.trade.app.pay"
     params['format'] = "JSON"
     params['charset'] = "utf-8"
     
-    params['timestamp'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M%S")
+    params['timestamp'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     params['version'] = "1.0"
     params['notify_url'] = settings.ALIPAY_NOTIFY_URL
 

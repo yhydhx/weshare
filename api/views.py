@@ -308,9 +308,11 @@ def user(request, method, Oid):
             Info['message'] = "请先登录"
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
-        Info['data']['sent_bills'] = host.get_one_user_host_bills()
+        Info['data']['sent_bills'] = host.get_one_user_host_bills("APP")
+
         if host.state != HOST_STATE['GUEST']:
-            Info['data']['got_bills'] = host.get_one_host_user_bills()
+            Info['data']['got_bills'] = host.get_one_host_user_bills("APP")
+
         return HttpResponse(json.dumps(Info),content_type="application/json")
 
     else:

@@ -9,6 +9,10 @@ class settings:
   # 合作身份者ID，以2088开头的16位纯数字  
   ALIPAY_PARTNER = '2088912886788535'  
   
+  # app端支付的APP ID
+  ALIPAY_APP_ID = '2016081101731899'
+  
+  
   # 签约支付宝账号或卖家支付宝帐户  
   ALIPAY_SELLER_EMAIL = 'kaixuant@outlook.com'  
   
