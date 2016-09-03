@@ -309,8 +309,12 @@ def user(request, method, Oid):
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
         Info['data']['sent_bills'] = host.get_one_user_host_bills()
+        for bill_atom in Info['data']['sent_bills']:
+            bill_atom.format_dict_via_app()
         if host.state != HOST_STATE['GUEST']:
             Info['data']['got_bills'] = host.get_one_host_user_bills()
+            for bill_atom in Info['data']['got_bills']:
+                bill_atom.format_dict_via_app()
         return HttpResponse(json.dumps(Info),content_type="application/json")
 
     else:
