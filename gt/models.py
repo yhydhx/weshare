@@ -966,3 +966,4 @@ class Appointment(models.Model):
 class Log(models.Model):
     #记录支付宝的
     operation = models.CharField(max_length = 200)
+    operation_time = models.DateTimeField(null = True)
