@@ -139,7 +139,7 @@ def create_direct_pay_by_user_on_app(tn, subject, body, bank, total_fee):
     params['format'] = "JSON"
     params['charset'] = "utf-8"
     
-    params['timestamp'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M%S")
+    params['timestamp'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     params['version'] = "1.0"
     params['notify_url'] = settings.ALIPAY_NOTIFY_URL
 
