@@ -91,7 +91,7 @@ def urlencode2dict(urlencoded):
     return dict
 
 
-class TmpQQUser(object):
+class TmpUser(object):
     def __init__(self, username, icon):
         self.username = username
         self.icon = icon
