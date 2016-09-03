@@ -194,6 +194,17 @@ def logout(request):
 
 
 @csrf_exempt
+def wechat_login(request):
+    try:
+        f = open("wechat_test.txt", "a+")
+
+
+    except:
+        return None
+    return
+
+
+@csrf_exempt
 def weibo_login(request):
     try:
         f = open('test_wb', 'a+')
