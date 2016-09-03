@@ -24,6 +24,7 @@ import base64
 import time
 import datetime
 from frontEnd.tools import *
+from payment.alipay import *
 
 
 
@@ -149,7 +150,7 @@ def user(request, method, Oid):
             elif not process_passwd(password):
                 Info['state'] = 403
                 Info['message'] = '请使用正确要求的密码'
-            elif  not process_phone_num(phone):
+            elif not process_phone_num(phone):
                 Info['state'] = 404
                 Info['data']['phone'] = ""
                 Info['message'] = '请选择国家区号'
@@ -307,9 +308,11 @@ def user(request, method, Oid):
             Info['message'] = "请先登录"
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
-        Info['data']['sent_bills'] = host.get_one_user_host_bills()
+        Info['data']['sent_bills'] = host.get_one_user_host_bills("APP")
+
         if host.state != HOST_STATE['GUEST']:
-            Info['data']['got_bills'] = host.get_one_host_user_bills()
+            Info['data']['got_bills'] = host.get_one_host_user_bills("APP")
+
         return HttpResponse(json.dumps(Info),content_type="application/json")
 
     else:
@@ -552,8 +555,51 @@ def bill(request,method,Oid):
 
         return HttpResponseRedirect('host_center/manage')
 
+    elif method == "end_talk":
+        if request.method == "POST":
+            appt_id = request.POST.get("appt_id")
+            try:
+                appointment = Appointment.objects.get(id = appt_id)
+                appointment.state =  APPOINTMENT_STATE['COMPLETED']
+                appointment.save()
+                Info['appointment'] = appointment.format_dict_on_manage()
+                return HttpResponse(json.dumps(Info), content_type="application/json")
+            except:
+                Info['state'] = 300
+                Info['message'] = "信息有误"
+                return HttpResponse(json.dumps(Info), content_type="application/json")
+
+    elif method == "evaluation":
+        if request.method == "POST":
+
+            appt_id = request.POST.get("appt_id")
+            appointment = Appointment.objects.get(id = appt_id)
+
+            from_user = appointment.from_user_id
+            to_user = appointment.to_host_id
+            message_type = MESSAGE_TYPE["EVALUATION"]
+            icon = appointment.from_user_icon
+            upload_time = datetime.datetime.now()
+            content = request.POST.get("message")
+            
+            message = Message(
+                appt_id = appt_id,
+                appointment = appointment,
+
+                from_user = from_user,
+                to_user = to_user,
+                message_type = message_type,
+                icon = icon,
+                upload_time = upload_time,
+                content = content,
+                extra_id = appt_id,
+            )
+            message.save()
+            Info['message'] = "添加成功"
+
     elif method == "test":
-        return HttpResponse("test")
+        url = create_direct_pay_by_user_on_app(str(random.random())[-5:],"weshare","weshare","","0.01")
+        return HttpResponse(url, content_type="application/json")
 
     else:
         return HttpResponse("end")

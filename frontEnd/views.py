@@ -194,6 +194,17 @@ def logout(request):
 
 
 @csrf_exempt
+def wechat_login(request):
+    try:
+        f = open("wechat_test.txt", "a+")
+
+
+    except:
+        return None
+    return
+
+
+@csrf_exempt
 def weibo_login(request):
     try:
         f = open('test_wb', 'a+')
@@ -206,10 +217,10 @@ def weibo_login(request):
                  'client_secret': WEIBO_SECRET,
                  'code': code,
                  'redirect_uri': 'http://www.wshere.com/wblogin/'}
-        address = 'https://api.weibo.com/oauth2/access_token?' + urlencode(wdict)
-        f.write('address: ' + address + '\n')
 
-        ret_token = urllib2.urlopen(address).read()  # ret_weibo_token是一个dict
+        access_token_url = 'https://api.weibo.com/oauth2/access_token'
+
+        ret_token = post(access_token_url, wdict)
         f.write('ret_weibo_token: ' + str(ret_token) + '\n')
 
         ret_weibo_token = json.loads(ret_token)
@@ -223,10 +234,15 @@ def weibo_login(request):
         address2 = 'https://api.weibo.com/2/users/show.json?' + urlencode(user_token)
         user_info = json.loads(urllib2.urlopen(address2).read())
         f.write('user_info[important]: ' + str(user_info) + '\n')
+
         id = user_info['id']
         username = user_info['name']
+        icon = user_info['profile_image_url']
+
+        weibo_user = TmpUser(username=username, icon=icon)
         f.close()
-        return render_to_response('frontEnd/index.html')
+        return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': weibo_user},
+                                  context_instance=RequestContext(request))
 
     except IOError:
         f = open('test_wb', 'a+')
@@ -300,7 +316,7 @@ def qq_login(request):
 
             f.write('###############end##################')
 
-            qq_user = TmpQQUser(user_info['nickname'], user_info['figureurl_qq_1'])
+            qq_user = TmpUser(user_info['nickname'], user_info['figureurl_qq_1'])
             f.close()
 
             request.session['openid'] = open_id

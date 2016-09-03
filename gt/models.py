@@ -347,21 +347,27 @@ class Host(models.Model):
 
         return result_hosts
 
-    def get_one_user_host_bills(self):
+    def get_one_user_host_bills(self,client_type="WEB"):
         bills = Appointment.objects.filter(from_user_id = self.id)
 
         result = []
         for bill_atom in bills:
-            tmp_bill = bill_atom.format_dict_on_manage()
+            if client_type == "APP":
+                tmp_bill = bill_atom.format_dict_via_app()
+            else:
+                tmp_bill = bill_atom.format_dict_on_manage()
             result.append(tmp_bill)
 
         return result
 
-    def get_one_host_user_bills(self):
+    def get_one_host_user_bills(self,client_type="WEB"):
         bills = Appointment.objects.filter(to_host_id = self.id)
         result = []
         for bill_atom in bills:
-            tmp_bill = bill_atom.format_dict_on_manage()
+            if client_type == "APP":
+                tmp_bill = bill_atom.format_dict_via_app()
+            else:
+                tmp_bill = bill_atom.format_dict_on_manage()
             result.append(tmp_bill)
         return result
 

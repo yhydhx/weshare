@@ -104,6 +104,7 @@ BILL_STATE = {
 
 MESSAGE_TYPE = {
     "APPOINTMENT_COMM": 1,
+    "EVALUATION" : 2,
 }
 
 GENDER = {
