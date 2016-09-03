@@ -183,9 +183,8 @@
                                 {{ host.introduction | safe}}
                             </div>
 
+                            <!-- Tab #1 -->
                             <div role="tabpanel" class="tab-pane fade" id="amenities">
-
-
                                 {% block content %}
                                 {% for topic in host.features %}
                                 <h3 class="ct-fw-lighter ct-u-marginTop50 ct-u-marginBottom20 ct-u-paddingBottom15 ct-u-borderBottom">
@@ -224,7 +223,7 @@
                                 </div>
                                 {% endfor %}
                                 {% endblock %}
-
+                            </div>
 
                             </div>
 
