@@ -69,19 +69,22 @@ def alipay_notify_url (request):
             
             if trade_status == 'TRADE_SUCCESS':  
                 cb.paid()  
-                log=Log(operation='notify1_'+trade_status+'_'+trade_no)  
+                log=Log(operation='notify1_'+trade_status+'_'+trade_no,
+                operation_time = datetime.datetime.now())  
                 log.save()  
 
                 return HttpResponse("success")  
 
             else:  
                 #写入日志  
-                log=Log(operation='notify2_'+trade_status+'_'+trade_no)  
+                log=Log(operation='notify2_'+trade_status+'_'+trade_no,
+                operation_time = datetime.datetime.now())  
                 log.save()  
                 return HttpResponse ("success")  
         else:  
             #黑客攻击  
-            log=Log(operation='hack_notify_'+trade_status+'_'+trade_no+'_'+'out_trade_no')  
+            log=Log(operation='hack_notify_'+trade_status+'_'+trade_no+'_'+'out_trade_no',
+                operation_time = datetime.datetime.now())  
             log.save()  
     return HttpResponse ("fail")  
   
@@ -93,7 +96,8 @@ def alipay_return_url (request):
         trade_no = request.GET.get('trade_no')  
         trade_status = request.GET.get('trade_status')  
             
-        log=Log(operation='return_'+trade_status+'_'+trade_no)  
+        log=Log(operation='return_'+trade_status+'_'+trade_no,
+                operation_time = datetime.datetime.now())  
         log.save() 
         
         bill = Bill.objects.get(bill_id = tn)
