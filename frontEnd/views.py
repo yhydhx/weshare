@@ -202,7 +202,7 @@ def wechat_login(request):
         f.write('code: ' + code + '\n')
 
         access_token_req_dict = {
-            'id': WECHAT_APPID,
+            'appid': WECHAT_APPID,
             'secret': WECHAT_SECRET,
             'code': code,
             'grant_type': 'authorization_code',
