@@ -235,9 +235,7 @@ def wechat_login(request):
         f = open("wechat_test.txt", "a+")
         f.write('login failure')
         f.close()
-
         return HttpResponse('login_failure')
-    return
 
 
 @csrf_exempt
