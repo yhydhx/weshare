@@ -229,7 +229,12 @@ def wechat_login(request):
         wx_user_info = urllib2.urlopen(address3).read()
 
         f.write('wx_user_info: ' + wx_user_info + '\n')
+        f.close()
     except:
+        f = open("wechat_test.txt", "a+")
+        f.write('login failure')
+        f.close()
+
         return None
     return
 
