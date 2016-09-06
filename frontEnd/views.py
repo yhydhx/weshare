@@ -197,8 +197,8 @@ def logout(request):
 def wechat_login(request):
     try:
         f = open("wechat_test.txt", "a+")
-        code = request.GET['code']
         f.write("============wechat start===========\n")
+        code = request.GET['code']
         f.write('code: ' + code + '\n')
 
         access_token_req_dict = {
@@ -230,12 +230,13 @@ def wechat_login(request):
 
         f.write('wx_user_info: ' + wx_user_info + '\n')
         f.close()
+        return HttpResponse('login_success')
     except:
         f = open("wechat_test.txt", "a+")
         f.write('login failure')
         f.close()
 
-        return None
+        return HttpResponse('login_failure')
     return
 
 
