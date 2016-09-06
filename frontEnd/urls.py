@@ -29,14 +29,12 @@ urlpatterns = patterns('',
                        url(r'^user/(?P<method>\w+)/?(?P<Oid>\w*)$', views.user, name='user'),
                        url(r'^qqlogin/$', views.qq_login, name='qqlogin'),
                        url(r'^wblogin/$', views.weibo_login, name='weibo_login'),
-                       url(r'^wechatlogin/$', views.wechat_login, name='wechat-login'),
+
+                       url(r'^wechatlogin/$', views.wechat_login),
+
                        url(r'^host_center/(?P<method>\w+)/?(?P<Oid>\w*)$', views.host_center, name='host_center'),
 
                        )
 
 
 
-
-# https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&scope=snsapi_userinfo&response_type=code&state=STATE#wechat_redirect
-
-# https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect

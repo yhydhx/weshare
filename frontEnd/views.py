@@ -26,7 +26,7 @@ import time
 from urllib import urlencode, unquote
 import urllib2
 import logging
-from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY, WEIBO_APPKEY, WEIBO_SECRET
+from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY, WEIBO_APPKEY, WEIBO_SECRET, WECHAT_APPID, WECHAT_SECRET
 
 
 def index(request):
@@ -197,11 +197,45 @@ def logout(request):
 def wechat_login(request):
     try:
         f = open("wechat_test.txt", "a+")
+        f.write("============wechat start===========\n")
+        code = request.GET['code']
+        f.write('code: ' + code + '\n')
 
+        access_token_req_dict = {
+            'appid': WECHAT_APPID,
+            'secret': WECHAT_SECRET,
+            'code': code,
+            'grant_type': 'authorization_code',
+        }
 
+        address_token_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?' + urlencode(access_token_req_dict)
+        f.write('address_token_url: ' + address_token_url + '\n')
+
+        access_token_ret = urllib2.urlopen(address_token_url).read()
+        f.write('access_token_url: ' + access_token_ret + '\n')
+
+        access_token_dict = json.loads(access_token_ret)
+        access_token = access_token_dict['access_token']
+        expires_in = access_token_dict['expires_in']
+        openid = access_token_dict['openid']
+        scope = access_token_dict['scope']
+
+        tmp_dict = {
+            'access_token': access_token,
+            'openid': openid,
+        }
+        address3 = 'https://api.weixin.qq.com/sns/userinfo?' + urlencode(tmp_dict)
+
+        wx_user_info = urllib2.urlopen(address3).read()
+
+        f.write('wx_user_info: ' + wx_user_info + '\n')
+        f.close()
+        return HttpResponse('login_success')
     except:
-        return None
-    return
+        f = open("wechat_test.txt", "a+")
+        f.write('login failure')
+        f.close()
+        return HttpResponse('login_failure')
 
 
 @csrf_exempt
