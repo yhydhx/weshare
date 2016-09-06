@@ -228,14 +228,23 @@ def wechat_login(request):
 
         wx_user_info = urllib2.urlopen(address3).read()
 
+        wx_user = json.loads(wx_user_info)
+        nickname = wx_user['nickname']
+        openid = wx_user['openid']
+        headimgurl = wx_user['headimgurl']
+
         f.write('wx_user_info: ' + wx_user_info + '\n')
         f.close()
-        return HttpResponse('login_success')
+
+        current_user = TmpUser(username=nickname, icon=headimgurl)
+        return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': current_user},
+                                  context_instance=RequestContext(request))
     except:
         f = open("wechat_test.txt", "a+")
         f.write('login failure')
         f.close()
-        return HttpResponse('login_failure')
+        return HttpResponse("login failure")
+
 
 
 @csrf_exempt
