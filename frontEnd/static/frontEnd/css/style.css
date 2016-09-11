@@ -7980,7 +7980,8 @@ p {
   background: #666666 !important;
 }
 .ct-u-colorMotive {
-  color: #4e4e4e !important;               /* here  */
+  /*color: #4e4e4e !important;*/               /* here  */
+  color:white;
 }
 .ct-u-colorPrimary {
   color: #337ab7 !important;

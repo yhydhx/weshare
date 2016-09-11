@@ -62,7 +62,7 @@
                         <hr>
                         <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
 
-                            <select class="form-control" id="minor_topic_id" name="minor_topic_id" required>
+                            <select class="form-control" id="minor_topic_id" name="minor_topic_id" required onchange="qingkong();">
                                 <option value="">选择小话题</option>
 
                                 {% for minor in topic.minor_topic_list %}
@@ -196,4 +196,10 @@ function showFeatures(tag){
     }
 </script>
 
+<!-- 切换小话题后，清空input -->
+<script>
+    function qingkong(){
+        $("[name='feature_name']").val('');
+    }
+</script>
 {% endblock %}

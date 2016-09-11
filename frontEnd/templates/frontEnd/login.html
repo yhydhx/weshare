@@ -34,7 +34,7 @@
                         {% csrf_token %}
                         <div class="ct-panel-inner">
                             <div class="form-group">
-                                <input id="email" name="email" required class="form-control form-control--type2" placeholder="用户名/邮箱/手机号">
+                                <input id="email" name="email" required class="form-control form-control--type2" placeholder="邮箱">
                             </div>
                             <div class="form-group">
                                 <input id="password" name="password" type="password" required
@@ -53,7 +53,7 @@
                             <div style="text-align: right; padding-top: 10%">
                                 <a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101349090&redirect_uri=http://www.wshere.com/qqlogin/&state=test&scope=get_user_info"><img alt="QQ登录" id="qqlogin" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
                                 <a href="https://api.weibo.com/oauth2/authorize?client_id=4233883551&redirect_uri=http://www.wshere.com/wblogin/&scope=all&display=default"><img src="http://www.easyicon.net/api/resizeApi.php?id=1164436&size=48" width="30px" height="30px"></a>        <!--先留在这里,到时候加上图标这些-->
-                                <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wx2c49167d4a989b89&redirect_uri=http://www.wshere.com/wechatlogin/&response_type=code&scope=snsapi_login&state=test#wechat_redirect"> <img src="http://www.easyicon.net/api/resizeApi.php?id=1164443&size=48" width="30px" height="30px"></a>
+                                <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxcf9810a3cab41902&redirect_uri=http://www.wshere.com/wechatlogin/&response_type=code&scope=snsapi_login&state=test#wechat_redirect"> <img src="http://www.easyicon.net/api/resizeApi.php?id=1164443&size=48" width="30px" height="30px"></a>
                             </div>
                         </div>
                     </form>

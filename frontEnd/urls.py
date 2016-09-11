@@ -29,7 +29,12 @@ urlpatterns = patterns('',
                        url(r'^user/(?P<method>\w+)/?(?P<Oid>\w*)$', views.user, name='user'),
                        url(r'^qqlogin/$', views.qq_login, name='qqlogin'),
                        url(r'^wblogin/$', views.weibo_login, name='weibo_login'),
-                       url(r'^wechatlogin/$', views.wechat_login, name='wechat-login'),
+
+                       url(r'^wechatlogin/$', views.wechat_login),
+
                        url(r'^host_center/(?P<method>\w+)/?(?P<Oid>\w*)$', views.host_center, name='host_center'),
 
                        )
+
+
+

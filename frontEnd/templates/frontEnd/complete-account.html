@@ -2,6 +2,9 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}
+<!-- ZUI 时间选择器 -->
+<link rel="stylesheet" type="text/css" href="{% static 'frontEnd/plugins/datetimepicker/datetimepicker.min.css'%}">
+
 <body class="cssAnimate">
 
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340"
@@ -174,12 +177,18 @@
                         <input id="qq" name="qq" required class="form-control form-control--type2">
                     </div>
 
+                    <div class="form-group">
+                        <label for="alipay" class="required">支付宝</label>
+                        <input id="alipay" name="alipay" required class="form-control form-control--type2">
+                    </div>
+
 
                     <label>请选择您的学历</label>
                     <select class="form-control" onchange="showEducation(this.value)">
                       <option>本科</option>
                       <option>硕士</option>
                       <option>博士</option>
+                      <option>其他</option>
                     </select>
                     <div id="Education">
                         <input type="hidden" name="education" value="1">   
@@ -192,18 +201,26 @@
                     <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                     <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                     <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+                    <input type="text" class="form-control form-date" id="txtScBeginTime" name="school1BeginTime" placeholder="点此选择开始时间">
+                    <input type="text" class="form-control form-date" id="txtScEndTime" name="school1EndTime" placeholder="点此选择结束时间">
+                    
+                    <br><br><br>
 
                     <input type="hidden"  id="MtxtSc2" name="schoolID2">
-                    <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校和专业" style="display:none;"/>
+                    <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校和专业" style="display:none; margin-top: 10px; "/>
                     <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                     <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                     <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+                    <input type="text" class="form-control form-date" id="MtxtScBeginTime" name="school2BeginTime" placeholder="点此选择开始时间" style="display:none;">
+                    <input type="text" class="form-control form-date" id="MtxtScEndTime" name="school2EndTime" placeholder="点此选择结束时间" style="display:none;">
 
                     <input type="hidden"  id="PtxtSc2" name="schoolID3">
-                    <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校和专业" style="display:none;"/>
+                    <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校和专业" style="display:none; margin-top: 10px; "/>
                     <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                     <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                     <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+                    <input type="text" class="form-control form-date" id="PtxtScBeginTime" name="school3BeginTime" placeholder="点此选择开始时间" style="display:none;">
+                    <input type="text" class="form-control form-date" id="PtxtScEndTime" name="school3EndTime" placeholder="点此选择结束时间" style="display:none;">
 
 
 
@@ -236,6 +253,51 @@
 {% endblock %}
 
 {% block js %}
+<!-- ZUI 时间选择器 -->
+<script src="{% static 'frontEnd/plugins/datetimepicker/datetimepicker.min.js'%}"></script>
+<script>
+// 选择时间和日期
+$(".form-datetime").datetimepicker(
+{
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1,
+    format: "yyyy-mm-dd hh:ii"
+});
+// 仅选择日期
+$(".form-date").datetimepicker(
+{
+    language:  "zh-CN",
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: "yyyy-mm-dd"
+});
+
+// 选择时间
+$(".form-time").datetimepicker({
+    language:  "zh-CN",
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 1,
+    minView: 0,
+    maxView: 1,
+    forceParse: 0,
+    format: 'hh:ii'
+});
+</script>
+
+
 <!-- 富文本编辑器 -->
 <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/kindeditor.js'%}"></script>
 <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/lang/zh-CN.js'%}"></script>
@@ -251,20 +313,49 @@
     function showEducation(value){
         console.log(value);
         if (value === '博士') {
-            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"3\">");
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"2\">");
             $("#MtxtSc").show();
+            $('#MtxtScBeginTime').show();
+            $('#MtxtScEndTime').show();
+
             $("#PtxtSc").show();
+            $('#PtxtScBeginTime').show();
+            $('#PtxtScEndTime').show();
 
         }
         else if (value === '硕士') {
-            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"2\">");
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"1\">");
             $("#MtxtSc").show();
+            $('#MtxtScBeginTime').show();
+            $('#MtxtScEndTime').show();
+
             $("#PtxtSc").hide();
+            $('#PtxtScBeginTime').hide();
+            $('#PtxtScEndTime').hide();
         }
         else if (value ==='本科') {
-            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"1\">");
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"0\">");
             $("#MtxtSc").hide();
+            $('#MtxtScBeginTime').hide();
+            $('#MtxtScEndTime').hide();
+
             $("#PtxtSc").hide();
+            $('#PtxtScBeginTime').hide();
+            $('#PtxtScEndTime').hide();
+        }
+        else if (value === '其他') {
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"3\">");
+            $("#txtSc").hide();
+            $('#txtScBeginTime').hide();
+            $('#txtScEndTime').hide();
+
+            $("#MtxtSc").hide();
+            $('#MtxtScBeginTime').hide();
+            $('#MtxtScEndTime').hide();
+
+            $("#PtxtSc").hide();
+            $('#PtxtScBeginTime').hide();
+            $('#PtxtScEndTime').hide();
         }
         else{
 
