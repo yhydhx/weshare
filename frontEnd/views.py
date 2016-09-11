@@ -449,6 +449,7 @@ def complete_account(request):
             service_time = request.POST['service-time']
             max_payment = float(request.POST['max-payment'])
             qq = request.POST['qq']
+            alipay = request.POST['alipay']
 
             # Education Infomation
             education = request.POST['education']
@@ -489,6 +490,7 @@ def complete_account(request):
             host.bachelor = bachelor
             host.graduate = graduate
             host.phd = phd
+            host.alipay = alipay
             # host.bachelor_major = bachelor_major
             # host.graduate_major = graduate_major
             # host.phd_major = phd_major

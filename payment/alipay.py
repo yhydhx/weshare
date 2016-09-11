@@ -156,12 +156,12 @@ def create_direct_pay_by_user_on_app(tn, subject, body, bank, total_fee):
     params['biz_content']['product_code'] = "QUICK_MSECURITY_PAY"
 
     params['biz_content'] = json.dumps(params['biz_content'])
-    params['sign_type'] = "RSA"  
+    params['sign_type'] = settings.ALIPAY_APP_SIGN_TYPE  
     params,prestr = params_filter_app(params)  
     
-    params['sign'] = build_mysign(prestr, settings.ALIPAY_KEY, "RSA")  
+    params['sign'] = build_mysign(prestr, settings.ALIPAY_KEY, settings.ALIPAY_APP_SIGN_TYPE)  
 
-    return generate_rsa_str(params)
+    return params['sign'],alipaygenerate_rsa_str(params)
 
 def generate_rsa_str(params):
     rsa_str = ""
@@ -173,11 +173,10 @@ def generate_rsa_str(params):
         #print k,tmp_dict[k]
         rsa_str += urlencode(tmp_dict)+"&"
     tmp_dict = {}
-    k= "sign"
+    k = "sign"
     tmp_dict[k] = params[k]
     rsa_str += urlencode(tmp_dict)
     return rsa_str
-
 
 def params_filter_app(params):
     ks = sorted(params.keys())
@@ -193,3 +192,4 @@ def params_filter_app(params):
             #print k,prestr
     prestr = prestr[:-1]  
     return newparams, prestr  
+

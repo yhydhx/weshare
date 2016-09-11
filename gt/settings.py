@@ -75,6 +75,9 @@ DATABASES = {
     }
 }
 
+#APP session 过期时间 暂时设置为一个月
+APP_USER_SESSION_EXPIRE_TIME = 30*24*60*60
+
 # 用户状态
 HOST_STATE = {
     'GUEST': 0,

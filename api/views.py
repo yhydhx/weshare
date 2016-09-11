@@ -210,6 +210,7 @@ def user(request, method, Oid):
                         Info['message'] = "密码错误"
                         return HttpResponse(json.dumps(Info),content_type="application/json")
                     else:
+                        request.session.set_expiry(APP_USER_SESSION_EXPIRE_TIME) 
                         request.session['email'] = email
                         Info['message'] = "登录成功"
                         Info['state'] = 0
@@ -532,7 +533,8 @@ def bill(request,method,Oid):
         )
         bill.save()
 
-        url=create_direct_pay_by_user (bill.bill_id,bill.subject,bill.body,"",bill.total_fee)  
+        app_sign,url=create_direct_pay_by_user_on_app (bill.bill_id,bill.subject,bill.body,"",bill.total_fee)  
+        request.session['alipay_sign'] = app_sign
 
         Info['state'] = 0
         Info['message'] = "付款链接创建成功！"
@@ -541,15 +543,27 @@ def bill(request,method,Oid):
 
     elif method == "verify":
         '''
-            从阿里巴巴返回的数据
+            从APP返回的数据
         '''
         try:
-            bill = Bill.objects.get(bill_id = Oid)
-            bill.state = BILL_STATE.PAID
-            bill.save()
-            appointment = Appointment.objects.get(appointment_id = bill.bill_id)
-            appointment.state = APPOINTMENT_STATE.PAID
-            appointment.save()
+            
+            sign_string = eval(request.POST.get("sign_string"))
+            sign = sign_string['sign']
+            if sign == request.session['alipay_sign'] and sign_string['code'] == "10000":
+                #删除用户中的session
+                del request.session['alipay_sign']
+
+                bill = Bill.objects.get(bill_id = sign_string['alipay_trade_app_pay_response']['trade_no'])
+                if bill.paid() == True:
+                    if bill.bill_type == BILL_TYPE["APPOINTMENT"]:
+                        appointment = Appointment.objects.get(appointment_id = bill.bill_id)
+                        Info['data']['appointment'] = appointment.format_dict_via_app()
+                        Info['message'] = "付款成功"
+                        return HttpResponse(json.dumps(Info), content_type="application/json")
+            else:
+                Info['state'] = 303
+                Info['message'] = "验签失败"
+                return HttpResponse(json.dumps(Info), content_type="application/json")
         except:
             return render(request,"frontEnd/error.html")
 
@@ -596,7 +610,7 @@ def bill(request,method,Oid):
             )
             message.save()
             Info['message'] = "添加成功"
-
+            return HttpResponse(json.dumps(Info), content_type="application/json")
     elif method == "test":
         url = create_direct_pay_by_user_on_app(str(random.random())[-5:],"weshare","weshare","","0.01")
         return HttpResponse(url, content_type="application/json")

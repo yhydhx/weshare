@@ -364,7 +364,74 @@ method : POST
 	'state':
 	'message':
 	'data':{
-		'url'  :    ~付款链接
+		'url'  :    ~付款string
 }
 
+第八步：
+APP端获取了支付回调的json，返回给服务端验签并改变订单状态
+
+url : /api/bill/verify
+method: POST
+
+data = {
+	"sign_string"     ~ Char   支付宝返回的session，将其字符串化，然后返回
+}
+
+验签成功：
+
+{
+	'state': 0
+	'message':  "付款成功"
+ 	'data':{
+		'appointment'  : {
+					'id':         ~该订单的唯一标示符号
+			        'state'  :     ~  目前的订单状态     'INITED': 0,  # 创建订单    'CERTIFIED': 1,  # 确认   'PAID': 2,  # 付款     'COMPLETED': 3,  # 完成了  'FINISHED': 4  # 结算完成
+			        'from_user_id'  :     ~  
+			        'to_host_id'  :     ~  
+			        'from_user_icon'  :     ~  
+			        'to_host_icon'  :     ~  
+			        'intro_and_question'  :     ~  
+			        'appointment_time'  :     ~  
+			        'recommend_info'  :     ~  
+			        'recommend_begin_time'  :     ~  
+			        'recommend_end_time'  :     ~  
+			        'recommend_length'  :     ~  
+			        'appointment_id'  :     ~  唯一的订单号
+				}
+}
+
+验签失败：
+
+{
+	'state': 303
+	'message': "验签失败"
+	'data': {}
+}
+
+
+
+第八步：
+聊完点击完成
+
+url : /bill/end_talk
+method : POST
+
+{
+	'appnt_id':    ~ 订单的ID
+}
+
+点击完会让人填写此次经历的评价
+
+第九步：
+评价
+
+url : /bill/evaluation	
+method : POST
+
+{
+	appt_id :    ~ 订单的ID
+	content :    ~ 评价的内容
+}
+
+随后会返回host主页
 

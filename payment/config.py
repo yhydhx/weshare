@@ -17,6 +17,8 @@ class settings:
   ALIPAY_SELLER_EMAIL = 'kaixuant@outlook.com'  
   
   ALIPAY_SIGN_TYPE = 'MD5'  
+
+  ALIPAY_APP_SIGN_TYPE = "RSA"
   
   # 付完款后跳转的页面（同步通知） 要用 http://格式的完整路径，不允许加?id=123这类自定义参数  
   ALIPAY_RETURN_URL='http://www.wshere.com/alipay/return'  
