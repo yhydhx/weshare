@@ -188,6 +188,7 @@
                       <option>本科</option>
                       <option>硕士</option>
                       <option>博士</option>
+                      <option>其他</option>
                     </select>
                     <div id="Education">
                         <input type="hidden" name="education" value="1">   
@@ -312,7 +313,7 @@ $(".form-time").datetimepicker({
     function showEducation(value){
         console.log(value);
         if (value === '博士') {
-            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"3\">");
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"2\">");
             $("#MtxtSc").show();
             $('#MtxtScBeginTime').show();
             $('#MtxtScEndTime').show();
@@ -323,7 +324,7 @@ $(".form-time").datetimepicker({
 
         }
         else if (value === '硕士') {
-            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"2\">");
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"1\">");
             $("#MtxtSc").show();
             $('#MtxtScBeginTime').show();
             $('#MtxtScEndTime').show();
@@ -333,7 +334,21 @@ $(".form-time").datetimepicker({
             $('#PtxtScEndTime').hide();
         }
         else if (value ==='本科') {
-            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"1\">");
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"0\">");
+            $("#MtxtSc").hide();
+            $('#MtxtScBeginTime').hide();
+            $('#MtxtScEndTime').hide();
+
+            $("#PtxtSc").hide();
+            $('#PtxtScBeginTime').hide();
+            $('#PtxtScEndTime').hide();
+        }
+        else if (value === '其他') {
+            $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"3\">");
+            $("#txtSc").hide();
+            $('#txtScBeginTime').hide();
+            $('#txtScEndTime').hide();
+
             $("#MtxtSc").hide();
             $('#MtxtScBeginTime').hide();
             $('#MtxtScEndTime').hide();
