@@ -486,7 +486,7 @@ def complete_account(request):
                 request.POST['qq']:
 
             self_introduction = request.POST['self-introduction']
-            gender = request.POST['gender']
+            gender = request.POST['gender'] 
             motto = request.POST['motto']
             min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
@@ -1036,6 +1036,8 @@ def general_search(request):
         Info['message'] = "找不到包含关键字的内容"
 
     return HttpResponse(json.dumps(search_result), content_type="application/json")
+
+
 
 
 '''

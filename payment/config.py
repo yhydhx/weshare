@@ -2,19 +2,19 @@
   
 class settings:  
   # 安全检验码，以数字和字母组成的32位字符  
-  ALIPAY_KEY = 'rj05ktzrcmahy859qfdhqfdpk9q6jfz5'  
+  ALIPAY_KEY = 'ogdhuv0vu7mwyfnvpyox6qctjgo4n2oq'  
   
   ALIPAY_INPUT_CHARSET = 'utf-8'  
   
   # 合作身份者ID，以2088开头的16位纯数字  
-  ALIPAY_PARTNER = '2088912886788535'  
+  ALIPAY_PARTNER = '2088421797331962'  
   
   # app端支付的APP ID
-  ALIPAY_APP_ID = '2016081101731899'
+  ALIPAY_APP_ID = '2016090101833175'
   
   
   # 签约支付宝账号或卖家支付宝帐户  
-  ALIPAY_SELLER_EMAIL = 'kaixuant@outlook.com'  
+  ALIPAY_SELLER_EMAIL = 'wesharehere@163.com'  
   
   ALIPAY_SIGN_TYPE = 'MD5'  
 

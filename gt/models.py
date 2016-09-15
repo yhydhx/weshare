@@ -234,7 +234,7 @@ class Host(models.Model):
             '''
 
             tag = ""
-            if each_host.gender == 1:
+            if each_host.gender == GENDER['MALE']:
                 tag += "male "
             else:
                 tag += "female "
@@ -664,9 +664,10 @@ class User_data(models.Model):
 
 class Certificate(models.Model):  # igno
     host_id = models.CharField(max_length=100)
-    c_name = models.CharField(max_length=200)
+    is_ceritifies = models.IntegerField()
+    c_name = models.CharField(max_length=200)     #显示的名字
     c_state = models.IntegerField()
-
+    c_introduction = models.CharField(max_length = 200)
 
 class Admin(models.Model):
     username = models.CharField(max_length=100)
@@ -727,8 +728,8 @@ class Mail(models.Model):
         msg.send()
 
     def register_success(self,to,content):
-        context = {"content": content}
-
+        context = {"content": content,'username':"dai"}
+        subject = "恭喜您成为我们的HOST！"
         email_template_name = 'backEnd/register_success_template.html'
         t = loader.get_template(email_template_name)
 

@@ -186,7 +186,27 @@ def bill(request,method,Oid):
 		return HttpResponseRedirect("/bill/detail/"+appt_id)
 
     elif method == "test":
-		return HttpResponse("test")
+    	host = Host.objects.get(username="haixing")
+        subject = "这就是subjecgt？"
+        content = "恭喜您成为我们的大Host"
+        to = ["87826632@qq.com"]
+        # sendMail(subject,to,content)
+
+        mail = Mail(	
+            subject = subject,
+            from_email = EMAIL_HOST_USER,
+            to_email = host.email,
+            host_id = host.id,
+            admin_id = request.session['email'],
+            content = content,
+            is_success = 0
+            )
+        mail.save()
+        mail.register_success(to,content)
+        #send success, update the data
+        mail.is_success = 1
+        mail.save()
+        return HttpResponse("test")
 
     elif method == "end_talk":
 		if request.method == "POST":

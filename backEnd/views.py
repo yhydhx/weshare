@@ -309,9 +309,9 @@ def school(request, method, Oid):
                 des_origin_f.write(chunk)
             des_origin_f.close()
             
-            Scholl.objects.filter(id=Oid).update( s_image = des_origin_path)
-            img.save()
-            return HttpResponseRedirect('showImgList')
+            School.objects.filter(id=Oid).update( s_image = des_origin_path)
+
+            return HttpResponseRedirect('/dc/school/show')
         else:
             return HttpResponse('allowed only via POST')
 
