@@ -308,8 +308,8 @@ def school(request, method, Oid):
             for chunk in tmpImg.chunks():
                 des_origin_f.write(chunk)
             des_origin_f.close()
-            
-            School.objects.filter(id=Oid).update( s_image = des_origin_path)
+           
+            School.objects.filter(id=Oid).update( s_image =  '/files/icons/' + mark_list + '.jpeg')
 
             return HttpResponseRedirect('/dc/school/show')
         else:
