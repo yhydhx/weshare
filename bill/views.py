@@ -58,9 +58,12 @@ def bill(request,method,Oid):
         except:
             return render(request,"frontEnd/404.html")
 
-		#generate bill id
-		#
+		
+        #send email to the host
+        # create_bill_mail  = Mail()
+        # create_bill_mail.
 
+		#generate bill id
 
     	appointment = Appointment(
 			state = APPOINTMENT_STATE['INITED'] ,

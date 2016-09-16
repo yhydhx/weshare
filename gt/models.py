@@ -727,7 +727,7 @@ class Mail(models.Model):
 
         msg.send()
 
-    def register_success(self,to,content):
+    def register_success(self,subject,to,content):
         context = {"content": content,'username':"dai"}
         subject = "恭喜您成为我们的HOST！"
         email_template_name = 'backEnd/register_success_template.html'

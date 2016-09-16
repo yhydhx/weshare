@@ -61,7 +61,14 @@ def index(request):
     Info.update(recommend_host.get_index_statistic())
 
     Info['object'] = obj
+    
     Info['data'] = {}
+
+
+    Info['data']['school_on_index_list'] = []
+    #get some school on index
+    uestc = School.objects.get(id = "57a5a16fd3486d8aedd93a30")
+    Info['data']['school_on_index_list'].append(uestc)
 
     login_flag = False
 
