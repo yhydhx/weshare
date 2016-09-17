@@ -2,7 +2,6 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}
-<body class="cssAnimate">
 
     {% if host.state == 0 %}
 
@@ -321,9 +320,7 @@
     </div>
     {% endif %}
 
-</div><!-- 接：<div id="ct-js-wrapper" class="ct-pageWrapper"> 很重要：勿删 -->
 
-</body>
 {% endblock %}
 
 {% block js %}

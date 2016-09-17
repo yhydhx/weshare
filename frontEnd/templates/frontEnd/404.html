@@ -2,31 +2,28 @@
 {% load staticfiles %}<!-- 加载全局变量 --> 
 
 {% block body %}
-<body class="cssAnimate">
 
-    <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop50 ct-u-paddingBottom100" data-height="100%" data-type="kenburns" data-bg-image-mobile="{% static 'frontEnd/images/content/cars/bg-06.jpg' %}">
-        <div class="ct-mediaSection-kenburnsImageContainer">
-            <img src="{% static 'frontEnd/images/content/cars/bg-06.jpg' %}" alt="">
-        </div>
-        <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom text-center">
-            <div class="container">
-                <h1 class="ct-404-header ct-u-marginBottom40"><b>404</b></h1>
+<section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop50 ct-u-paddingBottom100" data-height="100%" data-type="kenburns" data-bg-image-mobile="{% static 'frontEnd/images/content/cars/bg-06.jpg' %}">
+    <div class="ct-mediaSection-kenburnsImageContainer">
+        <img src="{% static 'frontEnd/images/content/cars/bg-06.jpg' %}" alt="">
+    </div>
+    <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom text-center">
+        <div class="container">
+            <h1 class="ct-404-header ct-u-marginBottom40"><b>404</b></h1>
 
-                <h2><small class="ct-fw-lighter">You have now left the known universe, proceed with caution!</small></h2>
+            <h2><small class="ct-fw-lighter">You have now left the known universe, proceed with caution!</small></h2>
 
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <a href="index.html" class="btn btn-lg btn-wide btn-motive ct-u-marginBoth30"><span>Take me back to friendlier places</span></a>
-                        <div class="form-group ct-widget-search ct-u-marginBottom30">
-                            <input placeholder="Search..." type="text" name="field[]" class="form-control">
-                            <button type="submit"><i class="fa fa-search fa-fw"></i></button>
-                        </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <a href="index.html" class="btn btn-lg btn-wide btn-motive ct-u-marginBoth30"><span>Take me back to friendlier places</span></a>
+                    <div class="form-group ct-widget-search ct-u-marginBottom30">
+                        <input placeholder="Search..." type="text" name="field[]" class="form-control">
+                        <button type="submit"><i class="fa fa-search fa-fw"></i></button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-<!-- </div> --><!-- 接：<div id="ct-js-wrapper" class="ct-pageWrapper"> 很重要：勿删 -->
-</body>
 {% endblock %}

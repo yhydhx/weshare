@@ -28,11 +28,16 @@
     <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script><!-- 模板自带：请勿删除 -->
 </head>
 
+<body class="cssAnimate">
+
 {% include "frontEnd/nav.html" %}<!-- 加载导航栏 -->
 
 {% block body %}{% endblock %}<!-- 网页主体 -->
 
 {% include "frontEnd/footer.html" %}<!-- 加载footer -->
+
+</body>
+
 
 <script src="{% static 'frontEnd/js/jquery.min.js' %}"></script><!-- jquery依赖 -->
 <script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script><!-- bootstrap -->

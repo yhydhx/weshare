@@ -2,7 +2,11 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}
-<body class="cssAnimate" style="background-color:white;">
+<style>
+    body{
+        background-color:white;
+    }
+</style>
 
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340"
              data-type="parallax" data-stellar-background-ratio="0.3"
@@ -62,9 +66,6 @@
         </div>
     </form>
 
-</div><!-- 接：<div id="ct-js-wrapper" class="ct-pageWrapper"> 很重要：勿删 -->
-
-</body>
 {% endblock %}
 
 {% block js %}
