@@ -1,0 +1,28 @@
+
+{% load staticfiles %}
+
+<form method = 'post' action = '/dc/school/addImage/{{school.id}}'  enctype="multipart/form-data">
+	 {% csrf_token %}
+	
+	<h3>学校 {{school.s_name}}</h3>
+    <img src="{{school.s_image}}">
+
+	<input name='img' id='img' type="file" onchange="change(this.value)" >
+	<input type='hidden' id = 'type' name = 'type' value="">
+
+    <input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+
+<script type="text/javascript" src="{% static 'blog/js/tinymce/tinymce.min.js' %}"  ></script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+   language:"zh_CN",		
+ });
+    function change(imgName){
+        var imgInfo = document.getElementById('type');
+        var infoArr = imgName.split('.');
+        imgInfo.value = infoArr[infoArr.length-1];
+    }
+</script>

@@ -308,10 +308,10 @@ def school(request, method, Oid):
             for chunk in tmpImg.chunks():
                 des_origin_f.write(chunk)
             des_origin_f.close()
-            
-            Scholl.objects.filter(id=Oid).update( s_image = des_origin_path)
-            img.save()
-            return HttpResponseRedirect('showImgList')
+           
+            School.objects.filter(id=Oid).update( s_image =  '/files/icons/' + mark_list + '.jpeg')
+
+            return HttpResponseRedirect('/dc/school/show')
         else:
             return HttpResponse('allowed only via POST')
 
@@ -511,7 +511,30 @@ def user(request, method, Oid):
 
     elif method == 'pass':
 
+        #send email 
+        host = Host.objects.get(id=Oid)
+        subject = "恭喜您成功成为我们的HOST!"
+        content = "恭喜您成为我们的分享者！"
+        to = [host.email]
+        # sendMail(subject,to,content)
+
+        mail = Mail(    
+            subject = subject,
+            from_email = EMAIL_HOST_USER,
+            to_email = host.email,
+            host_id = host.id,
+            admin_id = request.session['adminname'],
+            content = content,
+            is_success = 0
+            )
+        mail.save()
+        mail.register_success(to,content)
+        #send success, update the data
+        mail.is_success = 1
+        mail.save()
+
         Host.objects.filter(id=Oid).update(state=2)
+
 
         return HttpResponseRedirect('/dc/user/host/')
 

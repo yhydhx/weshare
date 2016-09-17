@@ -125,7 +125,6 @@ def verify(request,cbid):
 
         #如果订单时间距现在超过1天，跳转到错误页面！  
         #避免网站信息流失  
-          
         return render_to_response('public_verify.html',{'cb':cb},RequestContext(request))  
     except ObjectDoesNotExist:  
         return HttpResponseRedirect("/err/no_object")  

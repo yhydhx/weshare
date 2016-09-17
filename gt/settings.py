@@ -75,6 +75,9 @@ DATABASES = {
     }
 }
 
+#APP session 过期时间 暂时设置为一个月
+APP_USER_SESSION_EXPIRE_TIME = 30*24*60*60
+
 # 用户状态
 HOST_STATE = {
     'GUEST': 0,
@@ -144,7 +147,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mxhichina.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'service@wshere.com'
-EMAIL_HOST_PASSWORD = 'WeShareHere001'
+EMAIL_HOST_PASSWORD = 'WeShareHere222'
 # EMAIL_USE_TLS = True
 EMAIL_SSL_PORT = 465
 

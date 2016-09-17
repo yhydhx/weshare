@@ -61,7 +61,14 @@ def index(request):
     Info.update(recommend_host.get_index_statistic())
 
     Info['object'] = obj
+    
     Info['data'] = {}
+
+
+    Info['data']['school_on_index_list'] = []
+    #get some school on index
+    uestc = School.objects.get(id = "57a5a16fd3486d8aedd93a30")
+    Info['data']['school_on_index_list'].append(uestc)
 
     login_flag = False
 
@@ -486,12 +493,13 @@ def complete_account(request):
                 request.POST['qq']:
 
             self_introduction = request.POST['self-introduction']
-            gender = request.POST['gender']
+            gender = request.POST['gender'] 
             motto = request.POST['motto']
             min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
             max_payment = float(request.POST['max-payment'])
             qq = request.POST['qq']
+            alipay = request.POST['alipay']
 
             # Education Infomation
             education = request.POST['education']
@@ -532,6 +540,7 @@ def complete_account(request):
             host.bachelor = bachelor
             host.graduate = graduate
             host.phd = phd
+            host.alipay = alipay
             # host.bachelor_major = bachelor_major
             # host.graduate_major = graduate_major
             # host.phd_major = phd_major
@@ -1034,6 +1043,8 @@ def general_search(request):
         Info['message'] = "找不到包含关键字的内容"
 
     return HttpResponse(json.dumps(search_result), content_type="application/json")
+
+
 
 
 '''
