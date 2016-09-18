@@ -709,6 +709,15 @@ class Mail(models.Model):
     content = models.TextField()
     is_success = models.IntegerField()
 
+    def save_email(self,subject,from_email,to_email,host_id,admin_id,content,is_success):
+        self.subject = subject
+        self.from_email = from_email
+        self.to_email = to_email
+        self.host_id = host_id
+        self.admin_id = admin_id
+        self.content = content
+        self.is_success = is_success
+        self.save()
 
     def sendMail(self, subject, to, content):
         # to = ['yhydhx@126.com']
@@ -726,11 +735,10 @@ class Mail(models.Model):
         msg.attach_alternative(html_content, "text/html")
 
         msg.send()
-        msg.save_email(subject,from_email,to_email,host_id,admin_id,content,1)
-
-    def register_success(self,subject,to,content):
+       
+    def register_success(self,to,content,host):
+        subject = "欢迎您加入weshare！"
         context = {"content": content,'username':"dai"}
-        subject = "恭喜您成为我们的HOST！"
         email_template_name = 'backEnd/register_success_template.html'
         t = loader.get_template(email_template_name)
 
@@ -740,12 +748,18 @@ class Mail(models.Model):
         # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
-
         msg.send()
 
-    def host_pass(self,to,content):
-        context = {"content": content}
+        #save email 
+        to_email = to[0]
+        host_id = host.id
+        self.save_email(subject,from_email,to_email,host_id,"0",content,1)
 
+        
+
+    def host_pass(self,to,content,host,admin):
+        context = {"content": content}
+        subject = "恭喜您成为我们的HOST！"
         email_template_name = 'backEnd/host_pass_template.html'
         t = loader.get_template(email_template_name)
         from_email = EMAIL_HOST_USER
@@ -755,7 +769,17 @@ class Mail(models.Model):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-    def bill_info(self,to,content):
+         #save email 
+        to_email = to[0]
+        host_id = host.id
+        admin_id = admin.id
+        self.save_email(subject,from_email,to_email,host_id,admin_id,content,1)
+
+
+
+
+    def bill_info(self,subject,to,content,host):
+        
         context = {"content": content}
 
         email_template_name = 'backEnd/bill_info_template.html'
@@ -766,6 +790,12 @@ class Mail(models.Model):
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+
+         #save email 
+        to_email = to[0]
+        host_id = host.id
+        self.save_email(subject,from_email,to_email,host_id,"0",content,1)
+
 
     def report(self,to,content):
         context = {"content": content}
