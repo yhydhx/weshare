@@ -1132,6 +1132,147 @@ data = {
 
 
 
+-----------------------------------------------------------------------------------------------
+
+分享者界面
+
+url:   /share/show
+method :GET
+
+function :
+1. 展现话题和小话题和分享者
+
+API:
+
+传输的数据(可不要)
+
+{
+	"page"    ~分页符号
+	"sortword"  :   ~ 排序关键字  这个我们要设立一个对应表，免得数据库泄露
+}
+
+
+分享者界面
+
+url:   /share/show
+method :POST
+
+function :
+1. 展现话题和小话题和分享者
+2. 用户已经选择好相应的话题了
+API:
+
+传输的数据
+
+{	
+	"m_name"  : 选择的话题的名字 
+	"t_name"  :	选择的小话题的名字
+    "m_id" : ~添加的 minor topic ID
+}
+
+
+返回的数据
+
+data = {
+	"m_name":   ~小话题的名字      /如果用户之前选择了的话
+	"t_name"	~话题的名字		/如果用户之前选择了的话
+	"topics" : [
+	   {
+	      "t_tag":				~ 话题标签
+	      "t_intro":				~ 话题简介
+	      "t_id":				~ 话题名字
+	      "minor_topics":[		~ 所属的小话题
+	         {
+	            "m_introduction":  ~ 小话题简介
+	            "m_topic":   ~ 所属大滑梯
+	            "id":		~ 小话题的id
+	            "m_name":   ~小话题的名称
+	         },
+	         {
+	            "m_introduction":  ~ 小话题简介
+	            "m_topic":   ~ 所属大滑梯
+	            "id":		~ 小话题的id
+	            "m_name":   ~小话题的名称
+	         },
+	         ......
+	      ],
+	      "t_name":				~话题名字
+	   },
+	   {
+	      "t_tag":				~ 话题标签
+	      "t_intro":				~ 话题简介
+	      "t_id":				~ 话题名字
+	      "minor_topics":[		~ 所属的小话题
+	         {
+	            "m_introduction":  ~ 小话题简介
+	            "m_topic":   ~ 所属大滑梯
+	            "id":		~ 小话题的id
+	            "m_name":   ~小话题的名称
+	         },
+	         {
+	            "m_introduction":  ~ 小话题简介
+	            "m_topic":   ~ 所属大滑梯
+	            "id":		~ 小话题的id
+	            "m_name":   ~小话题的名称
+	         },
+	         ......
+	      ],
+	      "t_name":				~话题名字
+	   },
+	   ......
+	],
+	"hosts": [
+		{
+    		'id' : char  用户的唯一标识符
+    		"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+				
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+
+		},{
+			'id' : char  用户的唯一标识符
+    		"username" : char
+			"gender" : int   ~ 1是男生0是女生
+			"motto" : char   ~ 座右铭
+			"introduction" : char  ~简介
+			"icon" : char  ~ 头像
+			"orders" : int  ~订单数量
+			"service_time" : char ~提供服务的时间
+			"max_payment" : float  
+			"min_payment" : float 
+				
+			"state" : int  ~状态 normal user  => 0  examing => 1  sharer => 2
+			"birth" : char ~生日
+			"qq_number" : char ~qq号码
+			"wechat" : char ~微信号
+
+			%%Education Infomation
+			"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
+			"bacholor" : char ~本科学校
+			"graduate" : char  ~硕士学校
+			"phd" : char  ~ 博士学校
+
+		},
+		.......     
+	],
+}
+
 
 
 
