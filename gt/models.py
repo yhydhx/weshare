@@ -397,7 +397,7 @@ class School(models.Model):
         tmp_school['s_display_index'] = self.s_display_index
         tmp_school['s_student_number'] = self.s_student_number
         tmp_school['s_image'] = self.s_image
-        tmp_school['id'] = self.id
+        tmp_school['s_id'] = self.id
         
         return tmp_school
 

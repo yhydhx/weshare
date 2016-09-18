@@ -314,6 +314,7 @@ Info = {
 	data: {
 		"school_on_index_list":[
 			{
+				"s_id"					~学校的id，可以通过 /school/detail/{{id}} 的形式进入学校主页
 		        "s_province": 			# 学校所代表的省份
 		        "s_image": 				#学校的图片
 		        "s_name": 				~学校的姓名
