@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 <div class="col-md-4" style="font-size: 20px; ">
-                    <a href="">more>></a>
+                    <a href="/school/show">more>></a>
                 </div>
             </div>
             
@@ -209,7 +209,7 @@
         <div class="container-fluid">
             {% block findschool %}
                 {% for school in data.school_on_index_list %}
-                    <a href="">
+                    <a href="/school/detail/{{ school.s_id }}">
                         <div class="row" style="background:url('{{ school.s_image }}');height: 200px;background-position: center;background-repeat: no-repeat; display: flex;align-items: center;justify-content: center; ">
                             <h2 style="color:black">{{ school.s_name }}</h2>
                         </div>
