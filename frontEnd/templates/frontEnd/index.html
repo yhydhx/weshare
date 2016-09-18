@@ -22,7 +22,6 @@
 
 
     <!-- 首页轮播模块 -->
-
     <div id="myNiceCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 60px; ">
       <!-- 圆点指示器 -->
       <!-- <ol class="carousel-indicators">
@@ -176,12 +175,17 @@
                     <a href="">more>></a>
                 </div>
             </div>
+            
 
-            <div class="row">
-                <div class="col-md-12">
-                    <img src="" alt="">
-                </div>
-            </div>
+            {% block findschool %}
+                {% for school in data.school_on_index_list %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="{{ school.s_image }}" alt="">
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endblock %}
             
             <!-- <div class="row">
                 <div class="itemCon" style="float: left">
