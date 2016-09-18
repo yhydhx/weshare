@@ -155,7 +155,7 @@
     </div>
 
     <!-- 首页地图-发现学校 模块 -->
-    <section class="ct-u-marginTop90 ct-u-paddingBottom10">
+    <section class="ct-u-marginTop90 ct-u-paddingBottom10" style="padding-bottom: 0px!important; ">
         <div class="container">
             <div class="row">
                 <div class="col-md-4"></div>
@@ -177,15 +177,7 @@
             </div>
             
 
-            {% block findschool %}
-                {% for school in data.school_on_index_list %}
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="{{ school.s_image }}" alt="">
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endblock %}
+            
             
             <!-- <div class="row">
                 <div class="itemCon" style="float: left">
@@ -212,8 +204,22 @@
                     {% endblock %}   
                 </div>
             </div> -->
+
         </div>
+        <div class="container-fluid">
+            {% block findschool %}
+                {% for school in data.school_on_index_list %}
+                    <a href="">
+                        <div class="row" style="background:url('{{ school.s_image }}');height: 200px;background-position: center;background-repeat: no-repeat; display: flex;align-items: center;justify-content: center; ">
+                            <h2 style="color:black">{{ school.s_name }}</h2>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% endblock %}            
+        </div>
+
     </section>
+
 
 
     <!-- 首页发现话题模块 -->
