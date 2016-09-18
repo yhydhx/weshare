@@ -67,10 +67,11 @@ def index(request):
 
     Info['data']['school_on_index_list'] = []
     #get some school on index
-    uestc = School.objects.get(id = "57a5a16fd3486d8aedd93a30")
+    uestc = School.objects.get(id = "57a5a16fd3486d8aedd93a30").format_dict()
     Info['data']['school_on_index_list'].append(uestc)
 
     login_flag = False
+
 
     try:
         # check the user is login or not

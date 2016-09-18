@@ -397,6 +397,8 @@ class School(models.Model):
         tmp_school['s_display_index'] = self.s_display_index
         tmp_school['s_student_number'] = self.s_student_number
         tmp_school['s_image'] = self.s_image
+        tmp_school['id'] = self.id
+        
         return tmp_school
 
     def get_single_school_detail(self,school_id):
@@ -708,8 +710,6 @@ class Mail(models.Model):
     is_success = models.IntegerField()
 
 
-
-
     def sendMail(self, subject, to, content):
         # to = ['yhydhx@126.com']
 
@@ -726,6 +726,7 @@ class Mail(models.Model):
         msg.attach_alternative(html_content, "text/html")
 
         msg.send()
+        msg.save_email(subject,from_email,to_email,host_id,admin_id,content,1)
 
     def register_success(self,subject,to,content):
         context = {"content": content,'username':"dai"}
