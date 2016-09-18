@@ -3,9 +3,86 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container-fluid" style="margin-top: 100px; ">
     <div class="row">
-        aaa
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <ol class="breadcrumb">
+                  <li><a href="/share/show">全部</a></li>
+                  <!-- <li><a href="#">Library</a></li>
+                  <li class="active">Data</li> -->
+                </ol>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-6"><a href="" data-toggle="modal" data-target="#myModal1">综合咨询</a></div>
+                <div class="col-md-3 col-sm-4 col-xs-6"><a href="">留学咨询</a></div>
+                <div class="col-md-3 col-sm-4 col-xs-6"><a href="">实习求职</a></div>
+                <div class="col-md-3 col-sm-4 col-xs-6"><a href="">课程点睛</a></div>
+                <div class="col-md-3 col-sm-4 col-xs-6"><a href="">竞赛创业</a></div>
+                <div class="col-md-3 col-sm-4 col-xs-6"><a href="">考研保研</a></div>
+                <div class="col-md-3 col-sm-4 col-xs-6"><a href="">科研探讨</a></div>
+                <div class="col-md-3 col-sm-4 col-xs-6"><a href="">艺体综合</a></div>
+
+                <!-- Modal1 ：综合咨询 -->
+                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 80px; ">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">综合咨询</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="cards">
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <a class="card" href="###">
+                          <img src="{% static 'frontEnd/images/weshare/test.jpg' %}" alt="">
+                          <div class="caption">“良辰美景” 出自《牡丹亭》</div>
+                          <div class="card-heading"><strong>良辰美景</strong></div>
+                          <div class="card-content text-muted">良辰美景奈何天，赏心乐事谁家院。</div>
+                          <div class="card-actions">
+                            <button type="button" class="btn btn-danger"><i class="icon-heart"></i> 喜欢</button>
+                            <div class="pull-right text-danger"><i class="icon-heart-empty"></i> 520 人喜欢</div>
+                          </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <a class="card" href="###">
+                          <img src="{% static 'frontEnd/images/weshare/test.jpg' %}" alt="">
+                          <div class="caption">“良辰美景” 出自《牡丹亭》</div>
+                          <div class="card-heading"><strong>良辰美景</strong></div>
+                          <div class="card-content text-muted">良辰美景奈何天，赏心乐事谁家院。</div>
+                          <div class="card-actions">
+                            <button type="button" class="btn btn-danger"><i class="icon-heart"></i> 喜欢</button>
+                            <div class="pull-right text-danger"><i class="icon-heart-empty"></i> 520 人喜欢</div>
+                          </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <a class="card" href="###">
+                          <img src="{% static 'frontEnd/images/weshare/test.jpg' %}" alt="">
+                          <div class="caption">“良辰美景” 出自《牡丹亭》</div>
+                          <div class="card-heading"><strong>良辰美景</strong></div>
+                          <div class="card-content text-muted">良辰美景奈何天，赏心乐事谁家院。</div>
+                          <div class="card-actions">
+                            <button type="button" class="btn btn-danger"><i class="icon-heart"></i> 喜欢</button>
+                            <div class="pull-right text-danger"><i class="icon-heart-empty"></i> 520 人喜欢</div>
+                          </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-2"></div>
     </div>
 </div>
 
