@@ -996,11 +996,72 @@ def share(request, method, Oid):
     except:
         pass
 
+    Info = {}
+    Info['login_flag'] = login_flag
+    if login_flag == True:
+        Info['current_user'] = user
+
     if method == "show":
-        Info = {}
-        if login_flag:
-            Info['current_user'] = user
-        Info['login_flag'] = login_flag
+        topic = Topic()
+        topics = topic.get_all_topics()
+        Info["topics"] = topics
+        SHOW_PEOPLE = 20
+        SORT_KEY_WORD = ""
+        #setting the begin and end
+        if request.GET.get("page")== None:
+            begin = 0
+            end = begin + SHOW_PEOPLE
+        else:
+            try:
+                page = int(request.GET.get("page"))
+            except:
+                return render("frontEnd/error.html")
+            begin = 0 * (page-1)*SHOW_PEOPLE
+            end = begin + SHOW_PEOPLE
+        if request.GET.get("sortword") != None:
+            SORT_KEY_WORD = request.GET.get("sortword")
+
+        if request.method == "POST":
+            m_id = request.POST.get("m_id")
+            m_name = request.POST.get("m_name")
+            t_name = request.POST.get("t_name")
+
+            host_topic = Host_Topic()
+            share_hosts = host_topic.get_host_via_minor_topic(m_id)
+            request.session["share_hosts"] = share_hosts
+            request.session["m_name"] = m_name
+            request.session["t_name"] = t_name
+            Info['m_name'] = m_name
+            Info['t_name'] = t_name
+
+            if end < host_number:
+                Info['hosts'] = hosts[begin:end]
+            else:
+                Info['hosts'] = hosts[:SHOW_PEOPLE]
+
+            #排序
+            if SORT_KEY_WORD != "":
+                Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
+
+        else:
+            if request.session.has_key("share_hosts"):
+                hosts = request.session["share_hosts"]
+                Info['m_name'] =request.session["m_name"]
+                Info['t_name'] = request.session["t_name"]
+            else:
+                tmp_host = Host.objects.filter(state=HOST_STATE['HOST'])
+                hosts = []
+                for host_atom in tmp_host:
+                    hosts.append(host_atom.format_dict())
+            host_number = len(hosts)
+            if end < host_number:
+                Info['hosts'] = hosts[begin:end]
+            else:
+                Info['hosts'] = hosts[:SHOW_PEOPLE]
+
+            if SORT_KEY_WORD != "":
+                Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
+
 
         return render(request, 'frontEnd/host.html', Info)
 

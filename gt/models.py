@@ -531,8 +531,27 @@ class Topic(models.Model):
             result.append(minor_topic_atom.format_dict())
         return result
 
+    def get_all_topics(self):
+        result = []
+        topics = Topic.objects.all()
+        for topic_atom in topics:
+            tmp_topic_dict = topic_atom.format_dict()
+            tmp_topic_dict['minor_topics'] = self.get_minor_topic_of_one_topic(tmp_topic_dict['t_name'])
+            result.append(tmp_topic_dict)
+        return result
 
-
+    def format_dict(self):
+        tmp_dict = {}
+        tmp_dict['t_name'] = self.t_name
+        tmp_dict['t_click'] = self.t_click
+        tmp_dict['t_intro'] = self.t_intro
+        tmp_dict['t_tag'] = self.t_tag
+        tmp_dict['t_index'] = self.t_index
+        try:
+            tmp_dict['t_id'] = self.id
+        except:
+            pass
+        return tmp_dict
 class Minor_Topic(models.Model):
     m_name = models.CharField(max_length=100)
     m_click = models.IntegerField(default=0)
@@ -656,6 +675,17 @@ class Host_Topic(models.Model):
     t_id = models.CharField(max_length=100)
     m_id = models.CharField(max_length=100)  #minor topic
     f_id = models.CharField(max_length=100)  # 关系库
+
+    def get_host_via_minor_topic(self,m_id):
+        result = []
+        host_dict = {}
+        host_topics  =  Host_Topic.objects.filter(m_id=m_id)
+        for host_topic_atom in host_topics:
+            if not host_dict.has(host_topic_atom.host_id):
+                host_dict[host_topic_atom.host_id] = 1
+                host_atom = Host.objects.get(id=host_id).format_dict()
+                result.append(host_atom)
+        return result
 
 
 class User_data(models.Model):
