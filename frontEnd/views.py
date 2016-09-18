@@ -985,6 +985,59 @@ def user(request, method, Oid):
     else:
         return render(request, "frontEnd/404.html")
 
+# user view
+@csrf_exempt
+def share(request, method, Oid):
+    login_flag = False
+    try:
+        username = request.session['email']
+        user = Host.objects.get(email=username)
+        login_flag = True
+    except:
+        pass
+
+    if method == "show":
+        Info = {}
+        if login_flag:
+            Info['current_user'] = user
+        Info['login_flag'] = login_flag
+
+        return render(request, 'frontEnd/host.html', Info)
+
+    elif method == "msg":
+        # check whether the user is online
+        try:
+            req_username = request.session['email']
+            # get the user
+            user = Host.objects.get(email=req_username)
+        except:
+            return render(request, "frontEnd/404.html")
+
+        # check is the host exist
+        try:
+            host = Host.objects.get(id=Oid)
+        except:
+            return render(request, "frontEnd/404.html")
+
+        # save the message
+        msg = request.POST.get("message")
+        if user.icon == "":
+            user.icon == DEFAULT_ICON
+
+        message = Message(
+            from_user=user.id,
+            to_user=host.id,
+            message_type=0,  # which means normal message
+            icon=user.icon,
+            content=msg,
+            upload_time=datetime.datetime.now(),
+        )
+        message.save()
+
+        return HttpResponseRedirect("/user/show/" + Oid)
+
+    else:
+        return render(request, "frontEnd/404.html")
 
 @csrf_exempt
 def image_library(request):
