@@ -195,32 +195,39 @@
                     </div>
 
                     
-
-                    <input type="hidden"  id="txtSc2" name="schoolID1">
-                    <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校和专业" />
-                    <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
-                    <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
-                    <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
-                    <input type="text" class="form-control form-date" id="txtScBeginTime" name="school1BeginTime" placeholder="点此选择开始时间">
-                    <input type="text" class="form-control form-date" id="txtScEndTime" name="school1EndTime" placeholder="点此选择结束时间">
-                    
+                    <div id="school">
+                        <input type="hidden"  id="txtSc2" name="schoolID1">
+                        <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" />
+                        <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                        <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                        <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+                        <input type="text" class="form-control" name="bachelor_majot" placeholder="点此输入您的本科专业">
+                        <input type="text" class="form-control form-date" name="school1BeginTime" placeholder="点此选择开始时间">
+                        <input type="text" class="form-control form-date" name="school1EndTime" placeholder="点此选择结束时间">
+                    </div>
                     <br><br><br>
 
-                    <input type="hidden"  id="MtxtSc2" name="schoolID2">
-                    <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校和专业" style="display:none; margin-top: 10px; "/>
-                    <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
-                    <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
-                    <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
-                    <input type="text" class="form-control form-date" id="MtxtScBeginTime" name="school2BeginTime" placeholder="点此选择开始时间" style="display:none;">
-                    <input type="text" class="form-control form-date" id="MtxtScEndTime" name="school2EndTime" placeholder="点此选择结束时间" style="display:none;">
+                    <div id="Mschool" style="display:none;">
+                        <input type="hidden"  id="MtxtSc2" name="schoolID2">
+                        <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" style="margin-top: 10px; "/>
+                        <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                        <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                        <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+                        <input type="text" class="form-control" name="graduate_major" placeholder="点此输入您的硕士专业">
+                        <input type="text" class="form-control form-date" name="school2BeginTime" placeholder="点此选择开始时间">
+                        <input type="text" class="form-control form-date" name="school2EndTime" placeholder="点此选择结束时间">
+                    </div>
 
-                    <input type="hidden"  id="PtxtSc2" name="schoolID3">
-                    <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校和专业" style="display:none; margin-top: 10px; "/>
-                    <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
-                    <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
-                    <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
-                    <input type="text" class="form-control form-date" id="PtxtScBeginTime" name="school3BeginTime" placeholder="点此选择开始时间" style="display:none;">
-                    <input type="text" class="form-control form-date" id="PtxtScEndTime" name="school3EndTime" placeholder="点此选择结束时间" style="display:none;">
+                    <div id="Pschool" style="display:none;">
+                        <input type="hidden"  id="PtxtSc2" name="schoolID3">
+                        <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" style="margin-top: 10px; "/>
+                        <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
+                        <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
+                        <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
+                        <input type="text" class="form-control" name="phd_major" placeholder="点此输入您的博士专业">
+                        <input type="text" class="form-control form-date" name="school3BeginTime" placeholder="点此选择开始时间">
+                        <input type="text" class="form-control form-date" name="school3EndTime" placeholder="点此选择结束时间">
+                    </div>
 
 
 
@@ -312,48 +319,27 @@ $(".form-time").datetimepicker({
         console.log(value);
         if (value === '博士') {
             $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"2\">");
-            $("#MtxtSc").show();
-            $('#MtxtScBeginTime').show();
-            $('#MtxtScEndTime').show();
-
-            $("#PtxtSc").show();
-            $('#PtxtScBeginTime').show();
-            $('#PtxtScEndTime').show();
-
+            $("#school").show();
+            $("#Mschool").show();
+            $("#Pschool").show();
         }
         else if (value === '硕士') {
             $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"1\">");
-            $("#MtxtSc").show();
-            $('#MtxtScBeginTime').show();
-            $('#MtxtScEndTime').show();
-
-            $("#PtxtSc").hide();
-            $('#PtxtScBeginTime').hide();
-            $('#PtxtScEndTime').hide();
+            $("#school").show();
+            $("#Mschool").show();
+            $("#Pschool").hide();
         }
         else if (value ==='本科') {
             $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"0\">");
-            $("#MtxtSc").hide();
-            $('#MtxtScBeginTime').hide();
-            $('#MtxtScEndTime').hide();
-
-            $("#PtxtSc").hide();
-            $('#PtxtScBeginTime').hide();
-            $('#PtxtScEndTime').hide();
+            $("#school").show();
+            $("#Mschool").hide();
+            $("#Pschool").hide();
         }
         else if (value === '其他') {
             $("#Education").html("<input type=\"hidden\" name=\"education\" value=\"3\">");
-            $("#txtSc").hide();
-            $('#txtScBeginTime').hide();
-            $('#txtScEndTime').hide();
-
-            $("#MtxtSc").hide();
-            $('#MtxtScBeginTime').hide();
-            $('#MtxtScEndTime').hide();
-
-            $("#PtxtSc").hide();
-            $('#PtxtScBeginTime').hide();
-            $('#PtxtScEndTime').hide();
+            $("#school").hide();
+            $("#Mschool").hide();
+            $("#Pschool").hide();
         }
         else{
 
