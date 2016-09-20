@@ -681,7 +681,7 @@ class Host_Topic(models.Model):
         host_dict = {}
         host_topics  =  Host_Topic.objects.filter(m_id=m_id)
         for host_topic_atom in host_topics:
-            if not host_dict.has(host_topic_atom.host_id):
+            if not host_dict.has_key(host_topic_atom.host_id):
                 host_dict[host_topic_atom.host_id] = 1
                 host_atom = Host.objects.get(id=host_id).format_dict()
                 result.append(host_atom)
