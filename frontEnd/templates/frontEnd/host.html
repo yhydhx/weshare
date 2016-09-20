@@ -11,9 +11,12 @@
             <!-- 面包屑导航 -->
             <div class="row">
                 <ol class="breadcrumb">
-                  <li><a href="/share/show">全部</a></li>
-                  <!-- <li><a href="#">Library</a></li>
-                  <li class="active">Data</li> -->
+                  <li><a href="/share/clear">全部</a></li>
+
+                  {% if t_name != '' %}
+                  <!-- <li><a href="#">Library</a></li> -->
+                  <li class="active">{{ t_name }}-{{ m_name }}</li>
+                  {% endif %}
                 </ol>
             </div>
 
