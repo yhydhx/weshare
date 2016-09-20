@@ -62,7 +62,7 @@
                     {% block hosts %}
                     {% for host in hosts %}
                         <div class="col-md-4 col-sm-4 col-xs-6">
-                            <a class="card" href="###">
+                            <a class="card" href="/user/show/{{ host.id }}">
                               <img src="{{ host.icon }}" alt="">
                               <div class="caption">服务时间：{{ host.service_time }}</div>
                               <div class="card-heading"><strong>{{ host.username }}</strong></div>
