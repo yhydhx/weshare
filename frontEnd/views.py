@@ -1035,9 +1035,9 @@ def share(request, method, Oid):
             Info['t_name'] = t_name
             host_number = len(share_hosts)
             if end < host_number:
-                Info['hosts'] = hosts[begin:end]
+                Info['hosts'] = share_hosts[begin:end]
             else:
-                Info['hosts'] = hosts[:SHOW_PEOPLE]
+                Info['hosts'] = share_hosts[:SHOW_PEOPLE]
 
             #排序
             if SORT_KEY_WORD != "":
