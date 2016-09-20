@@ -2,6 +2,11 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}
+<style>
+    body{
+        background-color: white;
+    }
+</style>
 
 <div class="container-fluid" style="margin-top: 100px; ">
     <div class="row">
@@ -21,6 +26,7 @@
             </div>
 
             <!-- 选择筛选器 -->
+            <hr>
             <div class="row">
                 {% block topics %}
                 {% for topic in topics %}
@@ -55,6 +61,7 @@
                 {% endfor %}
                 {% endblock %}
             </div>
+            <hr>
             
             <!-- host 展示 -->
             <div class="row">
