@@ -149,7 +149,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 /*school-search*/
 @media screen and (min-width: 768px){
 	.ssbody{
-		margin-top: 160px;
+		margin-top: 60px;
 	}
 	.ssImax{
 	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
