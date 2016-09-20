@@ -1033,7 +1033,7 @@ def share(request, method, Oid):
             request.session["t_name"] = t_name
             Info['m_name'] = m_name
             Info['t_name'] = t_name
-
+            host_number = len(share_hosts)
             if end < host_number:
                 Info['hosts'] = hosts[begin:end]
             else:
