@@ -316,7 +316,7 @@ def school(request, method, Oid):
             return HttpResponse('allowed only via POST')
 
     elif method == 'generateJS':
-        s = School.objects.all()[0]
+        s = School()
         result = s.get_country_province_school()
         write_js(result)
         return HttpResponse(result)
@@ -528,10 +528,10 @@ def user(request, method, Oid):
             is_success = 0
             )
         mail.save()
-        mail.register_success(to,content)
+        #mail.register_success(to,content)
         #send success, update the data
-        mail.is_success = 1
-        mail.save()
+        #mail.is_success = 1
+        #mail.save()
 
         Host.objects.filter(id=Oid).update(state=2)
 

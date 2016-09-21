@@ -434,9 +434,11 @@ class School(models.Model):
         '''
         d_topic_detail = self.d_topic_detail
         tag = ""
-        if each_host.gender == 1:
+        print each_host.format_dict()
+        print each_host.username, each_host.gender, GENDER['MALE'], each_host.gender == GENDER['MALE']
+        if each_host.gender == GENDER['MALE']:
             tag += "male "
-        else:
+        elif each_host.gender == GENDER['FEMALE']:
             tag += "female "
 
         h_topics = Host_Topic.objects.filter(host_id=each_host.id)
@@ -502,7 +504,7 @@ class School(models.Model):
                 province_index += 1
 
                 #get each school 
-                schools  = School.objects.filter(s_province=tmpP['name'], s_display_index = 1)
+                schools  = School.objects.filter(s_province = tmpP['name'], s_display_index = 1)
                 school_index = 1
                 for school in schools:
                     tmpS = {}
