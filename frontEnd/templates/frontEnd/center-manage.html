@@ -17,11 +17,12 @@
               <div class="row centerLeftbarButton"><a href="/host_center/manage" style="color:black;">订单管理</a></div>
               
                 {% if current_user.state == 0 %}
-                <div class="row centerLeftbarButton"><a href="/image-receive/">申请认证</a></div>
+                <div class="row centerLeftbarButton"><a href="/image-receive/">注册HOST</a></div>
                 {% elif current_user.state == 1 %}
                 <div class="row centerLeftbarButton"><a href="/host_center/auth">更新主页</a></div>
                 {% elif current_user.state == 2 %}
-                <div class="row centerLeftbarButton"><a href="/host_center/auth">更新主页</a></div>
+                <div class="row centerLeftbarButton"><a href="/host_center/edit2">更新主页</a></div>
+                <div class="row centerLeftbarButton"><a href="/host_center/auth">申请认证</a></div>
                 {% endif %}
           </div>
   		    <div class="col-md-9" style="padding-top:30px;">
