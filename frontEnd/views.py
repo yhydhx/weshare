@@ -867,6 +867,8 @@ def host_center(request, method, Oid):
 
     if method == "edit":
         return render(request, "frontEnd/center-edit.html", Info)
+    elif method == "edit2":
+        return render(request, "frontEnd/center-edit2.html", Info)
     elif method == "manage":
         Info['sent_bills'] = host.get_one_user_host_bills()
         if host.state != HOST_STATE['GUEST']:
