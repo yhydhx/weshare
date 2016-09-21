@@ -17,14 +17,29 @@
     			<div class="row centerLeftbarIcon"><img src="{{ current_user.icon }}" style="height: 100px; width: 100px; border: 1px solid #cccccc; border-radius: 50%;"></div>
     			<div class="row centerLeftbarButton"><a href="/host_center/edit">修改信息</a></div> 
     			<div class="row centerLeftbarButton"><a href="/host_center/manage">订单管理</a></div>
-    			<div class="row centerLeftbarButton"><a href="/image-receive/" style="color:black;">申请认证</a></div>
+
+                {% if current_user.state == 0 %}
+                <div class="row centerLeftbarButton"><a href="/image-receive/">申请认证</a></div>
+                {% elif current_user.state == 1 %}
+                <div class="row centerLeftbarButton"><a href="/host_center/auth">更新主页</a></div>
+                {% elif current_user.state == 2 %}
+                <div class="row centerLeftbarButton"><a href="/host_center/auth">更新主页</a></div>
+                {% endif %}
     		</div>
     		<div class="col-md-10" style="padding-bottom:800px;">
 
+
+                {% if current_user.state == 1 %}
+                    <div class="row" style="padding-top: 10px; ">
+                        <a href="" class="ct-login"><span>审核中</span><i class="fa fa-lock"></i></a>
+                    </div>
+                {% endif %} 
                 <!-- 修改主页资料 -->
                 <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
                     <div class="col-xs-4"><hr></div>
-                    <div class="col-xs-4" style="text-align:center;"><h4>主页资料修改</h4></div>
+                    <div class="col-xs-4" style="text-align:center;">
+                        <h4>主页资料修改</h4>
+                    </div>
                     <div class="col-xs-4"><hr></div>
                 </div>
 

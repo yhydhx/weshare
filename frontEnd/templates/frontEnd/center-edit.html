@@ -14,7 +14,14 @@
     			<div class="row centerLeftbarIcon"><img src="{{ current_user.icon }}" style="height: 100px; width: 100px; border: 1px solid #cccccc; border-radius: 50%;"></div>
     			<div class="row centerLeftbarButton"><a href="/host_center/edit" style="color:black;">修改信息</a></div> 
     			<div class="row centerLeftbarButton"><a href="/host_center/manage">订单管理</a></div>
-    			<div class="row centerLeftbarButton"><a href="/image-receive/">申请认证</a></div>
+
+                {% if current_user.state == 0 %}
+                <div class="row centerLeftbarButton"><a href="/image-receive/">申请认证</a></div>
+                {% elif current_user.state == 1 %}
+                <div class="row centerLeftbarButton"><a href="/host_center/auth">更新主页</a></div>
+                {% elif current_user.state == 2 %}
+                <div class="row centerLeftbarButton"><a href="/host_center/auth">更新主页</a></div>
+                {% endif %}
     		</div>
     		<div class="col-md-10"">
 
@@ -79,7 +86,7 @@
                             <div class="form-group ">
                                 <label for="username" style="text-align: left">真实姓名</label>
                                 <input id="username" name="username" type="text"
-                                       value="{{ current_user.username }}"
+                                       value="{{ data.host.username }}"
                                        class="form-control form-control--type2">
                             </div>
 
