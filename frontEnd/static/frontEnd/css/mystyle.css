@@ -159,7 +159,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
 	/*	background-repeat: no-repeat;
 		background-position: center;*/
-		height:500px;
+		height:400px;
 
 		display: flex;
 		justify-content:center;
