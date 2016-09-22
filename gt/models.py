@@ -60,6 +60,16 @@ class Host(models.Model):
     def __unicode__(self):
         return self.username
 
+    def get_host_school_name(self):
+        result = []
+        if self.bachelor  != "":
+            result.append(School.objects.get(id = self.bachelor).s_name)
+        if self.graduate != "":
+            result.append(School.objects.get(id = self.graduate).s_name)
+        if self.phd != "":
+            result.append(School.objects.get(id = self.phd).s_name)
+        return result
+
     def general_search(self,word_1,word_2):
         '''
         a).   “分享家”的一句话简介；
