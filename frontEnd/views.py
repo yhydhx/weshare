@@ -859,13 +859,17 @@ def host_center(request, method, Oid):
 
     try:
         host = Host.objects.get(email=username)
-        Info['current_user'] = host.format_dict()
+
+        Info['current_user'] = host.format_dict_with_school_name()
+        Info['current_user']['school_list'] = host.get_host_school_name()
         login_flag = True
         Info['login_flag'] = login_flag
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
     if method == "edit":
+
+
         return render(request, "frontEnd/center-edit.html", Info)
     elif method == "edit2":
         return render(request, "frontEnd/center-edit2.html", Info)
@@ -958,7 +962,7 @@ def host_center(request, method, Oid):
         else:
             return HttpResponse('请把表单填写完整')
 
-        return render(request, "frontEnd/center-manage-detail.html", Info)
+        
     elif method == "modify_host_info":
 
         return render(request, "frontEnd/center-manage-detail.html", Info)
