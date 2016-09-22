@@ -154,6 +154,7 @@ class Host(models.Model):
     def format_dict(self):
         tmpHost = {}
         tmpHost["username"] =  self.username
+        tmpHost["phone_number"] = self.phone_number
         tmpHost["gender"] =  self.gender
         tmpHost["motto"] =  self.motto
         tmpHost["introduction"] =  self.introduction
