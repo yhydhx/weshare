@@ -52,6 +52,14 @@ class Host(models.Model):
     graduate_major = models.CharField(blank=True, max_length=100)
     phd_major = models.CharField(blank=True, max_length=100)
 
+    bachelor_start = models.CharField(blank=True, max_length=100)
+    graduate_start = models.CharField(blank=True, max_length=100)
+    phd_start = models.CharField(blank=True, max_length=100)
+
+    bachelor_end = models.CharField(blank=True, max_length=100)
+    graduate_end = models.CharField(blank=True, max_length=100)
+    phd_end = models.CharField(blank=True, max_length=100)
+
     #alipay
     alipay = models.CharField(blank=True, max_length = 200)
     #  qq_login information::
@@ -60,15 +68,15 @@ class Host(models.Model):
     def __unicode__(self):
         return self.username
 
-    def get_host_school_name(self):
-        result = []
-        if self.bachelor  != "":
-            result.append(School.objects.get(id = self.bachelor).s_name)
-        if self.graduate != "":
-            result.append(School.objects.get(id = self.graduate).s_name)
-        if self.phd != "":
-            result.append(School.objects.get(id = self.phd).s_name)
-        return result
+    def format_dict_with_school_name(self):
+        tmpHost = self.format_dict()
+        if tmpHost['bachelor'] != "":
+            tmpHost['bachelor_school'] = School.objects.get(id=tmpHost['bachelor']).s_name
+        if tmpHost['graduate'] != "":
+            tmpHost['graduate_school'] = School.objects.get(id=tmpHost['graduate']).s_name
+        if tmpHost['phd'] != "":
+            tmpHost['phd_school'] = School.objects.get(id=tmpHost['phd']).s_name
+        return tmpHost
 
     def general_search(self,word_1,word_2):
         '''
@@ -179,12 +187,25 @@ class Host(models.Model):
         tmpHost["birth"] =  self.birth
         tmpHost["qq_number"] =  self.qq_number
         tmpHost["wechat"] =  self.wechat
+        tmpHost["alipay"] =  self.alipay
 
         #Education Infomation
         tmpHost["education"] =  self.education
         tmpHost["bachelor"] =  self.bachelor
         tmpHost["graduate"] =  self.graduate
         tmpHost["phd"] =  self.phd
+
+        tmpHost['bachelor_major'] = self.bachelor_major
+        tmpHost['graduate_major'] = self.graduate_major
+        tmpHost['phd_major'] = self.phd_major
+
+        tmpHost['bachelor_start'] = self.bachelor_start
+        tmpHost['graduate_start'] = self.graduate_start
+        tmpHost['phd_start'] = self.phd_start
+
+        tmpHost['bachelor_end'] = self.bachelor_end
+        tmpHost['graduate_end'] = self.graduate_end
+        tmpHost['phd_end'] = self.phd_end
 
         try:
             tmpHost['id'] = self.id

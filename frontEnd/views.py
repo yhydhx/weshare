@@ -860,7 +860,7 @@ def host_center(request, method, Oid):
     try:
         host = Host.objects.get(email=username)
 
-        Info['current_user'] = host.format_dict()
+        Info['current_user'] = host.format_dict_with_school_name()
         Info['current_user']['school_list'] = host.get_host_school_name()
         login_flag = True
         Info['login_flag'] = login_flag
