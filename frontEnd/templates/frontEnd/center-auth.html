@@ -46,7 +46,8 @@
                             <img data-toggle="lightbox" src="" data-image="large-image.jpg" data-caption="小图看大图" class="img-thumbnail" alt="还未上传认证图片" width="200">
                         </div>
                         <div class="col-md-6">
-                            <a href="" class="btn btn-primary">上传资料</a><span style="padding-left: 20px; ">支持：jpg、png、pdf</span>
+                            <a href="" class="btn btn-primary"  onclick="upload.click(); return false;">上传资料</a><span style="padding-left: 20px; ">支持：jpg、png、pdf</span>
+                            <input type="file" id="upload" style="display:none" onchange="upfile.value=this.value">
                             <br><br>
                             <a href="" class="btn btn-success">提交更新</a><span style="padding-left: 20px; ">状态：未提交</span>
                         </div>
