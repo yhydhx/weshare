@@ -857,18 +857,16 @@ def host_center(request, method, Oid):
     except:
         return render_to_response('frontEnd/login.html', {'session_timeout': True})
 
+
     try:
         host = Host.objects.get(email=username)
-
         Info['current_user'] = host.format_dict_with_school_name()
-        Info['current_user']['school_list'] = host.get_host_school_name()
         login_flag = True
         Info['login_flag'] = login_flag
     except:
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
     if method == "edit":
-
 
         return render(request, "frontEnd/center-edit.html", Info)
     elif method == "edit2":
