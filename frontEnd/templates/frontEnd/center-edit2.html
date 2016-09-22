@@ -67,13 +67,15 @@
 
                             <div class="form-group">
                                 <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
-                                <input id="min-payment" name="min-payment" type="number" required value="请填写数字"
+                                <input id="min-payment" name="min-payment" type="number" required 
+                                        value="{{ current_user.min_payment }}"
                                        class="form-control form-control--type2">
                             </div>
 
                             <div class="form-group">
                                 <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
-                                <input id="max-payment" name="max-payment" type="number" required value="请填写数字"
+                                <input id="max-payment" name="max-payment" type="number" required 
+                                        value="{{ current_user.max_payment }}"
                                        class="form-control form-control--type2">
                             </div>
 
