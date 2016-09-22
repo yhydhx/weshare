@@ -923,22 +923,33 @@ def host_center(request, method, Oid):
             try:
                 bachelor = request.POST['schoolID1']
                 bachelor_major = request.POST['bachelor_major']
+                bachelor_start = request.POST['bachelor_major']
+                bachelor_end = request.POST['bachelor_end']
             except:
                 bachelor = ""
                 bachelor_major = ""
+                bachelor_start = ""
+                bachelor_end = ""
             try:
                 graduate = request.POST['schoolID2']
                 graduate_major = request.POST['graduate_major']
+                graduate_start = request.POST['graduate_start']
+                graduate_end = request.POST['graduate_end']
             except:
                 graduate = ""
                 graduate_major = ""
+                graduate_start = ""
+                graduate_end = ""
             try:
                 phd_major = request.POST['schoolID3']
                 phd = request.POST['phd']
+                phd_start = request.POST['phd_start']
+                phd_end = request.POST['phd_end']
             except:
                 phd_major = ""
                 phd = ""
-
+                phd_start = ""
+                phd_end = ""
 
             host.gender = gender
             host.motto = motto
@@ -954,6 +965,14 @@ def host_center(request, method, Oid):
             host.bachelor_major = bachelor_major
             host.graduate_major = graduate_major
             host.phd_major = phd_major
+
+            host.bachelor_start  = bachelor_start
+            host.graduate_start  = graduate_start
+            host.phd_start  = phd_start
+
+            host.bachelor_end  = bachelor_end
+            host.graduate_end  = graduate_end
+            host.phd_end  = phd_end
 
             host.save()
             return HttpResponseRedirect('/host_center/edit')
