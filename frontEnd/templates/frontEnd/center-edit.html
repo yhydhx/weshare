@@ -164,8 +164,8 @@
 
 
                             <div id="school">
-                                <input type="hidden"  id="txtSc2" name="schoolID1">
-                                <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" />
+                                <input type="hidden"  id="txtSc2" name="schoolID1" value="{{ current_user.bachelor }}">
+                                <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" value="{{ current_user.bachelor_school }}" />
                                 <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                                 <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                                 <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
@@ -176,8 +176,8 @@
                             <br><br><br>
 
                             <div id="Mschool" style="display:none;">
-                                <input type="hidden"  id="MtxtSc2" name="schoolID2">
-                                <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" style="margin-top: 10px; "/>
+                                <input type="hidden"  id="MtxtSc2" name="schoolID2" value="{{ current_user.graduate }}">
+                                <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" value="{{ current_user.graduate_school }}" style="margin-top: 10px; "/>
                                 <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                                 <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                                 <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
@@ -187,8 +187,8 @@
                             </div>
 
                             <div id="Pschool" style="display:none;">
-                                <input type="hidden"  id="PtxtSc2" name="schoolID3">
-                                <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" style="margin-top: 10px; "/>
+                                <input type="hidden"  id="PtxtSc2" name="schoolID3" value="{{ current_user.phd }}">
+                                <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" value="{{ current_user.phd_school }}" style="margin-top: 10px; "/>
                                 <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                                 <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                                 <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
