@@ -914,53 +914,46 @@ def host_center(request, method, Oid):
             gender = request.POST['gender'] 
             motto = request.POST['motto']
             qq = request.POST['qq']
-
+            birth = request.POST.get("birth")
             # Education Infomation
             education = request.POST['education']
 
             try:
                 bachelor = request.POST['schoolID1']
-                # bachelor_major = request.POST['bachelor_major']
+                bachelor_major = request.POST['bachelor_major']
             except:
                 bachelor = ""
-                # bachelor_major = ""
+                bachelor_major = ""
             try:
                 graduate = request.POST['schoolID2']
-                # graduate_major = request.POST['graduate_major']
+                graduate_major = request.POST['graduate_major']
             except:
                 graduate = ""
-                # graduate_major = ""
+                graduate_major = ""
             try:
-                # phd_major = request.POST['schoolID3']
+                phd_major = request.POST['schoolID3']
                 phd = request.POST['phd']
             except:
-                # phd_major = ""
+                phd_major = ""
                 phd = ""
 
-            if not judge_limit(min_payment, max_payment):
-                return HttpResponse('最低报酬要小于最高报酬')
 
             host.gender = gender
-            host.introduction = self_introduction
             host.motto = motto
-            host.min_payment = min_payment
-            host.service_time = service_time
-            host.max_payment = max_payment
 
-            host.state = HOST_STATE['APPLY']
             host.qq_number = qq
 
             host.education = education
             host.bachelor = bachelor
             host.graduate = graduate
             host.phd = phd
-            host.alipay = alipay
-            # host.bachelor_major = bachelor_major
-            # host.graduate_major = graduate_major
-            # host.phd_major = phd_major
+            #host.alipay = alipay
+            host.bachelor_major = bachelor_major
+            host.graduate_major = graduate_major
+            host.phd_major = phd_major
 
             host.save()
-            return HttpResponseRedirect('/complete-account-feature')
+            return HttpResponseRedirect('/host_center/edit')
         else:
             return HttpResponse('请把表单填写完整')
 
