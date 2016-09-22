@@ -876,7 +876,34 @@ def host_center(request, method, Oid):
 
         return render(request, "frontEnd/center-manage.html", Info)
     elif method == "auth":
-        return render(request, "frontEnd/center-auth.html", Info)
+        if request.method == "POST":
+            host_id = host.id
+            
+            c_name = request.POST.get("c_name")
+            c_state = CERTIFICATE_STATE['CERTIFYING']
+            c_introduction = request.POST.get("c_introduction")
+            c_type = request.POST.get("c_type")
+            mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
+            
+            des_origin_path = settings.UPLOAD_PATH + 'certification/' + mark_list + "." + c_type
+            des_origin_f = open(des_origin_path, "ab")
+            tmpImg = request.FILES['certification']
+            for chunk in tmpImg.chunks():
+                des_origin_f.write(chunk)
+            des_origin_f.close()
+            c_file_path = "/files/certification/" + mark_list + "." + c_type
+            certification = Certificate(
+                host_id = host_id ,
+                c_file_path = c_file_path,
+                c_name = c_name,
+                c_state = c_state,
+                c_introduction = c_introduction
+                )
+            certification.save()
+
+            return HttpResponseRedirect("/host_center/auth")
+        else:
+            return render(request, "frontEnd/center-auth.html", Info)
     elif method == "detail":
 
         return render(request, "frontEnd/center-manage-detail.html", Info)

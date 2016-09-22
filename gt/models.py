@@ -698,7 +698,7 @@ class User_data(models.Model):
 
 class Certificate(models.Model):  # igno
     host_id = models.CharField(max_length=100)
-    is_ceritifies = models.IntegerField()
+    c_file_path = models.CharField(max_length=100)
     c_name = models.CharField(max_length=200)     #显示的名字
     c_state = models.IntegerField()
     c_introduction = models.CharField(max_length = 200)

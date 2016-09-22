@@ -83,6 +83,8 @@ HOST_STATE = {
     'GUEST': 0,
     'APPLY': 1,
     'HOST': 2,
+    'FROZEN':3,
+
 }
 
 # 预约的状态
@@ -115,6 +117,11 @@ GENDER = {
     "FEMALE": 0,
 }
 
+CERTIFICATE_STATE = {
+    "CERTIFYING" : 1,
+    "PASSED"    :2,
+
+}
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
