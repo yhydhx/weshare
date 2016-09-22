@@ -501,7 +501,7 @@ def complete_account(request):
             max_payment = float(request.POST['max-payment'])
             qq = request.POST['qq']
             alipay = request.POST['alipay']
-
+            birth = request.POST['birth']
             # Education Infomation
             education = request.POST['education']
 
@@ -533,7 +533,7 @@ def complete_account(request):
             host.min_payment = min_payment
             host.service_time = service_time
             host.max_payment = max_payment
-
+            host.birth  = birth
             host.state = HOST_STATE['APPLY']
             host.qq_number = qq
 
@@ -739,7 +739,7 @@ def modify_account(request):
             school = request.POST['school']
             qq = request.POST['qq']
 
-            print gender
+           
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
 
@@ -905,6 +905,60 @@ def host_center(request, method, Oid):
         else:
             return render(request, "frontEnd/center-auth.html", Info)
     elif method == "detail":
+
+        return render(request, "frontEnd/center-manage-detail.html", Info)
+    elif method == "modify_base_info":
+        if request.method == 'POST':
+            
+            phone_number = request.POST.get("phone")
+            gender = request.POST['gender'] 
+            motto = request.POST['motto']
+            qq = request.POST['qq']
+            birth = request.POST.get("birth")
+            # Education Infomation
+            education = request.POST['education']
+
+            try:
+                bachelor = request.POST['schoolID1']
+                bachelor_major = request.POST['bachelor_major']
+            except:
+                bachelor = ""
+                bachelor_major = ""
+            try:
+                graduate = request.POST['schoolID2']
+                graduate_major = request.POST['graduate_major']
+            except:
+                graduate = ""
+                graduate_major = ""
+            try:
+                phd_major = request.POST['schoolID3']
+                phd = request.POST['phd']
+            except:
+                phd_major = ""
+                phd = ""
+
+
+            host.gender = gender
+            host.motto = motto
+
+            host.qq_number = qq
+
+            host.education = education
+            host.bachelor = bachelor
+            host.graduate = graduate
+            host.phd = phd
+            #host.alipay = alipay
+            host.bachelor_major = bachelor_major
+            host.graduate_major = graduate_major
+            host.phd_major = phd_major
+
+            host.save()
+            return HttpResponseRedirect('/host_center/edit')
+        else:
+            return HttpResponse('请把表单填写完整')
+
+        return render(request, "frontEnd/center-manage-detail.html", Info)
+    elif method == "modify_host_info":
 
         return render(request, "frontEnd/center-manage-detail.html", Info)
     else:

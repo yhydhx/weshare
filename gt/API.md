@@ -182,6 +182,7 @@ Info = {
 		'host':{
 			"username" : char
 			"gender" : int   ~ 1是男生0是女生
+			'phone_number' : char  ~ 电话号码
 			"motto" : char   ~ 座右铭
 			"introduction" : char  ~简介
 			"icon" : char  ~ 头像
