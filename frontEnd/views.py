@@ -947,6 +947,7 @@ def host_center(request, method, Oid):
             host.bachelor = bachelor
             host.graduate = graduate
             host.phd = phd
+            host.birth = birth
             #host.alipay = alipay
             host.bachelor_major = bachelor_major
             host.graduate_major = graduate_major
