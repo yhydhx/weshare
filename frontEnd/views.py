@@ -1015,7 +1015,9 @@ def host_center(request, method, Oid):
             host.max_payment = max_payment
 
             host.save()
-        return render(request, "frontEnd/center-edit2.html", Info)
+            return HttpResponseRedirect("/host_center/modify_host_info")
+        else:
+            return render(request, "frontEnd/center-edit2.html", Info)
     else:
         return HttpResponseRedirect('/user/show/' + host.id)
 
