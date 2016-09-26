@@ -997,7 +997,7 @@ def host_center(request, method, Oid):
         
     elif method == "modify_host_info":
         if request.method == "POST":
-            self_introduction = request.POST['self-introduction']
+            self_introduction = request.POST['introduction']
             motto = request.POST['motto']
             min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
