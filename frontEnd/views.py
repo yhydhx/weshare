@@ -996,7 +996,25 @@ def host_center(request, method, Oid):
 
         
     elif method == "modify_host_info":
+        if request.method == "POST":
+            self_introduction = request.POST['self-introduction']
+            motto = request.POST['motto']
+            min_payment = float(request.POST['min-payment'])
+            service_time = request.POST['service-time']
+            max_payment = float(request.POST['max-payment'])
+        
+        
+            if not judge_limit(min_payment, max_payment):
+                return HttpResponse('最低报酬要小于最高报酬')
 
+
+            host.introduction = self_introduction
+            host.motto = motto
+            host.min_payment = min_payment
+            host.service_time = service_time
+            host.max_payment = max_payment
+
+            host.save()
         return render(request, "frontEnd/center-manage-detail.html", Info)
     else:
         return HttpResponseRedirect('/user/show/' + host.id)
