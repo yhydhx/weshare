@@ -164,37 +164,37 @@
 
 
                             <div id="school">
-                                <input type="hidden"  id="txtSc2" name="bachelor" value="{{ current_user.bachelor }}">
-                                <input type="text" class="form-control" id="txtSc" name="bachelor_school" placeholder="&nbsp;&nbsp;点此选择您的本科学校" value="{{ current_user.bachelor_school }}" />
+                                <input type="hidden"  id="txtSc2" name="schoolID1" value="{{ current_user.bachelor }}">
+                                <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" value="{{ current_user.bachelor_school }}" />
                                 <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                                 <div id="sheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                                 <div id="list" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
-                                <input type="text" class="form-control" name="bachelor_major" placeholder="点此输入您的本科专业">
-                                <input type="text" class="form-control form-date" name="bachelor_start" placeholder="点此选择开始时间">
-                                <input type="text" class="form-control form-date" name="bachelor_end" placeholder="点此选择结束时间">
+                                <input type="text" class="form-control" name="bachelor_major" placeholder="点此输入您的本科专业" value="{{ current_user.bachelor_major }}">
+                                <input type="text" class="form-control form-date" name="bachelor_start" placeholder="点此选择开始时间" value="{{ current_user.bachelor_start }}">
+                                <input type="text" class="form-control form-date" name="bachelor_end" placeholder="点此选择结束时间" value="{{ current_user.bachelor_end }}">
                             </div>
                             <br><br><br>
 
                             <div id="Mschool" style="display:none;">
-                                <input type="hidden"  id="MtxtSc2" name="graduate" value="{{ current_user.graduate }}">
-                                <input type="text" class="form-control" id="MtxtSc" name="graduate_school" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" value="{{ current_user.graduate_school }}" style="margin-top: 10px; "/>
+                                <input type="hidden"  id="MtxtSc2" name="schoolID2" value="{{ current_user.graduate }}">
+                                <input type="text" class="form-control" id="MtxtSc" name="school2" placeholder="&nbsp;&nbsp;点此选择您的硕士学校" value="{{ current_user.graduate_school }}" style="margin-top: 10px; "/>
                                 <div id="Mgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                                 <div id="Msheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                                 <div id="Mlist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
-                                <input type="text" class="form-control" name="graduate_major" placeholder="点此输入您的硕士专业">
-                                <input type="text" class="form-control form-date" name="graduate_start" placeholder="点此选择开始时间">
-                                <input type="text" class="form-control form-date" name="graduate_end" placeholder="点此选择结束时间">
+                                <input type="text" class="form-control" name="graduate_major" placeholder="点此输入您的硕士专业" value="{{ current_user.graduate_major }}">
+                                <input type="text" class="form-control form-date" name="graduate_start" placeholder="点此选择开始时间" value="{{ current_user.graduate_start }}">
+                                <input type="text" class="form-control form-date" name="graduate_end" placeholder="点此选择结束时间" value="{{ current_user.graduate_end }}">
                             </div>
 
                             <div id="Pschool" style="display:none;">
-                                <input type="hidden"  id="PtxtSc2" name="phd" value="{{ current_user.phd }}">
-                                <input type="text" class="form-control" id="PtxtSc" name="phd_school" placeholder="&nbsp;&nbsp;点此选择您的博士学校" value="{{ current_user.phd_school }}" style="margin-top: 10px; "/>
+                                <input type="hidden"  id="PtxtSc2" name="schoolID3" value="{{ current_user.phd }}">
+                                <input type="text" class="form-control" id="PtxtSc" name="school3" placeholder="&nbsp;&nbsp;点此选择您的博士学校" value="{{ current_user.phd_school }}" style="margin-top: 10px; "/>
                                 <div id="Pgj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
                                 <div id="Psheng" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;"></div>
                                 <div id="Plist" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px;display:none;background-color:white;height:300px; overflow-y:auto;"></div>
-                                <input type="text" class="form-control" name="phd_major" placeholder="点此输入您的博士专业">
-                                <input type="text" class="form-control form-date" name="phd_start" placeholder="点此选择开始时间">
-                                <input type="text" class="form-control form-date" name="phd_end" placeholder="点此选择结束时间">
+                                <input type="text" class="form-control" name="phd_major" placeholder="点此输入您的博士专业" value="{{ current_user.phd_major }}">
+                                <input type="text" class="form-control form-date" name="phd_start" placeholder="点此选择开始时间" value="{{ current_user.phd_start }}">
+                                <input type="text" class="form-control form-date" name="phd_end" placeholder="点此选择结束时间" value="{{ current_user.phd_end }}">
                             </div>
 
                         </div>
