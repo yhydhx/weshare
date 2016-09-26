@@ -31,92 +31,86 @@
 
 
                 {% if current_user.state == 1 %}
-                    <div class="row" style="padding-top: 10px; ">
-                        <a href="" class="ct-login"><span>审核中</span><i class="fa fa-lock"></i></a>
-                    </div>
-                {% endif %} 
-                <!-- 修改主页资料 -->
-                <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
-                    <div class="col-xs-4"><hr></div>
-                    <div class="col-xs-4" style="text-align:center;">
-                        <h4>主页资料修改</h4>
-                    </div>
-                    <div class="col-xs-4"><hr></div>
+                <div class="row" style="padding-top: 10px; ">
+                    <a href="" class="ct-login"><span>审核中</span><i class="fa fa-lock"></i></a>
                 </div>
+                {% endif %}
 
-                <form class=" ct-u-marginBottom input-daterange input-group"
-                      action="/host_center/modify_host_info" method="post" id="form1">
-                    {% csrf_token %}
-                    <div class="col-md-6 col-md-offset-3 ct-u-paddingTop80">
+                <form class=" ct-u-marginBottom input-daterange input-group" action="/host_center/modify_host_info" method="post" id="form1">
+                {% csrf_token %}
 
-                        <div class="ct-panel-inner">
+                    <!-- 修改主页资料 -->
+                    <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
+                        <div class="col-xs-4"><hr></div>
+                        <div class="col-xs-4" style="text-align:center;">
+                            <h4>主页资料修改</h4>
+                        </div>
+                        <div class="col-xs-4"><hr></div>
+                    </div>
 
-                            <div class="form-group ">
-                                <label for="motto">一句话简介</label>
-                                <input id="motto" name="motto" type="text"
-                                       value="{{ current_user.motto }}"
-                                       class="form-control form-control--type2">
+                    
+
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 ct-u-paddingTop80">
+
+                            <div class="ct-panel-inner">
+
+                                <div class="form-group ">
+                                    <label for="motto">一句话简介</label>
+                                    <input id="motto" name="motto" type="text"
+                                           value="{{ current_user.motto }}"
+                                           class="form-control form-control--type2">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="service-time" class="required">您方便服务的时间</label>
+                                    <input id="service-time" name="service-time" required
+                                           value="{{ current_user.service_time }}"
+                                           class="form-control form-control--type2">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
+                                    <input id="min-payment" name="min-payment" type="number" required 
+                                            value="{{ current_user.min_payment }}"
+                                           class="form-control form-control--type2">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
+                                    <input id="max-payment" name="max-payment" type="number" required 
+                                            value="{{ current_user.max_payment }}"
+                                           class="form-control form-control--type2">
+                                </div>
+
                             </div>
-
-                            <div class="form-group">
-                                <label for="service-time" class="required">您方便服务的时间</label>
-                                <input id="service-time" name="service-time" required
-                                       value="{{ current_user.service_time }}"
-                                       class="form-control form-control--type2">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
-                                <input id="min-payment" name="min-payment" type="number" required 
-                                        value="{{ current_user.min_payment }}"
-                                       class="form-control form-control--type2">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
-                                <input id="max-payment" name="max-payment" type="number" required 
-                                        value="{{ current_user.max_payment }}"
-                                       class="form-control form-control--type2">
-                            </div>
-
                         </div>
                     </div>
-                    <div class="row" style="">
-                        <div class="col-md-6 col-md-offset-3 ct-u-paddingTop40">
-                            <input id="submit" type="submit"
-                                   class="btn btn-lg btn-wide btn-motive"
-                                   value="确认修改">
-                        </div>
+
+                    
+
+
+                    <!-- 修改个人介绍 -->
+                    <div class="row" style="display: flex;align-items: center; padding-top:60px; padding-bottom: 30px; ">
+                        <div class="col-xs-4"><hr></div>
+                        <div class="col-xs-4" style="text-align:center;"><h4>个人介绍修改</h4></div>
+                        <div class="col-xs-4"><hr></div>
                     </div>
-                </form>
+
+                    <textarea id="editor_id" name="introduction" style="width:100%;height:500px;">
+                        {{ current_user.introduction}}
+                    </textarea>
 
 
-                <!-- 修改个人介绍 -->
-                <div class="row" style="display: flex;align-items: center; padding-top:60px; padding-bottom: 30px; ">
-                    <div class="col-xs-4"><hr></div>
-                    <div class="col-xs-4" style="text-align:center;"><h4>个人介绍修改</h4></div>
-                    <div class="col-xs-4"><hr></div>
-                </div>
-
-                <textarea id="editor_id" name="introduction" style="width:100%;height:500px;">
-                    {{ current_user.introduction}}
-                </textarea>
-
-                <!-- 修改个人特质 -->
-                <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
-                    <div class="col-xs-4"><hr></div>
-                    <div class="col-xs-4" style="text-align:center;"><h4>服务项目修改</h4></div>
-                    <div class="col-xs-4"><hr></div>
-                </div>
-
-
-                <div style="width:80%">
-
+                    <!-- 修改个人特质 -->
+                    <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
+                        <div class="col-xs-4"><hr></div>
+                        <div class="col-xs-4" style="text-align:center;"><h4>服务项目修改</h4></div>
+                        <div class="col-xs-4"><hr></div>
+                    </div>
                     {% block content %}
                     <div class="row">
                         <div class="col-md-12 ct-u-paddingTop80">
-
-
                             {%  for topic in user_features%}
                             <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
                                 <form class="ct-u-sectionBorder" name="{{topic.tag}}" action="" id="{{topic.id}}">
@@ -143,13 +137,11 @@
                                 <button onclick="showFeatures('{{topic.id}}')" class="btn btn-lg btn-wide btn-motive">添加</button>
                             </div>
                             {% endfor %}
-
                         </div>
                     </div>
-
                     {% endblock %}
 
-                    <div class="row" style="margin-left: 29%">
+                    <!-- <div class="row" style="margin-left: 29%">
                         <div class="col-md-6 ct-u-paddingTop40 ct-u-paddingBottom150">
                             <script>
                                 function openpage() {
@@ -160,9 +152,16 @@
                                 <span>完成全部的内容</span>
                             </button>
                         </div>
-                    </div>
+                    </div> -->
 
-                </div>
+                    <div class="row" style="">
+                        <div class="col-md-6 col-md-offset-3 ct-u-paddingTop40">
+                            <input id="submit" type="submit"
+                                   class="btn btn-lg btn-wide btn-motive"
+                                   value="确认修改">
+                        </div>
+                    </div>
+                </form>
 
             </div>
     	</div>
