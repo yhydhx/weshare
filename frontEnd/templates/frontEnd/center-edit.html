@@ -27,7 +27,7 @@
                 <div class="row centerLeftbarButton"><a href="/host_center/auth">申请认证</a></div>
                 {% endif %}
     		</div>
-            {{ current_user }}
+            <!-- {{ current_user }} -->
             <div class="col-md-10">
                 
     			<!-- 修改头像 -->
@@ -344,17 +344,17 @@ $(".form-time").datetimepicker({
     document.getElementById("education").options[0].selected="selected";
     showEducation('本科');
 </script>
-{% elif current_user.gender == 1 %}
+{% elif current_user.education == 1 %}
 <script>
     document.getElementById("education").options[1].selected="selected";
     showEducation('硕士');
 </script>
-{% elif current_user.gender == 2 %}
+{% elif current_user.education == 2 %}
 <script>
     document.getElementById("education").options[2].selected="selected";
     showEducation('博士');
 </script>
-{% elif current_user.gender == 3 %}
+{% elif current_user.education == 3 %}
 <script>
     document.getElementById("education").options[3].selected="selected";
     showEducation('其他');
