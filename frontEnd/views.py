@@ -889,6 +889,9 @@ def host_center(request, method, Oid):
 
         return render(request, "frontEnd/center-edit.html", Info)
     elif method == "edit2":
+        feature = Feature()
+        user_features = feature.get_one_user_features_with_all_topic(host.id)
+        Info['user_features'] = user_features
         return render(request, "frontEnd/center-edit2.html", Info)
     elif method == "manage":
         Info['sent_bills'] = host.get_one_user_host_bills()
