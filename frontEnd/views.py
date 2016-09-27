@@ -1017,6 +1017,14 @@ def host_center(request, method, Oid):
             host.save()
             return HttpResponseRedirect("/host_center/modify_host_info")
         else:
+            topics = Topic.objects.all()
+            feature = Feature()
+            user_features = feature.get_one_user_features_with_all_topic(host.id)
+
+            Info = {}
+            Info['user_features'] = user_features
+            Info['current_user'] = host
+            Info['login_flag'] = True
             return render(request, "frontEnd/center-edit2.html", Info)
     else:
         return HttpResponseRedirect('/user/show/' + host.id)
