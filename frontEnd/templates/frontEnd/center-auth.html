@@ -25,96 +25,84 @@
                 {% endif %}
     		</div>
     		<div class="col-md-10">
-                <p style="margin-top:20px;">共可申请三个官方认证，请填写认证描述、上传支持材料，并点击提交或更新：</p>
-                <hr>
+
+                <div class="row" style="display: flex;align-items: center; padding-top:30px; padding-bottom: 30px; ">
+                    <div class="col-xs-4"><hr></div>
+                    <div class="col-xs-4" style="text-align:center;">
+                        <h4>提交认证资料</h4>
+                    </div>
+                    <div class="col-xs-4"><hr></div>
+                </div>
+
+                <form id="firstAuth" onsubmit="updateAuth(1);return false">
+                    {% csrf_token %}
+                    <div class="panel" style="text-align: left; ">
+                      <div class="panel-heading" style="height:50px;">
+
+                        <div class="form-group">
+                            <div class="col-xs-4">
+                              <input type="text" class="form-control" name="c_name" placeholder="请输入认证名称">
+                            </div>
+                            <div class="col-xs-8">
+                              <input type="text" class="form-control" name="c_introduction" placeholder="请输入认证描述，如：ACM世界排名第一">
+                            </div>
+                        </div>
+                        
+                      </div>
+                      <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <a href="" class="btn btn-primary"  onclick="upload.click(); return false;">上传资料</a><span style="padding-left: 20px; "> 支持：jpg、png、pdf  &nbsp;&nbsp;</span>
+                                <input type="text" id="upfile"> 
+                                <input type="text" id="upfileType" name="c_type">
+                                <input type="file" id="upload" name="certification" accept=".jpg,.png,.pdf" style="display:none" onchange="upfile.value=this.value;upfileType.value=this.value.substr(this.value.indexOf('.'));">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-danger">添加</button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+
+                <div class="row" style="display: flex;align-items: center; padding-top:30px; padding-bottom: 30px; ">
+                    <div class="col-xs-4"><hr></div>
+                    <div class="col-xs-4" style="text-align:center;">
+                        <h4>已提交的资料</h4>
+                    </div>
+                    <div class="col-xs-4"><hr></div>
+                </div>
 
 
                 <div class="panel" style="text-align: left; ">
                   <div class="panel-heading" style="height:50px;">
-
-                    <div class="form-group">
-                        <label class="col-xs-1 control-label"><h4>①</h4></label>
-                        <div class="col-xs-11">
-                          <input type="text" class="form-control" placeholder="请输入认证描述，如：ACM世界排名第一">
+                    <div class="row">
+                        <div class="col-xs-1 control-label"><h4>①</h4></div>
+                        <div class="col-xs-3">
+                          认证名称：ACM
+                        </div>
+                        <div class="col-xs-8">
+                          认证描述：ACM世界第一
                         </div>
                     </div>
-                    
                   </div>
                   <div class="panel-body">
                     <div class="row">
                         <div class="col-md-5">
-                            <img data-toggle="lightbox" src="" data-image="large-image.jpg" data-caption="小图看大图" class="img-thumbnail" alt="还未上传认证图片" width="200">
+                            <img data-toggle="lightbox" src="{% static 'frontEnd/images/weshare/Imax1.jpg' %}" data-image="{% static 'frontEnd/images/weshare/Imax1.jpg' %}" data-caption="认证图片" class="img-thumbnail" alt="还未上传认证图片" width="200">
                         </div>
-                        <div class="col-md-6">
-                            <a href="" class="btn btn-primary"  onclick="upload.click(); return false;">上传资料</a><span style="padding-left: 20px; ">支持：jpg、png、pdf</span>
-                            <input type="file" id="upload" style="display:none" onchange="upfile.value=this.value">
-                            <br><br>
-                            <a href="" class="btn btn-success">提交更新</a><span style="padding-left: 20px; ">状态：未提交</span>
+                        <div class="col-md-5">
+                            状态：审核中...
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-2">
+                            <a href="" class="btn btn-success">编辑</a>
                             <a href="" class="btn btn-danger">删除</a>
                         </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="panel" style="text-align: left; ">
-                  <div class="panel-heading" style="height:50px;">
-
-                    <div class="form-group">
-                        <label class="col-xs-1 control-label"><h4>②</h4></label>
-                        <div class="col-xs-11">
-                          <input type="text" class="form-control" placeholder="请输入认证描述，如：ACM世界排名第一">
-                        </div>
-                    </div>
-                    
-                  </div>
-                  <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <img data-toggle="lightbox" src="" data-image="large-image.jpg" data-caption="小图看大图" class="img-thumbnail" alt="还未上传认证图片" width="200">
-                        </div>
-                        <div class="col-md-6">
-                            <a href="" class="btn btn-primary">上传资料</a><span style="padding-left: 20px; ">支持：jpg、png、pdf</span>
-                            <br><br>
-                            <a href="" class="btn btn-success">提交更新</a><span style="padding-left: 20px; ">状态：未提交</span>
-                        </div>
-                        <div class="col-md-1">
-                            <a href="" class="btn btn-danger">删除</a>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="panel" style="text-align: left; ">
-                  <div class="panel-heading" style="height:50px;">
-
-                    <div class="form-group">
-                        <label class="col-xs-1 control-label"><h4>③</h4></label>
-                        <div class="col-xs-11">
-                          <input type="text" class="form-control" placeholder="请输入认证描述，如：ACM世界排名第一">
-                        </div>
-                    </div>
-                    
-                  </div>
-                  <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <img data-toggle="lightbox" src="" data-image="large-image.jpg" data-caption="小图看大图" class="img-thumbnail" alt="还未上传认证图片" width="200">
-                        </div>
-                        <div class="col-md-6">
-                            <a href="" class="btn btn-primary">上传资料</a><span style="padding-left: 20px; ">支持：jpg、png、pdf</span>
-                            <br><br>
-                            <a href="" class="btn btn-success">提交更新</a><span style="padding-left: 20px; ">状态：未提交</span>
-                        </div>
-                        <div class="col-md-1">
-                            <a href="" class="btn btn-danger">删除</a>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-
-
+                
 
 
     		</div>
@@ -125,5 +113,31 @@
 
 {% block js %}
 
+<script>
+function updateAuth(z){
+    console.log(z);
 
+    var data = $("#firstAuth").serialize();
+    console.log(data);
+    $.ajax({
+        url : "/host_center/auth",
+        type : "POST",
+        dataType : "html",
+        data : $("#firstAuth").serialize(),
+        success : function(str){
+            console.log('成功');
+            console.log(str);
+            // str2 = JSON.parse(str);
+            // console.log(str2);
+            // $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span><a href=\"\"><i class=\"fa fa-trash\"></i></a>"+str2['data']['feature_name']+"</span></li>");
+            // $('#'+tag+"TXT").append("<div class=\"row\" style=\"padding-top:5px;padding-bottom: 5px; \"><div class=\"col-md-12\"><p style=\"float: left;font-size:15px;\"> <span class=\"label label-primary\">"+ str2['data']['m_name'] +"</span> "+ str2['data']['feature_name'] +" </p><a href=\"\" class=\"btn btn-danger\" style=\"float: right; \">删除</a></div></div>");
+        },
+        error : function(err){
+            console.log('失败');
+            console.log(err);
+        }
+
+    })
+}
+</script>
 {% endblock %}

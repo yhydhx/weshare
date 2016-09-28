@@ -99,60 +99,7 @@
                         {{ current_user.introduction}}
                     </textarea>
 
-
-                    <!-- 修改个人特质 -->
-                    <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
-                        <div class="col-xs-4"><hr></div>
-                        <div class="col-xs-4" style="text-align:center;"><h4>服务项目修改</h4></div>
-                        <div class="col-xs-4"><hr></div>
-                    </div>
-
-                    {% block content %}
-
-                    {%  for topic in user_features%}
-
-                    <div class="panel panel-default">
-                      <div class="panel-heading"><h3>{{topic.name}}</h3></div>
-                      <div class="panel-body">
-                        <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}" style="width:80%;margin-left:10%;">
-                            <div id="{{topic.id}}TXT">
-                            {% for feature in topic.feature_list %}
-                                <div class="row" style="padding-top:5px;padding-bottom: 5px; " id="{{ feature.f_id }}">
-                                    <div class="col-md-12">                           
-                                        <p style="float: left;font-size:15px;"> <span class="label label-primary">{{ feature.m_name }}</span> {{ feature.f_name }} </p>
-                                        <a href="" class="btn btn-danger" style="float: right; " onclick="delete_feature('{{ topic.id }}','{{ feature.f_name }}','{{ feature.m_id }}');return false">删除</a>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            </div>
-                        </ul>
-
-                        <hr>
-                        <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
-
-                            <select class="form-control" id="minor_topic_id" name="minor_topic_id" required onchange="qingkong();">
-                                <option value="">选择小话题</option>
-
-                                {% for minor in topic.minor_topic_list %}
-                                <option value="{{ minor.id }}">{{ minor.m_name }}</option>
-                                {% endfor %}
-                            </select>
-                          <div class="form-group">
-                            <input type="text" class="form-control" id="{{topic.tag}}" name="feature_name" placeholder="点此添加您要提供的服务">
-                            <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>
-                            <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
-                          </div>                
-                          <button type="submit" class="btn btn-info" style="">添加</button>
-                        </form>
-
-                      </div>
-                    </div>
-                    {% endfor %}
-
-                    {% endblock %}
-
-                            
-
+                    
                     <div class="row" style="">
                         <div class="col-md-6 col-md-offset-3 ct-u-paddingTop40">
                             <input id="submit" type="submit"
@@ -161,6 +108,59 @@
                         </div>
                     </div>
                 </form>
+
+
+                <!-- 修改个人特质 -->
+                <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
+                    <div class="col-xs-4"><hr></div>
+                    <div class="col-xs-4" style="text-align:center;"><h4>服务项目修改</h4></div>
+                    <div class="col-xs-4"><hr></div>
+                </div>
+
+                <br><br><br>
+                {% block content %}
+
+                {%  for topic in user_features%}
+
+                <div class="panel panel-default">
+                  <div class="panel-heading"><h3>{{topic.name}}</h3></div>
+                  <div class="panel-body">
+                    <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}" style="width:80%;margin-left:10%;">
+                        <div id="{{topic.id}}TXT">
+                        {% for feature in topic.feature_list %}
+                            <div class="row" style="padding-top:5px;padding-bottom: 5px; " id="{{ feature.f_id }}">
+                                <div class="col-md-12">                           
+                                    <p style="float: left;font-size:15px;"> <span class="label label-primary">{{ feature.m_name }}</span> {{ feature.f_name }} </p>
+                                    <a href="" class="btn btn-danger" style="float: right; " onclick="delete_feature('{{ topic.id }}','{{ feature.f_name }}','{{ feature.m_id }}');return false">删除</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </ul>
+
+                    <hr>
+                    <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
+
+                        <select class="form-control" id="minor_topic_id" name="minor_topic_id" required onchange="qingkong();">
+                            <option value="">选择小话题</option>
+
+                            {% for minor in topic.minor_topic_list %}
+                            <option value="{{ minor.id }}">{{ minor.m_name }}</option>
+                            {% endfor %}
+                        </select>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="{{topic.tag}}" name="feature_name" placeholder="点此添加您要提供的服务">
+                        <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>
+                        <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
+                      </div>                
+                      <button type="submit" class="btn btn-info" style="">添加</button>
+                    </form>
+
+                  </div>
+                </div>
+                {% endfor %}
+
+                {% endblock %}
 
             </div>
     	</div>
