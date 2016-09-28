@@ -925,7 +925,7 @@ def host_center(request, method, Oid):
             for chunk in tmpImg.chunks():
                 des_origin_f.write(chunk)
             des_origin_f.close()
-            c_file_path = "/files/certification/" + mark_list + c_type
+            c_file_path = "/files/certification/" + mark_list + "." + c_type
             certification = Certificate(
                 host_id = host_id ,
                 c_file_path = c_file_path,
