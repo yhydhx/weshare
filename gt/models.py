@@ -405,6 +405,22 @@ class Host(models.Model):
             result.append(tmp_bill)
         return result
 
+    def get_one_host_passed_certification(self):
+        ertifications = Certificate.objects.filter(host_id = host.id, c_state= CERTIFICATE_STATE["PASSED"])
+        result = []
+        for certification_atom in certifications:
+            result.append(certification_atom.format_dict())
+
+        return result
+
+    def get_one_host_certifying_certification(self):
+        certifications = Certificate.objects.filter(host_id = host.id, c_state= CERTIFICATE_STATE["CERTIFYING"])
+        result = []
+        for certification_atom in certifications:
+            result.append(certification_atom.format_dict())
+
+        return result
+
 class Country(models.Model):
     c_name = models.CharField(max_length=100)
     c_id = models.IntegerField()
@@ -734,6 +750,13 @@ class Certificate(models.Model):  # igno
     c_name = models.CharField(max_length=200)     #显示的名字
     c_state = models.IntegerField()
     c_introduction = models.CharField(max_length = 200)
+
+    def format_dict(self):
+        tmp_dict = {}
+        tmp_dict['c_file_path'] = self.c_file_path
+        tmp_dict['c_name'] = self.c_name
+        tmp_dict['c_introduction'] = self.c_introduction
+        return tmp_dict
 
 class Admin(models.Model):
     username = models.CharField(max_length=100)

@@ -904,6 +904,16 @@ def host_center(request, method, Oid):
             host_id = host.id
             
             c_name = request.POST.get("c_name")
+
+            #check the name is repeat
+            try:
+                certification_test = Certificate.objects.get(host_id = host.id,c_name = c_name)
+                Info['state'] = 300
+                Info['message'] = "认证文件名重复，请换一个认证名"
+            except:
+                pass
+
+
             c_state = CERTIFICATE_STATE['CERTIFYING']
             c_introduction = request.POST.get("c_introduction")
             c_type = request.POST.get("c_type")
@@ -924,8 +934,10 @@ def host_center(request, method, Oid):
                 c_introduction = c_introduction
                 )
             certification.save()
+            Info['message'] = "认证提交成功，请等待审核!"
+            Info['state'] = 0
+            return HttpResponse(json.dumps(Info),content_type="application/json")
 
-            return HttpResponseRedirect("/host_center/auth")
         else:
             return render(request, "frontEnd/center-auth.html", Info)
     elif method == "detail":
