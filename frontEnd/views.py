@@ -944,6 +944,8 @@ def host_center(request, method, Oid):
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
         else:
+
+            Info.update(host.get_one_host_all_certification()) 
             return render(request, "frontEnd/center-auth.html", Info)
     elif method == "detail":
 

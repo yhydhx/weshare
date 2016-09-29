@@ -405,6 +405,12 @@ class Host(models.Model):
             result.append(tmp_bill)
         return result
 
+    def get_one_host_all_certification(self):
+        result = {}
+        result['passed_certification' = self.get_one_host_passed_certification()
+        result['verfying_certification' = self.get_one_host_certifying_certification()
+        return result
+
     def get_one_host_passed_certification(self):
         ertifications = Certificate.objects.filter(host_id = host.id, c_state= CERTIFICATE_STATE["PASSED"])
         result = []
