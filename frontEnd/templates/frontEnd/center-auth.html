@@ -34,7 +34,7 @@
                     <div class="col-xs-4"><hr></div>
                 </div>
 
-                <form id="firstAuth" onsubmit="updateAuth(1);return false">
+                <form id="firstAuth" onsubmit="updateAuth();return false">
                     {% csrf_token %}
                     <div class="panel" style="text-align: left; ">
                       <div class="panel-heading" style="height:50px;">
@@ -114,8 +114,7 @@
 {% block js %}
 
 <script>
-function updateAuth(z){
-    console.log(z);
+function updateAuth(){
 
     var data = $("#firstAuth").serialize();
     console.log(data);
