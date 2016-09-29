@@ -940,6 +940,7 @@ def host_center(request, method, Oid):
             certification.save()
             Info['message'] = "认证提交成功，请等待审核!"
             Info['state'] = 0
+            Info['data'] = certification.format_dict()
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
         else:
