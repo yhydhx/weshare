@@ -76,12 +76,14 @@
                 </div>
 
 
+                {% block authView %}
+                {% for auth in passed_certification %}
                 <div class="panel" style="text-align: left; ">
                   <div class="panel-heading" style="height:50px;">
                     <div class="row">
                         <div class="col-xs-1 control-label"><h4>①</h4></div>
                         <div class="col-xs-3">
-                          认证名称：ACM
+                          认证名称：ACM第一
                         </div>
                         <div class="col-xs-8">
                           认证描述：ACM世界第一
@@ -103,6 +105,8 @@
                     </div>
                   </div>
                 </div>
+                {% endfor %}
+                {% endblock %}
 
                 
 
@@ -132,6 +136,7 @@ function updateAuth(){
             console.log('成功');
             console.log(str['message']);
             $('#uploadMessage').append(str['message']);
+
         },
         error : function(err){
             console.log('失败');
