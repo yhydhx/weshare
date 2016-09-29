@@ -756,6 +756,7 @@ class Certificate(models.Model):  # igno
         tmp_dict = {}
         tmp_dict['c_file_path'] = self.c_file_path
         tmp_dict['c_name'] = self.c_name
+        tmp_dict['c_state'] = self.c_state
         tmp_dict['c_introduction'] = self.c_introduction
         tmp_dict['c_upload_time'] = self.c_upload_time
         return tmp_dict
