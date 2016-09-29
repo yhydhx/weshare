@@ -893,6 +893,7 @@ def host_center(request, method, Oid):
         user_features = feature.get_one_user_features_with_all_topic(host.id)
         Info['user_features'] = user_features
         return render(request, "frontEnd/center-edit2.html", Info)
+
     elif method == "manage":
         Info['sent_bills'] = host.get_one_user_host_bills()
         if host.state != HOST_STATE['GUEST']:
@@ -910,6 +911,8 @@ def host_center(request, method, Oid):
                 certification_test = Certificate.objects.get(host_id = host.id,c_name = c_name)
                 Info['state'] = 300
                 Info['message'] = "认证文件名重复，请换一个认证名"
+                return HttpResponse(json.dumps(Info),content_type="application/json")
+
             except:
                 pass
 
@@ -931,7 +934,8 @@ def host_center(request, method, Oid):
                 c_file_path = c_file_path,
                 c_name = c_name,
                 c_state = c_state,
-                c_introduction = c_introduction
+                c_introduction = c_introduction,
+                c_upload_time = datetime.datetime.now()
                 )
             certification.save()
             Info['message'] = "认证提交成功，请等待审核!"

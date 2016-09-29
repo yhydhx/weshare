@@ -750,12 +750,14 @@ class Certificate(models.Model):  # igno
     c_name = models.CharField(max_length=200)     #显示的名字
     c_state = models.IntegerField()
     c_introduction = models.CharField(max_length = 200)
+    c_upload_time = models.DateTimeField()
 
     def format_dict(self):
         tmp_dict = {}
         tmp_dict['c_file_path'] = self.c_file_path
         tmp_dict['c_name'] = self.c_name
         tmp_dict['c_introduction'] = self.c_introduction
+        tmp_dict['c_upload_time'] = self.c_upload_time
         return tmp_dict
 
 class Admin(models.Model):
