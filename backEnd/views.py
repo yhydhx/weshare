@@ -513,25 +513,14 @@ def user(request, method, Oid):
 
         #send email 
         host = Host.objects.get(id=Oid)
+        admin_id = request.session['adminname']
         subject = "恭喜您成功成为我们的HOST!"
         content = "恭喜您成为我们的分享者！"
         to = [host.email]
-        # sendMail(subject,to,content)
 
-        mail = Mail(    
-            subject = subject,
-            from_email = EMAIL_HOST_USER,
-            to_email = host.email,
-            host_id = host.id,
-            admin_id = request.session['adminname'],
-            content = content,
-            is_success = 0
-            )
-        mail.save()
-        #mail.register_success(to,content)
-        #send success, update the data
-        #mail.is_success = 1
-        #mail.save()
+        #to = ["yhydhx@126.com"]
+        mail = Mail()
+        mail.host_pass(to,content,host,admin_id)
 
         Host.objects.filter(id=Oid).update(state=2)
 

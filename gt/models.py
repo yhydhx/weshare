@@ -407,8 +407,8 @@ class Host(models.Model):
 
     def get_one_host_all_certification(self):
         result = {}
-        result['passed_certification' = self.get_one_host_passed_certification()
-        result['verfying_certification' = self.get_one_host_certifying_certification()
+        result['passed_certification'] = self.get_one_host_passed_certification()
+        result['verfying_certification'] = self.get_one_host_certifying_certification()
         return result
 
     def get_one_host_passed_certification(self):
@@ -831,7 +831,11 @@ class Mail(models.Model):
         msg.attach_alternative(html_content, "text/html")
 
         msg.send()
-       
+    
+    def send_succussful(self):
+        self.is_success = 1
+        self.save()
+
     def register_success(self,to,content,host):
         subject = "欢迎您加入weshare！"
         context = {"content": content,'username':"dai"}
@@ -853,23 +857,29 @@ class Mail(models.Model):
 
         
 
-    def host_pass(self,to,content,host,admin):
+    def host_pass(self,to,content,host,admin_id):
         context = {"content": content}
         subject = "恭喜您成为我们的HOST！"
         email_template_name = 'backEnd/host_pass_template.html'
         t = loader.get_template(email_template_name)
         from_email = EMAIL_HOST_USER
         html_content = t.render(Context(context))
+
+
+         #save email 
+        to_email = to[0]
+        host_id = host.id
+
+        self.save_email(subject,from_email,to_email,host_id,admin_id,content,0)
+
         # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-         #save email 
-        to_email = to[0]
-        host_id = host.id
-        admin_id = admin.id
-        self.save_email(subject,from_email,to_email,host_id,admin_id,content,1)
+        
+        #send succesfull =》change the state
+        self.send_succussful()
 
 
 
