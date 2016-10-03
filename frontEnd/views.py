@@ -1303,7 +1303,7 @@ def general_search(request):
     Info['data']['search_result'] = search_result
     Info['data']['search_number'] = len(search_result)
 
-    if len(search_result == 0):
+    if len(search_result) == 0:
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
 
