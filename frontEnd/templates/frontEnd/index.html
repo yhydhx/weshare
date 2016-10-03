@@ -120,9 +120,11 @@
 
     <!-- 首页搜索栏 -->
     <div class="IndexSearch">
-        <form  method="get" class="" style="width:50%">
+        <form  action="/general_search" method="get" class="" style="width:50%">
         {% csrf_token %}
-            <input type="text" id="" name="search" class="IndexSearchInput" placeholder="&nbsp;&nbsp;点此输入搜索关键词，多关键词用空格分开" /><button type="submit" class="IndexSearchButton">搜&nbsp;索</button>
+            <input type="hidden" id="word_1" name="word_1">
+            <input type="hidden" id="word_2" name="word_2">
+            <input type="text" class="IndexSearchInput" placeholder="&nbsp;&nbsp;点此输入搜索关键词，多关键词用空格分开" onkeyup="getkey(this.value);" /><button type="submit" class="IndexSearchButton">搜&nbsp;索</button>
         </form>
     </div>
 
@@ -309,6 +311,17 @@
     });
     function findSchool() {
         window.scrollTo(100, 800);
+    }
+</script>
+
+
+<!-- 首页搜索框JS -->
+<script>
+    //分割关键字
+    function getkey(z){
+        z = z.split(" ");
+        document.getElementById("word_1").value = z[0];
+        document.getElementById("word_2").value = z[1];
     }
 </script>
 
