@@ -120,6 +120,7 @@ GENDER = {
 CERTIFICATE_STATE = {
     "CERTIFYING" : 1,
     "PASSED"    :2,
+    "FAILED"    :3,
 
 }
 # Internationalization
