@@ -760,6 +760,7 @@ class Certificate(models.Model):  # igno
 
     def format_dict(self):
         tmp_dict = {}
+        tmp_dict['id'] = self.id
         tmp_dict['c_file_path'] = self.c_file_path
         tmp_dict['c_name'] = self.c_name
         tmp_dict['c_state'] = self.c_state

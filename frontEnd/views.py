@@ -900,6 +900,12 @@ def host_center(request, method, Oid):
             Info['got_bills'] = host.get_one_host_user_bills()
 
         return render(request, "frontEnd/center-manage.html", Info)
+    
+    elif method == "delete_auth":
+
+        certification_id = request.POST.get("crt_id")
+        Certificate.objects.get(id = certification_id ).delete()
+        return HttpResponseRedirect("/host_center/auth")
     elif method == "auth":
         if request.method == "POST":
             host_id = host.id
