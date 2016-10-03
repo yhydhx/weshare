@@ -42,6 +42,7 @@
                     <div class="ct-widget ct-widget-checkbox-2items ct-u-marginBottom30">
                         <h3 class="ct-widget-header">认证</h3>
                         <form id="ct-js-driverCheckbox" class="ct-js-radio-group ct-widget-content">
+                        {% csrf_token %}
                             <div class="ct-u-displayTableVertical">
                                 <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
                                     <li><i class="fa fa-check"></i><span>百度CEO</span></li>
@@ -55,6 +56,7 @@
                     <div class="ct-widget ct-widget-checkbox-2items ct-u-marginBottom30">
                         <h3 class="ct-widget-header">服务时间</h3>
                         <form id="ct-js-driverCheckbox" class="ct-js-radio-group ct-widget-content">
+                        {% csrf_token %}
                             <div class="ct-u-displayTableVertical">
                                 <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
                                     <li><span>{{ host.service_time }}</span></li>

@@ -31,6 +31,7 @@
         <div class="row">
             <form class="ct-u-sectionBorder ct-u-sectionBorder ct-u-marginBottom input-daterange input-group"
                   action="/complete-account/" method="post" id="form1">
+            {% csrf_token %}
                 <div class="col-md-7 ct-u-paddingTop80">
                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
                         <h2 class="ct-sectionHeader-title">

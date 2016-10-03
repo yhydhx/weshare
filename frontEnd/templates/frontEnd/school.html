@@ -55,6 +55,7 @@ body{
 
                     <div class="form-group ct-widget-search ct-u-marginBottom30">
                         <form id="form1" runat="server">
+                        {% csrf_token %}
                         <div>
                             智能模糊查询提示
                             <input id="txt_search" placeholder="Search..." type="text" name="field[]" class="form-control">
@@ -71,6 +72,7 @@ body{
                     <div class="ct-widget-filter-byType ct-u-marginBottom30">
                         <h3 class="ct-widget-header">发现话题</h3>
                         <form class="ct-widget-content">
+                        {% csrf_token %}
                             <div class="ct-u-displayTableVertical">
                                 <div class="ct-u-displayTableCell">
                                     <div class="ct-checkbox">
@@ -124,6 +126,7 @@ body{
                     <div class="ct-widget ct-u-marginBottom30">
                         <h3 class="ct-widget-header">选择性别</h3>
                         <form class="ct-widget-content">
+                        {% csrf_token %}
                             <select class="ct-select ct-js-selectize ct-js-selectDriver" title="gender">
                                 <option value="*">请选择性别</option>
                                 <option value=".male">男</option>
@@ -136,6 +139,7 @@ body{
                     <div class="ct-widget ct-u-marginBottom30">
                         <h3 class="ct-widget-header">选择学历</h3>
                         <form class="ct-widget-content">
+                        {% csrf_token %}
                             <select class="ct-select ct-js-selectize ct-js-selectDriver" title="Driver">
                                 <option value="*">全部学历</option>
                                 <option value=".withDriver">本科</option>
