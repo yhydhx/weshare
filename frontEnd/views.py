@@ -1182,7 +1182,7 @@ def share(request, method, Oid):
         topic = Topic()
         topics = topic.get_all_topics()
         Info["topics"] = topics
-        SHOW_PEOPLE = 20
+        SHOW_PEOPLE = 10
         SORT_KEY_WORD = ""
         #setting the begin and end
         
