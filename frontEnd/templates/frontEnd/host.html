@@ -191,7 +191,9 @@ function get_page(current_page,total_page){
 
   result += "</ul>";
   $('#pages').append(result);
-
-}window.onload=get_page({{ hosts.number }},{{ hosts.paginator.num_pages }}); 
+}
+//页面加载时自动运行函数
+window.onload=get_page({{ hosts.number }},{{ hosts.paginator.num_pages }}); 
 </script>
+
 {% endblock %}
