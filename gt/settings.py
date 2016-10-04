@@ -80,10 +80,12 @@ APP_USER_SESSION_EXPIRE_TIME = 30*24*60*60
 
 # 用户状态
 HOST_STATE = {
+    'FROZEN' : -2,
+    'UNCERTIFY' : -1,
     'GUEST': 0,
     'APPLY': 1,
     'HOST': 2,
-    'FROZEN':3,
+    #'FROZEN':3,
 
 }
 

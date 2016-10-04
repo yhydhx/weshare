@@ -65,6 +65,9 @@ class Host(models.Model):
     #  qq_login information::
     open_id = models.CharField(blank=True, max_length=100)
 
+    email_certify_code = models.CharField(blank = True, max_length = 100)
+    email_certify_time = models.DateTimeField(null = True)
+
     def __unicode__(self):
         return self.username
 
@@ -1103,8 +1106,8 @@ class Appointment(models.Model):
             result.append(tmp_msg)
 
         return result
-            
+
 class Log(models.Model):
-    #记录支付宝的
+    #记录支付宝的，用户登录
     operation = models.CharField(max_length = 200)
     operation_time = models.DateTimeField(null = True)

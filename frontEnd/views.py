@@ -1307,8 +1307,7 @@ def general_search(request):
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
 
-    return HttpResponse(json.dumps(search_result), content_type="application/json")
-
+    return render(request,"frontEnd/search-host.html",Info)
 
 
 
