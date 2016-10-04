@@ -68,6 +68,9 @@ class Host(models.Model):
     email_certify_code = models.CharField(blank = True, max_length = 100)
     email_certify_time = models.DateTimeField(null = True)
 
+    #scode 
+    score = models.FloatField(null= True)
+
     def __unicode__(self):
         return self.username
 

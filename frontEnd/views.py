@@ -6,6 +6,7 @@ from django.template import RequestContext, loader
 from django.shortcuts import render, get_object_or_404, RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator
 from django.views import generic
 # from blog.models import Poll,Choice,Blog
 from django import forms
@@ -1184,16 +1185,12 @@ def share(request, method, Oid):
         SHOW_PEOPLE = 20
         SORT_KEY_WORD = ""
         #setting the begin and end
-        if request.GET.get("page")== None:
-            begin = 0
-            end = begin + SHOW_PEOPLE
-        else:
-            try:
-                page = int(request.GET.get("page"))
-            except:
-                return render("frontEnd/error.html")
-            begin = 0 * (page-1)*SHOW_PEOPLE
-            end = begin + SHOW_PEOPLE
+        
+        try:
+            page = int(request.GET.get("page"))
+        except:
+            page = 1
+            
         if request.GET.get("sortword") != None:
             SORT_KEY_WORD = request.GET.get("sortword")
 
@@ -1210,14 +1207,25 @@ def share(request, method, Oid):
             Info['m_name'] = m_name
             Info['t_name'] = t_name
             host_number = len(share_hosts)
-            if end < host_number:
-                Info['hosts'] = share_hosts[begin:end]
-            else:
-                Info['hosts'] = share_hosts[:SHOW_PEOPLE]
 
-            #排序
+            Info['hosts'] = share_hosts
             if SORT_KEY_WORD != "":
                 Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
+
+            #divide people 
+            
+            paginator = Paginator(Info['hosts'], SHOW_PEOPLE)
+            
+            try:
+                Info['hosts'] = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                Info['hosts'] = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+                Info['hosts'] = paginator.page(paginator.num_pages)
+            #排序
+            
 
         else:
             if request.session.has_key("share_hosts"):
@@ -1230,13 +1238,28 @@ def share(request, method, Oid):
                 for host_atom in tmp_host:
                     hosts.append(host_atom.format_dict())
             host_number = len(hosts)
+            
+            if SORT_KEY_WORD != "":
+                Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
+
+            #divide people into different page
+            paginator = Paginator(Info['hosts'], SHOW_PEOPLE)
+            
+            try:
+                Info['hosts'] = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                Info['hosts'] = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+                Info['hosts'] = paginator.page(paginator.num_pages)
+
             if end < host_number:
                 Info['hosts'] = hosts[begin:end]
             else:
                 Info['hosts'] = hosts[:SHOW_PEOPLE]
 
-            if SORT_KEY_WORD != "":
-                Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
+            
 
 
         return render(request, 'frontEnd/host.html', Info)
@@ -1307,6 +1330,7 @@ def general_search(request):
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
 
+    return HttpResponse(json.dumps(Info),content_type="application/json")
     return render(request,"frontEnd/search-host.html",Info)
 
 
