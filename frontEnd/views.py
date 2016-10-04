@@ -1238,7 +1238,7 @@ def share(request, method, Oid):
                 for host_atom in tmp_host:
                     hosts.append(host_atom.format_dict())
             host_number = len(hosts)
-            
+            Info['hosts'] = hosts
             if SORT_KEY_WORD != "":
                 Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
 
@@ -1258,9 +1258,6 @@ def share(request, method, Oid):
                 Info['hosts'] = hosts[begin:end]
             else:
                 Info['hosts'] = hosts[:SHOW_PEOPLE]
-
-            
-
 
         return render(request, 'frontEnd/host.html', Info)
 
