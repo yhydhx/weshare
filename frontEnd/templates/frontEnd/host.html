@@ -107,50 +107,8 @@
                 </div>
             </div>
 
-            <div class="pagination">
-                <span class="step-links">
-                    {% if hosts.has_previous %}
-                        <a href="?page={{ hosts.previous_page_number }}">previous</a>
-                    {% endif %}
 
-                    <span class="current">
-                        Page {{ hosts.number }} of {{ hosts.paginator.num_pages }}.
-                    </span>
-
-
-
-                    {% if hosts.has_next %}
-                        <a href="?page={{ hosts.next_page_number }}">next</a>
-                    {% endif %}
-                </span>
-            </div>
-
-            <!-- 分页 -->
-            <!-- <ul class="pager">
-
-              {% if hosts.has_previous %}
-                <li class="previous"><a href="?page={{ hosts.previous_page_number }}">«</a></li>
-              {% endif %}
-
-              <li><a href="?page=1">1</a></li>
-              <li><a href="your/nice/url">...</a></li>
-              <li><a href="your/nice/url">3</a></li>
-              <li><a href="your/nice/url">4</a></li>
-              <li><a href="your/nice/url">5</a></li>
-              <li><a href="your/nice/url">6</a></li>
-
-              <li><a href="your/nice/url">...</a></li>
-              <li><a href="?page={{ hosts.paginator.num_pages }}">{{ hosts.paginator.num_pages }}</a></li>
-
-              {% if hosts.has_next %}
-                <li class="next"><a href="?page={{ hosts.next_page_number }}">»</a></li>
-              {% endif %}
-            </ul> -->
-
-
-            <div id="pages">
-              
-            </div>
+            <div id="pages"><!-- 分页页码自动生成块 --></div>
 
         </div>
         <div class="col-md-2"></div>
@@ -176,13 +134,54 @@ function get_page(current_page,total_page){
   if (total_page < 7) {
     for (var i = 1; i < total_page+1; i++) {
       result += "<li";
-      if (i == current_page) {
+      if (current_page == i) {
         result += " class=\"active\"";
       }
       result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
     }
   }
+
   //页数大于等于7时，生成带省略的页码
+  if (total_page > 6) {
+    //当前页<5时，生成右省略页码
+    if (current_page < 5) {
+      for (var i = 1; i < 7; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      }
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      result += "<li><a href=\"?page=" + total_page + "\">" + total_page + "</a></li>";
+    }
+    //当前页>=5且<=total-4时，生成左右省略页码
+    if (current_page >= 5 && current_page <= total_page-4) {
+      result += "<li><a href=\"?page=1\">1</a></li>";
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      for (var i = current_page-2; i < current_page+3; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      }
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      result += "<li><a href=\"?page=" + total_page + "\">" + total_page + "</a></li>";
+    }
+    //当前页>total-4时，生成左省略页码
+    if (current_page > total_page-4) {
+      result += "<li><a href=\"?page=1\">1</a></li>";
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      for (var i = total_page-5; i < total_page+1; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      }
+    }
+  }
 
   // 生成下一页按钮
   if (current_page != total_page) {
