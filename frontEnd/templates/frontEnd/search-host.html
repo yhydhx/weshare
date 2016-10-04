@@ -54,5 +54,16 @@
 {% endblock %}
 
 {% block js %}
-
+<!-- 搜索框JS -->
+<script>
+    //分割关键字
+    function getkey(z){
+        z = z.split(" ");
+        if (typeof(z[1]) == "undefined") {
+            z[1] = "";
+        }
+        document.getElementById("word_1").value = z[0];
+        document.getElementById("word_2").value = z[1];
+    }
+</script>
 {% endblock %}
