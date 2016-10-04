@@ -82,16 +82,7 @@
                 </div>
             </div> -->
 
-            <!-- 分页 -->
-            <!-- <ul class="pager">
-              <li class="previous"><a href="your/nice/url">«</a></li>
-              <li><a href="your/nice/url">1</a></li>
-              <li class="active"><a href="your/nice/url">2</a></li>
-              <li><a href="your/nice/url">3</a></li>
-              <li><a href="your/nice/url">4</a></li>
-              <li><a href="your/nice/url">5</a></li>
-              <li class="next"><a href="your/nice/url">»</a></li>
-            </ul> -->
+            
 
             <!-- host 展示 -->
             <div class="row">
@@ -126,10 +117,39 @@
                         Page {{ hosts.number }} of {{ hosts.paginator.num_pages }}.
                     </span>
 
+
+
                     {% if hosts.has_next %}
                         <a href="?page={{ hosts.next_page_number }}">next</a>
                     {% endif %}
                 </span>
+            </div>
+
+            <!-- 分页 -->
+            <!-- <ul class="pager">
+
+              {% if hosts.has_previous %}
+                <li class="previous"><a href="?page={{ hosts.previous_page_number }}">«</a></li>
+              {% endif %}
+
+              <li><a href="?page=1">1</a></li>
+              <li><a href="your/nice/url">...</a></li>
+              <li><a href="your/nice/url">3</a></li>
+              <li><a href="your/nice/url">4</a></li>
+              <li><a href="your/nice/url">5</a></li>
+              <li><a href="your/nice/url">6</a></li>
+
+              <li><a href="your/nice/url">...</a></li>
+              <li><a href="?page={{ hosts.paginator.num_pages }}">{{ hosts.paginator.num_pages }}</a></li>
+
+              {% if hosts.has_next %}
+                <li class="next"><a href="?page={{ hosts.next_page_number }}">»</a></li>
+              {% endif %}
+            </ul> -->
+
+
+            <div id="pages">
+              
             </div>
 
         </div>
@@ -141,4 +161,37 @@
 
 {% block js %}
 
+<!-- 自动生成分页页码块 -->
+<script>
+function get_page(current_page,total_page){
+  var result = "";
+  result += "<ul class=\"pager\">";
+
+  // 生成上一页按钮
+  if (current_page != 1) {
+    result += "<li class=\"previous\"><a href=\"?page=" + (current_page-1) + "\"><<上一页</a></li>";
+  }
+
+  // 页数小于7时，生成不带省略的页码
+  if (total_page < 7) {
+    for (var i = 1; i < total_page+1; i++) {
+      result += "<li";
+      if (i == current_page) {
+        result += " class=\"active\"";
+      }
+      result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+    }
+  }
+  //页数大于等于7时，生成带省略的页码
+
+  // 生成下一页按钮
+  if (current_page != total_page) {
+    result += "<li class=\"next\"><a href=\"?page=" + (current_page+1) + "\">下一页>></a></li>"
+  }
+
+  result += "</ul>";
+  $('#pages').append(result);
+
+}window.onload=get_page({{ hosts.number }},{{ hosts.paginator.num_pages }}); 
+</script>
 {% endblock %}
