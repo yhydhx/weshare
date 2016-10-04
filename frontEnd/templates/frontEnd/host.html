@@ -93,10 +93,9 @@
               <li class="next"><a href="your/nice/url">»</a></li>
             </ul> -->
 
-<!--             {% for contact in contacts %}
+            {% for host in hosts %}
                 {# Each "contact" is a Contact model object. #}
-                {{ contact.full_name|upper }}<br />
-                ...
+                {{ host.username|upper }}<br />
             {% endfor %}
 
             <div class="pagination">
@@ -113,7 +112,7 @@
                         <a href="?page={{ contacts.next_page_number }}">next</a>
                     {% endif %}
                 </span>
-            </div> -->
+            </div>
 
         </div>
         <div class="col-md-2"></div>
