@@ -83,7 +83,7 @@
             </div>
 
             <!-- 分页 -->
-            <ul class="pager">
+            <!-- <ul class="pager">
               <li class="previous"><a href="your/nice/url">«</a></li>
               <li><a href="your/nice/url">1</a></li>
               <li class="active"><a href="your/nice/url">2</a></li>
@@ -91,7 +91,29 @@
               <li><a href="your/nice/url">4</a></li>
               <li><a href="your/nice/url">5</a></li>
               <li class="next"><a href="your/nice/url">»</a></li>
-            </ul>
+            </ul> -->
+
+<!--             {% for contact in contacts %}
+                {# Each "contact" is a Contact model object. #}
+                {{ contact.full_name|upper }}<br />
+                ...
+            {% endfor %}
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if contacts.has_previous %}
+                        <a href="?page={{ contacts.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+                    </span>
+
+                    {% if contacts.has_next %}
+                        <a href="?page={{ contacts.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div> -->
 
         </div>
         <div class="col-md-2"></div>
