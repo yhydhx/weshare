@@ -10,7 +10,7 @@
         <div class="col-md-8">
 
             <!-- 面包屑导航 -->
-            <div class="row" style="font-size: 18px;">
+            <div class="row">
                 <ol class="breadcrumb">
                   <li><a href="/share/clear">全部</a></li>
 
@@ -27,7 +27,7 @@
                 {% block topics %}
                 {% for topic in topics %}
             
-                    <div class="col-md-3 col-sm-4 col-xs-6" style="font-size: 18px;padding-top: 5px;padding-bottom: 5px; "><a href="" data-toggle="modal" data-target="#myModal{{ forloop.counter }}">{{ topic.t_name }}</a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-6"><a href="" data-toggle="modal" data-target="#myModal{{ forloop.counter }}">{{ topic.t_name }}</a></div>
 
                     <!-- Modal-->
                     <div class="modal fade" id="myModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 80px; ">
@@ -45,7 +45,7 @@
                                         <input type="hidden" name="t_name" value="{{ topic.t_name }}">
                                         <input type="hidden" name="m_name" value="{{ Mtopic.m_name }}">
                                         <input type="hidden" name="m_id" value="{{ Mtopic.id }}">
-                                        <div class="col-md-3 col-sm-4 col-xs-6" style="font-size:18px;padding-top: 5px;padding-bottom: 5px; "><button type="submit" class="btn">{{ Mtopic.m_name }}</button></div>
+                                        <div class="col-md-3 col-sm-4 col-xs-6" style="padding-top: 5px;padding-bottom: 5px; "><button type="submit">{{ Mtopic.m_name }}</button></div>
                                     </form>
                                 {% endfor %}
                             </div>
@@ -81,17 +81,6 @@
                     {% endblock %}
                 </div>
             </div>
-
-            <!-- 分页 -->
-            <ul class="pager">
-              <li class="previous"><a href="your/nice/url">«</a></li>
-              <li><a href="your/nice/url">1</a></li>
-              <li class="active"><a href="your/nice/url">2</a></li>
-              <li><a href="your/nice/url">3</a></li>
-              <li><a href="your/nice/url">4</a></li>
-              <li><a href="your/nice/url">5</a></li>
-              <li class="next"><a href="your/nice/url">»</a></li>
-            </ul>
 
         </div>
         <div class="col-md-2"></div>
