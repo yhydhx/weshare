@@ -1078,10 +1078,30 @@ def school(request, method, Oid):
         # find the passed host of the school
         school = School()
         school_union, topics = school.get_single_school_detail(Oid)
-
         Info = {}
-        Info['login_flag'] = login_flag
         Info['object'] = school_union
+
+        try:
+            page = request.GET.get("page")
+        except:
+            page = 1
+        SHOW_PEOPLE = 2
+        #divide people into different page
+        paginator = Paginator(Info['object'], SHOW_PEOPLE)
+        
+        try:
+            Info['object'] = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            Info['object'] = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            Info['object'] = paginator.page(paginator.num_pages)
+
+
+        
+        Info['login_flag'] = login_flag
+        
         Info['topics'] = topics
         Info['school'] = School.objects.get(id=Oid)
         Info['allPeople'] = len(school_union)
@@ -1182,7 +1202,7 @@ def share(request, method, Oid):
         topic = Topic()
         topics = topic.get_all_topics()
         Info["topics"] = topics
-        SHOW_PEOPLE = 10
+        SHOW_PEOPLE = 2
         SORT_KEY_WORD = ""
         #setting the begin and end
         
