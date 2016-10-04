@@ -19,7 +19,8 @@
               {% csrf_token %}
                   <input type="hidden" id="word_1" name="word_1">
                   <input type="hidden" id="word_2" name="word_2">
-                  <input type="text" class="IndexSearchInput" style="background-color: #DBDBDB!important;" placeholder="&nbsp;&nbsp;点此输入搜索关键词，多关键词用空格分开" onkeyup="getkey(this.value);" /><button type="submit" class="IndexSearchButton">搜&nbsp;索</button>
+                  <input type="text" class="IndexSearchInput" style="background-color: #DBDBDB!important;" placeholder="&nbsp;&nbsp;点此输入搜索关键词，多关键词用空格分开" onkeyup="getkey(this.value);" /><button type="submit" class="IndexSearchButton" onclick="$('#searchMessage').append('搜索中，请稍后...');">搜&nbsp;索</button>
+                  <div id="searchMessage"><!-- 搜索提示信息 --></div>
               </form>
             <hr>
             
