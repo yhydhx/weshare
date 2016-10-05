@@ -129,37 +129,37 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                 Info['state'] = 405
                 Info['message'] = '您的邮箱已经被注册了'
                 Info['data']['email'] = ""
+            
             except:
+                
+                host = Host(username=username,
+                            password=password,
+                            email=email,
+                            phone_number=phone,
+                            education=-1,
+                            register_time=datetime.datetime.now(),
+                            icon=DEFAULT_ICON,
+                            state = HOST_STATE['UNCERTIFY'],
+                            )
+                # encode password
+                host.password = host.encode_password(password)
+                host.save()
+
                 try:
                     # 拥有qq_openid注册
                     openid = request.session['openid']
-                    host = Host(username=username,
-                                password=password,
-                                email=email,
-                                phone_number=phone,
-                                education=-1,
-                                register_time=datetime.datetime.now(),
-                                icon=DEFAULT_ICON,
-                                open_id=openid,
-                                )
-                    # encode password
-                    host.password = host.encode_password(password)
+                    host.openid = openid
                     host.save()
-                    return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
                 except:
+                    pass
 
-                    host = Host(username=username,
-                                password=password,
-                                email=email,
-                                phone_number=phone,
-                                education=-1,
-                                register_time=datetime.datetime.now(),
-                                icon=DEFAULT_ICON,
-                                )
-                    # encode password
-                    host.password = host.encode_password(password)
-                    host.save()
-                    return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
+                #send certification email and
+                certify_email = Mail()
+                certify_email.register_success(host)
+
+                return render_to_response('frontEnd/register_success.html', context_instance=RequestContext(request))
+
+                    
         return render_to_response('frontEnd/account.html', Info,
                                   context_instance=RequestContext(request))
     else:
@@ -187,9 +187,14 @@ def login(request):
 
                 if user.password != password:
                     return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
-                else:
-                    request.session['email'] = email
-                    return HttpResponseRedirect('/index/')
+                
+                #check the user state
+                if user.state < 0 :
+                    return render(request,"frontEnd/uncertified.html")
+                #all passed
+                request.session['email'] = email
+                return HttpResponseRedirect('/index/')
+
             except:
                 return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
     else:
@@ -1179,6 +1184,24 @@ def user(request, method, Oid):
 
         return HttpResponseRedirect("/user/show/" + Oid)
 
+    elif method == "certify":
+        try:
+            host = Host.objects.get(email_certify_code = Oid)
+            datetime_now = datetime.datetime.now()
+            if (host.email_certify_time - datetime_now).total_seconds() < 60 * 60 * 12:
+                host.state = HOST_STATE['GUEST']
+                host.save()
+                return render(request,"frontEnd/certify_success.html")
+            else:
+                return render(request,"frontEnd/uncertified.html",{'host':host})
+        except:
+            return render(request,"frontEnd/error.html")
+    elif method == "resend_certify_code":
+        host = Host.objects.get(id= Oid)
+        certify_email = Email()
+        certify_email.register_success(host)
+        return render(request,"frontEnd/register_success.html")
+        
     else:
         return render(request, "frontEnd/404.html")
 

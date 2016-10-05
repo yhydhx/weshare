@@ -169,7 +169,17 @@ class Host(models.Model):
         return result
 
 
+    def generate_certify_code(self):
+        '''
+        生成以个验证码，以验证用户
+        '''
+        certify_code = hashlib.md5(str(time.time())).hexdigest()
+        self.email_certify_code = certify_code
+        self.email_certify_time = datetime.datetime.now()
+        self.save()
 
+        url = "http://www.wshere.com/user/certify/"+certify_code
+        return url
 
 
     def encode_password(self,s):
@@ -843,24 +853,28 @@ class Mail(models.Model):
         self.is_success = 1
         self.save()
 
-    def register_success(self,to,content,host):
+    def register_success(self,host):
         subject = "欢迎您加入weshare！"
-        context = {"content": content,'username':"dai"}
+        url = host.generate_certify_code()
+        context = {"content": content,'username':host.username,'url':url}
+        to = [host.email]
         email_template_name = 'backEnd/register_success_template.html'
         t = loader.get_template(email_template_name)
-
         from_email = EMAIL_HOST_USER
-
         html_content = t.render(Context(context))
         # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
 
         #save email 
         to_email = to[0]
         host_id = host.id
-        self.save_email(subject,from_email,to_email,host_id,"0",content,1)
+        self.save_email(subject,from_email,to_email,host_id,"0",content,0)
+
+        msg.send()
+        self.send_succussful()
+
+        
 
         
 
