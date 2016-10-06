@@ -1200,7 +1200,7 @@ def user(request, method, Oid):
             return render(request,"frontEnd/error.html")
     elif method == "resend_certify_code":
         host = Host.objects.get(id= Oid)
-        certify_email = Email()
+        certify_email = Mail()
         certify_email.register_success(host)
         return render(request,"frontEnd/register_success.html")
         
