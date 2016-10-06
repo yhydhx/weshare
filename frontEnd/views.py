@@ -190,7 +190,8 @@ def login(request):
                 
                 #check the user state
                 if user.state < 0 :
-                    return render(request,"frontEnd/uncertified.html")
+                    Info['host'] = user
+                    return render(request,"frontEnd/uncertified.html",Info)
                 #all passed
                 request.session['email'] = email
                 return HttpResponseRedirect('/index/')
