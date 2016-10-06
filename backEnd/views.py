@@ -528,7 +528,7 @@ def user(request, method, Oid):
         return HttpResponseRedirect('/dc/user/host/')
 
     elif method == 'delete':
-        Topic.objects.filter(id=Oid).delete()
+        Host.objects.filter(id=Oid).delete()
         return HttpResponseRedirect('../show/')
     elif method == 'applying':
         users = Host.objects.filter(state=1)
