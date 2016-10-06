@@ -855,6 +855,7 @@ class Mail(models.Model):
 
     def register_success(self,host):
         subject = "欢迎您加入weshare！"
+        content = "欢迎您加入weshare！"
         url = host.generate_certify_code()
         context = {"content": content,'username':host.username,'url':url}
         to = [host.email]
