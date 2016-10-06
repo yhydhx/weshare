@@ -190,6 +190,7 @@ def login(request):
                 
                 #check the user state
                 if user.state < 0 :
+                    Info = {}
                     Info['host'] = user
                     return render(request,"frontEnd/uncertified.html",Info)
                 #all passed
