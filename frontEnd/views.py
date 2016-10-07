@@ -6,7 +6,7 @@ from django.template import RequestContext, loader
 from django.shortcuts import render, get_object_or_404, RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic
 # from blog.models import Poll,Choice,Blog
 from django import forms
