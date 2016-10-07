@@ -390,6 +390,6 @@ function get_page(current_page,total_page){
   $('#pages').append(result);
 }
 //页面加载时自动运行函数
-window.onload=get_page({{ hosts.number }},{{ hosts.paginator.num_pages }}); 
+window.onload=get_page({{ object.number }},{{ object.paginator.num_pages }}); 
 </script>
 {% endblock %}
