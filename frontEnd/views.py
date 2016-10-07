@@ -1365,11 +1365,30 @@ def general_search(request):
     Info['data']['search_result'] = search_result
     Info['data']['search_number'] = len(search_result)
 
+    try:
+        page = request.GET.get("page")
+    except:
+        page = 1
+    #divide people into different page
+    paginator = Paginator(Info['data']['search_result'], SHOW_PEOPLE)
+    
+    try:
+        Info['data']['search_result'] = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        Info['data']['search_result'] = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        Info['data']['search_result'] = paginator.page(paginator.num_pages)
+
+
+    
+
     if len(search_result) == 0:
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
 
-    return HttpResponse(json.dumps(Info),content_type="application/json")
+    #return HttpResponse(json.dumps(Info),content_type="application/json")
     return render(request,"frontEnd/search-host.html",Info)
 
 
