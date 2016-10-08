@@ -1392,24 +1392,6 @@ def general_search(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         Info['data']['search_result'] = paginator.page(paginator.num_pages)
 
-    try:
-        page = request.GET.get("page")
-    except:
-        page = 1
-    #divide people into different page
-    paginator = Paginator(Info['data']['search_result'], SHOW_PEOPLE)
-    
-    try:
-        Info['data']['search_result'] = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        Info['data']['search_result'] = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        Info['data']['search_result'] = paginator.page(paginator.num_pages)
-
-
-    
 
     if len(search_result) == 0:
         Info['state'] = 404

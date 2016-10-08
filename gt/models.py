@@ -94,7 +94,7 @@ class Host(models.Model):
         f).    线上问答的数据（如果有线上问答&且线上问答有文字数据记录的话，例如：分答的提问是文字形式，回答只有语音，则只需要从提问的问题中检索关键字）；
         g).   “提问者”在完成订单后的文字评价（如果技术上复杂，则可以免去这个部分的信息）；
         '''
-        all_host = Host.objects.all()
+        all_host = Host.objects.filter(state = HOST_STATE['HOST'])
         result = []
 
         for host_atom in all_host:
