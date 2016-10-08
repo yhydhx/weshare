@@ -1416,13 +1416,11 @@ def general_search(request):
         Info['message'] = "找不到包含关键字的内容"
 
     #return HttpResponse(json.dumps(Info),content_type="application/json")
-<<<<<<< HEAD
-=======
+
     #
     Info['login_flag'] = login_flag
     if login_flag == True:
         Info['current_user'] = current_user
->>>>>>> 7fa836049ba0e803df691ac4ac8ce070cf3efd34
     return render(request,"frontEnd/search-host.html",Info)
 
 
