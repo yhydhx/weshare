@@ -896,6 +896,7 @@ def host_center(request, method, Oid):
     if method == "edit":
 
         return render(request, "frontEnd/center-edit.html", Info)
+    
     elif method == "edit2":
         feature = Feature()
         user_features = feature.get_one_user_features_with_all_topic(host.id)
@@ -1352,6 +1353,14 @@ def image_library(request):
 
 
 def general_search(request):
+    login_flag = False
+    try:
+        username = request.session['email']
+        user = Host.objects.get(email=username)
+        login_flag = True
+    except:
+        pass
+
     Info = {}
     Info['state'] = 0
     Info['message'] = 0
@@ -1364,6 +1373,8 @@ def general_search(request):
     search_result = h.general_search(word_1, word_2)
     Info['data']['search_result'] = search_result
     Info['data']['search_number'] = len(search_result)
+    Info['data']['word_1'] = word_1
+    Info['data']['word_2'] = word_2
 
     try:
         page = request.GET.get("page")
@@ -1381,14 +1392,15 @@ def general_search(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         Info['data']['search_result'] = paginator.page(paginator.num_pages)
 
-
-    
-
     if len(search_result) == 0:
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
 
     #return HttpResponse(json.dumps(Info),content_type="application/json")
+    #
+    Info['login_flag'] = login_flag
+    if login_flag == True:
+        Info['current_user'] = current_user
     return render(request,"frontEnd/search-host.html",Info)
 
 
