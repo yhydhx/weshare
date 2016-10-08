@@ -907,23 +907,32 @@ class Mail(models.Model):
 
 
     def bill_info(self,subject,to,content,host):
-        
-        context = {"content": content}
+        """
+        创建订单的时候，subject
+
+        """ 
+        context = {"content": content,'username':host.username}
 
         email_template_name = 'backEnd/bill_info_template.html'
         t = loader.get_template(email_template_name)
         from_email = EMAIL_HOST_USER
         html_content = t.render(Context(context))
         # print html_content
+        
+
+        to_email = to[0]
+        host_id = host.id
+
+        self.save_email(subject,from_email,to_email,host_id,"0",content,0)
+
+        # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-         #save email 
-        to_email = to[0]
-        host_id = host.id
-        self.save_email(subject,from_email,to_email,host_id,"0",content,1)
-
+        
+        #send succesfull =》change the state
+        self.send_succussful()
 
     def report(self,to,content):
         context = {"content": content}
