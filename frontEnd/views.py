@@ -1420,7 +1420,7 @@ def general_search(request):
     #
     Info['login_flag'] = login_flag
     if login_flag == True:
-        Info['current_user'] = current_user
+        Info['current_user'] = user
     return render(request,"frontEnd/search-host.html",Info)
 
 
