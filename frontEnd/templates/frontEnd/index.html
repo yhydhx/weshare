@@ -37,8 +37,8 @@
           <div class="carousel-caption">
             <h3>您是否正在寻找科研大牛？</h3>
             <br>
-            <a href="" class="btn btn-primary"><span>Contact</span></a>
-            <a href="" class="btn btn-danger"><span>联系我们</span></a>
+            <!-- <a href="" class="btn btn-primary"><span>Contact</span></a>
+            <a href="" class="btn btn-danger"><span>联系我们</span></a> -->
             <br>
           </div>
         </div>
@@ -47,8 +47,8 @@
           <div class="carousel-caption">
             <h3>您是否正在寻找出国达人？</h3>
             <br>
-            <a href="" class="btn btn-primary"><span>Contact</span></a>
-            <a href="" class="btn btn-danger"><span>联系我们</span></a>
+            <!-- <a href="" class="btn btn-primary"><span>Contact</span></a>
+            <a href="" class="btn btn-danger"><span>联系我们</span></a> -->
             <br>
           </div>
         </div>
@@ -57,8 +57,8 @@
           <div class="carousel-caption">
             <h3>您是否正在寻找课程学霸？</h3>
             <br>
-            <a href="" class="btn btn-primary"><span>Contact</span></a>
-            <a href="" class="btn btn-danger"><span>联系我们</span></a>
+            <!-- <a href="" class="btn btn-primary"><span>Contact</span></a>
+            <a href="" class="btn btn-danger"><span>联系我们</span></a> -->
             <br>
           </div>
         </div>
@@ -159,7 +159,8 @@
 
     <!-- 首页地图-发现学校 模块 -->
     <section class="ct-u-marginTop90 ct-u-paddingBottom10" style="padding-bottom: 0px!important; ">
-        <div class="container">
+        <!-- 探索学校大标题，暂时隐藏 -->
+        <!-- <div class="container">
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
@@ -178,37 +179,8 @@
                     <a href="/school/show">more>></a>
                 </div>
             </div>
-            
+        </div> -->
 
-            
-            
-            <!-- <div class="row">
-                <div class="itemCon" style="float: left">
-                    <div id="ChinaMap" style="margin-left: 20%;"></div>
-                    <div id="stateTip" style="position: absolute;left: 100%;text-align: left;display: inline;"></div>
-                </div>
-                <div id="mapTipContent" style="width: 900px;margin: 0 auto;display: none">
-                    
-                    {% block content %}
-                        {% for province in object %}
-                        <div class="mapTipText mapTipText{{province.id}}">
-                            <div class="mapTipImg"><img src="{% static 'frontEnd/images/heilongjiang.jpg'%}" alt=""/></div>
-                            <div class="mapTipList">
-                                <h2><a href="">{{province.name}}<span>{{province.name}}</span></a></h2>
-                                <ul>
-                                    {% for school in province.schools %}
-                                    <li><a href="{{school.id}}">{{school.name}}</a></li> 
-                                    {% endfor%}
-                                </ul>
-                            </div>
-                        </div>
-
-                        {% endfor %}
-                    {% endblock %}   
-                </div>
-            </div> -->
-
-        </div>
         <div class="container-fluid">
             {% block findschool %}
                 {% for school in data.school_on_index_list %}
