@@ -96,6 +96,7 @@ class Host(models.Model):
         '''
         all_host = Host.objects.filter(state = HOST_STATE['HOST'])
         result = []
+        school_dict = {}
 
         for host_atom in all_host:
             search_string = ""
@@ -105,25 +106,31 @@ class Host(models.Model):
             #get the school infomation
             if education == 0:
                 try:
-                    bachelor_school = School.objects.get(s_name = host_atom.bachelor).s_name
+                    if school_dict.has_key(host_atom.bachelor):
+                        bachelor_school = school_dict[host_atom.bachelor].s_name
+                    else:
+                        bachelor_school_object = School.objects.get(id = host_atom.bachelor)
+                        school_dict[host_atom.bachelor] = bachelor_school_object
+                        bachelor_school = bachelor_school_object.s_name
+
                     search_string += bachelor_school + " "
                 except :
                     pass
             elif education == 1:
                 try:
-                    graduate_school = School.objects.get(s_name = host_atom.graduate).s_name
+                    graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate + " "
-                    bachelor_school = School.objects.get(s_name = host_atom.bachelor).s_name
+                    bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
                 except:
                     pass
             elif education == 2:
                 try:
-                    graduate_school = School.objects.get(s_name = host_atom.graduate).s_name
+                    graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate + " "
-                    bachelor_school = School.objects.get(s_name = host_atom.bachelor).s_name
+                    bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
-                    phd_school = School.objects.get(s_name = host_atom.phd).s_name
+                    phd_school = School.objects.get(id = host_atom.phd).s_name
                     search_string += phd_school + " "
                 except:
                     pass
