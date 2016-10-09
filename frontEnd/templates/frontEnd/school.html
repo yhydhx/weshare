@@ -238,7 +238,7 @@ body{
                     //async: false, //同步执行，不然会有问题
                     dataType: "json",
                     url: "/dc/getUserNameList",   //提交的页面/方法名
-                    data: "userName="+ $("#txt_search").val()+"&schollID={{school.id}}",              //参数（如果没有参数：null）
+                    data: "userName="+ $("#txt_search").val()+"&schoolID={{school.id}}",              //参数（如果没有参数：null）
                     contentType: "application/json; charset=utf-8",
                     error: function (msg) {//请求失败处理函数
                         alert("数据加载失败");
