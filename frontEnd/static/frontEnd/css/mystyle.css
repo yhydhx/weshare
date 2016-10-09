@@ -73,11 +73,9 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 /*footer*/
 @media screen and (min-width: 768px){
 	.footerImg{
-	background-position: center; 
-	background-repeat: no-repeat; 
+	background-position: center;  
 	background-attachment:fixed;
 	background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
-	height:359px;
 
 	display: flex;
 	align-items: center;
