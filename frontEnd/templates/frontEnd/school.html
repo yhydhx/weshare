@@ -54,19 +54,21 @@ body{
                     <div class="clearfix"></div>
 
                     <div class="form-group ct-widget-search ct-u-marginBottom30">
-                        <form id="form1" runat="server">
+                        <form id="form1" runat="server" action="/general_search" method="get">
                         {% csrf_token %}
-                        <div>
-                            智能模糊查询提示
-                            <input id="txt_search" placeholder="Search..." type="text" name="field[]" class="form-control">
-
-                            <div id="searchresult" style="display: none;">
+                            <div>
+                                <input id="txt_search" placeholder="输入姓名搜索" type="text" name="word_1" class="form-control">
+                                <input type="hidden" name="word_2" value="{{ school.s_name }}">
+                                <input type="hidden" name="schoolID" value="{{ school.id }}">
+                                <div id="searchresult" style="display: none;">
+                                </div>
                             </div>
-                        </div>
-                       
+                            <button type="submit" onclick="$('#searchMessage').append('搜索中，请稍后...');><i class="fa fa-search fa-fw"></i></button>
                         </form>
+                        <div id="searchMessage"><!-- 点击搜索后的提示信息 --></div>
 
-                        <button type="submit"><i class="fa fa-search fa-fw"></i></button>
+
+                        
                     </div>
 
                     <div class="ct-widget-filter-byType ct-u-marginBottom30">

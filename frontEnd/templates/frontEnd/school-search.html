@@ -97,11 +97,16 @@ function getSchoolID(school_id,school_name){
 }
 
 //点击表单响应
-$("#txtSc").live("click",function (){
+// $("#txtSc").live("click",function (){
+//     $("#gj").show();
+//     $("#list").hide();
+//     $("#sheng").hide();
+// });
+$('body').on('click', '#txtSc', function (){
     $("#gj").show();
-    $("#list").hide();
+     $("#list").hide();
     $("#sheng").hide();
-});
+ });
 </script>
 
 {% endblock %}
