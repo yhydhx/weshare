@@ -708,11 +708,14 @@ def test(request):
 
 def getUserNameList(request):
     username = request.GET.get("userName")
-
-    hosts = Host.objects.all()
+    schoolID = request.GET.get("schoolID")
+    hosts = Host.objects.filter(state=HOST_STATE['HOST'])
 
     response_data = []
     for host_atom in hosts:
+        if not schoolID in [host_atom.bachelor , host_atom.graduate , host_atom.phd]:
+            continue
+
         #print host_atom.username, username , host_atom.username.startswith(username)
         if host_atom.username.startswith(username):
             tmpD = {}
