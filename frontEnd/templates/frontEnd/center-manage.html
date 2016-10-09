@@ -3,11 +3,7 @@
 
 {% block body %}
 
-<style>
-  body{
-    background-color:white;
-  }
-</style>
+
 
   <div class="container" style="margin-top: 60px;">
   	<div class="row">
@@ -27,9 +23,9 @@
           </div>
   		    <div class="col-md-9" style="padding-top:30px;">
               
-              {% if current_user.state == 0 %}
+              {% if current_user.state == 0 or current_user.state == 1 %}
 
-                  我是：guest
+                  <h3>我的订单</h3>
                   {% block sent0 %}
                   {% for bill in sent_bills %}
                   <table class="table table-bordered ">
@@ -37,13 +33,13 @@
                         <td colspan="3" style="text-align:left;">编号：{{ bill.appointment_id }} 发起时间：{{ bill.appointment_init_time }}</td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="width: 60%">
                             <div class="row">
                                 <div class="col-md-3"><img src="{{ bill.to_host_icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
                             <div class="col-md-9"><h3>{{ bill.feature_name }}</h3><p>{{ bill.host_name }} {{ bill.host_motto }}</p></div>
                             </div>
                         </td>
-                        <td>
+                        <td style="width: 20%">
                           <h4>
                             {% if bill.state == 0 %}
                               创建订单
@@ -58,51 +54,18 @@
                             {% endif %}
                           </h4>
                         </td>
-                        <td><a href="/bill/detail/{{ bill.id }}">查看详情</a></td>
+                        <td style="width: 20%">
+                          <a href="/bill/detail/{{ bill.id }}">查看详情</a>
+                        </td>
                     </tr>
                   </table>
                   {% endfor %}
                   {% endblock %}
 
-              {% elif current_user.state == 1 %}
-                  我是：审核中的guest
-                  {% block sent1 %}
-                  {% for bill in sent_bills %}
-                  <table class="table table-bordered ">
-                    <tr>
-                        <td colspan="3" style="text-align:left;">编号：{{ bill.appointment_id }} 发起时间：{{ bill.appointment_init_time }}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-md-3"><img src="{{ bill.to_host_icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
-                            <div class="col-md-9"><h3>{{ bill.feature_name }}</h3><p>{{ bill.host_name }} {{ bill.host_motto }}</p></div>
-                            </div>
-                        </td>
-                        <td>
-                          <h4>
-                            {% if bill.state == 0 %}
-                              创建订单
-                            {% elif bill.state == 1 %}
-                              确认
-                            {% elif bill.state == 2 %}
-                              付款
-                            {% elif bill.state == 3 %}
-                              完成了
-                            {% elif bill.state == 4 %}
-                              结算完成
-                            {% endif %}
-                          </h4>
-                        </td>
-                        <td><a href="/bill/detail/{{ bill.id }}">查看详情</a></td>
-                    </tr>
-                  </table>
-                  {% endfor %}
-                  {% endblock %}
+
               {% elif current_user.state == 2 %}
-                  我是：host
 
-                  <br>---------------------我的服务：<br>
+                  <h3>我的服务</h3>
                   {% block sent2 %}
                   {% for bill in got_bills %}
                   <table class="table table-bordered ">
@@ -110,13 +73,13 @@
                         <td colspan="3" style="text-align:left;">编号：{{ bill.appointment_id }} 发起时间：{{ bill.appointment_init_time }}</td>
                     </tr>
                     <tr>
-                        <td>
+                        <td  style="width: 60%">
                             <div class="row">
                                 <div class="col-md-3"><img src="{{ bill.from_user_icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
                             <div class="col-md-9"><h3>{{ bill.feature_name }}</h3><p>{{ bill.host_name }} {{ bill.host_motto }}</p></div>
                             </div>
                         </td>
-                        <td>
+                        <td  style="width: 20%">
                           <h4>
                             {% if bill.state == 0 %}
                               创建订单
@@ -131,25 +94,27 @@
                             {% endif %}
                           </h4>
                         </td>
-                        <td><a href="/bill/detail/{{ bill.id }}">查看详情</a></td>
+                        <td  style="width: 20%">
+                          <a href="/bill/detail/{{ bill.id }}">查看详情</a>
+                        </td>
                     </tr>
                   </table>
                   {% endfor %}
 
-                  <br>---------------------我的订单：<br>
+                  <h3>我的订单</h3>
                   {% for bill in sent_bills %}
                   <table class="table table-bordered ">
                     <tr>
                         <td colspan="3" style="text-align:left;">编号：{{ bill.appointment_id }} 发起时间：{{ bill.appointment_init_time }}</td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="width: 60%">
                             <div class="row">
                                 <div class="col-md-3"><img src="{{ bill.to_host_icon }}" style="height: 80px; width: 80px; border: 1px solid #cccccc; border-radius: 50%;"></div>
                             <div class="col-md-9"><h3>{{ bill.feature_name }}</h3><p>{{ bill.host_name }} {{ bill.host_motto }}</p></div>
                             </div>
                         </td>
-                        <td>
+                        <td style="width: 20%">
                           <h4>
                             {% if bill.state == 0 %}
                               创建订单
@@ -164,7 +129,9 @@
                             {% endif %}
                           </h4>
                         </td>
-                        <td><a href="/bill/detail/{{ bill.id }}">查看详情</a></td>
+                        <td style="width: 20%">
+                          <a href="/bill/detail/{{ bill.id }}">查看详情</a>
+                        </td>
                     </tr>
                   </table>
                   {% endfor %}

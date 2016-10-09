@@ -6,6 +6,7 @@ from django.template import RequestContext, loader
 from django.shortcuts import render, get_object_or_404, RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic
 # from blog.models import Poll,Choice,Blog
 from django import forms
@@ -128,37 +129,37 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                 Info['state'] = 405
                 Info['message'] = '您的邮箱已经被注册了'
                 Info['data']['email'] = ""
+            
             except:
+                
+                host = Host(username=username,
+                            password=password,
+                            email=email,
+                            phone_number=phone,
+                            education=-1,
+                            register_time=datetime.datetime.now(),
+                            icon=DEFAULT_ICON,
+                            state = HOST_STATE['UNCERTIFY'],
+                            )
+                # encode password
+                host.password = host.encode_password(password)
+                host.save()
+
                 try:
                     # 拥有qq_openid注册
                     openid = request.session['openid']
-                    host = Host(username=username,
-                                password=password,
-                                email=email,
-                                phone_number=phone,
-                                education=-1,
-                                register_time=datetime.datetime.now(),
-                                icon=DEFAULT_ICON,
-                                open_id=openid,
-                                )
-                    # encode password
-                    host.password = host.encode_password(password)
+                    host.openid = openid
                     host.save()
-                    return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
                 except:
+                    pass
 
-                    host = Host(username=username,
-                                password=password,
-                                email=email,
-                                phone_number=phone,
-                                education=-1,
-                                register_time=datetime.datetime.now(),
-                                icon=DEFAULT_ICON,
-                                )
-                    # encode password
-                    host.password = host.encode_password(password)
-                    host.save()
-                    return render_to_response('frontEnd/login.html', context_instance=RequestContext(request))
+                #send certification email and
+                certify_email = Mail()
+                certify_email.register_success(host)
+
+                return render_to_response('frontEnd/register_success.html', context_instance=RequestContext(request))
+
+                    
         return render_to_response('frontEnd/account.html', Info,
                                   context_instance=RequestContext(request))
     else:
@@ -186,9 +187,16 @@ def login(request):
 
                 if user.password != password:
                     return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
-                else:
-                    request.session['email'] = email
-                    return HttpResponseRedirect('/index/')
+                
+                #check the user state
+                if user.state < 0 :
+                    Info = {}
+                    Info['host'] = user
+                    return render(request,"frontEnd/uncertified.html",Info)
+                #all passed
+                request.session['email'] = email
+                return HttpResponseRedirect('/index/')
+
             except:
                 return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
     else:
@@ -888,6 +896,7 @@ def host_center(request, method, Oid):
     if method == "edit":
 
         return render(request, "frontEnd/center-edit.html", Info)
+    
     elif method == "edit2":
         feature = Feature()
         user_features = feature.get_one_user_features_with_all_topic(host.id)
@@ -900,6 +909,12 @@ def host_center(request, method, Oid):
             Info['got_bills'] = host.get_one_host_user_bills()
 
         return render(request, "frontEnd/center-manage.html", Info)
+    
+    elif method == "delete_auth":
+
+        certification_id = request.POST.get("crt_id")
+        Certificate.objects.get(id = certification_id ).delete()
+        return HttpResponseRedirect("/host_center/auth")
     elif method == "auth":
         if request.method == "POST":
             host_id = host.id
@@ -944,6 +959,8 @@ def host_center(request, method, Oid):
             return HttpResponse(json.dumps(Info),content_type="application/json")
 
         else:
+
+            Info.update(host.get_one_host_all_certification(host)) 
             return render(request, "frontEnd/center-auth.html", Info)
     elif method == "detail":
 
@@ -1069,10 +1086,30 @@ def school(request, method, Oid):
         # find the passed host of the school
         school = School()
         school_union, topics = school.get_single_school_detail(Oid)
-
         Info = {}
-        Info['login_flag'] = login_flag
         Info['object'] = school_union
+
+        try:
+            page = request.GET.get("page")
+        except:
+            page = 1
+        SHOW_PEOPLE = 2
+        #divide people into different page
+        paginator = Paginator(Info['object'], SHOW_PEOPLE)
+        
+        try:
+            Info['object'] = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            Info['object'] = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            Info['object'] = paginator.page(paginator.num_pages)
+
+
+        
+        Info['login_flag'] = login_flag
+        
         Info['topics'] = topics
         Info['school'] = School.objects.get(id=Oid)
         Info['allPeople'] = len(school_union)
@@ -1150,6 +1187,24 @@ def user(request, method, Oid):
 
         return HttpResponseRedirect("/user/show/" + Oid)
 
+    elif method == "certify":
+        try:
+            host = Host.objects.get(email_certify_code = Oid)
+            datetime_now = datetime.datetime.now()
+            if (host.email_certify_time - datetime_now).total_seconds() < 60 * 60 * 12:
+                host.state = HOST_STATE['GUEST']
+                host.save()
+                return render(request,"frontEnd/certify_success.html")
+            else:
+                return render(request,"frontEnd/uncertified.html",{'host':host})
+        except:
+            return render(request,"frontEnd/error.html")
+    elif method == "resend_certify_code":
+        host = Host.objects.get(id= Oid)
+        certify_email = Mail()
+        certify_email.register_success(host)
+        return render(request,"frontEnd/register_success.html")
+        
     else:
         return render(request, "frontEnd/404.html")
 
@@ -1173,19 +1228,15 @@ def share(request, method, Oid):
         topic = Topic()
         topics = topic.get_all_topics()
         Info["topics"] = topics
-        SHOW_PEOPLE = 20
+        SHOW_PEOPLE = 2
         SORT_KEY_WORD = ""
         #setting the begin and end
-        if request.GET.get("page")== None:
-            begin = 0
-            end = begin + SHOW_PEOPLE
-        else:
-            try:
-                page = int(request.GET.get("page"))
-            except:
-                return render("frontEnd/error.html")
-            begin = 0 * (page-1)*SHOW_PEOPLE
-            end = begin + SHOW_PEOPLE
+        
+        try:
+            page = int(request.GET.get("page"))
+        except:
+            page = 1
+            
         if request.GET.get("sortword") != None:
             SORT_KEY_WORD = request.GET.get("sortword")
 
@@ -1202,14 +1253,25 @@ def share(request, method, Oid):
             Info['m_name'] = m_name
             Info['t_name'] = t_name
             host_number = len(share_hosts)
-            if end < host_number:
-                Info['hosts'] = share_hosts[begin:end]
-            else:
-                Info['hosts'] = share_hosts[:SHOW_PEOPLE]
 
-            #排序
+            Info['hosts'] = share_hosts
             if SORT_KEY_WORD != "":
                 Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
+
+            #divide people 
+            
+            paginator = Paginator(Info['hosts'], SHOW_PEOPLE)
+            
+            try:
+                Info['hosts'] = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                Info['hosts'] = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+                Info['hosts'] = paginator.page(paginator.num_pages)
+            #排序
+            
 
         else:
             if request.session.has_key("share_hosts"):
@@ -1222,14 +1284,23 @@ def share(request, method, Oid):
                 for host_atom in tmp_host:
                     hosts.append(host_atom.format_dict())
             host_number = len(hosts)
-            if end < host_number:
-                Info['hosts'] = hosts[begin:end]
-            else:
-                Info['hosts'] = hosts[:SHOW_PEOPLE]
+            
+            Info['hosts'] = hosts
 
             if SORT_KEY_WORD != "":
                 Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
 
+            #divide people into different page
+            paginator = Paginator(Info['hosts'], SHOW_PEOPLE)
+            
+            try:
+                Info['hosts'] = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                Info['hosts'] = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+                Info['hosts'] = paginator.page(paginator.num_pages)
 
         return render(request, 'frontEnd/host.html', Info)
 
@@ -1282,6 +1353,14 @@ def image_library(request):
 
 
 def general_search(request):
+    login_flag = False
+    try:
+        username = request.session['email']
+        user = Host.objects.get(email=username)
+        login_flag = True
+    except:
+        pass
+
     Info = {}
     Info['state'] = 0
     Info['message'] = 0
@@ -1294,13 +1373,37 @@ def general_search(request):
     search_result = h.general_search(word_1, word_2)
     Info['data']['search_result'] = search_result
     Info['data']['search_number'] = len(search_result)
+    Info['data']['word_1'] = word_1
+    Info['data']['word_2'] = word_2
 
-    if len(search_result == 0):
+    try:
+        page = request.GET.get("page")
+    except:
+        page = 1
+    #divide people into different page
+    paginator = Paginator(Info['data']['search_result'], SHOW_PEOPLE)
+    
+    try:
+        Info['data']['search_result'] = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        Info['data']['search_result'] = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        Info['data']['search_result'] = paginator.page(paginator.num_pages)
+
+
+    if len(search_result) == 0:
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
 
-    return HttpResponse(json.dumps(search_result), content_type="application/json")
+    #return HttpResponse(json.dumps(Info),content_type="application/json")
 
+    #
+    Info['login_flag'] = login_flag
+    if login_flag == True:
+        Info['current_user'] = user
+    return render(request,"frontEnd/search-host.html",Info)
 
 
 

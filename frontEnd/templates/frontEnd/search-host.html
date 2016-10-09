@@ -1,0 +1,154 @@
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 -->
+
+{% block body %}
+
+
+<div class="container-fluid" style="margin-top: 100px; ">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <!-- header -->
+            <h4>搜索结果</h4>
+            
+
+            <!-- 搜索框 -->
+            <hr>
+              <form  action="/general_search" method="get" class="" style="width: 50%;margin-left: 25%; ">
+              {% csrf_token %}
+                  <input type="hidden" id="word_1" name="word_1">
+                  <input type="hidden" id="word_2" name="word_2">
+                  <input type="text" class="IndexSearchInput" style="background-color: #DBDBDB!important;" placeholder="&nbsp;&nbsp;点此输入搜索关键词，多关键词用空格分开" onkeyup="getkey(this.value);" /><button type="submit" class="IndexSearchButton" onclick="$('#searchMessage').append('搜索中，请稍后...');">搜&nbsp;索</button>
+                  <div id="searchMessage"><!-- 搜索提示信息 --></div>
+              </form>
+            <hr>
+            
+            <!-- host 展示 -->
+            <div class="row">
+                <div class="cards">
+                    {% block hosts %}
+                    {% for host in data.search_result %}
+                        <div class="col-md-4 col-sm-4 col-xs-6">
+                            <a class="card" href="/user/show/{{ host.id }}">
+                              <img src="{{ host.icon }}" alt="">
+                              <div class="caption">服务时间：{{ host.service_time }}</div>
+                              <div class="card-heading"><strong>{{ host.username }}</strong></div>
+                              <div class="card-content text-muted">{{ host.motto }}</div>
+                              <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div>
+                              <div class="card-actions">
+                                <button type="button" class="btn btn-danger">查看详情</button>
+                                <div class="pull-right text-danger"> {{ host.orders }} 次 服务</div>
+                              </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    {% endblock %}
+                </div>
+            </div>
+
+            <div id="pages"><!-- 分页页码自动生成块 --></div>
+            
+            <!-- 当前页：{{ data.search_result.number }}
+            总页数：{{ data.search_result.paginator.num_pages }}
+            关键词1：{{ data.word_1 }}
+            关键词2：{{ data.word_2 }} -->
+
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<!-- 搜索框JS -->
+<script>
+    //分割关键字
+    function getkey(z){
+        z = z.split(" ");
+        if (typeof(z[1]) == "undefined") {
+            z[1] = "";
+        }
+        document.getElementById("word_1").value = z[0];
+        document.getElementById("word_2").value = z[1];
+    }
+</script>
+
+<!-- 自动生成分页页码块JS -->
+<script>
+function get_page(current_page,total_page,word_1,word_2){
+  var result = "";
+  result += "<ul class=\"pager\">";
+
+  // 生成上一页按钮
+  if (current_page != 1) {
+    result += "<li class=\"previous\"><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + (current_page-1) + "\"><<上一页</a></li>";
+  }
+
+  // 页数小于7时，生成不带省略的页码
+  if (total_page < 7) {
+    for (var i = 1; i < total_page+1; i++) {
+      result += "<li";
+      if (current_page == i) {
+        result += " class=\"active\"";
+      }
+      result += "><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + i + "\">" + i + "</a></li>";
+    }
+  }
+
+  //页数大于等于7时，生成带省略的页码
+  if (total_page > 6) {
+    //当前页<5时，生成右省略页码
+    if (current_page < 5) {
+      for (var i = 1; i < 7; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + i + "\">" + i + "</a></li>";
+      }
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      result += "<li><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + total_page + "\">" + total_page + "</a></li>";
+    }
+    //当前页>=5且<=total-4时，生成左右省略页码
+    if (current_page >= 5 && current_page <= total_page-4) {
+      result += "<li><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=1\">1</a></li>";
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      for (var i = current_page-2; i < current_page+3; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + i + "\">" + i + "</a></li>";
+      }
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      result += "<li><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + total_page + "\">" + total_page + "</a></li>";
+    }
+    //当前页>total-4时，生成左省略页码
+    if (current_page > total_page-4) {
+      result += "<li><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=1\">1</a></li>";
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      for (var i = total_page-5; i < total_page+1; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + i + "\">" + i + "</a></li>";
+      }
+    }
+  }
+
+  // 生成下一页按钮
+  if (current_page != total_page) {
+    result += "<li class=\"next\"><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + (current_page+1) + "\">下一页>></a></li>"
+  }
+
+  result += "</ul>";
+  $('#pages').append(result);
+}
+//页面加载时自动运行函数
+window.onload=get_page({{ data.search_result.number }},{{ data.search_result.paginator.num_pages }},"{{ data.word_1 }}","{{ data.word_2 }}"); 
+</script>
+{% endblock %}

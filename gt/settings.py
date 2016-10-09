@@ -80,10 +80,12 @@ APP_USER_SESSION_EXPIRE_TIME = 30*24*60*60
 
 # 用户状态
 HOST_STATE = {
+    'FROZEN' : -2,
+    'UNCERTIFY' : -1,
     'GUEST': 0,
     'APPLY': 1,
     'HOST': 2,
-    'FROZEN':3,
+    #'FROZEN':3,
 
 }
 
@@ -120,8 +122,13 @@ GENDER = {
 CERTIFICATE_STATE = {
     "CERTIFYING" : 1,
     "PASSED"    :2,
+    "FAILED"    :3,
 
 }
+
+#the number of people on each page
+SHOW_PEOPLE = 2
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 

@@ -340,6 +340,7 @@
                                     <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
                                         <form class="ct-u-sectionBorder" name="{{topic.tag}}" action="/complete-account-feature/"
                                               method="post">
+                                        {% csrf_token %}
                                             <h2 class="ct-sectionHeader-title">
                                                 <small><span>{{topic.name}}</span></small>
                                             </h2>

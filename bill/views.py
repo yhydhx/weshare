@@ -60,8 +60,9 @@ def bill(request,method,Oid):
 
 		
         #send email to the host
-        # create_bill_mail  = Mail()
-        # create_bill_mail.
+        create_bill_mail  = Mail()
+        to = [host.email]
+        create_bill_mail.bill_info("您有一份新的订单",to,"您有一份新的订单，请登录weshare官网并在我的订单中查看",host)
 
 		#generate bill id
 

@@ -65,6 +65,12 @@ class Host(models.Model):
     #  qq_login information::
     open_id = models.CharField(blank=True, max_length=100)
 
+    email_certify_code = models.CharField(blank = True, max_length = 100)
+    email_certify_time = models.DateTimeField(null = True)
+
+    #scode 
+    score = models.FloatField(null= True)
+
     def __unicode__(self):
         return self.username
 
@@ -88,8 +94,9 @@ class Host(models.Model):
         f).    线上问答的数据（如果有线上问答&且线上问答有文字数据记录的话，例如：分答的提问是文字形式，回答只有语音，则只需要从提问的问题中检索关键字）；
         g).   “提问者”在完成订单后的文字评价（如果技术上复杂，则可以免去这个部分的信息）；
         '''
-        all_host = Host.objects.all()
+        all_host = Host.objects.filter(state = HOST_STATE['HOST'])
         result = []
+        school_dict = {}
 
         for host_atom in all_host:
             search_string = ""
@@ -99,25 +106,31 @@ class Host(models.Model):
             #get the school infomation
             if education == 0:
                 try:
-                    bachelor_school = School.objects.get(s_name = host_atom.bachelor).s_name
+                    if school_dict.has_key(host_atom.bachelor):
+                        bachelor_school = school_dict[host_atom.bachelor].s_name
+                    else:
+                        bachelor_school_object = School.objects.get(id = host_atom.bachelor)
+                        school_dict[host_atom.bachelor] = bachelor_school_object
+                        bachelor_school = bachelor_school_object.s_name
+
                     search_string += bachelor_school + " "
                 except :
                     pass
             elif education == 1:
                 try:
-                    graduate_school = School.objects.get(s_name = host_atom.graduate).s_name
+                    graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate + " "
-                    bachelor_school = School.objects.get(s_name = host_atom.bachelor).s_name
+                    bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
                 except:
                     pass
             elif education == 2:
                 try:
-                    graduate_school = School.objects.get(s_name = host_atom.graduate).s_name
+                    graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate + " "
-                    bachelor_school = School.objects.get(s_name = host_atom.bachelor).s_name
+                    bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
-                    phd_school = School.objects.get(s_name = host_atom.phd).s_name
+                    phd_school = School.objects.get(id = host_atom.phd).s_name
                     search_string += phd_school + " "
                 except:
                     pass
@@ -163,7 +176,17 @@ class Host(models.Model):
         return result
 
 
+    def generate_certify_code(self):
+        '''
+        生成以个验证码，以验证用户
+        '''
+        certify_code = hashlib.md5(str(time.time())).hexdigest()
+        self.email_certify_code = certify_code
+        self.email_certify_time = datetime.datetime.now()
+        self.save()
 
+        url = "http://www.wshere.com/user/certify/"+certify_code
+        return url
 
 
     def encode_password(self,s):
@@ -405,15 +428,21 @@ class Host(models.Model):
             result.append(tmp_bill)
         return result
 
-    def get_one_host_passed_certification(self):
-        ertifications = Certificate.objects.filter(host_id = host.id, c_state= CERTIFICATE_STATE["PASSED"])
+    def get_one_host_all_certification(self,host):
+        result = {}
+        result['passed_certification'] = self.get_one_host_passed_certification(host)
+        result['verfying_certification'] = self.get_one_host_certifying_certification(host)
+        return result
+
+    def get_one_host_passed_certification(self,host):
+        certifications = Certificate.objects.filter(host_id = host.id, c_state= CERTIFICATE_STATE["PASSED"])
         result = []
         for certification_atom in certifications:
             result.append(certification_atom.format_dict())
 
         return result
 
-    def get_one_host_certifying_certification(self):
+    def get_one_host_certifying_certification(self,host):
         certifications = Certificate.objects.filter(host_id = host.id, c_state= CERTIFICATE_STATE["CERTIFYING"])
         result = []
         for certification_atom in certifications:
@@ -754,6 +783,7 @@ class Certificate(models.Model):  # igno
 
     def format_dict(self):
         tmp_dict = {}
+        tmp_dict['id'] = self.id
         tmp_dict['c_file_path'] = self.c_file_path
         tmp_dict['c_name'] = self.c_name
         tmp_dict['c_state'] = self.c_state
@@ -825,67 +855,91 @@ class Mail(models.Model):
         msg.attach_alternative(html_content, "text/html")
 
         msg.send()
-       
-    def register_success(self,to,content,host):
+    
+    def send_succussful(self):
+        self.is_success = 1
+        self.save()
+
+    def register_success(self,host):
         subject = "欢迎您加入weshare！"
-        context = {"content": content,'username':"dai"}
+        content = "欢迎您加入weshare！"
+        url = host.generate_certify_code()
+        context = {"content": content,'username':host.username,'url':url}
+        to = [host.email]
         email_template_name = 'backEnd/register_success_template.html'
         t = loader.get_template(email_template_name)
-
         from_email = EMAIL_HOST_USER
-
         html_content = t.render(Context(context))
         # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
 
         #save email 
         to_email = to[0]
         host_id = host.id
-        self.save_email(subject,from_email,to_email,host_id,"0",content,1)
+        self.save_email(subject,from_email,to_email,host_id,"0",content,0)
+
+        msg.send()
+        self.send_succussful()
 
         
 
-    def host_pass(self,to,content,host,admin):
+        
+
+    def host_pass(self,to,content,host,admin_id):
         context = {"content": content}
         subject = "恭喜您成为我们的HOST！"
         email_template_name = 'backEnd/host_pass_template.html'
         t = loader.get_template(email_template_name)
         from_email = EMAIL_HOST_USER
         html_content = t.render(Context(context))
+
+
+         #save email 
+        to_email = to[0]
+        host_id = host.id
+
+        self.save_email(subject,from_email,to_email,host_id,admin_id,content,0)
+
         # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-         #save email 
-        to_email = to[0]
-        host_id = host.id
-        admin_id = admin.id
-        self.save_email(subject,from_email,to_email,host_id,admin_id,content,1)
+        
+        #send succesfull =》change the state
+        self.send_succussful()
 
 
 
 
     def bill_info(self,subject,to,content,host):
-        
-        context = {"content": content}
+        """
+        创建订单的时候，subject
+
+        """ 
+        context = {"content": content,'username':host.username}
 
         email_template_name = 'backEnd/bill_info_template.html'
         t = loader.get_template(email_template_name)
         from_email = EMAIL_HOST_USER
         html_content = t.render(Context(context))
         # print html_content
+        
+
+        to_email = to[0]
+        host_id = host.id
+
+        self.save_email(subject,from_email,to_email,host_id,"0",content,0)
+
+        # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-         #save email 
-        to_email = to[0]
-        host_id = host.id
-        self.save_email(subject,from_email,to_email,host_id,"0",content,1)
-
+        
+        #send succesfull =》change the state
+        self.send_succussful()
 
     def report(self,to,content):
         context = {"content": content}
@@ -1086,8 +1140,8 @@ class Appointment(models.Model):
             result.append(tmp_msg)
 
         return result
-            
+
 class Log(models.Model):
-    #记录支付宝的
+    #记录支付宝的，用户登录
     operation = models.CharField(max_length = 200)
     operation_time = models.DateTimeField(null = True)

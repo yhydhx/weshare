@@ -2,11 +2,7 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}
-<style>
-    body{
-        background-color: white;
-    }
-</style>
+
 
 <div class="container-fluid" style="margin-top: 100px; ">
     <div class="row">
@@ -14,7 +10,7 @@
         <div class="col-md-8">
 
             <!-- 面包屑导航 -->
-            <div class="row">
+            <div class="row" style="font-size: 18px;">
                 <ol class="breadcrumb">
                   <li><a href="/share/clear">全部</a></li>
 
@@ -31,7 +27,7 @@
                 {% block topics %}
                 {% for topic in topics %}
             
-                    <div class="col-md-3 col-sm-4 col-xs-6"><a href="" data-toggle="modal" data-target="#myModal{{ forloop.counter }}">{{ topic.t_name }}</a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-6" style="font-size: 18px;padding-top: 5px;padding-bottom: 5px; "><a href="" data-toggle="modal" data-target="#myModal{{ forloop.counter }}">{{ topic.t_name }}</a></div>
 
                     <!-- Modal-->
                     <div class="modal fade" id="myModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 80px; ">
@@ -49,7 +45,7 @@
                                         <input type="hidden" name="t_name" value="{{ topic.t_name }}">
                                         <input type="hidden" name="m_name" value="{{ Mtopic.m_name }}">
                                         <input type="hidden" name="m_id" value="{{ Mtopic.id }}">
-                                        <div class="col-md-3 col-sm-4 col-xs-6" style="padding-top: 5px;padding-bottom: 5px; "><button type="submit">{{ Mtopic.m_name }}</button></div>
+                                        <div class="col-md-3 col-sm-4 col-xs-6" style="font-size:18px;padding-top: 5px;padding-bottom: 5px; "><button type="submit" class="btn">{{ Mtopic.m_name }}</button></div>
                                     </form>
                                 {% endfor %}
                             </div>
@@ -64,7 +60,7 @@
             <hr>
             
             <!-- host 展示 -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="cards">
                     {% block hosts %}
                     {% for host in hosts %}
@@ -84,7 +80,35 @@
                     {% endfor %}
                     {% endblock %}
                 </div>
+            </div> -->
+
+            
+
+            <!-- host 展示 -->
+            <div class="row">
+                <div class="cards">
+                  {% for host in hosts %}
+                      <!-- {# Each "contact" is a Contact model object. #}
+                      <!-- {{ host.username|upper }}<br /> -->
+                      <div class="col-md-4 col-sm-4 col-xs-6">
+                          <a class="card" href="/user/show/{{ host.id }}">
+                            <img src="{{ host.icon }}" alt="">
+                            <div class="caption">服务时间：{{ host.service_time }}</div>
+                            <div class="card-heading"><strong>{{ host.username }}</strong></div>
+                            <div class="card-content text-muted">{{ host.motto }}</div>
+                            <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div>
+                            <div class="card-actions">
+                              <button type="button" class="btn btn-danger">查看详情</button>
+                              <div class="pull-right text-danger"> {{ host.orders }} 次 服务</div>
+                            </div>
+                          </a>
+                      </div>
+                  {% endfor %}
+                </div>
             </div>
+
+
+            <div id="pages"><!-- 分页页码自动生成块 --></div>
 
         </div>
         <div class="col-md-2"></div>
@@ -94,5 +118,81 @@
 {% endblock %}
 
 {% block js %}
+
+<!-- 自动生成分页页码块JS -->
+<script>
+function get_page(current_page,total_page){
+  var result = "";
+  result += "<ul class=\"pager\">";
+
+  // 生成上一页按钮
+  if (current_page != 1) {
+    result += "<li class=\"previous\"><a href=\"?page=" + (current_page-1) + "\"><<上一页</a></li>";
+  }
+
+  // 页数小于7时，生成不带省略的页码
+  if (total_page < 7) {
+    for (var i = 1; i < total_page+1; i++) {
+      result += "<li";
+      if (current_page == i) {
+        result += " class=\"active\"";
+      }
+      result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+    }
+  }
+
+  //页数大于等于7时，生成带省略的页码
+  if (total_page > 6) {
+    //当前页<5时，生成右省略页码
+    if (current_page < 5) {
+      for (var i = 1; i < 7; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      }
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      result += "<li><a href=\"?page=" + total_page + "\">" + total_page + "</a></li>";
+    }
+    //当前页>=5且<=total-4时，生成左右省略页码
+    if (current_page >= 5 && current_page <= total_page-4) {
+      result += "<li><a href=\"?page=1\">1</a></li>";
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      for (var i = current_page-2; i < current_page+3; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      }
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      result += "<li><a href=\"?page=" + total_page + "\">" + total_page + "</a></li>";
+    }
+    //当前页>total-4时，生成左省略页码
+    if (current_page > total_page-4) {
+      result += "<li><a href=\"?page=1\">1</a></li>";
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      for (var i = total_page-5; i < total_page+1; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      }
+    }
+  }
+
+  // 生成下一页按钮
+  if (current_page != total_page) {
+    result += "<li class=\"next\"><a href=\"?page=" + (current_page+1) + "\">下一页>></a></li>"
+  }
+
+  result += "</ul>";
+  $('#pages').append(result);
+}
+//页面加载时自动运行函数
+window.onload=get_page({{ hosts.number }},{{ hosts.paginator.num_pages }}); 
+</script>
 
 {% endblock %}

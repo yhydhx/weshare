@@ -513,25 +513,14 @@ def user(request, method, Oid):
 
         #send email 
         host = Host.objects.get(id=Oid)
+        admin_id = request.session['adminname']
         subject = "恭喜您成功成为我们的HOST!"
         content = "恭喜您成为我们的分享者！"
         to = [host.email]
-        # sendMail(subject,to,content)
 
-        mail = Mail(    
-            subject = subject,
-            from_email = EMAIL_HOST_USER,
-            to_email = host.email,
-            host_id = host.id,
-            admin_id = request.session['adminname'],
-            content = content,
-            is_success = 0
-            )
-        mail.save()
-        #mail.register_success(to,content)
-        #send success, update the data
-        #mail.is_success = 1
-        #mail.save()
+        #to = ["yhydhx@126.com"]
+        mail = Mail()
+        mail.host_pass(to,content,host,admin_id)
 
         Host.objects.filter(id=Oid).update(state=2)
 
@@ -539,7 +528,7 @@ def user(request, method, Oid):
         return HttpResponseRedirect('/dc/user/host/')
 
     elif method == 'delete':
-        Topic.objects.filter(id=Oid).delete()
+        Host.objects.filter(id=Oid).delete()
         return HttpResponseRedirect('../show/')
     elif method == 'applying':
         users = Host.objects.filter(state=1)
@@ -719,11 +708,14 @@ def test(request):
 
 def getUserNameList(request):
     username = request.GET.get("userName")
-
-    hosts = Host.objects.all()
+    schoolID = request.GET.get("schoolID")
+    hosts = Host.objects.filter(state=HOST_STATE['HOST'])
 
     response_data = []
     for host_atom in hosts:
+        if not schoolID in [host_atom.bachelor , host_atom.graduate , host_atom.phd]:
+            continue
+
         #print host_atom.username, username , host_atom.username.startswith(username)
         if host_atom.username.startswith(username):
             tmpD = {}

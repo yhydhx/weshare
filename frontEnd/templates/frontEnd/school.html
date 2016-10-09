@@ -55,6 +55,7 @@ body{
 
                     <div class="form-group ct-widget-search ct-u-marginBottom30">
                         <form id="form1" runat="server">
+                        {% csrf_token %}
                         <div>
                             智能模糊查询提示
                             <input id="txt_search" placeholder="Search..." type="text" name="field[]" class="form-control">
@@ -71,6 +72,7 @@ body{
                     <div class="ct-widget-filter-byType ct-u-marginBottom30">
                         <h3 class="ct-widget-header">发现话题</h3>
                         <form class="ct-widget-content">
+                        {% csrf_token %}
                             <div class="ct-u-displayTableVertical">
                                 <div class="ct-u-displayTableCell">
                                     <div class="ct-checkbox">
@@ -124,6 +126,7 @@ body{
                     <div class="ct-widget ct-u-marginBottom30">
                         <h3 class="ct-widget-header">选择性别</h3>
                         <form class="ct-widget-content">
+                        {% csrf_token %}
                             <select class="ct-select ct-js-selectize ct-js-selectDriver" title="gender">
                                 <option value="*">请选择性别</option>
                                 <option value=".male">男</option>
@@ -136,6 +139,7 @@ body{
                     <div class="ct-widget ct-u-marginBottom30">
                         <h3 class="ct-widget-header">选择学历</h3>
                         <form class="ct-widget-content">
+                        {% csrf_token %}
                             <select class="ct-select ct-js-selectize ct-js-selectDriver" title="Driver">
                                 <option value="*">全部学历</option>
                                 <option value=".withDriver">本科</option>
@@ -147,8 +151,8 @@ body{
                     </div>
 
 
-                    <a href="rent-page-variation-1.html"
-                       class="btn btn-wide btn-motive ct-u-marginBottom50"><span>清空条件</span></a>
+                    <!-- <a href="rent-page-variation-1.html"
+                       class="btn btn-wide btn-motive ct-u-marginBottom50"><span>清空条件</span></a> -->
 
                 </div>
 
@@ -195,10 +199,13 @@ body{
                             {% endfor %}
                         
                         {% endblock %}
-                        
 
+
+                
                         <!-- ======================= -->
                     </div>
+
+                    <div id="pages"><!-- 分页页码自动生成块 --></div>
 
                 </div>
             </div>
@@ -231,7 +238,7 @@ body{
                     //async: false, //同步执行，不然会有问题
                     dataType: "json",
                     url: "/dc/getUserNameList",   //提交的页面/方法名
-                    data: "userName="+ $("#txt_search").val(),              //参数（如果没有参数：null）
+                    data: "userName="+ $("#txt_search").val()+"&schoolID={{school.id}}",              //参数（如果没有参数：null）
                     contentType: "application/json; charset=utf-8",
                     error: function (msg) {//请求失败处理函数
                         alert("数据加载失败");
@@ -306,5 +313,83 @@ body{
         $("#searchresult").css("left", left + "px"); //重新定义CSS属性
         $("#searchresult").css("top", top + "px"); //同上
     }
+</script>
+
+
+
+<!-- 自动生成分页页码块JS -->
+<script>
+function get_page(current_page,total_page){
+  var result = "";
+  result += "<ul class=\"pager\">";
+
+  // 生成上一页按钮
+  if (current_page != 1) {
+    result += "<li class=\"previous\"><a href=\"?page=" + (current_page-1) + "\"><<上一页</a></li>";
+  }
+
+  // 页数小于7时，生成不带省略的页码
+  if (total_page < 7) {
+    for (var i = 1; i < total_page+1; i++) {
+      result += "<li";
+      if (current_page == i) {
+        result += " class=\"active\"";
+      }
+      result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+    }
+  }
+
+  //页数大于等于7时，生成带省略的页码
+  if (total_page > 6) {
+    //当前页<5时，生成右省略页码
+    if (current_page < 5) {
+      for (var i = 1; i < 7; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      }
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      result += "<li><a href=\"?page=" + total_page + "\">" + total_page + "</a></li>";
+    }
+    //当前页>=5且<=total-4时，生成左右省略页码
+    if (current_page >= 5 && current_page <= total_page-4) {
+      result += "<li><a href=\"?page=1\">1</a></li>";
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      for (var i = current_page-2; i < current_page+3; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      }
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      result += "<li><a href=\"?page=" + total_page + "\">" + total_page + "</a></li>";
+    }
+    //当前页>total-4时，生成左省略页码
+    if (current_page > total_page-4) {
+      result += "<li><a href=\"?page=1\">1</a></li>";
+      result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
+      for (var i = total_page-5; i < total_page+1; i++) {
+        result += "<li";
+        if (current_page == i) {
+          result += " class=\"active\"";
+        }
+        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      }
+    }
+  }
+
+  // 生成下一页按钮
+  if (current_page != total_page) {
+    result += "<li class=\"next\"><a href=\"?page=" + (current_page+1) + "\">下一页>></a></li>"
+  }
+
+  result += "</ul>";
+  $('#pages').append(result);
+}
+//页面加载时自动运行函数
+window.onload=get_page({{ object.number }},{{ object.paginator.num_pages }}); 
 </script>
 {% endblock %}

@@ -14,6 +14,7 @@
     <div class="ssImax" style=" background-image:url('{% static 'frontEnd/images/weshare/ssImax.jpg'%}');">
         <div class="ssImaxSearch">
             <form  method="get">
+            {% csrf_token %}
                 <input type="hidden" id="txtSc2" name="schoolID">
                 <input type="text" id="txtSc" name="school" class="ssImaxSearchInput" placeholder="&nbsp;&nbsp;点此选择您的学校" /><button type="submit" class="ssImaxSearchButton">搜&nbsp;索</button>
                 <div id="gj" style="width: 100%; border:1px solid; padding:5px; overflow:hidden; line-height:25px; display:none;background-color:white;"></div>
@@ -96,11 +97,16 @@ function getSchoolID(school_id,school_name){
 }
 
 //点击表单响应
-$("#txtSc").live("click",function (){
+// $("#txtSc").live("click",function (){
+//     $("#gj").show();
+//     $("#list").hide();
+//     $("#sheng").hide();
+// });
+$('body').on('click', '#txtSc', function (){
     $("#gj").show();
-    $("#list").hide();
+     $("#list").hide();
     $("#sheng").hide();
-});
+ });
 </script>
 
 {% endblock %}
