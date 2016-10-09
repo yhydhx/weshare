@@ -51,6 +51,8 @@
             
             当前页：{{ data.search_result.number }}
             总页数：{{ data.search_result.paginator.num_pages }}
+            关键词1：{{ data.word_1 }}
+            关键词2：{{ data.word_2 }}
 
 
         </div>
@@ -76,13 +78,13 @@
 
 <!-- 自动生成分页页码块JS -->
 <script>
-function get_page(current_page,total_page){
+function get_page(current_page,total_page,word_1,word_2){
   var result = "";
   result += "<ul class=\"pager\">";
 
   // 生成上一页按钮
   if (current_page != 1) {
-    result += "<li class=\"previous\"><a href=\"?page=" + (current_page-1) + "\"><<上一页</a></li>";
+    result += "<li class=\"previous\"><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + (current_page-1) + "\"><<上一页</a></li>";
   }
 
   // 页数小于7时，生成不带省略的页码
@@ -92,7 +94,7 @@ function get_page(current_page,total_page){
       if (current_page == i) {
         result += " class=\"active\"";
       }
-      result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+      result += "><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + i + "\">" + i + "</a></li>";
     }
   }
 
@@ -105,48 +107,48 @@ function get_page(current_page,total_page){
         if (current_page == i) {
           result += " class=\"active\"";
         }
-        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+        result += "><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + i + "\">" + i + "</a></li>";
       }
       result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
-      result += "<li><a href=\"?page=" + total_page + "\">" + total_page + "</a></li>";
+      result += "<li><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + total_page + "\">" + total_page + "</a></li>";
     }
     //当前页>=5且<=total-4时，生成左右省略页码
     if (current_page >= 5 && current_page <= total_page-4) {
-      result += "<li><a href=\"?page=1\">1</a></li>";
+      result += "<li><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=1\">1</a></li>";
       result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
       for (var i = current_page-2; i < current_page+3; i++) {
         result += "<li";
         if (current_page == i) {
           result += " class=\"active\"";
         }
-        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+        result += "><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + i + "\">" + i + "</a></li>";
       }
       result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
-      result += "<li><a href=\"?page=" + total_page + "\">" + total_page + "</a></li>";
+      result += "<li><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + total_page + "\">" + total_page + "</a></li>";
     }
     //当前页>total-4时，生成左省略页码
     if (current_page > total_page-4) {
-      result += "<li><a href=\"?page=1\">1</a></li>";
+      result += "<li><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=1\">1</a></li>";
       result += "<li class=\"disabled\"><a href=\"\">...</a></li>";
       for (var i = total_page-5; i < total_page+1; i++) {
         result += "<li";
         if (current_page == i) {
           result += " class=\"active\"";
         }
-        result += "><a href=\"?page=" + i + "\">" + i + "</a></li>";
+        result += "><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + i + "\">" + i + "</a></li>";
       }
     }
   }
 
   // 生成下一页按钮
   if (current_page != total_page) {
-    result += "<li class=\"next\"><a href=\"?page=" + (current_page+1) + "\">下一页>></a></li>"
+    result += "<li class=\"next\"><a href=\"?word_1=" + word_1 + "&word_2=" + word_2 + "&page=" + (current_page+1) + "\">下一页>></a></li>"
   }
 
   result += "</ul>";
   $('#pages').append(result);
 }
 //页面加载时自动运行函数
-window.onload=get_page({{ data.search_result.number }},{{ data.search_result.paginator.num_pages }}); 
+window.onload=get_page({{ data.search_result.number }},{{ data.search_result.paginator.num_pages }},"{{ data.word_1 }}","{{ data.word_2 }}"); 
 </script>
 {% endblock %}
