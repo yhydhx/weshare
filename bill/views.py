@@ -161,18 +161,22 @@ def bill(request,method,Oid):
 		except:
 			return render(request,'frontEnd/error.html')
 
+		#search if there is a bill exist
+		try:
+			bill = Bill.objects.get(bill_id = appointment.appointment_id)
+		except:
 
-		bill = Bill(
-			bill_id = appointment.appointment_id ,      # 请与贵网站订单系统中的唯一订单号匹配  
-		    subject = u"与"+host.username+u"交流"+str(appointment.recommend_length)+u"小时",     # 订单名称，显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里。  
-		    body = u"与"+host.username+u"交流"+str(appointment.recommend_length)+u"小时",           # 订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里，可以为空  
-		    total_fee = appointment.recommend_salary,                  
-		    create_time = datetime.datetime.now(),
-		    state =  BILL_STATE['UNPAID'],
-		    from_user_id = appointment.from_user_id,
-		    to_host_id = appointment.to_host_id,
-		    bill_type = BILL_TYPE['APPOINTMENT'],
-		)
+			bill = Bill(
+				bill_id = appointment.appointment_id ,      # 请与贵网站订单系统中的唯一订单号匹配  
+			    subject = u"与"+host.username+u"交流"+str(appointment.recommend_length)+u"小时",     # 订单名称，显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里。  
+			    body = u"与"+host.username+u"交流"+str(appointment.recommend_length)+u"小时",           # 订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里，可以为空  
+			    total_fee = appointment.recommend_salary,                  
+			    create_time = datetime.datetime.now(),
+			    state =  BILL_STATE['UNPAID'],
+			    from_user_id = appointment.from_user_id,
+			    to_host_id = appointment.to_host_id,
+			    bill_type = BILL_TYPE['APPOINTMENT'],
+			)
 		bill.save()
 
 		url=create_direct_pay_by_user (bill.bill_id,bill.subject,bill.body,"",bill.total_fee)  
@@ -222,7 +226,7 @@ def bill(request,method,Oid):
 				Info['appointment'] = appointment.format_dict_on_manage()
 				return render(request,"frontEnd/evaluation.html",Info)
 			except:
-				return render("frontEnd/error.html")
+				return render(request,"frontEnd/error.html")
 
     elif method == "evaluation":
 		if request.method == "POST":
@@ -255,7 +259,7 @@ def bill(request,method,Oid):
 			appointment = Appointment.objects.get(id = Oid)
 			#当已经评价过了或者没有完成订单的时候
 			if appointment.state != APPOINTMENT_STATE['COMPLETED']:
-				return render("frontEnd/error.html")
+				return render(request,"frontEnd/error.html")
 			Info['appointment'] = appointment.format_dict_on_manage()
 			return render(request,"frontEnd/evaluation.html",Info)
 
