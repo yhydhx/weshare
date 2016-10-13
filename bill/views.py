@@ -214,20 +214,20 @@ def bill(request,method,Oid):
 
     elif method == "end_talk":
 		if request.method == "POST":
-			appt_id = request.POST.get("appt_id")
+			appt_id = request.POST.get("appnt_id")
 			try:
 				appointment = Appointment.objects.get(id = appt_id)
 				appointment.state =  APPOINTMENT_STATE['COMPLETED']
 				appointment.save()
 				Info['appointment'] = appointment.format_dict_on_manage()
-				return render("frontEnd/evaluation.html",Info)
+				return render(request,"frontEnd/evaluation.html",Info)
 			except:
 				return render("frontEnd/error.html")
 
     elif method == "evaluation":
 		if request.method == "POST":
 
-			appt_id = request.POST.get("appt_id")
+			appt_id = request.POST.get("appnt_id")
 			appointment = Appointment.objects.get(id = appt_id)
 
 			from_user = appointment.from_user_id
@@ -238,20 +238,26 @@ def bill(request,method,Oid):
 			content = request.POST.get("message")
 			
 			message = Message(
-			appt_id = appt_id,
-			appointment = appointment,
+				appt_id = appt_id,
+				appointment = appointment,
 
-			from_user = from_user,
-			to_user = to_user,
-			message_type = message_type,
-			icon = icon,
-			upload_time = upload_time,
-			content = content,
-			extra_id = appt_id,
+				from_user = from_user,
+				to_user = to_user,
+				message_type = message_type,
+				icon = icon,
+				upload_time = upload_time,
+				content = content,
+				extra_id = appt_id,
 			)
 			message.save()
 			return HttpResponseRedirect("/user/show/"+to_user)
-
+		else:
+			appointment = Appointment.objects.get(id = Oid)
+			#当已经评价过了或者没有完成订单的时候
+			if appointment.state != APPOINTMENT_STATE['COMPLETED']:
+				return render("frontEnd/error.html")
+			Info['appointment'] = appointment.format_dict_on_manage()
+			return render(request,"frontEnd/evaluation.html",Info)
 
     else:
 		return HttpResponse("end")

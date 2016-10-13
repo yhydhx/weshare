@@ -114,20 +114,23 @@ class Host(models.Model):
                         bachelor_school = bachelor_school_object.s_name
 
                     search_string += bachelor_school + " "
-                except :
+                    #print bachelor_school
+                except Exception,e:
+                    #print Exception,"--",e
                     pass
             elif education == 1:
                 try:
                     graduate_school = School.objects.get(id = host_atom.graduate).s_name
-                    search_string += graduate + " "
+                    search_string += graduate_school + " "
                     bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
-                except:
+                except Exception,e:
+                    #print Exception,"--",e
                     pass
             elif education == 2:
                 try:
                     graduate_school = School.objects.get(id = host_atom.graduate).s_name
-                    search_string += graduate + " "
+                    search_string += graduate_school + " "
                     bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
                     phd_school = School.objects.get(id = host_atom.phd).s_name
@@ -165,8 +168,8 @@ class Host(models.Model):
             
 
             #introduction 
-            search_string += host_atom.introduction + " "
-
+            #search_string += host_atom.introduction + " "
+            print search_string
             #etc
             #
 
@@ -270,10 +273,10 @@ class Host(models.Model):
         return d_topic_feature
 
 
-    def get_all_classes(self, school_id="none"):
+    def get_index_all_classes(self, school_id="none"):
         hosts=[]
         if school_id == "none":
-            hosts = Host.objects.filter(state=2)
+            hosts = Host.objects.filter(state=2).order_by("score")[:20]
         d_topic_detail = {}
         for each_host in hosts:
             '''
@@ -368,10 +371,10 @@ class Host(models.Model):
                 Info['normal_num'] += 1
 
             #Get the School Infomation 
-            if not univ.has_key(host_atom.h_school):
-                univ[host_atom.h_school] = 1
+            if not univ.has_key(host_atom.bachelor):
+                univ[host_atom.bachelor] = 1
             else:
-                univ[host_atom.h_school] += 1
+                univ[host_atom.bachelor] += 1
 
         Info['school_num'] = len(univ)
 

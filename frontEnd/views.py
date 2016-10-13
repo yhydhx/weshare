@@ -32,36 +32,37 @@ from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY, WEIBO_APPKEY, WEIBO
 
 def index(request):
     log = logging.getLogger(__name__)
-    provinces = Province.objects.all()
-    d = {}
-    for s_province in provinces:
-        d[s_province.p_name] = {}
-        d[s_province.p_name]['name'] = s_province.p_name
-        d[s_province.p_name]['id'] = s_province.p_id
-        d[s_province.p_name]['schools'] = []
+    
+    # provinces = Province.objects.all()
+    # d = {}
+    # for s_province in provinces:
+    #     d[s_province.p_name] = {}
+    #     d[s_province.p_name]['name'] = s_province.p_name
+    #     d[s_province.p_name]['id'] = s_province.p_id
+    #     d[s_province.p_name]['schools'] = []
 
-    schools = School.objects.all()
-    for s_school in schools:
-        if s_school.s_display_index == 0:
-            continue
-        s_school_name = s_school.s_name
-        d_school = {}
-        d_school['name'] = s_school_name
-        d_school['id'] = s_school.id
-        d[s_school.s_province]['schools'].append(d_school)
+    # schools = School.objects.all()
+    # for s_school in schools:
+    #     if s_school.s_display_index == 0:
+    #         continue
+    #     s_school_name = s_school.s_name
+    #     d_school = {}
+    #     d_school['name'] = s_school_name
+    #     d_school['id'] = s_school.id
+    #     d[s_school.s_province]['schools'].append(d_school)
 
-    obj = []
-    for t in d.values():
-        obj.append(t)
+    # obj = []
+    # for t in d.values():
+    #     obj.append(t)
 
     # get recommended hosts
 
     recommend_host = Host()
     Info = {}
-    Info = recommend_host.get_all_classes()
+    Info = recommend_host.get_index_all_classes()
     Info.update(recommend_host.get_index_statistic())
 
-    Info['object'] = obj
+    #Info['object'] = obj
     
     Info['data'] = {}
 
