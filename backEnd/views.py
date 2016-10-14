@@ -873,4 +873,27 @@ def setEmail(request):
 
     return HttpResponse("succuss")
 
+#功能模块
+
+def func(request, method, Oid):
+    try:
+        request.session['adminname']
+    except KeyError, e:
+        return HttpResponseRedirect('login.html')
+
+
+    if method == 'generate_index_data':
+        
+        return HttpResponse('主页信息生成成功')
+    elif method == 'add':
+        menu = Menu.objects.all()
+        return render(request, 'backEnd/addDocView.html', {'menu': menu})
+    elif method == 'show' or method == '':
+        allFeature = Document.objects.all()
+        for doc_atom in allFeature:
+            doc_atom.format_menu()
+        return render(request, 'backEnd/showDocList.html', {'object': allFeature})
+
+    else:
+        return HttpResponse('没有该方法')
 

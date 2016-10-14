@@ -343,7 +343,7 @@ class Host(models.Model):
         return Info
 
     def get_user_message(self,user_id):
-        msgs = Message.objects.filter(to_user=user_id)
+        msgs = Message.objects.filter(to_user=user_id,message_type = MESSAGE_TYPE["EVALUATION"])
         msg_result = []
         for msg_atom in msgs:
             tmp_message = {}
@@ -1148,3 +1148,11 @@ class Log(models.Model):
     #记录支付宝的，用户登录
     operation = models.CharField(max_length = 200)
     operation_time = models.DateTimeField(null = True)
+
+
+class Cache(models.Model):
+    #为了加快加载速度手动生成文件
+    cache_name = models.CharField(max_length = 200, unique= True, primary_key= True)
+    cache_value = models.TextField()
+    cache_modify_time = models.DateTimeField()
+

@@ -218,9 +218,9 @@ def bill(request,method,Oid):
 
     elif method == "end_talk":
 		if request.method == "POST":
-			appt_id = request.POST.get("appnt_id")
+			appnt_id = request.POST.get("appnt_id")
 			try:
-				appointment = Appointment.objects.get(id = appt_id)
+				appointment = Appointment.objects.get(id = appnt_id)
 				appointment.state =  APPOINTMENT_STATE['COMPLETED']
 				appointment.save()
 				Info['appointment'] = appointment.format_dict_on_manage()
@@ -231,27 +231,27 @@ def bill(request,method,Oid):
     elif method == "evaluation":
 		if request.method == "POST":
 
-			appt_id = request.POST.get("appnt_id")
-			appointment = Appointment.objects.get(id = appt_id)
+			appnt_id = request.POST.get("appnt_id")
+			appointment = Appointment.objects.get(id = appnt_id)
+			appointment.state = APPOINTMENT_STATE['FINISHED']
+			appointment.save()
 
+			#save evaluation information
 			from_user = appointment.from_user_id
 			to_user = appointment.to_host_id
 			message_type = MESSAGE_TYPE["EVALUATION"]
 			icon = appointment.from_user_icon
 			upload_time = datetime.datetime.now()
-			content = request.POST.get("message")
+			content = request.POST.get("content")
 			
 			message = Message(
-				appt_id = appt_id,
-				appointment = appointment,
-
 				from_user = from_user,
 				to_user = to_user,
 				message_type = message_type,
 				icon = icon,
 				upload_time = upload_time,
 				content = content,
-				extra_id = appt_id,
+				extra_id = appnt_id,
 			)
 			message.save()
 			return HttpResponseRedirect("/user/show/"+to_user)

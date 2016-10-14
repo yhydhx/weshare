@@ -24,6 +24,8 @@ urlpatterns = patterns('',
     url(r'^menu/(?P<method>\w+)/?(?P<Oid>\w*)$', views.menu,name ='menu'),
     url(r'^doc/(?P<method>\w+)/?(?P<Oid>\w*)$', views.doc,name ='doc'),   
 
+    url(r'^func/(?P<method>\w+)/?(?P<Oid>\w*)$', views.func,name ='func'),   
+
     url(r'^test\.html$', views.test, name='test'),
     url(r'^s\.html$', views.s, name='s'),
     url(r'^email\.html$', views.setEmail, name='setEmail'),

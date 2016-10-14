@@ -305,7 +305,7 @@ url : /bill/evaluation
 method : POST
 
 {
-	appt_id :    ~ 订单的ID
+	appnt_id :    ~ 订单的ID
 	content :    ~ 评价的内容
 }
 
