@@ -57,21 +57,27 @@ def pay(request):
  
 @csrf_exempt  
 def alipay_notify_url (request): 
-    log=Log(operation='simply'+str(request.GET),
+    log=Log(operation='simply'+str(request.POST),
                 operation_time = datetime.datetime.now())   
     log.save()
     if request.method == 'POST':  
         if notify_verify (request.POST):  
             #商户网站订单号  
-            tn = request.POST.get('out_trade_no')  
-            #支付宝单号  
-            trade_no=request.POST.get('trade_no')  
-            #返回支付状态  
-            trade_status = request.POST.get('trade_status')  
-            cb = Bill.objects.get(bill_id=cbid)
-            
+            try:
+                tn = request.POST.get('out_trade_no')  
+                #支付宝单号  
+                trade_no=request.POST.get('trade_no')  
+                #返回支付状态  
+                trade_status = request.POST.get('trade_status')  
+                cb = Bill.objects.get(bill_id=tn)
+            except Exception e:
+                print e
             if trade_status == 'TRADE_SUCCESS':  
-                cb.paid()  
+                if bill.paid() == True:
+                    if bill.bill_type == BILL_TYPE["APPOINTMENT"]:
+                        appt_id = bill.get_appt_id()
+                        return HttpResponseRedirect("success")
+
                 log=Log(operation='notify1_'+trade_status+'_'+trade_no,
                 operation_time = datetime.datetime.now())  
                 log.save()  
