@@ -297,6 +297,13 @@ class Host(models.Model):
             else:
                 tag += "female "
 
+            if each_host.education == 0 :
+                tag += "bachelor "
+            elif each_host.education == 1:
+                tag += "gradate "
+            elif each_host.education == 2:
+                tag += "phd "
+
             h_topics = Host_Topic.objects.filter(host_id=each_host.id)
 
             # classification
