@@ -140,11 +140,13 @@
 
               <hr style="border: none;border-top: 1px solid black; ">
               
-              <form action="/bill/evaluation/{{ appointment.id }}">">
+              <form action="/bill/evaluation" method="post">
+              {% csrf_token %}
                 <div class="panel panel-default">
                   <div class="panel-heading"><h4>对此次约见的评价</h4></div>
                   <div class="panel-body">
-                      <textarea class="form-control" name="" rows="5"></textarea>
+                      <input type="hidden" name="appt_id" value="{{ appointment.id }}">
+                      <textarea class="form-control" name="content" rows="5"></textarea>
                       <br>
                       <button type="submit" class="btn btn-lg">提交</button>
                   </div>
