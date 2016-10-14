@@ -48,6 +48,12 @@
                                     <li><i class="fa fa-check"></i><span>百度CEO</span></li>
                                     <li><i class="fa fa-check"></i><span>哈佛本硕博</span></li>
                                     <li><i class="fa fa-check"></i><span>电子科大教授</span></li>
+                                    {% block auth %}
+                                    {% for auth in evaluation %}
+                                        aaa
+                                    {% endfor %}
+                                    {% endblock %}
+                                    {{ evaluation }}
                                 </ul>
                             </div>
                         </form>
