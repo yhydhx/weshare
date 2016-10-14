@@ -257,6 +257,14 @@
                   <button type="submit" class="btn btn-danger btn-lg">约见完成</button>
                 </form>
               </div>
+              {% elif appointment.state == 3 %}
+              <div style="display: flex;justify-content: center; ">
+                <form action="" method="post" style="margin-left:5px;">
+                  {% csrf_token %}
+                  <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
+                  <button type="submit" class="btn btn-lg">评价</button>
+                </form>
+              </div>
               {% endif %}
 
               <br><br>
