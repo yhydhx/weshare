@@ -45,15 +45,31 @@
                         {% csrf_token %}
                             <div class="ct-u-displayTableVertical">
                                 <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                    <li><i class="fa fa-check"></i><span>百度CEO</span></li>
-                                    <li><i class="fa fa-check"></i><span>哈佛本硕博</span></li>
-                                    <li><i class="fa fa-check"></i><span>电子科大教授</span></li>
                                     {% block auth %}
-                                    {% for auth in evaluation %}
-                                        aaa
+                                    {% for auth in certification %}
+                                        <li><i class="fa fa-check"></i><a href="" data-toggle="modal" data-target="#auth{{ auth.id }}"><span>{{ auth.c_name }}</span></a></li>
+
+                                        <!-- 弹出框 -->
+                                        <div class="modal fade" id="auth{{ auth.id }}">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                                                <h4 class="modal-title">{{ auth.c_name }}</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                <p>{{ auth.c_introduction }}</p>
+                                                <img src="{{ auth.c_file_path }}" alt="">
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn" data-dismiss="modal">关闭</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
                                     {% endfor %}
                                     {% endblock %}
-                                    {{ evaluation }}
+                                    <!-- {{ certification }} -->
                                 </ul>
                             </div>
                         </form>
