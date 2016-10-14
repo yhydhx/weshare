@@ -70,7 +70,7 @@ def alipay_notify_url (request):
                 #返回支付状态  
                 trade_status = request.POST.get('trade_status')  
                 cb = Bill.objects.get(bill_id=tn)
-            except Exception e:
+            except Exception ,e:
                 print e
             if trade_status == 'TRADE_SUCCESS':  
                 if bill.paid() == True:
