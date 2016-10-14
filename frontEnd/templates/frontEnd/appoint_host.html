@@ -123,15 +123,15 @@
                     <td>
                       <h4>
                         {% if appointment.state == 0 %}
-                          创建订单
+                          等待分享家确定
                         {% elif appointment.state == 1 %}
-                          确认
+                          等待付款
                         {% elif appointment.state == 2 %}
-                          付款
+                          已付款
                         {% elif appointment.state == 3 %}
-                          完成了
+                          约见完成
                         {% elif appointment.state == 4 %}
-                          结算完成
+                          已评价
                         {% endif %}
                       </h4>
                     </td>
