@@ -1149,6 +1149,7 @@ def user(request, method, Oid):
         Info['host'] = host
         Info['msgs'] = host.get_user_message(host.id)
         Info['questions'] = questions
+        Info['certification'] = host.get_one_host_passed_certification(host)
 
         if login_flag:
             Info['current_user'] = user
