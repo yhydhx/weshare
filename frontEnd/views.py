@@ -57,10 +57,10 @@ def index(request):
 
     # get recommended hosts
 
-    recommend_host = Host()
+
     Info = {}
-    Info = recommend_host.get_index_all_classes()
-    Info.update(recommend_host.get_index_statistic())
+    index_cache =  eval(Cache.objects.get(cache_name = "index_data").cache_value)
+    Info.update(index_cache)
 
     #Info['object'] = obj
     
