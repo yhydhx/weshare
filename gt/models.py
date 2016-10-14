@@ -415,7 +415,7 @@ class Host(models.Model):
         return result_hosts
 
     def get_one_user_host_bills(self,client_type="WEB"):
-        bills = Appointment.objects.filter(from_user_id = self.id)
+        bills = Appointment.objects.filter(from_user_id = self.id).order_by("-appointment_init_time")
 
         result = []
         for bill_atom in bills:
@@ -428,7 +428,7 @@ class Host(models.Model):
         return result
 
     def get_one_host_user_bills(self,client_type="WEB"):
-        bills = Appointment.objects.filter(to_host_id = self.id)
+        bills = Appointment.objects.filter(to_host_id = self.id).order_by("-appointment_init_time")
         result = []
         for bill_atom in bills:
             if client_type == "APP":
@@ -799,6 +799,9 @@ class Certificate(models.Model):  # igno
         tmp_dict['c_state'] = self.c_state
         tmp_dict['c_introduction'] = self.c_introduction
         tmp_dict['c_upload_time'] = self.c_upload_time
+        #加上用户的名字
+        tmp_dict['c_host_name'] = Host.objects.get(id=self.host_id).username
+
         return tmp_dict
 
 class Admin(models.Model):
@@ -1069,7 +1072,7 @@ class Appointment(models.Model):
     recommend_begin_time = models.DateTimeField( null = True)                    #建议的时间
     recommend_end_time = models.DateTimeField( null = True)                    #建议的时间
     recommend_length = models.FloatField( null = True)                     #建议的时长
-    recommend_payment = models.FloatField( null = True)                    #每小时多少钱
+    recommend_payment = models.IntegerField( null = True)                    #每小时多少钱
     recommend_salary = models.FloatField( null = True)                      #总共多少钱
     feature_id = models.CharField(max_length = 100)            #feature_id
     appointment_id = models.CharField(max_length=100)     #唯一的订单号-》

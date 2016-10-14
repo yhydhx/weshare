@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0091) -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<!-- Place this in the body of the page content -->
+<form method="post" action='../passing/'>
+		 {% csrf_token %}
+        <input type='hidden' name="id" value={{object.id}}> 
+
+     <img src="{{object.c_file_path}}">
+    <h2>certification name<input name='c_name' value ='{{object.c_name}}' ></h2>
+    
+    <input type='submit' value="审核通过">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+
+
+
+<script type="text/javascript" src="{% static 'blog/js/jstable.js' %}"></script>
+
+
+
+

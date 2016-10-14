@@ -910,3 +910,36 @@ def func(request, method, Oid):
     else:
         return HttpResponse('没有该方法')
 
+def certification(request, method, Oid):
+    try:
+        request.session['adminname']
+    except KeyError, e:
+        return HttpResponseRedirect('login.html')
+
+    if method == 'passed':
+        crt = Certificate.objects.filter(c_state = CERTIFICATE_STATE['PASSED'])
+        return render(request, 'backEnd/showCertificationList.html', {'menu': menu})
+
+    elif method  == "passing":
+        if request.method == "POST":
+            c_id = request.POST.get("id")
+            crt = Certificate.objects.get(id = c_id)
+            crt.c_state = CERTIFICATE_STATE['PASSED']
+            crt.save()
+            return HttpResponseRedirect("/dc/certification/show")
+
+    elif method == "failed":
+        crt = Certificate.objects.filter(c_state = CERTIFICATE_STATE['FAILED'])
+        return render(request, 'backEnd/showCertificationList.html', {'menu': menu})
+    elif method == 'show' or method == '':
+        crt = Certificate.objects.filter(c_state = CERTIFICATE_STATE['CERTIFYING'])
+        crt_list = []
+        for crt_atom in crt: 
+            crt_list.append(crt_atom.format_dict())
+        return render(request, 'backEnd/showCertificationList.html', {'object': crt_list})
+    elif method == "change":
+        crt = Certificate.objects.get(id = Oid)
+        return render(request, 'backEnd/changeCertification.html', {'object': crt})
+    else:
+        return HttpResponse('没有该方法')
+
