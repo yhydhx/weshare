@@ -260,7 +260,7 @@
                         <input type="text" name="recommend_length" id="time" class="form-control" readonly="readonly">
                         
                         <label for="">费用单价</label>
-                        <input type="number" name="recommend_payment" id="price" class="form-control" placeholder="请输入每小时的费用" onchange="InputPrice();InputPrices();">
+                        <input type="number" name="recommend_payment" id="price" class="form-control" placeholder="请输入每小时的费用" onkeyup="InputPrice();InputPrices();if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}">
                         
                         <label for="">费用总价</label>
                         <input type="number" name="recommend_salary" id="prices" class="form-control" readonly="readonly">
