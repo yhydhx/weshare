@@ -56,7 +56,10 @@ def pay(request):
 #alipay异步通知  
  
 @csrf_exempt  
-def alipay_notify_url (request):  
+def alipay_notify_url (request): 
+    log=Log(operation='simply'+str(request.GET),
+                operation_time = datetime.datetime.now())   
+    log.save()
     if request.method == 'POST':  
         if notify_verify (request.POST):  
             #商户网站订单号  
