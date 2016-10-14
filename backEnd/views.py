@@ -883,9 +883,22 @@ def func(request, method, Oid):
 
 
     if method == 'generate_index_data':
-        
+        recommend_host = Host()
+        Info = {}
+        Info = recommend_host.get_index_all_classes()
+        Info.update(recommend_host.get_index_statistic())
+
+        try:
+            cache = Cache.objects.get(cache_name = "index_data")
+        except:
+            cache = Cache(cache_name = "index_data")
+        cache_content = json.dumps(Info)
+        cache.cache_value = cache_content
+        cache.cache_modify_time = datetime.datetime.now()
+        cache.save()
+
         return HttpResponse('主页信息生成成功')
-    elif method == 'add':
+    elif method == 'compute_user_score':
         menu = Menu.objects.all()
         return render(request, 'backEnd/addDocView.html', {'menu': menu})
     elif method == 'show' or method == '':
