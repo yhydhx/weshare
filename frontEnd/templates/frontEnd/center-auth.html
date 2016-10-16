@@ -40,6 +40,7 @@
                                 <input type="text" id="upfile"> 
                                 <input type="text" id="upfileType" name="c_type">
                                 <input type="file" id="upload" name="certification" accept=".jpg,.png,.pdf" style="display:none" onchange="upfile.value=this.value;upfileType.value=this.value.substr(this.value.indexOf('.')+1);">
+                                <p style="margin-top: 5px;">提交过后无法更改，请谨慎填写，如需更改，请删除重新提交</p>
                             </div>
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-danger">添加</button>

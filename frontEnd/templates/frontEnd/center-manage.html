@@ -13,6 +13,12 @@
               {% if current_user.state == 0 or current_user.state == 1 %}
 
                   <h3>我的订单</h3>
+                  <!-- 判空 -->
+                  {% if sent_bills|length == 0 %}
+                    <p style="margin-top: 10px;">暂无订单</p>
+                  {% endif %}
+
+                  <!-- 订单显示模块 -->
                   {% block sent0 %}
                   {% for bill in sent_bills %}
                   <table class="table table-bordered ">
@@ -53,6 +59,12 @@
               {% elif current_user.state == 2 %}
 
                   <h3>我的服务</h3>
+                  <!-- 判空 -->
+                  {% if got_bills|length == 0 %}
+                    <p style="margin-top: 10px;">暂无订单</p>
+                  {% endif %}
+
+                  <!-- 订单显示模块 -->
                   {% block sent2 %}
                   {% for bill in got_bills %}
                   <table class="table table-bordered ">
@@ -89,6 +101,12 @@
                   {% endfor %}
 
                   <h3>我的订单</h3>
+                  <!-- 判空 -->
+                  {% if sent_bills|length == 0 %}
+                    <p style="margin-top: 10px;">暂无订单</p>
+                  {% endif %}
+
+                  <!-- 订单显示模块 -->
                   {% for bill in sent_bills %}
                   <table class="table table-bordered ">
                     <tr>
