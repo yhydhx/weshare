@@ -396,14 +396,14 @@ def i_forget(request, attr=False):
 
         # 处理密码找回工作
         if attr:
-            print 'attr found' + '  ' + str(attr)
+            #print 'attr found' + '  ' + str(attr)
             try:
                 forget = Forget.objects.get(forget_string=str(attr))
-                print 'forget_object find'
+                #print 'forget_object find'
                 host = Host.objects.get(id=forget.user_id)
-                print 'host find'
+                #print 'host find'
                 time_now = timezone.datetime.now()
-                print 'time marked'
+                #print 'time marked'
                 if (time_now - forget.timestamp).seconds <= 1800:
                     request.session['email'] = host.email
                     return HttpResponseRedirect('/ichange/')
@@ -422,21 +422,21 @@ def i_forget(request, attr=False):
             email = request.POST.get("data", None)
             try:
                 host = Host.objects.get(email=email)  # 找到host
-                print host
+                #print host
                 #  生成找回链接
-                print 'host has found'
+                #print 'host has found'
 
                 string = hashlib.md5(
                     str(email) + str(timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S"))).hexdigest()
-                print string
+                #print string
                 forget = Forget(user_id=host.id,
                                 forget_string=str(string),
                                 timestamp=timezone.datetime.now())
                 forget.save()
-                print 'forger_object has been found'
+                #print 'forger_object has been found'
 
                 iforget_link = '127.0.0.1:8077/iforget/' + str(string) + '/'
-                print iforget_link
+                #print iforget_link
             except:
                 return HttpResponse('没找到对应的用户,请检查您输入的email')
         except:
