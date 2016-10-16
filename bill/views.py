@@ -58,6 +58,8 @@ def bill(request,method,Oid):
         except:
             return render(request,"frontEnd/404.html")
 
+        if user.id == host.id:
+        	return render(request,'frontEnd/error.html',{"message":"对不起，你不能创建该订单！~~"})
 		
         #send email to the host
         create_bill_mail  = Mail()
@@ -130,6 +132,14 @@ def bill(request,method,Oid):
 														    recommend_salary = recommend_salary,
 														    state = APPOINTMENT_STATE['CERTIFIED']
 														    )
+
+		#send infomation to host
+		appointment = Appointment.objects.get(id= appnt_id)
+		user = Host.objects.get(id = appointment.from_user_id)
+		create_bill_mail  = Mail()
+		to = [user.email]
+		create_bill_mail.bill_info("您的订单已被确认",to,"您有订单被确认，请登录weshare官网并在我的订单中查看~",user)
+
 		return HttpResponseRedirect("/bill/detail/"+appnt_id)
     elif method == "communicate":
 		appnt_id = request.POST.get("appnt_id")
@@ -138,10 +148,15 @@ def bill(request,method,Oid):
 
 		try:
 			appointment = Appointment.objects.get(id= appnt_id)
+			if user.id == appointment.from_user_id:
+				to_user = appointment.to_host_id
+			else:
+				to_user = appointment.from_user_id
+
 			message_type =  MESSAGE_TYPE['APPOINTMENT_COMM']
 			new_message = Message(    
 								from_user = user.id,
-							    to_user = appointment.to_host_id,
+							    to_user = to_user,
 							    message_type = message_type,
 							    icon = user.icon,
 							    upload_time = datetime.datetime.now(),
@@ -149,6 +164,12 @@ def bill(request,method,Oid):
 							    extra_id = appnt_id,
 							    )
 			new_message.save()
+
+			user = Host.objects.get(id = to_user)
+			create_bill_mail  = Mail()
+			to = [user.email]
+			create_bill_mail.bill_info("您的订单有新消息",to,"您的订单有新消息，请根据新的消息协商时间，谢谢~",user)
+
 			return HttpResponseRedirect('/bill/detail/'+appnt_id)
 
 		except:
@@ -194,26 +215,31 @@ def bill(request,method,Oid):
 		return HttpResponseRedirect("/bill/detail/"+appt_id)
 
     elif method == "test":
-    	host = Host.objects.get(username="haixing")
-        subject = "这就是subjecgt？"
-        content = "恭喜您成为我们的大Host"
-        to = ["87826632@qq.com"]
-        # sendMail(subject,to,content)
+    	# host = Host.objects.get(username="haixing")
+     #    subject = "这就是subjecgt？"
+     #    content = "恭喜您成为我们的大Host"
+     #    to = ["87826632@qq.com"]
+     #    # sendMail(subject,to,content)
 
-        mail = Mail(	
-            subject = subject,
-            from_email = EMAIL_HOST_USER,
-            to_email = host.email,
-            host_id = host.id,
-            admin_id = request.session['email'],
-            content = content,
-            is_success = 0
-            )
-        mail.save()
-        mail.register_success(to,content)
-        #send success, update the data
-        mail.is_success = 1
-        mail.save()
+     #    mail = Mail(	
+     #        subject = subject,
+     #        from_email = EMAIL_HOST_USER,
+     #        to_email = host.email,
+     #        host_id = host.id,
+     #        admin_id = request.session['email'],
+     #        content = content,
+     #        is_success = 0
+     #        )
+     #    mail.save()
+     #    mail.register_success(to,content)
+     #    #send success, update the data
+     #    mail.is_success = 1
+     #    mail.save()
+     #    
+     #    
+     	create_bill_mail  = Mail()
+        to = ["yhydhx@126.com"]
+        create_bill_mail.bill_info("您的订单已被确认",to,"您有订单被确认，请登录weshare官网并在我的订单中查看~",user)
         return HttpResponse("test")
 
     elif method == "end_talk":
