@@ -892,7 +892,7 @@ def func(request, method, Oid):
             cache = Cache.objects.get(cache_name = "index_data")
         except:
             cache = Cache(cache_name = "index_data")
-        cache_content = json.dumps(Info)
+        cache_content = str(Info)
         cache.cache_value = cache_content
         cache.cache_modify_time = datetime.datetime.now()
         cache.save()

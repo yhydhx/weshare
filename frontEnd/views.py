@@ -59,8 +59,14 @@ def index(request):
 
 
     Info = {}
-    index_cache =  eval(Cache.objects.get(cache_name = "index_data").cache_value)
-    Info.update(index_cache)
+
+    index_cache =  Cache.objects.get(cache_name = "index_data").cache_value
+    #index_cache = "u\'" + index_cache + "\'"
+
+    index_data = eval(index_cache)
+    #return HttpResponse(json.dumps(Info), content_type="application/json")
+
+    Info.update(index_data)
 
     #Info['object'] = obj
     
