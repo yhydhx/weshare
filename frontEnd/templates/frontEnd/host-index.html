@@ -269,7 +269,10 @@
                         </div>
 
                     </div>
-                    <div>
+
+
+                    <!-- 评论显示模块 -->
+                    <div style="text-align: left;">
                         {% block message %}
                         {% for message in msgs %}
                         <div class="media ct-comment">
@@ -286,61 +289,7 @@
                         </div>
                         {% endfor %}
                         {%  endblock %}
-                       
-                        <!-- <div class="ct-sectionHeader ct-sectionHeader--left ct-u-paddingTop70 ct-u-paddingBottom60">
-                            <h2 class="ct-sectionHeader-title"><small>Leave a <span>reply</span></small></h2>
-                            <div class="ct-sectionHeader-separator">
-                                <span class="slash">/</span>
-                                <span class="slash">/</span>
-                                <span class="minus"></span>
-                            </div>
-                            <p>What do you think about post ?</p>
-                        </div>
-                        <form role="form" action="/user/msg/{{user.id}}" method="POST" class="validateIt">
-                            <div class="form-group  ct-input--type2 ct-u-marginBottom20">
-                                {% csrf_token %}
-                                <textarea id="contact_message" placeholder="Comment" class="form-control" rows="6" name="message" required="" title="Message"></textarea>
-                            </div>
-
-                            <div class="clearfix"></div>
-
-                            <button type="submit" class="btn btn-wide btn-motive"><span>Submit Comment</span></button>
-
-                        </form> -->
                     </div>
-
-                    <!-- <div class="ct-socialSection">
-                        <div class="ct-socialSection-backButton ct-u-sectionGrayDarker ct-u-textRight">
-                            <a class="h6 text-uppercase ct-fw-bold" href="rent-now.html">Go back
-                            <span class="ct-iconButton ct-iconButton--larger animated ct-u-margin10x9" data-fx="fadeIn">
-                                <i class="fa fa-arrow-left animated" data-fx="bounceInRight" data-time="100"></i>
-                            </span>
-                            </a>
-                        </div>
-                        <div class="ct-socialSection-socialContainer ct-u-sectionMotive">
-                            <ul class="ct-socials ct-socials--type3">
-                                <li>Share</li>
-                                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i
-                                        class="fa fa-facebook-square"></i></a></li>
-                                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i
-                                        class="fa fa-twitter"></i></a></li>
-                                <li><a data-toggle="tooltip" data-placement="top" title="google plus" href="#"><i
-                                        class="fa fa-google-plus"></i></a></li>
-                                <li><a data-toggle="tooltip" data-placement="top" title="linkedin" href="#"><i
-                                        class="fa fa-linkedin"></i></a></li>
-                                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i
-                                        class="fa fa-pinterest"></i></a></li>
-                                <li><a data-toggle="tooltip" data-placement="top" title="digg" href="#"><i
-                                        class="fa fa-digg"></i></a></li>
-                                <li><a data-toggle="tooltip" data-placement="top" title="users" href="#"><i
-                                        class="fa fa-users"></i></a></li>
-                                <li><a data-toggle="tooltip" data-placement="top" title="yahoo" href="#"><i
-                                        class="fa fa-yahoo"></i></a></li>
-                                <li><a data-toggle="tooltip" data-placement="top" title="email" href="#"><i
-                                        class="fa fa-envelope"></i></a></li>
-                            </ul>
-                        </div>
-                    </div> -->
 
                 </div>
             </div>
