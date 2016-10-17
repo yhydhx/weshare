@@ -934,6 +934,7 @@ def host_center(request, method, Oid):
 
     elif method == "upload_img":
         if request.method == "POST":
+
             mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
             des_origin_path = settings.UPLOAD_PATH + 'image/' + mark_list + '.jpeg'  # mark_list是唯一的标志
             des_origin_f = open(des_origin_path, "ab")
