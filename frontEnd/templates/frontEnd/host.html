@@ -95,7 +95,7 @@
                             <img src="{{ host.icon }}" alt="">
                             <div class="caption">服务时间：{{ host.service_time }}</div>
                             <div class="card-heading"><strong>{{ host.username }}</strong></div>
-                            <div class="card-content text-muted">{{ host.motto }}</div>
+                            <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">{{ host.motto }}</div>
                             <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div>
                             <div class="card-actions">
                               <button type="button" class="btn btn-danger">查看详情</button>
