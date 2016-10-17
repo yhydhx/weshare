@@ -185,9 +185,12 @@
                         <div class="col-md-6 col-md-offset-3 ct-u-paddingTop40 ct-u-paddingBottom150">
                             <input id="submit" type="submit"
                                    class="btn btn-lg btn-wide btn-motive"
-                                   value="确认修改">
+                                   value="确认修改" onclick="$('#SuccessMessage').append('修改成功！');">
+                                   
+                            <div id="SuccessMessage" style="margin-top: 5px;"><!-- 搜索提示信息 --></div>
                         </div>
                     </div>
+
                 </form>
 
     		</div>
