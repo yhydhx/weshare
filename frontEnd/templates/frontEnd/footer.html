@@ -1,51 +1,52 @@
 {% load staticfiles %}
-<footer class="">
-    <div class="footerImg" style="background:url('{% static 'frontEnd/images/weshare/footer.png'%}');">
-        <div class="container">
-            <div class="row" style="margin-top: 20px;">
-                <div class="col-md-10">
-                    <div class="row">
-                        <div class="col-sm-4" style="text-align:left;line-height: 0.8;">
-                            <p style="font-size: 18pt; "><b>关于『为啥』</b></p>
-                            <p><a href="" style="font-size: 14pt; ">首页</a></p>
-                            <p><a href="" style="font-size: 14pt; ">核心服务</a></p>
-                            <p><a href="" style="font-size: 14pt; ">关于我们</a></p>
-                            <!-- <p><a href="" style="font-size: 14pt; ">关于我们</a></p> --><!-- 忘记是什么了 文案？ -->
-                            <p><a href="" style="font-size: 14pt; ">业务合作</a></p>
-                        </div>
-                        <div class="col-sm-3" style="text-align:left;line-height: 0.8;">
-                            <p style="font-size: 18pt; "><b>发现</b></p>
-                            <p><a href="" style="font-size: 14pt; ">帮助中心</a></p>
-                            <p><a href="" style="font-size: 14pt; ">用户保障</a></p>
-                            <p><a href="" style="font-size: 14pt; ">服务协议</a></p>
-                            <p><a href="" style="font-size: 14pt; ">成为[分享家]</a></p>
-                            <p><a href="" style="font-size: 14pt; ">分享故事</a></p>
-                        </div>
-                        <div class="col-sm-5" style="text-align:left;line-height: 0.8;">
-                            <p style="font-size: 14pt; ">移动版</p>
-                            <p><a href="" style="font-size: 14pt; ">『为啥』APP下载</a></p>
-                            <br>
-                            <p style="font-size: 14pt; ">客服电话：<span style="color: #f67862; ">400-0000-0000</span></p>
-                            <p style="font-size: 14pt; ">意见反馈：<span style="color: #f67862; ">kf@weshare.com</span></p>
-                            <p style="font-size: 14pt; ">或咨询 <a href=""><span class="btn btn-danger" style="background-color: #f67862; ">在线客服</span></a></p>
-                        </div>
-                    </div>
+<!-- footer -->
+<div class="container-fluid">   
+    <div class="row footerImg" style=" background:url('{% static 'frontEnd/images/weshare/footer.png'%}');padding-top: 20px;">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-4" style="text-align:left;line-height: 0.8;">
+                    <p style="font-size: 14pt; "><b>关于『为啥』</b></p>
+                    <p><a href="/index/" style="font-size: 12pt; ">首页</a></p>
+                    <p><a href="/recruit/1" style="font-size: 12pt; ">核心服务</a></p>
+                    <p><a href="/recruit/2" style="font-size: 12pt; ">关于我们</a></p>
+                    <p><a href="/recruit/3" style="font-size: 12pt; ">加入我们</a></p>
+                    <p><a href="/recruit/4" style="font-size: 12pt; ">业务合作</a></p>
                 </div>
-                <div class="col-md-2">
-                    <img style="height: 100px;" src="{% static 'frontEnd/images/weshare/QRcode.jpg'%}" alt="">
-                    <!-- <img style="margin-left: 5px; height: 100px;" src="{% static 'frontEnd/images/weshare/QRcode.jpg'%}" alt=""> -->
-
-                    <div class="row" style="padding-top:20px;">
-                        <p style="font-size: 12pt; ">分享到：</p>
-                    </div> 
+                <div class="col-sm-3" style="text-align:left;line-height: 0.8;">
+                    <p style="font-size: 14pt; "><b>发现</b></p>
+                    <p><a href="/service" style="font-size: 12pt; ">帮助中心</a></p>
+                    <p><a href="" style="font-size: 12pt; ">用户保障</a></p>
+                    <p><a href="" style="font-size: 12pt; ">服务协议</a></p>
+                    <p><a href="/image-receive/" style="font-size: 12pt; ">成为[分享家]</a></p>
+                    <p><a href="" style="font-size: 12pt; ">分享故事</a></p>
+                </div>
+                <div class="col-sm-5" style="text-align:left;line-height: 0.8;">
+                    <p style="font-size: 14pt; ">移动版</p>
+                    <p><a href="" style="font-size: 12pt; ">『为啥』APP下载</a></p>
+                    <br>
+                    <p style="font-size: 12pt; ">客服电话：<span style="color: #f67862; ">400-0000-0000</span></p>
+                    <p style="font-size: 12pt; ">意见反馈：<span style="color: #f67862; ">kf@weshare.com</span></p>
+                    <!-- <p style="font-size: 12pt; ">或咨询 <a href=""><span class="btn btn-danger" style="background-color: #f67862; ">在线客服</span></a></p> -->
                 </div>
             </div>
         </div>
-    </div>
-    <hr style="border:none;border-top: 1px solid white; margin:0;">
-    <div style="background-color: #6c6c6c; height: 70px; display: flex;justify-content: center;align-items: center;">
-        <p style="color: white; font-family: Arial , 'Hiragino Sans GB'; font-size: 12pt; ">蜀ICP备16021944号 @2016为啥网 All Right Reserved</p>
-    </div>
-</footer>
+        <div class="col-md-2">
+            <img style="height: 100px;" src="{% static 'frontEnd/images/weshare/QRcode.jpg'%}" alt="">
+            <!-- <img style="margin-left: 5px; height: 100px;" src="{% static 'frontEnd/images/weshare/QRcode.jpg'%}" alt=""> -->
+
+            <div class="row" style="padding-top:20px;">
+                <!-- <p style="font-size: 12pt; ">分享到：</p> -->
+            </div> 
+        </div>
+        <div class="col-md-2"></div>
+    </div>          
+</div>
+
+<!-- 底部信息栏 -->
+<hr style="border:none;border-top: 1px solid white; margin:0;">
+<div style="background-color: #6c6c6c; height: 70px; display: flex;justify-content: center;align-items: center;">
+    <p style="color: white; font-family: Arial , 'Hiragino Sans GB'; font-size: 12pt; ">蜀ICP备16021944号 @2016为啥网 All Right Reserved</p>
+</div>
 
 </div><!-- 侧滑自适应-重要：勿删 -->
