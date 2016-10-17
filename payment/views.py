@@ -45,12 +45,16 @@ def pay(request):
     #         tf='%.2f' % cb.amount  
     #         url=create_direct_pay_by_user (tn,subject,body,bank,tf)  
     # def create_direct_pay_by_user(tn, subject, body, bank, total_fee):  
+    #
+    
     url=create_direct_pay_by_user (str(random.random()),"weshare","weshare","","0.01")  
+    
     #如果网关是财付通  
     # elif cb.cbank.gateway=='tenpay':  
     #     pass  
       
     #去支付页面  
+
     return HttpResponseRedirect(url)  
   
 #alipay异步通知  
@@ -69,7 +73,7 @@ def alipay_notify_url (request):
                 trade_no=request.POST.get('trade_no')  
                 #返回支付状态  
                 trade_status = request.POST.get('trade_status')  
-                cb = Bill.objects.get(bill_id=tn)
+                bill = Bill.objects.get(bill_id=tn)
             except Exception ,e:
                 print e
             if trade_status == 'TRADE_SUCCESS':  

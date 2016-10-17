@@ -312,7 +312,7 @@ class Host(models.Model):
                 t_id = h_topic_atom.t_id
                 f_id = h_topic_atom.f_id
                 if not d_topic_detail.has_key(t_id):
-                    print t_id
+                    #print t_id
                     single_topic = Topic.objects.get(id=t_id)
                     d_topic_detail[t_id] = {}
                     d_topic_detail[t_id]['name'] = single_topic.t_name
@@ -521,8 +521,8 @@ class School(models.Model):
         '''
         d_topic_detail = self.d_topic_detail
         tag = ""
-        print each_host.format_dict()
-        print each_host.username, each_host.gender, GENDER['MALE'], each_host.gender == GENDER['MALE']
+        #print each_host.format_dict()
+        #print each_host.username, each_host.gender, GENDER['MALE'], each_host.gender == GENDER['MALE']
         if each_host.gender == GENDER['MALE']:
             tag += "male "
         elif each_host.gender == GENDER['FEMALE']:
