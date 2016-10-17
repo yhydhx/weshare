@@ -153,11 +153,9 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
 		background-position: center; 
 		background-repeat: no-repeat; 
-		background-attachment:fixed;
-		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
-	/*	background-repeat: no-repeat;
-		background-position: center;*/
-		height:400px;
+		/*background-attachment:fixed; *//*背景图固定*/
+		/*background-size:cover;-webkit-background-size: cover;-o-background-size: cover;*//*铺满屏幕*/
+		height:568px;
 
 		display: flex;
 		justify-content:center;

@@ -4732,7 +4732,7 @@ video {
 }
 .ct-mediaSection {
   background-color: #fff;
-  background-size: cover;
+  /*background-size: cover;*/ /*背景图填充*/
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
@@ -4763,7 +4763,7 @@ video {
   display: table;
 }
 .ct-mediaSection[data-type="parallax"] {
-  background-attachment: fixed;
+  /*background-attachment: fixed;*/ /*背景图固定*/
   display: table;
 }
 .ct-mediaSection[data-type="parallax"].ct-mediaSection--stellar {
