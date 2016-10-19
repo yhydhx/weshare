@@ -519,7 +519,7 @@ def complete_account(request):
             birth = request.POST['birth']
             # Education Infomation
             education = request.POST['education']
-
+            
             try:
                 bachelor = request.POST['schoolID1']
                 bachelor_major = request.POST['bachelor_major']
@@ -848,13 +848,35 @@ def about(request):
 
 
 def recruit(request, method, Oid):
+    login_flag = False
+    Info = {}
+    try:
+        username = request.session['email']
+        host = Host.objects.get(email=username)
+        login_flag = True
+        Info['current_user'] = host
+        Info['login_flag'] = login_flag
+    except:
+        pass
+
     if method == "index":
-        return render(request, "frontEnd/recruitment.html")
+        return render(request, "frontEnd/recruitment.html",Info)
     else:
-        return render(request, "frontEnd/recruit" + method + ".html")
+        return render(request, "frontEnd/recruit" + method + ".html",Info)
 
 
 def service(request):
+    login_flag = False
+    Info = {}
+    try:
+        username = request.session['email']
+        host = Host.objects.get(email=username)
+        login_flag = True
+        Info['current_user'] = host
+        Info['login_flag'] = login_flag
+    except:
+        pass
+
     menu = Menu.objects.filter(m_index=2).order_by("m_upload_time")
     # for k in menu:
     #     print k.id, k.m_name
@@ -880,9 +902,10 @@ def service(request):
     for k in menu:
         result.append(d_topic_question[k.id])
 
-    return render(request, "frontEnd/services.html", {"object": result})
+    Info['object'] = result
+    return render(request, "frontEnd/services.html", Info)
 
-
+@csrf_exempt
 def host_center(request, method, Oid):
     Info = {}
     login_flag = False
@@ -901,7 +924,6 @@ def host_center(request, method, Oid):
         return HttpResponse('您所持有的用户名不能匹配任何一个host')
 
     if method == "edit":
-
         return render(request, "frontEnd/center-edit.html", Info)
     
     elif method == "edit2":
@@ -910,6 +932,24 @@ def host_center(request, method, Oid):
         Info['user_features'] = user_features
         return render(request, "frontEnd/center-edit2.html", Info)
 
+    elif method == "upload_img":
+        if request.method == "POST":
+
+            mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
+            des_origin_path = settings.UPLOAD_PATH + 'image/' + mark_list + '.jpeg'  # mark_list是唯一的标志
+            des_origin_f = open(des_origin_path, "ab")
+            tmpImg = request.FILES['imgFile']
+            for chunk in tmpImg.chunks():
+                des_origin_f.write(chunk)
+            des_origin_f.close()
+
+            image_url =  '/files/image/' + mark_list + '.jpeg'
+            Info = {}
+            Info['error'] = 0
+            Info['url'] = image_url
+            return HttpResponse(json.dumps(Info),content_type="application/json")
+        else:
+            return HttpResponse('allowed only via POST')
     elif method == "manage":
         Info['sent_bills'] = host.get_one_user_host_bills()
         if host.state != HOST_STATE['GUEST']:
@@ -1076,24 +1116,29 @@ def host_center(request, method, Oid):
 
 def school(request, method, Oid):
     login_flag = False
+    Info = {}
     try:
         username = request.session['email']
         host = Host.objects.get(email=username)
         login_flag = True
+        Info['current_user'] = host
+        Info['login_flag'] = login_flag
+        
+        
     except:
         pass
 
     if method == "show":
         if request.GET.get("schoolID"):
             return HttpResponseRedirect("/school/detail/" + request.GET.get("schoolID"))
-        return render(request, "frontEnd/school-search.html")
+        return render(request, "frontEnd/school-search.html",Info)
 
 
     elif method == "detail":
         # find the passed host of the school
         school = School()
         school_union, topics = school.get_single_school_detail(Oid)
-        Info = {}
+        
         Info['object'] = school_union
 
         try:

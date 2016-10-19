@@ -24,7 +24,7 @@
                 {% endif %}
 
                 <form class=" ct-u-marginBottom input-daterange input-group" action="/host_center/modify_host_info" method="post" id="form1">
-                {% csrf_token %}
+                    {% csrf_token %}
 
                     <!-- 修改主页资料 -->
                     <div class="row" style="display: flex;align-items: center; padding-top:60px; ">
@@ -164,7 +164,9 @@
 <script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/lang/zh-CN.js'%}"></script>
 <script>
         KindEditor.ready(function(K) {
-                window.editor = K.create('#editor_id');
+                window.editor = K.create('#editor_id',{
+                uploadJson : '/host_center/upload_img',
+            });
         });
 </script>
 
