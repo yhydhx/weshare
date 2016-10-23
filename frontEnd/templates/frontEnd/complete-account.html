@@ -312,6 +312,14 @@ $(".form-time").datetimepicker({
                 window.editor = K.create('#editor_id');
         });
 </script>
+<!-- 富文本编辑器-图片上传 -->
+<script>
+    KindEditor.ready(function(k){
+        window.editor = k.create('#editor_id',{
+            uploadJson : '/host_center/upload_img',
+        });
+    });
+</script>
 
 <!-- 选择学历 -->
 <script>
