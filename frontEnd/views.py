@@ -1358,9 +1358,12 @@ def share(request, method, Oid):
         return render(request, 'frontEnd/host.html', Info)
 
     elif method == "clear":
-        del request.session["share_hosts"] 
-        del request.session["m_name"] 
-        del request.session["t_name"]
+        if request.session.has_key("share_hosts"):
+            del request.session["share_hosts"] 
+        if request.session.has_key("m_name"):
+            del request.session["m_name"] 
+        if request.session.has_key("t_name"):
+            del request.session["t_name"]
         return HttpResponseRedirect("/share/show/")
 
     else:
