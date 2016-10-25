@@ -467,6 +467,7 @@ def ichange(request):
         user = Host.objects.get(email=email)
     except:
         return HttpResponse('没有找到您所持有的session所对应的用户')
+    del request.session
     ERROR = []
     MARK = []
     if request.method == 'POST':
@@ -481,6 +482,7 @@ def ichange(request):
             else:
                 user.password = new_password
                 user.save()
+                del request.session
                 return render_to_response('frontEnd/ichange.html', {'current_user': user,
                                                                     'change_mark': False},
                                           context_instance=RequestContext(request))
