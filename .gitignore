@@ -2,3 +2,4 @@
 gt/settings.py
 *.DS_Store
 gt/static/upload/icons/*
+/.idea

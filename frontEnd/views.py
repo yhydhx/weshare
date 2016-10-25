@@ -32,7 +32,7 @@ from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY, WEIBO_APPKEY, WEIBO
 
 def index(request):
     log = logging.getLogger(__name__)
-    
+
     # provinces = Province.objects.all()
     # d = {}
     # for s_province in provinces:
@@ -60,26 +60,24 @@ def index(request):
 
     Info = {}
 
-    index_cache =  Cache.objects.get(cache_name = "index_data").cache_value
-    #index_cache = "u\'" + index_cache + "\'"
+    index_cache = Cache.objects.get(cache_name="index_data").cache_value
+    # index_cache = "u\'" + index_cache + "\'"
 
     index_data = eval(index_cache)
-    #return HttpResponse(json.dumps(Info), content_type="application/json")
+    # return HttpResponse(json.dumps(Info), content_type="application/json")
 
     Info.update(index_data)
 
-    #Info['object'] = obj
-    
+    # Info['object'] = obj
+
     Info['data'] = {}
 
-
     Info['data']['school_on_index_list'] = []
-    #get some school on index
-    uestc = School.objects.get(id = "57a5a16fd3486d8aedd93a30").format_dict()
+    # get some school on index
+    uestc = School.objects.get(id="57a5a16fd3486d8aedd93a30").format_dict()
     Info['data']['school_on_index_list'].append(uestc)
 
     login_flag = False
-
 
     try:
         # check the user is login or not
@@ -136,9 +134,9 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                 Info['state'] = 405
                 Info['message'] = '您的邮箱已经被注册了'
                 Info['data']['email'] = ""
-            
+
             except:
-                
+
                 host = Host(username=username,
                             password=password,
                             email=email,
@@ -146,7 +144,7 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                             education=-1,
                             register_time=datetime.datetime.now(),
                             icon=DEFAULT_ICON,
-                            state = HOST_STATE['UNCERTIFY'],
+                            state=HOST_STATE['UNCERTIFY'],
                             )
                 # encode password
                 host.password = host.encode_password(password)
@@ -160,13 +158,12 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
                 except:
                     pass
 
-                #send certification email and
+                # send certification email and
                 certify_email = Mail()
                 certify_email.register_success(host)
 
                 return render_to_response('frontEnd/register_success.html', context_instance=RequestContext(request))
 
-                    
         return render_to_response('frontEnd/account.html', Info,
                                   context_instance=RequestContext(request))
     else:
@@ -194,13 +191,13 @@ def login(request):
 
                 if user.password != password:
                     return HttpResponse('用户名或者密码不正确,或者账户处于被冻结的状态')
-                
-                #check the user state
-                if user.state < 0 :
+
+                # check the user state
+                if user.state < 0:
                     Info = {}
                     Info['host'] = user
-                    return render(request,"frontEnd/uncertified.html",Info)
-                #all passed
+                    return render(request, "frontEnd/uncertified.html", Info)
+                # all passed
                 request.session['email'] = email
                 return HttpResponseRedirect('/index/')
 
@@ -267,7 +264,6 @@ def wechat_login(request):
         f.write('login failure')
         f.close()
         return HttpResponse("login failure")
-
 
 
 @csrf_exempt
@@ -402,14 +398,14 @@ def i_forget(request, attr=False):
 
         # 处理密码找回工作
         if attr:
-            #print 'attr found' + '  ' + str(attr)
+            # print 'attr found' + '  ' + str(attr)
             try:
                 forget = Forget.objects.get(forget_string=str(attr))
-                #print 'forget_object find'
+                # print 'forget_object find'
                 host = Host.objects.get(id=forget.user_id)
-                #print 'host find'
+                # print 'host find'
                 time_now = timezone.datetime.now()
-                #print 'time marked'
+                # print 'time marked'
                 if (time_now - forget.timestamp).seconds <= 1800:
                     request.session['email'] = host.email
                     return HttpResponseRedirect('/ichange/')
@@ -422,27 +418,27 @@ def i_forget(request, attr=False):
         else:
             return render_to_response('frontEnd/iforget.html')
 
-    # 处理上传的东西
+    # 处理上传的链接
     else:
         try:
             email = request.POST.get("data", None)
             try:
                 host = Host.objects.get(email=email)  # 找到host
-                #print host
+                # print host
                 #  生成找回链接
-                #print 'host has found'
+                # print 'host has found'
 
                 string = hashlib.md5(
                     str(email) + str(timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S"))).hexdigest()
-                #print string
+                # print string
                 forget = Forget(user_id=host.id,
                                 forget_string=str(string),
                                 timestamp=timezone.datetime.now())
                 forget.save()
-                #print 'forger_object has been found'
+                print 'forger_object has been found'
 
-                iforget_link = '127.0.0.1:8077/iforget/' + str(string) + '/'
-                #print iforget_link
+                iforget_link = 'testadmin.wshere.com/iforget/' + str(string) + '/'
+                # print iforget_link
             except:
                 return HttpResponse('没找到对应的用户,请检查您输入的email')
         except:
@@ -471,21 +467,25 @@ def ichange(request):
         user = Host.objects.get(email=email)
     except:
         return HttpResponse('没有找到您所持有的session所对应的用户')
+    del request.session
     ERROR = []
     MARK = []
     if request.method == 'POST':
         if request.POST['new-passwd'] and request.POST['new-passwd-confirm']:
             new_password = request.POST['new-passwd']
             new_password_confirm = request.POST['new-passwd-confirm']
-            if new_password != new_password_confirm:
+            if new_password != new_password_confirm or process_passwd(new_password):
                 PASSWORD_CONFIRM_ERROR = True
                 return render_to_response('frontEnd/ichange.html', {'current_user': user,
+                                                                    'change_mark': False,
                                                                     'PASSWORDCONFIRMERROR': PASSWORD_CONFIRM_ERROR})
             else:
                 user.password = new_password
                 user.save()
+                del request.session
                 return render_to_response('frontEnd/ichange.html', {'current_user': user,
-                                                                    'change_mark': True})
+                                                                    'change_mark': True},
+                                          context_instance=RequestContext(request))
     else:
         return render_to_response('frontEnd/ichange.html', {'current_user': user})
 
@@ -509,7 +509,7 @@ def complete_account(request):
                 request.POST['qq']:
 
             self_introduction = request.POST['self-introduction']
-            gender = request.POST['gender'] 
+            gender = request.POST['gender']
             motto = request.POST['motto']
             min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
@@ -519,7 +519,7 @@ def complete_account(request):
             birth = request.POST['birth']
             # Education Infomation
             education = request.POST['education']
-            
+
             try:
                 bachelor = request.POST['schoolID1']
                 bachelor_major = request.POST['bachelor_major']
@@ -560,7 +560,7 @@ def complete_account(request):
             host.min_payment = min_payment
             host.service_time = service_time
             host.max_payment = max_payment
-            host.birth  = birth
+            host.birth = birth
             host.state = HOST_STATE['APPLY']
             host.qq_number = qq
 
@@ -572,13 +572,13 @@ def complete_account(request):
             host.bachelor_major = bachelor_major
             host.graduate_major = graduate_major
             host.phd_major = phd_major
-            host.bachelor_start  = bachelor_start
-            host.graduate_start  = graduate_start
-            host.phd_start  = phd_start
+            host.bachelor_start = bachelor_start
+            host.graduate_start = graduate_start
+            host.phd_start = phd_start
 
-            host.bachelor_end  = bachelor_end
-            host.graduate_end  = graduate_end
-            host.phd_end  = phd_end
+            host.bachelor_end = bachelor_end
+            host.graduate_end = graduate_end
+            host.phd_end = phd_end
 
             host.save()
             return HttpResponseRedirect('/complete-account-feature')
@@ -773,7 +773,6 @@ def modify_account(request):
             school = request.POST['school']
             qq = request.POST['qq']
 
-           
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
 
@@ -860,9 +859,9 @@ def recruit(request, method, Oid):
         pass
 
     if method == "index":
-        return render(request, "frontEnd/recruitment.html",Info)
+        return render(request, "frontEnd/recruitment.html", Info)
     else:
-        return render(request, "frontEnd/recruit" + method + ".html",Info)
+        return render(request, "frontEnd/recruit" + method + ".html", Info)
 
 
 def service(request):
@@ -905,6 +904,7 @@ def service(request):
     Info['object'] = result
     return render(request, "frontEnd/services.html", Info)
 
+
 @csrf_exempt
 def host_center(request, method, Oid):
     Info = {}
@@ -913,7 +913,6 @@ def host_center(request, method, Oid):
         username = request.session['email']
     except:
         return render_to_response('frontEnd/login.html', {'session_timeout': True})
-
 
     try:
         host = Host.objects.get(email=username)
@@ -925,7 +924,7 @@ def host_center(request, method, Oid):
 
     if method == "edit":
         return render(request, "frontEnd/center-edit.html", Info)
-    
+
     elif method == "edit2":
         feature = Feature()
         user_features = feature.get_one_user_features_with_all_topic(host.id)
@@ -943,11 +942,11 @@ def host_center(request, method, Oid):
                 des_origin_f.write(chunk)
             des_origin_f.close()
 
-            image_url =  '/files/image/' + mark_list + '.jpeg'
+            image_url = '/files/image/' + mark_list + '.jpeg'
             Info = {}
             Info['error'] = 0
             Info['url'] = image_url
-            return HttpResponse(json.dumps(Info),content_type="application/json")
+            return HttpResponse(json.dumps(Info), content_type="application/json")
         else:
             return HttpResponse('allowed only via POST')
     elif method == "manage":
@@ -956,34 +955,33 @@ def host_center(request, method, Oid):
             Info['got_bills'] = host.get_one_host_user_bills()
 
         return render(request, "frontEnd/center-manage.html", Info)
-    
+
     elif method == "delete_auth":
 
         certification_id = request.POST.get("crt_id")
-        Certificate.objects.get(id = certification_id ).delete()
+        Certificate.objects.get(id=certification_id).delete()
         return HttpResponseRedirect("/host_center/auth")
     elif method == "auth":
         if request.method == "POST":
             host_id = host.id
-            
+
             c_name = request.POST.get("c_name")
 
-            #check the name is repeat
+            # check the name is repeat
             try:
-                certification_test = Certificate.objects.get(host_id = host.id,c_name = c_name)
+                certification_test = Certificate.objects.get(host_id=host.id, c_name=c_name)
                 Info['state'] = 300
                 Info['message'] = "认证文件名重复，请换一个认证名"
-                return HttpResponse(json.dumps(Info),content_type="application/json")
+                return HttpResponse(json.dumps(Info), content_type="application/json")
 
             except:
                 pass
-
 
             c_state = CERTIFICATE_STATE['CERTIFYING']
             c_introduction = request.POST.get("c_introduction")
             c_type = request.POST.get("c_type")
             mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
-            
+
             des_origin_path = settings.UPLOAD_PATH + 'certification/' + mark_list + "." + c_type
             des_origin_f = open(des_origin_path, "ab")
             tmpImg = request.FILES['certification']
@@ -992,31 +990,31 @@ def host_center(request, method, Oid):
             des_origin_f.close()
             c_file_path = "/files/certification/" + mark_list + "." + c_type
             certification = Certificate(
-                host_id = host_id ,
-                c_file_path = c_file_path,
-                c_name = c_name,
-                c_state = c_state,
-                c_introduction = c_introduction,
-                c_upload_time = datetime.datetime.now()
-                )
+                host_id=host_id,
+                c_file_path=c_file_path,
+                c_name=c_name,
+                c_state=c_state,
+                c_introduction=c_introduction,
+                c_upload_time=datetime.datetime.now()
+            )
             certification.save()
             Info['message'] = "认证提交成功，请等待审核!"
             Info['state'] = 0
             Info['data'] = certification.format_dict()
-            return HttpResponse(json.dumps(Info),content_type="application/json")
+            return HttpResponse(json.dumps(Info), content_type="application/json")
 
         else:
 
-            Info.update(host.get_one_host_all_certification(host)) 
+            Info.update(host.get_one_host_all_certification(host))
             return render(request, "frontEnd/center-auth.html", Info)
     elif method == "detail":
 
         return render(request, "frontEnd/center-manage-detail.html", Info)
     elif method == "modify_base_info":
         if request.method == 'POST':
-            
+
             phone_number = request.POST.get("phone")
-            gender = request.POST['gender'] 
+            gender = request.POST['gender']
             motto = request.POST['motto']
             qq = request.POST['qq']
             birth = request.POST.get("birth")
@@ -1027,7 +1025,6 @@ def host_center(request, method, Oid):
             bachelor_major = request.POST['bachelor_major']
             bachelor_start = request.POST['bachelor_start']
             bachelor_end = request.POST['bachelor_end']
-
 
             try:
                 graduate = request.POST['schoolID2']
@@ -1060,25 +1057,25 @@ def host_center(request, method, Oid):
             host.graduate = graduate
             host.phd = phd
             host.birth = birth
-            #host.alipay = alipay
+            # host.alipay = alipay
             host.bachelor_major = bachelor_major
             host.graduate_major = graduate_major
             host.phd_major = phd_major
 
-            host.bachelor_start  = bachelor_start
-            host.graduate_start  = graduate_start
-            host.phd_start  = phd_start
+            host.bachelor_start = bachelor_start
+            host.graduate_start = graduate_start
+            host.phd_start = phd_start
 
-            host.bachelor_end  = bachelor_end
-            host.graduate_end  = graduate_end
-            host.phd_end  = phd_end
+            host.bachelor_end = bachelor_end
+            host.graduate_end = graduate_end
+            host.phd_end = phd_end
 
             host.save()
             return HttpResponseRedirect('/host_center/edit')
         else:
             return HttpResponse('请把表单填写完整')
 
-        
+
     elif method == "modify_host_info":
         if request.method == "POST":
             self_introduction = request.POST['introduction']
@@ -1086,11 +1083,9 @@ def host_center(request, method, Oid):
             min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
             max_payment = float(request.POST['max-payment'])
-        
-        
+
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
-
 
             host.introduction = self_introduction
             host.motto = motto
@@ -1123,22 +1118,22 @@ def school(request, method, Oid):
         login_flag = True
         Info['current_user'] = host
         Info['login_flag'] = login_flag
-        
-        
+
+
     except:
         pass
 
     if method == "show":
         if request.GET.get("schoolID"):
             return HttpResponseRedirect("/school/detail/" + request.GET.get("schoolID"))
-        return render(request, "frontEnd/school-search.html",Info)
+        return render(request, "frontEnd/school-search.html", Info)
 
 
     elif method == "detail":
         # find the passed host of the school
         school = School()
         school_union, topics = school.get_single_school_detail(Oid)
-        
+
         Info['object'] = school_union
 
         try:
@@ -1146,9 +1141,9 @@ def school(request, method, Oid):
         except:
             page = 1
         SHOW_PEOPLE = 2
-        #divide people into different page
+        # divide people into different page
         paginator = Paginator(Info['object'], SHOW_PEOPLE)
-        
+
         try:
             Info['object'] = paginator.page(page)
         except PageNotAnInteger:
@@ -1158,10 +1153,8 @@ def school(request, method, Oid):
             # If page is out of range (e.g. 9999), deliver last page of results.
             Info['object'] = paginator.page(paginator.num_pages)
 
-
-        
         Info['login_flag'] = login_flag
-        
+
         Info['topics'] = topics
         Info['school'] = School.objects.get(id=Oid)
         Info['allPeople'] = len(school_union)
@@ -1242,24 +1235,25 @@ def user(request, method, Oid):
 
     elif method == "certify":
         try:
-            host = Host.objects.get(email_certify_code = Oid)
+            host = Host.objects.get(email_certify_code=Oid)
             datetime_now = datetime.datetime.now()
             if (host.email_certify_time - datetime_now).total_seconds() < 60 * 60 * 12:
                 host.state = HOST_STATE['GUEST']
                 host.save()
-                return render(request,"frontEnd/certify_success.html")
+                return render(request, "frontEnd/certify_success.html")
             else:
-                return render(request,"frontEnd/uncertified.html",{'host':host})
+                return render(request, "frontEnd/uncertified.html", {'host': host})
         except:
-            return render(request,"frontEnd/error.html")
+            return render(request, "frontEnd/error.html")
     elif method == "resend_certify_code":
-        host = Host.objects.get(id= Oid)
+        host = Host.objects.get(id=Oid)
         certify_email = Mail()
         certify_email.register_success(host)
-        return render(request,"frontEnd/register_success.html")
-        
+        return render(request, "frontEnd/register_success.html")
+
     else:
         return render(request, "frontEnd/404.html")
+
 
 # user view
 @csrf_exempt
@@ -1283,13 +1277,13 @@ def share(request, method, Oid):
         Info["topics"] = topics
         SHOW_PEOPLE = 2
         SORT_KEY_WORD = ""
-        #setting the begin and end
-        
+        # setting the begin and end
+
         try:
             page = int(request.GET.get("page"))
         except:
             page = 1
-            
+
         if request.GET.get("sortword") != None:
             SORT_KEY_WORD = request.GET.get("sortword")
 
@@ -1309,12 +1303,12 @@ def share(request, method, Oid):
 
             Info['hosts'] = share_hosts
             if SORT_KEY_WORD != "":
-                Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
+                Info['hosts'] = sorted(Info['hosts'], key=lambda x: x[SORT_KEY_WORD], reverse=True)
 
-            #divide people 
-            
+            # divide people
+
             paginator = Paginator(Info['hosts'], SHOW_PEOPLE)
-            
+
             try:
                 Info['hosts'] = paginator.page(page)
             except PageNotAnInteger:
@@ -1323,13 +1317,13 @@ def share(request, method, Oid):
             except EmptyPage:
                 # If page is out of range (e.g. 9999), deliver last page of results.
                 Info['hosts'] = paginator.page(paginator.num_pages)
-            #排序
-            
+                # 排序
+
 
         else:
             if request.session.has_key("share_hosts"):
                 hosts = request.session["share_hosts"]
-                Info['m_name'] =request.session["m_name"]
+                Info['m_name'] = request.session["m_name"]
                 Info['t_name'] = request.session["t_name"]
             else:
                 tmp_host = Host.objects.filter(state=HOST_STATE['HOST'])
@@ -1337,15 +1331,15 @@ def share(request, method, Oid):
                 for host_atom in tmp_host:
                     hosts.append(host_atom.format_dict())
             host_number = len(hosts)
-            
+
             Info['hosts'] = hosts
 
             if SORT_KEY_WORD != "":
-                Info['hosts'] =  sorted(Info['hosts'],key= lambda x:x[SORT_KEY_WORD], reverse=True)
+                Info['hosts'] = sorted(Info['hosts'], key=lambda x: x[SORT_KEY_WORD], reverse=True)
 
-            #divide people into different page
+            # divide people into different page
             paginator = Paginator(Info['hosts'], SHOW_PEOPLE)
-            
+
             try:
                 Info['hosts'] = paginator.page(page)
             except PageNotAnInteger:
@@ -1358,13 +1352,14 @@ def share(request, method, Oid):
         return render(request, 'frontEnd/host.html', Info)
 
     elif method == "clear":
-        del request.session["share_hosts"] 
-        del request.session["m_name"] 
+        del request.session["share_hosts"]
+        del request.session["m_name"]
         del request.session["t_name"]
         return HttpResponseRedirect("/share/show/")
 
     else:
         return render(request, "frontEnd/404.html")
+
 
 @csrf_exempt
 def image_library(request):
@@ -1433,9 +1428,9 @@ def general_search(request):
         page = request.GET.get("page")
     except:
         page = 1
-    #divide people into different page
+    # divide people into different page
     paginator = Paginator(Info['data']['search_result'], SHOW_PEOPLE)
-    
+
     try:
         Info['data']['search_result'] = paginator.page(page)
     except PageNotAnInteger:
@@ -1445,19 +1440,17 @@ def general_search(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         Info['data']['search_result'] = paginator.page(paginator.num_pages)
 
-
     if len(search_result) == 0:
         Info['state'] = 404
         Info['message'] = "找不到包含关键字的内容"
 
-    #return HttpResponse(json.dumps(Info),content_type="application/json")
+    # return HttpResponse(json.dumps(Info),content_type="application/json")
 
     #
     Info['login_flag'] = login_flag
     if login_flag == True:
         Info['current_user'] = user
-    return render(request,"frontEnd/search-host.html",Info)
-
+    return render(request, "frontEnd/search-host.html", Info)
 
 
 '''
