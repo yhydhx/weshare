@@ -9,8 +9,6 @@
                 <div class="col-sm-6 ct-u-paddingTop30 ct-u-paddingBottom150">
                     <form class="ct-panel" method="post" id="email-form" action="/ichange/">
                         {% csrf_token %}
-
-                        {% if  %}
                         <div class="ct-panel-inner">
                             <h2 class="ct-u-marginBottom30">
                                 <small class="ct-fw-300"><span class="ct-fw-bold">您好, {{ current_user.username }}</span></small>

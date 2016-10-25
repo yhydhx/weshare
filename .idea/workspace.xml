@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0739ecb5-f8ce-40a7-a704-d49c1a062d3b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/weshare.iml" afterPath="$PROJECT_DIR$/.idea/weshare.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/views.py" afterPath="$PROJECT_DIR$/frontEnd/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gt/settings.py" afterPath="$PROJECT_DIR$/gt/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontEnd/templates/frontEnd/ichange.html" afterPath="$PROJECT_DIR$/frontEnd/templates/frontEnd/ichange.html" />
     </list>
     <ignored path="weshare.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +33,7 @@
           <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
+                <state relative-caret-position="-210">
                   <caret line="77" column="4" selection-start-line="77" selection-start-column="4" selection-end-line="77" selection-end-column="4" />
                   <folding>
                     <element signature="e#42#72#0" expanded="true" />
@@ -140,7 +138,7 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="-675">
@@ -148,6 +146,16 @@
                   <folding>
                     <element signature="e#42#72#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ichange.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/ichange.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="150">
+                  <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -194,7 +202,6 @@
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/complete-account.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/nav.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/iforget.html" />
-        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/ichange.html" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/onepage.html" />
         <option value="$PROJECT_DIR$/frontEnd/static/frontEnd/js/QQloginJS.js" />
         <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/index.html" />
@@ -206,6 +213,8 @@
         <option value="$PROJECT_DIR$/frontEnd/urls.py" />
         <option value="$PROJECT_DIR$/frontEnd/views.py" />
         <option value="$PROJECT_DIR$/gt/settings.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/frontEnd/templates/frontEnd/ichange.html" />
       </list>
     </option>
   </component>
@@ -676,16 +685,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="89" column="8" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="8" />
-          <folding>
-            <element signature="e#42#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gt/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -816,13 +815,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/ichange.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="71" column="26" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1015,6 +1007,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontEnd/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-675">
@@ -1022,6 +1022,14 @@
           <folding>
             <element signature="e#42#72#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontEnd/templates/frontEnd/ichange.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
