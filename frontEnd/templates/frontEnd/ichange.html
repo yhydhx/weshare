@@ -10,6 +10,7 @@
                     <form class="ct-panel" method="post" id="email-form" action="/ichange/">
                         {% csrf_token %}
                         <div class="ct-panel-inner">
+                            {% if change_mark %}
                             <h2 class="ct-u-marginBottom30">
                                 <small class="ct-fw-300"><span class="ct-fw-bold">您好, {{ current_user.username }}</span></small>
                             </h2>
@@ -22,6 +23,13 @@
                                 <input type="password" id="new-passwd-confirm" name="new-passwd-confirm" required class="form-control form-control--type2">
                             </div>
                             <button id="new-passwd-submit" type="submit" class="btn btn-motive"><span>更改密码</span></button>
+                            {% else %}
+                            <h2 class="ct-u-marginBottom30">
+                                <small class="ct-fw-300"><span class="ct-fw-bold">您好, {{ current_user.username }} <br>
+                                    密码修改完成<a href="/login/">请重新登录</a></span></small>
+                            </h2>
+                            {% endif %}
+
                         </div>
                     </form>
                 </div>
