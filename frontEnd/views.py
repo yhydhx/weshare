@@ -476,12 +476,13 @@ def ichange(request):
             if new_password != new_password_confirm or process_passwd(new_password):
                 PASSWORD_CONFIRM_ERROR = True
                 return render_to_response('frontEnd/ichange.html', {'current_user': user,
+                                                                    'change_mark': True,
                                                                     'PASSWORDCONFIRMERROR': PASSWORD_CONFIRM_ERROR})
             else:
                 user.password = new_password
                 user.save()
                 return render_to_response('frontEnd/ichange.html', {'current_user': user,
-                                                                    'change_mark': True},
+                                                                    'change_mark': False},
                                           context_instance=RequestContext(request))
     else:
         return render_to_response('frontEnd/ichange.html', {'current_user': user})
