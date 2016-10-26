@@ -978,20 +978,43 @@ class Mail(models.Model):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-    def forgotPassword(self, subject, to, content):
+
+
+       
+    def forgotPassword(self , to, url):
+
+        '''
+            用法
+            forgot_mail = Mail()
+            forgot_mail.forgotPassword(to,url)
+
+            to -> 用户的邮箱  示例  ['222@a.com']  是一个数组
+            url ->  忘记密码的url 
+        '''
         context = {"content": content}
 
+        
+        
+        subject = "重置您的密码"
+        content = "重置您的密码"
+        url = url
+        context = {"content": content,'url':url}
+        to = [host.email]
         email_template_name = 'backEnd/forget_password_template.html'
         t = loader.get_template(email_template_name)
-
         from_email = EMAIL_HOST_USER
-
         html_content = t.render(Context(context))
         # print html_content
         msg = EmailMultiAlternatives(subject, html_content, from_email, to)
         msg.attach_alternative(html_content, "text/html")
 
+        #save email 
+        to_email = to[0]
+        host_id = host.id
+        self.save_email(subject,from_email,to_email,host_id,"0",content,0)
+
         msg.send()
+        self.send_succussful()
 
 
 class Message(models.Model):

@@ -127,7 +127,7 @@ CERTIFICATE_STATE = {
 }
 
 #the number of people on each page
-SHOW_PEOPLE = 2
+SHOW_PEOPLE = 12
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

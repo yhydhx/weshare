@@ -32,6 +32,8 @@ urlpatterns = patterns('',
                        url(r'^wblogin/$', views.weibo_login, name='weibo_login'),
 
                        url(r'^wechatlogin/$', views.wechat_login),
+                       url(r'^support/$', views.support),
+                       url(r'^agreement/$', views.agreement),
 
                        url(r'^host_center/(?P<method>\w+)/?(?P<Oid>\w*)$', views.host_center, name='host_center'),
 
