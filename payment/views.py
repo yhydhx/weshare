@@ -76,15 +76,18 @@ def alipay_notify_url (request):
                 bill = Bill.objects.get(bill_id=tn)
             except Exception ,e:
                 print e
-            if trade_status == 'TRADE_SUCCESS':  
+            if trade_status == 'TRADE_SUCCESS': 
+
+                log=Log(operation='notify1_'+trade_status+'_'+tn,
+                operation_time = datetime.datetime.now())  
+                log.save() 
+                 
                 if bill.paid() == True:
                     if bill.bill_type == BILL_TYPE["APPOINTMENT"]:
                         appt_id = bill.get_appt_id()
                         return HttpResponseRedirect("success")
 
-                log=Log(operation='notify1_'+trade_status+'_'+trade_no,
-                operation_time = datetime.datetime.now())  
-                log.save()  
+                 
 
                 return HttpResponse("success")  
 

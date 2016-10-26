@@ -444,18 +444,9 @@ def i_forget(request, attr=False):
         except:
             return HttpResponse("后台没有接受到数据")
 
-        '''#######################################
-        mail = Mail(
-            subject='weshere账户密码找回,请不要回复此邮件',
-            from_email=EMAIL_HOST_USER,
-            to_email=email,
-            host_id=host.id,
-            admin_id='1',
-            content=iforget_link,
-        )
-        # mail.sendMail()
-        ######################################
-        return HttpResponse('邮件已经发送啦')'''
+        forgot_mail = Mail()
+        forgot_mail.forgotPassword([email],iforget_link)
+        return render_to_response('frontEnd/register_success.html', context_instance=RequestContext(request))
 
 
 def ichange(request):
@@ -1352,9 +1343,13 @@ def share(request, method, Oid):
         return render(request, 'frontEnd/host.html', Info)
 
     elif method == "clear":
-        del request.session["share_hosts"]
-        del request.session["m_name"]
-        del request.session["t_name"]
+        if request.session.has_key("share_hosts"):
+            del request.session["share_hosts"] 
+        if request.session.has_key("m_name"):
+            del request.session["m_name"] 
+        if request.session.has_key("t_name"):
+            del request.session["t_name"]
+
         return HttpResponseRedirect("/share/show/")
 
     else:
@@ -1452,7 +1447,11 @@ def general_search(request):
         Info['current_user'] = user
     return render(request, "frontEnd/search-host.html", Info)
 
+def support(request):
+    return render(request,"frontEnd/support.html")
 
+def agreement(request):
+    return render(request,"frontEnd/agreement.html")
 '''
 @csrf_exempt
 def feature_ajax(request):
