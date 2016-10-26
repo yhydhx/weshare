@@ -4,7 +4,7 @@
 {% block body %}<!-- 网页主体 -->
 <style>
     *{margin:0;padding:0;border: none;}
-    body { color: #333;  font: 12px "微软雅黑";background-color: white; }
+    body { color: #333; font: 12px "微软雅黑";background-color: white; }
     .mapTipText{width: 280px;height: 110px;background-color: #ffffff;}
     .mapTipText .mapTipImg{height: 66px; width: 66px; float: left;border: 2px solid #ffffff; border-radius: 50%;overflow: hidden;margin: -12px 5px 0 -12px;}
     .mapTipText .mapTipImg img{width: 100%;height: 100%;}
@@ -263,16 +263,25 @@
         <!-- <a href="#" class="btn btn-motive ct-loadMoreButton"><span class="h2"><small>Load <b>More</b><i class="fa fa-arrow-down"></i></small></span></a> -->
     </div>
 
+    <!-- 首页视频模块 -->
+    <!-- <div class="IndexVideo" style="background-color: #EDEFED;">
+        <p>Weshare 介绍视频</p>
+        <div>
+            <video src="{% static 'frontEnd/video/1.mp4' %}" controls="controls"></video>
+        </div>
+        
+    </div> -->
+
 {% endblock %}
 
 
 
 {% block js %}
 <!-- 首页轮播JS -->
-<script src="{% static 'frontEnd/plugins/slick/slick.min.js'%}"  ></script>
-<script src="{% static 'frontEnd/plugins/slick/init.js'%}" ></script>
+<!-- <script src="{% static 'frontEnd/plugins/slick/slick.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js'%}" ></script> -->
 <!-- 首页地图JS -->
-<script type="text/javascript" src="{% static 'frontEnd/js/map/lib/raphael-min.js'%}" ></script>
+<!-- <script type="text/javascript" src="{% static 'frontEnd/js/map/lib/raphael-min.js'%}" ></script>
 <script type="text/javascript" src="{% static 'frontEnd/js/map/res/chinaMapConfig.js'%}" ></script>
 <script type="text/javascript" src="{% static 'frontEnd/js/map/map-min.js'%}" ></script>
 <script type="text/javascript">
@@ -285,7 +294,7 @@
     function findSchool() {
         window.scrollTo(100, 800);
     }
-</script>
+</script> -->
 
 
 <!-- 首页搜索框JS -->

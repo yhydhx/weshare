@@ -68,6 +68,21 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 		font-family:'Microsoft YaHei'; 
 	}
 
+@media screen and (min-width: 992px){
+	.IndexVideo{
+		padding:100px 20% 100px 20%;
+		text-align: center;
+	}
+}
+@media screen and (max-width: 992px){
+	.IndexVideo{
+		padding:50px 20px 50px 20px;
+		text-align: center;
+	}
+}
+
+
+
 
 
 /*footer*/
