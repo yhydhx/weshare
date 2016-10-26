@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os,time
+import os, time
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -70,22 +70,21 @@ DATABASES = {
         # 'PASSWORD' : '5080',
         'HOST': '120.24.156.181',
         # 'HOST': '127.0.0.1',
-
         'PORT': '27017',
     }
 }
 
-#APP session 过期时间 暂时设置为一个月
-APP_USER_SESSION_EXPIRE_TIME = 30*24*60*60
+# APP session 过期时间 暂时设置为一个月
+APP_USER_SESSION_EXPIRE_TIME = 30 * 24 * 60 * 60
 
 # 用户状态
 HOST_STATE = {
-    'FROZEN' : -2,
-    'UNCERTIFY' : -1,
+    'FROZEN': -2,
+    'UNCERTIFY': -1,
     'GUEST': 0,
     'APPLY': 1,
     'HOST': 2,
-    #'FROZEN':3,
+    # 'FROZEN':3,
 
 }
 
@@ -111,7 +110,7 @@ BILL_STATE = {
 
 MESSAGE_TYPE = {
     "APPOINTMENT_COMM": 1,
-    "EVALUATION" : 2,
+    "EVALUATION": 2,
 }
 
 GENDER = {
@@ -120,9 +119,9 @@ GENDER = {
 }
 
 CERTIFICATE_STATE = {
-    "CERTIFYING" : 1,
-    "PASSED"    :2,
-    "FAILED"    :3,
+    "CERTIFYING": 1,
+    "PASSED": 2,
+    "FAILED": 3,
 
 }
 
@@ -134,7 +133,7 @@ SHOW_PEOPLE = 12
 
 LANGUAGE_CODE = 'en-us'
 
-#TIME_ZONE = 'Etc/GMT%+-d'%(time.timezone/3600)
+# TIME_ZONE = 'Etc/GMT%+-d'%(time.timezone/3600)
 TIME_ZONE = 'Asia/Shanghai'
 
 # USE_I18N = True

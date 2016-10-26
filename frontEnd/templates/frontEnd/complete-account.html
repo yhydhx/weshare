@@ -312,6 +312,14 @@ $(".form-time").datetimepicker({
                 window.editor = K.create('#editor_id');
         });
 </script>
+<!-- 富文本编辑器-图片上传 -->
+<script>
+    KindEditor.ready(function(k){
+        window.editor = k.create('#editor_id',{
+            uploadJson : '/host_center/upload_img',
+        });
+    });
+</script>
 
 <!-- 选择学历 -->
 <script>
@@ -350,7 +358,7 @@ $(".form-time").datetimepicker({
 
 <!-- 选择学校JS -->
 <script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
-<script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script> 
+<!-- <script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script>  -->
 
 <!-- 本科school-search -->
 <script type="text/javascript">
@@ -416,11 +424,16 @@ function getSchoolID(school_id,school_name){
 }
 
 //点击表单响应
-$("#txtSc").live("click",function (){
+// $("#txtSc").live("click",function (){
+//     $("#gj").show();
+//     $("#list").hide();
+//     $("#sheng").hide();
+// });
+$('body').on('click', '#txtSc', function (){
     $("#gj").show();
-    $("#list").hide();
+     $("#list").hide();
     $("#sheng").hide();
-});
+ });
 </script>
 
 
@@ -489,11 +502,16 @@ function MgetSchoolID(school_id,school_name){
 }
 
 //点击表单响应
-$("#MtxtSc").live("click",function (){
-    $("#Mgj").show();
-    $("#Mlist").hide();
-    $("#Msheng").hide();
-});
+// $("#MtxtSc").live("click",function (){
+//     $("#Mgj").show();
+//     $("#Mlist").hide();
+//     $("#Msheng").hide();
+// });
+$('body').on('click', '#MtxtSc', function (){
+    $("#gj").show();
+     $("#list").hide();
+    $("#sheng").hide();
+ });
 </script>
 
 
@@ -562,11 +580,16 @@ function PgetSchoolID(school_id,school_name){
 }
 
 //点击表单响应
-$("#PtxtSc").live("click",function (){
-    $("#Pgj").show();
-    $("#Plist").hide();
-    $("#Psheng").hide();
-});
+// $("#PtxtSc").live("click",function (){
+//     $("#Pgj").show();
+//     $("#Plist").hide();
+//     $("#Psheng").hide();
+// });
+$('body').on('click', '#PtxtSc', function (){
+    $("#gj").show();
+     $("#list").hide();
+    $("#sheng").hide();
+ });
 </script>
 
 <!-- <script src="{% static 'frontEnd/js/shop.js' %}"></script> -->

@@ -24,9 +24,9 @@
                 <small class="ct-fw-lighter ct-u-colorMotive">- {{ host.motto }} -</small>
             </h3>
             {% if host.state == 1 %}
-            <a href="/host-center/" class="ct-login"><span style="color: white; ">审核中</span><i class="fa fa-lock"></i></a>
+            <a href="" class="ct-login"><span style="color: white; ">审核中</span><i class="fa fa-lock"></i></a>
             {% else%}
-            <a href="/host-center/" class="ct-login"><span style="color: white; ">审核通过</span><i class="fa fa-unlock"></i></a>
+            <a href="" class="ct-login"><span style="color: white; ">审核通过</span><i class="fa fa-unlock"></i></a>
             {% endif %}
         </div>
     </section>
@@ -101,8 +101,12 @@
                             </h4>
                         </div>
                     </div>
-
-                    <button class="btn btn-lg btn-wide btn-motive"  data-toggle="modal" data-target="#myModal" onclick="checkLogin();"><span>预约</span></button>
+                    
+                    {% if host.state == 1 %}
+                        <button class="btn btn-lg btn-wide btn-motive disabled"><span>审核中..</span></button>
+                    {% else %}
+                        <button class="btn btn-lg btn-wide btn-motive"  data-toggle="modal" data-target="#myModal" onclick="checkLogin();"><span>预约</span></button>
+                    {% endif %}
 
                     <!-- Modal -->
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -111,7 +115,7 @@
                             <div class="row">
                                 <div class="col-xs-1"></div>
                                 <div class="col-xs-2">
-                                    <div class="row" style="color:red; font-size: 20px; padding-top:5px; padding-bottom:5px; ">预约</div>
+                                    <div class="row" style="color:red; font-size: 20px; padding-top:5px; padding-bottom:5px; ">等待确定</div>
                                     <div class="row" style="display: flex;justify-content: center; ">
                                         <div style=" width:40px; height:40px; background-color:#F00; border-radius:20px;">
                                             <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">1</span>
@@ -119,7 +123,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
-                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">等待确认</div>
+                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">等待付款</div>
                                     <div class="row" style="display: flex;justify-content: center; ">
                                         <div style=" width:40px; height:40px; background-color:gray; border-radius:20px;">
                                             <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">2</span>
@@ -127,7 +131,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
-                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">付款</div>
+                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">已付款</div>
                                     <div class="row" style="display: flex;justify-content: center; ">
                                         <div style=" width:40px; height:40px; background-color:gray; border-radius:20px;">
                                             <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">3</span>
@@ -135,7 +139,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
-                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">完成</div>
+                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">约见完成</div>
                                     <div class="row" style="display: flex;justify-content: center; ">
                                         <div style=" width:40px; height:40px; background-color:gray; border-radius:20px;">
                                             <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">4</span>
@@ -143,7 +147,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
-                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">评价</div>
+                                    <div class="row" style="color:gray; font-size: 20px; padding-top:5px; padding-bottom:5px; ">已评价</div>
                                     <div class="row" style="display: flex;justify-content: center; ">
                                         <div style=" width:40px; height:40px; background-color:gray; border-radius:20px;">
                                             <span style="height:40px; line-height:40px; display:block; color:#FFF; font-size: 25px; text-align:center">5</span>

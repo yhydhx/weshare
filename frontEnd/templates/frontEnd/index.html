@@ -4,7 +4,7 @@
 {% block body %}<!-- 网页主体 -->
 <style>
     *{margin:0;padding:0;border: none;}
-    body { color: #333; text-align: center; font: 12px "微软雅黑";background-color: #dcf5ed; }
+    body { color: #333; font: 12px "微软雅黑";background-color: white; }
     .mapTipText{width: 280px;height: 110px;background-color: #ffffff;}
     .mapTipText .mapTipImg{height: 66px; width: 66px; float: left;border: 2px solid #ffffff; border-radius: 50%;overflow: hidden;margin: -12px 5px 0 -12px;}
     .mapTipText .mapTipImg img{width: 100%;height: 100%;}
@@ -35,7 +35,7 @@
         <div class="item active">
           <img alt="First slide" src="{% static 'frontEnd/images/weshare/Imax1.jpg' %}" style="width: 100%; ">
           <div class="carousel-caption">
-            <h3>您是否正在寻找科研大牛？</h3>
+            <h2>您是否正在寻找出国达人？</h2>
             <br>
             <!-- <a href="" class="btn btn-primary"><span>Contact</span></a>
             <a href="" class="btn btn-danger"><span>联系我们</span></a> -->
@@ -45,7 +45,7 @@
         <div class="item">
           <img alt="Second slide" src="{% static 'frontEnd/images/weshare/Imax2.jpg' %}" style="width: 100%; ">
           <div class="carousel-caption">
-            <h3>您是否正在寻找出国达人？</h3>
+            <h2>您是否正在寻找课程学霸？</h2>
             <br>
             <!-- <a href="" class="btn btn-primary"><span>Contact</span></a>
             <a href="" class="btn btn-danger"><span>联系我们</span></a> -->
@@ -55,7 +55,7 @@
         <div class="item">
           <img alt="Third slide" src="{% static 'frontEnd/images/weshare/Imax3.jpg' %}" style="width: 100%; ">
           <div class="carousel-caption">
-            <h3>您是否正在寻找课程学霸？</h3>
+            <h2>您是否正在寻找科研大牛？</h2>
             <br>
             <!-- <a href="" class="btn btn-primary"><span>Contact</span></a>
             <a href="" class="btn btn-danger"><span>联系我们</span></a> -->
@@ -136,21 +136,21 @@
                     <div class="ct-numberBox ct-numberBox--right ct-u-paddingBoth50">
                         <h2 class="ct-numberBox-number"><b>{{host_num}}</b></h2>
                         <h6 class="ct-numberBox-header ct-u-hr ct-u-hr--right">分享者</h6>
-                        <p class="ct-numberBox-content">We have a large base of satisfied customers, no one can give as much as we.</p>
+                        <p class="ct-numberBox-content"></p>
                     </div>
                 </div>
                 <div class="col-sm-4 ct-u-sectionGray">
                     <div class="ct-numberBox ct-numberBox--center ct-u-paddingBoth50">
                         <h2 class="ct-numberBox-number"><b>{{register_num}}</b></h2>
                         <h6 class="ct-numberBox-header ct-u-hr ct-u-hr--center">总注册人数</h6>
-                        <p class="ct-numberBox-content">We have a large base of satisfied customers, no one can give as much as we.</p>
+                        <p class="ct-numberBox-content"></p>
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="ct-numberBox ct-u-paddingBoth50">
+                    <div class="ct-numberBox ct-numberBox--left ct-u-paddingBoth50">
                         <h2 class="ct-numberBox-number"><b>{{school_num}}</b></h2>
                         <h6 class="ct-numberBox-header ct-u-hr ct-u-hr--left">高校数</h6>
-                        <p class="ct-numberBox-content">We have a large base of satisfied customers, no one can give as much as we.</p>
+                        <p class="ct-numberBox-content"></p>
                     </div>
                 </div>
             </div>
@@ -263,16 +263,25 @@
         <!-- <a href="#" class="btn btn-motive ct-loadMoreButton"><span class="h2"><small>Load <b>More</b><i class="fa fa-arrow-down"></i></small></span></a> -->
     </div>
 
+    <!-- 首页视频模块 -->
+    <!-- <div class="IndexVideo" style="background-color: #EDEFED;">
+        <p>Weshare 介绍视频</p>
+        <div>
+            <video src="{% static 'frontEnd/video/1.mp4' %}" controls="controls"></video>
+        </div>
+        
+    </div> -->
+
 {% endblock %}
 
 
 
 {% block js %}
 <!-- 首页轮播JS -->
-<script src="{% static 'frontEnd/plugins/slick/slick.min.js'%}"  ></script>
-<script src="{% static 'frontEnd/plugins/slick/init.js'%}" ></script>
+<!-- <script src="{% static 'frontEnd/plugins/slick/slick.min.js'%}"  ></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js'%}" ></script> -->
 <!-- 首页地图JS -->
-<script type="text/javascript" src="{% static 'frontEnd/js/map/lib/raphael-min.js'%}" ></script>
+<!-- <script type="text/javascript" src="{% static 'frontEnd/js/map/lib/raphael-min.js'%}" ></script>
 <script type="text/javascript" src="{% static 'frontEnd/js/map/res/chinaMapConfig.js'%}" ></script>
 <script type="text/javascript" src="{% static 'frontEnd/js/map/map-min.js'%}" ></script>
 <script type="text/javascript">
@@ -285,7 +294,7 @@
     function findSchool() {
         window.scrollTo(100, 800);
     }
-</script>
+</script> -->
 
 
 <!-- 首页搜索框JS -->

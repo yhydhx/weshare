@@ -6629,6 +6629,9 @@ p {
 .ct-numberBox--center * {
   text-align: center;
 }
+.ct-numberBox--left * {
+  text-align: left;
+}
 @media (max-width: 767px) {
   .ct-numberBox {
     text-align: center;
