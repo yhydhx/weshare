@@ -106,7 +106,7 @@ class Host(models.Model):
             #get the school infomation
             if education == 0:
                 try:
-                    print "hostname:"+host.username+"   - -"+host.bachelor
+                    print "hostname:"+host_atom.username+"   - -"+host_atom.bachelor
                     if school_dict.has_key(host_atom.bachelor):
                         bachelor_school = school_dict[host_atom.bachelor].s_name
                     else:
