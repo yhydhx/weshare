@@ -1131,7 +1131,7 @@ def school(request, method, Oid):
             page = request.GET.get("page")
         except:
             page = 1
-        SHOW_PEOPLE = 2
+
         # divide people into different page
         paginator = Paginator(Info['object'], SHOW_PEOPLE)
 
@@ -1266,7 +1266,7 @@ def share(request, method, Oid):
         topic = Topic()
         topics = topic.get_all_topics()
         Info["topics"] = topics
-        SHOW_PEOPLE = 2
+
         SORT_KEY_WORD = ""
         # setting the begin and end
 
