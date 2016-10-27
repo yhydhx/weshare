@@ -554,7 +554,7 @@ def user(request, method, Oid):
         users = Host.objects.filter(state=2)
         for each_host in users:
             each_host.userState = "分享者"
-        return render(request, 'backEnd/showUserList.html', {'object': users})
+        return render(request, 'backEnd/showHostList.html', {'object': users})
     elif method == 'mail':
         host = Host.objects.get(id=Oid)
         return render(request, 'backEnd/sendMail.html',{'object':host})
