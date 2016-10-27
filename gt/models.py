@@ -114,9 +114,9 @@ class Host(models.Model):
                         bachelor_school = bachelor_school_object.s_name
 
                     search_string += bachelor_school + " "
-                    #print bachelor_school
+                    print bachelor_school
                 except Exception,e:
-                    #print Exception,"--",e
+                    print Exception,"--",e
                     pass
             elif education == 1:
                 try:
@@ -125,7 +125,7 @@ class Host(models.Model):
                     bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
                 except Exception,e:
-                    #print Exception,"--",e
+                    print Exception,"--",e
                     pass
             elif education == 2:
                 try:
@@ -168,8 +168,8 @@ class Host(models.Model):
             
 
             #introduction 
-            #search_string += host_atom.introduction + " "
-            #print search_string
+            search_string += host_atom.introduction + " "
+            print search_string
             #etc
             #
 
