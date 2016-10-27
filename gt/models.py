@@ -169,7 +169,7 @@ class Host(models.Model):
 
             #introduction 
             #search_string += host_atom.introduction + " "
-            print search_string
+            #print search_string
             #etc
             #
 
