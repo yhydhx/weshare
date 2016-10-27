@@ -106,9 +106,11 @@ class Host(models.Model):
             #get the school infomation
             if education == 0:
                 try:
+                    print "hostname:"+host.username+"   - -"+host.bachelor
                     if school_dict.has_key(host_atom.bachelor):
                         bachelor_school = school_dict[host_atom.bachelor].s_name
                     else:
+
                         bachelor_school_object = School.objects.get(id = host_atom.bachelor)
                         school_dict[host_atom.bachelor] = bachelor_school_object
                         bachelor_school = bachelor_school_object.s_name
@@ -169,7 +171,7 @@ class Host(models.Model):
 
             #introduction 
             search_string += host_atom.introduction + " "
-            print search_string
+            #print search_string
             #etc
             #
 
