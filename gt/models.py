@@ -122,6 +122,7 @@ class Host(models.Model):
                     pass
             elif education == 1:
                 try:
+                    print "hostname:"+host_atom.username+"   - -"+host_atom.bachelor
                     graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate_school + " "
                     bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
@@ -131,13 +132,15 @@ class Host(models.Model):
                     pass
             elif education == 2:
                 try:
+                    print "hostname:"+host_atom.username+"   - -"+host_atom.bachelor
                     graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate_school + " "
                     bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
                     phd_school = School.objects.get(id = host_atom.phd).s_name
                     search_string += phd_school + " "
-                except:
+                except Exception,e:
+                    print Exception,"--",e
                     pass
             #服务列表
             
