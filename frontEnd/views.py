@@ -514,7 +514,7 @@ def complete_account(request):
             try:
                 bachelor = request.POST['schoolID1']
                 bachelor_major = request.POST['bachelor_major']
-                bachelor_start = request.POST['bachelor_major']
+                bachelor_start = request.POST['bachelor_start']
                 bachelor_end = request.POST['bachelor_end']
             except:
                 bachelor = ""
