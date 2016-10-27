@@ -122,7 +122,8 @@ class Host(models.Model):
                     pass
             elif education == 1:
                 try:
-                    print "hostname:"+host_atom.username+"   - -"+host_atom.bachelor
+                    print "graduate"
+                    print "hostname:"+host_atom.username+"   - -"+host_atom.bachelor+"   - -"+host_atom.graduate
                     graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate_school + " "
                     bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
@@ -132,6 +133,7 @@ class Host(models.Model):
                     pass
             elif education == 2:
                 try:
+                    print "phd"
                     print "hostname:"+host_atom.username+"   - -"+host_atom.bachelor
                     graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate_school + " "
