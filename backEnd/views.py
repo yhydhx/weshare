@@ -527,6 +527,12 @@ def user(request, method, Oid):
 
         return HttpResponseRedirect('/dc/user/host/')
 
+    elif method == "degrade":
+        host = Host.objects.get(id=Oid)
+        host.state = HOST_STATE['APPLY']
+        host.save()
+        return HttpResponseRedirect("/dc/user/host/")
+
     elif method == 'delete':
         Host.objects.filter(id=Oid).delete()
         return HttpResponseRedirect('../show/')
