@@ -40,7 +40,7 @@ body{
 
 
     <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="340"
-             data-type="parallax" data-stellar-background-ratio="0.2" data-bg-image="{% static 'frontEnd/images/weshare/schoolImax.png'%}"
+             data-type="parallax" data-stellar-background-ratio="0.2" data-bg-image="{{ school.s_image }}"
              data-bg-image-mobile="./assets/images/content/cars/bg-01-mobile.jpg">
         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom" data-stellar-ratio="0.7"><h2
                 class="ct-fw-lighter ct-u-hr ct-u-hr--wide text-center" style="color:white;filter:Alpha(Opacity=50);background-color:rgba(0, 0, 0, 0.5);padding-top: 20px;">{{school.s_name}}</h2></div>
@@ -57,16 +57,15 @@ body{
                         <form id="form1" runat="server">
                         {% csrf_token %}
                         <div>
-                            智能模糊查询提示
                             <input id="txt_search" placeholder="Search..." type="text" name="field[]" class="form-control">
 
                             <div id="searchresult" style="display: none;">
                             </div>
                         </div>
-                       
+                        <button type="submit"><i class="fa fa-search fa-fw"></i></button>
                         </form>
 
-                        <button type="submit"><i class="fa fa-search fa-fw"></i></button>
+                        
                     </div>
 
                     <div class="ct-widget-filter-byType ct-u-marginBottom30">

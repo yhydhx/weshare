@@ -410,11 +410,16 @@ function getSchoolID(school_id,school_name){
 }
 
 //点击表单响应
-$("#txtSc").live("click",function (){
+// $("#txtSc").live("click",function (){
+//     $("#gj").show();
+//     $("#list").hide();
+//     $("#sheng").hide();
+// });
+$('body').on('click', '#txtSc', function (){
     $("#gj").show();
-    $("#list").hide();
+     $("#list").hide();
     $("#sheng").hide();
-});
+ });
 </script>
 
 
@@ -483,11 +488,16 @@ function MgetSchoolID(school_id,school_name){
 }
 
 //点击表单响应
-$("#MtxtSc").live("click",function (){
+// $("#MtxtSc").live("click",function (){
+//     $("#Mgj").show();
+//     $("#Mlist").hide();
+//     $("#Msheng").hide();
+// });
+$('body').on('click', '#MtxtSc', function (){
     $("#Mgj").show();
-    $("#Mlist").hide();
+     $("#Mlist").hide();
     $("#Msheng").hide();
-});
+ });
 </script>
 
 
@@ -561,6 +571,11 @@ $("#PtxtSc").live("click",function (){
     $("#Plist").hide();
     $("#Psheng").hide();
 });
+$('body').on('click', '#PtxtSc', function (){
+    $("#Pgj").show();
+     $("#Plist").hide();
+    $("#Psheng").hide();
+ });
 </script>
 
 
