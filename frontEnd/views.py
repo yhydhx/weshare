@@ -622,6 +622,12 @@ def complete_account_feature(request):
                               f_topic=topic_id)
             feature.save()
 
+        #check the feature name is null 
+        if feature_name == "":
+            Info['state'] = 404
+            Info['message'] = "请填写详细的服务信息"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
         # check the error
         if m_id == "":
             Info['state'] = 404
@@ -637,6 +643,7 @@ def complete_account_feature(request):
             Info['state'] = 300
             Info['message'] = "这个特征已经存在，请添加其他的特征"
             return HttpResponse(json.dumps(Info), content_type="application/json")
+
         except:
             host_topic = Host_Topic(
                 host_id=host.id,
