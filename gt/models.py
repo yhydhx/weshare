@@ -106,36 +106,43 @@ class Host(models.Model):
             #get the school infomation
             if education == 0:
                 try:
+                    print "hostname:"+host_atom.username+"   - -"+host_atom.bachelor
                     if school_dict.has_key(host_atom.bachelor):
                         bachelor_school = school_dict[host_atom.bachelor].s_name
                     else:
+
                         bachelor_school_object = School.objects.get(id = host_atom.bachelor)
                         school_dict[host_atom.bachelor] = bachelor_school_object
                         bachelor_school = bachelor_school_object.s_name
 
                     search_string += bachelor_school + " "
-                    #print bachelor_school
+                    print bachelor_school
                 except Exception,e:
-                    #print Exception,"--",e
+                    print Exception,"--",e
                     pass
             elif education == 1:
                 try:
+                    print "graduate"
+                    print "hostname:"+host_atom.username+"   - -"+host_atom.bachelor+"   - -"+host_atom.graduate
                     graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate_school + " "
                     bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
                 except Exception,e:
-                    #print Exception,"--",e
+                    print Exception,"--",e
                     pass
             elif education == 2:
                 try:
+                    print "phd"
+                    print "hostname:"+host_atom.username+"   - -"+host_atom.bachelor
                     graduate_school = School.objects.get(id = host_atom.graduate).s_name
                     search_string += graduate_school + " "
                     bachelor_school = School.objects.get(id = host_atom.bachelor).s_name
                     search_string += bachelor_school + " "
                     phd_school = School.objects.get(id = host_atom.phd).s_name
                     search_string += phd_school + " "
-                except:
+                except Exception,e:
+                    print Exception,"--",e
                     pass
             #服务列表
             
@@ -168,8 +175,8 @@ class Host(models.Model):
             
 
             #introduction 
-            #search_string += host_atom.introduction + " "
-            print search_string
+            search_string += host_atom.introduction + " "
+            #print search_string
             #etc
             #
 

@@ -514,7 +514,7 @@ def complete_account(request):
             try:
                 bachelor = request.POST['schoolID1']
                 bachelor_major = request.POST['bachelor_major']
-                bachelor_start = request.POST['bachelor_major']
+                bachelor_start = request.POST['bachelor_start']
                 bachelor_end = request.POST['bachelor_end']
             except:
                 bachelor = ""
@@ -622,6 +622,12 @@ def complete_account_feature(request):
                               f_topic=topic_id)
             feature.save()
 
+        #check the feature name is null 
+        if feature_name == "":
+            Info['state'] = 404
+            Info['message'] = "请填写详细的服务信息"
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
         # check the error
         if m_id == "":
             Info['state'] = 404
@@ -637,6 +643,7 @@ def complete_account_feature(request):
             Info['state'] = 300
             Info['message'] = "这个特征已经存在，请添加其他的特征"
             return HttpResponse(json.dumps(Info), content_type="application/json")
+
         except:
             host_topic = Host_Topic(
                 host_id=host.id,
@@ -1131,7 +1138,7 @@ def school(request, method, Oid):
             page = request.GET.get("page")
         except:
             page = 1
-        SHOW_PEOPLE = 2
+
         # divide people into different page
         paginator = Paginator(Info['object'], SHOW_PEOPLE)
 
@@ -1266,7 +1273,7 @@ def share(request, method, Oid):
         topic = Topic()
         topics = topic.get_all_topics()
         Info["topics"] = topics
-        SHOW_PEOPLE = 2
+
         SORT_KEY_WORD = ""
         # setting the begin and end
 
