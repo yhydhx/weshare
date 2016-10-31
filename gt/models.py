@@ -780,7 +780,7 @@ class Host_Topic(models.Model):
             if not host_dict.has_key(host_topic_atom.host_id):
                 host_dict[host_topic_atom.host_id] = 1
                 host_atom = Host.objects.get(id=host_topic_atom.host_id).format_dict()
-                if host_atom.state == HOST_STATE['HOST']:
+                if host_atom['state'] == HOST_STATE['HOST']:
                     result.append(host_atom)
         return result
 
