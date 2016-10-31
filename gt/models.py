@@ -779,7 +779,10 @@ class Host_Topic(models.Model):
         for host_topic_atom in host_topics:
             if not host_dict.has_key(host_topic_atom.host_id):
                 host_dict[host_topic_atom.host_id] = 1
-                host_atom = Host.objects.get(id=host_topic_atom.host_id).format_dict()
+                try:
+                    host_atom = Host.objects.get(id=host_topic_atom.host_id).format_dict()
+                except:
+                    Host_Topic.objects.filter(host_id = host_topic_atom.host_id).delete()
                 result.append(host_atom)
         return result
 
