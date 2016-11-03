@@ -325,7 +325,7 @@ def school(request, method, Oid):
         return HttpResponse('没有该方法')
 
 def write_js(result):
-    output_file = file("frontEnd/static/frontEnd/js/schoolsearch/allunivlist.js",'w')
+    output_file = file("gt/static/frontEnd/js/schoolsearch/allunivlist.js",'w')
     output_file.write('var allUnivList = ')
     output_file.write(json.dumps(result))
 
