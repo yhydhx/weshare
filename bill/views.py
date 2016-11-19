@@ -133,12 +133,16 @@ def bill(request,method,Oid):
 														    state = APPOINTMENT_STATE['CERTIFIED']
 														    )
 
-		#send infomation to host
+		#send infomation to user
 		appointment = Appointment.objects.get(id= appnt_id)
 		user = Host.objects.get(id = appointment.from_user_id)
 		create_bill_mail  = Mail()
 		to = [user.email]
 		create_bill_mail.bill_info("您的订单已被确认",to,"您有订单被确认，请登录weshare官网并在我的订单中查看~",user)
+
+		#statistic the bill count
+		host = Host.objects.get(id = appointment.to_host_id)
+		host.get_one_host_bill_number()
 
 		return HttpResponseRedirect("/bill/detail/"+appnt_id)
     elif method == "communicate":

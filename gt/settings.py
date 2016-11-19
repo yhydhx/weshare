@@ -66,11 +66,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django_mongodb_engine',
         'NAME': "weshare",
-        # 'USER': 'jupiter',
-        # 'PASSWORD' : '5080',
-        'HOST': '120.24.156.181',
-        # 'HOST': '127.0.0.1',
-        'PORT': '27017',
+        'USER': 'jupiter',
+        'PASSWORD' : '5080',
+        #'HOST': '120.24.156.181',
+        'HOST': 'www.wshere.com',
+        #'PORT': '27017',
+        'PORT' : '27001'
     }
 }
 

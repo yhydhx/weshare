@@ -70,6 +70,7 @@ class Host(models.Model):
 
     #scode 
     score = models.FloatField(null= True)
+    bill_number = models.IntegerField(default = 0)
 
     def __unicode__(self):
         return self.username
@@ -239,6 +240,8 @@ class Host(models.Model):
         tmpHost['bachelor_end'] = self.bachelor_end
         tmpHost['graduate_end'] = self.graduate_end
         tmpHost['phd_end'] = self.phd_end
+        tmpHost['score'] = score
+        tmpHost['bill_number'] = bill_number
 
         try:
             tmpHost['id'] = self.id
@@ -466,6 +469,24 @@ class Host(models.Model):
             result.append(certification_atom.format_dict())
 
         return result
+
+    def get_one_host_bill_number(self):
+        appointments = Appointment.objects.filter(to_host_id = self.id)
+        self.bill_number = len(appointments)
+        self.save()
+
+    def get_all_host_bill_number(self):
+        hosts = Host.objects.filter(state = HOST_STATE['HOST'])
+        for host_atom in hosts:
+            host_atom.get_one_host_bill_number()
+
+    def get_one_host_score(self):
+        return 1
+
+    def get_all_host_score(self):
+        hosts = Host.objects.filter(state = HOST_STATE['HOST'])
+        for host_atom in hosts:
+            host_atom.get_one_host_score()
 
 class Country(models.Model):
     c_name = models.CharField(max_length=100)
@@ -1160,7 +1181,6 @@ class Appointment(models.Model):
         tmp_dict['appointment_id']  = self.appointment_id
         tmp_dict['recommend_payment']  = self.recommend_payment
         tmp_dict['recommend_salary']  = self.recommend_salary
-        recommend_salary = models.FloatField( null = True) 
         appt_feature = Feature.objects.get(id=self.feature_id).f_name
         tmp_dict['feature_name'] = appt_feature
 

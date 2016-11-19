@@ -26,6 +26,7 @@ urlpatterns = patterns('',
 
     url(r'^func/(?P<method>\w+)/?(?P<Oid>\w*)$', views.func,name ='func'),   
     url(r'^certification/(?P<method>\w+)/?(?P<Oid>\w*)$', views.certification,name ='certification'),   
+    url(r'^appointment/(?P<method>\w+)/?(?P<Oid>\w*)$', views.appointment,name ='appointment'),   
 
     url(r'^test\.html$', views.test, name='test'),
     url(r'^s\.html$', views.s, name='s'),

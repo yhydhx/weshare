@@ -952,3 +952,71 @@ def certification(request, method, Oid):
     else:
         return HttpResponse('没有该方法')
 
+def appointment(request, method, Oid):
+    '''
+    'INITED': 0,  # 创建订单
+    'CERTIFIED': 1,  # 确认
+    'PAID': 2,  # 付款
+    'COMPLETED': 3,  # 完成了
+    'FINISHED': 4  # 结算完成
+    '''
+
+    try:
+        request.session['adminname']
+    except KeyError, e:
+        return HttpResponseRedirect('login.html')
+
+    if method == 'inited':
+        obj = []
+        appt = Appointment.objects.filter(state = APPOINTMENT_STATE['INITED'])
+        for app in appt: obj.append(app.format_dict_on_manage())
+        return render(request, 'backEnd/showAppointmentList.html', {'object': obj})
+    
+    elif method == "certified":
+        obj = []
+        appt = Appointment.objects.filter(state = APPOINTMENT_STATE['CERTIFIED'])
+        for app in appt: obj.append(app.format_dict_on_manage())
+        return render(request, 'backEnd/showAppointmentList.html', {'object': obj})
+    
+    elif method == "paid":
+        obj = []
+        appt = Appointment.objects.filter(state = APPOINTMENT_STATE['PAID'])
+        for app in appt: obj.append(app.format_dict_on_manage())
+        return render(request, 'backEnd/showAppointmentList.html', {'object': obj})
+    
+    elif method == "complete":
+        obj = []
+        appt = Appointment.objects.filter(state = APPOINTMENT_STATE['COMPLETED'])
+        for app in appt: obj.append(app.format_dict_on_manage())
+        return render(request, 'backEnd/showAppointmentList.html', {'object': obj})
+    
+    elif method == "finished":
+        obj = []
+        appt = Appointment.objects.filter(state = APPOINTMENT_STATE['FINISHED'])
+        for app in appt: obj.append(app.format_dict_on_manage())
+        return render(request, 'backEnd/showAppointmentList.html', {'object': obj})
+    
+
+    # elif method  == "passing":
+    #     if request.method == "POST":
+    #         c_id = request.POST.get("id")
+    #         crt = Certificate.objects.get(id = c_id)
+    #         crt.state = APPOINTMENT_STATE['PASSED']
+    #         crt.save()
+    #         return HttpResponseRedirect("/dc/certification/show")
+
+    # elif method == "failed":
+    #     crt = Certificate.objects.filter(state = APPOINTMENT_STATE['FAILED'])
+    #     return render(request, 'backEnd/showCertificationList.html', {'menu': menu})
+    # elif method == 'show' or method == '':
+    #     crt = Certificate.objects.filter(state = APPOINTMENT_STATE['CERTIFYING'])
+    #     crt_list = []
+    #     for crt_atom in crt: 
+    #         crt_list.append(crt_atom.format_dict())
+    #     return render(request, 'backEnd/showCertificationList.html', {'object': crt_list})
+    # elif method == "change":
+    #     crt = Certificate.objects.get(id = Oid)
+    #     return render(request, 'backEnd/changeCertification.html', {'object': crt})
+    else:
+        return HttpResponse('没有该方法')
+
