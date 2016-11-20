@@ -240,8 +240,8 @@ class Host(models.Model):
         tmpHost['bachelor_end'] = self.bachelor_end
         tmpHost['graduate_end'] = self.graduate_end
         tmpHost['phd_end'] = self.phd_end
-        tmpHost['score'] = score
-        tmpHost['bill_number'] = bill_number
+        tmpHost['score'] = self.score
+        tmpHost['bill_number'] = self.bill_number
 
         try:
             tmpHost['id'] = self.id
@@ -1156,6 +1156,7 @@ class Appointment(models.Model):
 
     def format_dict_on_manage(self):
         tmp_dict = self.format_dict()
+        #print tmp_dict['to_host_id']
         host = Host.objects.get(id= tmp_dict['to_host_id'])
 
         tmp_dict['host_name'] = host.username
@@ -1181,6 +1182,7 @@ class Appointment(models.Model):
         tmp_dict['appointment_id']  = self.appointment_id
         tmp_dict['recommend_payment']  = self.recommend_payment
         tmp_dict['recommend_salary']  = self.recommend_salary
+        print self.feature_id
         appt_feature = Feature.objects.get(id=self.feature_id).f_name
         tmp_dict['feature_name'] = appt_feature
 
