@@ -42,11 +42,11 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 
 /*index*/
 	.IndexSearch{
-		height:100px; 
+		height:100px;
 		display: flex;
 		justify-content: center;
-		align-items: center; 
-		
+		align-items: center;
+
 		filter:Alpha(Opacity=50);
 		background-color:rgba(0, 0, 0, 0.5);
 	}
@@ -55,7 +55,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 		border-radius: 5px 0 0 5px;
 		width:80%;
 		height: 40px;
-		padding-left: 10%; 
+		padding-left: 10%;
 
 	}
 	.IndexSearchButton{
@@ -63,9 +63,9 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 		border-radius: 0 5px 5px 0;
 		width:20%;
 		height: 40px;
-		background-color: #FF615E; 
+		background-color: #FF615E;
 		color:white;
-		font-family:'Microsoft YaHei'; 
+		font-family:'Microsoft YaHei';
 	}
 
 @media screen and (min-width: 992px){
@@ -88,7 +88,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 /*footer*/
 @media screen and (min-width: 768px){
 	.footerImg{
-	background-position: center;  
+	background-position: center;
 	background-attachment:fixed;
 	background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
 
@@ -102,7 +102,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 }
 @media screen and (max-width: 768px){
 	.footerImg{
-	background-position: center; 
+	background-position: center;
 	background-attachment:fixed;
 	background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
 
@@ -135,7 +135,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 	.footerInfo{
 		color: gray;
 		margin-top: 20px;
-	}	
+	}
 }
 @media screen and (max-width: 768px){
 	.footerLogo{
@@ -152,7 +152,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 	}
 	.footerQRcode{
 		margin-top: 10px;
-	}	
+	}
 	.footerInfo{
 	color: gray;
 	margin-top: 20px;
@@ -166,10 +166,10 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 	}
 	.ssImax{
 	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
-		background-position: center; 
-		background-repeat: no-repeat; 
+		background-position: center;
+		background-repeat: no-repeat;
 		/*background-attachment:fixed; *//*背景图固定*/
-		/*background-size:cover;-webkit-background-size: cover;-o-background-size: cover;*//*铺满屏幕*/
+		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;/*铺满屏幕*/
 		height:568px;
 
 		display: flex;
@@ -189,14 +189,14 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 		border: 0;
 		width:20%;
 		height: 30px;
-		background-color: #FF615E; 
+		background-color: #FF615E;
 		color:white;
-		font-family:'Microsoft YaHei'; 
+		font-family:'Microsoft YaHei';
 	}
 	.ssImaxSearchButton:hover{
-		background-color: #C35556; 
+		background-color: #C35556;
 	    cursor: pointer;
-	}	
+	}
 }
 @media screen and (max-width: 768px){
 	.ssbody{
@@ -204,13 +204,13 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 	}
 	.ssImax{
 	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
-		background-position: center; 
-		background-repeat: no-repeat; 
-		background-attachment:fixed;
-		background-size:cover;-webkit-background-size: cover;-o-background-size: cover;
+		/*background-position: center;*/
+		/*background-repeat: no-repeat;*/
+		/*background-attachment:fixed;*/
+		/*background-size:cover;-webkit-background-size: cover;-o-background-size: cover;*/
 	/*	background-repeat: no-repeat;
 		background-position: center;*/
-		height:800px;
+		height:1600px;
 
 		display: flex;
 		justify-content:center;
@@ -228,12 +228,12 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 		border: 0;
 		width:20%;
 		height: 30px;
-		background-color: #FF615E; 
-		color:white; 
-		font-family:'Microsoft YaHei'; 
+		background-color: #FF615E;
+		color:white;
+		font-family:'Microsoft YaHei';
 	}
 	.ssImaxSearchButton:hover{
-		background-color: #C35556; 
+		background-color: #C35556;
 	    cursor: pointer;
 	}
 }
