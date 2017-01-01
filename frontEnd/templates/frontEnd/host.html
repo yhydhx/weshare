@@ -105,15 +105,13 @@
                             <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div>
                             <div class="card-actions">
                               <button type="button" class="btn btn-danger">查看详情</button>
-                              <div class="pull-right text-danger"> {{ host.orders }} 次 服务</div>
+                              <div class="pull-right text-danger"> {{ host.bill_number }} 次 服务</div>
                             </div>
                           </a>
                       </div>
                   {% endfor %}
                 </div>
             </div>
-
-
             <div id="pages"><!-- 分页页码自动生成块 --></div>
 
         </div>
