@@ -274,8 +274,9 @@ def wechat_login(request):
 
         try:
             user = Host.objects.get(wechat_open_id=wechat_open_id)  # 已经有了
-            return render_to_response('frontEnd/index.html', Info, {'current_user': user,
-                                                                    'login_flag': True})
+            request.session['email'] = user.email
+            return HttpResponseRedirect('/index/')
+            
         except:
             request.session['wechat_open_id'] = wechat_open_id
             current_user = TmpUser(username=nickname, icon=headimgurl)
@@ -324,9 +325,9 @@ def weibo_login(request):
         icon = user_info['profile_image_url']
         try:
             user = Host.objects.get(weibo_open_id=weibo_open_id)  # 已经有了
-            f.write(str(user))
-            return render_to_response('frontEnd/index.html', Info, {'current_user': user,
-                                                                    'login_flag': True})
+            request.session['email'] = user.email
+            return HttpResponseRedirect('/index/')
+            
         except:
 
             request.session['weibo_open_id'] = weibo_open_id
