@@ -62,8 +62,13 @@ class Host(models.Model):
 
     #alipay
     alipay = models.CharField(blank=True, max_length = 200)
-    #  qq_login information::
-    open_id = models.CharField(blank=True, max_length=100)
+    #  qq_login information:
+    #  weibo open id 
+    #  wechat open id 
+    #  
+    qq_open_id = models.CharField(blank=True, max_length=100)
+    wechat_open_id = models.CharField(blank=True, max_length=100)
+    weibo_open_id = models.CharField(blank=True, max_length=100)
 
     email_certify_code = models.CharField(blank = True, max_length = 100)
     email_certify_time = models.DateTimeField(null = True)
