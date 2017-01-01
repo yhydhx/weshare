@@ -312,14 +312,14 @@ def weibo_login(request):
         access_token = ret_weibo_token['access_token']
         expires_in = ret_weibo_token['expires_in']
         remind_in = ret_weibo_token['remind_in']
-        uid = ret_weibo_token['uid']
+        weibo_open_id = ret_weibo_token['uid']
 
-        user_token = {'access_token': access_token, 'uid': uid}
+        user_token = {'access_token': access_token, 'uid': weibo_open_id}
         address2 = 'https://api.weibo.com/2/users/show.json?' + urlencode(user_token)
         user_info = json.loads(urllib2.urlopen(address2).read())
         f.write('user_info[important]: ' + str(user_info) + '\n')
 
-        weibo_open_id = user_info['id']
+        weibo_id = user_info['id']
         username = user_info['name']
         icon = user_info['profile_image_url']
         try:
