@@ -324,6 +324,7 @@ def weibo_login(request):
         icon = user_info['profile_image_url']
         try:
             user = Host.objects.get(weibo_open_id=weibo_open_id)  # 已经有了
+            f.write(str(user))
             return render_to_response('frontEnd/index.html', Info, {'current_user': user,
                                                                     'login_flag': True})
         except:
