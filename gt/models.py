@@ -493,6 +493,9 @@ class Host(models.Model):
         for host_atom in hosts:
             host_atom.get_one_host_score()
 
+
+
+
 class Country(models.Model):
     c_name = models.CharField(max_length=100)
     c_id = models.IntegerField()

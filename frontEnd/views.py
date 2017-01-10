@@ -1218,7 +1218,7 @@ def user(request, method, Oid):
         questions = f.get_one_host_questions(Oid)
 
         Info = {}
-        Info['host'] = host
+        Info['host'] = host.format_dict_with_school_name()
         Info['msgs'] = host.get_user_message(host.id)
         Info['questions'] = questions
         Info['certification'] = host.get_one_host_passed_certification(host)
