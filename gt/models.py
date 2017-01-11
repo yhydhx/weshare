@@ -1175,7 +1175,9 @@ class Appointment(models.Model):
     recommend_salary = models.FloatField( null = True)                      #总共多少钱
     feature_id = models.CharField(max_length = 100)            #feature_id
     appointment_id = models.CharField(max_length=100)     #唯一的订单号-》
-
+    '''
+    user will give his evaluation 
+    '''
 
     def generate_id(self):
         tmp_id = ""

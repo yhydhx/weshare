@@ -450,6 +450,16 @@ Info = {
 			"graduate_school" : char  ~硕士学校
 			"phd_school" : char  ~ 博士学校
 
+			"bachelor_major" : char  ~ 专业
+			"graduate_major" : char  ~ 专业
+			"phd_major" : char  ~ 专业
+			"bachelor_start" : ~ 起始时间
+			"graduate_start" : ~ 起始时间
+			"phd_start" : ~ 起始时间
+			"bachelor_end" : ~结束时间
+			"graduate_end" : ~结束时间
+			"phd_end" : ~结束时间
+
 			‘features’ : [
 				'{topic_id}':{
 					'name' : ~ char 话题的名字
