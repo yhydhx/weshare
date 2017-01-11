@@ -45,7 +45,7 @@
                         {% csrf_token %}
                             <div class="ct-u-displayTableVertical">
                                 <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
-                                    
+
                                     {% block auth %}
                                     {% for auth in certification %}
                                         <li><i class="fa fa-check"></i><a href="" data-toggle="modal" data-target="#auth{{ auth.id }}"><span>{{ auth.c_name }}</span></a></li>
@@ -101,7 +101,7 @@
                             </h4>
                         </div>
                     </div>
-                    
+
                     {% if host.state == 1 %}
                         <button class="btn btn-lg btn-wide btn-motive disabled"><span>审核中..</span></button>
                     {% else %}
@@ -161,7 +161,7 @@
                                 <div class="col-xs-1"></div>
                                 <div class="col-xs-10">
                                     <form action="/bill/init" method="POST">
-                                    
+
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <label style="font-size: 15px; ">请选择咨询问题</label>
@@ -172,12 +172,12 @@
                                               {% endfor %}
                                               {% endblock %}
                                             </select>
-                                        </div>                               
+                                        </div>
                                         <input type="hidden" name="host_id" value="{{ host.id }}">
                                         <div class="form-group">
                                             <label style="font-size: 15px; ">简要介绍自己的情况，并描述要咨询的问题</label>
                                             <textarea class="form-control" rows="4" name="intro_and_question" placeholder="例如：我是清华大学计算机专业大三的学生，专业排名前百分之三十，有多个关于自动驾驶的项目经历。本科毕业后想去BAT等公司从事与计算机视觉相关的工作。想知道现在开始该如何准备？比如该熟悉哪些开源项目，或是该多积累哪种平台的开发经验。"></textarea>
-                                        </div>                                
+                                        </div>
                                         <div class="form-group">
                                             <label style="font-size: 15px; ">告诉分享者你所希望的见面时间与约聊时长</label>
                                             <textarea class="form-control" rows="4" name="appointment_time" placeholder="例如：我每周一／三下午2点到晚上6点都有空，我想请教的细节问题比较多，觉得预约3个小时比较合适。"></textarea>
@@ -189,7 +189,7 @@
                                 <div class="col-xs-1"></div>
                             </div>
 
-                            
+
 
                         </div>
                       </div>
@@ -197,6 +197,21 @@
                 </div>
 
                 <div class="col-md-9 col-md-pull-3 ct-u-paddingTop50">
+
+                    <!-- 基本信息 -->
+                    <div class="">
+                        <h4>基本信息：</h4>
+                        <br>
+                        {% if host.education = 2 %}
+                        <p>博士： {{ host.phd_school }} - {{ host.phd_major }} ( {{ host.phd_start }} ~ {{ host.phd_end }} )</p>
+                        {% endif %}
+
+                        {% if host.education = 1 or host.education = 2 %}
+                        <p>硕士： {{ host.graduate_school }} - {{ host.graduate_major }} ( {{ host.graduate_start }} ~ {{ host.graduate_end }} )</p>
+                        {% endif %}
+
+                        <p>本科： {{ host.bachelor_school }} - {{ host.bachelor_major }} ( {{ host.bachelor_start }} ~ {{ host.bachelor_end }} )</p>
+                    </div>
 
                     <div class="tabpanel ct-u-paddingTop50 ct-u-paddingBottom60">
                         <!-- Nav tabs -->
@@ -260,7 +275,7 @@
 
                             <!-- Tab #3 -->
                             <div role="tabpanel" class="tab-pane fade" id="details">
-                                
+
                             </div>
                         </div>
 
@@ -304,7 +319,7 @@
     function checkLogin() {
         alert('您尚未登录或注册，请前往注册以进行面聊预约');
         window.location.href = "/login/";
-     } 
+     }
 </script>
 {% endif %}
 <!-- <script src="{% static 'frontEnd/js/shop.js' %}"></script> -->

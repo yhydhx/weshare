@@ -69,7 +69,7 @@ DATABASES = {
         'USER': 'jupiter',
         'PASSWORD' : '5080',
         #'HOST': '120.24.156.181',
-        'HOST': 'www.wshere.com',
+        'HOST': 'www.wesharediy.com',
         #'PORT': '27017',
         'PORT' : '27001'
     }
