@@ -152,8 +152,24 @@ def init_register(request):  # 暂时统一用用户名注册,以后的一些坑
 
                 try:
                     # 拥有qq_openid注册
-                    openid = request.session['openid']
-                    host.openid = openid
+                    qq_open_id = request.session['qq_open_id']
+                    host.qq_open_id = qq_open_id
+                    host.save()
+                except:
+                    pass
+
+                try:
+                    # 拥有qq_openid注册
+                    wechat_open_id = request.session['wechat_open_id']
+                    host.wechat_open_id = wechat_open_id
+                    host.save()
+                except:
+                    pass
+
+                try:
+                    # 拥有qq_openid注册
+                    weibo_open_id = request.session['weibo_open_id']
+                    host.weibo_open_id = weibo_open_id
                     host.save()
                 except:
                     pass
@@ -250,14 +266,21 @@ def wechat_login(request):
 
         wx_user = json.loads(wx_user_info)
         nickname = wx_user['nickname']
-        openid = wx_user['openid']
+        wechat_open_id = wx_user['openid']
         headimgurl = wx_user['headimgurl']
 
         f.write('wx_user_info: ' + wx_user_info + '\n')
         f.close()
 
-        current_user = TmpUser(username=nickname, icon=headimgurl)
-        return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': current_user},
+        try:
+            user = Host.objects.get(wechat_open_id=wechat_open_id)  # 已经有了
+            request.session['email'] = user.email
+            return HttpResponseRedirect('/index/')
+            
+        except:
+            request.session['wechat_open_id'] = wechat_open_id
+            current_user = TmpUser(username=nickname, icon=headimgurl)
+            return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': current_user},
                                   context_instance=RequestContext(request))
     except:
         f = open("wechat_test.txt", "a+")
@@ -290,21 +313,28 @@ def weibo_login(request):
         access_token = ret_weibo_token['access_token']
         expires_in = ret_weibo_token['expires_in']
         remind_in = ret_weibo_token['remind_in']
-        uid = ret_weibo_token['uid']
+        weibo_open_id = ret_weibo_token['uid']
 
-        user_token = {'access_token': access_token, 'uid': uid}
+        user_token = {'access_token': access_token, 'uid': weibo_open_id}
         address2 = 'https://api.weibo.com/2/users/show.json?' + urlencode(user_token)
         user_info = json.loads(urllib2.urlopen(address2).read())
         f.write('user_info[important]: ' + str(user_info) + '\n')
 
-        id = user_info['id']
+        weibo_id = user_info['id']
         username = user_info['name']
         icon = user_info['profile_image_url']
+        try:
+            user = Host.objects.get(weibo_open_id=weibo_open_id)  # 已经有了
+            request.session['email'] = user.email
+            return HttpResponseRedirect('/index/')
+            
+        except:
 
-        weibo_user = TmpUser(username=username, icon=icon)
-        f.close()
-        return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': weibo_user},
-                                  context_instance=RequestContext(request))
+            request.session['weibo_open_id'] = weibo_open_id
+           
+            weibo_user = TmpUser(username=username, icon=icon)
+            return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': weibo_user},
+                                      context_instance=RequestContext(request))
 
     except IOError:
         f = open('test_wb', 'a+')
@@ -355,11 +385,11 @@ def qq_login(request):
         callback_dict = json.loads(str(ret_open_id).split(' ')[1])  # unicode 类型
         f.write('callback_dict: ' + str(callback_dict) + '\n')
 
-        open_id = callback_dict[u'openid']
-        f.write('open_id: ' + str(open_id) + '\n')
+        qq_open_id = callback_dict[u'openid']
+        f.write('open_id: ' + str(qq_open_id) + '\n')
 
         try:
-            user = Host.objects.get(open_id=open_id)  # 已经有了
+            user = Host.objects.get(qq_open_id=qq_open_id)  # 已经有了
             return render_to_response('frontEnd/index.html', Info, {'current_user': user,
                                                                     'login_flag': True})
         except:
@@ -381,7 +411,7 @@ def qq_login(request):
             qq_user = TmpUser(user_info['nickname'], user_info['figureurl_qq_1'])
             f.close()
 
-            request.session['openid'] = open_id
+            request.session['qq_open_id'] = open_id
             return render_to_response('frontEnd/account.html', {'login_flag': True, 'current_user': qq_user},
                                       context_instance=RequestContext(request))
 
@@ -1188,7 +1218,7 @@ def user(request, method, Oid):
         questions = f.get_one_host_questions(Oid)
 
         Info = {}
-        Info['host'] = host
+        Info['host'] = host.format_dict_with_school_name()
         Info['msgs'] = host.get_user_message(host.id)
         Info['questions'] = questions
         Info['certification'] = host.get_one_host_passed_certification(host)

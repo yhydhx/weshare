@@ -62,8 +62,13 @@ class Host(models.Model):
 
     #alipay
     alipay = models.CharField(blank=True, max_length = 200)
-    #  qq_login information::
-    open_id = models.CharField(blank=True, max_length=100)
+    #  qq_login information:
+    #  weibo open id 
+    #  wechat open id 
+    #  
+    qq_open_id = models.CharField(blank=True, max_length=100)
+    wechat_open_id = models.CharField(blank=True, max_length=100)
+    weibo_open_id = models.CharField(blank=True, max_length=100)
 
     email_certify_code = models.CharField(blank = True, max_length = 100)
     email_certify_time = models.DateTimeField(null = True)
@@ -248,8 +253,28 @@ class Host(models.Model):
         except:
             pass
         return tmpHost
-
     def get_all_features(self):
+        host_topics = Host_Topic.objects.filter(host_id=self.id)
+        d_topic_feature = {}
+        for single_feature in host_topics:
+            t_id = single_feature.t_id
+            m_id = single_feature.m_id
+            f_id = single_feature.f_id
+
+            if not d_topic_feature.has_key(t_id):
+                d_topic_feature[t_id] = {}
+                d_topic_feature[t_id]['name'] = Topic.objects.get(id=t_id).t_name
+                d_topic_feature[t_id]['features'] = []
+             
+            tmp_mt_feature_dict = {}
+            tmp_mt_feature_dict['feature_name'] = Feature.objects.get(id=f_id).f_name 
+            tmp_mt_feature_dict['minor_topic_name'] = Minor_Topic.objects.get(id=m_id).m_name
+
+            d_topic_feature[t_id]['features'].append(tmp_mt_feature_dict)
+
+        return d_topic_feature
+
+    def get_all_features_with_four_colum(self):
         host_topics = Host_Topic.objects.filter(host_id=self.id)
         d_topic_feature = {}
         for single_feature in host_topics:
@@ -488,6 +513,9 @@ class Host(models.Model):
         for host_atom in hosts:
             host_atom.get_one_host_score()
 
+
+
+
 class Country(models.Model):
     c_name = models.CharField(max_length=100)
     c_id = models.IntegerField()
@@ -675,6 +703,14 @@ class Minor_Topic(models.Model):
     m_topic = models.CharField(max_length=100)
     m_index = models.IntegerField(default=0)
     m_introduction = models.CharField(max_length=100)
+
+    '''
+    first, we set a default value and set it's fixed or not
+    '''
+    m_default_value = models.IntegerField(default=0)
+    m_is_fixed = models.IntegerField(default=0)
+
+
     def format_dict(self):
         tmp_dict = {}
         tmp_dict['m_name'] = self.m_name
@@ -683,6 +719,9 @@ class Minor_Topic(models.Model):
         tmp_dict['m_index'] = self.m_index
         tmp_dict['m_introduction'] = self.m_introduction
         tmp_dict['id'] = self.id
+        tmp_dict['m_default_value'] = self.m_default_value
+        tmp_dict['m_is_fixed'] = self.m_is_fixed
+
         return tmp_dict
 
 class Feature(models.Model):
@@ -792,6 +831,14 @@ class Host_Topic(models.Model):
     t_id = models.CharField(max_length=100)
     m_id = models.CharField(max_length=100)  #minor topic
     f_id = models.CharField(max_length=100)  # 关系库
+
+    '''
+        if  the default value is not fixed, host can change the value .
+        And set the approximately time to finished.
+    '''
+    ht_salary = models.IntegerField(default=0)
+    ht_duration = models.FloatField(default = 0.0)
+
 
     def get_host_via_minor_topic(self,m_id):
         result = []

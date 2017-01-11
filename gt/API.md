@@ -446,44 +446,28 @@ Info = {
 
 			%%Education Infomation
 			"education" : int  ~目前的学历 bachlor => 0  graduate => 1 phd => 2 else => 3
-			"bacholor" : char ~本科学校
-			"graduate" : char  ~硕士学校
-			"phd" : char  ~ 博士学校
+			"bachelor_school" : char ~本科学校
+			"graduate_school" : char  ~硕士学校
+			"phd_school" : char  ~ 博士学校
 
 			‘features’ : [
 				'{topic_id}':{
 					'name' : ~ char 话题的名字
 	                'features' : [       ~所有feature的名字
-	                	'{feature_name_1}':  ~特征1的名字
-	                	'{feature_name_2}':  ~特征2的名字
-	                	'{feature_name_3}':  ~特征3的名字
+	                	'{ "feature_name" : char
+						   "minor_topic_name" : char
+						}':  ~特征1的名字
+	                	'{ "feature_name" : char
+						   "minor_topic_name" : char
+						}':  ~特征2的名字
+	                	'{ "feature_name" : char
+						   "minor_topic_name" : char
+						}':  ~特征3的名字
 	                	......
 	                ]
-	                'row1' : [  ~第一列的特征的名字
-	                	'{feature_name_1}':  ~特征1的名字
-	                	'{feature_name_2}':  ~特征2的名字
-	                	'{feature_name_3}':  ~特征3的名字
-	                	......
-	                ],
-	                'row2' : [	~第二列的特征的名字
-	                	'{feature_name_1}':  ~特征1的名字
-	                	'{feature_name_2}':  ~特征2的名字
-	                	'{feature_name_3}':  ~特征3的名字
-	                	......
-	                ],
-	                'row3' : [ 	~第三列的特征的名字
-	                	'{feature_name_1}':  ~特征1的名字
-	                	'{feature_name_2}':  ~特征2的名字
-	                	'{feature_name_3}':  ~特征3的名字
-	                	......
-	                ],
-	                'row4' : [	~第四列的特征的名字
-	                	'{feature_name_1}':  ~特征1的名字
-	                	'{feature_name_2}':  ~特征2的名字
-	                	'{feature_name_3}':  ~特征3的名字
-	                	......
-	                ],
+	                
 				},
+				....
 			]
 		}，
 
