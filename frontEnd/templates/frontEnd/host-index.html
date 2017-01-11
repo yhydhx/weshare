@@ -202,7 +202,15 @@
                     <div class="">
                         <h4>基本信息：</h4>
                         <br>
-                        <p>硕士：2016-09-01 ~ 2017-09-01 帝国理工 商业分析</p>
+                        {% if host.education = 2 %}
+                        <p>博士： {{ host.phd_school }} - {{ host.phd_major }} ( {{ host.phd_start }} ~ {{ host.phd_end }} )</p>
+                        {% endif %}
+
+                        {% if host.education = 1 or host.education = 2 %}
+                        <p>硕士： {{ host.graduate_school }} - {{ host.graduate_major }} ( {{ host.graduate_start }} ~ {{ host.graduate_end }} )</p>
+                        {% endif %}
+
+                        <p>本科： {{ host.bachelor_school }} - {{ host.bachelor_major }} ( {{ host.bachelor_start }} ~ {{ host.bachelor_end }} )</p>
                     </div>
 
                     <div class="tabpanel ct-u-paddingTop50 ct-u-paddingBottom60">
