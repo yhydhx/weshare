@@ -64,13 +64,13 @@
                         </ul>
 
                         <hr>
-                        <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
+                        <form class="form-inline" name="{{topic.tag}}" id="form{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
                         {% csrf_token %}
-                            <select class="form-control" id="minor_topic_id" name="minor_topic_id" required onchange="changeMinor($(this).children('option:selected').val());">
+                            <select class="form-control" id="minor_topic_id" name="minor_topic_id" required onchange="changeMinor(this);">
                                 <option value="">选择小话题</option>
 
                                 {% for minor in topic.minor_topic_list %}
-                                <option value="{{ minor.id }}">{{ minor.m_name }}</option>
+                                <option value="{{ minor.id }}" data-value2="{{minor.m_default_value}}" data-value3="{{minor.m_is_fixed}}" data-value4="{{minor.m_introduction}}" >{{ minor.m_name }}</option>
                                 {% endfor %}
                             </select>
                           <div class="form-group">
@@ -81,7 +81,14 @@
                             <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
                           </div>
                           <button type="submit" class="btn btn-info" style="">添加</button>
+
+                          <!-- 小话题简介模块 -->
+                          <div class="" id="introduction">
+                             <!-- JS赋值区 -->
+                          </div>
                         </form>
+
+
 
                       </div>
                     </div>
@@ -201,31 +208,32 @@ function showFeatures(tag){
     }
 </script>
 
-<!-- 切换小话题后，改变默认价格，并清空input -->
+<!-- 切换小话题后，改变默认价格，读取小话题简介，并清空input -->
 <!-- 输入：$id -> 小话题 id -->
 <script>
-    function changeMinor($id){
-        console.log($id);
+    function changeMinor(obj){
+        console.log(obj);
+        console.log(obj.options[obj.selectedIndex].getAttribute('data-value2'));
+        console.log(obj.options[obj.selectedIndex].getAttribute('data-value3'));
+        console.log(obj.options[obj.selectedIndex].getAttribute('data-value4'));
+        console.log(obj.parentNode.id);
 
-        //ajax 获取小话题默认价格
-        $.ajax({
-            type : "POST",
-            url : "/search_minor_topic/",
-            // contentType: "application/json;charset=utf-8",
-            dataType : "JSON",
-            data : {" minor_topic_id" : $id},
-            success : function(str){
-                console.log('成功');
-                console.log(str);
-            },
-            error : function(err){
-                console.log('失败');
-                console.log(err);
-            }
+        default_value = obj.options[obj.selectedIndex].getAttribute('data-value2');
+        is_fixed = obj.options[obj.selectedIndex].getAttribute('data-value3');
+        introduction = obj.options[obj.selectedIndex].getAttribute('data-value4');
+        form_id = obj.parentNode.id;
 
-        })
 
-        $("[name='ht_salary']").val('400');
+        //判断价格是否为只读
+        if (is_fixed === 1) {
+            document.querySelector('#'+ form_id +' input[name="ht_salary"]').readOnly = true;
+        }
+        //生成价格默认值
+        document.querySelector('#'+ form_id +' input[name="ht_salary"]').value = default_value;
+
+        document.querySelector('#'+ form_id +' div[id="introduction"]').textContent = introduction;
+
+
 
         $("[name='feature_name']").val('');
     }
