@@ -643,6 +643,14 @@ def complete_account_feature(request):
         host_id = host.id
         showTag = request.POST.get("topic_tag")
         m_id = request.POST.get("minor_topic_id")
+
+
+        '''
+        protetial salary and duration 
+        '''
+        ht_salary = request.POST.get("ht_salary")
+        ht_duration = request.POST.get("ht_duration")
+
         # check this feature is exist or not
         try:
             feature = Feature.objects.get(f_name=feature_name,
@@ -679,7 +687,9 @@ def complete_account_feature(request):
                 host_id=host.id,
                 t_id=topic_id,
                 f_id=feature.id,  # 然后把id相互关联起来
-                m_id=m_id
+                m_id=m_id,
+                ht_salary = ht_salary,
+                ht_duration = ht_duration
             )
         # get the m_name and save the relationship
         try:
@@ -694,6 +704,8 @@ def complete_account_feature(request):
         Info['data']['feature_name'] = feature_name
         Info['data']['m_id'] = m_id
         Info['data']['m_name'] = m_name
+        Info['data']['ht_salary'] = ht_salary
+        Info['data']['ht_duration'] = ht_duration
 
         return HttpResponse(json.dumps(Info), content_type="application/json")
 
@@ -714,6 +726,31 @@ def complete_account_feature(request):
 
         # return HttpResponse(json.dumps(Info))
         return render(request, 'frontEnd/complete-account-feature.html', Info)
+
+
+@csrf_exempt
+def search_minor_topic(request):
+    Info = {}
+    Info['state'] = 0
+    Info['message'] = ""
+    Info['data'] = {}
+
+    if request.method == 'POST':
+        '''
+        renew the feature
+        '''
+
+        m_id = request.POST.get("minor_topic_id")
+
+        try:
+            minor_topic = Minor_Topic.objects.get(id=m_id)
+            Info['data']['minor_topic'] = minor_topic
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+        except:
+            Info['message'] = "找不到该话题"
+            Info['state'] = 404
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
 
 
 @csrf_exempt

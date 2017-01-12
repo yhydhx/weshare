@@ -450,6 +450,16 @@ Info = {
 			"graduate_school" : char  ~硕士学校
 			"phd_school" : char  ~ 博士学校
 
+			"bachelor_major" : char  ~ 专业
+			"graduate_major" : char  ~ 专业
+			"phd_major" : char  ~ 专业
+			"bachelor_start" : ~ 起始时间
+			"graduate_start" : ~ 起始时间
+			"phd_start" : ~ 起始时间
+			"bachelor_end" : ~结束时间
+			"graduate_end" : ~结束时间
+			"phd_end" : ~结束时间
+
 			‘features’ : [
 				'{topic_id}':{
 					'name' : ~ char 话题的名字
@@ -1023,6 +1033,56 @@ Info = {
         'feature_name'       ~    feature 的名字
         'm_id'       ~    minor 的id标识符
         'f_id'       ~    feature的id 标识符
+	}
+}
+
+-----------------------------------------------------------------------------------------------
+
+
+删除feature
+
+url:   /search_minor_topic
+method :POST
+
+function :
+1. 根据minor topic id 找topic
+
+API:
+
+传输的数据
+
+{
+	
+    "minor_topic_id" : ~添加的 minor topic ID
+}
+
+
+返回：
+
+
+#找不到该TOPIC，Feature 
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘删除失败，找不到该Topic或Feature’   Char # 错误的提示信息
+	data: {}
+}
+
+#查找成功
+
+Info = {
+	state: 0   Int # 0 表示成功，其他数字表示不成功
+	message: '成功'   Char # 错误的提示信息
+	data: {
+		'minor_topic': {
+			m_name 
+		    m_click 
+		    m_topic 
+		    m_index 
+		    m_introduction 
+		    m_default_value 
+		    m_is_fixed 
+		}
+		
 	}
 }
 

@@ -17,6 +17,8 @@ urlpatterns = patterns('',
                        url(r'^image-receive/$', views.image_receive),
                        url(r'^complete-account-feature/', views.complete_account_feature, name='cp'),
                        url(r'^delete-feature/', views.delete_feature, name='delete_feature'),
+                       url(r'^search_minor_topic/', views.search_minor_topic, name='search_minor_topic'),
+                       
 
                        url('^image-library/', views.image_library, name='image-library'),
                        # url('^feature_ajax/', views.feature_ajax, name='feature_ajax'),
