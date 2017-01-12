@@ -1036,6 +1036,56 @@ Info = {
 	}
 }
 
+-----------------------------------------------------------------------------------------------
+
+
+删除feature
+
+url:   /search_minor_topic
+method :POST
+
+function :
+1. 根据minor topic id 找topic
+
+API:
+
+传输的数据
+
+{
+	
+    "minor_topic_id" : ~添加的 minor topic ID
+}
+
+
+返回：
+
+
+#找不到该TOPIC，Feature 
+Info = {
+	state: 404   Int # 0 表示成功，其他数字表示不成功
+	message: ‘删除失败，找不到该Topic或Feature’   Char # 错误的提示信息
+	data: {}
+}
+
+#查找成功
+
+Info = {
+	state: 0   Int # 0 表示成功，其他数字表示不成功
+	message: '成功'   Char # 错误的提示信息
+	data: {
+		'minor_topic': {
+			m_name 
+		    m_click 
+		    m_topic 
+		    m_index 
+		    m_introduction 
+		    m_default_value 
+		    m_is_fixed 
+		}
+		
+	}
+}
+
 
 -----------------------------------------------------------------------------------------------
 

@@ -729,6 +729,31 @@ def complete_account_feature(request):
 
 
 @csrf_exempt
+def search_minor_topic(request):
+    Info = {}
+    Info['state'] = 0
+    Info['message'] = ""
+    Info['data'] = {}
+
+    if request.method == 'POST':
+        '''
+        renew the feature
+        '''
+
+        m_id = request.POST.get("minor_topic_id")
+
+        try:
+            minor_topic = Minor_Topic.objects.get(id=m_id)
+            Info['data']['minor_topic'] = minor_topic
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+        except:
+            Info['message'] = "找不到该话题"
+            Info['state'] = 404
+            return HttpResponse(json.dumps(Info), content_type="application/json")
+
+
+
+@csrf_exempt
 def delete_feature(request):
     Info = {}
     Info['state'] = 0
