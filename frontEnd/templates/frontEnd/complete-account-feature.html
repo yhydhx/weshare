@@ -210,16 +210,13 @@ function showFeatures(tag){
         //ajax 获取小话题默认价格
         $.ajax({
             type : "POST",
-            url : "/search_minor_topic",
+            url : "/search_minor_topic/",
             // contentType: "application/json;charset=utf-8",
             dataType : "JSON",
-            data : {"topic_id":id,"feature_name":z,"minor_topic_id":t},
+            data : {" minor_topic_id" : $id},
             success : function(str){
                 console.log('成功');
                 console.log(str);
-                console.log(str['data']['f_id']);
-                var strID = str['data']['f_id'];
-                $('#'+strID).html("");
             },
             error : function(err){
                 console.log('失败');
