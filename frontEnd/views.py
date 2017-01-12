@@ -744,13 +744,17 @@ def search_minor_topic(request):
 
         try:
             minor_topic = Minor_Topic.objects.get(id=m_id)
-            Info['data']['minor_topic'] = minor_topic
+            Info['data']['minor_topic'] = minor_topic.format_dict()
             return HttpResponse(json.dumps(Info), content_type="application/json")
         except:
             Info['message'] = "找不到该话题"
             Info['state'] = 404
             return HttpResponse(json.dumps(Info), content_type="application/json")
-
+    # else:
+    #     m_id = "57b44dc7ac47ce2114ca3457"
+    #     minor_topic = Minor_Topic.objects.get(id=m_id)
+    #     Info['data']['minor_topic'] = minor_topic.format_dict()
+    #     return HttpResponse(json.dumps(Info), content_type="application/json")
 
 
 @csrf_exempt
