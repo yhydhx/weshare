@@ -29,7 +29,7 @@
         <div class="container" style="margin-top:30px;">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2" >
-                    
+
                     {% block content %}
 
                     {%  for topic in user_features%}
@@ -41,20 +41,20 @@
                             <div id="{{topic.id}}TXT">
                             {% for feature in topic.feature_list %}
                                 <div class="row" style="padding-top:5px;padding-bottom: 5px; " id="{{ feature.f_id }}">
-                                    <div class="col-md-12">                           
+                                    <div class="col-md-12">
                                         <p style="float: left;font-size:15px;"> <span class="label label-primary">{{ feature.m_name }}</span> {{ feature.f_name }} </p>
                                         <a href="" class="btn btn-danger" style="float: right; " onclick="delete_feature('{{ topic.id }}','{{ feature.f_name }}','{{ feature.m_id }}');return false">删除</a>
                                     </div>
                                 </div>
                             {% endfor %}
 <!--                                 <div class="row" style="padding-top:5px;padding-bottom: 5px; ">
-                                    <div class="col-md-12">                           
+                                    <div class="col-md-12">
                                         <p style="float: left;font-size:15px;"> <span class="label label-primary">选校定位</span> 如何选择留学学校？ </p>
                                         <a href="" class="btn btn-danger" style="float: right; ">删除</a>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-top:5px;padding-bottom: 5px; ">
-                                    <div class="col-md-12">                           
+                                    <div class="col-md-12">
                                         <p style="float: left;font-size:15px;"> <span class="label label-primary">面试指导</span> 如何打动面试官？ </p>
                                         <a href="" class="btn btn-danger" style="float: right; ">删除</a>
                                     </div>
@@ -66,7 +66,7 @@
                         <hr>
                         <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
                         {% csrf_token %}
-                            <select class="form-control" id="minor_topic_id" name="minor_topic_id" required onchange="qingkong();">
+                            <select class="form-control" id="minor_topic_id" name="minor_topic_id" required onchange="changeMinor($(this).children('option:selected').val());">
                                 <option value="">选择小话题</option>
 
                                 {% for minor in topic.minor_topic_list %}
@@ -75,9 +75,11 @@
                             </select>
                           <div class="form-group">
                             <input type="text" class="form-control" id="{{topic.tag}}" name="feature_name" placeholder="点此添加您要提供的服务" required>
+                            价格：<input type="text" class="form-control" id="" name="ht_salary" required style="width:60px;">
+                            时间：<input type="text" class="form-control" id="" name="ht_duration" required style="width:60px;">
                             <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>
                             <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
-                          </div>                
+                          </div>
                           <button type="submit" class="btn btn-info" style="">添加</button>
                         </form>
 
@@ -171,7 +173,7 @@ function showFeatures(tag){
         console.log(id);
         console.log(z);
         console.log(t);
-        // var jsondata = {  
+        // var jsondata = {
         //                 "topic_id" : id,
         //                 "feature_name" :  z,
         //                 "m_id" : t,
@@ -199,9 +201,35 @@ function showFeatures(tag){
     }
 </script>
 
-<!-- 切换小话题后，清空input -->
+<!-- 切换小话题后，改变默认价格，并清空input -->
+<!-- 输入：$id -> 小话题 id -->
 <script>
-    function qingkong(){
+    function changeMinor($id){
+        console.log($id);
+
+        //ajax 获取小话题默认价格
+        $.ajax({
+            type : "POST",
+            url : "/search_minor_topic",
+            // contentType: "application/json;charset=utf-8",
+            dataType : "JSON",
+            data : {"topic_id":id,"feature_name":z,"minor_topic_id":t},
+            success : function(str){
+                console.log('成功');
+                console.log(str);
+                console.log(str['data']['f_id']);
+                var strID = str['data']['f_id'];
+                $('#'+strID).html("");
+            },
+            error : function(err){
+                console.log('失败');
+                console.log(err);
+            }
+
+        })
+
+        $("[name='ht_salary']").val('400');
+
         $("[name='feature_name']").val('');
     }
 </script>
