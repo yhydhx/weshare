@@ -152,13 +152,13 @@ function showFeatures(tag){
     console.log('aa');
     console.log(tag);
     // $("#features").submit(function(){
-        var data1 = $("#"+tag).serialize();
+        var data1 = $("#form"+tag).serialize();
         console.log(data1);
         $.ajax({
             url : "/complete-account-feature/",
             type : "POST",
             dataType : "html",
-            data : $("#"+tag).serialize(),
+            data : data1,
             success : function(str){
                 console.log('成功');
                 console.log(str);
