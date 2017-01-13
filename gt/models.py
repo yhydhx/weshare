@@ -737,7 +737,8 @@ class Feature(models.Model):
             t_id = h_topic_atom.t_id
             f_id = h_topic_atom.f_id
             m_id = h_topic_atom.m_id
-
+            ht_duration = h_topic_atom.ht_duration
+            ht_salary = h_topic_atom.ht_salary
             #check the topic_id
             if not d_topic_feature.has_key(t_id):
                 d_topic_feature[t_id] = {}
@@ -748,6 +749,10 @@ class Feature(models.Model):
             feature_atom['f_id'] = f_id
             feature_atom['m_id'] = m_id
             feature_atom['t_id'] = t_id
+            feature_atom['ht_duration'] = ht_duration
+            feature_atom['ht_salary'] = ht_salary
+
+
             d_topic_feature[t_id]['feature_list'].append(feature_atom)
 
 
