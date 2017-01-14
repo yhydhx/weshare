@@ -165,7 +165,7 @@ function showFeatures(tag){
                 str2 = JSON.parse(str);
                 console.log(str2);
                 // $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span><a href=\"\"><i class=\"fa fa-trash\"></i></a>"+str2['data']['feature_name']+"</span></li>");
-                $('#'+tag+"TXT").append("<div class=\"row\" style=\"padding-top:5px;padding-bottom: 5px; \"><div class=\"col-md-12\"><p style=\"float: left;font-size:15px;\"> <span class=\"label label-primary\">"+ str2['data']['m_name'] +"</span> "+ str2['data']['feature_name'] +" </p><a href=\"\" class=\"btn btn-danger\" style=\"float: right; \">删除</a></div></div>");
+                $('#'+tag+"TXT").append("<div class=\"row\" style=\"padding-top:5px;padding-bottom: 5px; \"><div class=\"col-md-12\"><p style=\"float: left;font-size:15px;\"> <span class=\"label label-primary\">"+ str2['data']['m_name'] +"</span> "+ str2['data']['feature_name'] +" （时间："+ str2['data']['ht_duration'] +" 价格: "+ str2['data']['ht_salary'] +"）</p><a href=\"\" class=\"btn btn-danger\" style=\"float: right; \">删除</a></div></div>");
             }
 
         })
