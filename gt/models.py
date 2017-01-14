@@ -766,6 +766,7 @@ class Feature(models.Model):
             topic_intro = tmp_topic.t_intro
             topic_id = tmp_topic.id
             topic_tag = tmp_topic.t_tag
+
             d_topic_feature_translate[topic_name] = {}
             d_topic_feature_translate[topic_name]['intro'] = topic_intro
             d_topic_feature_translate[topic_name]['name'] = topic_name
@@ -786,6 +787,8 @@ class Feature(models.Model):
                 tmp_feature['m_name'] = minor_singel.m_name
                 tmp_feature['f_id'] = feature_single.id
                 tmp_feature['m_id'] = minor_singel.id
+                tmp_feature['ht_duration'] = feature_atom['ht_duration']
+                tmp_feature['ht_salary'] = feature_atom['ht_salary']
 
                 d_topic_feature_translate[topic_name]['feature_list'].append(tmp_feature)
         return  d_topic_feature_translate

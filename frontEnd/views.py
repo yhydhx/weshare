@@ -717,7 +717,7 @@ def complete_account_feature(request):
         topics = Topic.objects.all()
         feature = Feature()
         user_features = feature.get_one_user_features_with_all_topic(host.id)
-
+        #return HttpResponse(json.dumps(user_features), content_type="application/json") 
         Info = {}
         Info['user_features'] = user_features
         Info['host'] = host,
