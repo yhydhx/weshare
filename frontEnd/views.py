@@ -572,8 +572,8 @@ def complete_account(request):
                 phd_start = ""
                 phd_end = ""
 
-            if not judge_limit(min_payment, max_payment):
-                return HttpResponse('最低报酬要小于最高报酬')
+            # if not judge_limit(min_payment, max_payment):
+            #     return HttpResponse('最低报酬要小于最高报酬')
 
             host.gender = gender
             host.introduction = self_introduction
