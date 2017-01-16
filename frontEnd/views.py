@@ -525,19 +525,19 @@ def complete_account(request):
 
     if request.method == 'POST':
         if request.POST['self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
-            'motto'] and \
-                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
+            'motto'] and  request.POST['service-time']  and \
                 request.POST['qq']:
 
             self_introduction = request.POST['self-introduction']
             gender = request.POST['gender']
             motto = request.POST['motto']
-            min_payment = float(request.POST['min-payment'])
+            #min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
-            max_payment = float(request.POST['max-payment'])
+            #max_payment = float(request.POST['max-payment'])
             qq = request.POST['qq']
             alipay = request.POST['alipay']
             birth = request.POST['birth']
+            wechat = request.POST['wechat']
             # Education Infomation
             education = request.POST['education']
 
@@ -578,12 +578,13 @@ def complete_account(request):
             host.gender = gender
             host.introduction = self_introduction
             host.motto = motto
-            host.min_payment = min_payment
+            #host.min_payment = min_payment
             host.service_time = service_time
-            host.max_payment = max_payment
+            #host.max_payment = max_payment
             host.birth = birth
             host.state = HOST_STATE['APPLY']
             host.qq_number = qq
+            host.wechat = wechat
 
             host.education = education
             host.bachelor = bachelor
@@ -828,19 +829,19 @@ def modify_account(request):
     if request.method == 'POST':
         if request.POST['username'] and request.POST['phone'] and request.POST[
             'self-introduction'] and request.POST['birth'] and request.POST['gender'] and request.POST[
-            'motto'] and \
-                request.POST['min-payment'] and request.POST['service-time'] and request.POST['max-payment'] and \
+            'motto'] and  request.POST['service-time'] and  \
                 request.POST['school'] and request.POST['qq']:
             username = request.POST['username']
             phone = request.POST['phone']
             self_introduction = request.POST['self-introduction']
             gender = request.POST['selectbox']
             motto = request.POST['motto']
-            min_payment = float(request.POST['min-payment'])
+            #min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
-            max_payment = float(request.POST['max-payment'])
+            #max_payment = float(request.POST['max-payment'])
             school = request.POST['school']
             qq = request.POST['qq']
+            wechat = request.POST['wechat']
 
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
@@ -859,6 +860,7 @@ def modify_account(request):
             host.max_payment = max_payment
             host.h_school = school
             host.qq_number = qq
+            host.wechat = wechat
             host.save()
             return render_to_response('frontEnd/modify-account.html', {'login_flag': True,
                                                                        'current_user': host},
@@ -1087,6 +1089,7 @@ def host_center(request, method, Oid):
             motto = request.POST['motto']
             qq = request.POST['qq']
             birth = request.POST.get("birth")
+            wechat = request.POST['wechat']
             # Education Infomation
             education = request.POST['education']
 
@@ -1126,6 +1129,7 @@ def host_center(request, method, Oid):
             host.graduate = graduate
             host.phd = phd
             host.birth = birth
+            host.wechat = wechat
             # host.alipay = alipay
             host.bachelor_major = bachelor_major
             host.graduate_major = graduate_major
@@ -1149,18 +1153,18 @@ def host_center(request, method, Oid):
         if request.method == "POST":
             self_introduction = request.POST['introduction']
             motto = request.POST['motto']
-            min_payment = float(request.POST['min-payment'])
+            #min_payment = float(request.POST['min-payment'])
             service_time = request.POST['service-time']
-            max_payment = float(request.POST['max-payment'])
+            #max_payment = float(request.POST['max-payment'])
 
             if not judge_limit(min_payment, max_payment):
                 return HttpResponse('最低报酬要小于最高报酬')
 
             host.introduction = self_introduction
             host.motto = motto
-            host.min_payment = min_payment
+            #host.min_payment = min_payment
             host.service_time = service_time
-            host.max_payment = max_payment
+            #host.max_payment = max_payment
 
             host.save()
             return HttpResponseRedirect("/host_center/modify_host_info")
