@@ -126,7 +126,12 @@ CERTIFICATE_STATE = {
 
 }
 
-
+APPOINTMENT_EVALUATION = {
+    "UMCOMMENT" : -1,
+    "LOW" : 0,
+    "EQUAL" : 1,
+    "HIGH" : 2,
+}
 
 #the number of people on each page
 SHOW_PEOPLE = 12
@@ -162,7 +167,7 @@ STATICfILES_DIRS = (
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mxhichina.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'service@wshere.com'
+EMAIL_HOST_USER = 'service@wesharediy.com'
 EMAIL_HOST_PASSWORD = 'WeShareHere222'
 # EMAIL_USE_TLS = True
 EMAIL_SSL_PORT = 465
