@@ -1,5 +1,5 @@
 {% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
-{% load staticfiles %}<!-- 加载全局变量 --> 
+{% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}<!-- 网页主体 -->
 <style>
@@ -35,7 +35,8 @@
         <div class="item active">
           <img alt="First slide" src="{% static 'frontEnd/images/weshare/Imax1.jpg' %}" style="width: 100%; ">
           <div class="carousel-caption">
-            <h2>您是否正在寻找出国达人？</h2>
+            <h3>你今天的疑惑，也是我们曾经的疑惑</h3>
+            <h3>但我们曾走的弯路，你不必重走</h3>
             <br>
             <!-- <a href="" class="btn btn-primary"><span>Contact</span></a>
             <a href="" class="btn btn-danger"><span>联系我们</span></a> -->
@@ -45,7 +46,7 @@
         <div class="item">
           <img alt="Second slide" src="{% static 'frontEnd/images/weshare/Imax2.jpg' %}" style="width: 100%; ">
           <div class="carousel-caption">
-            <h2>您是否正在寻找课程学霸？</h2>
+            <h3>Weshare为啥，领先的大学生有偿价值干货分享平台</h3>
             <br>
             <!-- <a href="" class="btn btn-primary"><span>Contact</span></a>
             <a href="" class="btn btn-danger"><span>联系我们</span></a> -->
@@ -55,7 +56,7 @@
         <div class="item">
           <img alt="Third slide" src="{% static 'frontEnd/images/weshare/Imax3.jpg' %}" style="width: 100%; ">
           <div class="carousel-caption">
-            <h2>您是否正在寻找科研大牛？</h2>
+            <h3>前辈之路，少走弯路；知识分享，共赢梦想。</h3>
             <br>
             <!-- <a href="" class="btn btn-primary"><span>Contact</span></a>
             <a href="" class="btn btn-danger"><span>联系我们</span></a> -->
@@ -191,7 +192,7 @@
                         </div>
                     </a>
                 {% endfor %}
-            {% endblock %}            
+            {% endblock %}
         </div>
 
     </section>
@@ -200,7 +201,7 @@
 
     <!-- 首页发现话题模块 -->
     <div id="ct-js-wrapper" class="ct-pageWrapper">
-        
+
         <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="120" data-type="parallax" data-stellar-background-ratio="0.3" data-bg-image="./assets/images/content/cars/mediaHeader-03.jpg" data-bg-image-mobile="./assets/images/content/cars/mediaHeader-03.jpg">
                 <div class="ct-sectionHeader ct-u-marginBottom0">
 
@@ -220,9 +221,9 @@
                             <div class="col-md-4" style="font-size: 20px; ">
                                 <a href="/share/show">more>></a>
                             </div>
-                        </div>   
+                        </div>
                     </div>
-                    
+
                 </div>
         </section>
 
@@ -233,9 +234,9 @@
                     {% for host in topics %}
                     <li><a data-filter=".{{host.tag}}" class="btn btn-motive active"><span>{{host.name}}</span></a></li>
                     {% endfor %}
-                
+
                 {% endblock %}
-                
+
             </ul>
         </div> -->
 
@@ -269,7 +270,7 @@
         <div>
             <video src="{% static 'frontEnd/video/1.mp4' %}" controls="controls"></video>
         </div>
-        
+
     </div> -->
 
 {% endblock %}
