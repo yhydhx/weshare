@@ -37,6 +37,12 @@
                         <h2 class="ct-sectionHeader-title">
                             <small><span>自我介绍</span></small>
                         </h2>
+                        <!-- 自我介绍辅助文字 -->
+                        <div class="">
+                            <p>人生即经历！</p>
+                            <p>请围绕您的学业情况、从业经历、性格特点、项目经历等进行自我介绍，明确地描述您从事过哪些工作、经手过哪些项目、接触过哪些人以及在哪些领域富有经验，文字风格不拘，您的人生故事会让Guest快速认识您、信任您。</p>
+                            <a href="#">（参考实例：唐凯旋 帝国理工商业分析硕士何通 UCLA全奖PhD）</a>
+                        </div>
                     </div>
                     <!-- <textarea name="self-introduction" id="self-introduction">
                         <p style="text-align: left">请按照一下模板更改哦(注:若没有请删除完成后请把这段话删掉)</p>
@@ -69,6 +75,8 @@
 
                         </p>
                     </textarea> -->
+
+
 
                     <textarea id="editor_id" name="self-introduction" style="width:100%;height:500px;">
                         <p style="text-align: left;color: red;font-weight: bold;">请按照一下模板更改哦(注:若没有请删除完成后请把这段话删掉)</p>
@@ -129,7 +137,7 @@
                     </select> -->
 
                     <div class="form-group">
-                        <label for="">性别</label>
+                        <label for="" class="required">性别</label>
                         <select class="form-control" name="gender">
                             <option value="1">男</option>
                             <option value="0">女</option>
@@ -139,18 +147,18 @@
 
 
                     <div class="form-group ">
-                        <label for="motto">个人亮点</label>
+                        <label for="motto" class="required">个人亮点</label>
                         <input id="motto" name="motto" type="text" class="form-control form-control--type2">
                     </div>
 
                     <div class="form-group">
-                        <label for="service-time" class="required">您方便服务的时间</label>
+                        <label for="service-time">您方便服务的时间</label>
                         <input id="service-time" name="service-time" required
                                class="form-control form-control--type2">
                     </div>
 
                     <!--这里的填写最低薪酬的方法加上一个前端的验证 是否为数字-->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
                         <input id="min-payment" name="min-payment" type="number" required value="请填写数字"
                                class="form-control form-control--type2">
@@ -160,7 +168,7 @@
                         <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
                         <input id="max-payment" name="max-payment" type="number" required value="请填写数字"
                                class="form-control form-control--type2">
-                    </div>
+                    </div> -->
 <!--                     <div class="form-group">
                         <div style="width:100%; margin:0 auto; overflow:hidden;">
                             <label for="txtSc" class="required">你的学校</label>
@@ -177,7 +185,12 @@
                     </div> -->
 
                     <div class="form-group">
-                        <label for="qq" class="required">QQ号</label>
+                        <label for="wechat">微信号</label>
+                        <input id="wechat" name="wechat" required class="form-control form-control--type2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qq">QQ号</label>
                         <input id="qq" name="qq" required class="form-control form-control--type2">
                     </div>
 
@@ -187,7 +200,7 @@
                     </div>
 
 
-                    <label>请选择您的学历</label>
+                    <label class="required">请选择您的学历</label>
                     <select class="form-control" onchange="showEducation(this.value)">
                       <option>本科</option>
                       <option>硕士</option>

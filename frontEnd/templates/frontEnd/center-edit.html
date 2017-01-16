@@ -11,13 +11,13 @@
     	<div class="row">
     		{% include "frontEnd/center-left.html" %}<!-- 加载左侧栏 -->
             <div class="col-md-10">
-                
+
     			<!-- 修改头像 -->
     			<div class="row" style="display: flex;align-items: center; padding-top:60px;">
     				<div class="col-xs-4"><hr></div>
     				<div class="col-xs-4" style="text-align:center;"><h4>修改头像</h4></div>
     				<div class="col-xs-4"><hr></div>
-    			</div>	
+    			</div>
     			<div class="row">
     				<div role="tabpanel" class="tab-pane fade in active" id="description">
     	                <style>
@@ -95,7 +95,7 @@
     	                        <select class="form-control" name="gender" id="gender">
     	                            <option value="1">男</option>
     	                            <option value="0">女</option>
-    	                        </select>                      
+    	                        </select>
     	                    </div>
 
 
@@ -103,6 +103,13 @@
                                 <label for="motto">个性签名</label>
                                 <input id="motto" name="motto" type="text"
                                        value="{{ current_user.motto }}"
+                                       class="form-control form-control--type2">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="wechat" class="required">微信号</label>
+                                <input id="wechar" name="wechat" required
+                                       value="{{ current_user.wechat }}"
                                        class="form-control form-control--type2">
                             </div>
 
@@ -120,10 +127,10 @@
     	                      <option>博士</option>
     	                    </select>
     	                    <div id="Education">
-    	                        <input type="hidden" name="education" value="{{ current_user.education }}">   
+    	                        <input type="hidden" name="education" value="{{ current_user.education }}">
     	                    </div>
 
-    	                    
+
 
 <!--     	                    <input type="hidden"  id="txtSc2" name="schoolID1">
     	                    <input type="text" class="form-control" id="txtSc" name="school1" placeholder="&nbsp;&nbsp;点此选择您的本科学校" value="" />
@@ -186,7 +193,7 @@
                             <input id="submit" type="submit"
                                    class="btn btn-lg btn-wide btn-motive"
                                    value="确认修改" onclick="$('#SuccessMessage').append('修改成功！');">
-                                   
+
                             <div id="SuccessMessage" style="margin-top: 5px;"><!-- 搜索提示信息 --></div>
                         </div>
                     </div>
@@ -202,7 +209,7 @@
 {% block js %}
 <!-- 选择学校JS -->
 <script src="{% static 'frontEnd/js/schoolsearch/allunivlist.js'%}"></script>
-<script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script> 
+<script type="text/javascript" src="http://www.jq-school.com/js/jquery-1.7.2.min.js"></script>
 
 <!-- 自动选择默认性别 -->
 {% if current_user.gender == 1 %}
@@ -286,7 +293,7 @@ $(".form-time").datetimepicker({
         }
         else{
 
-        }  
+        }
     }
 </script> -->
 <script>
@@ -317,7 +324,7 @@ $(".form-time").datetimepicker({
         }
         else{
 
-        }  
+        }
     }
 </script>
 
@@ -352,13 +359,13 @@ var sf = "";
 
 var schoolID = "";
 $(function (){
-    $.each(allUnivList,function (j,m){      
-        $("#gj").append("<a href='javascript:void(0);' onclick='getSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    $.each(allUnivList,function (j,m){
+        $("#gj").append("<a href='javascript:void(0);' onclick='getSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
     });
 });
 
 //获取某国家的省份
-//参数 aid 
+//参数 aid
 //参数 name
 function getSheng(aid,name){
 school = name;
@@ -370,7 +377,7 @@ school = name;
     }
     else
     {
-        $.each(allUnivList[aid].provs,function (j,m){               
+        $.each(allUnivList[aid].provs,function (j,m){
             $("#sheng").append("<a href='javascript:void(0);' onclick='getSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
         });
     }
@@ -390,7 +397,7 @@ $("#list").show();
         $("#list").append("<a href=\"javascript:getSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
     });
     $("#list").append("<br style='clear:both;' />");
-        
+
 }
 
 //点击学校响应
@@ -430,13 +437,13 @@ var Msf = "";
 
 var MschoolID = "";
 $(function (){
-    $.each(allUnivList,function (j,m){      
-        $("#Mgj").append("<a href='javascript:void(0);' onclick='MgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    $.each(allUnivList,function (j,m){
+        $("#Mgj").append("<a href='javascript:void(0);' onclick='MgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
     });
 });
 
 //获取某国家的省份
-//参数 aid 
+//参数 aid
 //参数 name
 function MgetSheng(aid,name){
 Mschool = name;
@@ -448,7 +455,7 @@ Mschool = name;
     }
     else
     {
-        $.each(allUnivList[aid].provs,function (j,m){               
+        $.each(allUnivList[aid].provs,function (j,m){
             $("#Msheng").append("<a href='javascript:void(0);' onclick='MgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
         });
     }
@@ -468,7 +475,7 @@ $("#Mlist").show();
         $("#Mlist").append("<a href=\"javascript:MgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
     });
     $("#Mlist").append("<br style='clear:both;' />");
-        
+
 }
 
 //点击学校响应
@@ -508,13 +515,13 @@ var Psf = "";
 
 var PschoolID = "";
 $(function (){
-    $.each(allUnivList,function (j,m){      
-        $("#Pgj").append("<a href='javascript:void(0);' onclick='PgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");           
+    $.each(allUnivList,function (j,m){
+        $("#Pgj").append("<a href='javascript:void(0);' onclick='PgetSheng("+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
     });
 });
 
 //获取某国家的省份
-//参数 aid 
+//参数 aid
 //参数 name
 function PgetSheng(aid,name){
 Pschool = name;
@@ -526,7 +533,7 @@ Pschool = name;
     }
     else
     {
-        $.each(allUnivList[aid].provs,function (j,m){               
+        $.each(allUnivList[aid].provs,function (j,m){
             $("#Psheng").append("<a href='javascript:void(0);' onclick='PgetSchool("+aid+","+j+",\""+m.name+"\")'>"+m.name+"&nbsp;&nbsp;"+"</a>");
         });
     }
@@ -546,7 +553,7 @@ $("#Plist").show();
         $("#Plist").append("<a href=\"javascript:PgetSchoolID(\'"+l.school_id+"\',\'"+l.name+"\')\" style='width:270px;display:block;float:left;'>"+l.name+"</a>");
     });
     $("#Plist").append("<br style='clear:both;' />");
-        
+
 }
 
 //点击学校响应
