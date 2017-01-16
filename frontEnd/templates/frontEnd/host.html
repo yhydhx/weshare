@@ -32,7 +32,7 @@
             <div class="row">
                 {% block topics %}
                 {% for topic in topics %}
-            
+
                     <div class="col-md-3 col-sm-4 col-xs-6" style="font-size: 18px;padding-top: 5px;padding-bottom: 5px; "><a href="" data-toggle="modal" data-target="#myModal{{ forloop.counter }}">{{ topic.t_name }}</a></div>
 
                     <!-- Modal-->
@@ -64,7 +64,14 @@
                 {% endblock %}
             </div>
             <hr>
-            
+
+            <!-- 小话题介绍 -->
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <p>{{ m_service }}</p>
+                </div>
+            </div>
+
             <!-- host 展示 -->
             <!-- <div class="row">
                 <div class="cards">
@@ -88,7 +95,7 @@
                 </div>
             </div> -->
 
-            
+
 
             <!-- host 展示 -->
             <div class="row">
@@ -196,7 +203,7 @@ function get_page(current_page,total_page){
   $('#pages').append(result);
 }
 //页面加载时自动运行函数
-window.onload=get_page({{ hosts.number }},{{ hosts.paginator.num_pages }}); 
+window.onload=get_page({{ hosts.number }},{{ hosts.paginator.num_pages }});
 </script>
 
 {% endblock %}
