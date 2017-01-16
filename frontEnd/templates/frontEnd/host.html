@@ -106,10 +106,11 @@
                       <div class="col-md-4 col-sm-4 col-xs-6">
                           <a class="card" href="/user/show/{{ host.id }}">
                             <img src="{{ host.icon }}" alt="">
-                            <div class="caption">服务时间：{{ host.service_time }}</div>
+                            <!-- <div class="caption">服务时间：{{ host.service_time }}</div> -->
+                            <div class="caption">{{ host.motto }}</div>
                             <div class="card-heading"><strong>{{ host.username }}</strong></div>
-                            <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">{{ host.motto }}</div>
-                            <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div>
+                            <!-- <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">{{ host.motto }}</div> -->
+                            <!-- <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div> -->
                             <div class="card-actions">
                               <button type="button" class="btn btn-danger">查看详情</button>
                               <div class="pull-right text-danger"> {{ host.bill_number }} 次 服务</div>
