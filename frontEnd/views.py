@@ -1366,8 +1366,12 @@ def share(request, method, Oid):
             request.session["share_hosts"] = share_hosts
             request.session["m_name"] = m_name
             request.session["t_name"] = t_name
+
             Info['m_name'] = m_name
             Info['t_name'] = t_name
+            Info['m_service'] = Minor_Topic.objects.get(id=m_id).m_service
+            request.session['m_service'] = Info['m_service']
+
             host_number = len(share_hosts)
 
             Info['hosts'] = share_hosts
@@ -1394,6 +1398,7 @@ def share(request, method, Oid):
                 hosts = request.session["share_hosts"]
                 Info['m_name'] = request.session["m_name"]
                 Info['t_name'] = request.session["t_name"]
+                Info['m_service'] = request.session['m_service']
             else:
                 tmp_host = Host.objects.filter(state=HOST_STATE['HOST'])
                 hosts = []
