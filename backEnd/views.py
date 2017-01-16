@@ -506,6 +506,7 @@ def user(request, method, Oid):
         f = Feature()
         questions = f.get_one_host_questions(Oid)
         host = Host.objects.get(id=Oid)
+        Info = {}
         Info['host'] = host.format_dict_with_school_name()
         Info['msgs'] = host.get_user_message(host.id)
         Info['questions'] = questions
