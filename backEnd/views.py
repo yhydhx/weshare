@@ -507,7 +507,7 @@ def user(request, method, Oid):
         features = host.get_all_features()
         host.features = features.values()
         host.image = "/files/icons/" + host.icon.split("/")[-1]
-        return render(request, 'backEnd/host-index.html', {'user': host})
+        return render(request, 'backEnd/host-index-dc.html', {'user': host})
 
     elif method == 'pass':
 

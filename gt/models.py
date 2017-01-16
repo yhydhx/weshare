@@ -703,6 +703,7 @@ class Minor_Topic(models.Model):
     m_topic = models.CharField(max_length=100)
     m_index = models.IntegerField(default=0)
     m_introduction = models.CharField(max_length=100)
+    m_service = models.TextField(default="")
 
     '''
     first, we set a default value and set it's fixed or not
@@ -1184,8 +1185,9 @@ class Appointment(models.Model):
     feature_id = models.CharField(max_length = 100)            #feature_id
     appointment_id = models.CharField(max_length=100)     #唯一的订单号-》
     '''
-    user will give his evaluation 
+    user will give his evaluation to this point 
     '''
+    evaluation = models.IntegerField(default=-1)
 
     def generate_id(self):
         tmp_id = ""

@@ -126,6 +126,8 @@ CERTIFICATE_STATE = {
 
 }
 
+
+
 #the number of people on each page
 SHOW_PEOPLE = 12
 
