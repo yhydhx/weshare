@@ -503,11 +503,15 @@ def user(request, method, Oid):
         # Oid = news.id
         return HttpResponseRedirect('/dc/topic/show/')
     elif method == 'change':
+        f = Feature()
+        questions = f.get_one_host_questions(Oid)
         host = Host.objects.get(id=Oid)
-        features = host.get_all_features()
-        host.features = features.values()
-        host.image = "/files/icons/" + host.icon.split("/")[-1]
-        return render(request, 'backEnd/host-index-dc.html', {'user': host})
+        Info['host'] = host.format_dict_with_school_name()
+        Info['msgs'] = host.get_user_message(host.id)
+        Info['questions'] = questions
+        Info['certification'] = host.get_one_host_passed_certification(host)
+
+        return render(request, 'backEnd/host-index-dc.html', Info)
 
     elif method == 'pass':
 

@@ -1432,6 +1432,9 @@ def share(request, method, Oid):
             del request.session["m_name"] 
         if request.session.has_key("t_name"):
             del request.session["t_name"]
+        if request.session.has_key("m_service"):
+            del request.session["m_service"]
+
 
         return HttpResponseRedirect("/share/show/")
 
