@@ -130,9 +130,9 @@
                             <!-- <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div> -->
                             <div class="card-actions">
                               <div class="pull-left text-danger">
-                                  <span>好评 {{ appointment_data.higher }}</span>
-                                  <span>中评 {{ appointment_data.equal }}</span>
-                                  <span>差评 {{ appointment_data.lower }}</span>
+                                  <span>好评 {{ host.appointment_data.higher }}</span>
+                                  <span>中评 {{ host.appointment_data.equal }}</span>
+                                  <span>差评 {{ host.appointment_data.lower }}</span>
                               </div>
                               <button type="button" class="btn btn-danger">查看详情</button>
                               <div class="pull-right text-danger"> {{ host.bill_number }} 次 服务</div>
