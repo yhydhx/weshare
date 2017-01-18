@@ -269,8 +269,9 @@
                                 </div>
                                 {% endfor %}
                                 {% endblock %} -->
-                                {% block feature %}
-                                {%  for topic in features%}
+
+                                {% block content2 %}
+                                {%  for topic in host.features%}
 
                                 <div class="panel panel-default">
                                   <div class="panel-heading"><h3>{{topic.name}}</h3></div>
@@ -280,8 +281,8 @@
                                         {% for feature in topic.features %}
                                             <div class="row" style="padding-top:5px;padding-bottom: 5px; " id="{{ feature.f_id }}">
                                                 <div class="col-md-12">
-                                                    <p style="float: left;font-size:15px;"> <span class="label label-primary">{{ feature.m_name }}</span> {{ feature.f_name }} （时间：{{ feature.ht_duration }} 价格: {{ feature.ht_salary }}）</p>
-                                                    <a href="" class="btn btn-danger" style="float: right; " onclick="delete_feature('{{ topic.id }}','{{ feature.f_name }}','{{ feature.m_id }}');return false">删除</a>
+                                                    <p style="float: left;font-size:15px;"> <span class="label label-primary">{{ feature.minor_topic_name }}</span> {{ feature.feature_name }} （时间：{{ feature.ht_duration }} 小时 -- 价格: {{ feature.ht_salary }}）</p>
+                                                    <!-- <a href="" class="btn btn-danger" style="float: right; " onclick="delete_feature('{{ topic.id }}','{{ feature.f_name }}','{{ feature.m_id }}');return false">删除</a> -->
                                                 </div>
                                             </div>
                                         {% endfor %}
