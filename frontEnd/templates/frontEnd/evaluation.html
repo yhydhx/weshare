@@ -134,18 +134,23 @@
                         {% endif %}
                       </h4>
                     </td>
-                    
+
                 </tr>
               </table>
 
               <hr style="border: none;border-top: 1px solid black; ">
-              
+
               <form action="/bill/evaluation" method="post">
               {% csrf_token %}
                 <div class="panel panel-default">
                   <div class="panel-heading"><h4>对此次约见的评价</h4></div>
                   <div class="panel-body">
                       <input type="hidden" name="appnt_id" value="{{ appointment.id }}">
+                        <select class="form-control" name="evaluation">
+                          <option value="2">非常好</option>
+                          <option value="1">一般</option>
+                          <option value="0">不满意</option>
+                        </select>
                       <textarea class="form-control" name="content" rows="5"></textarea>
                       <br>
                       <button type="submit" class="btn btn-lg">提交</button>
@@ -153,7 +158,7 @@
                 </div>
               </form>
 
-              
+
 
 
           </div>
