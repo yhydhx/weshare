@@ -261,6 +261,12 @@ class Host(models.Model):
             m_id = single_feature.m_id
             f_id = single_feature.f_id
 
+            '''
+            add salary and duration
+            '''
+            ht_salary = single_feature.ht_salary
+            ht_duration = single_feature.ht_duration
+
             if not d_topic_feature.has_key(t_id):
                 d_topic_feature[t_id] = {}
                 d_topic_feature[t_id]['name'] = Topic.objects.get(id=t_id).t_name
@@ -269,6 +275,8 @@ class Host(models.Model):
             tmp_mt_feature_dict = {}
             tmp_mt_feature_dict['feature_name'] = Feature.objects.get(id=f_id).f_name 
             tmp_mt_feature_dict['minor_topic_name'] = Minor_Topic.objects.get(id=m_id).m_name
+            tmp_mt_feature_dict['ht_salary'] = ht_salary
+            tmp_mt_feature_dict['ht_duration'] = ht_duration 
 
             d_topic_feature[t_id]['features'].append(tmp_mt_feature_dict)
 

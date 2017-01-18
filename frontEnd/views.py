@@ -1256,17 +1256,21 @@ def user(request, method, Oid):
         except:
             return render(request, "frontEnd/404.html")
 
-        features = host.get_all_features()
-        host.features = features.values()
+        
+
         host.image = "/files/icons/" + host.icon.split("/")[-1]
         f = Feature()
         questions = f.get_one_host_questions(Oid)
+
 
         Info = {}
         Info['host'] = host.format_dict_with_school_name()
         Info['msgs'] = host.get_user_message(host.id)
         Info['questions'] = questions
         Info['certification'] = host.get_one_host_passed_certification(host)
+        features = host.get_all_features()
+        Info["host"]['features'] = features.values()
+        #return HttpResponse(json.dumps(Info),content_type="application/json")
 
         if login_flag:
             Info['current_user'] = user
