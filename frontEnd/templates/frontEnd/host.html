@@ -109,6 +109,23 @@
                             <!-- <div class="caption">服务时间：{{ host.service_time }}</div> -->
                             <div class="caption">{{ host.motto }}</div>
                             <div class="card-heading"><strong>{{ host.username }}</strong></div>
+
+                            <!-- 学校信息 -->
+                            <div class="">
+                                {% if host.education = 2 %}
+                                <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">博士： {{ host.phd_school }} - {{ host.phd_major }} ( {{ host.phd_start }} ~ {{ host.phd_end }} )</div>
+                                {% endif %}
+
+                                {% if host.education = 1 or host.education = 2 %}
+                                <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">硕士： {{ host.graduate_school }} - {{ host.graduate_major }} ( {{ host.graduate_start }} ~ {{ host.graduate_end }} )</div>
+                                {% endif %}
+
+                                {% if host.education = 1 or host.education = 2 or host.education = 3%}
+                                <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">本科： {{ host.bachelor_school }} - {{ host.bachelor_major }} ( {{ host.bachelor_start }} ~ {{ host.bachelor_end }} )</div>
+                                {% endif %}
+                            </div>
+
+
                             <!-- <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">{{ host.motto }}</div> -->
                             <!-- <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div> -->
                             <div class="card-actions">
