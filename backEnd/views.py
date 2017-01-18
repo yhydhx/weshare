@@ -910,7 +910,7 @@ def func(request, method, Oid):
         cache.cache_value = cache_content
         cache.cache_modify_time = datetime.datetime.now()
         cache.save()
-
+        return HttpResponse(json.dumps(Info), content_type="application/json")
         return HttpResponse('主页信息生成成功')
     elif method == 'compute_user_score':
         menu = Menu.objects.all()
