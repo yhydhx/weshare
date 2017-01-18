@@ -386,6 +386,7 @@ class Host(models.Model):
 
         for host_atom in hosts:
             tmpHost = host_atom.format_dict()
+            tmpHost['appointment_data'] = Appointment().get_appointment_statistics_of_one_host(host_atom.id)
             Info['hosts'].append(tmpHost)
 
         Info['topics'] = d_topic_detail.values()
@@ -1229,6 +1230,31 @@ class Appointment(models.Model):
         tmp_dict['host_name'] = host.username
         tmp_dict['host_motto'] = host.motto
         return tmp_dict
+
+    def get_appointment_statistics_of_one_host(self, host_id):
+        apoints = Appointment.objects.filter(to_host_id = host_id)
+        stat_dict = {}
+        stat_dict['sum'] = len(apoints)
+        stat_dict['finished'] = 0
+        stat_dict['higher'] = 0
+        stat_dict['equal'] = 0
+        stat_dict['lower'] = 0
+
+        for apoint_atom in apoints:
+            if apoint_atom.state >= APPOINTMENT_STATE['COMPLETED']:
+                stat_dict['finished'] += 1
+            if apoint_atom.evaluation == APPOINTMENT_EVALUATION['LOW']:
+                stat_dict['lower'] += 1
+            elif apoint_atom.evaluation == APPOINTMENT_EVALUATION['EQUAL']:
+                stat_dict['equal'] += 1
+            elif apoint_atom.evaluation == APPOINTMENT_EVALUATION['EQUAL']:
+                stat_dict['higher'] += 1
+        return stat_dict
+
+
+
+
+
 
     def format_dict(self):
         tmp_dict = {}
