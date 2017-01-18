@@ -80,6 +80,11 @@ class Host(models.Model):
     def __unicode__(self):
         return self.username
 
+    def format_dict_with_appointment_data(self):
+        tmpHost = self.format_dict_with_school_name()
+        tmpHost['appointment_data'] = Appointment().get_appointment_statistics_of_one_host(self.id)
+        return tmpHost
+
     def format_dict_with_school_name(self):
         tmpHost = self.format_dict()
         if tmpHost['bachelor'] != "":
@@ -865,7 +870,7 @@ class Host_Topic(models.Model):
         for host_topic_atom in host_topics:
             if not host_dict.has_key(host_topic_atom.host_id):
                 host_dict[host_topic_atom.host_id] = 1
-                host_atom = Host.objects.get(id=host_topic_atom.host_id).format_dict()
+                host_atom = Host.objects.get(id=host_topic_atom.host_id).format_dict_with_appointment_data()
                 if host_atom['state'] == HOST_STATE['HOST']:
                     result.append(host_atom)
         return result
