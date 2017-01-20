@@ -301,7 +301,7 @@ def weibo_login(request):
                  'client_id': WEIBO_APPKEY,
                  'client_secret': WEIBO_SECRET,
                  'code': code,
-                 'redirect_uri': 'http://www.wshere.com/wblogin/'}
+                 'redirect_uri': 'http://www.wesharediy.com/wblogin/'}
 
         access_token_url = 'https://api.weibo.com/oauth2/access_token'
 
@@ -357,7 +357,7 @@ def qq_login(request):
                  'client_id': TENCENT_APPID,
                  'client_secret': TENCENT_APPKEY,
                  'code': code,
-                 'redirect_uri': 'http://www.wshere.com/qqlogin/'}
+                 'redirect_uri': 'http://www.wesharediy.com/qqlogin/'}
         f.write('qdict: ' + str(qdict) + '\n')
 
         address = 'https://graph.qq.com/oauth2.0/token?' + urlencode(qdict)
@@ -1411,7 +1411,7 @@ def share(request, method, Oid):
                 tmp_host = Host.objects.filter(state=HOST_STATE['HOST'])
                 hosts = []
                 for host_atom in tmp_host:
-                    hosts.append(host_atom.format_dict())
+                    hosts.append(host_atom.format_dict_with_appointment_data())
             host_number = len(hosts)
 
             Info['hosts'] = hosts

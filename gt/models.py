@@ -206,7 +206,7 @@ class Host(models.Model):
         self.email_certify_time = datetime.datetime.now()
         self.save()
 
-        url = "http://www.wshere.com/user/certify/"+certify_code
+        url = "http://www.wesharediy.com/user/certify/"+certify_code
         return url
 
 
