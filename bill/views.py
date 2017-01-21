@@ -262,7 +262,7 @@ def bill(request,method,Oid):
 		if request.method == "POST":
 
 			appnt_id = request.POST.get("appnt_id")
-			evaluation_star = request.POST.get("evalution")
+			evaluation_star = request.POST.get("evaluation")
 			appointment = Appointment.objects.get(id = appnt_id)
 			appointment.state = APPOINTMENT_STATE['FINISHED']
 			appointment.evaluation = evaluation_star
