@@ -1,5 +1,5 @@
 {% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
-{% load staticfiles %}<!-- 加载全局变量 --> 
+{% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}
 
@@ -7,7 +7,7 @@
 
 <style>
     body{
-        background-color:white; 
+        background-color:white;
     }
 </style>
 
@@ -54,25 +54,25 @@
                                            class="form-control form-control--type2">
                                 </div>
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="min-payment" class="required">最低薪酬(人民币元/小时)</label>
-                                    <input id="min-payment" name="min-payment" type="number" required 
+                                    <input id="min-payment" name="min-payment" type="number" required
                                             value="{{ current_user.min_payment }}"
                                            class="form-control form-control--type2">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="max-payment" class="required">最高薪酬(人民币元/小时)</label>
-                                    <input id="max-payment" name="max-payment" type="number" required 
+                                    <input id="max-payment" name="max-payment" type="number" required
                                             value="{{ current_user.max_payment }}"
                                            class="form-control form-control--type2">
-                                </div>
+                                </div> -->
 
                             </div>
                         </div>
                     </div>
 
-                    
+
 
 
                     <!-- 修改个人介绍 -->
@@ -86,7 +86,7 @@
                         {{ current_user.introduction}}
                     </textarea>
 
-                    
+
                     <div class="row" style="">
                         <div class="col-md-6 col-md-offset-3 ct-u-paddingTop40">
                             <input id="submit" type="submit"
@@ -109,15 +109,15 @@
 
                 {%  for topic in user_features%}
 
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="text-align:center;">
                   <div class="panel-heading"><h3>{{topic.name}}</h3></div>
                   <div class="panel-body">
                     <ul class="ct-simpleList list-unstyled ct-u-marginBottom0" id="show{{topic.tag}}" style="width:80%;margin-left:10%;">
                         <div id="{{topic.id}}TXT">
                         {% for feature in topic.feature_list %}
                             <div class="row" style="padding-top:5px;padding-bottom: 5px; " id="{{ feature.f_id }}">
-                                <div class="col-md-12">                           
-                                    <p style="float: left;font-size:15px;"> <span class="label label-primary">{{ feature.m_name }}</span> {{ feature.f_name }} </p>
+                                <div class="col-md-12">
+                                    <p style="float: left;font-size:15px;"> <span class="label label-primary">{{ feature.m_name }}</span> {{ feature.f_name }} （时间：{{ feature.ht_duration }} 价格: {{ feature.ht_salary }}）</p>
                                     <a href="" class="btn btn-danger" style="float: right; " onclick="delete_feature('{{ topic.id }}','{{ feature.f_name }}','{{ feature.m_id }}');return false">删除</a>
                                 </div>
                             </div>
@@ -126,24 +126,29 @@
                     </ul>
 
                     <hr>
-                    <form class="form-inline" name="{{topic.tag}}" id="{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
+                    <form class="form-inline" name="{{topic.tag}}" id="form{{topic.id}}" action="/complete-account-feature/"  onsubmit="showFeatures('{{topic.id}}');return false">
                     {% csrf_token %}
-                    
-                        <select class="form-control" id="minor_topic_id" name="minor_topic_id" required onchange="qingkong();">
+                        <select class="form-control" id="minor_topic_id" name="minor_topic_id" required onchange="changeMinor(this);">
                             <option value="">选择小话题</option>
 
                             {% for minor in topic.minor_topic_list %}
-                            <option value="{{ minor.id }}">{{ minor.m_name }}</option>
+                            <option value="{{ minor.id }}" data-value2="{{minor.m_default_value}}" data-value3="{{minor.m_is_fixed}}" data-value4="{{minor.m_introduction}}" >{{ minor.m_name }}</option>
                             {% endfor %}
                         </select>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="{{topic.tag}}" name="feature_name" placeholder="点此添加您要提供的服务">
+                        <input type="text" class="form-control" id="{{topic.tag}}" name="feature_name" placeholder="点此添加您要提供的服务" required>
+                        价格：<input type="text" class="form-control" id="" name="ht_salary" required style="width:60px;">
+                        时间：<input type="number" class="form-control" id="" name="ht_duration" required style="width:60px;"> (h)
                         <input type='hidden' name = 'topic_id' value="{{topic.id}}"}>
                         <input type='hidden' name = 'topic_tag' value="show{{topic.tag}}"}>
-                      </div>                
+                      </div>
                       <button type="submit" class="btn btn-info" style="">添加</button>
-                    </form>
 
+                      <!-- 小话题简介模块 -->
+                      <div class="" id="introduction">
+                         <!-- JS赋值区 -->
+                      </div>
+                    </form>
                   </div>
                 </div>
                 {% endfor %}
@@ -176,20 +181,20 @@ function showFeatures(tag){
     console.log('aa');
     console.log(tag);
     // $("#features").submit(function(){
-        var data1 = $("#"+tag).serialize();
+        var data1 = $("#form"+tag).serialize();
         console.log(data1);
         $.ajax({
             url : "/complete-account-feature/",
             type : "POST",
             dataType : "html",
-            data : $("#"+tag).serialize(),
+            data : data1,
             success : function(str){
                 console.log('成功');
                 console.log(str);
                 str2 = JSON.parse(str);
                 console.log(str2);
                 // $('#'+tag+"TXT").append("<li><i class=\"fa fa-check\"></i><span><a href=\"\"><i class=\"fa fa-trash\"></i></a>"+str2['data']['feature_name']+"</span></li>");
-                $('#'+tag+"TXT").append("<div class=\"row\" style=\"padding-top:5px;padding-bottom: 5px; \"><div class=\"col-md-12\"><p style=\"float: left;font-size:15px;\"> <span class=\"label label-primary\">"+ str2['data']['m_name'] +"</span> "+ str2['data']['feature_name'] +" </p><a href=\"\" class=\"btn btn-danger\" style=\"float: right; \">删除</a></div></div>");
+                $('#'+tag+"TXT").append("<div class=\"row\" style=\"padding-top:5px;padding-bottom: 5px; \"><div class=\"col-md-12\"><p style=\"float: left;font-size:15px;\"> <span class=\"label label-primary\">"+ str2['data']['m_name'] +"</span> "+ str2['data']['feature_name'] +" （时间："+ str2['data']['ht_duration'] +" 价格: "+ str2['data']['ht_salary'] +"）</p><a href=\"\" class=\"btn btn-danger\" style=\"float: right; \">删除</a></div></div>");
             }
 
         })
@@ -204,7 +209,7 @@ function showFeatures(tag){
         console.log(id);
         console.log(z);
         console.log(t);
-        // var jsondata = {  
+        // var jsondata = {
         //                 "topic_id" : id,
         //                 "feature_name" :  z,
         //                 "m_id" : t,
@@ -232,9 +237,33 @@ function showFeatures(tag){
     }
 </script>
 
-<!-- 切换小话题后，清空input -->
+<!-- 切换小话题后，改变默认价格，读取小话题简介，并清空input -->
+<!-- 输入：$id -> 小话题 id -->
 <script>
-    function qingkong(){
+    function changeMinor(obj){
+        console.log(obj);
+        console.log(obj.options[obj.selectedIndex].getAttribute('data-value2'));
+        console.log(obj.options[obj.selectedIndex].getAttribute('data-value3'));
+        console.log(obj.options[obj.selectedIndex].getAttribute('data-value4'));
+        console.log(obj.parentNode.id);
+
+        default_value = obj.options[obj.selectedIndex].getAttribute('data-value2');
+        is_fixed = obj.options[obj.selectedIndex].getAttribute('data-value3');
+        introduction = obj.options[obj.selectedIndex].getAttribute('data-value4');
+        form_id = obj.parentNode.id;
+
+
+        //判断价格是否为只读
+        if (is_fixed === 1) {
+            document.querySelector('#'+ form_id +' input[name="ht_salary"]').readOnly = true;
+        }
+        //生成价格默认值
+        document.querySelector('#'+ form_id +' input[name="ht_salary"]').value = default_value;
+
+        document.querySelector('#'+ form_id +' div[id="introduction"]').textContent = introduction;
+
+
+
         $("[name='feature_name']").val('');
     }
 </script>
