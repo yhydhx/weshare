@@ -389,13 +389,14 @@ def minortopic(request, method, Oid):
         m_topic = request.POST.get("m_topic")
         m_index = request.POST.get("m_index")
         m_introduction = request.POST.get("m_introduction")
-
+        m_service = request.POST.get("m_service")
 
         minortopic = Minor_Topic(
             m_name = m_name ,
             m_topic = m_topic ,
             m_index = m_index ,
             m_introduction = m_introduction ,
+            m_service = m_service,
         )
         minortopic.save()
 
@@ -412,6 +413,7 @@ def minortopic(request, method, Oid):
                         "m_topic":  request.POST.get("m_topic"),
                         "m_index" : request.POST.get("m_index"),
                         "m_introduction" : request.POST.get("m_introduction"),
+                        "m_service" : request.POST.get("m_service"),
                        }
 
         Minor_Topic.objects.filter(id=minor['id']).update(
@@ -419,6 +421,7 @@ def minortopic(request, method, Oid):
                                                         m_topic = minor['m_topic'],
                                                         m_index = minor['m_index'],
                                                         m_introduction = minor['m_introduction'],
+                                                        m_service = minor['m_service'],
                                                         )
 
         return HttpResponseRedirect('/dc/minortopic/show/')
