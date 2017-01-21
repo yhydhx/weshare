@@ -1415,7 +1415,7 @@ def share(request, method, Oid):
             host_number = len(hosts)
 
             Info['hosts'] = hosts
-
+            #return HttpResponse(json.dumps(Info['hosts']),content_type="application/json")
             if SORT_KEY_WORD != "":
                 Info['hosts'] = sorted(Info['hosts'], key=lambda x: x[SORT_KEY_WORD], reverse=True)
 
@@ -1430,7 +1430,7 @@ def share(request, method, Oid):
             except EmptyPage:
                 # If page is out of range (e.g. 9999), deliver last page of results.
                 Info['hosts'] = paginator.page(paginator.num_pages)
-
+        #return HttpResponse(json.dumps(Info['hosts']),content_type="application/json")
         return render(request, 'frontEnd/host.html', Info)
 
     elif method == "clear":

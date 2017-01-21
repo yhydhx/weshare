@@ -1252,7 +1252,7 @@ class Appointment(models.Model):
                 stat_dict['lower'] += 1
             elif apoint_atom.evaluation == APPOINTMENT_EVALUATION['EQUAL']:
                 stat_dict['equal'] += 1
-            elif apoint_atom.evaluation == APPOINTMENT_EVALUATION['EQUAL']:
+            elif apoint_atom.evaluation == APPOINTMENT_EVALUATION['HIGH']:
                 stat_dict['higher'] += 1
         return stat_dict
 
