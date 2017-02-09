@@ -28,7 +28,7 @@ from urllib import urlencode, unquote
 import urllib2
 import logging
 from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY, WEIBO_APPKEY, WEIBO_SECRET, WECHAT_APPID, WECHAT_SECRET
-import PIL.Image as image
+#import PIL.Image as image
 
 def index(request):
     log = logging.getLogger(__name__)
@@ -910,6 +910,7 @@ def image_receive(request):
             return render(request, 'frontEnd/error.html')
 
         #resize
+        '''
         try:
             ori_img = des_origin_path
             dst_img = settings.UPLOAD_PATH + 'icons/' + mark_list + '.jpeg'
@@ -920,7 +921,7 @@ def image_receive(request):
         except:
             # maybe the picture is too big
             return render(request, 'frontEnd/error.html')
-
+        '''
         return HttpResponse('ACKACK')
     else:
         return render_to_response('frontEnd/complete-account-icon.html', {'login_flag': True,
