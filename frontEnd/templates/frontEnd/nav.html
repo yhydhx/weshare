@@ -32,13 +32,13 @@
         <li><a href="/school/show"><span>学校</span></a></li>
         <li><a href="/share/show"><span>分享家</span></a></li>
 
-        <li class="dropdown"><a href="#"><span>查看活动</span></a>
+        <!-- <li class="dropdown"><a href="#"><span>查看活动</span></a>
             <ul class="dropdown-menu">
                 <li><a href=""><span>活动即将开放</span></a></li>
                 <li><a href=""><span>敬请期待</span></a></li>
 
             </ul>
-        </li>
+        </li> -->
         <li class="dropdown"><a href="/host-center/"><span>个人信息</span></a>
             <ul class="dropdown-menu">
                 <li><a href="/host_center/show"><span>我的主页</span></a></li>
@@ -76,7 +76,7 @@
                                                                      alt=""/></a></li>
                                     </ul>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div> -->
 
@@ -86,7 +86,7 @@
                                 <div class="ct-langPicker-content">
                                     <a href="/index/"><img src="{% static 'frontEnd/images/weshare/LOGO.png' %}" style="height: 51px;width: 97px; "></a>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
 
@@ -153,7 +153,11 @@
                         </li>
                     </ul>
                 </li> -->
-                <li class="dropdown"><a href="#">
+                <!--=========================================================================-->
+
+                <!--=========================================================================-->
+                <!-- 活动 -->
+                <!-- <li class="dropdown"><a href="#">
                     <div class="ct-textEffect"><span data-content="查看活动">查看活动</span></div>
                 </a>
                     <ul class="dropdown-menu">
@@ -162,7 +166,7 @@
                         <li><a href=""><span>敬请期待</span></a></li>
 
                     </ul>
-                </li> 
+                </li>  -->
                 <!--=========================================================================-->
                 <li class="dropdown"><a href="/index/">
                     <div class="ct-textEffect"><span data-content="个人信息">个人信息</span></div>
@@ -185,6 +189,21 @@
 
                     </ul>
                 </li>
+                <!--=========================================================================-->
+                <li class="dropdown"><a href="#">
+                    <div class="ct-textEffect"><span data-content="搜索">搜索</span></div>
+                </a>
+                    <ul class="dropdown-menu">
+                        <form action="/general_search" method="get">
+                            {% csrf_token %}
+                            <input type="hidden" id="word_1" name="word_1">
+                            <input type="hidden" id="word_2" name="word_2">
+                            <input type="text" placeholder="输入关键词搜索" onkeyup="getkey(this.value);" style="padding:10px;"/>
+                        </form>
+                    </ul>
+                </li>
             </ul>
+
+
         </div>
     </nav>
