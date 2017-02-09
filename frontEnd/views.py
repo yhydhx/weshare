@@ -28,7 +28,7 @@ from urllib import urlencode, unquote
 import urllib2
 import logging
 from gt.settings import SALT, TENCENT_APPID, TENCENT_APPKEY, WEIBO_APPKEY, WEIBO_SECRET, WECHAT_APPID, WECHAT_SECRET
-
+import PIL.Image as image
 
 def index(request):
     log = logging.getLogger(__name__)
@@ -895,13 +895,28 @@ def image_receive(request):
         processed_data = str(data).split('/jpeg;base64,')[1].split('); background-position: 50% 50')[0]
         processed_pic = base64.b64decode(processed_data)
         mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
-        des_origin_path = settings.UPLOAD_PATH + 'icons/' + mark_list + '.jpeg'  # mark_list是唯一的标志
+        des_origin_path = settings.UPLOAD_PATH + 'raw_icons/' + mark_list + '.jpeg'  # mark_list是唯一的标志
+        
+
+
         try:
             des_origin_file = open(des_origin_path, 'w')
             des_origin_file.write(processed_pic)
             des_origin_file.close()
             host.icon = '/files/icons/' + mark_list + '.jpeg'
             host.save()
+        except:
+            # maybe the picture is too big
+            return render(request, 'frontEnd/error.html')
+
+        #resize
+        try:
+            ori_img = des_origin_path
+            dst_img = settings.UPLOAD_PATH + 'icons/' + mark_list + '.jpeg'
+            dst_w = 282
+            dst_h = 282
+            save_q = 35
+            resizeImg(ori_img=ori_img,dst_img=dst_img,dst_w=dst_w,dst_h=dst_h,save_q=save_q)
         except:
             # maybe the picture is too big
             return render(request, 'frontEnd/error.html')
@@ -1415,7 +1430,7 @@ def share(request, method, Oid):
             host_number = len(hosts)
 
             Info['hosts'] = hosts
-
+            #return HttpResponse(json.dumps(Info['hosts']),content_type="application/json")
             if SORT_KEY_WORD != "":
                 Info['hosts'] = sorted(Info['hosts'], key=lambda x: x[SORT_KEY_WORD], reverse=True)
 
@@ -1430,7 +1445,7 @@ def share(request, method, Oid):
             except EmptyPage:
                 # If page is out of range (e.g. 9999), deliver last page of results.
                 Info['hosts'] = paginator.page(paginator.num_pages)
-
+        #return HttpResponse(json.dumps(Info['hosts']),content_type="application/json")
         return render(request, 'frontEnd/host.html', Info)
 
     elif method == "clear":
@@ -1546,6 +1561,45 @@ def support(request):
 
 def agreement(request):
     return render(request,"frontEnd/agreement.html")
+
+
+#等比例压缩图片
+def resizeImg(**args):
+    args_key = {'ori_img':'','dst_img':'','dst_w':'','dst_h':'','save_q':75}
+    arg = {}
+    for key in args_key:
+        if key in args:
+            arg[key] = args[key]
+        
+    im = image.open(arg['ori_img'])
+    ori_w,ori_h = im.size
+    widthRatio = heightRatio = None
+    ratio = 1
+    if (ori_w and ori_w > arg['dst_w']) or (ori_h and ori_h > arg['dst_h']):
+        if arg['dst_w'] and ori_w > arg['dst_w']:
+            widthRatio = float(arg['dst_w']) / ori_w #正确获取小数的方式
+        if arg['dst_h'] and ori_h > arg['dst_h']:
+            heightRatio = float(arg['dst_h']) / ori_h
+
+        if widthRatio and heightRatio:
+            if widthRatio < heightRatio:
+                ratio = widthRatio
+            else:
+                ratio = heightRatio
+
+        if widthRatio and not heightRatio:
+            ratio = widthRatio
+        if heightRatio and not widthRatio:
+            ratio = heightRatio
+            
+        newWidth = int(ori_w * ratio)
+        newHeight = int(ori_h * ratio)
+    else:
+        newWidth = ori_w
+        newHeight = ori_h
+        
+    im.resize((newWidth,newHeight),image.ANTIALIAS).save(arg['dst_img'],quality=arg['save_q'])
+
 '''
 @csrf_exempt
 def feature_ajax(request):

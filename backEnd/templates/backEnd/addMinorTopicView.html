@@ -16,9 +16,28 @@
 	</select>
 	</h2>
 	<h2>minor topic service, mainly tell user the duration or the protential salary
- 		<textarea id="feature" name="m_service" style="width:100%;height:500px;">
+ 		<textarea id="editor_id" name="m_service" style="width:100%;height:500px;">
 		</textarea>
 	</br>
 	<input type='submit' value="确认">
     <input type='button' onclick = "history.go(-1)" value="取消">
 </form>
+
+
+
+    <!-- 富文本编辑器 -->
+<script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/kindeditor.js'%}"></script>
+<script charset="utf-8" src="{% static 'frontEnd/plugins/kindeditor/lang/zh-CN.js'%}"></script>
+<script>
+        KindEditor.ready(function(K) {
+                window.editor = K.create('#editor_id');
+        });
+</script>
+<!-- 富文本编辑器-图片上传 -->
+<script>
+    KindEditor.ready(function(k){
+        window.editor = k.create('#editor_id',{
+            uploadJson : '/host_center/upload_img',
+        });
+    });
+</script>

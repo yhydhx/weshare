@@ -172,12 +172,16 @@ class Host(models.Model):
 
             # add topic 
             for topic_atom in topic_list:
+                
                 topic = Topic.objects.get(id=topic_atom)
+
                 search_string += topic.t_name + " "
 
 
             for minor_atom in minor_topic_list:
+                
                 minor = Minor_Topic.objects.get(id=minor_atom)
+
                 search_string += minor.m_name + " "
 
             for feature_atom in feature_list:
@@ -1252,7 +1256,7 @@ class Appointment(models.Model):
                 stat_dict['lower'] += 1
             elif apoint_atom.evaluation == APPOINTMENT_EVALUATION['EQUAL']:
                 stat_dict['equal'] += 1
-            elif apoint_atom.evaluation == APPOINTMENT_EVALUATION['EQUAL']:
+            elif apoint_atom.evaluation == APPOINTMENT_EVALUATION['HIGH']:
                 stat_dict['higher'] += 1
         return stat_dict
 
