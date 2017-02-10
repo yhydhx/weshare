@@ -251,3 +251,13 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 .centerLeftbarButton a{
 	color: gray;
 }
+
+
+.z-content-box{
+  background-color: #EDEFED;
+}
+.z-content-box > .container{
+  max-width: 1200px;
+  padding:50px 0 50px 0;
+  text-align: center;
+}
