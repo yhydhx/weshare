@@ -52,6 +52,19 @@
                 <li><a href="/recruit/1"><span>招贤纳士</span></a></li>
             </ul>
         </li>
+
+        <li class="dropdown"><a href="#">
+            <div class="ct-textEffect"><span data-content="搜索">搜索</span></div>
+        </a>
+            <ul class="dropdown-menu">
+                <form action="/general_search" method="get">
+                    {% csrf_token %}
+                    <input type="hidden" id="word_1" name="word_1">
+                    <input type="hidden" id="word_2" name="word_2">
+                    <input type="text" placeholder="输入关键词搜索" onkeyup="getkey(this.value);" style="padding:10px;"/>
+                </form>
+            </ul>
+        </li>
     </ul>
 </div>
 
