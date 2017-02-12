@@ -22,6 +22,7 @@ from django.utils.http import urlquote
 
 import hashlib,json
 import datetime
+#import xlwt
 
 '''def index(request):
     latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]
@@ -923,6 +924,17 @@ def func(request, method, Oid):
         for doc_atom in allFeature:
             doc_atom.format_menu()
         return render(request, 'backEnd/showDocList.html', {'object': allFeature})
+    elif method == "host_mail":
+        hosts = Host.objects.filter(state = HOST_STATE['HOST'])
+        
+        output_file = file( settings.UPLOAD_PATH + 'files/' + 'host_email.csv','w')
+
+        for host_atom in hosts:
+            username = host_atom.username.encode("utf-8")
+            email = host_atom.email.encode("utf-8")
+            output_file.write("%s\t%s\n"%(username,email))
+
+        return HttpResponseRedirect("/files/files/host_email.csv")
 
     else:
         return HttpResponse('没有该方法')
