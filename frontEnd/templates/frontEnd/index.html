@@ -361,6 +361,18 @@
 
 
 {% block js %}
+<script>
+//分割关键字
+function getkey(z){
+    z = z.split(" ");
+    if (typeof(z[1]) == "undefined") {
+        z[1] = "";
+    }
+    document.getElementById("word_1").value = z[0];
+    document.getElementById("word_2").value = z[1];
+}
+</script>
+
 <!-- 首页轮播JS -->
 <!-- <script src="{% static 'frontEnd/plugins/slick/slick.min.js'%}"  ></script>
 <script src="{% static 'frontEnd/plugins/slick/init.js'%}" ></script> -->

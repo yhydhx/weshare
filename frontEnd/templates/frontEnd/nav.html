@@ -59,9 +59,9 @@
             <ul class="dropdown-menu">
                 <form action="/general_search" method="get">
                     {% csrf_token %}
-                    <input type="hidden" id="word_1" name="word_1">
-                    <input type="hidden" id="word_2" name="word_2">
-                    <input type="text" placeholder="输入关键词搜索" onkeyup="getkey(this.value);" style="padding:10px;"/>
+                    <input type="hidden" id="word_1_phone" name="word_1">
+                    <input type="hidden" id="word_2_phone" name="word_2">
+                    <input type="text" placeholder="输入关键词搜索" onkeyup="getkeyPhone(this.value);" style="padding:10px;"/>
                 </form>
             </ul>
         </li>
@@ -209,9 +209,9 @@
                     <ul class="dropdown-menu">
                         <form action="/general_search" method="get">
                             {% csrf_token %}
-                            <input type="hidden" id="word_1" name="word_1">
-                            <input type="hidden" id="word_2" name="word_2">
-                            <input type="text" placeholder="输入关键词搜索" onkeyup="getkey(this.value);" style="padding:10px;"/>
+                            <input type="hidden" id="word_1_nav" name="word_1">
+                            <input type="hidden" id="word_2_nav" name="word_2">
+                            <input type="text" placeholder="输入关键词搜索" onkeyup="getkeyNav(this.value);" style="padding:10px;"/>
                         </form>
                     </ul>
                 </li>

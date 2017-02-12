@@ -62,13 +62,21 @@
 <!-- 搜索框JS -->
 <script>
     //分割关键字
-    function getkey(z){
+    function getkeyNav(z){
         z = z.split(" ");
         if (typeof(z[1]) == "undefined") {
             z[1] = "";
         }
-        document.getElementById("word_1").value = z[0];
-        document.getElementById("word_2").value = z[1];
+        document.getElementById("word_1_nav").value = z[0];
+        document.getElementById("word_2_nav").value = z[1];
+    }
+    function getkeyPhone(z){
+        z = z.split(" ");
+        if (typeof(z[1]) == "undefined") {
+            z[1] = "";
+        }
+        document.getElementById("word_1_phone").value = z[0];
+        document.getElementById("word_2_phone").value = z[1];
     }
 </script>
 

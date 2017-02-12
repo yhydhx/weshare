@@ -11,7 +11,7 @@
 
             <!-- header -->
             <h4>搜索结果</h4>
-            
+
 
             <!-- 搜索框 -->
             <hr>
@@ -23,7 +23,7 @@
                   <div id="searchMessage"><!-- 搜索提示信息 --></div>
               </form>
             <hr>
-            
+
             <!-- host 展示 -->
             <div class="row">
                 <div class="cards">
@@ -48,7 +48,7 @@
             </div>
 
             <div id="pages"><!-- 分页页码自动生成块 --></div>
-            
+
             <!-- 当前页：{{ data.search_result.number }}
             总页数：{{ data.search_result.paginator.num_pages }}
             关键词1：{{ data.word_1 }}
@@ -149,6 +149,6 @@ function get_page(current_page,total_page,word_1,word_2){
   $('#pages').append(result);
 }
 //页面加载时自动运行函数
-window.onload=get_page({{ data.search_result.number }},{{ data.search_result.paginator.num_pages }},"{{ data.word_1 }}","{{ data.word_2 }}"); 
+window.onload=get_page({{ data.search_result.number }},{{ data.search_result.paginator.num_pages }},"{{ data.word_1 }}","{{ data.word_2 }}");
 </script>
 {% endblock %}
