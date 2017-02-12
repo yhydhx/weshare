@@ -29,31 +29,12 @@
                 <div class="cards">
                     {% block hosts %}
                     {% for host in data.search_result %}
-                        <div class="col-md-4 col-sm-4 col-xs-6">
-                            <a class="card" href="/user/show/{{ host.id }}">
-                              <img src="{{ host.icon }}" alt="">
-                              <div class="caption">服务时间：{{ host.service_time }}</div>
-                              <div class="card-heading"><strong>{{ host.username }}</strong></div>
-                              <div class="card-content text-muted">{{ host.motto }}</div>
-                              <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div>
-                              <div class="card-actions">
-                                <button type="button" class="btn btn-danger">查看详情</button>
-                                <div class="pull-right text-danger"> {{ host.orders }} 次 服务</div>
-                              </div>
-                            </a>
-                        </div>
+                        {% include "frontEnd/shared/host-info.html" %}
                     {% endfor %}
                     {% endblock %}
                 </div>
             </div>
-
             <div id="pages"><!-- 分页页码自动生成块 --></div>
-
-            <!-- 当前页：{{ data.search_result.number }}
-            总页数：{{ data.search_result.paginator.num_pages }}
-            关键词1：{{ data.word_1 }}
-            关键词2：{{ data.word_2 }} -->
-
 
         </div>
         <div class="col-md-2"></div>

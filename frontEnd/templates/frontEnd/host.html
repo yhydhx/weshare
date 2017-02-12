@@ -101,44 +101,7 @@
             <div class="row">
                 <div class="cards">
                   {% for host in hosts %}
-                      <!-- {# Each "contact" is a Contact model object. #}
-                      <!-- {{ host.username|upper }}<br /> -->
-                      <div class="col-md-4 col-sm-4 col-xs-6">
-                          <a class="card" href="/user/show/{{ host.id }}">
-                            <img src="{{ host.icon }}" alt="">
-                            <!-- <div class="caption">服务时间：{{ host.service_time }}</div> -->
-                            <div class="caption">{{ host.motto }}</div>
-                            <div class="card-heading"><strong>{{ host.username }}</strong></div>
-
-                            <!-- 学校信息 -->
-                            <div class="" style="height:100px;">
-                                {% if host.education = 2 %}
-                                <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">博士： {{ host.phd_school }} - {{ host.phd_major }} ( {{ host.phd_start }} ~ {{ host.phd_end }} )</div>
-                                {% endif %}
-
-                                {% if host.education = 1 or host.education = 2 %}
-                                <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">硕士： {{ host.graduate_school }} - {{ host.graduate_major }} ( {{ host.graduate_start }} ~ {{ host.graduate_end }} )</div>
-                                {% endif %}
-
-                                {% if host.education = 1 or host.education = 2 or host.education = 3%}
-                                <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">本科： {{ host.bachelor_school }} - {{ host.bachelor_major }} ( {{ host.bachelor_start }} ~ {{ host.bachelor_end }} )</div>
-                                {% endif %}
-                            </div>
-
-
-                            <!-- <div class="card-content text-muted" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;/*单行超出隐藏*/">{{ host.motto }}</div> -->
-                            <!-- <div class="card-content text-muted" style="color: #e74c46;font-size: 2rem;font-family: 'Lato', sans-serif; ">￥{{ host.min_payment }}-{{ host.max_payment }}</div> -->
-                            <div class="card-actions">
-                              <div class="pull-left text-danger">
-                                  <span>好评 {{ host.appointment_data.higher }}</span>
-                                  <span>中评 {{ host.appointment_data.equal }}</span>
-                                  <span>差评 {{ host.appointment_data.lower }}</span>
-                              </div>
-                              <button type="button" class="btn btn-danger">查看详情</button>
-                              <div class="pull-right text-danger"> {{ host.bill_number }} 次 服务</div>
-                            </div>
-                          </a>
-                      </div>
+                      {% include "frontEnd/shared/host-info.html" %}
                   {% endfor %}
                 </div>
             </div>
