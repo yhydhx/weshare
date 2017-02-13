@@ -843,8 +843,8 @@ def modify_account(request):
             qq = request.POST['qq']
             wechat = request.POST['wechat']
 
-            if not judge_limit(min_payment, max_payment):
-                return HttpResponse('最低报酬要小于最高报酬')
+            # if not judge_limit(min_payment, max_payment):
+            #     return HttpResponse('最低报酬要小于最高报酬')
 
             if gender == u'1':
                 host.gender = 0
@@ -855,9 +855,9 @@ def modify_account(request):
             host.phone_number = phone
             host.introduction = self_introduction
             host.motto = motto
-            host.min_payment = min_payment
+            #host.min_payment = min_payment
             host.service_time = service_time
-            host.max_payment = max_payment
+            #host.max_payment = max_payment
             host.h_school = school
             host.qq_number = qq
             host.wechat = wechat
@@ -1173,8 +1173,8 @@ def host_center(request, method, Oid):
             service_time = request.POST['service-time']
             #max_payment = float(request.POST['max-payment'])
 
-            if not judge_limit(min_payment, max_payment):
-                return HttpResponse('最低报酬要小于最高报酬')
+            #if not judge_limit(min_payment, max_payment):
+            #    return HttpResponse('最低报酬要小于最高报酬')
 
             host.introduction = self_introduction
             host.motto = motto
