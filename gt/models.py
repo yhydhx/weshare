@@ -172,16 +172,20 @@ class Host(models.Model):
 
             # add topic 
             for topic_atom in topic_list:
-                
-                topic = Topic.objects.get(id=topic_atom)
-
+                try:
+                    topic = Topic.objects.get(id=topic_atom)
+                except:
+                    Host_Topic.objects.filter(host_id = host_atom.id, t_id = topic_atom).delete()
+                    continue
                 search_string += topic.t_name + " "
 
 
             for minor_atom in minor_topic_list:
-                
-                minor = Minor_Topic.objects.get(id=minor_atom)
-
+                try:
+                    minor = Minor_Topic.objects.get(id=minor_atom)
+                except:
+                    Host_Topic.objects.filter(host_id = host_atom.id, m_id = minor_atom).delete()
+                    continue
                 search_string += minor.m_name + " "
 
             for feature_atom in feature_list:
@@ -365,7 +369,10 @@ class Host(models.Model):
                 f_id = h_topic_atom.f_id
                 if not d_topic_detail.has_key(t_id):
                     #print t_id
-                    single_topic = Topic.objects.get(id=t_id)
+                    try:
+                        single_topic = Topic.objects.get(id=t_id)
+                    except:
+                        Host_Topic.objects.filter(host_id=each_host.id, t_id = t_id).delete()
                     d_topic_detail[t_id] = {}
                     d_topic_detail[t_id]['name'] = single_topic.t_name
                     d_topic_detail[t_id]['tag'] = single_topic.t_tag
@@ -780,7 +787,10 @@ class Feature(models.Model):
         result = []
         d_topic_feature_translate = {}
         for k, v in d_topic_feature.items():
-            tmp_topic = Topic.objects.get(id=k)
+            try:
+                tmp_topic = Topic.objects.get(id=k)
+            except:
+                Host_Topic.objects.filter(host_id=user_id,t_id = k).delete()
             topic_name = tmp_topic.t_name
             topic_intro = tmp_topic.t_intro
             topic_id = tmp_topic.id
@@ -801,7 +811,11 @@ class Feature(models.Model):
             for feature_atom in v['feature_list']:
                 tmp_feature = {}
                 feature_single  = Feature.objects.get(id=feature_atom['f_id'])
-                minor_singel = Minor_Topic.objects.get(id=feature_atom['m_id'])
+                try:
+                    minor_singel = Minor_Topic.objects.get(id=feature_atom['m_id'])
+                except:
+                    Host_Topic.objects.filter(host_id=user_id, m_id = feature_atom['m_id']).delete()
+
                 tmp_feature['f_name'] = feature_single.f_name
                 tmp_feature['m_name'] = minor_singel.m_name
                 tmp_feature['f_id'] = feature_single.id
