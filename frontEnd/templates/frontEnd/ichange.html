@@ -10,7 +10,7 @@
                     <form class="ct-panel" method="post" id="email-form" action="/ichange/">
                         {% csrf_token %}
                         <div class="ct-panel-inner">
-                            {% if change_mark %}
+                            {% if change_mark == False %}
                             <h2 class="ct-u-marginBottom30">
                                 <small class="ct-fw-300"><span class="ct-fw-bold">您好, {{ current_user.username }}</span></small>
                             </h2>

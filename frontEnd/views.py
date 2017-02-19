@@ -437,7 +437,7 @@ def i_forget(request, attr=False):
                 time_now = timezone.datetime.now()
                 # print 'time marked'
                 if (time_now - forget.timestamp).seconds <= 1800:
-                    request.session['email'] = host.email
+                    request.session['forget_email'] = host.email
                     return HttpResponseRedirect('/ichange/')
                 else:
                     return HttpResponse('您验证的时间过期了,请重新发送验证邮件')
@@ -478,10 +478,10 @@ def i_forget(request, attr=False):
         forgot_mail.forgotPassword([email],iforget_link)
         return render_to_response('frontEnd/register_success.html', context_instance=RequestContext(request))
 
-
+@csrf_exempt
 def ichange(request):
     try:
-        email = request.session['email']
+        email = request.session['forget_email']
     except:
         return HttpResponse('没有找到您的session')  # 之后改为404错误
     try:
@@ -501,14 +501,13 @@ def ichange(request):
                                                                     'change_mark': False,
                                                                     'PASSWORDCONFIRMERROR': PASSWORD_CONFIRM_ERROR})
             else:
-                user.password = new_password
+                user.password = user.encode_password(new_password)
                 user.save()
-                del request.session
                 return render_to_response('frontEnd/ichange.html', {'current_user': user,
                                                                     'change_mark': True},
                                           context_instance=RequestContext(request))
     else:
-        return render_to_response('frontEnd/ichange.html', {'current_user': user})
+        return render_to_response('frontEnd/ichange.html', {'current_user': user,'change_mark':False})
 
 
 @csrf_exempt  # 所有有这个东西的全部要删掉到时候重新部署csrf防跨站
