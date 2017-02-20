@@ -467,7 +467,7 @@ def i_forget(request, attr=False):
                 forget.save()
                 print 'forger_object has been found'
 
-                iforget_link = 'www.wesharediy.com/iforget/' + str(string) + '/'
+                iforget_link = 'http://www.wesharediy.com/iforget/' + str(string) + '/'
                 # print iforget_link
             except:
                 return HttpResponse('没找到对应的用户,请检查您输入的email')
