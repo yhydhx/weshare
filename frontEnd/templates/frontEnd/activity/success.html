@@ -1,0 +1,26 @@
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 -->
+
+{% block body %}
+<form class="ct-u-sectionBorder" action="/activity/dating" method="post" style="background-color: white">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-2 ct-u-paddingTop80">
+                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
+                    <h3 class="ct-sectionHeader-title" style="text-align:center">
+                        <small><span>报名成功</span></small>
+                        
+                    </h3>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
