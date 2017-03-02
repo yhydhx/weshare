@@ -1464,6 +1464,30 @@ def share(request, method, Oid):
     else:
         return render(request, "frontEnd/404.html")
 
+@csrf_exempt
+def activity(request, method, Oid):
+    login_flag = False
+    try:
+        username = request.session['email']
+        user = Host.objects.get(email=username)
+        login_flag = True
+    except:
+        pass
+
+    Info = {}
+    Info['login_flag'] = login_flag
+    if login_flag == True:
+        Info['current_user'] = user
+
+    if method == "dating":
+        if request.method =="POST":
+            pass
+        else:
+            return render(request,"frontEnd/dating.html")
+
+    else:
+        return render(request, "frontEnd/404.html")
+
 
 @csrf_exempt
 def image_library(request):

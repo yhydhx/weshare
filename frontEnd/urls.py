@@ -30,6 +30,7 @@ urlpatterns = patterns('',
                        url(r'^school/(?P<method>\w+)/?(?P<Oid>\w*)$', views.school, name='school'),
                        url(r'^user/(?P<method>\w+)/?(?P<Oid>\w*)$', views.user, name='user'),
                        url(r'^share/(?P<method>\w+)/?(?P<Oid>\w*)$', views.share, name='share'),
+                       url(r'^activity/(?P<method>\w+)/?(?P<Oid>\w*)$', views.activity, name='activity'),
                        url(r'^qqlogin/$', views.qq_login, name='qqlogin'),
                        url(r'^wblogin/$', views.weibo_login, name='weibo_login'),
 
