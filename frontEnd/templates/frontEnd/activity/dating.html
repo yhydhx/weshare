@@ -2,7 +2,7 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}
-<form class="ct-u-sectionBorder" action="/account/" method="post" style="background-color: white">
+<form class="ct-u-sectionBorder" action="/activity/dating" method="post" style="background-color: white">
     {% csrf_token %}
     <div class="container">
         <div class="row">
@@ -37,22 +37,22 @@
                 <h3>关于我—那个迷人的自己</h3><br>
 
                 <div class="form-group" style="padding-top: 1 px">
-                    <label for="username" class="required">1. 姓名（或昵称）：</label>
-                    <input id="username" name="username" class="form-control form-control--type2" required>
+                    <label for="name" class="required">1. 姓名（或昵称）：</label>
+                    <input id="name" name="name" class="form-control form-control--type2" required>
                 </div>
 
                 <div class="form-group" style="padding-top: 1 px">
-                    <label for="" class="required">2. 性别：</label>
-                    <select class="form-control" required>
+                    <label for="gender" class="required">2. 性别：</label>
+                    <select class="form-control" id="gender" name="gender" required>
                       <option value="">请选择</option>
-                      <option value="">男</option>
-                      <option value="">女</option>
+                      <option value="1">男</option>
+                      <option value="0">女</option>
                     </select>
                 </div>
 
                 <div class="form-group" style="padding-top: 1 px">
-                    <label for="" class="required">3. 星座：</label>
-                    <select class="form-control" required>
+                    <label for="star" class="required">3. 星座：</label>
+                    <select class="form-control"  id="star" name="star" required>
                       <option value="">请选择</option>
                       <option value="水瓶座">水瓶座</option>
                       <option value="双鱼座">双鱼座</option>
@@ -69,229 +69,267 @@
                     </select>
                 </div>
 
-                <label for="" class="required">4. 你所在的城市</label>
+                <label for="location" class="required">4. 你所在的城市</label>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="北京" checked>
+                    <input type="radio" name="location" id="location1" value="北京" checked>
                     北京
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="上海">
+                    <input type="radio" name="location" id="location2" value="上海">
                     上海
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="广州">
+                    <input type="radio" name="location" id="location3" value="广州">
                     广州
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios4" value="天津">
+                    <input type="radio" name="location" id="location4" value="天津">
                     天津
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios5" value="南京">
+                    <input type="radio" name="location" id="location5" value="南京">
                     南京
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios6" value="杭州">
+                    <input type="radio" name="location" id="location6" value="杭州">
                     杭州
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios7" value="武汉">
+                    <input type="radio" name="location" id="location7" value="武汉">
                     武汉
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios8" value="重庆">
+                    <input type="radio" name="location" id="location8" value="重庆">
                     重庆
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios9" value="成都">
+                    <input type="radio" name="location" id="location9" value="成都">
                     成都
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios10" value="西安">
+                    <input type="radio" name="location" id="location10" value="西安">
                     西安
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios10" value="其他">
+                    <input type="radio" name="location" id="location10" value="其他">
                     其他
-                    <input name="username" class="form-control form-control--type2">
+                    <input name="ex_location" class="form-control form-control--type2">
                   </label>
                 </div>
 
                 <div class="form-group" style="padding-top: 1 px">
-                    <label for="school" class="required">5. 您所在高校的中文全称（例：北京大学）：</label>
-                    <input id="school" name="school" class="form-control form-control--type2" required>
+                    <label for="univ" class="required">5. 您所在高校的中文全称（例：北京大学）：</label>
+                    <input id="univ" name="univ" class="form-control form-control--type2" required>
                 </div>
 
                 <div class="form-group" style="padding-top: 1 px">
-                    <label for="" class="required">6. 您所在的年级（例：大二、研一、博三）：</label>
-                    <input id="" name="" class="form-control form-control--type2" required>
+                    <label for="grade" class="required">6. 您所在的年级（例：大二、研一、博三）：</label>
+                    <input id="grade" name="grade" class="form-control form-control--type2" required>
                 </div>
 
                 <div class="form-group" style="padding-top: 1 px">
-                    <label for="" class="required">7. 您的联系方式（请大家务必准确填写，联系方式会用于通知匹配结果及进行后续通知）</label>
-                    <p>微信号</p> <input id="" name="" class="form-control form-control--type2" required>
-                    <p>常用邮箱</p> <input id="" name="" class="form-control form-control--type2" required>
+                    <label class="required">7. 您的联系方式（请大家务必准确填写，联系方式会用于通知匹配结果及进行后续通知）</label>
+                    <p>微信号</p> <input id="wechat" name="wechat" class="form-control form-control--type2" required>
+                    <p>常用邮箱</p> <input id="email" name="email" class="form-control form-control--type2" required>
                 </div>
 
-                <label for="" class="required">8. 外貌性格（最好是别人眼中的你，而不是你心目中的自己~）</label>
+                <label for="personal" class="required">8. 外貌性格（最好是别人眼中的你，而不是你心目中的自己~）</label>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="阳光帅气运动型" checked>
+                    <input type="radio" name="personal" id="personal1" value="阳光帅气运动型" checked>
                     阳光帅气运动型
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="成熟稳重绅士型">
+                    <input type="radio" name="personal" id="personal2" value="成熟稳重绅士型">
                     成熟稳重绅士型
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="温文尔雅体贴型">
+                    <input type="radio" name="personal" id="personal3" value="温文尔雅体贴型">
                     温文尔雅体贴型
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="逗逼幽默同学型">
+                    <input type="radio" name="personal" id="personal4" value="逗逼幽默同学型">
                     逗逼幽默同学型
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="EQ IQ双高完美男人型">
+                    <input type="radio" name="personal" id="personal5" value="EQ IQ双高完美男人型">
                     EQ IQ双高完美男人型
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="以上都不符合">
+                    <input type="radio" name="personal" id="personal6" value="以上都不符合">
                     以上都不符合
                   </label>
                 </div>
 
                 <div class="form-group" style="padding-top: 1 px">
-                    <label for="">9. 自我介绍（选填）</label>
-                    <textarea class="form-control" rows="3"></textarea>
+                    <label for="intro">9. 自我介绍（选填）</label>
+                    <textarea class="form-control" name="intro" rows="3"></textarea>
                 </div>
 
                 <h3>关于TA—你期待的TA是什么样的呢？</h3><br>
 
                 <div class="form-group" style="padding-top: 1 px">
-                    <label for="" class="required">10. TA的性别：</label>
-                    <select class="form-control" required>
+                    <label for="ta_gender" class="required">10. TA的性别：</label>
+                    <select class="form-control" name="ta_gender" required>
                       <option value="">请选择</option>
-                      <option value="">男</option>
-                      <option value="">女</option>
+                      <option value="1">男</option>
+                      <option value="0">女</option>
                     </select>
                 </div>
 
-                <label for="" class="required">11. TA的星座（多选题）</label>
+                <label for="ta_star" class="required">11. TA的星座（多选题）</label>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox1" value="水瓶座">
+                      <input type="ta_star" id="ta_star1" value="水瓶座">
                       水瓶座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox2" value="双鱼座">
+                      <input type="ta_star" id="ta_star2" value="双鱼座">
                       双鱼座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox3" value="白羊座">
+                      <input type="ta_star" id="ta_star3" value="白羊座">
                       白羊座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox4" value="金牛座">
+                      <input type="ta_star" id="ta_star4" value="金牛座">
                       金牛座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox5" value="双子座">
+                      <input type="ta_star" id="ta_star5" value="双子座">
                       双子座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox6" value="巨蟹座">
+                      <input type="ta_star" id="ta_star6" value="巨蟹座">
                       巨蟹座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox7" value="狮子座">
+                      <input type="ta_star" id="ta_star7" value="狮子座">
                       狮子座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox8" value="处女座">
+                      <input type="ta_star" id="ta_star8" value="处女座">
                       处女座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox9" value="天枰座">
+                      <input type="ta_star" id="ta_star9" value="天枰座">
                       天枰座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox10" value="天蝎座">
+                      <input type="ta_star" id="ta_star10" value="天蝎座">
                       天蝎座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox11" value="射手座">
+                      <input type="ta_star" id="ta_star11" value="射手座">
                       射手座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox12" value="摩羯座">
+                      <input type="ta_star" id="ta_star12" value="摩羯座">
                       摩羯座
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                      <input type="checkbox" id="Checkbox13" value="无要求">
+                      <input type="ta_star" id="ta_star13" value="无要求">
                       无要求
+                  </label>
+                </div>
+
+                <label for="ta_personal" class="required">12. TA的外貌性格（大家不要太贪心呦，外貌性格只能选择一种你最喜欢的类型~）</label>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="ta_personal" id="ta_personal1" value="阳光帅气运动型" checked>
+                    阳光帅气运动型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="ta_personal" id="ta_personal2" value="成熟稳重绅士型">
+                    成熟稳重绅士型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="ta_personal" id="ta_personal3" value="温文尔雅体贴型">
+                    温文尔雅体贴型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="ta_personal" id="ta_personal4" value="逗逼幽默同学型">
+                    逗逼幽默同学型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="ta_personal" id="ta_personal5" value="EQ IQ双高完美男人型">
+                    EQ IQ双高完美男人型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="ta_personal" id="ta_personal6" value="以上都不符合">
+                    以上都不符合
                   </label>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="" class="required">12. 生活照（快放上自己帅帅哒美美哒照片吧~）</label>
-                    <input type="file">
+                    <label for="image" class="required">13. 生活照（快放上自己帅帅哒美美哒照片吧~）</label>
+                    <input type="image" required>
                 </div>
 
                 <button type="submit" class="btn btn-lg btn-wide btn-primary" style="margin:20px 0 40px"><span>提交</span></button>
