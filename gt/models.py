@@ -1324,6 +1324,24 @@ class Appointment(models.Model):
 
         return result
 
+class Dating(models.Model):
+    name = models.CharField(max_length = 100)
+    gender = models.IntegerField()
+    star = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+    univ = models.CharField(max_length = 200)
+    grade = models.CharField(max_length=200)
+    wechat = models.CharField(max_length=200)
+    personal = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    intro = models.CharField(max_length=300)
+    ta_gender = models.IntegerField()
+    ta_star = models.CharField(max_length=200)
+    ta_personal = models.CharField(max_length=200)
+    image = models.CharField(max_length=200)
+    upload_time = models.DateTimeField()
+
+
 class Log(models.Model):
     #记录支付宝的，用户登录
     operation = models.CharField(max_length = 200)
