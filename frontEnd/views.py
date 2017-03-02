@@ -1483,7 +1483,7 @@ def activity(request, method, Oid):
         if request.method =="POST":
             pass
         else:
-            return render(request,"frontEnd/dating.html")
+            return render(request,"frontEnd/activity/dating.html")
 
     else:
         return render(request, "frontEnd/404.html")
