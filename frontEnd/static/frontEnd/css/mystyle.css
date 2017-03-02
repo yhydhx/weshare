@@ -162,7 +162,7 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
 /*school-search*/
 @media screen and (min-width: 768px){
 	.ssbody{
-		margin-top: 60px;
+
 	}
 	.ssImax{
 	/*	background-image:url('./assets/images/weshare/ssImax.jpg');*/
@@ -260,4 +260,21 @@ font-family: Hiragino Sans GB;src: url("{% static 'frontEnd/fonts/dongqing.otf' 
   max-width: 1200px;
   padding:50px 0 50px 0;
   text-align: center;
+}
+
+
+/*activity-dating*/
+.dating-intro{
+    margin-top: 20px;
+}
+.dating-intro h5{
+    text-align: center;
+    font-size: 18px;
+    line-height: normal;
+    color: #940000;
+}
+.dating-intro p{
+    color: black;
+    font-size: 15px;
+    font-weight: normal;
 }

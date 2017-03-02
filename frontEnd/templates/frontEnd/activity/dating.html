@@ -1,0 +1,309 @@
+{% extends "frontEnd/base.html" %}<!-- 继承基础模板 -->
+{% load staticfiles %}<!-- 加载全局变量 -->
+
+{% block body %}
+<form class="ct-u-sectionBorder" action="/account/" method="post" style="background-color: white">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-2 ct-u-paddingTop80">
+                <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
+                    <h3 class="ct-sectionHeader-title" style="text-align:center">
+                        <small><span>Weshare "Dating Week" 活动报名表</span></small>
+                    </h3>
+
+                    <div class="dating-intro">
+                        <h5>这一天，我想开始与你的故事</h5>
+                        <h5>心心念，终于等到你</h5>
+
+                        <br>
+                        <p>我们承诺报名表中填写的所有信息都将被严格保密，仅用于审核确认申请人学生身份以及匹配参与活动的CP们使用。同时，希望亲爱的你可以保证：</p>
+                        <p>1.填写的信息真实可靠</p>
+                        <p>（一方面，方便后续的活动通知；另一方面，我们会根据填写的信息确认申请者身份从而保证活动进行时的安全性）</p>
+                        <p>2.确认参与活动后，请认真完成任务；并给予TA最大的尊重和爱护，不中途放弃或退出；</p>
+
+                        <br>
+                        <p>如果你同意以上两点要求，请在心中默念三遍：我是认真的，我是认真的，我是认真的。</p>
+                        <p>恭喜你！通过了考研，快快填写问卷报名活动吧~</p>
+                        <hr>
+                    </div>
+
+                    {% if state %}
+                    <p style="color: #da4f49">{{ message }}</p>
+                    {% endif %}
+                </div>
+
+
+                <h3>关于我—那个迷人的自己</h3><br>
+
+                <div class="form-group" style="padding-top: 1 px">
+                    <label for="username" class="required">1. 姓名（或昵称）：</label>
+                    <input id="username" name="username" class="form-control form-control--type2" required>
+                </div>
+
+                <div class="form-group" style="padding-top: 1 px">
+                    <label for="" class="required">2. 性别：</label>
+                    <select class="form-control" required>
+                      <option value="">请选择</option>
+                      <option value="">男</option>
+                      <option value="">女</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="padding-top: 1 px">
+                    <label for="" class="required">3. 星座：</label>
+                    <select class="form-control" required>
+                      <option value="">请选择</option>
+                      <option value="水瓶座">水瓶座</option>
+                      <option value="双鱼座">双鱼座</option>
+                      <option value="白羊座">白羊座</option>
+                      <option value="金牛座">金牛座</option>
+                      <option value="双子座">双子座</option>
+                      <option value="巨蟹座">巨蟹座</option>
+                      <option value="狮子座">狮子座</option>
+                      <option value="处女座">处女座</option>
+                      <option value="天枰座">天枰座</option>
+                      <option value="天蝎座">天蝎座</option>
+                      <option value="射手座">射手座</option>
+                      <option value="摩羯座">摩羯座</option>
+                    </select>
+                </div>
+
+                <label for="" class="required">4. 你所在的城市</label>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="北京" checked>
+                    北京
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="上海">
+                    上海
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="广州">
+                    广州
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios4" value="天津">
+                    天津
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios5" value="南京">
+                    南京
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios6" value="杭州">
+                    杭州
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios7" value="武汉">
+                    武汉
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios8" value="重庆">
+                    重庆
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios9" value="成都">
+                    成都
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios10" value="西安">
+                    西安
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios10" value="其他">
+                    其他
+                    <input name="username" class="form-control form-control--type2">
+                  </label>
+                </div>
+
+                <div class="form-group" style="padding-top: 1 px">
+                    <label for="school" class="required">5. 您所在高校的中文全称（例：北京大学）：</label>
+                    <input id="school" name="school" class="form-control form-control--type2" required>
+                </div>
+
+                <div class="form-group" style="padding-top: 1 px">
+                    <label for="" class="required">6. 您所在的年级（例：大二、研一、博三）：</label>
+                    <input id="" name="" class="form-control form-control--type2" required>
+                </div>
+
+                <div class="form-group" style="padding-top: 1 px">
+                    <label for="" class="required">7. 您的联系方式（请大家务必准确填写，联系方式会用于通知匹配结果及进行后续通知）</label>
+                    <p>微信号</p> <input id="" name="" class="form-control form-control--type2" required>
+                    <p>常用邮箱</p> <input id="" name="" class="form-control form-control--type2" required>
+                </div>
+
+                <label for="" class="required">8. 外貌性格（最好是别人眼中的你，而不是你心目中的自己~）</label>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="阳光帅气运动型" checked>
+                    阳光帅气运动型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="成熟稳重绅士型">
+                    成熟稳重绅士型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="温文尔雅体贴型">
+                    温文尔雅体贴型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="逗逼幽默同学型">
+                    逗逼幽默同学型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="EQ IQ双高完美男人型">
+                    EQ IQ双高完美男人型
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="以上都不符合">
+                    以上都不符合
+                  </label>
+                </div>
+
+                <div class="form-group" style="padding-top: 1 px">
+                    <label for="">9. 自我介绍（选填）</label>
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+
+                <h3>关于TA—你期待的TA是什么样的呢？</h3><br>
+
+                <div class="form-group" style="padding-top: 1 px">
+                    <label for="" class="required">10. TA的性别：</label>
+                    <select class="form-control" required>
+                      <option value="">请选择</option>
+                      <option value="">男</option>
+                      <option value="">女</option>
+                    </select>
+                </div>
+
+                <label for="" class="required">11. TA的星座（多选题）</label>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox1" value="水瓶座">
+                      水瓶座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox2" value="双鱼座">
+                      双鱼座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox3" value="白羊座">
+                      白羊座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox4" value="金牛座">
+                      金牛座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox5" value="双子座">
+                      双子座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox6" value="巨蟹座">
+                      巨蟹座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox7" value="狮子座">
+                      狮子座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox8" value="处女座">
+                      处女座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox9" value="天枰座">
+                      天枰座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox10" value="天蝎座">
+                      天蝎座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox11" value="射手座">
+                      射手座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox12" value="摩羯座">
+                      摩羯座
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" id="Checkbox13" value="无要求">
+                      无要求
+                  </label>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="" class="required">12. 生活照（快放上自己帅帅哒美美哒照片吧~）</label>
+                    <input type="file">
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-wide btn-primary" style="margin:20px 0 40px"><span>提交</span></button>
+            </div>
+        </div>
+
+
+
+    </div>
+</form>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

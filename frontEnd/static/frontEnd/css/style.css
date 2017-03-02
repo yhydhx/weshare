@@ -7586,7 +7586,7 @@ p {
   padding-bottom: 60px !important;
 }
 .ct-u-paddingTop60 {
-  padding-top: 60px !important; /*hostImax   changed*/  
+  padding-top: 60px !important; /*hostImax   changed*/
 }
 .ct-u-paddingBottom60 {
   padding-bottom: 60px !important;
@@ -8037,7 +8037,7 @@ p {
   border: 1px solid #333;
 }
 .ct-u-sectionBorder {
-  border-top: 20px solid #ddd;
+  /*border-top: 20px solid #ddd;*/
 }
 .ct-u-colorWhite {
   color: #ffffff;
@@ -8080,7 +8080,8 @@ p {
   right: 0;
   margin: auto;
   width: 50px;
-  height: 1px;
+  /*height: 1px;*/
+  height: 0px;
 }
 .ct-u-textInverse {
   background-color: #ffffff;
@@ -8260,8 +8261,7 @@ p {
 }
 @media (min-width: 768px) {
   .navbar.ct-navbar {
-    position: absolute;
-    top: 0;
+
   }
 }
 .navbar.ct-navbar .navbar-header {
