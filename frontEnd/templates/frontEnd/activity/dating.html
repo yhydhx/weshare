@@ -2,7 +2,7 @@
 {% load staticfiles %}<!-- 加载全局变量 -->
 
 {% block body %}
-<form class="ct-u-sectionBorder" action="/activity/dating" method="post" style="background-color: white">
+<form class="ct-u-sectionBorder" action="/activity/dating" method="post" style="background-color: white"  enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container">
         <div class="row">
