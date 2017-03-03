@@ -1481,19 +1481,16 @@ def activity(request, method, Oid):
 
     if method == "dating":
         if request.method =="POST":
-            try:
             #get image 
-                mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
-                des_origin_path = settings.UPLOAD_PATH + 'dating/' + mark_list + '.jpeg'  # mark_list是唯一的标志
-                des_origin_f = open(des_origin_path, "ab")
-                tmpImg = request.FILES['image']
-                for chunk in tmpImg.chunks():
-                    des_origin_f.write(chunk)
-                des_origin_f.close()
+            mark_list = hashlib.new('md5', timezone.datetime.now().strftime("%Y-%m-%d %H:%I:%S")).hexdigest()
+            des_origin_path = settings.UPLOAD_PATH + 'dating/' + mark_list + '.jpeg'  # mark_list是唯一的标志
+            des_origin_f = open(des_origin_path, "ab")
+            tmpImg = request.FILES['image']
+            for chunk in tmpImg.chunks():
+                des_origin_f.write(chunk)
+            des_origin_f.close()
 
-                image_url = '/files/dating/' + mark_list + '.jpeg'
-            except:
-                image_url = ""
+            image_url = '/files/dating/' + mark_list + '.jpeg'
             location = request.POST.get("location")
             if location  == r"其他":
                 location = request.POST.get("ex_location")
@@ -1509,7 +1506,7 @@ def activity(request, method, Oid):
                     email = request.POST.get("email"),
                     intro = request.POST.get("intro"),
                     ta_gender = request.POST.get("ta_gender"),
-                    ta_star = request.POST.get("ta_star"),
+                    ta_star = request.POST.get("ta_star[]"),
                     ta_personal = request.POST.get('ta_personal'),
                     image = image_url,
                     upload_time = datetime.datetime.now(),
