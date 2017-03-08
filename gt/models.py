@@ -1046,6 +1046,8 @@ class Mail(models.Model):
     def bill_info(self,subject,to,content,host):
         """
         创建订单的时候，subject
+        确认订单的时候
+        付款成功的时候
 
         """ 
         context = {"content": content,'username':host.username}
@@ -1187,6 +1189,14 @@ class Bill(models.Model):
             appointment = Appointment.objects.get(appointment_id = self.bill_id)
             appointment.state = APPOINTMENT_STATE['PAID']
             appointment.save()
+            #发送邮件
+            try:
+                create_bill_mail  = Mail()
+                user = Host.objects.get(id=to_host_id)
+                to = [user.email]
+                create_bill_mail.bill_info("您的订单已被确认",to,"您有订单被确认，请登录weshare官网并在我的订单中查看~",user)
+            except:
+                pass
             return True
         else:
             return False
