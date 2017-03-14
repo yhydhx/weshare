@@ -1000,7 +1000,10 @@ def certification(request, method, Oid):
 
     if method == 'passed':
         crt = Certificate.objects.filter(c_state = CERTIFICATE_STATE['PASSED'])
-        return render(request, 'backEnd/showCertificationList.html', {'menu': menu})
+        crt_list = []
+        for crt_atom in crt: 
+            crt_list.append(crt_atom.format_dict())
+        return render(request, 'backEnd/showCertificationList.html', {'object': crt_list})
 
     elif method  == "passing":
         if request.method == "POST":
@@ -1012,7 +1015,10 @@ def certification(request, method, Oid):
 
     elif method == "failed":
         crt = Certificate.objects.filter(c_state = CERTIFICATE_STATE['FAILED'])
-        return render(request, 'backEnd/showCertificationList.html', {'menu': menu})
+        crt_list = []
+        for crt_atom in crt: 
+            crt_list.append(crt_atom.format_dict())
+        return render(request, 'backEnd/showCertificationList.html', {'object': crt_list})
     elif method == 'show' or method == '':
         crt = Certificate.objects.filter(c_state = CERTIFICATE_STATE['CERTIFYING'])
         crt_list = []
