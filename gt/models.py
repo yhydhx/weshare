@@ -1263,6 +1263,7 @@ class Appointment(models.Model):
 
         tmp_dict['host_name'] = host.username
         tmp_dict['host_motto'] = host.motto
+        tmp_dict['host_alipay'] = host.alipay
         return tmp_dict
 
     def get_appointment_statistics_of_one_host(self, host_id):
