@@ -1076,7 +1076,7 @@ def appointment(request, method, Oid):
         return render(request, 'backEnd/showAppointmentList.html', {'object': obj})
     elif method == "change":
         appt = Appointment.objects.filter(id = Oid)
-        Info['appt'] = appt
+        Info['appt'] = appt.format_dict_on_manage()
         return HttpResponse(json.dumps(Info), content_type="application/json")
     # elif method  == "passing":
     #     if request.method == "POST":
