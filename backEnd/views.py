@@ -1079,9 +1079,17 @@ def appointment(request, method, Oid):
         appt = Appointment.objects.get(id = Oid)
         Info['appt'] = appt.format_dict_on_manage()
         Info['appt']['appointment_init_time'] = Info['appt']['appointment_init_time'].strftime("%Y-%m-%d %H:%I:%S")
+        
+
         try:
             Info['appt']['recommend_begin_time'] = Info['appt']['recommend_begin_time'].strftime("%Y-%m-%d %H:%I:%S")
+        except:
+            pass
+        try:
             Info['appt']['appointment_time'] = Info['appt']['appointment_time'].strftime("%Y-%m-%d %H:%I:%S")
+        except:
+            pass
+        try:
             Info['appt']['recommend_end_time'] = Info['appt']['recommend_end_time'].strftime("%Y-%m-%d %H:%I:%S")
         except:
             pass
