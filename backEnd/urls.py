@@ -11,6 +11,9 @@ urlpatterns = patterns('',
     url(r'^addUserView$', views.addUserView,name ='addUserView'),
     url(r'^changePasswd$', views.changePasswd,name ='changePasswd'),
     url(r'^logout$', views.logout,name ='logout'),
+    #url(r'^fake_user$', views.fake_user,name ='fake_user'),
+    
+    
 
 
     url(r'^country/(?P<method>\w+)/?(?P<Oid>\w*)$', views.country,name ='country'), 

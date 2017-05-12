@@ -1036,10 +1036,13 @@ def host_center(request, method, Oid):
         else:
             return HttpResponse('allowed only via POST')
     elif method == "manage":
+
         Info['sent_bills'] = host.get_one_user_host_bills()
+
         if host.state != HOST_STATE['GUEST']:
             Info['got_bills'] = host.get_one_host_user_bills()
-
+            print Info
+            print "check over"
         return render(request, "frontEnd/center-manage.html", Info)
 
     elif method == "delete_auth":

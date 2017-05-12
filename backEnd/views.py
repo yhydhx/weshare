@@ -46,6 +46,13 @@ def logout(request):
     del request.session['adminname']
     return HttpResponseRedirect("login.html")
 
+# def fake_user(request):
+#     """
+#     primarily for test
+#     """
+#     email = "qilu75@gmail.com"
+#     request.session['email'] = email
+#     return HttpResponseRedirect("/")
 
 def loginCertifacate(request):
     if request.method == 'POST':
