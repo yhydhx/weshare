@@ -91,15 +91,49 @@
                     </div>
 
 
-                    <div id="ct-js-checkoutBox" class="ct-widget ct-widget-pricing ct-u-marginBottom30">
-                        <h3 class="ct-widget-header ct-widget-header--dark">面谈价格<span id="datepickerOutput"
-                                                                                      class="pull-right">￥/h</span>
-                        </h3>
-                        <div class="ct-widget-content">
-                            <h4 class="ct-checkout-error">
-                                <small><span>{{ host.min_payment }} - {{ host.max_payment }}</span></small>
-                            </h4>
-                        </div>
+                    <!-- 基础信息 -->
+                    <div class="ct-widget ct-widget-checkbox-2items ct-u-marginBottom30">
+                        <h3 class="ct-widget-header">基础信息</h3>
+                        <form id="ct-js-driverCheckbox" class="ct-js-radio-group ct-widget-content">
+                        {% csrf_token %}
+                            <div class="ct-u-displayTableVertical">
+                                <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                    <li>支付宝<span>{{ host.alipay }}</span></li>
+                                    <li>手机号<span>{{ host.phone_number }}</span></li>
+                                    <li>QQ号<span>{{ host.qq_number }}</span></li>
+                                    <li>微信<span>{{ host.wechat }}</span></li>
+                                    <li>生日<span>{{ host.birth }}</span></li>
+                                    <li>性别<span>{{ host.gender }}</span></li>
+                                    <li>ID<span>{{ host.id }}</span></li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- 学历信息 -->
+                    <div class="ct-widget ct-widget-checkbox-2items ct-u-marginBottom30">
+                        <h3 class="ct-widget-header">学历信息</h3>
+                        <form id="ct-js-driverCheckbox" class="ct-js-radio-group ct-widget-content">
+                        {% csrf_token %}
+                            <div class="ct-u-displayTableVertical">
+                                <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                    <li>本科学校<span>{{ host.graduate_school }}</span></li>
+                                    <li>本科专业<span>{{ host.graduate_major }}</span></li>
+                                    <li>本科开始<span>{{ host.graduate_start }}</span></li>
+                                    <li>本科结束<span>{{ host.graduate_end }}</span></li>
+                                    <hr>
+                                    <li>硕士学校<span>{{ host.bachelor_school }}</span></li>
+                                    <li>硕士专业<span>{{ host.bachelor_major }}</span></li>
+                                    <li>硕士开始<span>{{ host.bachelor_start }}</span></li>
+                                    <li>硕士结束<span>{{ host.bachelor_end }}</span></li>
+                                    <hr>
+                                    <li>博士学校<span>{{ host.phd_school }}</span></li>
+                                    <li>博士专业<span>{{ host.phd_major }}</span></li>
+                                    <li>博士开始<span>{{ host.phd_start }}</span></li>
+                                    <li>博士结束<span>{{ host.phd_end }}</span></li>
+                                </ul>
+                            </div>
+                        </form>
                     </div>
 
                     {% if host.state == 1 %}
