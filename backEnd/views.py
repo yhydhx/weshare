@@ -46,6 +46,13 @@ def logout(request):
     del request.session['adminname']
     return HttpResponseRedirect("login.html")
 
+# def fake_user(request):
+#     """
+#     primarily for test
+#     """
+#     email = "qilu75@gmail.com"
+#     request.session['email'] = email
+#     return HttpResponseRedirect("/")
 
 def loginCertifacate(request):
     if request.method == 'POST':
@@ -1000,7 +1007,10 @@ def certification(request, method, Oid):
 
     if method == 'passed':
         crt = Certificate.objects.filter(c_state = CERTIFICATE_STATE['PASSED'])
-        return render(request, 'backEnd/showCertificationList.html', {'menu': menu})
+        crt_list = []
+        for crt_atom in crt: 
+            crt_list.append(crt_atom.format_dict())
+        return render(request, 'backEnd/showCertificationList.html', {'object': crt_list})
 
     elif method  == "passing":
         if request.method == "POST":
@@ -1012,7 +1022,10 @@ def certification(request, method, Oid):
 
     elif method == "failed":
         crt = Certificate.objects.filter(c_state = CERTIFICATE_STATE['FAILED'])
-        return render(request, 'backEnd/showCertificationList.html', {'menu': menu})
+        crt_list = []
+        for crt_atom in crt: 
+            crt_list.append(crt_atom.format_dict())
+        return render(request, 'backEnd/showCertificationList.html', {'object': crt_list})
     elif method == 'show' or method == '':
         crt = Certificate.objects.filter(c_state = CERTIFICATE_STATE['CERTIFYING'])
         crt_list = []
@@ -1068,8 +1081,26 @@ def appointment(request, method, Oid):
         appt = Appointment.objects.filter(state = APPOINTMENT_STATE['FINISHED'])
         for app in appt: obj.append(app.format_dict_on_manage())
         return render(request, 'backEnd/showAppointmentList.html', {'object': obj})
-    
+    elif method == "change":
+        Info = {}
+        appt = Appointment.objects.get(id = Oid)
+        Info['appt'] = appt.format_dict_on_manage()
+        Info['appt']['appointment_init_time'] = Info['appt']['appointment_init_time'].strftime("%Y-%m-%d %H:%I:%S")
+        
 
+        try:
+            Info['appt']['recommend_begin_time'] = Info['appt']['recommend_begin_time'].strftime("%Y-%m-%d %H:%I:%S")
+        except:
+            pass
+        try:
+            Info['appt']['appointment_time'] = Info['appt']['appointment_time'].strftime("%Y-%m-%d %H:%I:%S")
+        except:
+            pass
+        try:
+            Info['appt']['recommend_end_time'] = Info['appt']['recommend_end_time'].strftime("%Y-%m-%d %H:%I:%S")
+        except:
+            pass
+        return HttpResponse(json.dumps(Info), content_type="application/json")
     # elif method  == "passing":
     #     if request.method == "POST":
     #         c_id = request.POST.get("id")
