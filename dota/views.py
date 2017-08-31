@@ -220,7 +220,7 @@ def items(request, method, Oid):
 
 def crawl_data():
     Data = []
-    for i in range(36):
+    for i in range(24):
         page_number = str(i+1)
         url = "https://www.c5game.com/dota.html?rarity=immortal&page="+page_number+"&locale=zh"
         headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36"}
