@@ -1,0 +1,24 @@
+<h2>Item Name {{item_name}}</h2>
+
+<table>
+	<tr>
+		<td>价格<td>
+		<td>数量</td>
+		<td>时间</td>
+
+	</tr>	
+
+	
+		{% block content %}
+
+			{% for publisher in object %}
+			<tr>
+				<td>{{publisher.item_price}}<td>
+				<td>{{publisher.item_amount}}</td>
+				<td>{{publisher.item_crawl_date}}</td>			
+			</tr>
+			{% endfor %}
+			
+		{% endblock %}
+
+</table>

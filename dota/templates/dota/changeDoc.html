@@ -1,0 +1,72 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0091) -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
+    <script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
+    <script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <style type="text/css">
+        *{margin:0;padding:0;list-style-type:none;}
+        a,img{border:0;}
+        table{empty-cells:show;border-collapse:collapse;border-spacing:0;}
+        /* sortTable */
+        .sortTable{border:#000000 2px solid;}
+        .sortTable td,.sortTable th{font-size:12px;font-family:Arial;padding:5px;}
+        .sortTable th{background:#c0c0c0}
+        .sortTable th a{color:#000080;text-decoration:none}
+        .sortTable th.sortedcolumn{background:#b0b0b0}
+        .sortTable tr.alternaterow{background:#e0e0e0}
+        .sortTable tr.alternaterow td.sortedcolumn{background:#d0d0d0}
+        .sortTable td.sortedcolumn{background:#f0f0f0}
+    </style>
+</head>
+<!-- Place this in the body of the page content -->
+<form id='doc' method="post" action='../save/'>
+	{% csrf_token %}
+    <input type='hidden' name="id" value={{doc.id}}> 
+    <h2>doc name<input name='d_name' value ={{doc.d_name}} ></h2>
+    <h2>doc index<input name='d_index' value ={{doc.d_index}} ></h2>
+    <h2>菜单栏</h2>
+    <select id="menu" name = 'd_menu' form="doc">
+        {% block content %}
+            {% for publisher in menu %}
+            <option value={{publisher.id}}>{{publisher.m_name}}</option>
+            {% endfor %}
+        {% endblock %}
+    </select>
+    </h2>
+     <div class="col-md-7 ct-u-paddingTop80">
+        <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
+            <h2 class="ct-sectionHeader-title">
+                <small><span>内容</span></small>
+            </h2>
+        </div>
+        <textarea name="d_text" id="self-introduction">{{doc.d_text | safe}}
+        </textarea>
+    </div>
+
+
+    <input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+
+
+
+<script type="text/javascript" src="{% static 'blog/js/jstable.js' %}"></script>
+<script type="text/javascript">
+var menu = document.getElementById("menu").children;
+for(var i = 0; i < menu.length; i++){
+    if (menu[i].value == '{{doc.d_menu}}'){
+        menu[i].selected = true;
+    }
+}
+
+</script>
+
+
+
+

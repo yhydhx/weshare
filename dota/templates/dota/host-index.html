@@ -1,0 +1,303 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]>
+<html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="description" content="Rentica - The Best One Yet">
+    <meta name="author" content="CreateIT">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="{% static 'frontEnd/images/content/cars/icon.ico' %}">
+
+    <title>Rentica - HTML Template</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/bootstrap.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontEnd/css/style.css'%}">
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'frontEnd/bootstrap/js/html5shiv.min.js' %}"></script>
+    <script src="{% static 'frontEnd/bootstrap/js/respond.min.js' %}"></script>
+    <script src="{% static 'frontEnd/plugins/REM-unit-polyfill/js/rem.min.js' %}"></script>
+    <![endif]-->
+    <script src="{% static 'frontEnd/js/modernizr.custom.js'%}"></script>
+</head>
+
+<body class="cssAnimate">
+<div class="ct-preloader-container">                                            <!-- Preloader -->
+    <div class='ct-preloader'>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div>
+                                        <div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="ct-js-wrapper" class="ct-pageWrapper">
+
+    {% include "frontEnd/nav.html" %}
+    {% csrf_token %}
+    <section class="ct-mediaSection ct-mediaSection--desktop ct-u-paddingTop60 ct-u-paddingBottom40" data-height="553"
+             data-type="parallax" data-stellar-background-ratio="0.2"
+             data-bg-image="{% static 'frontEnd/images/content/cars/mediaHeader-02.jpg' %}"
+             data-bg-image-mobile="{% static 'frontEnd/images/content/cars/mediaHeader-02.jpg' %}">
+         <div class="ct-mediaSection-inner ct-mediaSection-inner--bottom text-center ct-u-paddingBottom20"
+             data-stellar-ratio="0.7">
+            {% if not user.state %}
+            <img src="{% static 'frontEnd/images/question' %}" style="text-align: center;  width: 150px; height: 150px">
+            {% else %}
+            <img src="{% static 'frontEnd/images/pd.png' %}" style="text-align: center; width: 150px; height: 150px">
+            {% endif %}
+            <h3 class="ct-fw-lighter ct-u-hr ct-u-hr--wide ct-u-marginBottom10">{{ user.username }}</h3>
+            <h3 class="ct-u-marginBottom20" style="color: transparent">
+                <small class="ct-fw-lighter ct-u-colorMotive">- {{ user.motto }} -</small>
+            </h3>
+            {% if current_user.state == 1 %}
+            <a href="/host-center/" class="ct-login"><span>审核中</span><i class="fa fa-lock"></i></a>
+            {% else%}
+            <a href="/host-center/" class="ct-login"><span>审核通过</span><i class="fa fa-unlock"></i></a>
+            {% endif %}
+        </div>
+    </section>
+
+    <div class="ct-u-paddingBottom150 ct-u-sectionBorder">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3 col-md-push-9 ct-u-paddingTop50">
+
+                    <div class="clearfix"></div>
+
+                    <div class="ct-widget ct-widget-checkbox-2items ct-u-marginBottom30">
+                        <h3 class="ct-widget-header">认证</h3>
+                        <form id="ct-js-driverCheckbox" class="ct-js-radio-group ct-widget-content">
+                            
+                            <div class="ct-u-displayTableVertical">
+                                <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                    <li><i class="fa fa-check"></i><span>百度CEO</span></li>
+                                    <li><i class="fa fa-check"></i><span>哈佛本硕博</span></li>
+                                    <li><i class="fa fa-check"></i><span>电子科大教授</span></li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="ct-widget ct-widget-checkbox-2items ct-u-marginBottom30">
+                        <h3 class="ct-widget-header">服务时间</h3>
+                        <form id="ct-js-driverCheckbox" class="ct-js-radio-group ct-widget-content">
+                            <div class="ct-u-displayTableVertical">
+                                <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                    <li><span>{{ user.service_time }}</span></li>
+
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div id="ct-js-checkoutBox" class="ct-widget ct-widget-pricing ct-u-marginBottom30">
+                        <h3 class="ct-widget-header ct-widget-header--dark">面谈价格 <span id="datepickerOutput"
+                                                                                       class="pull-right">￥/ h</span>
+                        </h3>
+                        <div class="ct-widget-content">
+                            <h4 class="ct-checkout-error">
+                                <small><span>{{ user.min_payment }} - {{ user.max_payment }}</span></small>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn btn-lg btn-wide btn-motive"><span>预约</span></a>
+                </div>
+
+                <div class="col-md-9 col-md-pull-3 ct-u-paddingTop50">
+
+                    <div class="tabpanel ct-u-paddingTop50 ct-u-paddingBottom60">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab">关于我</a>
+                            </li>
+                            <li role="presentation"><a href="#amenities" role="tab" data-toggle="tab">服务列表</a></li>
+                            <li role="presentation"><a href="#details" role="tab" data-toggle="tab">分答</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <!-- Tab #1 -->
+                            <div role="tabpanel" class="tab-pane fade in active" id="description">
+                                {{ user.introduction | safe}}
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane fade" id="amenities">
+
+                                
+                                {% block content %}
+                                    {% for topic in user.features %}
+                                    <h3 class="ct-fw-lighter ct-u-marginTop50 ct-u-marginBottom20 ct-u-paddingBottom15 ct-u-borderBottom">
+                                    {{topic.name}}</h3>
+                                    <div class="row">
+                                        <div class="col-md-3 col-xs-6">
+                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                                {% for feature in topic.row1 %}
+                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                                {% for feature in topic.row2 %}
+                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                                {% for feature in topic.row3 %}
+                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <ul class="ct-simpleList list-unstyled ct-u-marginBottom0">
+                                                {% for feature in topic.row4 %}
+                                                <li><i class="fa fa-check"></i><span>{{feature}}</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                    </div>
+                                    {% endfor %}
+                                {% endblock %}
+                                
+
+                            </div>
+
+                            <!-- Tab #3 -->
+                            <div role="tabpanel" class="tab-pane fade" id="details">
+                                <h3 class="ct-fw-lighter ct-u-marginBoth50">Technical Details</h3>
+                                <h6 class="ct-u-hr ct-u-hr--left ct-fw-bold text-uppercase">Lorem ipsum dolor sit
+                                    amet</h6>
+                                <p class="ct-u-marginBottom50">Quisque at nulla a tortor finibus tempor eget nec lacus.
+                                    Donec gravida molestie mauris.
+                                    TENDERS & TOYS 2 x 30ft inflatable tenders type 90 EFB with 350hp YaCHa inboard
+                                    engine. 1 x Classic Runnerboat with 360hp SRYreN inboard engine. 5 x YaCHa
+                                    Waverunners 1 x YaCHa Jetskis 570ft/25m floating trampoline 6 x kayak AMENITIES A
+                                    glass bottomed Jacuzzi for 5 A sauna and fully equipped spa room</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="ct-socialSection">
+                        <div class="ct-socialSection-backButton ct-u-sectionGrayDarker ct-u-textRight">
+                            <a class="h6 text-uppercase ct-fw-bold" href="rent-now.html">Go back
+                            <span class="ct-iconButton ct-iconButton--larger animated ct-u-margin10x9" data-fx="fadeIn">
+                                <i class="fa fa-arrow-left animated" data-fx="bounceInRight" data-time="100"></i>
+                            </span>
+                            </a>
+                        </div>
+                        <div class="ct-socialSection-socialContainer ct-u-sectionMotive">
+                            <ul class="ct-socials ct-socials--type3">
+                                <li>Share</li>
+                                <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i
+                                        class="fa fa-facebook-square"></i></a></li>
+                                <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i
+                                        class="fa fa-twitter"></i></a></li>
+                                <li><a data-toggle="tooltip" data-placement="top" title="google plus" href="#"><i
+                                        class="fa fa-google-plus"></i></a></li>
+                                <li><a data-toggle="tooltip" data-placement="top" title="linkedin" href="#"><i
+                                        class="fa fa-linkedin"></i></a></li>
+                                <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i
+                                        class="fa fa-pinterest"></i></a></li>
+                                <li><a data-toggle="tooltip" data-placement="top" title="digg" href="#"><i
+                                        class="fa fa-digg"></i></a></li>
+                                <li><a data-toggle="tooltip" data-placement="top" title="users" href="#"><i
+                                        class="fa fa-users"></i></a></li>
+                                <li><a data-toggle="tooltip" data-placement="top" title="yahoo" href="#"><i
+                                        class="fa fa-yahoo"></i></a></li>
+                                <li><a data-toggle="tooltip" data-placement="top" title="email" href="#"><i
+                                        class="fa fa-envelope"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="ct-footer ct-u-sectionDark">
+        <div class="ct-footer-meta ct-u-sectionMotive ct-u-marginTop70">
+            <div class="container">
+                <div class="ct-footer-copyright">COPYRIGHT © <a href="http://outsourcing.createit.pl/">createIT</a> 2014
+                </div>
+                <ul class="ct-socials">
+                    <li><a data-toggle="tooltip" data-placement="top" title="flickr" href="#"><i
+                            class="fa fa-flickr"></i></a></li>
+                    <li><a data-toggle="tooltip" data-placement="top" title="instagram" href="#"><i
+                            class="fa fa-instagram"></i></a></li>
+                    <li><a data-toggle="tooltip" data-placement="top" title="pinterest" href="#"><i
+                            class="fa fa-pinterest"></i></a></li>
+                    <li><a data-toggle="tooltip" data-placement="top" title="facebook" href="#"><i
+                            class="fa fa-facebook-square"></i></a></li>
+                    <li><a data-toggle="tooltip" data-placement="top" title="twitter" href="#"><i
+                            class="fa fa-twitter"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- JavaScripts -->
+<script src="{% static 'frontEnd/js/jquery.min.js' %}"></script>
+<script src="{% static 'frontEnd/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'frontEnd/js/dependencies.js'%}"></script>
+
+<script src="{% static 'frontEnd/js/main.js'%}"></script>
+
+<script src="{% static 'frontEnd/js/shop.js' %}"></script>
+
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/ct-mediaSection/js/init.js' %}"></script>
+
+<script src="{% static 'frontEnd/plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/magnific-popup/init.js' %}"></script>
+
+<script src="{% static 'frontEnd/plugins/slick/slick.min.js' %}"></script>
+<script src="{% static 'frontEnd/plugins/slick/init.js' %}"></script>
+
+<script src="{% static 'frontEnd/plugins/datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+<script>jQuery('.input-daterange').datepicker({});</script>
+
+<script src="{% static 'frontEnd/plugins/bootstrap-slider/js/bootstrap-slider.js' %}"></script>
+<script>jQuery('.sliderAmount').slider();</script>
+
+<script src="{% static 'frontEnd/plugins/selectize.js-master/dist/js/standalone/selectize.min.js"></script>
+
+
+</body>
+</html>

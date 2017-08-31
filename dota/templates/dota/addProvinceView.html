@@ -1,0 +1,22 @@
+
+{% load staticfiles %}
+
+<form id='room' method = 'post' action = '/dc/province/addProvince/'>
+	 {% csrf_token %}
+	<h2>province<input name='province_name' value ='' ></h2>
+	
+	<h2>province_id<input name='province_id' value ='' ></h2>
+	<h2> country 
+	<select id='country' name='c_name' form="room">
+		{% block content %}
+			{% for publisher in countries %}
+			<option value={{publisher.c_name}}>{{publisher.c_name}}</option>
+			{% endfor %}
+		{% endblock %}
+	</select>
+	</h2>
+
+	<input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
+

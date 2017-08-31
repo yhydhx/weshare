@@ -1,0 +1,20 @@
+
+{% load staticfiles %}
+
+<form id= "room" method = 'post' action = '/dc/school/addSchool/'>
+	 {% csrf_token %}
+	<h2>school name<input name='s_name' value ='' ></h2>
+	<h2>display on index <input name='s_display_index' value= ""></h2>
+	<h2> province 
+	<select name = 'p_name' form="room">
+		{% block content %}
+			{% for publisher in provinces %}
+			<option value={{publisher.p_name}}>{{publisher.p_name}}</option>
+			{% endfor %}
+		{% endblock %}
+	</select>
+	</h2>
+	</br>
+	<input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>

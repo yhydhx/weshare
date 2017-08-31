@@ -42,7 +42,8 @@ INSTALLED_APPS = (
     'bill',
     'backEnd',
     'payment',
-    'api'
+    'api',
+    'dota'
 
 )
 

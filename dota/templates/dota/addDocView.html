@@ -1,0 +1,32 @@
+
+{% load staticfiles %}
+<script src="{% static 'frontEnd/js/modernizr.custom.js' %}"></script>
+<script src="{% static 'frontEnd/js/tinymce/tinymce.min.js'%}"></script>
+<script src="{% static 'frontEnd/js/tinymce/tinymce-init.js'%}"></script>
+<form id= "feature" method = 'post' action = '/dc/doc/addDoc/'>
+	 {% csrf_token %}
+	<h2>doc name<input name='d_name' value ='' ></h2>
+	<h2>doc index<input name='d_index' value ='' ></h2>
+	
+	<h2> Menu 
+	<select name = 'd_menu' form="feature">
+		{% block content %}
+			{% for publisher in menu %}
+			<option value={{publisher.id}}>{{publisher.m_name}}</option>
+			{% endfor %}
+		{% endblock %}
+	</select>
+	</h2>
+	 <div class="col-md-7 ct-u-paddingTop80">
+                    <div class="ct-sectionHeader ct-sectionHeader--left ct-u-marginBottom70">
+                        <h2 class="ct-sectionHeader-title">
+                            <small><span>内容</span></small>
+                        </h2>
+                    </div>
+                    <textarea name="d_text" id="self-introduction">
+                    </textarea>
+                </div>
+	</br>
+	<input type='submit' value="确认">
+    <input type='button' onclick = "history.go(-1)" value="取消">
+</form>
